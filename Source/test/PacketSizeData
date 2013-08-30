@@ -1,0 +1,15 @@
+Packet Size Test Data
+
+
+blank class: 1 bytes
+enum: 2 bytes
+long: 8 bytes
+int: 4 bytes 
+short: 2 bytes
+byte: 1 byte
+float: 4 bytes
+null: 1 byte
+UUID String: 37 bytes
+UUID: 16 bytes
+10 character String: 11 bytes
+Class : 76 bytes
