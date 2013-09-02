@@ -24,7 +24,7 @@ public class EnemySmallMelee extends Skill{
     
     public EnemySmallMelee()
     {
-        super(SkillID.EnemySmallMelee,Skill.SkillType.OFFENSIVE, ExtendedImageAnimations.MELEEATTACK,34,80);
+        super(SkillID.EnemySmallMelee,Skill.SkillType.OFFENSIVE, ExtendedImageAnimations.MELEEATTACK,40,120);
         
 
     }

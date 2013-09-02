@@ -1,5 +1,6 @@
 package com.silvergobletgames.leadcrystal.core;
 
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.MoleAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.PlantAnimationPack;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SandSpawnEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SandSpurtEmitter;
@@ -19,7 +20,7 @@ public class SpawningEffectsFactory
         
         ArrayList<SimpleEntry<SceneObject,SylverVector2f>> effects = new ArrayList();
         
-        if(pack instanceof PlantAnimationPack)
+        if(pack instanceof PlantAnimationPack ||  pack instanceof MoleAnimationPack)
         {
             
             effects.add(new SimpleEntry(new SandSpawnEmitter(),new SylverVector2f(0,-.70f)));
