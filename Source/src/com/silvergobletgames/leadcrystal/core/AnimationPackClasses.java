@@ -624,7 +624,6 @@ public class AnimationPackClasses {
             
             //Spawn
             ArrayList<Texture> spawn = new ArrayList();
-                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("flier_spawn0.png"));
                 spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("flier_spawn1.png"));
                 spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("flier_spawn2.png"));
                 spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("flier_spawn3.png"));
@@ -660,6 +659,28 @@ public class AnimationPackClasses {
                 dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("flier_legs.png"));
                 dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("flier_wing.png"));
             this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
+            
+            
+             //=====================
+            // Build Delay Map
+            //=====================        
+            this.timingMap.put(ExtendedImageAnimations.RANGEDATTACK, 50);
+
+            //========================
+            // Build Skill Offset Map
+            //========================
+            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0011_1101_1010_0111_0111_0111_0000_0000),
+                                                                                        Float.intBitsToFloat(0b0111_1010_1000_0101_0111_0000_0000_0000)));
+                  
+
+            //================
+            // Build FPT Map
+            //================
+            this.fptMap.put(CoreAnimations.IDLE, 5);
+            this.fptMap.put(ExtendedImageAnimations.RUNNING, 5);
+            this.fptMap.put(ExtendedImageAnimations.SPAWN, 3);
+           // this.fptMap.put(ExtendedImageAnimations.MELEEATTACK, 5);
+            
         }
     }
     
@@ -756,10 +777,11 @@ public class AnimationPackClasses {
             
             //death
             ArrayList<Texture> dying = new ArrayList();
-                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("mole_head.png"));
-                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("mole_torso.png"));
-                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("mole_forearm.png"));
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("mole_head.png"));                
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("mole_upperarm.png"));
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("mole_forearm.png"));               
                 dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("mole_hand.png"));
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("mole_torso.png"));
                 dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("mole_foot.png"));
             this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
             
@@ -772,8 +794,8 @@ public class AnimationPackClasses {
             //========================
             // Build Skill Offset Map
             //========================
-           // this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0000_0000_0000_0000_0000_0000_0000_0000),
-            //                                                                            Float.intBitsToFloat(0b1110_0000_0000_0000_0000_0000_0000_0000)));
+            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0011_1101_1010_0111_0111_0111_0000_0000),
+                                                                                        Float.intBitsToFloat(0b0111_1010_1000_0101_0111_0000_0000_0000)));
                   
 
             //================
