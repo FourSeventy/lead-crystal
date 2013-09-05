@@ -55,7 +55,7 @@ public class PlayerDestructionDisk extends Skill{
         this.skillName = "Destruction Disk";
         this.skillDescription = "Hurls a slow moving explosive disk. If the disk is struck by your primary"
                 + " attack, it will cause a powerful explosion.";
-        this.unlockCost = 2;
+        this.unlockCost = 1;
        
 
     }

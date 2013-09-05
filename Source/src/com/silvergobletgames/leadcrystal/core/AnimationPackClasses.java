@@ -655,8 +655,10 @@ public class AnimationPackClasses {
             ArrayList<Texture> dying = new ArrayList();
                 dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("flier_head.png"));
                 dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("flier_torso.png"));
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("flier_torso.png"));
                 dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("flier_blutt.png"));
                 dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("flier_legs.png"));
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("flier_wing.png"));
                 dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("flier_wing.png"));
             this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
             
@@ -669,8 +671,8 @@ public class AnimationPackClasses {
             //========================
             // Build Skill Offset Map
             //========================
-            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0011_1101_1010_0111_0111_0111_0000_0000),
-                                                                                        Float.intBitsToFloat(0b0111_1010_1000_0101_0111_0000_0000_0000)));
+            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0111_0110_0111_0011_0111_0111_0110_0000),
+                                                                                        Float.intBitsToFloat(0b0011_1000_0111_0011_0100_0110_0111_0000)));
                   
 
             //================

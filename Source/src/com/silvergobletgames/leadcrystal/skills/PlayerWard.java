@@ -44,7 +44,7 @@ public class PlayerWard extends Skill{
         this.skillName = "Ice Trap";
         this.skillDescription = "Places a ward on the ground damaging and slowing all enemies in its radius.";
         
-        this.unlockCost = 2;
+        this.unlockCost = 1;
 
     }
     
