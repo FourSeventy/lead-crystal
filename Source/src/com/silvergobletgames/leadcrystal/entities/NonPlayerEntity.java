@@ -177,8 +177,8 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
     {
         super.addedToScene();
         
-        //set starting posiiton
-        this.placedLocation = this.getPosition();
+        
+        this.placedLocation = new SylverVector2f(this.getPosition());
     }
     
     public void collidedWith(Entity other, CollisionEvent event)

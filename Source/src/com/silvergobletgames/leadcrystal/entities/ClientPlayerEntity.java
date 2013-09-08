@@ -228,7 +228,8 @@ public class ClientPlayerEntity extends PlayerEntity
         float serverX,serverY;  
         serverX = (float)server.positionX;
         serverY = (float)server.positionY;        
-        this.body.setPosition(serverX,serverY);
+        //this.body.setPosition(serverX,serverY);
+        this.setPosition(serverX, serverY); 
                  
         //adjust x velocity
         if(old.velocityX != server.velocityX )

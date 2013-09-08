@@ -283,7 +283,7 @@ public class BrainFlyingFighter extends BrainFlying{
             {               
 
                 //move towards target 
-                SylverVector2f patternPosition = self.getTarget().getPosition();
+                SylverVector2f patternPosition = new SylverVector2f(self.getTarget().getPosition());
                 patternPosition.add(new SylverVector2f(0,300));
                  this.moveTowardsPoint(patternPosition);
 
@@ -305,7 +305,7 @@ public class BrainFlyingFighter extends BrainFlying{
                 //TODO- random delay
                 self.faceTarget();        
                 self.attack(selectedSkill);
-                SylverVector2f patternPosition = self.getTarget().getPosition();
+                SylverVector2f patternPosition = new SylverVector2f(self.getTarget().getPosition());
                 patternPosition.add(new SylverVector2f(0,300));
                 this.holdingPattern(patternPosition);
                 this.selectedSkill = null;
