@@ -58,6 +58,13 @@ public class ClientPlayerEntity extends PlayerEntity
     //====================
     public void update()
     {
+        //sets position to new body position
+        if(body != null)
+        {
+            Vector2f physVector = (Vector2f)this.body.getPosition();
+            this.position.set(physVector.x,physVector.y);
+        }
+        
         //updates the image
         if (image != null) 
         {

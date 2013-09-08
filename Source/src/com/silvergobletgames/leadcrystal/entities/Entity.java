@@ -200,6 +200,12 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
      */
     public void update()
     {
+        //sets position to new body position
+        if(body != null)
+        {
+            Vector2f physVector = (Vector2f)this.body.getPosition();
+            super.setPosition(physVector.x,physVector.y);
+        }
         //adds gear icon if entity is interactable
         if(this.scriptObject != null && this.scriptObject.getTrigger().equals(ScriptTrigger.RIGHTCLICK))
         {
@@ -368,13 +374,6 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
         }
     }
 
-    public SylverVector2f getPosition()
-    {
-        Vector2f physVector = (Vector2f)this.body.getPosition();
-        
-        return new SylverVector2f(physVector.x,physVector.y);
-    }
-
     /**
      * Set the position of this entity.
      *
@@ -382,6 +381,9 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
      */
     public void setPosition(float x, float y) 
     {
+        
+        super.setPosition(x,y);
+        
         //set body position
         body.setPosition(x, y);
         
