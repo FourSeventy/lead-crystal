@@ -638,13 +638,13 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                  //add jetpack emitters
                 if( this.doubleJumpEnergy == this.MAX_JUMP_ENERGY -20)
                 {
-                    ParticleEmitter emitter = new SmokeEmitter();
+                    AbstractParticleEmitter emitter = new SmokeEmitter();
                     emitter.setAngle(270);
                     emitter.setParticlesPerFrame(3);
                     emitter.setDuration(-1);
                     this.addEmitter(emitter);
                     
-                    ParticleEmitter explosionEmitter = new LeadCrystalParticleEmitters.RocketExplosionEmitter();
+                    AbstractParticleEmitter explosionEmitter = new LeadCrystalParticleEmitters.RocketExplosionEmitter();
                     explosionEmitter.setAngle(270);
                     explosionEmitter.setParticlesPerFrame(1);
                     explosionEmitter.setDuration(-1);
@@ -771,7 +771,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         else
             this.doubleJumpAvailable = false;
         
-        for(ParticleEmitter e :this.getEmitters())
+        for(AbstractParticleEmitter e :this.getEmitters())
         {
             if(e instanceof SmokeEmitter || e instanceof RocketExplosionEmitter)
             {

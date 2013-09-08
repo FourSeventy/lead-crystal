@@ -163,7 +163,7 @@ public class PlayerRicochet extends Skill{
                      angle += 180;
                  
                  //make emitter
-                 ParticleEmitter emitter = new LaserBitsEmitter();
+                 AbstractParticleEmitter emitter = new LaserBitsEmitter();
                  emitter.setPosition(event.getPoint().getX(), event.getPoint().getY());
                  emitter.setDuration(1);
                  emitter.setAngle(angle);

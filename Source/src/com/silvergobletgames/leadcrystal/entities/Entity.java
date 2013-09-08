@@ -55,8 +55,8 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
     protected float lightDirectionOffset;
     //the entities emitters
     //-emitters get added to the scene along with the entity, and are reponsible for removing themselves
-    protected ArrayList<ParticleEmitter> emitters = new ArrayList<>();
-    private HashMap<ParticleEmitter,Float> emitterAngleOffset = new HashMap();
+    protected ArrayList<AbstractParticleEmitter> emitters = new ArrayList<>();
+    private HashMap<AbstractParticleEmitter,Float> emitterAngleOffset = new HashMap();
     //The entity's script object
     protected ScriptObject scriptObject; 
     //the entitys personal Healthbars/Nametext/etc
@@ -233,8 +233,8 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
         }
         
         //updates the emitters positions in the world
-        ArrayList<ParticleEmitter> emitterUpdateList = new ArrayList(emitters);
-        for(ParticleEmitter emitter : emitterUpdateList)
+        ArrayList<AbstractParticleEmitter> emitterUpdateList = new ArrayList(emitters);
+        for(AbstractParticleEmitter emitter : emitterUpdateList)
         {
             if (emitter.isFinished())
                 emitters.remove(emitter);
@@ -395,7 +395,7 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
             light.setPosition(x, y);
         
         //set praticle emitter positions
-        for(ParticleEmitter emitter: emitters)     
+        for(AbstractParticleEmitter emitter: emitters)     
             emitter.setPosition(getPosition().x, getPosition().y);
         
         //set tooltip position
@@ -407,7 +407,7 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
     public void addedToScene()
     {
         //add emitters to the scene
-        for(ParticleEmitter emitter: emitters) 
+        for(AbstractParticleEmitter emitter: emitters) 
         {
             owningScene.add(emitter,Layer.MAIN);
         }
@@ -420,7 +420,7 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
     public void removedFromScene()
     {
         //tell the emitters to stop emitting 
-        for(ParticleEmitter emitter:emitters)
+        for(AbstractParticleEmitter emitter:emitters)
         {
             emitter.stopEmittingThenRemove();            
         }   
@@ -700,7 +700,7 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
         
     }
 
-    public final void addEmitter(ParticleEmitter emitter) 
+    public final void addEmitter(AbstractParticleEmitter emitter) 
     {
         //add to local list
         this.emitters.add(emitter);
@@ -716,7 +716,7 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
             owningScene.add(emitter,Layer.MAIN);
     }
 
-    public final ArrayList<ParticleEmitter> getEmitters() {
+    public final ArrayList<AbstractParticleEmitter> getEmitters() {
         return this.emitters;
     }
 

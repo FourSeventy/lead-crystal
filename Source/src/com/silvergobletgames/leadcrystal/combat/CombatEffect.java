@@ -2,11 +2,11 @@ package com.silvergobletgames.leadcrystal.combat;
 
 import com.silvergobletgames.sylver.core.Effect;
 import com.silvergobletgames.sylver.graphics.Overlay;
-import com.silvergobletgames.sylver.graphics.ParticleEmitter;
 import com.silvergobletgames.sylver.graphics.ImageEffect;
 import com.silvergobletgames.sylver.netcode.RenderData;
 import java.util.ArrayList;
 import com.silvergobletgames.leadcrystal.entities.CombatEntity;
+import com.silvergobletgames.sylver.graphics.AbstractParticleEmitter;
 
 
 /**
@@ -23,7 +23,7 @@ public abstract class CombatEffect extends Effect
     //render effects and overlays
     protected ArrayList<ImageEffect> renderEffects = new ArrayList();
     protected ArrayList<Overlay> overlays = new ArrayList();
-    protected ArrayList<ParticleEmitter> emitters = new ArrayList();
+    protected ArrayList<AbstractParticleEmitter> emitters = new ArrayList();
     
     //====================
     // Class Methods
@@ -42,7 +42,7 @@ public abstract class CombatEffect extends Effect
             owningEntity.getImage().addOverlay(image);
         
         //apply emitters
-        for(ParticleEmitter emitter: this.emitters)
+        for(AbstractParticleEmitter emitter: this.emitters)
             owningEntity.addEmitter(emitter);
     }
             
@@ -54,7 +54,7 @@ public abstract class CombatEffect extends Effect
         for(Overlay image: this.overlays)
             owningEntity.getImage().removeOverlay(image);
         
-        for(ParticleEmitter emitter: this.emitters)
+        for(AbstractParticleEmitter emitter: this.emitters)
             emitter.stopEmittingThenRemove();
     }
            
@@ -89,7 +89,7 @@ public abstract class CombatEffect extends Effect
         this.overlays.add(overlay);
     }
     
-    public void addEmitter(ParticleEmitter emitter)
+    public void addEmitter(AbstractParticleEmitter emitter)
     {
         this.emitters.add(emitter);
     }

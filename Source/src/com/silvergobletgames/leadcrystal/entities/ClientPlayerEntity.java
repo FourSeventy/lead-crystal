@@ -2,7 +2,7 @@ package com.silvergobletgames.leadcrystal.entities;
 
 import com.jogamp.newt.event.KeyEvent;
 import com.silvergobletgames.sylver.graphics.Image;
-import com.silvergobletgames.sylver.graphics.ParticleEmitter;
+import com.silvergobletgames.sylver.graphics.AbstractParticleEmitter;
 import com.silvergobletgames.sylver.netcode.SceneObjectRenderDataChanges;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,7 +66,7 @@ public class ClientPlayerEntity extends PlayerEntity
         }
         
         //updates the emitters positions in the world
-        for(ParticleEmitter emitter: emitters)
+        for(AbstractParticleEmitter emitter: emitters)
         {
             emitter.setPosition(getPosition().x, getPosition().y);
         }

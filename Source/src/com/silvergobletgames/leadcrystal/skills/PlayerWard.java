@@ -79,7 +79,7 @@ public class PlayerWard extends Skill{
         user.getOwningScene().add(img, Layer.ATTACHED_FG);
         
         //add its praticle effects
-        ParticleEmitter emitter = new IceEmitter();
+        AbstractParticleEmitter emitter = new IceEmitter();
         emitter.setDuration(900);
         hitbox.addEmitter(emitter);
         

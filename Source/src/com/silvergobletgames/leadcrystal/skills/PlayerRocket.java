@@ -111,7 +111,7 @@ public class PlayerRocket extends Skill
         rocket.getImage().setAngle((float)(theta * (180f/Math.PI))); 
         
         //add smoke effect
-        ParticleEmitter rocketEmitter = new RocketSmokeEmitter();
+        AbstractParticleEmitter rocketEmitter = new RocketSmokeEmitter();
         rocketEmitter.setAngle(180);
         rocket.addEmitter(rocketEmitter);
 
@@ -217,7 +217,7 @@ public class PlayerRocket extends Skill
                  this.getOwningScene().add(explosionHitbox, Layer.MAIN);
                  
                  //explosion particle emitter
-                 ParticleEmitter explosionEmitter = new RocketExplosionEmitter();
+                 AbstractParticleEmitter explosionEmitter = new RocketExplosionEmitter();
                  explosionEmitter.setPosition(this.getPosition().x, this.getPosition().y);
                  explosionEmitter.setDuration(10);
                  this.getOwningScene().add(explosionEmitter, Layer.ATTACHED_FG);

@@ -180,7 +180,7 @@ public class PlayerBuckshot extends Skill{
             this.body.setGravityEffected(true);
             this.body.setRestitution(.98f);
             
-            ParticleEmitter smokeEmitter = new SmokeEmitter();
+            AbstractParticleEmitter smokeEmitter = new SmokeEmitter();
             smokeEmitter.setDuration(16);
             smokeEmitter.setParticlesPerFrame(10);
             this.addEmitter(smokeEmitter);
@@ -199,7 +199,7 @@ public class PlayerBuckshot extends Skill{
              //remove if we hit a combat entity
              if( other instanceof CombatEntity)
              {
-                ParticleEmitter emitter = new LaserBitsEmitter();
+                AbstractParticleEmitter emitter = new LaserBitsEmitter();
                 emitter.setPosition(event.getPoint().getX(), event.getPoint().getY());
                 emitter.setDuration(1);
                 emitter.setParticlesPerFrame(5);

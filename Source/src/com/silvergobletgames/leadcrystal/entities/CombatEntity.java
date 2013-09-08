@@ -404,7 +404,7 @@ public abstract class CombatEntity extends Entity
         this.interruptAttacking();
         
         //remove emitters
-        for(ParticleEmitter emitter: this.emitters)
+        for(AbstractParticleEmitter emitter: this.emitters)
             emitter.stopEmittingThenRemove(); 
         
         //Playing of death sounds
@@ -539,14 +539,14 @@ public abstract class CombatEntity extends Entity
             {
                 if(this.getImage().getAnimationPack() instanceof PlantAnimationPack)
                 {
-                    ParticleEmitter emitter = new GreenBloodEmitter();
+                    AbstractParticleEmitter emitter = new GreenBloodEmitter();
                     emitter.setDuration(250);
                     emitter.setPosition(this.getPosition().x,this.getPosition().y);
                     chunk.addEmitter(emitter); 
                 }
                 else
                 {
-                    ParticleEmitter emitter = new BloodEmitter();
+                    AbstractParticleEmitter emitter = new BloodEmitter();
                     emitter.setDuration(250);
                     emitter.setPosition(this.getPosition().x,this.getPosition().y);
                     chunk.addEmitter(emitter); 

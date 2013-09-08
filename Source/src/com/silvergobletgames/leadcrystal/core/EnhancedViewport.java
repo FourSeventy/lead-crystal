@@ -3,7 +3,7 @@ package com.silvergobletgames.leadcrystal.core;
 import com.silvergobletgames.sylver.core.Scene.Layer;
 import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.graphics.Image;
-import com.silvergobletgames.sylver.graphics.ParticleEmitter;
+import com.silvergobletgames.sylver.graphics.AbstractParticleEmitter;
 import com.silvergobletgames.sylver.graphics.Text;
 import com.silvergobletgames.sylver.graphics.Viewport;
 import java.util.ArrayList;
@@ -178,7 +178,7 @@ public class EnhancedViewport extends Viewport{
             widthOfObj = ((Text)object).getWidth() * ((Text)object).getScale();
             heightOfObj = ((Text)object).getHeight() * ((Text)object).getScale();
         }
-        else if(object instanceof ParticleEmitter)
+        else if(object instanceof AbstractParticleEmitter)
         {
             positionOfObj = new SylverVector2f(object.getPosition());
             widthOfObj = 2000;

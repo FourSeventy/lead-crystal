@@ -1,12 +1,13 @@
 package com.silvergobletgames.leadcrystal.combat;
 
 import com.silvergobletgames.sylver.graphics.Overlay;
-import com.silvergobletgames.sylver.graphics.ParticleEmitter;
+import com.silvergobletgames.sylver.graphics.AbstractParticleEmitter;
 import com.silvergobletgames.sylver.graphics.ImageEffect;
 import com.silvergobletgames.sylver.netcode.RenderData;
 import com.silvergobletgames.sylver.netcode.SceneObjectRenderData;
 import java.util.ArrayList;
 import com.silvergobletgames.leadcrystal.combat.StateEffect.StateEffectType;
+import com.silvergobletgames.sylver.netcode.SceneObjectDeserializer;
 
 /**
  *
@@ -76,8 +77,8 @@ public class DotEffect extends CombatEffect
             returnCopy.addOverlay(overlay.copy());
         
         //addEmitters
-        for(ParticleEmitter emitter: this.emitters)
-            returnCopy.addEmitter(emitter.copy());
+        for(AbstractParticleEmitter emitter: this.emitters)
+            returnCopy.addEmitter(emitter.copyEmitter());
         
         return returnCopy;
     }
@@ -124,7 +125,7 @@ public class DotEffect extends CombatEffect
         
         //dump particles
         ArrayList<SceneObjectRenderData> particleData = new ArrayList();
-        for(ParticleEmitter emitter: this.emitters)
+        for(AbstractParticleEmitter emitter: this.emitters)
             particleData.add(emitter.dumpRenderData());
         renderData.data.add(8,particleData);
         
@@ -153,9 +154,9 @@ public class DotEffect extends CombatEffect
         for(RenderData overlayData: (ArrayList<RenderData>)renderData.data.get(7))
             effect.addOverlay(Overlay.buildFromRenderData(overlayData)); 
         
-        //buld particles
+        //build particles
         for(SceneObjectRenderData particleData: (ArrayList<SceneObjectRenderData>)renderData.data.get(8))
-            effect.addEmitter(ParticleEmitter.buildFromRenderData(particleData)); 
+            effect.addEmitter((AbstractParticleEmitter)SceneObjectDeserializer.buildSceneObjectFromRenderData(particleData)); 
        
        return effect;
     }

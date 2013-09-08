@@ -24,7 +24,7 @@ import com.silvergobletgames.leadcrystal.core.LevelData;
 import com.jogamp.newt.event.KeyEvent;
 import com.silvergobletgames.sylver.core.*;
 import com.silvergobletgames.sylver.graphics.OpenGLGameWindow;
-import com.silvergobletgames.sylver.graphics.ParticleEmitter;
+import com.silvergobletgames.sylver.graphics.AbstractParticleEmitter;
 import com.silvergobletgames.sylver.netcode.Packet;
 import com.silvergobletgames.sylver.netcode.SceneObjectRenderData;
 import com.silvergobletgames.sylver.netcode.SceneObjectRenderDataChanges;
@@ -591,7 +591,7 @@ public class GameServerScene extends Scene
         super.remove(item);
 
         //compile a list of objects that need to be removed on the client side
-        if(!(item instanceof ParticleEmitter))
+        if(!(item instanceof AbstractParticleEmitter))
              this.removeSceneObjects.add(item.getID());
     }
 
@@ -816,7 +816,7 @@ public class GameServerScene extends Scene
             {
                 SceneObject sceneObject =layerObjs.get(i);
                 //if this object isnt in the initial state, add it to a list to be added to the client, and its not an added client
-                if(!initialSceneObjectsIDs.contains(sceneObject.getID()) && !(sceneObject instanceof LightSource) && !(sceneObject instanceof ParticleEmitter) && !( this.newSceneObjects.containsKey(sceneObject.getID())))
+                if(!initialSceneObjectsIDs.contains(sceneObject.getID()) && !(sceneObject instanceof LightSource) && !(sceneObject instanceof AbstractParticleEmitter) && !( this.newSceneObjects.containsKey(sceneObject.getID())))
                     newObjectList.add( new SerializableEntry(((NetworkedSceneObject)sceneObject).dumpRenderData(),layer));
             }
         }

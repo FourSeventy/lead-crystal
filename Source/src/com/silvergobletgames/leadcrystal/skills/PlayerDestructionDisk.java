@@ -188,7 +188,7 @@ public class PlayerDestructionDisk extends Skill{
                 this.getOwningScene().add(explosionHitbox, Layer.MAIN);
 
                 //explosion particle emitter
-                ParticleEmitter explosionEmitter = new LeadCrystalParticleEmitters.RocketExplosionEmitter();
+                AbstractParticleEmitter explosionEmitter = new LeadCrystalParticleEmitters.RocketExplosionEmitter();
                 explosionEmitter.setPosition(this.getPosition().x, this.getPosition().y);
                 explosionEmitter.setDuration(10);
                 this.getOwningScene().add(explosionEmitter, Layer.ATTACHED_FG);

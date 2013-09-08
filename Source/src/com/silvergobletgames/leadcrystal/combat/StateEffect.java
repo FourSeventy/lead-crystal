@@ -2,6 +2,7 @@ package com.silvergobletgames.leadcrystal.combat;
 
 import com.silvergobletgames.sylver.graphics.*;
 import com.silvergobletgames.sylver.netcode.RenderData;
+import com.silvergobletgames.sylver.netcode.SceneObjectDeserializer;
 import com.silvergobletgames.sylver.netcode.SceneObjectRenderData;
 import java.util.ArrayList;
 import net.phys2d.math.Vector2f;
@@ -338,8 +339,8 @@ public class StateEffect extends CombatEffect
             returnCopy.addOverlay(overlay.copy());
         
         //addEmitters
-        for(ParticleEmitter emitter: this.emitters)
-            returnCopy.addEmitter(emitter.copy());
+        for(AbstractParticleEmitter emitter: this.emitters)
+            returnCopy.addEmitter(emitter.copyEmitter());
         
         return returnCopy;
     }
@@ -387,7 +388,7 @@ public class StateEffect extends CombatEffect
         
         //dump particles
         ArrayList<SceneObjectRenderData> particleData = new ArrayList();
-        for(ParticleEmitter emitter: this.emitters)
+        for(AbstractParticleEmitter emitter: this.emitters)
             particleData.add(emitter.dumpRenderData());
         renderData.data.add(9,particleData);
 
@@ -417,7 +418,7 @@ public class StateEffect extends CombatEffect
         
         //buld particles
         for(SceneObjectRenderData particleData: (ArrayList<SceneObjectRenderData>)renderData.data.get(9))
-            effect.addEmitter(ParticleEmitter.buildFromRenderData(particleData)); 
+            effect.addEmitter((AbstractParticleEmitter)SceneObjectDeserializer.buildSceneObjectFromRenderData(particleData)); 
        
        return effect;
     }

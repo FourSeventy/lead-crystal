@@ -600,7 +600,7 @@ public class PropertiesWindow extends Menu
             
             if(!newWO.getEmitters().isEmpty())
             {
-                for(ParticleEmitter emitter :selectedItem.getEmitters())
+                for(AbstractParticleEmitter emitter :selectedItem.getEmitters())
                 {
                     owningScene.remove(emitter);
                 }
@@ -609,7 +609,7 @@ public class PropertiesWindow extends Menu
             }
             else if(newWO.getEmitters().isEmpty())
             {
-                for(ParticleEmitter emitter :selectedItem.getEmitters())
+                for(AbstractParticleEmitter emitter :selectedItem.getEmitters())
                 {
                     owningScene.remove(emitter);
                 }
@@ -1599,7 +1599,7 @@ public class PropertiesWindow extends Menu
             //if emitter type is not none build the emitter
             if(emitterClass != null)
             {
-                ParticleEmitter emitter = (ParticleEmitter)emitterClass.newInstance();
+                AbstractParticleEmitter emitter = (AbstractParticleEmitter)emitterClass.newInstance();
                 emitter.setDuration(-1);
                 emitter.setParticlesPerFrame(particlesFrame); 
                 emitter.setAngle(emitterAngle);
