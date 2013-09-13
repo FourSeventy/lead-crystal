@@ -287,14 +287,6 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             //add to currency manager
             this.currencyManager.addCurrency(((Currency)other).getAmount());
 
-//                //play popping sound
-//                SoundData sound =SoundDataFactory.getInstance().newSource(false, "itm"+ID.toString(), "pop.ogg", false,  this.getPosition().x, this.getPosition().y);
-//                this.owningScene.add(sound);
-//                sound =SoundDataFactory.getInstance().setPitch("itm"+ID.toString(), 1.15f-(float)Math.random()*.3f);
-//                this.owningScene.add(sound);
-//                sound =SoundDataFactory.getInstance().playSource("itm"+ID.toString());
-//                this.owningScene.add(sound);
-
             //add currency text
             Text currencyText = new Text("+" + Integer.toString(((Currency)other).getAmount()), LeadCrystalTextType.COMBAT);
             currencyText.setColor(new Color(Color.blue));
