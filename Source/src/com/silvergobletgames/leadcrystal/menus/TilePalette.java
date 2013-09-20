@@ -1,6 +1,5 @@
 package com.silvergobletgames.leadcrystal.menus;
 
-import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BatAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.FlierAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.MoleAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.NPC2AnimationPack;
@@ -10,7 +9,6 @@ import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.NPC5Animation
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.NPC6AnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.NPC7AnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.PlantAnimationPack;
-import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.TikiGuyAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.Scout1AnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.Scout2AnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.Scout3AnimationPack;
@@ -123,8 +121,6 @@ public class TilePalette extends Menu {
         characters.add(new Image(new Scout2AnimationPack()));
         characters.add(new Image(new Scout3AnimationPack()));
         characters.add(new Image(new PlantAnimationPack()));
-        characters.add(new Image(new TikiGuyAnimationPack()));
-        characters.add(new Image(new BatAnimationPack()));
         characters.add(new Image(new NPC2AnimationPack()));
         characters.add(new Image(new NPC3AnimationPack()));
         characters.add(new Image(new NPC4AnimationPack()));

@@ -5,7 +5,6 @@ import com.silvergobletgames.leadcrystal.ai.AIState;
 import com.silvergobletgames.leadcrystal.ai.BrainFactory;
 import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.MoleAnimationPack;
-import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.TikiGuyAnimationPack;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.entities.*;
 import com.silvergobletgames.leadcrystal.skills.PlayerLaserShot.LaserHitbox;
@@ -32,7 +31,7 @@ public class EnemyAntThrow extends Skill {
     
     public EnemyAntThrow()
     {
-        super(SkillID.EnemyAntThrow,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,250,1200);
+        super(SkillID.EnemyAntThrow,SkillType.OFFENSIVE,ExtendedImageAnimations.MELEEATTACK,250,1200);
 
     }
     
@@ -56,9 +55,9 @@ public class EnemyAntThrow extends Skill {
               
 
         //build body
-        Body body = new Body(new Box(20,5), 10);
+        Body body = new Body(new Box(50,5), 10);
         Image img = new Image(new MoleAnimationPack());
-        img.setScale(.7f);
+        img.setScale(.8f);
         ImageEffect spin = new ImageEffect(ImageEffect.ImageEffectType.ROTATION, 60, 0, 360);
         spin.setRepeating(true);
         img.addImageEffect(spin);
@@ -110,10 +109,10 @@ public class EnemyAntThrow extends Skill {
                  // Create ant NPE 
                  //==================
                  
-                 Image antImage = new Image(new TikiGuyAnimationPack());
-                 antImage.setScale(.7f);
-                 Body antBody = new Body(new Circle(35),3);
-                 antBody.setFriction(1);
+                 Image antImage = new Image(new MoleAnimationPack());
+                 antImage.setScale(.8f);
+                 Body antBody = new Body(new Circle(40),3);
+                 antBody.setFriction(0.3f);
                  antBody.setGravityEffected(true);
                  antBody.setOverlapMask(Entity.OverlapMasks.NPE.value);
                  antBody.setBitmask(Entity.BitMasks.NPE.value);
@@ -121,7 +120,7 @@ public class EnemyAntThrow extends Skill {
                  ant.setBrain(BrainFactory.getInstance().getBrain(BrainFactory.BrainID.Fighter));
                  ant.getSkillManager().learnSkill(SkillID.EnemySmallMelee);
                  ant.getCombatData().baseDamage.setBase(5);
-                 ant.getCombatData().maxHealth.setBase(20);
+                 ant.getCombatData().maxHealth.setBase(30);
                  ant.getCombatData().currentHealth = 20;
                  ant.setPosition(this.body.getLastPosition().getX(), this.body.getLastPosition().getY() + 10);
                  ant.getBrain().getStateMachine().changeState(AIState.StateID.SPAWNING);
