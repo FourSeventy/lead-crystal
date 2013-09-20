@@ -4,6 +4,7 @@ package com.silvergobletgames.leadcrystal.skills;
 import com.silvergobletgames.leadcrystal.ai.AIState;
 import com.silvergobletgames.leadcrystal.ai.BrainFactory;
 import com.silvergobletgames.leadcrystal.combat.Damage;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.MoleAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.TikiGuyAnimationPack;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.entities.*;
@@ -35,7 +36,7 @@ public class EnemyAntThrow extends Skill {
 
     }
     
-     /**
+    /**
      * Executes this skill
      * @param user 
      */
@@ -54,9 +55,9 @@ public class EnemyAntThrow extends Skill {
         damage.addImageEffect(brightnessEffect);
               
 
-        //build laser
+        //build body
         Body body = new Body(new Box(20,5), 10);
-        Image img = new Image(new TikiGuyAnimationPack());
+        Image img = new Image(new MoleAnimationPack());
         img.setScale(.7f);
         ImageEffect spin = new ImageEffect(ImageEffect.ImageEffectType.ROTATION, 60, 0, 360);
         spin.setRepeating(true);
