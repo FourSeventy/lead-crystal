@@ -1777,7 +1777,7 @@ public final class GameClientScene extends Scene
         //currency text
         String currencyString = "+" + packet.currencyReward;
         Text currencyText = new Text(currencyString,LeadCrystalTextType.MESSAGE);
-        currencyText.setScale(1.3f);
+        currencyText.setScale(1f);
         currencyText.setPosition(center- currencyText.getWidth()/2 - 20, 600);
         currencyText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 240, 0, 0));
              
@@ -1787,6 +1787,12 @@ public final class GameClientScene extends Scene
         currencyImage.setPosition(center- currencyText.getWidth()/2 + 75, 600);
         currencyImage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 240, 0, 0));
         
+        //skill text
+        Text skillText = new Text("+1 Skill Point",LeadCrystalTextType.MESSAGE);
+        skillText.setScale(1f);
+        skillText.setPosition(center- skillText.getWidth()/2 - 20, 540);
+        skillText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 240, 0, 0));
+        
         
         //add fade effects
         TextEffect fade = new TextEffect(TextEffect.TextEffectType.COLOR, 30, new Color(Color.green), new Color(Color.green,0));
@@ -1795,12 +1801,18 @@ public final class GameClientScene extends Scene
         fade = new TextEffect(TextEffect.TextEffectType.COLOR, 30, new Color(Color.white), new Color(Color.white,0));
         fade.setDelay(210);
         currencyText.addTextEffect(fade);
+        fade = new TextEffect(TextEffect.TextEffectType.COLOR, 30, new Color(Color.white), new Color(Color.white,0));
+        fade.setDelay(210);
+        skillText.addTextEffect(fade);
         
         //add scale effects
         Float[] points ={1.3f,1.5f,1.3f};
         int[] durations = {45,45};
         completeText.addTextEffect(new MultiTextEffect(TextEffect.TextEffectType.SCALE, points, durations));
-        currencyText.addTextEffect(new MultiTextEffect(TextEffect.TextEffectType.SCALE, points, durations));
+        Float[] points3 ={1f,1.2f,1f};
+        int[] durations3 = {45,45};
+        currencyText.addTextEffect(new MultiTextEffect(TextEffect.TextEffectType.SCALE, points3, durations3));
+        skillText.addTextEffect(new MultiTextEffect(TextEffect.TextEffectType.SCALE, points3, durations3));
         
         Float[] points2 ={1f,1.2f,1f};
         int[] durations2 = {45,45};
@@ -1813,7 +1825,13 @@ public final class GameClientScene extends Scene
         {
             this.add(currencyText, Scene.Layer.HUD);
             this.add(currencyImage, Scene.Layer.HUD);
+            this.add(skillText, Scene.Layer.HUD);
+            //toggle on skillup icon
+           this.hud.openTooltip(OpenInstructionalTipPacket.InstructionalTip.SkillUp); 
         }
+        
+        
+        
         
     }
     

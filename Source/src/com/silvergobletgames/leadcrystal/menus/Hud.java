@@ -92,6 +92,9 @@ public class Hud extends Window
     private Label youHaveDied;
     private Button youDiedButton;
     
+    //skill up poppup
+    private Button skillUpButton;
+    
     //==================
     // networking stats
     //==================
@@ -666,6 +669,28 @@ public class Hud extends Window
         this.rightClickInteract.dontKillClick = true;
         this.addComponent(rightClickInteract); 
         
+        this.skillUpButton = new Button(new Image("skillUp.png"),center -40,90,80,80);
+        this.skillUpButton.setHidden(true);
+        this.skillUpButton.addActionListener(new ActionListener(){
+        
+            public void actionPerformed(ActionEvent e) 
+            {
+                if(e.getActionCommand().equals("clicked"))
+                {
+                    if(!skillMenu.isOpen() && !inventoryMenu.isOpen())
+                    {
+                        skillMenu.open();
+                        skillUpButton.getImage().removeAllImageEffects();
+                        skillUpButton.setHidden(true);
+                        
+                    }
+                }
+                
+            }   
+        
+        });
+        this.addComponent(this.skillUpButton);
+        
         //set up skills
         this.setUpSkillBar();
        
@@ -1133,6 +1158,16 @@ public class Hud extends Window
             case Jumpthrough: this.jumpThrough.setHidden(false); break;
             case Sprint: this.sprint.setHidden(false); break;
             case RightClick: this.rightClickInteract.setHidden(false); break;
+            case SkillUp: 
+                {
+                    Float[] points = {1.3f,3.0f,1.3f};
+                    int[] durations = {60,60};
+                    ImageEffect brightnessEffect = new MultiImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, points,durations);      
+                    brightnessEffect.setRepeating(true);
+                    this.skillUpButton.getImage().addImageEffect(brightnessEffect);
+                    this.skillUpButton.setHidden(false);
+                } 
+                break;
         }
     }
     
@@ -1148,6 +1183,11 @@ public class Hud extends Window
             case Jumpthrough: this.jumpThrough.setHidden(true); break;
             case Sprint: this.sprint.setHidden(true); break;
             case RightClick: this.rightClickInteract.setHidden(true); break;
+            case SkillUp:
+                {
+                    this.skillUpButton.getImage().removeAllImageEffects();
+                    this.skillUpButton.setHidden(true);
+                } break;
         }
     }
     

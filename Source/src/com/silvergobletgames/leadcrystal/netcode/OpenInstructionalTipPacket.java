@@ -12,7 +12,7 @@ public class OpenInstructionalTipPacket extends Packet{
     public InstructionalTip tipID;
     
     public static enum InstructionalTip{
-        Jump,PrimarySkill,SecondarySkill,Sprint,UsePotion,RightClick,Ladder,Jumpthrough,OpenMap,AssignSkills,BuyPotions
+        Jump,PrimarySkill,SecondarySkill,Sprint,UsePotion,RightClick,Ladder,Jumpthrough,OpenMap,AssignSkills,BuyPotions,SkillUp
     }
     
     public OpenInstructionalTipPacket()
