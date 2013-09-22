@@ -96,6 +96,7 @@ public class EnemyAntThrow extends Skill {
         { 
             super(d, b, i, user); 
             this.body.setGravityEffected(true);
+            this.body.setOverlapMask(Entity.OverlapMasks.NPE.value);
          }
         
         public void collidedWith(Entity other, CollisionEvent event)
