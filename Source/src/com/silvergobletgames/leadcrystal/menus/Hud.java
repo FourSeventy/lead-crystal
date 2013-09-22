@@ -115,7 +115,6 @@ public class Hud extends Window
     public PotionsMenu potionsMenu;
     public ArmorMenu armorMenu;
     public MapMenu mapMenu;
-    public LevelCompleteMenu levelCompleteMenu;
     public QuestMenu questMenu;
     
     //Chat manager
@@ -258,27 +257,6 @@ public class Hud extends Window
         mapMenu.close();
         mapMenu.setOwningScene(scene);
         menuList.add(mapMenu);
-        
-        //level Complete menu
-        levelCompleteMenu = new LevelCompleteMenu(center - 600,0,playerReference);
-        levelCompleteMenu.addActionListener(new ActionListener(){
-         public void actionPerformed(ActionEvent e)
-            {
-                if(e.getActionCommand().equals("mouseEntered"))
-                {
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND)); 
-                }
-                else if(e.getActionCommand().equals("mouseExited"))
-                {
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE)); 
-                }
-            }
-        
-        });
-        levelCompleteMenu.update();
-        levelCompleteMenu.close();
-        levelCompleteMenu.setOwningScene(scene);
-        menuList.add(levelCompleteMenu);
         
         //quest menu
         questMenu = new QuestMenu(10,0,playerReference);

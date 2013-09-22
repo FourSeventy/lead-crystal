@@ -196,24 +196,6 @@ public class BrainFlyingFighter extends BrainFlying{
          self.getCombatData().xVelocity.adjustPercentModifier(.4f);
          
          //play aggro sound
-        
-        //play emotion
-        Image exclaimImage = new Image(new AnimationPackClasses.ExclaimAnimationPack());
-        
-        Object[] points1 = {new Color(Color.white),new Color(1f,1f,1f,.8f),new Color(Color.transparent)};
-        int[] durations1 = {63,63};
-        exclaimImage.addImageEffect(new MultiImageEffect(ImageEffect.ImageEffectType.COLOR,points1,durations1));
-        exclaimImage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.SCALE, 63, 2.0f, 1.8f));
-        exclaimImage.setAnchor(Anchorable.Anchor.BOTTOMCENTER);
-
-        Overlay overlay = new Overlay(exclaimImage, 60, new SylverVector2f(.5f,1.2f));
-        overlay.setRelativeSize(.05f);
-        self.getImage().addOverlay("emotion", overlay);
-        
-        //add overlay movement effect
-        Float[] points ={1.2f,1.4f,1.2f};
-        int[] durations = {30,30};
-        self.getImage().addImageEffect(new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE,points,durations));
              
     }
     

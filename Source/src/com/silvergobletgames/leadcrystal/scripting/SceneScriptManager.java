@@ -7,9 +7,9 @@ import com.silvergobletgames.leadcrystal.entities.EntityEffect.EntityEffectType;
 import com.silvergobletgames.leadcrystal.entities.MobSpawner;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.netcode.GobletServer;
-import com.silvergobletgames.leadcrystal.netcode.LevelCompletePacket;
 import com.silvergobletgames.leadcrystal.netcode.OpenInstructionalTipPacket.InstructionalTip;
 import com.silvergobletgames.leadcrystal.netcode.OpenMenuPacket.MenuID;
+import com.silvergobletgames.leadcrystal.netcode.SideObjectiveCompletePacket;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.core.SceneObject;
@@ -199,8 +199,29 @@ public class SceneScriptManager
      */
     public void completeSideObjective(int levelNumber)
     {
-        //queue up the completion
-        this.setWorldData("sideObjective", 1);
+        
+        ArrayList<PlayerEntity> playerList = new ArrayList(((GameServerScene)this.owningScene).players);
+        for(PlayerEntity player :playerList)
+        {   
+            //figure out if it is newly completed
+            boolean sideObjectiveNewlyCompleted = false;
+            if(player.getLevelProgressionManager().levelMap.get(levelNumber).sideObjective.complete == false)
+                sideObjectiveNewlyCompleted = true;
+
+            //complete side objective
+            player.getLevelProgressionManager().completeSideObjective(levelNumber);
+            
+            //send side objective complete packet
+            short currencyReward =0;
+            if(sideObjectiveNewlyCompleted)
+            {
+                currencyReward = (short)player.getLevelProgressionManager().levelMap.get(levelNumber).sideObjective.currencyAward;
+            }
+            owningScene.sendSideObjectiveCompletePacket(player.getID(), currencyReward);
+            
+           
+        
+        }
         
         this.setSideQuestStatusText("complete");
     }
@@ -215,49 +236,48 @@ public class SceneScriptManager
      * complete the main objective for every player in the scene. Also moves all players back to town
      * @param levelNumber level to complete
      */
-    public void completeLevel(int levelNumber)
+    public void completeMainObjective(int levelNumber)
     {
         //for each player in the scene
         ArrayList<PlayerEntity> playerList = new ArrayList(((GameServerScene)this.owningScene).players);
         for(PlayerEntity player :playerList)
         {                       
             //flags for completion packet
-            boolean mainObjectiveNewleyCompleted = false, sideObjectiveNewleyCompleted = false;
+            boolean mainObjectiveNewleyCompleted = false;
             
             //completes the main objective
             if(player.getLevelProgressionManager().levelMap.get(levelNumber).mainObjective.complete == false)
                 mainObjectiveNewleyCompleted = true;
             
-            player.getLevelProgressionManager().completeMainObjective(levelNumber);          
-            
-            //completes sideObjective
-            if(this.getWorldData("sideObjective") == 1)
+            //calculate currency reward 
+            short currencyAward = 0;
+            if(mainObjectiveNewleyCompleted)
             {
-                if(player.getLevelProgressionManager().levelMap.get(levelNumber).sideObjective.complete == false)
-                sideObjectiveNewleyCompleted = true;
-                
-                player.getLevelProgressionManager().completeSideObjective(levelNumber);
+                currencyAward = (short)player.getLevelProgressionManager().levelMap.get(levelNumber).mainObjective.currencyAward;
             }
             
-            //heals players
-            player.getCombatData().fullHeal();
+            //send main objective complete packet
+            owningScene.sendMainObjectiveCompletePacket(player.getID(), currencyAward); 
             
+            //complete main objective
+            player.getLevelProgressionManager().completeMainObjective(levelNumber);          
+            
+            //heals players
+            player.getCombatData().fullHeal();    
+         
+        }
+       
+    }
+    
+    public void completeLevel()
+    {
+        //for each player in the scene
+        ArrayList<PlayerEntity> playerList = new ArrayList(((GameServerScene)this.owningScene).players);
+        for(PlayerEntity player :playerList)
+        {  
             //moves players back to town
             ((GobletServer)Game.getInstance().getRunnable("Goblet Server")).queueMovePlayerToLevel(player.getID(), "town.lv", "checkpoint1");          
-             
-            
-            //figure out and send level completion packet
-            LevelCompletePacket packet = new LevelCompletePacket();
-            packet.levelNumber = (byte)levelNumber;
-            packet.mainObjective = mainObjectiveNewleyCompleted;
-            packet.sideObjective = sideObjectiveNewleyCompleted;
-            
-            //send packet to client so it can paint level completion window
-           ((GameServerScene)player.getOwningScene()).sendCompleteLevelPacket(UUID.fromString(player.getID()), packet);
-    
-        }
-        
-        
+        }  
     }
     
     /**

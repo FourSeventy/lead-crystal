@@ -830,23 +830,6 @@ public class AnimationPackClasses {
         }
     }
     
-    public static class ExclaimAnimationPack extends AnimationPack
-    {
-        public ExclaimAnimationPack()
-        {
-            ArrayList<Texture> def = new ArrayList();
-                    def.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("exclaimbubble01.png"));
-                    def.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("exclaimbubble02.png"));
-                    def.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("exclaimbubble03.png"));
-                    def.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("exclaimbubble04.png"));
-                    def.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("exclaimbubble05.png"));
-                    def.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("exclaimbubble06.png"));
-                    def.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("exclaimbubble07.png"));
-                this.animationSet.put(CoreAnimations.IDLE, def);
-        }
-    }
-    
-    
             
     
     

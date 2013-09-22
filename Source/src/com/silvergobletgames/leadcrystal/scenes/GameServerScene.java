@@ -1057,6 +1057,22 @@ public class GameServerScene extends Scene
         }
     }
     
+    public void sendSideObjectiveCompletePacket(String client, short currencyReward)
+    {
+            //send out side objective complete packet
+           SideObjectiveCompletePacket packet = new SideObjectiveCompletePacket();           
+           packet.currencyReward = currencyReward;
+           this.sendPacket(packet,UUID.fromString(client));             
+    }
+    
+    public void sendMainObjectiveCompletePacket(String client, short currencyReward)
+    {
+           //send out side objective complete packet
+           MainObjectiveCompletePacket packet = new MainObjectiveCompletePacket();           
+           packet.currencyReward = currencyReward;
+           this.sendPacket(packet,UUID.fromString(client));             
+    }
+    
     public void sendCloseMenu(String client, MenuID id)
     {
         //bulid the packet
