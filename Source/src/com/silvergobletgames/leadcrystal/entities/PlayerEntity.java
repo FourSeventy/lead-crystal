@@ -48,6 +48,7 @@ import com.silvergobletgames.sylver.util.SylverVector2f;
 import java.awt.Point;
 import java.security.InvalidParameterException;
 import net.phys2d.raw.*;
+import net.phys2d.raw.shapes.Box;
 import net.phys2d.raw.shapes.Line;
 
 public class PlayerEntity extends CombatEntity implements SavableSceneObject
@@ -438,8 +439,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         //Stop casting
         this.interruptAttacking();
 
-        //Animation change
-        image.setAnimation(ExtendedImageAnimations.SPAWN);
+        
         
         //turn off light
         this.light.turnOff();
@@ -459,7 +459,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         //add respawn script
         //==================
         ScriptPage page = new ScriptPage();
-        page.setScript("self.respawn();"); 
+        page.setScript("if(self.getID() != invoker.getID()){scriptManager.respawnPlayer(self.getID(),invoker.getID());}"); 
         
         PageCondition condition = new PageCondition();
         condition.setConditionScript("conditionValue = true;");
@@ -467,8 +467,21 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         ScriptObject obj = new ScriptObject();
         obj.addPage(page, condition);
         obj.setTrigger(ScriptObject.ScriptTrigger.RIGHTCLICK);
+        this.setScriptObject(obj); 
         
-        this.setScriptObject(obj);
+        Float[] points = {0f,0f,1f};
+        int[] durations = {180,10};
+        this.getImage().addImageEffect(new MultiImageEffect(ImageEffect.ImageEffectType.ALPHABRIGHTNESS, points, durations));
+        //gravestone overlay
+        Overlay gravestoneOverlay = new Overlay(new Image("gravestone.png"));
+        gravestoneOverlay.getImage().addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.ALPHABRIGHTNESS, 180, 0, 1));
+        gravestoneOverlay.setRelativeSize(.7f);
+        gravestoneOverlay.setRelativePosition(.05f,0);
+        this.getImage().addOverlay("grave",gravestoneOverlay);
+        
+        
+        
+        
     }
    
     public void respawn()
@@ -496,6 +509,9 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         this.combatData.removeState(CombatState.ATTACKING);
         this.combatData.removeState(CombatState.SLOW);
         this.combatData.removeState(CombatState.IMMUNE);
+        
+        //remove respawn gravestone
+        this.getImage().removeOverlay("grave");
         
         //remove respawn script
         this.setScriptObject(null);

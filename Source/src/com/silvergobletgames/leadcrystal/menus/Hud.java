@@ -929,7 +929,7 @@ public class Hud extends Window
                 this.addComponent(youHaveDied);
                 
                 Text ehh = new Text("Respawn In Town",LeadCrystalTextType.MESSAGE);
-                this.youDiedButton = new Button(ehh, center - 200, 300);
+                this.youDiedButton = new Button(ehh, center - 200, 500);
                 youDiedButton.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e) {
@@ -938,7 +938,7 @@ public class Hud extends Window
                             ((GameClientScene)owningScene).sendRespawnRequestPacket();
                         }
                         if (e.getActionCommand().equals("mouseEntered")) {
-                            youDiedButton.text.setScale(1.5f);
+                            youDiedButton.text.setScale(1.2f);
                             
                         }
                         if (e.getActionCommand().equals("mouseExited")) {

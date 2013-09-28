@@ -14,6 +14,7 @@ import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.audio.Sound;
+import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.ImageEffect;
 import com.silvergobletgames.sylver.graphics.ImageEffect.ImageEffectType;
@@ -22,6 +23,8 @@ import com.silvergobletgames.sylver.graphics.LightEffect.LightEffectType;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
+import net.phys2d.raw.Body;
+import net.phys2d.raw.shapes.Box;
 
 /**
  *
@@ -303,9 +306,36 @@ public class SceneScriptManager
         ((GameServerScene)this.owningScene).clientsInScene.get(UUID.fromString(clientID)).player.getBody().setOverlapMask(Entity.OverlapMasks.PLAYER.value);
     }
     
-    public void respawnPlayer(String clientID)
+    public void respawnPlayer(String clientID,String invokerID)
     {
-        this.owningScene.clientsInScene.get(UUID.fromString(clientID)).player.respawn();
+        //get invoker
+        PlayerEntity invoker =this.owningScene.clientsInScene.get(UUID.fromString(invokerID)).player;
+        
+        //if invoker has a potion respawn the player
+        if(invoker.getPotionManager().getNumberOfPotions() >0)
+        {
+            //respawn player
+            PlayerEntity respawnedPlayer = this.owningScene.clientsInScene.get(UUID.fromString(clientID)).player;     
+            respawnedPlayer.respawn();
+            
+            
+            //remove potion anda add potion graphic
+            invoker.getPotionManager().addPotion(-1);
+            Image potionImage = new Image("healthPot3.png");
+           
+            potionImage.addImageEffect(new ImageEffect(ImageEffectType.SCALE, 60, 1, 2));
+            potionImage.addImageEffect(new ImageEffect(ImageEffectType.ALPHABRIGHTNESS, 60, 1, 0));
+            
+            Body body = new Body( new Box(10,10),1);
+            body.setGravityEffected(false);
+            body.setOverlapMask(Entity.OverlapMasks.NO_OVERLAP.value);
+            body.setBitmask(Entity.BitMasks.NO_COLLISION.value);
+            Entity potionEntity = new Entity(potionImage, body);
+             potionEntity.setPosition(respawnedPlayer.getPosition().x, respawnedPlayer.getPosition().y + 150);
+            potionEntity.addEntityEffect(new EntityEffect(EntityEffectType.DURATION, 61, 0, 1));
+            this.owningScene.add(potionEntity, Scene.Layer.MAIN);
+        }
+        
     }
     
     /**

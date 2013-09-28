@@ -162,7 +162,11 @@ public class GameServerScene extends Scene
                     
             //tick the physics world
             physicsWorld.clearRestingState(); //clear the physics world of resting bodies (this needs to be done for isTouching() to work)
+            
+           // long time = System.currentTimeMillis();
             physicsWorld.step(5 / 60F);
+            
+           // System.err.println(System.currentTimeMillis() - time);
             
             //resolve collisions
             this.collisionHandler.resolveCollisions();        
@@ -480,10 +484,12 @@ public class GameServerScene extends Scene
                     //test
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_M))
                     {
-
+                       this.players.get(0).respawn();
                     }
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_N))
                     {
+                        
+                        this.players.get(0).getCombatData().currentHealth = 0;
                     }
 
 

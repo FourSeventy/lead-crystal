@@ -521,6 +521,8 @@ public abstract class CombatEntity extends Entity
                     super.collidedWith(other, event);
                     
                     this.body.setRestitution(0);
+                    
+                   
                 }
             };
             chunk.getBody().setDamping(0);
@@ -529,9 +531,13 @@ public abstract class CombatEntity extends Entity
             if(i >=3)
             {
                 ImageEffect fadeEffect =new ImageEffect(ImageEffectType.COLOR, 200,new Color(Color.white),new Color(Color.transparent));
-                fadeEffect.setDelay(1500);
+                fadeEffect.setDelay(((int)(SylverRandom.random.nextFloat() * 500)) +1000);
                 chunk.getImage().addImageEffect(fadeEffect);           
                 chunk.addEntityEffect(new EntityEffect(EntityEffectType.DURATION,1699,1,1));
+            }
+            else
+            {
+                chunk.addEntityEffect(new EntityEffect(EntityEffectType.REMOVEBODY,1699,1,1));
             }
             
             //add blood emitter TODO add more blood with more mass

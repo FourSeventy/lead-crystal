@@ -57,10 +57,5 @@ public class EnemySmallMelee extends Skill{
         this.user.getOwningScene().add(hitBox,Layer.MAIN);        
     }
     
-    
-     public void useResource()
-    {
-        
-    }
 
 }

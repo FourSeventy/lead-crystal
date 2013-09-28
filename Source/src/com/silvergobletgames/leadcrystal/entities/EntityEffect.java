@@ -1,6 +1,9 @@
 package com.silvergobletgames.leadcrystal.entities;
 
+import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.sylver.core.Effect;
+import com.silvergobletgames.sylver.core.Scene;
+import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.netcode.RenderData;
 import com.silvergobletgames.sylver.util.LinearInterpolator;
 import java.util.HashMap;
@@ -25,7 +28,7 @@ public class EntityEffect extends Effect
     
     //render effect type enum
     public static enum EntityEffectType{
-        MASS(Float.class),DURATION(Float.class),ROTATION(Float.class),XTRANSLATE(Float.class),YTRANSLATE(Float.class),VFORCE(Float.class),HFORCE(Float.class);
+        MASS(Float.class),DURATION(Float.class),ROTATION(Float.class),XTRANSLATE(Float.class),YTRANSLATE(Float.class),VFORCE(Float.class),HFORCE(Float.class),REMOVEBODY(Float.class);
         
         public Class type;
         
@@ -74,6 +77,17 @@ public class EntityEffect extends Effect
                 this.owningEntity.getOwningScene().remove(this.owningEntity);
             }
             
+        }
+        else if(entityEffectType == EntityEffectType.REMOVEBODY)
+        {
+            if(this.owningEntity.getOwningScene() != null)   
+            {
+                if(this.owningEntity.getOwningScene() instanceof GameServerScene)
+                {
+                    ((GameServerScene)this.owningEntity.getOwningScene()).physicsWorld.remove(this.owningEntity.getBody());
+//                  
+                }
+            }
         }
 
     }

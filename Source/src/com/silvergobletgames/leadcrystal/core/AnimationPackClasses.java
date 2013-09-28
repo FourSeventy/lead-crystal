@@ -81,11 +81,7 @@ public class AnimationPackClasses {
                 melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("playerMelee6.png"));
             this.animationSet.put(ExtendedImageAnimations.MELEEATTACK,melee);
             
-            
-            //grave
-            ArrayList<Texture> grave = new ArrayList();
-                grave.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("gravestone.png"));
-            this.animationSet.put(ExtendedImageAnimations.SPAWN,grave);
+
 
 
             //=====================
