@@ -22,6 +22,7 @@ import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.leadcrystal.combat.CombatData.CombatState;
 import com.silvergobletgames.leadcrystal.core.*;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownFrontArmAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.PlayerAnimationPack;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.RocketExplosionEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SandSpurtEmitter;
@@ -47,6 +48,7 @@ import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 import java.awt.Point;
 import java.security.InvalidParameterException;
+import javax.media.opengl.GL2;
 import net.phys2d.raw.*;
 import net.phys2d.raw.shapes.Box;
 import net.phys2d.raw.shapes.Line;
@@ -61,6 +63,11 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     protected PotionManager potionManager;
     //level progression manager
     protected LevelProgressionManager levelProgressionManager;
+    
+    //back arm
+    protected Image backArm;
+    protected Image frontArm;
+    protected Image head;
         
     //skill assignments
     protected SkillID skill1 = SkillID.PlayerLaser;
@@ -104,12 +111,18 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     {
         //Call the superconstructor with appropriate data
         super(new Image(new PlayerAnimationPack()), new Body(new Circle(35), 10));
+        
+        //front arm
+        this.frontArm = new Image(new BashBrownFrontArmAnimationPack());
+        
+        //head
+        this.head = new Image("bash-head-brown.png");
             
         //ID
         this.ID = "Player";
         
         //set image dimensions and offset
-        image.setScale(1.3f);
+        image.setScale(1f);
         this.imageOffset = new Vector2f(0,10);
 
         //set body attributes
@@ -267,7 +280,23 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
              this.body.setVelocity(new Vector2f(this.dashVector.x * 100,this.dashVector.y * 100));
              
          }
+         
+         
+         
+         //front arm setup
+         this.frontArm.setRotationPoint(0, .5f); 
+         this.frontArm.setPosition(this.getPosition().x, this.getPosition().y);
+         this.frontArm.update();
     }   
+    
+    public void draw(GL2 gl)
+    {
+        super.draw(gl);
+        
+        this.head.draw(gl);
+        this.frontArm.draw(gl);
+        
+    } 
     
     /**
      * Notification that this entity collided with another.
