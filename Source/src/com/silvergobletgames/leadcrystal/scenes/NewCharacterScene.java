@@ -25,7 +25,21 @@ public class NewCharacterScene extends Scene
 {
     
     private TextBox nameTextBox;
-    private final Text headText,colorText;
+    private final Text headText, bodyText, gunText;
+    
+    private Image headImage,bodyImage,gunImage;
+    
+    //list of heads
+    private ArrayList<String> headList = new ArrayList<>();
+    private int currentHeadSelection = 0;
+    
+    //list of bodies
+    private ArrayList<String> bodyList= new ArrayList<>();
+    private int currentBodySelection = 0;
+    
+    //list of guns
+    private ArrayList<String> gunList= new ArrayList<>();
+    private int currentGunSelection = 0;
     
     //we have to pass this back to char select screen
     private String actionArg;
@@ -38,6 +52,27 @@ public class NewCharacterScene extends Scene
     public NewCharacterScene()
     {
 
+        //===================
+        // Build Image Lists
+        //===================
+        
+        this.headList.add("bash-head0.png");
+        this.headList.add("bash-head1.png");
+        this.headList.add("bash-head2.png");
+        this.headList.add("bash-head3.png");
+        this.headList.add("bash-head4.png");
+        
+        this.bodyList.add("bash_black.png");
+        this.bodyList.add("bash_blue.png");
+        this.bodyList.add("bash_green.png");
+        this.bodyList.add("bash_red.png");
+        this.bodyList.add("bash_white.png");
+        this.bodyList.add("bash_yellow.png");
+        
+        this.gunList.add("bash-gun0.png");
+        this.gunList.add("bash-gun1.png");
+        this.gunList.add("bash-gun2.png");
+        
         //================
         // Builds Buttons
         //================
@@ -58,11 +93,7 @@ public class NewCharacterScene extends Scene
         title.setPosition(center - title.getWidth()/2, 700);       
         this.add(title,Layer.MAIN);
         
-        //player image
-        Image player = new Image(new PlayerAnimationPack());
-        player.setScale(1.3f);
-        player.setPosition(center - player.getWidth()/2, 535);
-        this.add(player, Layer.MAIN);
+        setImages();
         
         //name label
         Text nameLabel = new Text("Name:",LeadCrystalTextType.MENUBUTTONS);
@@ -75,7 +106,7 @@ public class NewCharacterScene extends Scene
         this.add(nameTextBox,Layer.MAIN);
         
         // head
-        headText = new Text("Head: Normal",LeadCrystalTextType.MENUBUTTONS);
+        headText = new Text("Head: " + (this.currentHeadSelection + 1),LeadCrystalTextType.MENUBUTTONS);
         headText.setScale(1.2f);
         headText.setPosition(center - headText.getWidth()/2, 425);
         final Button headButton = new Button(new Image("blank.png"), center - headText.getWidth()/2, headText.getPosition().y, headText.getWidth(), headText.getHeight());
@@ -86,8 +117,10 @@ public class NewCharacterScene extends Scene
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("clicked")) 
                 {
-                    
-                        headText.setText("Head: Helmet");
+                        currentHeadSelection++;
+                        currentHeadSelection %= 5;
+                        headText.setText("Head: " + (currentHeadSelection + 1));
+                        setImages();
 
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
@@ -112,29 +145,31 @@ public class NewCharacterScene extends Scene
             }
         });
         
-        //color
-        colorText = new Text("Color: Normal",LeadCrystalTextType.MENUBUTTONS);
-        colorText.setScale(1.2f);
-        colorText.setPosition(center - colorText.getWidth()/2, 375);
-        final Button colorButton = new Button(new Image("blank.png"), center - colorText.getWidth()/2, colorText.getPosition().y, colorText.getWidth(), colorText.getHeight());
-        this.add(colorText,Layer.MAIN);
-        this.add(colorButton,Layer.MAIN);
-        colorButton.addActionListener(new ActionListener() {
+        //body
+        bodyText = new Text("Body: " + (this.currentBodySelection + 1),LeadCrystalTextType.MENUBUTTONS);
+        bodyText.setScale(1.2f);
+        bodyText.setPosition(center - bodyText.getWidth()/2, 375);
+        final Button bodyButton = new Button(new Image("blank.png"), center - bodyText.getWidth()/2, bodyText.getPosition().y, bodyText.getWidth(), bodyText.getHeight());
+        this.add(bodyText,Layer.MAIN);
+        this.add(bodyButton,Layer.MAIN);
+        bodyButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("clicked")) 
                 {
-                 
-                    colorText.setText("Color: Red");   
+                        currentBodySelection++;
+                        currentBodySelection%=6;
+                        bodyText.setText("Body: " + (currentBodySelection + 1));
+                        setImages();
 
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
                 {
                     
-                      if(colorText.hasTextEffect("small"))
-                          colorText.removeTextEffect("small");
+                      if(bodyText.hasTextEffect("small"))
+                          bodyText.removeTextEffect("small");
                       
-                       colorText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, colorText.getScale(), 1.5));
+                       bodyText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, bodyText.getScale(), 1.5));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true);
@@ -142,10 +177,50 @@ public class NewCharacterScene extends Scene
                 }
                 if (e.getActionCommand().equals("mouseExited"))
                 {
-                        if(colorText.hasTextEffect("big"))
-                           colorText.removeTextEffect("big");
+                        if(bodyText.hasTextEffect("big"))
+                           bodyText.removeTextEffect("big");
                         
-                        colorText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, colorText.getScale(), 1.2));
+                        bodyText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, bodyText.getScale(), 1.2));
+                }
+            }
+        });
+        
+        //gun
+        gunText = new Text("Gun: " +(this.currentGunSelection + 1),LeadCrystalTextType.MENUBUTTONS);
+        gunText.setScale(1.2f);
+        gunText.setPosition(center - gunText.getWidth()/2, 325);
+        final Button colorButton = new Button(new Image("blank.png"), center - gunText.getWidth()/2, gunText.getPosition().y, gunText.getWidth(), gunText.getHeight());
+        this.add(gunText,Layer.MAIN);
+        this.add(colorButton,Layer.MAIN);
+        colorButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                if (e.getActionCommand().equals("clicked")) 
+                {
+                    currentGunSelection++;
+                    currentGunSelection%=3;
+                    gunText.setText("Gun: " +(currentGunSelection + 1)); 
+                    setImages();
+
+                }
+                if (e.getActionCommand().equals("mouseEntered")) 
+                {
+                    
+                      if(gunText.hasTextEffect("small"))
+                          gunText.removeTextEffect("small");
+                      
+                       gunText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, gunText.getScale(), 1.5));
+                    
+                    //play sound
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true);
+                    add(sound);
+                }
+                if (e.getActionCommand().equals("mouseExited"))
+                {
+                        if(gunText.hasTextEffect("big"))
+                           gunText.removeTextEffect("big");
+                        
+                        gunText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, gunText.getScale(), 1.2));
                 }
             }
         });      
@@ -287,5 +362,34 @@ public class NewCharacterScene extends Scene
     public void sceneExited()
     {
         Game.getInstance().unloadScene(NewCharacterScene.class);
+    }
+    
+    
+    private void setImages()
+    {
+        final int right = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x;
+        final int center = right/2;
+            
+        //body image
+        if(bodyImage != null)
+           this.remove(bodyImage);
+        bodyImage = new Image(this.bodyList.get(this.currentBodySelection));
+        bodyImage.setPosition(center - bodyImage.getWidth()/2, 500);
+        this.add(bodyImage, Layer.MAIN);
+        
+        //head image
+        if(headImage != null)
+           this.remove(headImage);
+        headImage = new Image(this.headList.get(this.currentHeadSelection));
+        headImage.setPosition(center - headImage.getWidth()/2 + 2, 655);
+        this.add(headImage, Layer.MAIN);
+        
+        //gun image
+        if(gunImage != null)
+           this.remove(gunImage);
+        gunImage = new Image(this.gunList.get(this.currentGunSelection));
+        gunImage.setAngle(90);
+        gunImage.setPosition(center - gunImage.getWidth()/2 + 100, 575);
+        this.add(gunImage, Layer.MAIN);
     }
 }
