@@ -175,7 +175,7 @@ public class ClientPlayerEntity extends PlayerEntity
          this.frontArm.setHorizontalFlip(flipped);        
          if(flipped)
          {
-             System.out.println((float)((theta- Math.PI) * (180f/Math.PI)));
+
              float angle =(float)((theta- Math.PI) * (180f/Math.PI));
              if(angle <= -60 && angle >= -90)
                  angle = -60;
@@ -187,7 +187,7 @@ public class ClientPlayerEntity extends PlayerEntity
          }
          else
          {
-             System.out.println((float)(theta * (180f/Math.PI)));
+             
              float angle =(float)(theta * (180f/Math.PI));
              if(angle >= 60 && angle <= 90)
                  angle = 60;

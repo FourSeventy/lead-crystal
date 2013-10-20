@@ -116,7 +116,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         this.frontArm = new Image(new BashBrownFrontArmAnimationPack());
         
         //head
-        this.head = new Image("bash-head-brown.png");
+        this.head = new Image("bash-head1.png");
             
         //ID
         this.ID = "Player";
