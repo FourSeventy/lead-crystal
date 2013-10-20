@@ -600,7 +600,7 @@ public class PropertiesWindow extends Menu
             
             if(!newWO.getEmitters().isEmpty())
             {
-                for(ParticleEmitter emitter :selectedItem.getEmitters())
+                for(AbstractParticleEmitter emitter :selectedItem.getEmitters())
                 {
                     owningScene.remove(emitter);
                 }
@@ -609,7 +609,7 @@ public class PropertiesWindow extends Menu
             }
             else if(newWO.getEmitters().isEmpty())
             {
-                for(ParticleEmitter emitter :selectedItem.getEmitters())
+                for(AbstractParticleEmitter emitter :selectedItem.getEmitters())
                 {
                     owningScene.remove(emitter);
                 }
@@ -1599,7 +1599,7 @@ public class PropertiesWindow extends Menu
             //if emitter type is not none build the emitter
             if(emitterClass != null)
             {
-                ParticleEmitter emitter = (ParticleEmitter)emitterClass.newInstance();
+                AbstractParticleEmitter emitter = (AbstractParticleEmitter)emitterClass.newInstance();
                 emitter.setDuration(-1);
                 emitter.setParticlesPerFrame(particlesFrame); 
                 emitter.setAngle(emitterAngle);
@@ -1880,7 +1880,7 @@ public class PropertiesWindow extends Menu
         npeFields.add(tb); //0
         
         //drop quality
-        tp.addComponent(new Label("Drop Quality:", 20, 420),tab);
+        tp.addComponent(new Label("Pot Chance:", 20, 420),tab);
         DropDown<DropQuality> dropQuality = new DropDown(155,410);
         for(DropQuality c: DropQuality.values())
         {
@@ -1934,7 +1934,7 @@ public class PropertiesWindow extends Menu
         tp.addComponent(dropQuality, tab);
         
         //drop rate dropdown
-        tp.addComponent(new Label("Drop Chance:", 20, 460),tab);
+        tp.addComponent(new Label("$$$ Chance:", 20, 460),tab);
         DropDown<DropChance> drops = new DropDown(155,450);
         for(DropChance c: DropChance.values())
         {

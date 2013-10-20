@@ -7,13 +7,14 @@ import com.silvergobletgames.leadcrystal.entities.EntityEffect.EntityEffectType;
 import com.silvergobletgames.leadcrystal.entities.MobSpawner;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.netcode.GobletServer;
-import com.silvergobletgames.leadcrystal.netcode.LevelCompletePacket;
 import com.silvergobletgames.leadcrystal.netcode.OpenInstructionalTipPacket.InstructionalTip;
 import com.silvergobletgames.leadcrystal.netcode.OpenMenuPacket.MenuID;
+import com.silvergobletgames.leadcrystal.netcode.SideObjectiveCompletePacket;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.audio.Sound;
+import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.ImageEffect;
 import com.silvergobletgames.sylver.graphics.ImageEffect.ImageEffectType;
@@ -22,6 +23,8 @@ import com.silvergobletgames.sylver.graphics.LightEffect.LightEffectType;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
+import net.phys2d.raw.Body;
+import net.phys2d.raw.shapes.Box;
 
 /**
  *
@@ -199,8 +202,29 @@ public class SceneScriptManager
      */
     public void completeSideObjective(int levelNumber)
     {
-        //queue up the completion
-        this.setWorldData("sideObjective", 1);
+        
+        ArrayList<PlayerEntity> playerList = new ArrayList(((GameServerScene)this.owningScene).players);
+        for(PlayerEntity player :playerList)
+        {   
+            //figure out if it is newly completed
+            boolean sideObjectiveNewlyCompleted = false;
+            if(player.getLevelProgressionManager().levelMap.get(levelNumber).sideObjective.complete == false)
+                sideObjectiveNewlyCompleted = true;
+
+            //complete side objective
+            player.getLevelProgressionManager().completeSideObjective(levelNumber);
+            
+            //send side objective complete packet
+            short currencyReward =0;
+            if(sideObjectiveNewlyCompleted)
+            {
+                currencyReward = (short)player.getLevelProgressionManager().levelMap.get(levelNumber).sideObjective.currencyAward;
+            }
+            owningScene.sendSideObjectiveCompletePacket(player.getID(), currencyReward);
+            
+           
+        
+        }
         
         this.setSideQuestStatusText("complete");
     }
@@ -215,49 +239,50 @@ public class SceneScriptManager
      * complete the main objective for every player in the scene. Also moves all players back to town
      * @param levelNumber level to complete
      */
-    public void completeLevel(int levelNumber)
+    public void completeMainObjective(int levelNumber)
     {
         //for each player in the scene
         ArrayList<PlayerEntity> playerList = new ArrayList(((GameServerScene)this.owningScene).players);
         for(PlayerEntity player :playerList)
         {                       
             //flags for completion packet
-            boolean mainObjectiveNewleyCompleted = false, sideObjectiveNewleyCompleted = false;
+            boolean mainObjectiveNewleyCompleted = false;
             
             //completes the main objective
             if(player.getLevelProgressionManager().levelMap.get(levelNumber).mainObjective.complete == false)
                 mainObjectiveNewleyCompleted = true;
             
-            player.getLevelProgressionManager().completeMainObjective(levelNumber);          
-            
-            //completes sideObjective
-            if(this.getWorldData("sideObjective") == 1)
+            //calculate currency reward 
+            short currencyAward = 0;
+            if(mainObjectiveNewleyCompleted)
             {
-                if(player.getLevelProgressionManager().levelMap.get(levelNumber).sideObjective.complete == false)
-                sideObjectiveNewleyCompleted = true;
-                
-                player.getLevelProgressionManager().completeSideObjective(levelNumber);
+                currencyAward = (short)player.getLevelProgressionManager().levelMap.get(levelNumber).mainObjective.currencyAward;
             }
             
+            //send main objective complete packet
+            owningScene.sendMainObjectiveCompletePacket(player.getID(), currencyAward); 
+            
+            //complete main objective
+            player.getLevelProgressionManager().completeMainObjective(levelNumber);          
+            
+              
+         
+        }
+       
+    }
+    
+    public void completeLevel()
+    {
+        //for each player in the scene
+        ArrayList<PlayerEntity> playerList = new ArrayList(((GameServerScene)this.owningScene).players);
+        for(PlayerEntity player :playerList)
+        {  
             //heals players
-            player.getCombatData().fullHeal();
+            player.getCombatData().fullHeal();  
             
             //moves players back to town
             ((GobletServer)Game.getInstance().getRunnable("Goblet Server")).queueMovePlayerToLevel(player.getID(), "town.lv", "checkpoint1");          
-             
-            
-            //figure out and send level completion packet
-            LevelCompletePacket packet = new LevelCompletePacket();
-            packet.levelNumber = (byte)levelNumber;
-            packet.mainObjective = mainObjectiveNewleyCompleted;
-            packet.sideObjective = sideObjectiveNewleyCompleted;
-            
-            //send packet to client so it can paint level completion window
-           ((GameServerScene)player.getOwningScene()).sendCompleteLevelPacket(UUID.fromString(player.getID()), packet);
-    
-        }
-        
-        
+        }  
     }
     
     /**
@@ -281,9 +306,36 @@ public class SceneScriptManager
         ((GameServerScene)this.owningScene).clientsInScene.get(UUID.fromString(clientID)).player.getBody().setOverlapMask(Entity.OverlapMasks.PLAYER.value);
     }
     
-    public void respawnPlayer(String clientID)
+    public void respawnPlayer(String clientID,String invokerID)
     {
-        this.owningScene.clientsInScene.get(UUID.fromString(clientID)).player.respawn();
+        //get invoker
+        PlayerEntity invoker =this.owningScene.clientsInScene.get(UUID.fromString(invokerID)).player;
+        
+        //if invoker has a potion respawn the player
+        if(invoker.getPotionManager().getNumberOfPotions() >0)
+        {
+            //respawn player
+            PlayerEntity respawnedPlayer = this.owningScene.clientsInScene.get(UUID.fromString(clientID)).player;     
+            respawnedPlayer.respawn();
+            
+            
+            //remove potion anda add potion graphic
+            invoker.getPotionManager().addPotion(-1);
+            Image potionImage = new Image("healthPot3.png");
+           
+            potionImage.addImageEffect(new ImageEffect(ImageEffectType.SCALE, 60, 1, 2));
+            potionImage.addImageEffect(new ImageEffect(ImageEffectType.ALPHABRIGHTNESS, 60, 1, 0));
+            
+            Body body = new Body( new Box(10,10),1);
+            body.setGravityEffected(false);
+            body.setOverlapMask(Entity.OverlapMasks.NO_OVERLAP.value);
+            body.setBitmask(Entity.BitMasks.NO_COLLISION.value);
+            Entity potionEntity = new Entity(potionImage, body);
+             potionEntity.setPosition(respawnedPlayer.getPosition().x, respawnedPlayer.getPosition().y + 150);
+            potionEntity.addEntityEffect(new EntityEffect(EntityEffectType.DURATION, 61, 0, 1));
+            this.owningScene.add(potionEntity, Scene.Layer.MAIN);
+        }
+        
     }
     
     /**

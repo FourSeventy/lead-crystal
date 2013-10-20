@@ -8,7 +8,7 @@ import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity;
 import com.silvergobletgames.sylver.core.Scene.Layer;
 import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.Image;
-import com.silvergobletgames.sylver.graphics.ParticleEmitter;
+import com.silvergobletgames.sylver.graphics.AbstractParticleEmitter;
 import java.util.Random;
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
@@ -90,7 +90,7 @@ public class EnemyGooShot extends Skill
         goo1.getBody().addForce(new Vector2f((int)xforce1 ,(int)yforce1));
         goo1.getBody().setRotation((float)theta);
         goo1.getImage().setAngle((float)(theta * 180f/Math.PI)); 
-        ParticleEmitter emitter = new GreenGooEmitter();
+        AbstractParticleEmitter emitter = new GreenGooEmitter();
         emitter.setAngle((float)(theta * 180f/Math.PI));
         emitter.setDuration(-1);
         goo1.addEmitter(emitter);

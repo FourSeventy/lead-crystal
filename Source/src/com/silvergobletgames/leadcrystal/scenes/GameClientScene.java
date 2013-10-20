@@ -1521,10 +1521,6 @@ public final class GameClientScene extends Scene
         {
             handleCloseMenuPacket((CloseMenuPacket)object);
         }
-        else if(object instanceof LevelCompletePacket)
-        {
-            handleCompleteLevelPacket((LevelCompletePacket)object);
-        }
         else if(object instanceof OpenInstructionalTipPacket)
         {
             handleOpenInstructionalTipPacket((OpenInstructionalTipPacket)object);
@@ -1540,6 +1536,14 @@ public final class GameClientScene extends Scene
         else if(object instanceof HoverEntityPacket)
         {
             handleHoverEntityPacket((HoverEntityPacket)object);
+        }
+        else if(object instanceof SideObjectiveCompletePacket)
+        {
+            handleSideObjectiveCompletePacket((SideObjectiveCompletePacket)object);
+        }
+        else if(object instanceof MainObjectiveCompletePacket)
+        {
+            handleMainObjectiveCompletePacket((MainObjectiveCompletePacket)object);
         }
     }
     
@@ -1699,35 +1703,136 @@ public final class GameClientScene extends Scene
             
     }
     
-    private void handleCompleteLevelPacket(LevelCompletePacket packet)
-    {
-        hud.levelCompleteMenu.open();
-        hud.levelCompleteMenu.repaintLevelDetails(packet);
-    }
-    
     private void handleSetSideQuestStatusPacket(setSideQuestStatusPacket packet)
     {
         //set the status
         this.hud.questMenu.setSideObjectiveStatus(packet.text);
         
-        //if the status is complete, add some on screen text
-        if(packet.text.equals("complete"))
+       
+    }
+    
+    private void handleSideObjectiveCompletePacket(SideObjectiveCompletePacket packet)
+    {
+        //complete text
+        Text completeText = new Text("Side Objective Complete!", LeadCrystalTextType.MESSAGE);
+        completeText.setColor(new Color(Color.green));
+        completeText.setScale(1.3f);
+        float center = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x/2;
+        completeText.setPosition(center- completeText.getWidth()/2, 650);
+        completeText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 240, 0, 0));
+        
+        //currency text
+        String currencyString = "+" + packet.currencyReward;
+        Text currencyText = new Text(currencyString,LeadCrystalTextType.MESSAGE);
+        currencyText.setScale(1.3f);
+        currencyText.setPosition(center- currencyText.getWidth()/2 - 20, 600);
+        currencyText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 240, 0, 0));
+             
+        //currency image
+        Image currencyImage = new Image("currency2.png");
+        currencyImage.setScale(1f);
+        currencyImage.setPosition(center- currencyText.getWidth()/2 + 75, 600);
+        currencyImage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 240, 0, 0));
+        
+        
+        //add fade effects
+        TextEffect fade = new TextEffect(TextEffect.TextEffectType.COLOR, 30, new Color(Color.green), new Color(Color.green,0));
+        fade.setDelay(210);
+        completeText.addTextEffect(fade);
+        fade = new TextEffect(TextEffect.TextEffectType.COLOR, 30, new Color(Color.white), new Color(Color.white,0));
+        fade.setDelay(210);
+        currencyText.addTextEffect(fade);
+        
+        //add scale effects
+        Float[] points ={1.3f,1.5f,1.3f};
+        int[] durations = {45,45};
+        completeText.addTextEffect(new MultiTextEffect(TextEffect.TextEffectType.SCALE, points, durations));
+        currencyText.addTextEffect(new MultiTextEffect(TextEffect.TextEffectType.SCALE, points, durations));
+        
+        Float[] points2 ={1f,1.2f,1f};
+        int[] durations2 = {45,45};
+        currencyImage.addImageEffect(new MultiImageEffect(ImageEffect.ImageEffectType.SCALE,points2,durations2));
+       
+        //add text to scene
+        this.add(completeText, Scene.Layer.HUD);
+        
+        if(packet.currencyReward != 0)
         {
-            Text completeText = new Text("Side Objective Complete!", LeadCrystalTextType.MESSAGE);
-            completeText.setColor(new Color(Color.green));
-            completeText.setScale(1.3f);
-            float center = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x/2;
-            completeText.setPosition(center- completeText.getWidth()/2, 650);
-            completeText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 240, 0, 0));
-
-            TextEffect fade = new TextEffect(TextEffect.TextEffectType.COLOR, 30, new Color(Color.green), new Color(Color.green,0));
-            fade.setDelay(210);
-            completeText.addTextEffect(fade);
-            Float[] points ={1.3f,1.5f,1.3f};
-            int[] durations = {45,45};
-            completeText.addTextEffect(new MultiTextEffect(TextEffect.TextEffectType.SCALE, points, durations));
-            this.add(completeText, Scene.Layer.HUD);
+            this.add(currencyText, Scene.Layer.HUD);
+            this.add(currencyImage, Scene.Layer.HUD);
         }
+        
+    }
+    
+    private void handleMainObjectiveCompletePacket(MainObjectiveCompletePacket packet)
+    {
+        //complete text
+        Text completeText = new Text("Main Objective Complete!", LeadCrystalTextType.MESSAGE);
+        completeText.setColor(new Color(Color.green));
+        completeText.setScale(1.3f);
+        float center = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x/2;
+        completeText.setPosition(center- completeText.getWidth()/2, 650);
+        completeText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 240, 0, 0));
+        
+        //currency text
+        String currencyString = "+" + packet.currencyReward;
+        Text currencyText = new Text(currencyString,LeadCrystalTextType.MESSAGE);
+        currencyText.setScale(1f);
+        currencyText.setPosition(center- currencyText.getWidth()/2 - 20, 600);
+        currencyText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 240, 0, 0));
+             
+        //currency image
+        Image currencyImage = new Image("currency2.png");
+        currencyImage.setScale(1f);
+        currencyImage.setPosition(center- currencyText.getWidth()/2 + 75, 600);
+        currencyImage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 240, 0, 0));
+        
+        //skill text
+        Text skillText = new Text("+1 Skill Point",LeadCrystalTextType.MESSAGE);
+        skillText.setScale(1f);
+        skillText.setPosition(center- skillText.getWidth()/2 - 20, 540);
+        skillText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 240, 0, 0));
+        
+        
+        //add fade effects
+        TextEffect fade = new TextEffect(TextEffect.TextEffectType.COLOR, 30, new Color(Color.green), new Color(Color.green,0));
+        fade.setDelay(210);
+        completeText.addTextEffect(fade);
+        fade = new TextEffect(TextEffect.TextEffectType.COLOR, 30, new Color(Color.white), new Color(Color.white,0));
+        fade.setDelay(210);
+        currencyText.addTextEffect(fade);
+        fade = new TextEffect(TextEffect.TextEffectType.COLOR, 30, new Color(Color.white), new Color(Color.white,0));
+        fade.setDelay(210);
+        skillText.addTextEffect(fade);
+        
+        //add scale effects
+        Float[] points ={1.3f,1.5f,1.3f};
+        int[] durations = {45,45};
+        completeText.addTextEffect(new MultiTextEffect(TextEffect.TextEffectType.SCALE, points, durations));
+        Float[] points3 ={1f,1.2f,1f};
+        int[] durations3 = {45,45};
+        currencyText.addTextEffect(new MultiTextEffect(TextEffect.TextEffectType.SCALE, points3, durations3));
+        skillText.addTextEffect(new MultiTextEffect(TextEffect.TextEffectType.SCALE, points3, durations3));
+        
+        Float[] points2 ={1f,1.2f,1f};
+        int[] durations2 = {45,45};
+        currencyImage.addImageEffect(new MultiImageEffect(ImageEffect.ImageEffectType.SCALE,points2,durations2));
+       
+        //add text to scene
+        this.add(completeText, Scene.Layer.HUD);
+        
+        if(packet.currencyReward != 0)
+        {
+            this.add(currencyText, Scene.Layer.HUD);
+            this.add(currencyImage, Scene.Layer.HUD);
+            this.add(skillText, Scene.Layer.HUD);
+            //toggle on skillup icon
+           this.hud.openTooltip(OpenInstructionalTipPacket.InstructionalTip.SkillUp); 
+        }
+        
+        
+        
+        
     }
     
     private void handleOpenInstructionalTipPacket(OpenInstructionalTipPacket packet)

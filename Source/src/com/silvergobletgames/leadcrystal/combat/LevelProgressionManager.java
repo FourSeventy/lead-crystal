@@ -3,7 +3,6 @@ package com.silvergobletgames.leadcrystal.combat;
 import com.silvergobletgames.leadcrystal.cutscenes.CutsceneManager.Cutscenes;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.items.Currency;
-import com.silvergobletgames.leadcrystal.netcode.LevelCompletePacket;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.sylver.netcode.RenderData;
 import com.silvergobletgames.sylver.netcode.SaveData;

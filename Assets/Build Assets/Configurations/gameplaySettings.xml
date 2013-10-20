@@ -1,0 +1,14 @@
+<gamesettings>
+<gameplay>
+<drawNetworkingStats value="true"/>
+<showCooldownTimers value="false"/>
+</gameplay>
+<debug>
+<bodyWireframe value="false"/>
+<viewportFeelers value="false"/>
+<drawPlayerServerTime value="false"/>
+<networkDebugging value="false"/>
+<packetSizeDebugging value="false"/>
+<debugEnemies value="false"/>
+</debug>
+</gamesettings>

@@ -5,7 +5,7 @@ import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.core.SceneObjectManager;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.LightSource;
-import com.silvergobletgames.sylver.graphics.ParticleEmitter;
+import com.silvergobletgames.sylver.graphics.AbstractParticleEmitter;
 import com.silvergobletgames.sylver.netcode.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -111,7 +111,7 @@ public class WorldObjectEntity extends Entity implements SavableSceneObject, Sha
             
             if(SylverRandom.random.nextFloat() < (.25f + randomAdjust) ||(Math.abs(other.getBody().getLastVelocity().getX() - other.getBody().getLastVelocity().getY()) < 10 && other instanceof PlayerEntity))
             {
-                ParticleEmitter sand = new LeadCrystalParticleEmitters.SandSpurtEmitter();
+                AbstractParticleEmitter sand = new LeadCrystalParticleEmitters.SandSpurtEmitter();
                 sand.setDuration(5);
                 sand.setPosition(event.getPoint().getX(), event.getPoint().getY());
                 this.getOwningScene().add(sand, Scene.Layer.MAIN);
@@ -121,7 +121,7 @@ public class WorldObjectEntity extends Entity implements SavableSceneObject, Sha
         {
             if(SylverRandom.random.nextFloat() < .2f)
             {
-                ParticleEmitter rock = new RockChipsEmitter();
+                AbstractParticleEmitter rock = new RockChipsEmitter();
                 rock.setDuration(5);
                 rock.setPosition(event.getPoint().getX(), event.getPoint().getY());
                 this.getOwningScene().add(rock, Scene.Layer.MAIN);
@@ -526,8 +526,15 @@ public class WorldObjectEntity extends Entity implements SavableSceneObject, Sha
         
         //set emitter and light data
         if (emitterData != null) {
-            ParticleEmitter emitter = (ParticleEmitter) ParticleEmitter.buildFromFullData(emitterData);
-            built.addEmitter(emitter);
+            try{
+                AbstractParticleEmitter emitter = (AbstractParticleEmitter) SceneObjectDeserializer.buildSceneObjectFromSaveData(emitterData);
+                built.addEmitter(emitter);
+            }
+            catch(Exception e)
+            {
+                
+            }
+            
         }
         if (lightData != null) {
             LightSource light = (LightSource) LightSource.buildFromFullData(lightData);

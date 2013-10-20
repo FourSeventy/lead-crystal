@@ -10,7 +10,6 @@ import net.phys2d.math.Vector2f;
 import com.silvergobletgames.leadcrystal.ai.AIState.StateID;
 import com.silvergobletgames.leadcrystal.ai.BrainFactory.BrainID;
 import com.silvergobletgames.leadcrystal.combat.Damage;
-import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.ExclaimAnimationPack;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
@@ -177,24 +176,7 @@ public class BrainFighter extends BrainGround
          self.getCombatData().xVelocity.adjustPercentModifier(.4f);
          
           //play aggro sound
-        
-        //play emotion
-        Image exclaimImage = new Image(new ExclaimAnimationPack());
-        
-        Object[] points1 = {new Color(Color.white),new Color(1f,1f,1f,.8f),new Color(Color.transparent)};
-        int[] durations1 = {63,63};
-        exclaimImage.addImageEffect(new MultiImageEffect(ImageEffectType.COLOR,points1,durations1));
-        exclaimImage.addImageEffect(new ImageEffect(ImageEffectType.SCALE, 63, 2.0f, 1.8f));
-        exclaimImage.setAnchor(Anchorable.Anchor.BOTTOMCENTER);
 
-        Overlay overlay = new Overlay(exclaimImage, 60, new SylverVector2f(.5f,1.2f));
-        overlay.setRelativeSize(.05f);
-        self.getImage().addOverlay("emotion", overlay);
-        
-        //add overlay movement effect
-        Float[] points ={1.2f,1.4f,1.2f};
-        int[] durations = {30,30};
-        self.getImage().addImageEffect(new MultiImageEffect(ImageEffectType.YOVERLAYTRANSLATE,points,durations));
     }
     
     

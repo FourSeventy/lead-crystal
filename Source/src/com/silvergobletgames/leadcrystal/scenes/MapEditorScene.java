@@ -1243,7 +1243,7 @@ public class MapEditorScene extends Scene {
             {
 
                 SceneObject obj = (SceneObject) list.get(i);
-                if(!(obj instanceof ParticleEmitter) && !(obj instanceof LightSource)) //particle emitters are already saved in the entity we dont need to save them again
+                if(!(obj instanceof AbstractParticleEmitter) && !(obj instanceof LightSource)) //particle emitters are already saved in the entity we dont need to save them again
                 {
                     SceneObjectSaveData savedObj = ((SavableSceneObject)obj).dumpFullData();
                     //Adding layer to the data

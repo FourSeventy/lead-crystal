@@ -54,6 +54,9 @@ public class SerializationRegistrator
     public static Kryo registerSerialization(Kryo k)
     {
         Kryo kryo = k;
+        
+        kryo.register(MainObjectiveCompletePacket.class);
+        kryo.register(SideObjectiveCompletePacket.class);
         kryo.register(HoverEntityPacket.class);
         kryo.register(LeadCrystalTextType.class);
         kryo.register(CoreTextType.class);
@@ -67,7 +70,6 @@ public class SerializationRegistrator
         kryo.register(Cutscenes.class);
         kryo.register(SylverVector2f.class);
         kryo.register(TextEffectType.class);
-        kryo.register(LevelCompletePacket.class);
         kryo.register(BuySkillPacket.class);
         kryo.register(ClientChatPacket.class);
         kryo.register(CoreAnimations.class);

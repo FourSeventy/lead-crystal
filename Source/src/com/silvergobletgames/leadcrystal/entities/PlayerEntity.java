@@ -22,6 +22,7 @@ import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.leadcrystal.combat.CombatData.CombatState;
 import com.silvergobletgames.leadcrystal.core.*;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownFrontArmAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.PlayerAnimationPack;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.RocketExplosionEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SandSpurtEmitter;
@@ -47,7 +48,9 @@ import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 import java.awt.Point;
 import java.security.InvalidParameterException;
+import javax.media.opengl.GL2;
 import net.phys2d.raw.*;
+import net.phys2d.raw.shapes.Box;
 import net.phys2d.raw.shapes.Line;
 
 public class PlayerEntity extends CombatEntity implements SavableSceneObject
@@ -60,6 +63,11 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     protected PotionManager potionManager;
     //level progression manager
     protected LevelProgressionManager levelProgressionManager;
+    
+    //back arm
+    protected Image backArm;
+    protected Image frontArm;
+    protected Image head;
         
     //skill assignments
     protected SkillID skill1 = SkillID.PlayerLaser;
@@ -103,12 +111,18 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     {
         //Call the superconstructor with appropriate data
         super(new Image(new PlayerAnimationPack()), new Body(new Circle(35), 10));
+        
+        //front arm
+        this.frontArm = new Image(new BashBrownFrontArmAnimationPack());
+        
+        //head
+        this.head = new Image("bash-head-brown.png");
             
         //ID
         this.ID = "Player";
         
         //set image dimensions and offset
-        image.setScale(1.3f);
+        image.setScale(1f);
         this.imageOffset = new Vector2f(0,10);
 
         //set body attributes
@@ -152,7 +166,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         this.light.setColor(new Color(.9f,.9f,1f));
         this.light.setSize(600);
         this.light.setConicalRadius(40);
-        this.light.setIntensity(1.1f);
+        this.light.setIntensity(0.40f);
         this.light.turnOff();
         
         //entity tooltip
@@ -266,7 +280,23 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
              this.body.setVelocity(new Vector2f(this.dashVector.x * 100,this.dashVector.y * 100));
              
          }
+         
+         
+         
+         //front arm setup
+         this.frontArm.setRotationPoint(0, .5f); 
+         this.frontArm.setPosition(this.getPosition().x, this.getPosition().y);
+         this.frontArm.update();
     }   
+    
+    public void draw(GL2 gl)
+    {
+        super.draw(gl);
+        
+        this.head.draw(gl);
+        this.frontArm.draw(gl);
+        
+    } 
     
     /**
      * Notification that this entity collided with another.
@@ -286,14 +316,6 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             
             //add to currency manager
             this.currencyManager.addCurrency(((Currency)other).getAmount());
-
-//                //play popping sound
-//                SoundData sound =SoundDataFactory.getInstance().newSource(false, "itm"+ID.toString(), "pop.ogg", false,  this.getPosition().x, this.getPosition().y);
-//                this.owningScene.add(sound);
-//                sound =SoundDataFactory.getInstance().setPitch("itm"+ID.toString(), 1.15f-(float)Math.random()*.3f);
-//                this.owningScene.add(sound);
-//                sound =SoundDataFactory.getInstance().playSource("itm"+ID.toString());
-//                this.owningScene.add(sound);
 
             //add currency text
             Text currencyText = new Text("+" + Integer.toString(((Currency)other).getAmount()), LeadCrystalTextType.COMBAT);
@@ -446,8 +468,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         //Stop casting
         this.interruptAttacking();
 
-        //Animation change
-        image.setAnimation(ExtendedImageAnimations.SPAWN);
+        
         
         //turn off light
         this.light.turnOff();
@@ -467,7 +488,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         //add respawn script
         //==================
         ScriptPage page = new ScriptPage();
-        page.setScript("self.respawn();"); 
+        page.setScript("if(self.getID() != invoker.getID()){scriptManager.respawnPlayer(self.getID(),invoker.getID());}"); 
         
         PageCondition condition = new PageCondition();
         condition.setConditionScript("conditionValue = true;");
@@ -475,8 +496,21 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         ScriptObject obj = new ScriptObject();
         obj.addPage(page, condition);
         obj.setTrigger(ScriptObject.ScriptTrigger.RIGHTCLICK);
+        this.setScriptObject(obj); 
         
-        this.setScriptObject(obj);
+        Float[] points = {0f,0f,1f};
+        int[] durations = {180,10};
+        this.getImage().addImageEffect(new MultiImageEffect(ImageEffect.ImageEffectType.ALPHABRIGHTNESS, points, durations));
+        //gravestone overlay
+        Overlay gravestoneOverlay = new Overlay(new Image("gravestone.png"));
+        gravestoneOverlay.getImage().addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.ALPHABRIGHTNESS, 180, 0, 1));
+        gravestoneOverlay.setRelativeSize(.7f);
+        gravestoneOverlay.setRelativePosition(.05f,0);
+        this.getImage().addOverlay("grave",gravestoneOverlay);
+        
+        
+        
+        
     }
    
     public void respawn()
@@ -504,6 +538,9 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         this.combatData.removeState(CombatState.ATTACKING);
         this.combatData.removeState(CombatState.SLOW);
         this.combatData.removeState(CombatState.IMMUNE);
+        
+        //remove respawn gravestone
+        this.getImage().removeOverlay("grave");
         
         //remove respawn script
         this.setScriptObject(null);
@@ -638,13 +675,13 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                  //add jetpack emitters
                 if( this.doubleJumpEnergy == this.MAX_JUMP_ENERGY -20)
                 {
-                    ParticleEmitter emitter = new SmokeEmitter();
+                    AbstractParticleEmitter emitter = new SmokeEmitter();
                     emitter.setAngle(270);
                     emitter.setParticlesPerFrame(3);
                     emitter.setDuration(-1);
                     this.addEmitter(emitter);
                     
-                    ParticleEmitter explosionEmitter = new LeadCrystalParticleEmitters.RocketExplosionEmitter();
+                    AbstractParticleEmitter explosionEmitter = new LeadCrystalParticleEmitters.RocketExplosionEmitter();
                     explosionEmitter.setAngle(270);
                     explosionEmitter.setParticlesPerFrame(1);
                     explosionEmitter.setDuration(-1);
@@ -771,7 +808,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         else
             this.doubleJumpAvailable = false;
         
-        for(ParticleEmitter e :this.getEmitters())
+        for(AbstractParticleEmitter e :this.getEmitters())
         {
             if(e instanceof SmokeEmitter || e instanceof RocketExplosionEmitter)
             {

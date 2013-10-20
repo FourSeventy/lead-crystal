@@ -28,7 +28,7 @@ public class PlayerDashAttack extends Skill{
         this.icon = new Image("dashIcon.jpg");
         this.skillName = "Dash Attack";
         this.skillDescription = "Dashes forward passing through enemies while doing damage to them.";
-        this.unlockCost = 2;
+        this.unlockCost = 1;
     }
     
     public void use(Damage damage, SylverVector2f origin) 

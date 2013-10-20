@@ -92,6 +92,9 @@ public class Hud extends Window
     private Label youHaveDied;
     private Button youDiedButton;
     
+    //skill up poppup
+    private Button skillUpButton;
+    
     //==================
     // networking stats
     //==================
@@ -115,7 +118,6 @@ public class Hud extends Window
     public PotionsMenu potionsMenu;
     public ArmorMenu armorMenu;
     public MapMenu mapMenu;
-    public LevelCompleteMenu levelCompleteMenu;
     public QuestMenu questMenu;
     
     //Chat manager
@@ -258,27 +260,6 @@ public class Hud extends Window
         mapMenu.close();
         mapMenu.setOwningScene(scene);
         menuList.add(mapMenu);
-        
-        //level Complete menu
-        levelCompleteMenu = new LevelCompleteMenu(center - 600,0,playerReference);
-        levelCompleteMenu.addActionListener(new ActionListener(){
-         public void actionPerformed(ActionEvent e)
-            {
-                if(e.getActionCommand().equals("mouseEntered"))
-                {
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND)); 
-                }
-                else if(e.getActionCommand().equals("mouseExited"))
-                {
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE)); 
-                }
-            }
-        
-        });
-        levelCompleteMenu.update();
-        levelCompleteMenu.close();
-        levelCompleteMenu.setOwningScene(scene);
-        menuList.add(levelCompleteMenu);
         
         //quest menu
         questMenu = new QuestMenu(10,0,playerReference);
@@ -688,6 +669,28 @@ public class Hud extends Window
         this.rightClickInteract.dontKillClick = true;
         this.addComponent(rightClickInteract); 
         
+        this.skillUpButton = new Button(new Image("skillUp.png"),center -40,90,80,80);
+        this.skillUpButton.setHidden(true);
+        this.skillUpButton.addActionListener(new ActionListener(){
+        
+            public void actionPerformed(ActionEvent e) 
+            {
+                if(e.getActionCommand().equals("clicked"))
+                {
+                    if(!skillMenu.isOpen() && !inventoryMenu.isOpen())
+                    {
+                        skillMenu.open();
+                        skillUpButton.getImage().removeAllImageEffects();
+                        skillUpButton.setHidden(true);
+                        
+                    }
+                }
+                
+            }   
+        
+        });
+        this.addComponent(this.skillUpButton);
+        
         //set up skills
         this.setUpSkillBar();
        
@@ -926,7 +929,7 @@ public class Hud extends Window
                 this.addComponent(youHaveDied);
                 
                 Text ehh = new Text("Respawn In Town",LeadCrystalTextType.MESSAGE);
-                this.youDiedButton = new Button(ehh, center - 200, 300);
+                this.youDiedButton = new Button(ehh, center - 200, 500);
                 youDiedButton.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e) {
@@ -935,7 +938,7 @@ public class Hud extends Window
                             ((GameClientScene)owningScene).sendRespawnRequestPacket();
                         }
                         if (e.getActionCommand().equals("mouseEntered")) {
-                            youDiedButton.text.setScale(1.5f);
+                            youDiedButton.text.setScale(1.2f);
                             
                         }
                         if (e.getActionCommand().equals("mouseExited")) {
@@ -1155,6 +1158,16 @@ public class Hud extends Window
             case Jumpthrough: this.jumpThrough.setHidden(false); break;
             case Sprint: this.sprint.setHidden(false); break;
             case RightClick: this.rightClickInteract.setHidden(false); break;
+            case SkillUp: 
+                {
+                    Float[] points = {1.3f,3.0f,1.3f};
+                    int[] durations = {60,60};
+                    ImageEffect brightnessEffect = new MultiImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, points,durations);      
+                    brightnessEffect.setRepeating(true);
+                    this.skillUpButton.getImage().addImageEffect(brightnessEffect);
+                    this.skillUpButton.setHidden(false);
+                } 
+                break;
         }
     }
     
@@ -1170,6 +1183,11 @@ public class Hud extends Window
             case Jumpthrough: this.jumpThrough.setHidden(true); break;
             case Sprint: this.sprint.setHidden(true); break;
             case RightClick: this.rightClickInteract.setHidden(true); break;
+            case SkillUp:
+                {
+                    this.skillUpButton.getImage().removeAllImageEffects();
+                    this.skillUpButton.setHidden(true);
+                } break;
         }
     }
     

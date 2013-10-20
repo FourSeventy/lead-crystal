@@ -102,7 +102,7 @@ public class EnemyLaserShot extends Skill{
              super.collidedWith(other,event);
              
              //add emitter
-             ParticleEmitter emitter = new LaserBitsEmitter();
+             AbstractParticleEmitter emitter = new LaserBitsEmitter();
              emitter.setPosition(event.getPoint().getX(), event.getPoint().getY());
              emitter.setDuration(1);
              emitter.setParticlesPerFrame(5);

@@ -44,7 +44,7 @@ public class PlayerWard extends Skill{
         this.skillName = "Ice Trap";
         this.skillDescription = "Places a ward on the ground damaging and slowing all enemies in its radius.";
         
-        this.unlockCost = 2;
+        this.unlockCost = 1;
 
     }
     
@@ -79,7 +79,7 @@ public class PlayerWard extends Skill{
         user.getOwningScene().add(img, Layer.ATTACHED_FG);
         
         //add its praticle effects
-        ParticleEmitter emitter = new IceEmitter();
+        AbstractParticleEmitter emitter = new IceEmitter();
         emitter.setDuration(900);
         hitbox.addEmitter(emitter);
         

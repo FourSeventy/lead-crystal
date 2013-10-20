@@ -128,7 +128,7 @@ public class PlayerLaserShot extends Skill{
         user.getOwningScene().add(flash,Layer.MAIN);
         
         //add smoke
-        ParticleEmitter smokeEmitter = new SmokeEmitter();
+        AbstractParticleEmitter smokeEmitter = new SmokeEmitter();
         smokeEmitter.setPosition(origin.x, origin.y);
         smokeEmitter.setDuration(8);
         smokeEmitter.setParticlesPerFrame(10);
@@ -173,7 +173,7 @@ public class PlayerLaserShot extends Skill{
                      angle += 180;
                  
                  //make emitter
-                 ParticleEmitter emitter = new BlueLaserBitsEmitter();
+                 AbstractParticleEmitter emitter = new BlueLaserBitsEmitter();
                  emitter.setPosition(event.getPoint().getX(), event.getPoint().getY());
                  emitter.setDuration(1);
                  emitter.setAngle(angle);

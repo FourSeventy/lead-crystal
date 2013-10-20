@@ -55,7 +55,7 @@ public class PlayerDestructionDisk extends Skill{
         this.skillName = "Destruction Disk";
         this.skillDescription = "Hurls a slow moving explosive disk. If the disk is struck by your primary"
                 + " attack, it will cause a powerful explosion.";
-        this.unlockCost = 2;
+        this.unlockCost = 1;
        
 
     }
@@ -188,7 +188,7 @@ public class PlayerDestructionDisk extends Skill{
                 this.getOwningScene().add(explosionHitbox, Layer.MAIN);
 
                 //explosion particle emitter
-                ParticleEmitter explosionEmitter = new LeadCrystalParticleEmitters.RocketExplosionEmitter();
+                AbstractParticleEmitter explosionEmitter = new LeadCrystalParticleEmitters.RocketExplosionEmitter();
                 explosionEmitter.setPosition(this.getPosition().x, this.getPosition().y);
                 explosionEmitter.setDuration(10);
                 this.getOwningScene().add(explosionEmitter, Layer.ATTACHED_FG);

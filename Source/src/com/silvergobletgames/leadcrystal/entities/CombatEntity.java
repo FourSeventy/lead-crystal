@@ -404,7 +404,7 @@ public abstract class CombatEntity extends Entity
         this.interruptAttacking();
         
         //remove emitters
-        for(ParticleEmitter emitter: this.emitters)
+        for(AbstractParticleEmitter emitter: this.emitters)
             emitter.stopEmittingThenRemove(); 
         
         //Playing of death sounds
@@ -521,6 +521,8 @@ public abstract class CombatEntity extends Entity
                     super.collidedWith(other, event);
                     
                     this.body.setRestitution(0);
+                    
+                   
                 }
             };
             chunk.getBody().setDamping(0);
@@ -529,9 +531,13 @@ public abstract class CombatEntity extends Entity
             if(i >=3)
             {
                 ImageEffect fadeEffect =new ImageEffect(ImageEffectType.COLOR, 200,new Color(Color.white),new Color(Color.transparent));
-                fadeEffect.setDelay(1500);
+                fadeEffect.setDelay(((int)(SylverRandom.random.nextFloat() * 500)) +1000);
                 chunk.getImage().addImageEffect(fadeEffect);           
                 chunk.addEntityEffect(new EntityEffect(EntityEffectType.DURATION,1699,1,1));
+            }
+            else
+            {
+                chunk.addEntityEffect(new EntityEffect(EntityEffectType.REMOVEBODY,1699,1,1));
             }
             
             //add blood emitter TODO add more blood with more mass
@@ -539,14 +545,14 @@ public abstract class CombatEntity extends Entity
             {
                 if(this.getImage().getAnimationPack() instanceof PlantAnimationPack)
                 {
-                    ParticleEmitter emitter = new GreenBloodEmitter();
+                    AbstractParticleEmitter emitter = new GreenBloodEmitter();
                     emitter.setDuration(250);
                     emitter.setPosition(this.getPosition().x,this.getPosition().y);
                     chunk.addEmitter(emitter); 
                 }
                 else
                 {
-                    ParticleEmitter emitter = new BloodEmitter();
+                    AbstractParticleEmitter emitter = new BloodEmitter();
                     emitter.setDuration(250);
                     emitter.setPosition(this.getPosition().x,this.getPosition().y);
                     chunk.addEmitter(emitter); 

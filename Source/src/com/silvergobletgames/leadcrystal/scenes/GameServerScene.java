@@ -24,7 +24,7 @@ import com.silvergobletgames.leadcrystal.core.LevelData;
 import com.jogamp.newt.event.KeyEvent;
 import com.silvergobletgames.sylver.core.*;
 import com.silvergobletgames.sylver.graphics.OpenGLGameWindow;
-import com.silvergobletgames.sylver.graphics.ParticleEmitter;
+import com.silvergobletgames.sylver.graphics.AbstractParticleEmitter;
 import com.silvergobletgames.sylver.netcode.Packet;
 import com.silvergobletgames.sylver.netcode.SceneObjectRenderData;
 import com.silvergobletgames.sylver.netcode.SceneObjectRenderDataChanges;
@@ -162,7 +162,11 @@ public class GameServerScene extends Scene
                     
             //tick the physics world
             physicsWorld.clearRestingState(); //clear the physics world of resting bodies (this needs to be done for isTouching() to work)
+            
+           // long time = System.currentTimeMillis();
             physicsWorld.step(5 / 60F);
+            
+           // System.err.println(System.currentTimeMillis() - time);
             
             //resolve collisions
             this.collisionHandler.resolveCollisions();        
@@ -480,10 +484,12 @@ public class GameServerScene extends Scene
                     //test
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_M))
                     {
-
+                       this.players.get(0).respawn();
                     }
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_N))
                     {
+                        
+                        this.players.get(0).getCombatData().currentHealth = 0;
                     }
 
 
@@ -591,7 +597,7 @@ public class GameServerScene extends Scene
         super.remove(item);
 
         //compile a list of objects that need to be removed on the client side
-        if(!(item instanceof ParticleEmitter))
+        if(!(item instanceof AbstractParticleEmitter))
              this.removeSceneObjects.add(item.getID());
     }
 
@@ -816,7 +822,7 @@ public class GameServerScene extends Scene
             {
                 SceneObject sceneObject =layerObjs.get(i);
                 //if this object isnt in the initial state, add it to a list to be added to the client, and its not an added client
-                if(!initialSceneObjectsIDs.contains(sceneObject.getID()) && !(sceneObject instanceof LightSource) && !(sceneObject instanceof ParticleEmitter) && !( this.newSceneObjects.containsKey(sceneObject.getID())))
+                if(!initialSceneObjectsIDs.contains(sceneObject.getID()) && !(sceneObject instanceof LightSource) && !(sceneObject instanceof AbstractParticleEmitter) && !( this.newSceneObjects.containsKey(sceneObject.getID())))
                     newObjectList.add( new SerializableEntry(((NetworkedSceneObject)sceneObject).dumpRenderData(),layer));
             }
         }
@@ -1055,6 +1061,22 @@ public class GameServerScene extends Scene
             packet.text = text;
             this.sendPacket(packet, clientID);
         }
+    }
+    
+    public void sendSideObjectiveCompletePacket(String client, short currencyReward)
+    {
+            //send out side objective complete packet
+           SideObjectiveCompletePacket packet = new SideObjectiveCompletePacket();           
+           packet.currencyReward = currencyReward;
+           this.sendPacket(packet,UUID.fromString(client));             
+    }
+    
+    public void sendMainObjectiveCompletePacket(String client, short currencyReward)
+    {
+           //send out side objective complete packet
+           MainObjectiveCompletePacket packet = new MainObjectiveCompletePacket();           
+           packet.currencyReward = currencyReward;
+           this.sendPacket(packet,UUID.fromString(client));             
     }
     
     public void sendCloseMenu(String client, MenuID id)
