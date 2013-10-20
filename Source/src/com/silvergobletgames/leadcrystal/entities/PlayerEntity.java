@@ -62,7 +62,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     //Players potions
     protected PotionManager potionManager;
     //level progression manager
-    protected LevelProgressionManager levelProgressionManager;
+    protected LevelProgressionManager levelProgressionManager; 
     
     //back arm
     protected Image backArm;
