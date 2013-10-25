@@ -208,7 +208,7 @@ public final class GameClientScene extends Scene
         player = new ClientPlayerEntity(activeSaveGame.getPlayer());
         player.setID(this.clientID.toString());  
         //player server time
-        playerServerTime = new PlayerEntity();
+        playerServerTime = new PlayerEntity(player.getImage().copy(),player.getHead().copy(),player.getBackArm().copy(),player.getFrontArm().copy());
         playerServerTime.getImage().setColor(new Color(1,1,1,.5f));
         
      

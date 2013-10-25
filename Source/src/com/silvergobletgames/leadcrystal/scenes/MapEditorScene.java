@@ -1307,7 +1307,8 @@ public class MapEditorScene extends Scene {
         //Build a point to load at        
         
         //Dummy save game
-        final PlayerEntity player = new PlayerEntity();
+        final PlayerEntity player = new PlayerEntity(new Image(new AnimationPackClasses.BashBrownBodyAnimationPack()),new Image("bash-head1.png"),new Image(new AnimationPackClasses.BashBrownFrontArmAnimationPack()),new Image(new AnimationPackClasses.BashBrownFrontArmAnimationPack()));
+                   
         player.setName("testplayer");
         final SaveGame save = new SaveGame();
         save.setPlayer(player);

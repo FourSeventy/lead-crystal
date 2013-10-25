@@ -1,7 +1,8 @@
 package com.silvergobletgames.leadcrystal.scenes;
 
 import com.jogamp.newt.event.KeyEvent;
-import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.PlayerAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownBodyAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownFrontArmAnimationPack;
 import com.silvergobletgames.leadcrystal.core.CursorFactory;
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
@@ -241,7 +242,7 @@ public class NewCharacterScene extends Scene
                     //===============
                     //make the player
                     //===============
-                    PlayerEntity player = new PlayerEntity();
+                    PlayerEntity player = new PlayerEntity(new Image(new BashBrownBodyAnimationPack()),new Image(headList.get(currentHeadSelection)),new Image(new BashBrownFrontArmAnimationPack()),new Image(new BashBrownFrontArmAnimationPack()));
                     player.setName(nameTextBox.getText()); 
 
                     //dev settings

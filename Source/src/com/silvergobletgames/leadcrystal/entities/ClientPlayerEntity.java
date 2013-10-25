@@ -29,12 +29,14 @@ import net.phys2d.raw.shapes.Box;
 public class ClientPlayerEntity extends PlayerEntity
 {
     
+    ArrayList<Vector2f> bashHeadPosition;
+    
     //===============
     // Constructor
     //===============
     public ClientPlayerEntity(PlayerEntity player)
     {
-        super();
+        super(player.getImage().copy(),player.head.copy(),player.frontArm.copy(),player.backArm.copy());
         
         this.ID = player.getID();
         this.setName(player.getName()); 
@@ -51,6 +53,34 @@ public class ClientPlayerEntity extends PlayerEntity
         this.skill2 = player.skill2;
         this.skill3 = player.skill3;
         this.skill4 = player.skill4;
+        
+        
+        //bash head position map
+        bashHeadPosition = new ArrayList<>();
+         //0 44,11    89 x 134
+        bashHeadPosition.add(new Vector2f(0.494f,0.896f)); //1
+        bashHeadPosition.add(new Vector2f(0.506f,0.896f)); //2
+        bashHeadPosition.add(new Vector2f(0.506f,0.896f)); //3
+        bashHeadPosition.add(new Vector2f(0.506f,0.896f)); //4
+        bashHeadPosition.add(new Vector2f(0.517f,0.903f)); //5 
+        bashHeadPosition.add(new Vector2f(0.506f,0.910f)); //6
+        bashHeadPosition.add(new Vector2f(0.506f,0.925f)); //7
+        bashHeadPosition.add(new Vector2f(0.506f,0.918f)); //8
+        bashHeadPosition.add(new Vector2f(0.506f,0.910f));
+        bashHeadPosition.add(new Vector2f(0.506f,0.896f)); //9
+        bashHeadPosition.add(new Vector2f(0.494f,0.896f)); //10
+        bashHeadPosition.add(new Vector2f(0.494f,0.896f)); //11
+        bashHeadPosition.add(new Vector2f(0.506f,0.896f)); //12
+        bashHeadPosition.add(new Vector2f(0.517f,0.896f)); //13
+        bashHeadPosition.add(new Vector2f(0.517f,0.903f)); //14
+        bashHeadPosition.add(new Vector2f(0.517f,0.910f)); //15
+        bashHeadPosition.add(new Vector2f(0.517f,0.925f)); //16
+        bashHeadPosition.add(new Vector2f(0.517f,0.933f)); //17
+        bashHeadPosition.add(new Vector2f(0.506f,0.918f)); //18
+        bashHeadPosition.add(new Vector2f(0.506f,0.910f)); //19
+        bashHeadPosition.add(new Vector2f(0.506f,0.903f)); //20
+        bashHeadPosition.add(new Vector2f(0.495f,0.895f)); //21
+        
     }
     
     
@@ -171,7 +201,7 @@ public class ClientPlayerEntity extends PlayerEntity
         else
             flipped = false;
         
-          //front arm
+          //=========front arm============
          this.frontArm.setHorizontalFlip(flipped);        
          if(flipped)
          {
@@ -199,8 +229,36 @@ public class ClientPlayerEntity extends PlayerEntity
          }   
          this.frontArm.update();
          
+         //===========back arm===========
+         this.backArm.setHorizontalFlip(flipped);        
+         if(flipped)
+         {
+
+             float angle =(float)((theta- Math.PI) * (180f/Math.PI));
+             if(angle <= -60 && angle >= -90)
+                 angle = -60;
+             else if(angle >= 60 && angle <= 90)
+                 angle = 60;
+             this.backArm.setAngle(angle);
+             this.backArm.setRotationPoint(.85f, .7f);
+             this.backArm.setPosition(this.getPosition().x -55, this.getPosition().y+10);
+         }
+         else
+         {
+             
+             float angle =(float)(theta * (180f/Math.PI));
+             if(angle >= 60 && angle <= 90)
+                 angle = 60;
+             else if(angle <= 300 && angle >= 270)
+                 angle = 300;
+             this.backArm.setAngle(angle);
+             this.backArm.setRotationPoint(.15f, .7f);
+             this.backArm.setPosition(this.getPosition().x -15, this.getPosition().y+10);
+         }   
+         this.backArm.update();
          
-         //head
+         
+         //=============head============
          this.head.setHorizontalFlip(flipped);
          this.head.setScale(1.2f);
          this.head.setAnchor(Anchorable.Anchor.CENTER);
@@ -213,7 +271,10 @@ public class ClientPlayerEntity extends PlayerEntity
                  angle = 60;
              this.head.setRotationPoint(.5f, .1f);
              this.head.setAngle(angle);    
-             this.head.setPositionAnchored(this.getPosition().x, this.getPosition().y+80);
+             float xPos = this.image.getPosition().x + this.image.getWidth()*this.bashHeadPosition.get(this.image.getAnimationIndex()).x;
+             float yPos = 13+this.image.getPosition().y + this.image.getHeight()*this.bashHeadPosition.get(this.image.getAnimationIndex()).y;
+             
+             this.head.setPositionAnchored(xPos,yPos);
          }
          else
          {
@@ -224,7 +285,10 @@ public class ClientPlayerEntity extends PlayerEntity
                  angle = 300;
              this.head.setRotationPoint(.5f, .1f);
              this.head.setAngle(angle);    
-             this.head.setPositionAnchored(this.getPosition().x, this.getPosition().y+80);
+             float xPos = this.image.getPosition().x + this.image.getWidth()*this.bashHeadPosition.get(this.image.getAnimationIndex()).x;
+             float yPos = 13+this.image.getPosition().y + this.image.getHeight()*this.bashHeadPosition.get(this.image.getAnimationIndex()).y;
+             
+             this.head.setPositionAnchored(xPos,yPos);
          }         
          this.head.update();
      
@@ -396,7 +460,8 @@ public class ClientPlayerEntity extends PlayerEntity
         if(skill != null && skill.isUsable() && this.combatData.canAttack() && !this.inAttackAnimation())
         {
             //change animation
-            this.image.setAnimation(skill.getImageAnimation());
+            this.getFrontArm().setAnimation(skill.getImageAnimation());
+            this.getBackArm().setAnimation(skill.getImageAnimation());
             
             //start cooldown
             skill.beginCooldown();

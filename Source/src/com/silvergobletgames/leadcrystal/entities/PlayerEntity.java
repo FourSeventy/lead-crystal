@@ -22,8 +22,8 @@ import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.leadcrystal.combat.CombatData.CombatState;
 import com.silvergobletgames.leadcrystal.core.*;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownBackArmAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownFrontArmAnimationPack;
-import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.PlayerAnimationPack;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.RocketExplosionEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SandSpurtEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SmokeEmitter;
@@ -64,9 +64,9 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     //level progression manager
     protected LevelProgressionManager levelProgressionManager; 
     
-    //back arm
-    protected Image backArm;
+    //body part images
     protected Image frontArm;
+    protected Image backArm;
     protected Image head;
         
     //skill assignments
@@ -107,16 +107,21 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     /**
      * Main constructor for the player
      */
-    public PlayerEntity()
+    public PlayerEntity(Image bodyImage, Image head, Image backArm, Image frontArm)
     {
         //Call the superconstructor with appropriate data
-        super(new Image(new PlayerAnimationPack()), new Body(new Circle(35), 10));
+        super(bodyImage, new Body(new Circle(35), 10));
         
         //front arm
-        this.frontArm = new Image(new BashBrownFrontArmAnimationPack());
+        this.frontArm = frontArm;
+        this.frontArm.addAnimationListener(this);
+         
+        //back arm
+        this.backArm = backArm;
+        this.backArm.addAnimationListener(this);
         
         //head
-        this.head = new Image("bash-head1.png");
+        this.head = head;
             
         //ID
         this.ID = "Player";
@@ -443,7 +448,11 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
      */
     public void finishedAnimating(ImageAnimation action) 
     {
-        super.finishedAnimating(action);
+        if(action == ExtendedImageAnimations.MELEEATTACK || action == ExtendedImageAnimations.RANGEDATTACK || action == ExtendedImageAnimations.SPELLATTACK)
+        {            
+            this.backArm.setAnimation(CoreAnimations.IDLE);  
+            this.frontArm.setAnimation(CoreAnimations.IDLE);   
+        }
 
     }
     
@@ -598,6 +607,21 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
 
             }
         }
+    }
+    
+    public Image getFrontArm()
+    {
+        return frontArm;
+    }
+
+    public Image getBackArm()
+    {
+        return backArm;
+    }
+
+    public Image getHead()
+    {
+        return head;
     }
     
     
@@ -850,8 +874,45 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             this.body.addSoftForce(new Vector2f(3000 * vector.x,(this.onLadder?833:0)* vector.y));
             
             //set the correct animation
-            if((this.feetOnTheGround) && Math.abs(this.body.getVelocity().getX()) > 2 && !this.inAttackAnimation())
-                image.setAnimation(ExtendedImageAnimations.RUNNING); 
+            if((this.feetOnTheGround) && this.body.getVelocity().getX() > 0)
+            {
+                 
+                if(image.getAnimation() == ExtendedImageAnimations.RUNNINGREVERSE)
+                {
+                    int setIndex = image.getAnimationPack().animationSet.get(ExtendedImageAnimations.RUNNINGREVERSE).size() - 1 -image.getAnimationIndex();
+                    image.setAnimation(ExtendedImageAnimations.RUNNING);
+                    image.setAnimationIndex(setIndex);
+                    image.update();
+                    image.update();
+                    image.update();
+                }
+                else
+                {
+                   image.setAnimation(ExtendedImageAnimations.RUNNING);
+                   
+                }
+                
+            }
+            else if((this.feetOnTheGround) && this.body.getVelocity().getX() < 0)
+            {
+           
+                if(image.getAnimation() == ExtendedImageAnimations.RUNNING)
+                {
+                     int setIndex = image.getAnimationPack().animationSet.get(ExtendedImageAnimations.RUNNINGREVERSE).size() -1 -image.getAnimationIndex();
+                     image.setAnimation(ExtendedImageAnimations.RUNNINGREVERSE); 
+                     image.setAnimationIndex(setIndex);
+                     image.update();
+                     image.update();
+                     image.update();
+                }
+                else
+                {
+                    image.setAnimation(ExtendedImageAnimations.RUNNINGREVERSE); 
+        
+                }
+                
+                
+            }
         }
         
         
@@ -898,7 +959,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         Image image = Image.buildFromRenderData((SceneObjectRenderData)renderData.data.get(0));
         
         //build the player
-        PlayerEntity player = new PlayerEntity();
+        PlayerEntity player = new PlayerEntity(image,new Image("blank.png"),new Image("blank.png"),new Image("blank.png"));
         player.setID(renderData.getID());
         player.setImage(image);
         
@@ -1111,6 +1172,10 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         saveData.dataMap.put("skill2",this.skill2!= null? this.skill2.name(): null);
         saveData.dataMap.put("skill3",this.skill3!= null? this.skill3.name(): null);
         saveData.dataMap.put("skill4",this.skill4!= null? this.skill4.name(): null);
+        saveData.dataMap.put("headImage", this.head.dumpFullData());
+        saveData.dataMap.put("bodyImage", this.image.dumpFullData());
+        saveData.dataMap.put("frontArm", this.frontArm.dumpFullData());
+        saveData.dataMap.put("backArm", this.backArm.dumpFullData());
            
        return saveData;
     }
@@ -1124,7 +1189,12 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         //break saved data
         //======================================
         
-        PlayerEntity player = new PlayerEntity();
+        Image headImage = Image.buildFromFullData((SceneObjectSaveData)saveData.dataMap.get("headImage"));
+        Image bodyImage = Image.buildFromFullData((SceneObjectSaveData)saveData.dataMap.get("bodyImage"));
+        Image frontArm = Image.buildFromFullData((SceneObjectSaveData)saveData.dataMap.get("frontArm"));
+        Image backArm = Image.buildFromFullData((SceneObjectSaveData)saveData.dataMap.get("backArm"));
+        
+        PlayerEntity player = new PlayerEntity(bodyImage,headImage,frontArm,backArm);
         
         //skill manager
         SkillManager skillManager = SkillManager.buildFromFullData((SaveData)saveData.dataMap.get("skillManager"));
