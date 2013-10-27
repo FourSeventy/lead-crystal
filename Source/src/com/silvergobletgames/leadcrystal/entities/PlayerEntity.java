@@ -48,10 +48,13 @@ import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 import java.awt.Point;
 import java.security.InvalidParameterException;
+import java.util.HashMap;
 import javax.media.opengl.GL2;
+import net.phys2d.math.ROVector2f;
 import net.phys2d.raw.*;
 import net.phys2d.raw.shapes.Box;
 import net.phys2d.raw.shapes.Line;
+import net.phys2d.raw.shapes.Polygon;
 
 public class PlayerEntity extends CombatEntity implements SavableSceneObject
 {
@@ -65,9 +68,12 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     protected LevelProgressionManager levelProgressionManager; 
     
     //body part images
+    protected Image head;
     protected Image frontArm;
     protected Image backArm;
-    protected Image head;
+     
+    //body part positioning maps
+    protected HashMap<ImageAnimation,ArrayList<Vector2f>> bodyPartOffsets = new HashMap<>();
         
     //skill assignments
     protected SkillID skill1 = SkillID.PlayerLaser;
@@ -99,6 +105,8 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     public boolean onLadder = false;
     public boolean respawnWhenEnterTown = false;
     
+  
+    
     
     //=====================
     // Constructors
@@ -110,7 +118,8 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     public PlayerEntity(Image bodyImage, Image head, Image backArm, Image frontArm)
     {
         //Call the superconstructor with appropriate data
-        super(bodyImage, new Body(new Circle(35), 10));
+        super(bodyImage, new Body(new Polygon(PlayerEntity.getBodyVertices()), 10));        
+        
         
         //front arm
         this.frontArm = frontArm;
@@ -128,7 +137,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         //set image dimensions and offset
         image.setScale(1f);
-        this.imageOffset = new Vector2f(0,10);
+        this.imageOffset = new Vector2f(0,-25);
 
         //set body attributes
         body.setFriction(this.BASE_FRICTION);
@@ -179,6 +188,9 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         //set group
         this.addToGroup(ExtendedSceneObjectGroups.PLAYER);
+        
+        //initialize body position maps
+        initializeBodyOffsetMap();
                
     }
 
@@ -211,6 +223,106 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     //=====================
     // Class Methods
     //=====================
+    
+    private static ROVector2f[] getBodyVertices()
+    {
+        ROVector2f[] vertices = new ROVector2f[11];
+                
+        vertices[0] = new Vector2f(25,55);
+        vertices[1] = new Vector2f(-25,55); 
+        
+        //points on circle radius 25
+        int ehh = 2;
+        for(double t = Math.PI; t <= 2* Math.PI + Math.PI/10; t+= Math.PI/8)
+        {
+          double x = 25*Math.cos(t) + 0;
+          double y = 25*Math.sin(t) - 55;           
+          vertices[ehh] = new Vector2f((float)x,(float)y);                   
+          ehh++;
+        }
+      
+        return vertices;
+    }
+    
+    private void initializeBodyOffsetMap()
+    {  
+        //walking
+        ArrayList<Vector2f> walkingPosition = new ArrayList<>();
+        walkingPosition.add(new Vector2f(0.494f,0.896f)); 
+        walkingPosition.add(new Vector2f(0.506f,0.896f)); 
+        walkingPosition.add(new Vector2f(0.506f,0.896f)); 
+        walkingPosition.add(new Vector2f(0.506f,0.896f)); 
+        walkingPosition.add(new Vector2f(0.517f,0.903f)); 
+        walkingPosition.add(new Vector2f(0.506f,0.910f)); 
+        walkingPosition.add(new Vector2f(0.506f,0.925f));
+        walkingPosition.add(new Vector2f(0.506f,0.918f)); 
+        walkingPosition.add(new Vector2f(0.506f,0.910f));
+        walkingPosition.add(new Vector2f(0.506f,0.896f)); 
+        walkingPosition.add(new Vector2f(0.494f,0.896f)); 
+        walkingPosition.add(new Vector2f(0.494f,0.896f)); 
+        walkingPosition.add(new Vector2f(0.506f,0.896f));
+        walkingPosition.add(new Vector2f(0.517f,0.896f)); 
+        walkingPosition.add(new Vector2f(0.517f,0.903f)); 
+        walkingPosition.add(new Vector2f(0.517f,0.910f)); 
+        walkingPosition.add(new Vector2f(0.517f,0.925f)); 
+        walkingPosition.add(new Vector2f(0.517f,0.933f)); 
+        walkingPosition.add(new Vector2f(0.506f,0.918f)); 
+        walkingPosition.add(new Vector2f(0.506f,0.910f)); 
+        walkingPosition.add(new Vector2f(0.506f,0.903f)); 
+        walkingPosition.add(new Vector2f(0.495f,0.895f)); 
+        this.bodyPartOffsets.put(ExtendedImageAnimations.RUNNING, walkingPosition);
+        
+        //walking reverse
+        ArrayList<Vector2f> walkingReverse = new ArrayList<>();          
+        walkingReverse.add(new Vector2f(0.495f,0.895f)); 
+        walkingReverse.add(new Vector2f(0.506f,0.903f));
+        walkingReverse.add(new Vector2f(0.506f,0.910f)); 
+        walkingReverse.add(new Vector2f(0.506f,0.918f));
+        walkingReverse.add(new Vector2f(0.517f,0.933f));
+        walkingReverse.add(new Vector2f(0.517f,0.925f));
+        walkingReverse.add(new Vector2f(0.517f,0.910f)); 
+        walkingReverse.add(new Vector2f(0.517f,0.903f));
+        walkingReverse.add(new Vector2f(0.517f,0.896f));
+        walkingReverse.add(new Vector2f(0.506f,0.896f));
+        walkingReverse.add(new Vector2f(0.494f,0.896f)); 
+        walkingReverse.add(new Vector2f(0.494f,0.896f)); 
+        walkingReverse.add(new Vector2f(0.506f,0.896f));
+        walkingReverse.add(new Vector2f(0.506f,0.910f));
+        walkingReverse.add(new Vector2f(0.506f,0.918f));
+        walkingReverse.add(new Vector2f(0.506f,0.925f));
+        walkingReverse.add(new Vector2f(0.506f,0.910f)); 
+        walkingReverse.add(new Vector2f(0.517f,0.903f));
+        walkingReverse.add(new Vector2f(0.506f,0.896f)); 
+        walkingReverse.add(new Vector2f(0.506f,0.896f)); 
+        walkingReverse.add(new Vector2f(0.506f,0.896f));
+        walkingReverse.add(new Vector2f(0.494f,0.896f)); 
+        this.bodyPartOffsets.put(ExtendedImageAnimations.RUNNINGREVERSE, walkingReverse);
+        
+        //idle
+        ArrayList<Vector2f> idlePosition = new ArrayList<>();
+        idlePosition.add(new Vector2f(.494f,0.910f)); 
+        idlePosition.add(new Vector2f(.494f,0.910f));
+        idlePosition.add(new Vector2f(.494f,0.910f));
+        idlePosition.add(new Vector2f(.494f,0.910f));
+        idlePosition.add(new Vector2f(.494f,0.910f));
+        idlePosition.add(new Vector2f(.494f,0.910f));
+        idlePosition.add(new Vector2f(.494f,0.910f));
+        idlePosition.add(new Vector2f(.494f,0.910f));
+        idlePosition.add(new Vector2f(.494f,0.910f));
+        idlePosition.add(new Vector2f(.494f,0.910f));
+        idlePosition.add(new Vector2f(.494f,0.910f));
+        idlePosition.add(new Vector2f(.494f,0.910f));
+        idlePosition.add(new Vector2f(.494f,0.910f));
+        idlePosition.add(new Vector2f(.494f,0.910f));
+        idlePosition.add(new Vector2f(.494f,0.910f));
+        this.bodyPartOffsets.put(CoreAnimations.IDLE, idlePosition);
+        
+        ArrayList<Vector2f> jumpingPosition = new ArrayList<>();
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        this.bodyPartOffsets.put(ExtendedImageAnimations.JUMPING, jumpingPosition);
+        
+       
+    }
      
     public void update()
     {
@@ -296,6 +408,8 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     
     public void draw(GL2 gl)
     {
+        this.backArm.draw(gl);
+        
         super.draw(gl);
         
         this.head.draw(gl);
@@ -637,6 +751,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         {
             this.combatData.xVelocity.setBase(BASE_PLAYER_VELOCITY.x + 20);
             sprinting = true;
+            
         }
         
     }
@@ -874,9 +989,9 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             this.body.addSoftForce(new Vector2f(3000 * vector.x,(this.onLadder?833:0)* vector.y));
             
             //set the correct animation
-            if((this.feetOnTheGround) && this.body.getVelocity().getX() > 0)
+            if((this.feetOnTheGround) && (this.body.getVelocity().getX() > 0 && this.getFacingDirection() == FacingDirection.RIGHT)
+                                      || (this.body.getVelocity().getX() < 0 && this.getFacingDirection() == FacingDirection.LEFT))
             {
-                 
                 if(image.getAnimation() == ExtendedImageAnimations.RUNNINGREVERSE)
                 {
                     int setIndex = image.getAnimationPack().animationSet.get(ExtendedImageAnimations.RUNNINGREVERSE).size() - 1 -image.getAnimationIndex();
@@ -893,7 +1008,8 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                 }
                 
             }
-            else if((this.feetOnTheGround) && this.body.getVelocity().getX() < 0)
+            else if((this.feetOnTheGround) && (this.body.getVelocity().getX() > 0 && this.getFacingDirection() == FacingDirection.LEFT)
+                                           || (this.body.getVelocity().getX() < 0 && this.getFacingDirection() == FacingDirection.RIGHT))
             {
            
                 if(image.getAnimation() == ExtendedImageAnimations.RUNNING)

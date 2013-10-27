@@ -860,14 +860,21 @@ public class AnimationPackClasses {
               
               //Ranged
               ArrayList<Texture> attacking = new ArrayList();
-              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-frontArm-idle0.png"));
-              
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-frontArm-ranged0.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-frontArm-ranged1.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-frontArm-ranged2.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-frontArm-ranged3.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-frontArm-ranged4.png"));             
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-frontArm-ranged5.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-frontArm-ranged6.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-frontArm-ranged7.png")); 
               this.animationSet.put(ExtendedImageAnimations.RANGEDATTACK,attacking);
               
               //Use
               ArrayList<Texture> use = new ArrayList();
               this.animationSet.put(ExtendedImageAnimations.CASTING,use);
              
+              
               //========================
               // Build Skill Offset Map
               //========================

@@ -29,7 +29,7 @@ import net.phys2d.raw.shapes.Box;
 public class ClientPlayerEntity extends PlayerEntity
 {
     
-    ArrayList<Vector2f> bashHeadPosition;
+    
     
     //===============
     // Constructor
@@ -52,34 +52,7 @@ public class ClientPlayerEntity extends PlayerEntity
         this.skill1 = player.skill1;
         this.skill2 = player.skill2;
         this.skill3 = player.skill3;
-        this.skill4 = player.skill4;
-        
-        
-        //bash head position map
-        bashHeadPosition = new ArrayList<>();
-         //0 44,11    89 x 134
-        bashHeadPosition.add(new Vector2f(0.494f,0.896f)); //1
-        bashHeadPosition.add(new Vector2f(0.506f,0.896f)); //2
-        bashHeadPosition.add(new Vector2f(0.506f,0.896f)); //3
-        bashHeadPosition.add(new Vector2f(0.506f,0.896f)); //4
-        bashHeadPosition.add(new Vector2f(0.517f,0.903f)); //5 
-        bashHeadPosition.add(new Vector2f(0.506f,0.910f)); //6
-        bashHeadPosition.add(new Vector2f(0.506f,0.925f)); //7
-        bashHeadPosition.add(new Vector2f(0.506f,0.918f)); //8
-        bashHeadPosition.add(new Vector2f(0.506f,0.910f));
-        bashHeadPosition.add(new Vector2f(0.506f,0.896f)); //9
-        bashHeadPosition.add(new Vector2f(0.494f,0.896f)); //10
-        bashHeadPosition.add(new Vector2f(0.494f,0.896f)); //11
-        bashHeadPosition.add(new Vector2f(0.506f,0.896f)); //12
-        bashHeadPosition.add(new Vector2f(0.517f,0.896f)); //13
-        bashHeadPosition.add(new Vector2f(0.517f,0.903f)); //14
-        bashHeadPosition.add(new Vector2f(0.517f,0.910f)); //15
-        bashHeadPosition.add(new Vector2f(0.517f,0.925f)); //16
-        bashHeadPosition.add(new Vector2f(0.517f,0.933f)); //17
-        bashHeadPosition.add(new Vector2f(0.506f,0.918f)); //18
-        bashHeadPosition.add(new Vector2f(0.506f,0.910f)); //19
-        bashHeadPosition.add(new Vector2f(0.506f,0.903f)); //20
-        bashHeadPosition.add(new Vector2f(0.495f,0.895f)); //21
+        this.skill4 = player.skill4;       
         
     }
     
@@ -132,7 +105,7 @@ public class ClientPlayerEntity extends PlayerEntity
             this.jumpEnergy = 0;
         
          
-         if (!combatData.isDead() && this.image.getAnimation() != ExtendedImageAnimations.MELEEATTACK && this.image.getAnimation() != ExtendedImageAnimations.RANGEDATTACK)
+         if (!combatData.isDead())
          {           
              //change animation if we are in the air
              if(inAirTimer > 18)
@@ -201,6 +174,12 @@ public class ClientPlayerEntity extends PlayerEntity
         else
             flipped = false;
         
+        if(flipped)
+            this.image.setHorizontalFlip(true);
+        else
+            this.image.setHorizontalFlip(false);
+
+        
           //=========front arm============
          this.frontArm.setHorizontalFlip(flipped);        
          if(flipped)
@@ -213,7 +192,19 @@ public class ClientPlayerEntity extends PlayerEntity
                  angle = 60;
              this.frontArm.setAngle(angle);
              this.frontArm.setRotationPoint(.85f, .7f);
-             this.frontArm.setPosition(this.getPosition().x -75, this.getPosition().y+10);
+             this.frontArm.setAnchor(Anchorable.Anchor.LEFTCENTER); 
+             
+             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
+             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
+             
+             if(this.image.isFlippedHorizontal())
+             {
+                 xOffset = 1 - xOffset;
+           
+             }
+             float xPos = -76 +this.image.getPosition().x + this.image.getWidth()* xOffset; 
+             float yPos = -26 +this.image.getPosition().y + this.image.getHeight()* yOffset;        
+             this.frontArm.setPositionAnchored(xPos,yPos);
          }
          else
          {
@@ -225,7 +216,20 @@ public class ClientPlayerEntity extends PlayerEntity
                  angle = 300;
              this.frontArm.setAngle(angle);
              this.frontArm.setRotationPoint(.15f, .7f);
-             this.frontArm.setPosition(this.getPosition().x -35, this.getPosition().y+10);
+             this.frontArm.setAnchor(Anchorable.Anchor.LEFTCENTER); 
+             
+             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
+             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
+             
+             if(this.image.isFlippedHorizontal())
+             {
+                 xOffset = 1 - xOffset;
+                
+             }
+             
+             float xPos = -39 +this.image.getPosition().x + this.image.getWidth()*xOffset; 
+             float yPos = -26 + this.image.getPosition().y + this.image.getHeight()*yOffset;            
+             this.frontArm.setPositionAnchored(xPos,yPos);
          }   
          this.frontArm.update();
          
@@ -240,8 +244,20 @@ public class ClientPlayerEntity extends PlayerEntity
              else if(angle >= 60 && angle <= 90)
                  angle = 60;
              this.backArm.setAngle(angle);
-             this.backArm.setRotationPoint(.85f, .7f);
-             this.backArm.setPosition(this.getPosition().x -55, this.getPosition().y+10);
+             this.backArm.setRotationPoint(1.3f, .7f);
+             this.backArm.setAnchor(Anchorable.Anchor.LEFTCENTER); 
+             
+             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
+             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
+             
+             if(this.image.isFlippedHorizontal())
+             {
+                 xOffset = 1 - xOffset;
+           
+             }
+             float xPos = -53 +this.image.getPosition().x + this.image.getWidth()* xOffset; 
+             float yPos = -26 +this.image.getPosition().y + this.image.getHeight()* yOffset;        
+             this.backArm.setPositionAnchored(xPos,yPos);
          }
          else
          {
@@ -252,15 +268,28 @@ public class ClientPlayerEntity extends PlayerEntity
              else if(angle <= 300 && angle >= 270)
                  angle = 300;
              this.backArm.setAngle(angle);
-             this.backArm.setRotationPoint(.15f, .7f);
-             this.backArm.setPosition(this.getPosition().x -15, this.getPosition().y+10);
+             this.backArm.setRotationPoint(-.3f, .7f);
+             this.backArm.setAnchor(Anchorable.Anchor.LEFTCENTER); 
+             
+             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
+             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
+             
+             if(this.image.isFlippedHorizontal())
+             {
+                 xOffset = 1 - xOffset;
+                
+             }
+             
+             float xPos = 0 +this.image.getPosition().x + this.image.getWidth()*xOffset; 
+             float yPos = -26 + this.image.getPosition().y + this.image.getHeight()*yOffset;            
+             this.backArm.setPositionAnchored(xPos,yPos);
          }   
          this.backArm.update();
          
          
          //=============head============
          this.head.setHorizontalFlip(flipped);
-         this.head.setScale(1.2f);
+         this.head.setScale(1.15f);
          this.head.setAnchor(Anchorable.Anchor.CENTER);
          if(flipped)
          {
@@ -269,10 +298,20 @@ public class ClientPlayerEntity extends PlayerEntity
                  angle = -60;
              else if(angle >= 60 && angle <= 90)
                  angle = 60;
-             this.head.setRotationPoint(.5f, .1f);
-             this.head.setAngle(angle);    
-             float xPos = this.image.getPosition().x + this.image.getWidth()*this.bashHeadPosition.get(this.image.getAnimationIndex()).x;
-             float yPos = 13+this.image.getPosition().y + this.image.getHeight()*this.bashHeadPosition.get(this.image.getAnimationIndex()).y;
+             this.head.setRotationPoint(.5f, .25f);
+             this.head.setAngle(angle);   
+             
+             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
+             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
+             
+             if(this.image.isFlippedHorizontal())
+             {
+                 xOffset = 1 - xOffset;
+                
+             }
+             
+             float xPos = this.image.getPosition().x + this.image.getWidth()*xOffset; 
+             float yPos = 15+this.image.getPosition().y + this.image.getHeight()*yOffset;
              
              this.head.setPositionAnchored(xPos,yPos);
          }
@@ -283,10 +322,19 @@ public class ClientPlayerEntity extends PlayerEntity
                  angle = 60;
              else if(angle <= 300 && angle >= 270)
                  angle = 300;
-             this.head.setRotationPoint(.5f, .1f);
+             this.head.setRotationPoint(.5f, .25f);
              this.head.setAngle(angle);    
-             float xPos = this.image.getPosition().x + this.image.getWidth()*this.bashHeadPosition.get(this.image.getAnimationIndex()).x;
-             float yPos = 13+this.image.getPosition().y + this.image.getHeight()*this.bashHeadPosition.get(this.image.getAnimationIndex()).y;
+             
+             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
+             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
+             
+             if(this.image.isFlippedHorizontal())
+             {
+                 xOffset = 1 - xOffset;
+             }
+             
+             float xPos = this.image.getPosition().x + this.image.getWidth()*xOffset;
+             float yPos = 15+this.image.getPosition().y + this.image.getHeight()*yOffset;
              
              this.head.setPositionAnchored(xPos,yPos);
          }         
