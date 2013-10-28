@@ -406,6 +406,8 @@ public class GameServerScene extends Scene
                     //================
                     //Keyboard Input
                     //================
+                    
+                    player.setSkillReleasePoint(clientData.currentInputPacket.mouseLocationX,clientData.currentInputPacket.mouseLocationY); 
 
 
                     //move left
@@ -484,12 +486,12 @@ public class GameServerScene extends Scene
                     //test
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_M))
                     {
-                       this.players.get(0).respawn();
+                       
                     }
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_N))
                     {
                         
-                        this.players.get(0).getCombatData().currentHealth = 0;
+                       
                     }
 
 
@@ -497,6 +499,8 @@ public class GameServerScene extends Scene
                     //=============
                     // Mouse Input
                     //=============
+                    
+                   
 
                     //mouse CLICKED handling
                    if(inputSnapshot.isMouseClicked() && !clientData.currentInputPacket.isMouseOverMenu())
