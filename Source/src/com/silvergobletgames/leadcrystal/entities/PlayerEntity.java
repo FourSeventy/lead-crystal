@@ -322,10 +322,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
          
          
          
-         //front arm setup
-         this.frontArm.setRotationPoint(0, .5f); 
-         this.frontArm.setPosition(this.getPosition().x, this.getPosition().y);
-         this.frontArm.update();
+         
     }   
     
     public void draw(GL2 gl)
@@ -819,6 +816,199 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
        
     }
     
+    private void updateBodyParts()
+    {
+        //============
+         // Body Parts
+         //============
+       
+        //Get user X and Y
+        float userX = this.getPosition().x;
+        float userY = this.getPosition().y;
+        
+        //get vector to target
+        Vector2f vectorToTarget = new Vector2f(this.skillReleasePoint.x - userX, this.skillReleasePoint.y - userY);
+        vectorToTarget.normalise();
+
+        //determine angle for the image
+        float theta = (float)Math.acos(vectorToTarget.dot(new Vector2f(1,0)));
+        if(this.skillReleasePoint.y < userY)
+            theta = (float)(2* Math.PI - theta);
+        
+        //determine flipped
+        boolean flipped;
+        if(this.skillReleasePoint.x < userX)
+             flipped = true;
+        else
+            flipped = false;
+        
+        if(flipped)
+            this.image.setHorizontalFlip(true);
+        else
+            this.image.setHorizontalFlip(false);
+
+        
+          //=========front arm============
+         this.frontArm.setHorizontalFlip(flipped);        
+         if(flipped)
+         {
+
+             float angle =(float)((theta- Math.PI) * (180f/Math.PI));
+             if(angle <= -60 && angle >= -90)
+                 angle = -60;
+             else if(angle >= 60 && angle <= 90)
+                 angle = 60;
+             this.frontArm.setAngle(angle);
+             this.frontArm.setRotationPoint(.85f, .7f);
+             this.frontArm.setAnchor(Anchorable.Anchor.LEFTCENTER); 
+             
+             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
+             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
+             
+             if(this.image.isFlippedHorizontal())
+             {
+                 xOffset = 1 - xOffset;
+           
+             }
+             float xPos = -76 +this.image.getPosition().x + this.image.getWidth()* xOffset; 
+             float yPos = -26 +this.image.getPosition().y + this.image.getHeight()* yOffset;        
+             this.frontArm.setPositionAnchored(xPos,yPos);
+         }
+         else
+         {
+             
+             float angle =(float)(theta * (180f/Math.PI));
+             if(angle >= 60 && angle <= 90)
+                 angle = 60;
+             else if(angle <= 300 && angle >= 270)
+                 angle = 300;
+             this.frontArm.setAngle(angle);
+             this.frontArm.setRotationPoint(.15f, .7f);
+             this.frontArm.setAnchor(Anchorable.Anchor.LEFTCENTER); 
+             
+             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
+             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
+             
+             if(this.image.isFlippedHorizontal())
+             {
+                 xOffset = 1 - xOffset;
+                
+             }
+             
+             float xPos = -39 +this.image.getPosition().x + this.image.getWidth()*xOffset; 
+             float yPos = -26 + this.image.getPosition().y + this.image.getHeight()*yOffset;            
+             this.frontArm.setPositionAnchored(xPos,yPos);
+         }   
+         this.frontArm.update();
+         
+         //===========back arm===========
+         this.backArm.setHorizontalFlip(flipped);        
+         if(flipped)
+         {
+
+             float angle =(float)((theta- Math.PI) * (180f/Math.PI));
+             if(angle <= -60 && angle >= -90)
+                 angle = -60;
+             else if(angle >= 60 && angle <= 90)
+                 angle = 60;
+             this.backArm.setAngle(angle);
+             this.backArm.setRotationPoint(1.3f, .7f);
+             this.backArm.setAnchor(Anchorable.Anchor.LEFTCENTER); 
+             
+             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
+             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
+             
+             if(this.image.isFlippedHorizontal())
+             {
+                 xOffset = 1 - xOffset;
+           
+             }
+             float xPos = -53 +this.image.getPosition().x + this.image.getWidth()* xOffset; 
+             float yPos = -26 +this.image.getPosition().y + this.image.getHeight()* yOffset;        
+             this.backArm.setPositionAnchored(xPos,yPos);
+         }
+         else
+         {
+             
+             float angle =(float)(theta * (180f/Math.PI));
+             if(angle >= 60 && angle <= 90)
+                 angle = 60;
+             else if(angle <= 300 && angle >= 270)
+                 angle = 300;
+             this.backArm.setAngle(angle);
+             this.backArm.setRotationPoint(-.3f, .7f);
+             this.backArm.setAnchor(Anchorable.Anchor.LEFTCENTER); 
+             
+             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
+             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
+             
+             if(this.image.isFlippedHorizontal())
+             {
+                 xOffset = 1 - xOffset;
+                
+             }
+             
+             float xPos = 0 +this.image.getPosition().x + this.image.getWidth()*xOffset; 
+             float yPos = -26 + this.image.getPosition().y + this.image.getHeight()*yOffset;            
+             this.backArm.setPositionAnchored(xPos,yPos);
+         }   
+         this.backArm.update();
+         
+         
+         //=============head============
+         this.head.setHorizontalFlip(flipped);
+         this.head.setScale(1.15f);
+         this.head.setAnchor(Anchorable.Anchor.CENTER);
+         if(flipped)
+         {
+             float angle =(float)((theta- Math.PI) * (180f/Math.PI));
+             if(angle <= -60 && angle >= -90)
+                 angle = -60;
+             else if(angle >= 60 && angle <= 90)
+                 angle = 60;
+             this.head.setRotationPoint(.5f, .25f);
+             this.head.setAngle(angle);   
+             
+             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
+             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
+             
+             if(this.image.isFlippedHorizontal())
+             {
+                 xOffset = 1 - xOffset;
+                
+             }
+             
+             float xPos = this.image.getPosition().x + this.image.getWidth()*xOffset; 
+             float yPos = 15+this.image.getPosition().y + this.image.getHeight()*yOffset;
+             
+             this.head.setPositionAnchored(xPos,yPos);
+         }
+         else
+         {
+             float angle =(float)(theta * (180f/Math.PI));
+             if(angle >= 60 && angle <= 90)
+                 angle = 60;
+             else if(angle <= 300 && angle >= 270)
+                 angle = 300;
+             this.head.setRotationPoint(.5f, .25f);
+             this.head.setAngle(angle);    
+             
+             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
+             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
+             
+             if(this.image.isFlippedHorizontal())
+             {
+                 xOffset = 1 - xOffset;
+             }
+             
+             float xPos = this.image.getPosition().x + this.image.getWidth()*xOffset;
+             float yPos = 15+this.image.getPosition().y + this.image.getHeight()*yOffset;
+             
+             this.head.setPositionAnchored(xPos,yPos);
+         }         
+         this.head.update();
+    }
+    
     
 
     
@@ -1138,7 +1328,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         renderData.data.add(4,this.currencyManager.dumpRenderData());
         renderData.data.add(5,this.armorManager.dumpRenderData());
         renderData.data.add(6,this.levelProgressionManager.dumpRenderData());
-        renderData.data.add(7,null);
+        renderData.data.add(7,this.skillReleasePoint);
         renderData.data.add(8,null); 
         renderData.data.add(9,null);
         renderData.data.add(10,null);
@@ -1156,7 +1346,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         Image image = Image.buildFromRenderData((SceneObjectRenderData)renderData.data.get(0));
         
         //build the player
-        PlayerEntity player = new PlayerEntity(image,new Image("blank.png"),new Image("blank.png"),new Image("blank.png"));
+        PlayerEntity player = new PlayerEntity(image,new Image("bash-head0.png"),new Image(new BashBrownBackArmAnimationPack()),new Image(new BashBrownFrontArmAnimationPack()));
         player.setID(renderData.getID());
         player.setImage(image);
         
@@ -1241,6 +1431,12 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             changeMap += 1L <<6;
         }   
         
+        if(!oldData.data.get(7).equals( newData.data.get(7)))
+        {
+            changeList.add(newData.data.get(7));
+            changeMap += 1L << 7;
+        }
+        
         
         if(entityTooltip != null)
         {
@@ -1314,6 +1510,12 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         if(this.entityTooltip != null && changeData.get(11) != null)
             this.entityTooltip.reconcileRenderDataChanges(lastTime, futureTime, (SceneObjectRenderDataChanges)changeData.get(11));
 
+        if(changeData.get(7) != null && !(this instanceof ClientPlayerEntity))
+        {
+            this.skillReleasePoint = (SylverVector2f)changeData.get(7);
+            
+            this.updateBodyParts();
+        }
         
 
     }
