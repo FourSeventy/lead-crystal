@@ -407,7 +407,7 @@ public class GameServerScene extends Scene
                     //Keyboard Input
                     //================
                     
-                    player.setSkillReleasePoint(clientData.currentInputPacket.mouseLocationX,clientData.currentInputPacket.mouseLocationY); 
+                    player.setWorldMouseLocationPoint(clientData.currentInputPacket.mouseLocationX,clientData.currentInputPacket.mouseLocationY); 
 
 
                     //move left

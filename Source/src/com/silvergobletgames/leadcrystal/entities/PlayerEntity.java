@@ -87,6 +87,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     
     //skill release point
     protected SylverVector2f skillReleasePoint = new SylverVector2f(0,0);
+    protected SylverVector2f worldMousePoint = new SylverVector2f(0,0);
     
     //jumping variables
     protected int inAirTimer = 0;
@@ -320,13 +321,28 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
              
          }
          
+         //===============================
+         // Calculate Skill Release Point
+         //===============================
          
-         
-         
+         //Get user X and Y
+        float userX = this.getPosition().x;
+        float userY = this.getPosition().y;
+              
+        //get vector to target
+        Vector2f vectorToTarget = new Vector2f(this.worldMousePoint.x - userX, this.worldMousePoint.y - userY);
+        vectorToTarget.normalise();
+        
+        vectorToTarget.scale(this.getFrontArm().getWidth());
+        vectorToTarget.add(new Vector2f(this.getPosition().x,this.getPosition().y)); 
+        this.skillReleasePoint = new SylverVector2f(vectorToTarget.x,vectorToTarget.y);
+                
     }   
     
     public void draw(GL2 gl)
     {
+        this.updateBodyParts();
+                
         this.backArm.draw(gl);
         
         super.draw(gl);
@@ -621,30 +637,18 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         }
     }
     
-    public void setSkillReleasePoint(float worldMouseX, float worldMouseY)
-    {
-        
-        //Get user X and Y
-        float userX = this.getPosition().x;
-        float userY = this.getPosition().y;
-              
-        //get vector to target
-        Vector2f vectorToTarget = new Vector2f(worldMouseX - userX, worldMouseY - userY);
-        vectorToTarget.normalise();
-        
-        vectorToTarget.scale(this.getFrontArm().getWidth());
-        vectorToTarget.add(new Vector2f(this.getPosition().x,this.getPosition().y)); 
-        this.skillReleasePoint = new SylverVector2f(vectorToTarget.x,vectorToTarget.y);
-        
-      //  System.err.println(this.skillReleasePoint);
-        
-//        //determine angle for the image
-//        float theta = (float)Math.acos(vectorToTarget.dot(new Vector2f(1,0)));
-//        if(targetY < userY)
-//            theta = (float)(2* Math.PI - theta);
-        
-        
+    /**
+     * Set the world mouse location for the player. This is used for the skill release
+     * point and aiming body parts.
+     * @param worldMouseX
+     * @param worldMouseY 
+     */
+    public void setWorldMouseLocationPoint(float worldMouseX, float worldMouseY)
+    {      
+      // this.worldMousePoint.set(worldMouseX, worldMouseY);
+        this.worldMousePoint = new SylverVector2f(worldMouseX,worldMouseY);
     }
+
     
     @Override
     protected void finishAttack()
@@ -683,7 +687,6 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         //use the skill
         this.castingSkill.use(damage, new SylverVector2f(this.skillReleasePoint));
-        System.err.println("USE: " + this.skillReleasePoint);
         
         //start the cooldown
         this.castingSkill.beginCooldown(); 
@@ -823,21 +826,21 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
          //============
        
         //Get user X and Y
-        float userX = this.getPosition().x;
-        float userY = this.getPosition().y;
+        float userX = this.getImage().getPosition().x + this.getImage().getWidth() * .5f;
+        float userY = this.getImage().getPosition().y + this.getImage().getHeight() * .5f +25;
         
         //get vector to target
-        Vector2f vectorToTarget = new Vector2f(this.skillReleasePoint.x - userX, this.skillReleasePoint.y - userY);
+        Vector2f vectorToTarget = new Vector2f(this.worldMousePoint.x - userX, this.worldMousePoint.y - userY);
         vectorToTarget.normalise();
 
         //determine angle for the image
         float theta = (float)Math.acos(vectorToTarget.dot(new Vector2f(1,0)));
-        if(this.skillReleasePoint.y < userY)
+        if(this.worldMousePoint.y < userY)
             theta = (float)(2* Math.PI - theta);
         
         //determine flipped
         boolean flipped;
-        if(this.skillReleasePoint.x < userX)
+        if(this.worldMousePoint.x < userX)
              flipped = true;
         else
             flipped = false;
@@ -1328,7 +1331,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         renderData.data.add(4,this.currencyManager.dumpRenderData());
         renderData.data.add(5,this.armorManager.dumpRenderData());
         renderData.data.add(6,this.levelProgressionManager.dumpRenderData());
-        renderData.data.add(7,this.skillReleasePoint);
+        renderData.data.add(7,this.worldMousePoint);
         renderData.data.add(8,null); 
         renderData.data.add(9,null);
         renderData.data.add(10,null);
@@ -1512,9 +1515,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
 
         if(changeData.get(7) != null && !(this instanceof ClientPlayerEntity))
         {
-            this.skillReleasePoint = (SylverVector2f)changeData.get(7);
-            
-            this.updateBodyParts();
+            this.worldMousePoint = new SylverVector2f((SylverVector2f)changeData.get(7));
         }
         
 

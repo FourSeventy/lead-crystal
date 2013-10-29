@@ -745,6 +745,8 @@ public final class GameClientScene extends Scene
             //==============
             // Mouse Input
             //==============
+            
+            this.player.setWorldMouseLocationPoint(mouseX, mouseY); 
             if (inputSnapshot.isMouseDown() && !hud.isMouseOverMenu() && !this.mouseHoverInRange)
             {
                 if (inputSnapshot.buttonClicked() == 1 )
