@@ -80,12 +80,37 @@ public class Main
             public void action()
             {
                 //saving gameplay settings
-                GameplaySettings.getInstance().dumpSettingsToFile();
+                try
+                {
+                File directory = new File ("");
+                URI systemSettingsPath = directory.toURI().resolve("System/gameSettings.ini");
+                GameplaySettings.getInstance().dumpSettingsToFile(systemSettingsPath);
+                }
+                catch(Exception ex){ System.err.println("couldnt save settings");}
+                
             }
         });
         
-        //loads gameplay settings
-        GameplaySettings.getInstance().loadSettingsFromFile();
+        //loads gameplay settings      
+        try
+        {   
+            File directory = new File("");
+            URI systemSettingsPath = directory.toURI().resolve("System/gameSettings.ini");
+            GameplaySettings.getInstance().loadFromFile(systemSettingsPath);
+        }
+        catch(Exception e) 
+        {
+            e.printStackTrace(System.err);
+            
+            //try to save the default system settings                  
+            try
+            {
+                File directory = new File ("");
+                URI systemSettingsPath = directory.toURI().resolve("System/gameSettings.ini");
+                GameplaySettings.getInstance().dumpSettingsToFile(systemSettingsPath);
+            }
+            catch(Exception ex){ System.err.println("couldnt save settings");}
+        }
         
         //changes us into the loading scene
         Game.getInstance().loadScene(new LoadingScene());

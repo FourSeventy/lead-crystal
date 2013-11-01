@@ -641,6 +641,8 @@ public class GameServerScene extends Scene
                 i--;
             }
         }
+        
+        this.physicsWorld.clear();
                  
         //Load the objects to the scene
         ArrayList<SimpleEntry<SceneObject,Layer>> sceneObjectList = level.getSceneObjects();
@@ -648,6 +650,8 @@ public class GameServerScene extends Scene
         {
             this.add(entry.getKey(), entry.getValue());
         }
+        
+
         
         //set which level is active
         this.activeLevel = level;

@@ -2,7 +2,14 @@ package com.silvergobletgames.leadcrystal.core;
 
 import com.silvergobletgames.sylver.core.Game;
 import java.io.*;
+import java.net.URI;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Properties;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -56,207 +63,83 @@ public class GameplaySettings{
     public boolean showCooldownTimers = false;
     
     
-    public void loadSettingsFromFile()
+     //===============
+    // Class Methods
+    //=============== 
+    
+    /**
+     * Dump the engine settings to an .ini file with given path. Path must include the filename
+     * @param filePath URI to dump the file. Must include the filename. eg. C:\folder\engineSettings.ini
+     */
+    public void dumpSettingsToFile(URI filePath)
     {
-              
-        Document dom = this.getDOM();
-        
-        if (dom == null)
-        {
-            this.dumpSettingsToFile();
-            dom = this.getDOM();
-        }
-        
-        //get the root element
-        Element docEle = dom.getDocumentElement();
-
-        parseGameplayFields(docEle);
-        parseDebugFields(docEle);
-    
-    }
-    
-    private Document getDOM()
-    {
-        File directory = new File ("");
-        String path = directory.getAbsolutePath() + "\\System\\";
-        
-        try
-        { 
-            //Get the factory
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            //Using factory get an instance of document builder
-            DocumentBuilder db = dbf.newDocumentBuilder(); 
-            //parse using builder to get DOM representation of the XML file
-            
-            File file = new File(path + "gameplaySettings.xml");
-            return db.parse(file);
-        }
-        catch(ParserConfigurationException | SAXException | IOException e){
-            return null;
-        }
-    }
-    
-    
-    private void parseGameplayFields(Element docEle){
-        //get a nodelist of elements
-        NodeList nl = docEle.getElementsByTagName("gameplay");
-        if(nl != null && nl.getLength() > 0) {
-            for(int i = 0 ; i < nl.getLength();i++) {
-
-                Element gameplayElement = (Element)nl.item(i);
-                
-                //declare the nodelist that will hold each element
-                NodeList n2;
-                
-                n2 = gameplayElement.getElementsByTagName("drawNetworkingStats");
-                if(n2 != null && n2.getLength() > 0) 
-                    this.drawNetworkingStats = getBooleanValue((Element)n2.item(0));
-                
-                n2 = gameplayElement.getElementsByTagName("showCooldownTimers");
-                if(n2 != null && n2.getLength() > 0) 
-                    this.showCooldownTimers = getBooleanValue((Element)n2.item(0));
-            }
-        }
-    }
-    
-    private void parseDebugFields(Element docEle){
-        //get a nodelist of elements
-        NodeList nl = docEle.getElementsByTagName("debug");
-        if(nl != null && nl.getLength() > 0) {
-            for(int i = 0 ; i < nl.getLength();i++) {
-
-                Element debugElement = (Element)nl.item(i);
-                
-                //declare the nodelist that will hold each element
-                NodeList n2;
-                
-                n2 = debugElement.getElementsByTagName("bodyWireframe");
-                if(n2 != null && n2.getLength() > 0) 
-                    this.bodyWireframe = getBooleanValue((Element)n2.item(0));
-		
-                n2 = debugElement.getElementsByTagName("viewportFeelers");
-                if(n2 != null && n2.getLength() > 0) 
-                    this.viewportFeelers = getBooleanValue((Element)n2.item(0));
-                
-                n2 = debugElement.getElementsByTagName("drawPlayerServerTime");
-                if(n2 != null && n2.getLength() > 0) 
-                    this.drawPlayerServerTime = getBooleanValue((Element)n2.item(0));
-                
-                n2 = debugElement.getElementsByTagName("networkDebugging");
-                if(n2 != null && n2.getLength() > 0) 
-                    this.networkDebugging = getBooleanValue((Element)n2.item(0));
-                
-                n2 = debugElement.getElementsByTagName("packetSizeDebugging");
-                if(n2 != null && n2.getLength() > 0) 
-                    this.packetSizeDebugging = getBooleanValue((Element)n2.item(0));
-                
-                n2 = debugElement.getElementsByTagName("debugEnemies");
-                if(n2 != null && n2.getLength() > 0) 
-                    this.debugEnemies = getBooleanValue((Element)n2.item(0));
-            }
-        }
-    }
-    
-    public void dumpSettingsToFile() 
-    {
+       
         try
         {
-            DocumentBuilderFactory dbfac =DocumentBuilderFactory.newInstance();
-            DocumentBuilder docBuilder = dbfac.newDocumentBuilder();
-            Document doc = docBuilder.newDocument();
+            //set properties
+            Properties iniSaver = new Properties();
+            iniSaver.setProperty("debug_bodyWireframe", Boolean.toString(this.bodyWireframe));
+            iniSaver.setProperty("debug_viewportFeelers", Boolean.toString(this.viewportFeelers));
+            iniSaver.setProperty("debug_drawPlayerServerTime", Boolean.toString(this.drawPlayerServerTime));
+            iniSaver.setProperty("debug_networkDebugging", Boolean.toString(this.networkDebugging));
+            iniSaver.setProperty("debug_packetSizeDebugging", Boolean.toString(this.packetSizeDebugging));
+            iniSaver.setProperty("debug_drawNetworkingStats", Boolean.toString(this.drawNetworkingStats));
+            iniSaver.setProperty("debug_debugEnemies",Boolean.toString(this.debugEnemies));
             
-            //==================
-            //Creating XML tree
-            //==================
-            
-            Element usersettings = doc.createElement("gamesettings");
-            doc.appendChild(usersettings);
-            
-            //Element used for each value, re-used.
-            Element elem;
-            
-             //======
-            //DEBUG
-            //======
-            Element debug = doc.createElement("debug");
-            
-                elem = doc.createElement("bodyWireframe");
-                elem.setAttribute("value", Boolean.toString(this.bodyWireframe));
-                debug.appendChild(elem);
+            iniSaver.setProperty("showHealthBars",Boolean.toString(this.showHealthBars));
+            iniSaver.setProperty("showCooldownTimers",Boolean.toString(this.showCooldownTimers));
 
-                elem = doc.createElement("viewportFeelers");
-                elem.setAttribute("value", Boolean.toString(this.viewportFeelers));
-                debug.appendChild(elem);
-
-                elem = doc.createElement("drawPlayerServerTime");
-                elem.setAttribute("value", Boolean.toString(this.drawPlayerServerTime));
-                debug.appendChild(elem);
-
-                elem = doc.createElement("networkDebugging");
-                elem.setAttribute("value", Boolean.toString(this.networkDebugging));
-                debug.appendChild(elem);
-
-                elem = doc.createElement("packetSizeDebugging");
-                elem.setAttribute("value", Boolean.toString(this.packetSizeDebugging));
-                debug.appendChild(elem);
-                
-                elem = doc.createElement("debugEnemies");
-                elem.setAttribute("value", Boolean.toString(this.debugEnemies));
-                debug.appendChild(elem);
-                
-                //=========
-                //GAMEPLAY
-                //=========
-                Element gameplay = doc.createElement("gameplay");
-
-
-                elem = doc.createElement("drawNetworkingStats");
-                elem.setAttribute("value", Boolean.toString(this.drawNetworkingStats));
-                gameplay.appendChild(elem);
-                
-                elem = doc.createElement("showCooldownTimers");
-                elem.setAttribute("value", Boolean.toString(this.showCooldownTimers));
-                gameplay.appendChild(elem);
-                
-                usersettings.appendChild(gameplay);
-                usersettings.appendChild(debug);
-                
-                //set up a transformer
-            TransformerFactory transfac = TransformerFactory.newInstance();
-            Transformer trans = transfac.newTransformer();
-            trans.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-            trans.setOutputProperty(OutputKeys.INDENT, "yes");
-            trans.setOutputProperty(OutputKeys.METHOD, "xml");
-         
-
-            //create string from xml tree
-            StringWriter sw = new StringWriter();
-            StreamResult result = new StreamResult(sw);
-            DOMSource source = new DOMSource(doc);
-            trans.transform(source, result);
-            String xmlString = sw.toString();
-
-            File directory = new File ("");
-             String path = directory.getAbsolutePath() + "\\System\\";
-
-            //write that raw data to the disk
-            try (FileOutputStream f = new FileOutputStream(path + "gameplaySettings.xml"); 
-                 OutputStreamWriter writer = new OutputStreamWriter(f);)
-            {           
-                writer.write(xmlString);
-                writer.close();                
-            }     
+            //open output stream
+            OutputStream out = Files.newOutputStream(Paths.get(filePath));
+            iniSaver.store(out, "Gameplay Settings");
         }
-        catch(ParserConfigurationException | DOMException | TransformerFactoryConfigurationError | IllegalArgumentException | TransformerException | IOException e)
+        catch(Exception e)
         {
-            
-            System.out.println(e);
+             //log error to console
+            Logger logger =Logger.getLogger(GameplaySettings.class.getName());
+            logger.log(Level.SEVERE, "Could not dump gameplaySettings.ini to file: " + e.toString());
+            logger.addHandler(new ConsoleHandler());     
         }
     }
     
-    private static boolean getBooleanValue(Element ele)
-    {
-        return Boolean.parseBoolean(ele.getAttribute("value"));
+    /**
+     * Load the settings in from a file.
+     * @param filePath URI to .ini file that contains the settings to load
+     * @return returns a constructed EngineSettings object with the settings from the file
+     */
+    public void loadFromFile(URI filePath)
+    {       
+        try
+        {
+            //open file
+            InputStream inputStream = Files.newInputStream(Paths.get(filePath));
+           
+            //load file
+            Properties iniLoader = new Properties();
+            iniLoader.load(inputStream);
+            
+            //get values
+            this.bodyWireframe = Boolean.parseBoolean(iniLoader.getProperty("debug_bodyWireframe"));
+            this.viewportFeelers = Boolean.parseBoolean(iniLoader.getProperty("debug_viewportFeelers"));
+            this.drawPlayerServerTime = Boolean.parseBoolean(iniLoader.getProperty("debug_drawPlayerServerTime"));
+            this.networkDebugging = Boolean.parseBoolean(iniLoader.getProperty("debug_networkDebugging"));
+            this.packetSizeDebugging = Boolean.parseBoolean(iniLoader.getProperty("debug_packetSizeDebugging"));
+            this.drawNetworkingStats = Boolean.parseBoolean(iniLoader.getProperty("debug_drawNetworkingStats"));
+            this.debugEnemies = Boolean.parseBoolean(iniLoader.getProperty("debug_debugEnemies"));
+            
+            this.showHealthBars = Boolean.parseBoolean(iniLoader.getProperty("showHealthBars"));
+            this.showCooldownTimers = Boolean.parseBoolean(iniLoader.getProperty("showCooldownTimers"));
+
+        }
+        catch(IOException e)
+        {
+            //log error to console
+            Logger logger =Logger.getLogger(GameplaySettings.class.getName());
+            logger.log(Level.SEVERE, "Could not open gameplaySettings.ini file: " + e.toString());
+            logger.addHandler(new ConsoleHandler()); 
+        }
+        
+        
     }
     
     

@@ -1103,11 +1103,8 @@ public final class GameClientScene extends Scene
                 i--;
             }
         }
-        //refresh physics world
-        this.collisionHandler = new ClientCollisionHandler();
-        physicsWorld = new World(new Vector2f(0.0f, -45.0f), 10, new QuadSpaceStrategy(20, 5));
-        physicsWorld.addListener(collisionHandler);
-        physicsWorld.enableRestingBodyDetection(1f, 1f, 1f);
+        //refresh physics world        
+        physicsWorld.clear();
 
         //load the level
         LevelData levelData = LevelLoader.getInstance().getLevelData(packet.gameLevelName);
