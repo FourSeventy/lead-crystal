@@ -51,7 +51,7 @@ public abstract class CombatEntity extends Entity
     private Damage lastDamage;
     
     //Skill that we are currently casting
-    private Skill castingSkill;
+    protected Skill castingSkill;
     //attack delay
     private int attackDelay = 0;
     
@@ -194,7 +194,7 @@ public abstract class CombatEntity extends Entity
         }
     }
     
-    private void finishAttack()
+    protected void finishAttack()
     {
         //build the damage object
         Damage damage = new Damage(DamageType.PHYSICAL, 0, this);

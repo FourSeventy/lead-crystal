@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="5.0.11" transformSequenceNumber="3">
-  <directoryPresets config="X:/Lead Crystal/Assets/Build Assets/Installer Images" />
-  <application name="Lead Crystal" distributionSourceDir="" applicationId="0938-5269-1317-3306" mediaDir="X:/Lead Crystal/Distributions/${compiler:sys.version}" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="LeadCrystal" publisher="Silver Goblet Games" publisherWeb="http://www.silvergobletgames.com" version="0.7.1" allPathsRelative="false" backupOnSave="false" autoSave="false" convertDotsToUnderscores="false" macSignature="????" installerName="" javaMinVersion="1.7" javaMaxVersion="" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
+  <directoryPresets config="X:/Lead Crystal/Assets/Build Assets/Configurations/gameSettings.ini" />
+  <application name="Lead Crystal" distributionSourceDir="" applicationId="0938-5269-1317-3306" mediaDir="X:/Lead Crystal/Distributions/${compiler:sys.version}" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="LeadCrystal" publisher="Silver Goblet Games" publisherWeb="http://www.silvergobletgames.com" version="0.7.3" allPathsRelative="false" backupOnSave="false" autoSave="false" convertDotsToUnderscores="false" macSignature="????" installerName="" javaMinVersion="1.7" javaMaxVersion="" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
       <additionalLanguages />
@@ -49,7 +49,7 @@
       <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/Sylver Engine/natives/jogl-all-natives-windows-i586.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="26" file="X:/Lead Crystal/Assets/Build Assets/Configurations/engineSettings.ini" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="26" file="X:/Lead Crystal/Source/dist/LeadCrystal.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
-      <fileEntry mountPoint="26" file="X:/Lead Crystal/Assets/Build Assets/Configurations/gameplaySettings.xml" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="26" file="X:/Lead Crystal/Assets/Build Assets/Configurations/gameSettings.ini" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <dirEntry mountPoint="123" file="X:/Lead Crystal/Assets/Build Assets/Graphics" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="Graphics" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>

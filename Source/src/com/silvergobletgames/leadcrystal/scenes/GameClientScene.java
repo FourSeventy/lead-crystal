@@ -208,7 +208,7 @@ public final class GameClientScene extends Scene
         player = new ClientPlayerEntity(activeSaveGame.getPlayer());
         player.setID(this.clientID.toString());  
         //player server time
-        playerServerTime = new PlayerEntity();
+        playerServerTime = new PlayerEntity(player.getImage().copy(),player.getHead().copy(),player.getBackArm().copy(),player.getFrontArm().copy());
         playerServerTime.getImage().setColor(new Color(1,1,1,.5f));
         
      
@@ -745,6 +745,8 @@ public final class GameClientScene extends Scene
             //==============
             // Mouse Input
             //==============
+            
+            this.player.setWorldMouseLocationPoint(mouseX, mouseY); 
             if (inputSnapshot.isMouseDown() && !hud.isMouseOverMenu() && !this.mouseHoverInRange)
             {
                 if (inputSnapshot.buttonClicked() == 1 )
@@ -1101,11 +1103,8 @@ public final class GameClientScene extends Scene
                 i--;
             }
         }
-        //refresh physics world
-        this.collisionHandler = new ClientCollisionHandler();
-        physicsWorld = new World(new Vector2f(0.0f, -45.0f), 10, new QuadSpaceStrategy(20, 5));
-        physicsWorld.addListener(collisionHandler);
-        physicsWorld.enableRestingBodyDetection(1f, 1f, 1f);
+        //refresh physics world        
+        physicsWorld.clear();
 
         //load the level
         LevelData levelData = LevelLoader.getInstance().getLevelData(packet.gameLevelName);

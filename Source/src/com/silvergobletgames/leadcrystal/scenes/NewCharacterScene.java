@@ -1,7 +1,9 @@
 package com.silvergobletgames.leadcrystal.scenes;
 
 import com.jogamp.newt.event.KeyEvent;
-import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.PlayerAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownBackArmAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownBodyAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownFrontArmAnimationPack;
 import com.silvergobletgames.leadcrystal.core.CursorFactory;
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
@@ -25,9 +27,9 @@ public class NewCharacterScene extends Scene
 {
     
     private TextBox nameTextBox;
-    private final Text headText, bodyText, gunText;
+    private final Text headText, bodyText;
     
-    private Image headImage,bodyImage,gunImage;
+    private Image headImage,bodyImage;
     
     //list of heads
     private ArrayList<String> headList = new ArrayList<>();
@@ -37,9 +39,6 @@ public class NewCharacterScene extends Scene
     private ArrayList<String> bodyList= new ArrayList<>();
     private int currentBodySelection = 0;
     
-    //list of guns
-    private ArrayList<String> gunList= new ArrayList<>();
-    private int currentGunSelection = 0;
     
     //we have to pass this back to char select screen
     private String actionArg;
@@ -67,11 +66,7 @@ public class NewCharacterScene extends Scene
         this.bodyList.add("bash_green.png");
         this.bodyList.add("bash_red.png");
         this.bodyList.add("bash_white.png");
-        this.bodyList.add("bash_yellow.png");
-        
-        this.gunList.add("bash-gun0.png");
-        this.gunList.add("bash-gun1.png");
-        this.gunList.add("bash-gun2.png");
+        this.bodyList.add("bash_yellow.png");      
         
         //================
         // Builds Buttons
@@ -184,47 +179,7 @@ public class NewCharacterScene extends Scene
                 }
             }
         });
-        
-        //gun
-        gunText = new Text("Gun: " +(this.currentGunSelection + 1),LeadCrystalTextType.MENUBUTTONS);
-        gunText.setScale(1.2f);
-        gunText.setPosition(center - gunText.getWidth()/2, 325);
-        final Button colorButton = new Button(new Image("blank.png"), center - gunText.getWidth()/2, gunText.getPosition().y, gunText.getWidth(), gunText.getHeight());
-        this.add(gunText,Layer.MAIN);
-        this.add(colorButton,Layer.MAIN);
-        colorButton.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                if (e.getActionCommand().equals("clicked")) 
-                {
-                    currentGunSelection++;
-                    currentGunSelection%=3;
-                    gunText.setText("Gun: " +(currentGunSelection + 1)); 
-                    setImages();
-
-                }
-                if (e.getActionCommand().equals("mouseEntered")) 
-                {
-                    
-                      if(gunText.hasTextEffect("small"))
-                          gunText.removeTextEffect("small");
-                      
-                       gunText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, gunText.getScale(), 1.5));
-                    
-                    //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true);
-                    add(sound);
-                }
-                if (e.getActionCommand().equals("mouseExited"))
-                {
-                        if(gunText.hasTextEffect("big"))
-                           gunText.removeTextEffect("big");
-                        
-                        gunText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, gunText.getScale(), 1.2));
-                }
-            }
-        });      
-        
+    
         
         //ok
         final Text okText = new Text("OK",LeadCrystalTextType.MENUBUTTONS);
@@ -241,7 +196,7 @@ public class NewCharacterScene extends Scene
                     //===============
                     //make the player
                     //===============
-                    PlayerEntity player = new PlayerEntity();
+                    PlayerEntity player = new PlayerEntity(new Image(new BashBrownBodyAnimationPack()),new Image(headList.get(currentHeadSelection)),new Image(new BashBrownBackArmAnimationPack()),new Image(new BashBrownFrontArmAnimationPack()));
                     player.setName(nameTextBox.getText()); 
 
                     //dev settings
@@ -384,12 +339,6 @@ public class NewCharacterScene extends Scene
         headImage.setPosition(center - headImage.getWidth()/2 + 2, 655);
         this.add(headImage, Layer.MAIN);
         
-        //gun image
-        if(gunImage != null)
-           this.remove(gunImage);
-        gunImage = new Image(this.gunList.get(this.currentGunSelection));
-        gunImage.setAngle(90);
-        gunImage.setPosition(center - gunImage.getWidth()/2 + 100, 575);
-        this.add(gunImage, Layer.MAIN);
+    
     }
 }
