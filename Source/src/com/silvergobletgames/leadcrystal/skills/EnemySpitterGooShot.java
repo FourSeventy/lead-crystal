@@ -25,10 +25,10 @@ import com.silvergobletgames.sylver.util.SylverVector2f;
  *
  * @author mike
  */
-public class EnemyGooShot extends Skill 
+public class EnemySpitterGooShot extends Skill 
 {
     
-    public EnemyGooShot()
+    public EnemySpitterGooShot()
     {
         super(SkillID.EnemyGooShot,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,120,800);
         

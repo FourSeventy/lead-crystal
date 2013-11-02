@@ -20,9 +20,9 @@ import com.silvergobletgames.leadcrystal.entities.HitBox;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 
 
-public class EnemySmallMelee extends Skill{
+public class EnemyMoleSmallMelee extends Skill{
     
-    public EnemySmallMelee()
+    public EnemyMoleSmallMelee()
     {
         super(SkillID.EnemySmallMelee,Skill.SkillType.OFFENSIVE, ExtendedImageAnimations.MELEEATTACK,60,150);
         

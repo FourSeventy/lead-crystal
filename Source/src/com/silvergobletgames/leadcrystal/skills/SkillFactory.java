@@ -46,9 +46,10 @@ public class SkillFactory
             case PlayerSnipe: return new PlayerSnipe();
             case EnemyLaser: return new EnemyLaserShot();
             case EnemyMeleeBash: return new EnemyMeleeBash();
-            case EnemySmallMelee: return new EnemySmallMelee();
-            case EnemyGooShot: return new EnemyGooShot();
+            case EnemySmallMelee: return new EnemyMoleSmallMelee();
+            case EnemyGooShot: return new EnemySpitterGooShot();
             case EnemyAntThrow: return new EnemyAntThrow();
+            case EnemyFlierGooBomb: return new EnemyFlierGooBomb();
             case PlayerDash: return new PlayerDashAttack();
             case PlayerGuard: return new PlayerGuard();
             case PlayerFreezeAttack: return new PlayerFreezeAttack();
@@ -63,6 +64,7 @@ public class SkillFactory
             case PlayerSoulLeech: return new PlayerSoulLeech();
             case PlayerStomp: return new PlayerStompAttack();
             case PlayerRocket: return new PlayerRocket();
+            
             default: return null;
         }
     }
