@@ -24,7 +24,7 @@ public class EnemySmallMelee extends Skill{
     
     public EnemySmallMelee()
     {
-        super(SkillID.EnemySmallMelee,Skill.SkillType.OFFENSIVE, ExtendedImageAnimations.MELEEATTACK,40,120);
+        super(SkillID.EnemySmallMelee,Skill.SkillType.OFFENSIVE, ExtendedImageAnimations.MELEEATTACK,60,150);
         
 
     }
@@ -48,12 +48,12 @@ public class EnemySmallMelee extends Skill{
         if (user.getFacingDirection().equals(FacingDirection.RIGHT))
             image.setHorizontalFlip(true);
         image.setAnchor(Anchorable.Anchor.CENTER);
-        image.setPositionAnchored(user.getPosition().x + 65*user.getFacingDirection().value, user.getPosition().y);
+        image.setPositionAnchored(origin.x,origin.y);
         this.user.getOwningScene().add(image,Layer.MAIN);
         
         HitBox hitBox = new HitBox(damage,body,new Image("blank.png"),this.user);
         hitBox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 25, 1, 1));
-        hitBox.setPosition(user.getPosition().x + 65*user.getFacingDirection().value, user.getPosition().y);
+        hitBox.setPosition(origin.x,origin.y);
         this.user.getOwningScene().add(hitBox,Layer.MAIN);        
     }
     

@@ -144,8 +144,10 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
             //animation handling
             if(this.image.getAnimation() != ExtendedImageAnimations.MELEEATTACK && this.image.getAnimation() != ExtendedImageAnimations.RANGEDATTACK && this.image.getAnimation() != ExtendedImageAnimations.SPELLATTACK && this.image.getAnimation() != ExtendedImageAnimations.SPAWN)
             {
-                if (Math.abs(body.getVelocity().getX()) < 2)                
-                    image.setAnimation(CoreAnimations.IDLE);           
+                if (Math.abs(body.getVelocity().getX()) < 2)  
+                { 
+                    image.setAnimation(CoreAnimations.IDLE); 
+                }
             }
         } 
     }
@@ -156,7 +158,7 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
         
         if(animation == ExtendedImageAnimations.SPAWN)
         {
-            this.getImage().setAnimation(CoreAnimations.IDLE);
+            //this.getImage().setAnimation(CoreAnimations.IDLE);
             this.getBrain().getStateMachine().changeState(AIState.StateID.AGGRESSIVE);
         }
     }
