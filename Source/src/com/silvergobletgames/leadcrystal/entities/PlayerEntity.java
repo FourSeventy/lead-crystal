@@ -91,7 +91,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     
     //jumping variables
     protected int inAirTimer = 0;
-    protected final float MAX_JUMP_ENERGY = 100;
+    protected final float MAX_JUMP_ENERGY = 125;
     protected float jumpEnergy = MAX_JUMP_ENERGY;
     protected boolean jumpReleased = true;
     protected boolean waitingToResetEnergy = false;
