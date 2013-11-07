@@ -723,8 +723,8 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     {
         ROVector2f[] vertices = new ROVector2f[11];
                 
-        vertices[0] = new Vector2f(25,55);
-        vertices[1] = new Vector2f(-25,55); 
+        vertices[0] = new Vector2f(15,55);
+        vertices[1] = new Vector2f(-15,55); 
         
         //points on circle radius 25
         int ehh = 2;
