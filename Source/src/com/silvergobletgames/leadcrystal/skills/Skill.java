@@ -44,7 +44,8 @@ public abstract class Skill
         PlayerBashAttack,PlayerDestructionDisk, PlayerFreezeAttack,PlayerSnipe,
         PlayerStomp,PlayerDash,PlayerStimpack,PlayerSoulLeech,
         PlayerAttackDrone,PlayerGuard,PlayerWard,PlayerFlashbang,    
-        EnemyLaser,EnemyMeleeBash,EnemyGooShot,EnemySmallMelee, EnemyAntThrow, EnemyFlierGooBomb
+        EnemyLaser,EnemyMeleeBash,EnemyGooShot,EnemySmallMelee, EnemyAntThrow, EnemyFlierGooBomb,
+        EnemyBossSwipe;
     }
     
     public static enum SkillType{
