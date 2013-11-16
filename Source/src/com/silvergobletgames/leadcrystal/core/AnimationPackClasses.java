@@ -929,6 +929,136 @@ public class AnimationPackClasses {
          }
      }
      
+     
+     public static class BashBlueBodyAnimationPack extends AnimationPack
+     {
+        public BashBlueBodyAnimationPack()
+        {
+            //=====================
+            // Build Animation Map
+            //=====================
+
+            //idle
+            ArrayList<Texture> idle = new ArrayList();
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-idle0.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-idle1.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-idle2.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-idle3.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-idle4.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-idle5.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-idle6.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-idle7.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-idle8.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-idle9.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-idle10.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-idle11.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-idle12.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-idle13.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-idle14.png"));
+            this.animationSet.put(CoreAnimations.IDLE, idle);
+
+            //Running
+            ArrayList<Texture> running = new ArrayList();
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking0.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking1.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking2.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking3.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking4.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking5.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking6.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking7.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking8.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking9.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking10.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking11.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking12.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking13.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking14.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking15.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking16.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking17.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking18.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking19.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking20.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking21.png"));
+            this.animationSet.put(ExtendedImageAnimations.RUNNING, running);
+            
+            //RunningReverse
+            ArrayList<Texture> runningReverse = new ArrayList();
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking21.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking20.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking19.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking18.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking17.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking16.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking15.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking14.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking13.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking12.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking11.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking10.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking9.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking8.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking7.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking6.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking5.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking4.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking3.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking2.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking1.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-walking0.png"));
+            this.animationSet.put(ExtendedImageAnimations.RUNNINGREVERSE, runningReverse);
+
+            //Jumping
+            ArrayList<Texture> jumping = new ArrayList();
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-jumping0.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-jumping1.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-jumping2.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-jumping3.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-jumping4.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-jumping5.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-jumping6.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-jumping7.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-jumping8.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-jumping9.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-jumping10.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-jumping11.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-jumping12.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-jumping13.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-blue-body-jumping14.png"));
+            this.animationSet.put(ExtendedImageAnimations.JUMPING, jumping);            
+
+            //death
+            ArrayList<Texture> dying = new ArrayList();
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_head.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_torso.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_leftarm.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_rightarm.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_righthand.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_leftleg.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_rightleg.png"));  
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_leftfoot.png"));  
+            this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
+
+
+            //========================
+            // Build Skill Offset Map
+            //========================
+            
+            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0011_0111_0100_1011_1011_0100_1011_0100),
+                                                                                        Float.intBitsToFloat(0b0111_0111_1011_1011_0110_0100_0111_0111)));
+                    
+            //================
+            // Build FPT Map
+            //================
+            this.fptMap.put(CoreAnimations.IDLE,10);
+            this.fptMap.put(ExtendedImageAnimations.RUNNING,2);
+            this.fptMap.put(ExtendedImageAnimations.RUNNINGREVERSE,2);
+
+        }
+    }
+     
+     
             
     
     

@@ -814,6 +814,20 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         ArrayList<Vector2f> jumpingPosition = new ArrayList<>();
         jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
         this.bodyPartOffsets.put(ExtendedImageAnimations.JUMPING, jumpingPosition);
         
        
