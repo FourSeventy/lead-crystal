@@ -53,7 +53,7 @@ public abstract class CombatEntity extends Entity
     //Skill that we are currently casting
     protected Skill castingSkill;
     //attack delay
-    private int attackDelay = 0;
+    protected int attackDelay = 0;
     
     protected boolean feetOnTheGround = true;
 

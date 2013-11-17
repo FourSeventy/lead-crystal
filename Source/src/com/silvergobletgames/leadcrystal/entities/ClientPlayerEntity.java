@@ -36,7 +36,7 @@ public class ClientPlayerEntity extends PlayerEntity
     //===============
     public ClientPlayerEntity(PlayerEntity player)
     {
-        super(player.getImage().copy(),player.head.copy(),player.frontArm.copy(),player.backArm.copy());
+        super(player.getImage().copy(),player.head.copy(),player.backArm.copy(),player.frontArm.copy());
         
         this.ID = player.getID();
         this.setName(player.getName()); 
@@ -144,201 +144,12 @@ public class ClientPlayerEntity extends PlayerEntity
          }
          
          //update skill manager
-         skillManager.update();
+         skillManager.update();       
          
-//         //============
-//         // Body Parts
-//         //============
-//         
-//         //Get target X and Y
-//        float targetX = ((GameClientScene)this.getOwningScene()).worldMouseLocation.x;
-//        float targetY = ((GameClientScene)this.getOwningScene()).worldMouseLocation.y;
-//        
-//        //Get user X and Y
-//        float userX = this.getPosition().x;
-//        float userY = this.getPosition().y;
-//        
-//        //get vector to target
-//        Vector2f vectorToTarget = new Vector2f(targetX - userX, targetY - userY);
-//        vectorToTarget.normalise();
-//        
-//        //determine angle for the image
-//        float theta = (float)Math.acos(vectorToTarget.dot(new Vector2f(1,0)));
-//        if(targetY < userY)
-//            theta = (float)(2* Math.PI - theta);
-//        
-//        //determine flipped
-//        boolean flipped;
-//        if(targetX < userX)
-//             flipped = true;
-//        else
-//            flipped = false;
-//        
-//        if(flipped)
-//            this.image.setHorizontalFlip(true);
-//        else
-//            this.image.setHorizontalFlip(false);
-//
-//        
-//          //=========front arm============
-//         this.frontArm.setHorizontalFlip(flipped);        
-//         if(flipped)
-//         {
-//
-//             float angle =(float)((theta- Math.PI) * (180f/Math.PI));
-//             if(angle <= -60 && angle >= -90)
-//                 angle = -60;
-//             else if(angle >= 60 && angle <= 90)
-//                 angle = 60;
-//             this.frontArm.setAngle(angle);
-//             this.frontArm.setRotationPoint(.85f, .7f);
-//             this.frontArm.setAnchor(Anchorable.Anchor.LEFTCENTER); 
-//             
-//             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
-//             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
-//             
-//             if(this.image.isFlippedHorizontal())
-//             {
-//                 xOffset = 1 - xOffset;
-//           
-//             }
-//             float xPos = -76 +this.image.getPosition().x + this.image.getWidth()* xOffset; 
-//             float yPos = -26 +this.image.getPosition().y + this.image.getHeight()* yOffset;        
-//             this.frontArm.setPositionAnchored(xPos,yPos);
-//         }
-//         else
-//         {
-//             
-//             float angle =(float)(theta * (180f/Math.PI));
-//             if(angle >= 60 && angle <= 90)
-//                 angle = 60;
-//             else if(angle <= 300 && angle >= 270)
-//                 angle = 300;
-//             this.frontArm.setAngle(angle);
-//             this.frontArm.setRotationPoint(.15f, .7f);
-//             this.frontArm.setAnchor(Anchorable.Anchor.LEFTCENTER); 
-//             
-//             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
-//             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
-//             
-//             if(this.image.isFlippedHorizontal())
-//             {
-//                 xOffset = 1 - xOffset;
-//                
-//             }
-//             
-//             float xPos = -39 +this.image.getPosition().x + this.image.getWidth()*xOffset; 
-//             float yPos = -26 + this.image.getPosition().y + this.image.getHeight()*yOffset;            
-//             this.frontArm.setPositionAnchored(xPos,yPos);
-//         }   
-//         this.frontArm.update();
-//         
-//         //===========back arm===========
-//         this.backArm.setHorizontalFlip(flipped);        
-//         if(flipped)
-//         {
-//
-//             float angle =(float)((theta- Math.PI) * (180f/Math.PI));
-//             if(angle <= -60 && angle >= -90)
-//                 angle = -60;
-//             else if(angle >= 60 && angle <= 90)
-//                 angle = 60;
-//             this.backArm.setAngle(angle);
-//             this.backArm.setRotationPoint(1.3f, .7f);
-//             this.backArm.setAnchor(Anchorable.Anchor.LEFTCENTER); 
-//             
-//             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
-//             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
-//             
-//             if(this.image.isFlippedHorizontal())
-//             {
-//                 xOffset = 1 - xOffset;
-//           
-//             }
-//             float xPos = -53 +this.image.getPosition().x + this.image.getWidth()* xOffset; 
-//             float yPos = -26 +this.image.getPosition().y + this.image.getHeight()* yOffset;        
-//             this.backArm.setPositionAnchored(xPos,yPos);
-//         }
-//         else
-//         {
-//             
-//             float angle =(float)(theta * (180f/Math.PI));
-//             if(angle >= 60 && angle <= 90)
-//                 angle = 60;
-//             else if(angle <= 300 && angle >= 270)
-//                 angle = 300;
-//             this.backArm.setAngle(angle);
-//             this.backArm.setRotationPoint(-.3f, .7f);
-//             this.backArm.setAnchor(Anchorable.Anchor.LEFTCENTER); 
-//             
-//             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
-//             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
-//             
-//             if(this.image.isFlippedHorizontal())
-//             {
-//                 xOffset = 1 - xOffset;
-//                
-//             }
-//             
-//             float xPos = 0 +this.image.getPosition().x + this.image.getWidth()*xOffset; 
-//             float yPos = -26 + this.image.getPosition().y + this.image.getHeight()*yOffset;            
-//             this.backArm.setPositionAnchored(xPos,yPos);
-//         }   
-//         this.backArm.update();
-//         
-//         
-//         //=============head============
-//         this.head.setHorizontalFlip(flipped);
-//         this.head.setScale(1.15f);
-//         this.head.setAnchor(Anchorable.Anchor.CENTER);
-//         if(flipped)
-//         {
-//             float angle =(float)((theta- Math.PI) * (180f/Math.PI));
-//             if(angle <= -60 && angle >= -90)
-//                 angle = -60;
-//             else if(angle >= 60 && angle <= 90)
-//                 angle = 60;
-//             this.head.setRotationPoint(.5f, .25f);
-//             this.head.setAngle(angle);   
-//             
-//             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
-//             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
-//             
-//             if(this.image.isFlippedHorizontal())
-//             {
-//                 xOffset = 1 - xOffset;
-//                
-//             }
-//             
-//             float xPos = this.image.getPosition().x + this.image.getWidth()*xOffset; 
-//             float yPos = 15+this.image.getPosition().y + this.image.getHeight()*yOffset;
-//             
-//             this.head.setPositionAnchored(xPos,yPos);
-//         }
-//         else
-//         {
-//             float angle =(float)(theta * (180f/Math.PI));
-//             if(angle >= 60 && angle <= 90)
-//                 angle = 60;
-//             else if(angle <= 300 && angle >= 270)
-//                 angle = 300;
-//             this.head.setRotationPoint(.5f, .25f);
-//             this.head.setAngle(angle);    
-//             
-//             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
-//             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
-//             
-//             if(this.image.isFlippedHorizontal())
-//             {
-//                 xOffset = 1 - xOffset;
-//             }
-//             
-//             float xPos = this.image.getPosition().x + this.image.getWidth()*xOffset;
-//             float yPos = 15+this.image.getPosition().y + this.image.getHeight()*yOffset;
-//             
-//             this.head.setPositionAnchored(xPos,yPos);
-//         }         
-//         this.head.update();
+         //update body parts
+        this.frontArm.update();
+        this.backArm.update();
+        this.head.update();
      
     }
     
@@ -509,7 +320,7 @@ public class ClientPlayerEntity extends PlayerEntity
         {
             //change animation
             this.getFrontArm().setAnimation(skill.getImageAnimation());
-            this.getBackArm().setAnimation(skill.getImageAnimation());
+           // this.getBackArm().setAnimation(skill.getImageAnimation());
             
             //start cooldown
             skill.beginCooldown();
@@ -518,7 +329,7 @@ public class ClientPlayerEntity extends PlayerEntity
         //dash
         if(skill instanceof PlayerDashAttack)
         {
-              //Get target X and Y
+            //Get target X and Y
             float targetX = ((GameClientScene)this.getOwningScene()).worldMouseLocation.x;
             float targetY = ((GameClientScene)this.getOwningScene()).worldMouseLocation.y;
 

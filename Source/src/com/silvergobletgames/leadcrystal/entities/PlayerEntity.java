@@ -25,6 +25,7 @@ import com.silvergobletgames.leadcrystal.combat.CombatEffect;
 import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.combat.ProcEffect;
 import com.silvergobletgames.leadcrystal.core.*;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBlackFrontArmAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownBackArmAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownFrontArmAnimationPack;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.RocketExplosionEmitter;
@@ -336,6 +337,11 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         vectorToTarget.scale(this.getFrontArm().getWidth());
         vectorToTarget.add(new Vector2f(this.getPosition().x,this.getPosition().y)); 
         this.skillReleasePoint = new SylverVector2f(vectorToTarget.x,vectorToTarget.y);
+        
+        //update body parts
+        this.frontArm.update();
+        this.backArm.update();
+        this.head.update();
                 
     }   
     
@@ -649,6 +655,40 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         this.worldMousePoint = new SylverVector2f(worldMouseX,worldMouseY);
     }
 
+    /**
+     * Begins to cast the skill that is passed as a parameter.  The cast will
+     * finish after the skills cast time has elapsed.
+     * @param skill The skill to be cast.
+     */
+    @Override
+    public void attack(Skill skill) 
+    {
+
+        //start to cast the skill if we aren't already casting , and the skill is usable
+        if(skill != null && skill.isUsable() && this.combatData.canAttack() && !this.inAttackAnimation())
+        {   
+            //set variables
+            this.castingSkill = skill;      
+            this.attackDelay = this.image.getAnimationPack().getTimingDelay(skill.getImageAnimation());
+             
+            //change states
+            this.combatData.setState(CombatData.CombatState.ATTACKING);
+            
+            //change animation
+            this.frontArm.setAnimation(skill.getImageAnimation());
+
+            //if there is no attack delay call finish attack
+            if(this.attackDelay <= 0)
+                this.finishAttack();             
+           
+        }
+    }
+    
+    @Override
+    public boolean inAttackAnimation()
+    {
+        return (this.frontArm.getAnimation() == ExtendedImageAnimations.MELEEATTACK || this.frontArm.getAnimation() == ExtendedImageAnimations.RANGEDATTACK || this.frontArm.getAnimation() == ExtendedImageAnimations.SPELLATTACK);
+    }
     
     @Override
     protected void finishAttack()
@@ -814,6 +854,20 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         ArrayList<Vector2f> jumpingPosition = new ArrayList<>();
         jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
+        jumpingPosition.add(new Vector2f(.5f,0.895f));
         this.bodyPartOffsets.put(ExtendedImageAnimations.JUMPING, jumpingPosition);
         
        
@@ -873,8 +927,8 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                  xOffset = 1 - xOffset;
            
              }
-             float xPos = -76 +this.image.getPosition().x + this.image.getWidth()* xOffset; 
-             float yPos = -26 +this.image.getPosition().y + this.image.getHeight()* yOffset;        
+             float xPos = -86 +this.image.getPosition().x + this.image.getWidth()* xOffset; 
+             float yPos = -36 +this.image.getPosition().y + this.image.getHeight()* yOffset;        
              this.frontArm.setPositionAnchored(xPos,yPos);
          }
          else
@@ -898,11 +952,11 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                 
              }
              
-             float xPos = -39 +this.image.getPosition().x + this.image.getWidth()*xOffset; 
-             float yPos = -26 + this.image.getPosition().y + this.image.getHeight()*yOffset;            
+             float xPos = -44 +this.image.getPosition().x + this.image.getWidth()*xOffset; 
+             float yPos = -36 + this.image.getPosition().y + this.image.getHeight()*yOffset;            
              this.frontArm.setPositionAnchored(xPos,yPos);
          }   
-         this.frontArm.update();
+         //this.frontArm.update();
          
          //===========back arm===========
          this.backArm.setHorizontalFlip(flipped);        
@@ -955,7 +1009,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
              float yPos = -26 + this.image.getPosition().y + this.image.getHeight()*yOffset;            
              this.backArm.setPositionAnchored(xPos,yPos);
          }   
-         this.backArm.update();
+         //this.backArm.update();
          
          
          //=============head============
@@ -1009,7 +1063,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
              
              this.head.setPositionAnchored(xPos,yPos);
          }         
-         this.head.update();
+        // this.head.update();
     }
     
     
@@ -1349,7 +1403,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         Image image = Image.buildFromRenderData((SceneObjectRenderData)renderData.data.get(0));
         
         //build the player
-        PlayerEntity player = new PlayerEntity(image,new Image("bash-head0.png"),new Image(new BashBrownBackArmAnimationPack()),new Image(new BashBrownFrontArmAnimationPack()));
+        PlayerEntity player = new PlayerEntity(image,new Image("bash-head0.png"),new Image(new BashBrownBackArmAnimationPack()),new Image(new BashBlackFrontArmAnimationPack()));
         player.setID(renderData.getID());
         player.setImage(image);
         
@@ -1594,7 +1648,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         Image frontArm = Image.buildFromFullData((SceneObjectSaveData)saveData.dataMap.get("frontArm"));
         Image backArm = Image.buildFromFullData((SceneObjectSaveData)saveData.dataMap.get("backArm"));
         
-        PlayerEntity player = new PlayerEntity(bodyImage,headImage,frontArm,backArm);
+        PlayerEntity player = new PlayerEntity(bodyImage,headImage,backArm,frontArm);
         
         //skill manager
         SkillManager skillManager = SkillManager.buildFromFullData((SaveData)saveData.dataMap.get("skillManager"));
