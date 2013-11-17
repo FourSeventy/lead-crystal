@@ -1,10 +1,27 @@
 package com.silvergobletgames.leadcrystal.scenes;
 
 import com.jogamp.newt.event.KeyEvent;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBlackBackArmAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBlackBodyAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBlackFrontArmAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBlueBackArmAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBlueBodyAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBlueFrontArmAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownBackArmAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownBodyAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownFrontArmAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashGreenBackArmAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashGreenBodyAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashGreenFrontArmAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashRedBackArmAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashRedBodyAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashRedFrontArmAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashWhiteBackArmAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashWhiteBodyAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashWhiteFrontArmAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashYellowBackArmAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashYellowBodyAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashYellowFrontArmAnimationPack;
 import com.silvergobletgames.leadcrystal.core.CursorFactory;
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
@@ -13,6 +30,7 @@ import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.sylver.audio.AudioRenderer;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.*;
+import com.silvergobletgames.sylver.graphics.AnimationPack;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.OpenGLGameWindow;
 import com.silvergobletgames.sylver.graphics.Text;
@@ -62,12 +80,15 @@ public class NewCharacterScene extends Scene
         this.headList.add("bash-head3.png");
         this.headList.add("bash-head4.png");
         
+        this.bodyList.add("bash_brown.png"); 
         this.bodyList.add("bash_black.png");
         this.bodyList.add("bash_blue.png");
         this.bodyList.add("bash_green.png");
         this.bodyList.add("bash_red.png");
         this.bodyList.add("bash_white.png");
-        this.bodyList.add("bash_yellow.png");      
+        this.bodyList.add("bash_yellow.png");  
+        
+        
         
         //================
         // Builds Buttons
@@ -154,7 +175,7 @@ public class NewCharacterScene extends Scene
                 if (e.getActionCommand().equals("clicked")) 
                 {
                         currentBodySelection++;
-                        currentBodySelection%=6;
+                        currentBodySelection%=7;
                         bodyText.setText("Body: " + (currentBodySelection + 1));
                         setImages();
 
@@ -194,10 +215,10 @@ public class NewCharacterScene extends Scene
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("clicked")) 
                 {
-                    //===============
+                    //=============== 
                     //make the player
                     //===============
-                    PlayerEntity player = new PlayerEntity(new Image(new BashBlueBodyAnimationPack()),new Image(headList.get(currentHeadSelection)),new Image(new BashBrownBackArmAnimationPack()),new Image(new BashBrownFrontArmAnimationPack()));
+                    PlayerEntity player = new PlayerEntity(new Image(getBodyAnimationPack(bodyList.get(currentBodySelection))),new Image(headList.get(currentHeadSelection)),new Image(getBackArmAnimationPack(bodyList.get(currentBodySelection))),new Image(getFrontArmAnimationPack(bodyList.get(currentBodySelection))));
                     player.setName(nameTextBox.getText()); 
 
                     //dev settings
@@ -342,4 +363,51 @@ public class NewCharacterScene extends Scene
         
     
     }
+    
+    
+    private AnimationPack getBodyAnimationPack(String selection)
+    {
+        switch(selection)
+        {
+            case "bash_brown.png": return new BashBrownBodyAnimationPack();
+            case "bash_blue.png": return new BashBlueBodyAnimationPack();
+            case "bash_green.png": return new BashGreenBodyAnimationPack();
+            case "bash_red.png": return new BashRedBodyAnimationPack();
+            case "bash_white.png": return new BashWhiteBodyAnimationPack();
+            case "bash_yellow.png": return new BashYellowBodyAnimationPack();
+            case "bash_black.png": return new BashBlackBodyAnimationPack();
+        }
+        return null;
+    }
+    
+    private AnimationPack getFrontArmAnimationPack(String selection)
+    {
+        switch(selection)
+        {
+            case "bash_brown.png": return new BashBrownFrontArmAnimationPack();
+            case "bash_blue.png": return new BashBlueFrontArmAnimationPack();
+            case "bash_green.png": return new BashGreenFrontArmAnimationPack();
+            case "bash_red.png": return new BashRedFrontArmAnimationPack();
+            case "bash_white.png": return new BashWhiteFrontArmAnimationPack();
+            case "bash_yellow.png": return new BashYellowFrontArmAnimationPack();
+            case "bash_black.png": return new BashBlackFrontArmAnimationPack();
+        }
+        return null;
+    }
+    
+    private AnimationPack getBackArmAnimationPack(String selection)
+    {
+        switch(selection)
+        {
+            case "bash_brown.png": return new BashBrownBackArmAnimationPack();
+            case "bash_blue.png": return new BashBlueBackArmAnimationPack();
+            case "bash_green.png": return new BashGreenBackArmAnimationPack();
+            case "bash_red.png": return new BashRedBackArmAnimationPack();
+            case "bash_white.png": return new BashWhiteBackArmAnimationPack();
+            case "bash_yellow.png": return new BashYellowBackArmAnimationPack();
+            case "bash_black.png": return new BashBlackBackArmAnimationPack();
+        }
+        return null;
+    }
+
 }

@@ -715,7 +715,9 @@ public class AnimationPackClasses {
     }
     
     
-    
+    //==============
+    // Bash Brown
+    //==============
      public static class BashBrownBodyAnimationPack extends AnimationPack
      {
         public BashBrownBodyAnimationPack()
@@ -930,6 +932,274 @@ public class AnimationPackClasses {
      }
      
      
+     
+     //==============
+    // Bash Black
+    //==============
+     public static class BashBlackBodyAnimationPack extends AnimationPack
+     {
+        public BashBlackBodyAnimationPack()
+        {
+            //=====================
+            // Build Animation Map
+            //=====================
+
+            //idle
+            ArrayList<Texture> idle = new ArrayList();
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-idle0.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-idle1.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-idle2.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-idle3.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-idle4.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-idle5.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-idle6.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-idle7.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-idle8.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-idle9.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-idle10.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-idle11.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-idle12.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-idle13.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-idle14.png"));
+            this.animationSet.put(CoreAnimations.IDLE, idle);
+
+            //Running
+            ArrayList<Texture> running = new ArrayList();
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking0.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking1.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking2.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking3.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking4.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking5.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking6.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking7.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking8.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking9.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking10.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking11.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking12.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking13.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking14.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking15.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking16.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking17.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking18.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking19.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking20.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking21.png"));
+            this.animationSet.put(ExtendedImageAnimations.RUNNING, running);
+            
+            //RunningReverse
+            ArrayList<Texture> runningReverse = new ArrayList();
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking21.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking20.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking19.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking18.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking17.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking16.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking15.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking14.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking13.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking12.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking11.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking10.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking9.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking8.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking7.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking6.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking5.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking4.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking3.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking2.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking1.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-walking0.png"));
+            this.animationSet.put(ExtendedImageAnimations.RUNNINGREVERSE, runningReverse);
+
+            //Jumping
+            ArrayList<Texture> jumping = new ArrayList();
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-jump0.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-jump1.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-jump2.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-jump3.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-jump4.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-jump5.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-jump6.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-jump7.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-jump8.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-jump9.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-jump10.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-jump11.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-jump12.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-jump13.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-body-jump14.png"));
+            this.animationSet.put(ExtendedImageAnimations.JUMPING, jumping);            
+
+            //death
+            ArrayList<Texture> dying = new ArrayList();
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_head.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_torso.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_leftarm.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_rightarm.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_righthand.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_leftleg.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_rightleg.png"));  
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_leftfoot.png"));  
+            this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
+
+
+            //========================
+            // Build Skill Offset Map
+            //========================
+            
+            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0011_0111_0100_1011_1011_0100_1011_0100),
+                                                                                        Float.intBitsToFloat(0b0111_0111_1011_1011_0110_0100_0111_0111)));
+                    
+            //================
+            // Build FPT Map
+            //================
+            this.fptMap.put(CoreAnimations.IDLE,10);
+            this.fptMap.put(ExtendedImageAnimations.RUNNING,2);
+            this.fptMap.put(ExtendedImageAnimations.RUNNINGREVERSE,2);
+
+        }
+    }
+     
+     public static class BashBlackFrontArmAnimationPack extends AnimationPack
+     {
+         public BashBlackFrontArmAnimationPack()
+         {
+             //idle
+             ArrayList<Texture> idle = new ArrayList();
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle0.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle1.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle2.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle3.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle4.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle5.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle6.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle7.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle8.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle9.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle10.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle11.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle12.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle13.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle14.png"));
+              this.animationSet.put(CoreAnimations.IDLE, idle);
+              
+              //melee
+              ArrayList<Texture> melee = new ArrayList();
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee0.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee1.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee2.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee3.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee4.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee5.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee6.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee7.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee8.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee9.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee10.png"));
+              this.animationSet.put(ExtendedImageAnimations.MELEEATTACK,melee);
+              
+              
+              //Ranged
+              ArrayList<Texture> attacking = new ArrayList();
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot0.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot1.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot2.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot3.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot4.png"));             
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot5.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot6.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot7.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot8.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot9.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot10.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot11.png")); 
+              
+              this.animationSet.put(ExtendedImageAnimations.RANGEDATTACK,attacking);
+              
+              //Use
+              ArrayList<Texture> use = new ArrayList(); 
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast0.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast1.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast2.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast3.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast4.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast5.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast6.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast7.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast8.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast9.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast10.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast11.png"));
+              this.animationSet.put(ExtendedImageAnimations.CASTING,use);
+              
+            //================
+            // Build FPT Map
+            //================
+            this.fptMap.put(CoreAnimations.IDLE,10);
+            this.fptMap.put(ExtendedImageAnimations.RANGEDATTACK,3);
+            this.fptMap.put(ExtendedImageAnimations.MELEEATTACK,2);
+             
+              
+              //========================
+              // Build Skill Offset Map
+              //========================
+            
+              this.positionOffsetMap.put(ExtendedImageAnimations.RANGEDATTACK, new SylverVector2f(25,10));
+              this.positionOffsetMap.put(ExtendedImageAnimations.MELEEATTACK, new SylverVector2f(25,10));
+            
+         }
+     }
+     
+     public static class BashBlackBackArmAnimationPack extends AnimationPack
+     {
+         public BashBlackBackArmAnimationPack()
+         {
+              //idle
+              ArrayList<Texture> idle = new ArrayList();
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle0.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle1.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle2.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle3.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle4.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle5.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle6.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle7.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle8.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle9.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle10.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle11.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle12.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle13.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle14.png"));
+              this.animationSet.put(CoreAnimations.IDLE, idle);
+              
+              //melee
+              ArrayList<Texture> melee = new ArrayList();
+               melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle0.png"));
+              
+              this.animationSet.put(ExtendedImageAnimations.MELEEATTACK,melee);
+              
+              
+              //Ranged
+              ArrayList<Texture> attacking = new ArrayList();
+               attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle0.png"));
+              
+              this.animationSet.put(ExtendedImageAnimations.RANGEDATTACK,attacking);
+              
+              //Use
+              ArrayList<Texture> use = new ArrayList();
+              this.animationSet.put(ExtendedImageAnimations.CASTING,use);
+         }
+     }
+     
+     
+     //==============
+    // Bash Blue
+    //==============
      public static class BashBlueBodyAnimationPack extends AnimationPack
      {
         public BashBlueBodyAnimationPack()
@@ -1057,6 +1327,1190 @@ public class AnimationPackClasses {
 
         }
     }
+     
+     public static class BashBlueFrontArmAnimationPack extends AnimationPack
+     {
+         public BashBlueFrontArmAnimationPack()
+         {
+             //idle
+             ArrayList<Texture> idle = new ArrayList();
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle0.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle1.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle2.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle3.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle4.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle5.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle6.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle7.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle8.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle9.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle10.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle11.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle12.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle13.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle14.png"));
+              this.animationSet.put(CoreAnimations.IDLE, idle);
+              
+              //melee
+              ArrayList<Texture> melee = new ArrayList();
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee0.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee1.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee2.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee3.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee4.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee5.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee6.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee7.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee8.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee9.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee10.png"));
+              this.animationSet.put(ExtendedImageAnimations.MELEEATTACK,melee);
+              
+              
+              //Ranged
+              ArrayList<Texture> attacking = new ArrayList();
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot0.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot1.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot2.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot3.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot4.png"));             
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot5.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot6.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot7.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot8.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot9.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot10.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot11.png")); 
+              
+              this.animationSet.put(ExtendedImageAnimations.RANGEDATTACK,attacking);
+              
+              //Use
+              ArrayList<Texture> use = new ArrayList(); 
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast0.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast1.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast2.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast3.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast4.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast5.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast6.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast7.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast8.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast9.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast10.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast11.png"));
+              this.animationSet.put(ExtendedImageAnimations.CASTING,use);
+              
+            //================
+            // Build FPT Map
+            //================
+            this.fptMap.put(CoreAnimations.IDLE,10);
+            this.fptMap.put(ExtendedImageAnimations.RANGEDATTACK,3);
+            this.fptMap.put(ExtendedImageAnimations.MELEEATTACK,2);
+             
+              
+              //========================
+              // Build Skill Offset Map
+              //========================
+            
+              this.positionOffsetMap.put(ExtendedImageAnimations.RANGEDATTACK, new SylverVector2f(25,10));
+              this.positionOffsetMap.put(ExtendedImageAnimations.MELEEATTACK, new SylverVector2f(25,10));
+            
+         }
+     }
+     
+     public static class BashBlueBackArmAnimationPack extends AnimationPack
+     {
+         public BashBlueBackArmAnimationPack()
+         {
+              //idle
+              ArrayList<Texture> idle = new ArrayList();
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle0.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle1.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle2.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle3.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle4.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle5.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle6.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle7.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle8.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle9.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle10.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle11.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle12.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle13.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle14.png"));
+              this.animationSet.put(CoreAnimations.IDLE, idle);
+              
+              //melee
+              ArrayList<Texture> melee = new ArrayList();
+               melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle0.png"));
+              
+              this.animationSet.put(ExtendedImageAnimations.MELEEATTACK,melee);
+              
+              
+              //Ranged
+              ArrayList<Texture> attacking = new ArrayList();
+               attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle0.png"));
+              
+              this.animationSet.put(ExtendedImageAnimations.RANGEDATTACK,attacking);
+              
+              //Use
+              ArrayList<Texture> use = new ArrayList();
+              this.animationSet.put(ExtendedImageAnimations.CASTING,use);
+         }
+     }
+     
+     //==============
+    // Bash Green
+    //==============
+     public static class BashGreenBodyAnimationPack extends AnimationPack
+     {
+        public BashGreenBodyAnimationPack()
+        {
+            //=====================
+            // Build Animation Map
+            //=====================
+
+            //idle
+            ArrayList<Texture> idle = new ArrayList();
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-idle0.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-idle1.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-idle2.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-idle3.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-idle4.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-idle5.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-idle6.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-idle7.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-idle8.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-idle9.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-idle10.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-idle11.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-idle12.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-idle13.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-idle14.png"));
+            this.animationSet.put(AnimationPack.CoreAnimations.IDLE, idle);
+
+            //Running
+            ArrayList<Texture> running = new ArrayList();
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking0.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking1.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking2.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking3.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking4.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking5.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking6.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking7.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking8.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking9.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking10.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking11.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking12.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking13.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking14.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking15.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking16.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking17.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking18.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking19.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking20.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking21.png"));
+            this.animationSet.put(ExtendedImageAnimations.RUNNING, running);
+            
+            //RunningReverse
+            ArrayList<Texture> runningReverse = new ArrayList();
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking21.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking20.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking19.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking18.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking17.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking16.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking15.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking14.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking13.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking12.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking11.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking10.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking9.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking8.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking7.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking6.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking5.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking4.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking3.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking2.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking1.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-walking0.png"));
+            this.animationSet.put(ExtendedImageAnimations.RUNNINGREVERSE, runningReverse);
+
+            //Jumping
+            ArrayList<Texture> jumping = new ArrayList();
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-jump0.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-jump1.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-jump2.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-jump3.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-jump4.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-jump5.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-jump6.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-jump7.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-jump8.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-jump9.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-jump10.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-jump11.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-jump12.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-jump13.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-green-body-jump14.png"));
+            this.animationSet.put(ExtendedImageAnimations.JUMPING, jumping);            
+
+            //death
+            ArrayList<Texture> dying = new ArrayList();
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_head.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_torso.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_leftarm.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_rightarm.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_righthand.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_leftleg.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_rightleg.png"));  
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_leftfoot.png"));  
+            this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
+
+
+            //========================
+            // Build Skill Offset Map
+            //========================
+            
+            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0011_0111_0100_1011_1011_0100_1011_0100),
+                                                                                        Float.intBitsToFloat(0b0111_0111_1011_1011_0110_0100_0111_0111)));
+                    
+            //================
+            // Build FPT Map
+            //================
+            this.fptMap.put(AnimationPack.CoreAnimations.IDLE,10);
+            this.fptMap.put(ExtendedImageAnimations.RUNNING,2);
+            this.fptMap.put(ExtendedImageAnimations.RUNNINGREVERSE,2);
+
+        }
+    }
+     
+     public static class BashGreenFrontArmAnimationPack extends AnimationPack
+     {
+         public BashGreenFrontArmAnimationPack()
+         {
+             //idle
+             ArrayList<Texture> idle = new ArrayList();
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle0.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle1.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle2.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle3.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle4.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle5.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle6.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle7.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle8.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle9.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle10.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle11.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle12.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle13.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle14.png"));
+              this.animationSet.put(CoreAnimations.IDLE, idle);
+              
+              //melee
+              ArrayList<Texture> melee = new ArrayList();
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee0.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee1.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee2.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee3.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee4.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee5.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee6.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee7.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee8.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee9.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee10.png"));
+              this.animationSet.put(ExtendedImageAnimations.MELEEATTACK,melee);
+              
+              
+              //Ranged
+              ArrayList<Texture> attacking = new ArrayList();
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot0.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot1.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot2.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot3.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot4.png"));             
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot5.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot6.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot7.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot8.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot9.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot10.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot11.png")); 
+              
+              this.animationSet.put(ExtendedImageAnimations.RANGEDATTACK,attacking);
+              
+              //Use
+              ArrayList<Texture> use = new ArrayList(); 
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast0.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast1.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast2.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast3.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast4.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast5.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast6.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast7.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast8.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast9.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast10.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast11.png"));
+              this.animationSet.put(ExtendedImageAnimations.CASTING,use);
+              
+            //================
+            // Build FPT Map
+            //================
+            this.fptMap.put(CoreAnimations.IDLE,10);
+            this.fptMap.put(ExtendedImageAnimations.RANGEDATTACK,3);
+            this.fptMap.put(ExtendedImageAnimations.MELEEATTACK,2);
+             
+              
+              //========================
+              // Build Skill Offset Map
+              //========================
+            
+              this.positionOffsetMap.put(ExtendedImageAnimations.RANGEDATTACK, new SylverVector2f(25,10));
+              this.positionOffsetMap.put(ExtendedImageAnimations.MELEEATTACK, new SylverVector2f(25,10));
+            
+         }
+     }
+     
+     public static class BashGreenBackArmAnimationPack extends AnimationPack
+     {
+         public BashGreenBackArmAnimationPack()
+         {
+              //idle
+              ArrayList<Texture> idle = new ArrayList();
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle0.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle1.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle2.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle3.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle4.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle5.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle6.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle7.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle8.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle9.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle10.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle11.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle12.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle13.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle14.png"));
+              this.animationSet.put(CoreAnimations.IDLE, idle);
+              
+              //melee
+              ArrayList<Texture> melee = new ArrayList();
+               melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle0.png"));
+              
+              this.animationSet.put(ExtendedImageAnimations.MELEEATTACK,melee);
+              
+              
+              //Ranged
+              ArrayList<Texture> attacking = new ArrayList();
+               attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle0.png"));
+              
+              this.animationSet.put(ExtendedImageAnimations.RANGEDATTACK,attacking);
+              
+              //Use
+              ArrayList<Texture> use = new ArrayList();
+              this.animationSet.put(ExtendedImageAnimations.CASTING,use);
+         }
+     }
+        
+     //==============
+    // Bash Red
+    //==============
+     public static class BashRedBodyAnimationPack extends AnimationPack
+     {
+        public BashRedBodyAnimationPack()
+        {
+            //=====================
+            // Build Animation Map
+            //=====================
+
+            //idle
+            ArrayList<Texture> idle = new ArrayList();
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-idle0.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-idle1.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-idle2.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-idle3.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-idle4.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-idle5.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-idle6.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-idle7.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-idle8.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-idle9.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-idle10.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-idle11.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-idle12.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-idle13.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-idle14.png"));
+            this.animationSet.put(AnimationPack.CoreAnimations.IDLE, idle);
+
+            //Running
+            ArrayList<Texture> running = new ArrayList();
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk0.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk1.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk2.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk3.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk4.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk5.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk6.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk7.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk8.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk9.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk10.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk11.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk12.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk13.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk14.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk15.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk16.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk17.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk18.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk19.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk20.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk21.png"));
+            this.animationSet.put(ExtendedImageAnimations.RUNNING, running);
+            
+            //RunningReverse
+            ArrayList<Texture> runningReverse = new ArrayList();
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk21.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk20.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk19.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk18.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk17.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk16.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk15.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk14.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk13.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk12.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk11.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk10.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk9.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk8.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk7.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk6.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk5.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk4.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk3.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk2.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk1.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-walk0.png"));
+            this.animationSet.put(ExtendedImageAnimations.RUNNINGREVERSE, runningReverse);
+
+            //Jumping
+            ArrayList<Texture> jumping = new ArrayList();
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-jump0.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-jump1.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-jump2.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-jump3.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-jump4.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-jump5.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-jump6.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-jump7.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-jump8.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-jump9.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-jump10.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-jump11.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-jump12.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-jump13.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-red-body-jump14.png"));
+            this.animationSet.put(ExtendedImageAnimations.JUMPING, jumping);            
+
+            //death
+            ArrayList<Texture> dying = new ArrayList();
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_head.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_torso.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_leftarm.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_rightarm.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_righthand.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_leftleg.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_rightleg.png"));  
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_leftfoot.png"));  
+            this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
+
+
+            //========================
+            // Build Skill Offset Map
+            //========================
+            
+            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0011_0111_0100_1011_1011_0100_1011_0100),
+                                                                                        Float.intBitsToFloat(0b0111_0111_1011_1011_0110_0100_0111_0111)));
+                    
+            //================
+            // Build FPT Map
+            //================
+            this.fptMap.put(AnimationPack.CoreAnimations.IDLE,10);
+            this.fptMap.put(ExtendedImageAnimations.RUNNING,2);
+            this.fptMap.put(ExtendedImageAnimations.RUNNINGREVERSE,2);
+
+        }
+    }
+     
+     public static class BashRedFrontArmAnimationPack extends AnimationPack
+     {
+         public BashRedFrontArmAnimationPack()
+         {
+             //idle
+             ArrayList<Texture> idle = new ArrayList();
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle0.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle1.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle2.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle3.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle4.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle5.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle6.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle7.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle8.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle9.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle10.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle11.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle12.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle13.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle14.png"));
+              this.animationSet.put(CoreAnimations.IDLE, idle);
+              
+              //melee
+              ArrayList<Texture> melee = new ArrayList();
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee0.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee1.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee2.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee3.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee4.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee5.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee6.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee7.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee8.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee9.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee10.png"));
+              this.animationSet.put(ExtendedImageAnimations.MELEEATTACK,melee);
+              
+              
+              //Ranged
+              ArrayList<Texture> attacking = new ArrayList();
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot0.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot1.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot2.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot3.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot4.png"));             
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot5.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot6.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot7.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot8.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot9.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot10.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot11.png")); 
+              
+              this.animationSet.put(ExtendedImageAnimations.RANGEDATTACK,attacking);
+              
+              //Use
+              ArrayList<Texture> use = new ArrayList(); 
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast0.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast1.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast2.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast3.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast4.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast5.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast6.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast7.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast8.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast9.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast10.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast11.png"));
+              this.animationSet.put(ExtendedImageAnimations.CASTING,use);
+              
+            //================
+            // Build FPT Map
+            //================
+            this.fptMap.put(CoreAnimations.IDLE,10);
+            this.fptMap.put(ExtendedImageAnimations.RANGEDATTACK,3);
+            this.fptMap.put(ExtendedImageAnimations.MELEEATTACK,2);
+             
+              
+              //========================
+              // Build Skill Offset Map
+              //========================
+            
+              this.positionOffsetMap.put(ExtendedImageAnimations.RANGEDATTACK, new SylverVector2f(25,10));
+              this.positionOffsetMap.put(ExtendedImageAnimations.MELEEATTACK, new SylverVector2f(25,10));
+            
+         }
+     }
+     
+     public static class BashRedBackArmAnimationPack extends AnimationPack
+     {
+         public BashRedBackArmAnimationPack()
+         {
+              //idle
+              ArrayList<Texture> idle = new ArrayList();
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle0.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle1.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle2.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle3.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle4.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle5.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle6.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle7.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle8.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle9.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle10.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle11.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle12.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle13.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle14.png"));
+              this.animationSet.put(CoreAnimations.IDLE, idle);
+              
+              //melee
+              ArrayList<Texture> melee = new ArrayList();
+               melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle0.png"));
+              
+              this.animationSet.put(ExtendedImageAnimations.MELEEATTACK,melee);
+              
+              
+              //Ranged
+              ArrayList<Texture> attacking = new ArrayList();
+               attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle0.png"));
+              
+              this.animationSet.put(ExtendedImageAnimations.RANGEDATTACK,attacking);
+              
+              //Use
+              ArrayList<Texture> use = new ArrayList();
+              this.animationSet.put(ExtendedImageAnimations.CASTING,use);
+         }
+     }
+     
+     //==============
+    // Bash White
+    //==============
+     public static class BashWhiteBodyAnimationPack extends AnimationPack
+     {
+        public BashWhiteBodyAnimationPack()
+        {
+            //=====================
+            // Build Animation Map
+            //=====================
+
+            //idle
+            ArrayList<Texture> idle = new ArrayList();
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-idle0.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-idle1.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-idle2.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-idle3.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-idle4.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-idle5.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-idle6.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-idle7.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-idle8.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-idle9.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-idle10.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-idle11.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-idle12.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-idle13.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-idle14.png"));
+            this.animationSet.put(AnimationPack.CoreAnimations.IDLE, idle);
+
+            //Running
+            ArrayList<Texture> running = new ArrayList();
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk0.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk1.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk2.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk3.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk4.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk5.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk6.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk7.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk8.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk9.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk10.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk11.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk12.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk13.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk14.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk15.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk16.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk17.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk18.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk19.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk20.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk21.png"));
+            this.animationSet.put(ExtendedImageAnimations.RUNNING, running);
+            
+            //RunningReverse
+            ArrayList<Texture> runningReverse = new ArrayList();
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk21.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk20.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk19.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk18.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk17.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk16.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk15.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk14.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk13.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk12.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk11.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk10.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk9.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk8.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk7.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk6.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk5.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk4.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk3.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk2.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk1.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-walk0.png"));
+            this.animationSet.put(ExtendedImageAnimations.RUNNINGREVERSE, runningReverse);
+
+            //Jumping
+            ArrayList<Texture> jumping = new ArrayList();
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-jump0.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-jump1.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-jump2.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-jump3.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-jump4.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-jump5.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-jump6.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-jump7.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-jump8.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-jump9.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-jump10.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-jump11.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-jump12.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-jump13.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-white-body-jump14.png"));
+            this.animationSet.put(ExtendedImageAnimations.JUMPING, jumping);            
+
+            //death
+            ArrayList<Texture> dying = new ArrayList();
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_head.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_torso.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_leftarm.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_rightarm.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_righthand.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_leftleg.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_rightleg.png"));  
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_leftfoot.png"));  
+            this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
+
+
+            //========================
+            // Build Skill Offset Map
+            //========================
+            
+            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0011_0111_0100_1011_1011_0100_1011_0100),
+                                                                                        Float.intBitsToFloat(0b0111_0111_1011_1011_0110_0100_0111_0111)));
+                    
+            //================
+            // Build FPT Map
+            //================
+            this.fptMap.put(AnimationPack.CoreAnimations.IDLE,10);
+            this.fptMap.put(ExtendedImageAnimations.RUNNING,2);
+            this.fptMap.put(ExtendedImageAnimations.RUNNINGREVERSE,2);
+
+        }
+    }
+     
+     public static class BashWhiteFrontArmAnimationPack extends AnimationPack
+     {
+         public BashWhiteFrontArmAnimationPack()
+         {
+             //idle
+             ArrayList<Texture> idle = new ArrayList();
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle0.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle1.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle2.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle3.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle4.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle5.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle6.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle7.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle8.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle9.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle10.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle11.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle12.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle13.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle14.png"));
+              this.animationSet.put(CoreAnimations.IDLE, idle);
+              
+              //melee
+              ArrayList<Texture> melee = new ArrayList();
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee0.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee1.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee2.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee3.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee4.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee5.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee6.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee7.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee8.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee9.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee10.png"));
+              this.animationSet.put(ExtendedImageAnimations.MELEEATTACK,melee);
+              
+              
+              //Ranged
+              ArrayList<Texture> attacking = new ArrayList();
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot0.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot1.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot2.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot3.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot4.png"));             
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot5.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot6.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot7.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot8.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot9.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot10.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot11.png")); 
+              
+              this.animationSet.put(ExtendedImageAnimations.RANGEDATTACK,attacking);
+              
+              //Use
+              ArrayList<Texture> use = new ArrayList(); 
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast0.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast1.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast2.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast3.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast4.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast5.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast6.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast7.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast8.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast9.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast10.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast11.png"));
+              this.animationSet.put(ExtendedImageAnimations.CASTING,use);
+              
+            //================
+            // Build FPT Map
+            //================
+            this.fptMap.put(CoreAnimations.IDLE,10);
+            this.fptMap.put(ExtendedImageAnimations.RANGEDATTACK,3);
+            this.fptMap.put(ExtendedImageAnimations.MELEEATTACK,2);
+             
+              
+              //========================
+              // Build Skill Offset Map
+              //========================
+            
+              this.positionOffsetMap.put(ExtendedImageAnimations.RANGEDATTACK, new SylverVector2f(25,10));
+              this.positionOffsetMap.put(ExtendedImageAnimations.MELEEATTACK, new SylverVector2f(25,10));
+            
+         }
+     }
+     
+     public static class BashWhiteBackArmAnimationPack extends AnimationPack
+     {
+         public BashWhiteBackArmAnimationPack()
+         {
+              //idle
+              ArrayList<Texture> idle = new ArrayList();
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle0.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle1.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle2.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle3.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle4.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle5.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle6.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle7.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle8.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle9.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle10.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle11.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle12.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle13.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle14.png"));
+              this.animationSet.put(CoreAnimations.IDLE, idle);
+              
+              //melee
+              ArrayList<Texture> melee = new ArrayList();
+               melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle0.png"));
+              
+              this.animationSet.put(ExtendedImageAnimations.MELEEATTACK,melee);
+              
+              
+              //Ranged
+              ArrayList<Texture> attacking = new ArrayList();
+               attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle0.png"));
+              
+              this.animationSet.put(ExtendedImageAnimations.RANGEDATTACK,attacking);
+              
+              //Use
+              ArrayList<Texture> use = new ArrayList();
+              this.animationSet.put(ExtendedImageAnimations.CASTING,use);
+         }
+     }
+     
+     //==============
+    // Bash Yellow
+    //==============
+     public static class BashYellowBodyAnimationPack extends AnimationPack
+     {
+        public BashYellowBodyAnimationPack()
+        {
+            //=====================
+            // Build Animation Map
+            //=====================
+
+            //idle
+            ArrayList<Texture> idle = new ArrayList();
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-idle0.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-idle1.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-idle2.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-idle3.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-idle4.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-idle5.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-idle6.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-idle7.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-idle8.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-idle9.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-idle10.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-idle11.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-idle12.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-idle13.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-idle14.png"));
+            this.animationSet.put(AnimationPack.CoreAnimations.IDLE, idle);
+
+            //Running
+            ArrayList<Texture> running = new ArrayList();
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk0.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk1.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk2.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk3.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk4.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk5.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk6.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk7.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk8.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk9.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk10.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk11.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk12.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk13.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk14.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk15.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk16.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk17.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk18.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk19.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk20.png"));
+                running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk21.png"));
+            this.animationSet.put(ExtendedImageAnimations.RUNNING, running);
+            
+            //RunningReverse
+            ArrayList<Texture> runningReverse = new ArrayList();
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk21.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk20.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk19.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk18.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk17.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk16.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk15.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk14.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk13.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk12.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk11.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk10.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk9.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk8.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk7.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk6.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk5.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk4.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk3.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk2.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk1.png"));
+                runningReverse.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-walk0.png"));
+            this.animationSet.put(ExtendedImageAnimations.RUNNINGREVERSE, runningReverse);
+
+            //Jumping
+            ArrayList<Texture> jumping = new ArrayList();
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-jump0.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-jump1.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-jump2.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-jump3.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-jump4.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-jump5.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-jump6.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-jump7.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-jump8.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-jump9.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-jump10.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-jump11.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-jump12.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-jump13.png"));
+                jumping.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-yellow-body-jump14.png"));
+            this.animationSet.put(ExtendedImageAnimations.JUMPING, jumping);            
+
+            //death
+            ArrayList<Texture> dying = new ArrayList();
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_head.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_torso.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_leftarm.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_rightarm.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_righthand.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_leftleg.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_rightleg.png"));  
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_leftfoot.png"));  
+            this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
+
+
+            //========================
+            // Build Skill Offset Map
+            //========================
+            
+            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0011_0111_0100_1011_1011_0100_1011_0100),
+                                                                                        Float.intBitsToFloat(0b0111_0111_1011_1011_0110_0100_0111_0111)));
+                    
+            //================
+            // Build FPT Map
+            //================
+            this.fptMap.put(AnimationPack.CoreAnimations.IDLE,10);
+            this.fptMap.put(ExtendedImageAnimations.RUNNING,2);
+            this.fptMap.put(ExtendedImageAnimations.RUNNINGREVERSE,2);
+
+        }
+    }
+     
+     public static class BashYellowFrontArmAnimationPack extends AnimationPack
+     {
+         public BashYellowFrontArmAnimationPack()
+         {
+             //idle
+             ArrayList<Texture> idle = new ArrayList();
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle0.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle1.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle2.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle3.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle4.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle5.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle6.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle7.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle8.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle9.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle10.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle11.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle12.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle13.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-idle14.png"));
+              this.animationSet.put(CoreAnimations.IDLE, idle);
+              
+              //melee
+              ArrayList<Texture> melee = new ArrayList();
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee0.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee1.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee2.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee3.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee4.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee5.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee6.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee7.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee8.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee9.png"));
+              melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-melee10.png"));
+              this.animationSet.put(ExtendedImageAnimations.MELEEATTACK,melee);
+              
+              
+              //Ranged
+              ArrayList<Texture> attacking = new ArrayList();
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot0.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot1.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot2.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot3.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot4.png"));             
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot5.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot6.png"));
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot7.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot8.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot9.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot10.png")); 
+              attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-shoot11.png")); 
+              
+              this.animationSet.put(ExtendedImageAnimations.RANGEDATTACK,attacking);
+              
+              //Use
+              ArrayList<Texture> use = new ArrayList(); 
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast0.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast1.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast2.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast3.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast4.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast5.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast6.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast7.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast8.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast9.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast10.png"));
+              use.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-black-frontArm-cast11.png"));
+              this.animationSet.put(ExtendedImageAnimations.CASTING,use);
+              
+            //================
+            // Build FPT Map
+            //================
+            this.fptMap.put(CoreAnimations.IDLE,10);
+            this.fptMap.put(ExtendedImageAnimations.RANGEDATTACK,3);
+            this.fptMap.put(ExtendedImageAnimations.MELEEATTACK,2);
+             
+              
+              //========================
+              // Build Skill Offset Map
+              //========================
+            
+              this.positionOffsetMap.put(ExtendedImageAnimations.RANGEDATTACK, new SylverVector2f(25,10));
+              this.positionOffsetMap.put(ExtendedImageAnimations.MELEEATTACK, new SylverVector2f(25,10));
+            
+         }
+     }
+     
+     public static class BashYellowBackArmAnimationPack extends AnimationPack
+     {
+         public BashYellowBackArmAnimationPack()
+         {
+              //idle
+              ArrayList<Texture> idle = new ArrayList();
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle0.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle1.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle2.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle3.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle4.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle5.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle6.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle7.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle8.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle9.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle10.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle11.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle12.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle13.png"));
+              idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle14.png"));
+              this.animationSet.put(CoreAnimations.IDLE, idle);
+              
+              //melee
+              ArrayList<Texture> melee = new ArrayList();
+               melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle0.png"));
+              
+              this.animationSet.put(ExtendedImageAnimations.MELEEATTACK,melee);
+              
+              
+              //Ranged
+              ArrayList<Texture> attacking = new ArrayList();
+               attacking.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("bash-brown-backArm-idle0.png"));
+              
+              this.animationSet.put(ExtendedImageAnimations.RANGEDATTACK,attacking);
+              
+              //Use
+              ArrayList<Texture> use = new ArrayList();
+              this.animationSet.put(ExtendedImageAnimations.CASTING,use);
+         }
+     }
      
      
             
