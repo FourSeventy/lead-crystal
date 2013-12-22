@@ -147,7 +147,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         //set image dimensions and offset
         image.setScale(1f);
-        this.imageOffset = new Vector2f(0,-25);
+        this.imageOffset = new Vector2f(0,-20);
 
         //set body attributes
         body.setFriction(this.BASE_FRICTION);
@@ -962,7 +962,6 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
              
              //twiddle some angle stuff
              float angle =(float)(theta * (180f/Math.PI));
-             System.out.println(angle);
              if(angle >= 60 && angle <= 90)
                  angle = 60;
              else if(angle <= 334 && angle >= 270)
@@ -985,7 +984,6 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
          {
              //twiddle some angle
              float angle =(float)((theta- Math.PI) * (180f/Math.PI));
-             System.out.println(angle);
              if(angle <= -60 && angle >= -90)
                  angle = -60;
              else if(angle >= 26 && angle <= 90)
@@ -1053,15 +1051,16 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     
     protected void setCorrectAnimation()
     {
-
         //============================
         // Determine Running Animation
         //============================
  
         if((this.feetOnTheGround) && !this.onLadder && 
-                                  ((this.body.getVelocity().getX() >= 1 && this.getFacingDirection() == FacingDirection.RIGHT)
-                                  || (this.body.getVelocity().getX() < -1 && this.getFacingDirection() == FacingDirection.LEFT)))
+                                  ((this.body.getVelocity().getX() >= 5 && this.getFacingDirection() == FacingDirection.RIGHT)
+                                  || (this.body.getVelocity().getX() < -5 && this.getFacingDirection() == FacingDirection.LEFT)))
         {
+            
+           
             
             if(image.getAnimation() == ExtendedImageAnimations.RUNNINGREVERSE)
             {
@@ -1080,9 +1079,10 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
 
         }
         else if((this.feetOnTheGround) && !this.onLadder && 
-                                         ((this.body.getVelocity().getX() >= 1 && this.getFacingDirection() == FacingDirection.LEFT)
-                                       || (this.body.getVelocity().getX() < -1 && this.getFacingDirection() == FacingDirection.RIGHT)))
+                                         ((this.body.getVelocity().getX() >= 5 && this.getFacingDirection() == FacingDirection.LEFT)
+                                       || (this.body.getVelocity().getX() < -5 && this.getFacingDirection() == FacingDirection.RIGHT)))
         {
+            
           
 
             if(image.getAnimation() == ExtendedImageAnimations.RUNNING)
@@ -1109,12 +1109,12 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
          if (!combatData.isDead() && !this.onLadder)
          {
              //change animation if we are in the air
-             if(inAirTimer > 30 || jumpEnergy < this.MAX_JUMP_ENERGY)           
+             if(inAirTimer > 30 || jumpEnergy < this.MAX_JUMP_ENERGY && !(this.feetOnTheGround))           
                  this.image.setAnimation(ExtendedImageAnimations.JUMPING);
              
                  
              //change the animation if we are resting
-             if(this.body.getVelocity().length() < 1.5 && (this.feetOnTheGround))              
+             if((Math.abs(this.body.getVelocity().getX()) < 5 || (Math.abs(this.body.getVelocity().getX()) < 20 && body.getVelocity().getX() == body.getLastVelocity().getX()) )  && (this.feetOnTheGround))              
                  this.image.setAnimation(CoreAnimations.IDLE); 
              
          }
