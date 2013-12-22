@@ -103,18 +103,7 @@ public class ClientPlayerEntity extends PlayerEntity
          //clear jump energy if we are in air for too long
         if(this.inAirTimer > 15 && this.jumpEnergy == this.MAX_JUMP_ENERGY)
             this.jumpEnergy = 0;
-        
-         
-         if (!combatData.isDead())
-         {           
-             //change animation if we are in the air
-             if(inAirTimer > 18)
-                 this.image.setAnimation(ExtendedImageAnimations.JUMPING);
-                 
-             //change the animation if we are resting
-             if(this.body.getVelocity().length() < 1.5 && (this.feetOnTheGround))
-                 this.image.setAnimation(CoreAnimations.IDLE); 
-         }
+               
          
          //update ladder settings         
          if(this.onLadder)
@@ -150,6 +139,8 @@ public class ClientPlayerEntity extends PlayerEntity
         this.frontArm.update();
         this.backArm.update();
         this.head.update();
+        
+        this.setCorrectAnimation();
      
     }
     
@@ -320,7 +311,7 @@ public class ClientPlayerEntity extends PlayerEntity
         {
             //change animation
             this.getFrontArm().setAnimation(skill.getImageAnimation());
-           // this.getBackArm().setAnimation(skill.getImageAnimation());
+            this.getBackArm().setAnimation(skill.getImageAnimation());
             
             //start cooldown
             skill.beginCooldown();

@@ -471,7 +471,7 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
      * Base definition for finishedAnimating.
      * @param animation 
      */
-    public void finishedAnimating(ImageAnimation animation)
+    public void finishedAnimating(Image image,ImageAnimation animation)
     {
     }
     
