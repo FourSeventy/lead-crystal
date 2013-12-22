@@ -53,7 +53,7 @@ public abstract class CombatEntity extends Entity
     //Skill that we are currently casting
     protected Skill castingSkill;
     //attack delay
-    private int attackDelay = 0;
+    protected int attackDelay = 0;
     
     protected boolean feetOnTheGround = true;
 
@@ -569,9 +569,9 @@ public abstract class CombatEntity extends Entity
      * Base definition for finishedAnimating.
      * @param animation 
      */
-    public void finishedAnimating(ImageAnimation animation) 
+    public void finishedAnimating(Image image,ImageAnimation animation) 
     {       
-        super.finishedAnimating(animation);       
+        super.finishedAnimating(image, animation);       
         
         if(animation == ExtendedImageAnimations.MELEEATTACK || animation == ExtendedImageAnimations.RANGEDATTACK || animation == ExtendedImageAnimations.SPELLATTACK)
         {            
@@ -599,7 +599,7 @@ public abstract class CombatEntity extends Entity
             this.body.addSoftForce(new Vector2f(3000 * vectorCopy.x, 3000 * vectorCopy.y));
             
             //set the correct animation            
-            if(Math.abs(this.body.getVelocity().getX()) > 2 && !this.combatData.getState(CombatData.CombatState.ATTACKING) && this.image.getAnimation() != ExtendedImageAnimations.CASTING && !this.inAttackAnimation())
+            if(Math.abs(this.body.getVelocity().getX()) > 2 && !this.combatData.getState(CombatData.CombatState.ATTACKING) &&  !this.inAttackAnimation())
                image.setAnimation(ExtendedImageAnimations.RUNNING);
         }
     }

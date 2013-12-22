@@ -99,8 +99,8 @@ public class LevelProgressionManager
         level2.mainObjective = objective;
         //side objective 
         objective = new LevelObjective();
-        objective.objectiveName = "Kill Mutant Scorpions";
-        objective.objectiveDescription = "Kill the 4 mutant scorpions.";
+        objective.objectiveName = "Find mysterious artifact.";
+        objective.objectiveDescription = "Keep your eyes open for any mysterious artifacts you may find out in the desert.";
         objective.currencyAward = 25;
         level2.sideObjective = objective;
         //adding to map

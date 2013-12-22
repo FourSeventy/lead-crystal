@@ -152,9 +152,9 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
         } 
     }
     
-    public void finishedAnimating(ImageAnimation animation)
+    public void finishedAnimating(Image image,ImageAnimation animation)
     {
-        super.finishedAnimating(animation);
+        super.finishedAnimating(image,animation);
         
         if(animation == ExtendedImageAnimations.SPAWN)
         {

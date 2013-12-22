@@ -273,6 +273,11 @@ public class SceneScriptManager
     
     public void completeLevel()
     {
+       this.completeLevel("checkpoint1");
+    }
+    
+    public void completeLevel(String destination)
+    {
         //for each player in the scene
         ArrayList<PlayerEntity> playerList = new ArrayList(((GameServerScene)this.owningScene).players);
         for(PlayerEntity player :playerList)
@@ -281,8 +286,8 @@ public class SceneScriptManager
             player.getCombatData().fullHeal();  
             
             //moves players back to town
-            ((GobletServer)Game.getInstance().getRunnable("Goblet Server")).queueMovePlayerToLevel(player.getID(), "town.lv", "checkpoint1");          
-        }  
+            ((GobletServer)Game.getInstance().getRunnable("Goblet Server")).queueMovePlayerToLevel(player.getID(), "town.lv", destination);          
+        }   
     }
     
     /**

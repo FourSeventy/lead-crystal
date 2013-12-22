@@ -31,7 +31,7 @@ public class EnemyAntThrow extends Skill {
     
     public EnemyAntThrow()
     {
-        super(SkillID.EnemyAntThrow,SkillType.OFFENSIVE,ExtendedImageAnimations.MELEEATTACK,250,1200);
+        super(SkillID.EnemyAntThrow,SkillType.OFFENSIVE,ExtendedImageAnimations.MELEEATTACK,360,1100);
 
     }
     
@@ -54,8 +54,10 @@ public class EnemyAntThrow extends Skill {
         damage.addImageEffect(brightnessEffect);
               
 
+        for( int i = 0; i <=1; i++)
+        {
         //build body
-        Body body = new Body(new Box(50,5), 10);
+        Body body = new Body(new Box(60,60), 10);
         Image img = new Image(new MoleAnimationPack());
         img.setScale(.8f);
         ImageEffect spin = new ImageEffect(ImageEffect.ImageEffectType.ROTATION, 60, 0, 360);
@@ -81,7 +83,7 @@ public class EnemyAntThrow extends Skill {
         tossedAnt.getImage().setAngle((float)(theta * 180f/Math.PI)); 
 
         user.getOwningScene().add(tossedAnt,Layer.MAIN);
- 
+        }
         //play sound
 
     
@@ -103,7 +105,7 @@ public class EnemyAntThrow extends Skill {
         {
             
              //if we collided with a world object or player
-             if(other instanceof WorldObjectEntity || other instanceof CombatEntity)
+             if(other instanceof WorldObjectEntity )
              {
                  
                  //==================

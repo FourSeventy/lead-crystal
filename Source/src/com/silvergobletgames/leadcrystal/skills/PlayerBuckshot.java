@@ -54,8 +54,8 @@ public class PlayerBuckshot extends Skill{
         PlayerEntity player = (PlayerEntity) user;
         
         //set damage
-        int min = 2; 
-        int max = 5;
+        int min = 3; 
+        int max = 6;
         float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
         damage.getAmountObject().adjustBase(damageAmout);
         damage.setType(Damage.DamageType.PHYSICAL);    
