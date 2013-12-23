@@ -370,8 +370,8 @@ public final class GameClientScene extends Scene
                         //use historical inputs to simulate back to current time
                         for(ClientInputPacket inputPacket: historicalInputList)
                         {
-                            if(player.dashing)
-                                continue;
+//                            if(player.dashing)
+//                                continue;
                             
                             //simulate player forces
                             this.player.simulateInputForPredictionErrorCorrection(inputPacket);

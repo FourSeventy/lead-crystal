@@ -298,7 +298,7 @@ public class SkillMenu extends Window {
        this.addComponent(b);       
        
        //shock
-       final Skill skill3 = new PlayerDestructionDisk();
+       final Skill skill3 = new PlayerDashAttack();
        b = new Button(skill3.getIcon(),202,393,60,70);
        b.addActionListener(new ActionListener(){
        
@@ -437,7 +437,7 @@ public class SkillMenu extends Window {
        this.addComponent(b);
        
        //dash attack
-       final Skill flashbangSkill = new PlayerDashAttack();
+       final Skill flashbangSkill = new PlayerDestructionDisk();
        b = new Button(flashbangSkill.getIcon(),200,220,60,70);
        b.addActionListener(new ActionListener(){
        
