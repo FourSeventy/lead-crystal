@@ -45,14 +45,14 @@ public class PlayerBashAttack extends Skill{
         
         //set damage
         int min = 13; 
-        int max = 16;
+        int max = 15;
         float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
         damage.getAmountObject().adjustBase(damageAmout);
         damage.setType(Damage.DamageType.PHYSICAL);    
         damage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, 10, 0.0f, 1f));
         
         //add stun effect
-        damage.addCombatEffect(new StateEffect(StateEffect.StateEffectType.STUN, 240));
+        damage.addCombatEffect(new StateEffect(StateEffect.StateEffectType.SLOW, 240,.5f,true));
         
         //Get target X and Y
         PlayerEntity player = (PlayerEntity) user;

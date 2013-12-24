@@ -312,6 +312,12 @@ public class GameServerScene extends Scene
             UUID clientID = (UUID)clientEntry.getKey();           
             PlayerEntity player = (PlayerEntity) this.getSceneObjectManager().get(clientID.toString());
             
+            //dash
+            if(player.dashing)
+            {
+                player.handleDash(null);
+            }
+            
                     
             //=================
             // Handle the Input

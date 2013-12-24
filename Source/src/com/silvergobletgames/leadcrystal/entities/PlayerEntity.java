@@ -294,33 +294,13 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
              this.body.setDamping(this.BASE_DAMPING);
          }
          
-         //handle dash
-         if(this.dashing)
-         {
-              
-             this.dashTicks++;
-             if(dashTicks > 30)
-             {
-                 this.dashing = false;
-                 this.dashTicks = 0;
-                 this.getBody().setVelocity(new Vector2f(0f,0f));
-                 this.getBody().setOverlapMask(Entity.OverlapMasks.PLAYER.value); 
-                 
-             }
-             else
-             {   
-                 this.getBody().setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value); 
-                 this.getBody().setVelocity(new Vector2f(this.dashVector.x * 150, this.dashVector.y * 150));
-             }
-           
-             
-         }
          
-         //===============================
-         // Calculate Skill Release Point
-         //===============================
          
-         //Get user X and Y
+        //===============================
+        // Calculate Skill Release Point
+        //===============================
+         
+        //Get user X and Y
         float userX = this.getPosition().x;
         float userY = this.getPosition().y;
               
@@ -1339,20 +1319,32 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     
     public void handleDash(SylverVector2f dashVector)
     {
-        
-        if(this.owningScene instanceof GameClientScene)
-        {
-            System.out.println("Client dash vector: " + dashVector);
-        }
-        else
-        {
-            System.out.println("Server dash vector: " + dashVector);
-        }
-        
-        this.dashVector = dashVector;
-        this.dashing = true;
-       // this.getBody().addSoftForce(new Vector2f(this.dashVector.x * 10000, this.dashVector.y * 10000));
-        //this.body.addForce(new Vector2f(this.dashVector.x * 100,this.dashVector.y * 100));
+       //handle dash
+         if(this.dashing)
+         {
+              
+             this.dashTicks++;
+             if(dashTicks > 30)
+             {
+                 this.dashing = false;
+                 this.dashTicks = 0;
+                 this.getBody().setVelocity(new Vector2f(0f,0f));
+                 this.getBody().setOverlapMask(Entity.OverlapMasks.PLAYER.value); 
+                 
+             }
+             else
+             {   
+                 this.getBody().setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value); 
+                 this.getBody().setVelocity(new Vector2f(this.dashVector.x * 150, this.dashVector.y * 150));
+             }
+           
+             
+         }
+         else
+         {       
+            this.dashVector = dashVector;
+            this.dashing = true;
+         }
     }
     
     public void handleJumpReleased()

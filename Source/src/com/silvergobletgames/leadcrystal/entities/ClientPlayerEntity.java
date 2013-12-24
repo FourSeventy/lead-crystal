@@ -120,26 +120,26 @@ public class ClientPlayerEntity extends PlayerEntity
          }
          
          //hanlde dash
-         if(this.dashing)
-         {
-             
-             this.dashTicks++;
-             if(dashTicks > 30)
-             {
-                 this.dashing = false;
-                 this.dashTicks = 0;
-                 this.getBody().setVelocity(new Vector2f(0f,0f));
-                 this.getBody().setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value); 
-                 this.getBody().setOverlapMask(Entity.OverlapMasks.PLAYER.value); 
-             }
-             else
-             {   
-                 this.getBody().setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value); 
-                 this.getBody().setVelocity(new Vector2f(this.dashVector.x * 150, this.dashVector.y * 150));
-             }
-           
-             
-         }
+//         if(this.dashing)
+//         {
+//             
+//             this.dashTicks++;
+//             if(dashTicks > 30)
+//             {
+//                 this.dashing = false;
+//                 this.dashTicks = 0;
+//                 this.getBody().setVelocity(new Vector2f(0f,0f));
+//                 this.getBody().setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value); 
+//                 this.getBody().setOverlapMask(Entity.OverlapMasks.PLAYER.value); 
+//             }
+//             else
+//             {   
+//                 this.getBody().setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value); 
+//                 this.getBody().setVelocity(new Vector2f(this.dashVector.x * 150, this.dashVector.y * 150));
+//             }
+//           
+//             
+//         }
          
          //update skill manager
          skillManager.update();       

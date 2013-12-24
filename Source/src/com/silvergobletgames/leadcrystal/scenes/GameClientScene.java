@@ -740,6 +740,11 @@ public final class GameClientScene extends Scene
                 sendSizeTest();
             }
 
+            //handle dashing
+            if(this.player.dashing)
+            {
+                this.player.handleDash(null);
+            }
 
 
             //==============
