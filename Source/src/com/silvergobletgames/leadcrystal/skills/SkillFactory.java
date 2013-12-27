@@ -58,7 +58,7 @@ public class SkillFactory
             case PlayerAttackDrone: return new PlayerAttackDrone();
             case PlayerDestructionDisk: return new PlayerDestructionDisk();
             case PlayerBashAttack: return new PlayerBashAttack();
-            case PlayerFlashbang: return new PlayerFlashbang();
+            case PlayerClusterbomb: return new PlayerClusterbomb();
             case PlayerStimpack: return new PlayerStimpack();
             case PlayerRicochet: return new PlayerRicochet();
             case PlayerSoulLeech: return new PlayerSoulLeech();

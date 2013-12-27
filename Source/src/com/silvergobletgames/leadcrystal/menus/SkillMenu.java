@@ -148,7 +148,7 @@ public class SkillMenu extends Window {
        this.skillSlots[3][0] = new PlayerAttackDrone();
        this.skillSlots[3][1] = new PlayerWard();
        this.skillSlots[3][2] = new PlayerGuard();
-       this.skillSlots[3][3] = new PlayerFlashbang();
+       this.skillSlots[3][3] = new PlayerClusterbomb();
        
        
        //=========================

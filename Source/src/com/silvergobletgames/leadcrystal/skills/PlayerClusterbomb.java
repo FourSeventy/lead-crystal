@@ -34,71 +34,92 @@ import net.phys2d.raw.StaticBody;
  * Cooldown: 30 seconds
  * Description: While active, you take 50% damage.  For the first second that Guard is active, you take no damage.
  */
-public class PlayerFlashbang extends Skill
+public class PlayerClusterbomb extends PlayerSkill
 {
     
-    public PlayerFlashbang()
+    public PlayerClusterbomb()
     {
         //super constructor
-        super(SkillID.PlayerFlashbang,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK,900, Integer.MAX_VALUE);
+        super(SkillID.PlayerClusterbomb,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK,420, Integer.MAX_VALUE);
         //set the skillID and the name
         this.icon = new Image("flashbangIcon.jpg");
-        this.skillName = "Flashbang";
-        this.skillDescription = "Throws a flashbang that stuns and slows all the enemies in a large radius."; 
+        this.skillName = "Cluster Bomb";
+        this.skillDescription = "Throws a cluster of bombs that stun enemies in a medium radius."; 
         this.unlockCost = 2;
         
     }
     
     public void use(Damage damage, SylverVector2f origin) 
     {
-      
-        PlayerEntity player = (PlayerEntity) user;
+
         Random r = SylverRandom.random;
+        
+        //get targeting data
+        TargetingData targetingData = this.getTargetingData(origin);
+        SylverVector2f vectorToTarget = targetingData.vectorToTarget;
+        float theta = targetingData.theta;
                         
         //set damage
-        int min = 5; 
-        int max = 7;
+        int min = 10; 
+        int max = 12;
         float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
         damage.getAmountObject().adjustBase(damageAmout);
         damage.setType(Damage.DamageType.NODAMAGE);  
         damage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, 10, 0.0f, 1f));
         
-        //build body of the shock
-        Body body = new Body(new Circle(15), 1);
-        body.setFriction(2);
+        //build body of bomb1
+        Body body1 = new Body(new Circle(15), 1);
+        body1.setFriction(2);
         Image img = new Image("destructionDisk.png");
         img.setDimensions(30, 30);
-        img.setColor(new Color(1f,1f,1f,1f)); 
-  
-        FlashbangHitbox laser = new FlashbangHitbox(damage, body, img, user);        
+        img.setColor(new Color(1f,1f,1f,1f));  
+        ClusterBombHitbox bomb1 = new ClusterBombHitbox(damage, body1, img, user); 
         
-        //Get target X and Y
-        float targetX = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationX;
-        float targetY = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationY;
+        //build body of bomb2
+        Body body2 = new Body(new Circle(15), 1);
+        body2.setFriction(2);
+        Image img2 = new Image("destructionDisk.png");
+        img2.setDimensions(30, 30);
+        img2.setColor(new Color(1f,1f,1f,1f));  
+        ClusterBombHitbox bomb2 = new ClusterBombHitbox(damage, body2, img2, user);
         
-        //Get user X and Y
-        float userX = origin.x;
-        float userY = origin.y;
+        //build body of bomb3
+        Body body3 = new Body(new Circle(15), 1);
+        body3.setFriction(2);
+        Image img3 = new Image("destructionDisk.png");
+        img3.setDimensions(30, 30);
+        img3.setColor(new Color(1f,1f,1f,1f));  
+        ClusterBombHitbox bomb3 = new ClusterBombHitbox(damage, body3, img3, user);
         
-        //get vector to target
-        Vector2f vectorToTarget = new Vector2f(targetX - userX, targetY - userY);
-        vectorToTarget.normalise();
+        //calculate angles
+        int degrees = 12 +r.nextInt(8);
+        Vector2f upVector = new Vector2f((float)(Math.cos(degrees * Math.PI/180)*vectorToTarget.x  - (Math.sin(degrees * Math.PI/180))*vectorToTarget.y ),(float)((Math.sin(degrees * Math.PI/180))*vectorToTarget.x  + (Math.cos(degrees * Math.PI/180))*vectorToTarget.y )); // 10 degrees
+        upVector.normalise();
         
-        //calculate force for the bullet
-        float xforce = 2000*vectorToTarget.x;
-        float yforce = 2000*vectorToTarget.y;
+        degrees = 7 +r.nextInt(6);
+        Vector2f downVector = new Vector2f((float)(Math.cos(-degrees * Math.PI/180)*vectorToTarget.x  - (Math.sin(-degrees * Math.PI/180))*vectorToTarget.y ),(float)((Math.sin(-degrees * Math.PI/180))*vectorToTarget.x  + (Math.cos(-degrees * Math.PI/180))*vectorToTarget.y )); // -5 degrees
+        downVector.normalise();
         
-        //determine angle for the image
-        float theta = (float)Math.acos(vectorToTarget.dot(new Vector2f(1,0)));
-        if(targetY < userY)
-            theta = (float)(2* Math.PI - theta);
+        //Dispense cluster into the world
+        bomb1.setPosition(origin.x + vectorToTarget.x * 25, origin.y + vectorToTarget.y * 25);
+        bomb1.getBody().setRotation((float)theta);
+        bomb1.getImage().setAngle((float)(theta * (180f/Math.PI))); 
+        user.getOwningScene().add(bomb1,Layer.MAIN);
         
-        //Dispense shock into the world
-        laser.setPosition(origin.x + vectorToTarget.x * 25, origin.y + vectorToTarget.y * 25);
-        laser.getBody().addForce(new Vector2f(xforce ,yforce));
-        laser.getBody().setRotation((float)theta);
-        laser.getImage().setAngle((float)(theta * (180f/Math.PI))); 
-        user.getOwningScene().add(laser,Layer.MAIN);
+        bomb2.setPosition(origin.x + vectorToTarget.x * 25, origin.y + vectorToTarget.y * 25);
+        bomb2.getBody().setRotation((float)theta);
+        bomb2.getImage().setAngle((float)(theta * (180f/Math.PI))); 
+        user.getOwningScene().add(bomb2,Layer.MAIN);
+        
+        bomb3.setPosition(origin.x + vectorToTarget.x * 25, origin.y + vectorToTarget.y * 25);
+        bomb3.getBody().setRotation((float)theta);
+        bomb3.getImage().setAngle((float)(theta * (180f/Math.PI))); 
+        user.getOwningScene().add(bomb3,Layer.MAIN);
+        
+        bomb1.getBody().addForce(new Vector2f( (1500 + (int)(r.nextDouble() * 500) ) * upVector.getX(),(1400 + (int)(r.nextDouble() * 600) ) * upVector.getY()));
+        bomb2.getBody().addForce(new Vector2f( (1500 + (int)(r.nextDouble() * 500) )* vectorToTarget.getX(),(1400 + (int)(r.nextDouble() * 600) ) * vectorToTarget.getY()));
+        bomb3.getBody().addForce(new Vector2f( (1500 + (int)(r.nextDouble() * 500) )* downVector.getX(),(1400 + (int)(r.nextDouble() * 600) ) * downVector.getY()));
+       
         
 
       
@@ -106,17 +127,20 @@ public class PlayerFlashbang extends Skill
         
     }
 
-    private class FlashbangHitbox extends HitBox
+    private class ClusterBombHitbox extends HitBox
     {
         private int time = 0;
+        private int endTime;
         
-         public FlashbangHitbox(Damage d, Body b, Image i, Entity user)
+         public ClusterBombHitbox(Damage d, Body b, Image i, Entity user)
          { 
             super(d, b, i, user); 
             this.body.setBitmask(Entity.BitMasks.PLAYER.value);
             this.body.setOverlapMask(Entity.OverlapMasks.NO_OVERLAP.value);
             this.body.setGravityEffected(true);
             this.body.setRestitution(.98f);
+            
+            this.endTime = (80 + (int)(Math.random() * 40));
          }
          
          public void update()
@@ -125,7 +149,7 @@ public class PlayerFlashbang extends Skill
              
              time++;
              
-             if(time >180)
+             if(time >endTime)
              {
                  this.explode();
              }
@@ -160,10 +184,10 @@ public class PlayerFlashbang extends Skill
 
                 //explosion hitbox
                 Image img = new Image("gradientCircle.png");  
-                img.setDimensions(1000, 1000);
+                img.setDimensions(400, 400);
                 img.setColor(new Color(3,3,1,1));
-                img.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.SCALE, 40, 1, 0f));
-                Body beh = new StaticBody(new Circle(500));
+                img.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.SCALE, 35, 1, 0f));
+                Body beh = new StaticBody(new Circle(200));
                 beh.setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value);
                 beh.setBitmask(Entity.BitMasks.NO_COLLISION.value);
                 damage.setType(Damage.DamageType.PHYSICAL);   
