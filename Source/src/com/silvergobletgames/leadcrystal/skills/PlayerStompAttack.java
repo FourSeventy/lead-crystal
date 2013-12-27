@@ -53,7 +53,6 @@ public class PlayerStompAttack extends Skill
     
     public void use(Damage damage, SylverVector2f origin) 
     {
-        PlayerEntity player = (PlayerEntity) user;
         Random r = SylverRandom.random;
                         
         //set damage

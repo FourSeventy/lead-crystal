@@ -41,7 +41,7 @@ public abstract class Skill
     public static enum SkillID{
         //WARNING - Changing the names of this enum will break save data
         PlayerLaser,PlayerBuckshot, PlayerRicochet, PlayerRocket,
-        PlayerBashAttack,PlayerDestructionDisk, PlayerFreezeAttack,PlayerSnipe,
+        PlayerBashAttack,PlayerDestructionDisk, PlayerFreezeAttack,PlayerSnipe, PlayerBoomerang,
         PlayerStomp,PlayerDash,PlayerStimpack,PlayerSoulLeech,
         PlayerAttackDrone,PlayerGuard,PlayerWard,PlayerFlashbang,    
         EnemyLaser,EnemyMeleeBash,EnemyGooShot,EnemySmallMelee, EnemyAntThrow, EnemyFlierGooBomb,
@@ -203,6 +203,11 @@ public abstract class Skill
     public int getCooldownRemaining()
     {
         return this.cooldownRemaining;
+    }
+    
+    public void setCooldownRemaining(int value)
+    {
+        this.cooldownRemaining = value;
     }
     
     /**

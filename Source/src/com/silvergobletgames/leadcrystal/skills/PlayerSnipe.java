@@ -23,6 +23,7 @@ import com.silvergobletgames.leadcrystal.entities.*;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.audio.Sound;
+import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ import net.phys2d.raw.shapes.Polygon;
  * Cooldown: 10 seconds
  * @author Mike
  */
-public class PlayerSnipe extends Skill 
+public class PlayerSnipe extends PlayerSkill 
 {
 
     
@@ -54,8 +55,7 @@ public class PlayerSnipe extends Skill
         this.icon = new Image("snipeIcon.jpg");
         this.skillName = "Snipe";
         
-        this.skillDescription = "Shoots a long range powerful beam of energy that does more damage the farther away"
-                                 + " the target is. Snipe will always cause a critical hit.";
+        this.skillDescription = "Shoots a long range powerful beam of energy that always causes a critical hit.";
         this.unlockCost = 1;
 
     }
@@ -66,9 +66,13 @@ public class PlayerSnipe extends Skill
      */
     public void use(Damage damage, SylverVector2f origin) 
     {
-        Random r = SylverRandom.random;
-        
+        Random r = SylverRandom.random;        
         PlayerEntity player = (PlayerEntity) user;
+        
+         //get targeting data
+        TargetingData targetingData = this.getTargetingData(origin);
+        SylverVector2f vectorToTarget = targetingData.vectorToTarget;
+        float theta = targetingData.theta;
         
         //set damage
         int min = 19; 
@@ -84,37 +88,22 @@ public class PlayerSnipe extends Skill
             damage.setCrit(true);
             damage.getAmountObject().adjustPercentModifier(user.getCombatData().critModifier.getTotalValue());
         }
-        
-        //======================
-        // Get Vector To Target
-        //======================
-        
-        //Get target X and Y
-        float targetX = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationX;
-        float targetY = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationY;
-        
-        //Get user X and Y
-        float userX = origin.x;
-        float userY = origin.y;
-        
-        //get vector to target
-        Vector2f vectorToTarget = new Vector2f(targetX - userX, targetY - userY);
-        vectorToTarget.normalise();
+
         
         //===============================
         // Determine Rail Beam End Point
         //===============================
         
-        SylverVector2f endPoint = new SylverVector2f((vectorToTarget.x * 2000) + userX , (vectorToTarget.y * 2000) + userY);
+        SylverVector2f endPoint = new SylverVector2f((vectorToTarget.x * 2000) + origin.x , (vectorToTarget.y * 2000) + origin.y);
         ArrayList<SylverVector2f> potentialEnds = new ArrayList();
         //collision body
         //make line from self to target
-        Vector2f h = new Vector2f(vectorToTarget );
+        Vector2f h = new Vector2f(vectorToTarget.x, vectorToTarget.y );
         h.scale(2000);
         Line line = new Line(new Vector2f(0, 0),h);
  
         Body lineBody = new StaticBody(line);
-        lineBody.setPosition(userX, userY);
+        lineBody.setPosition(origin.x, origin.y);
         lineBody.setBitmask(Entity.BitMasks.COLLIDE_WORLD.value);
         lineBody.setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value);        
         
@@ -188,24 +177,27 @@ public class PlayerSnipe extends Skill
         //Dispense snipe hitbox into the world
         snipe.setPosition(endPoint.getX(), endPoint.getY());
         user.getOwningScene().add(snipe,Layer.MAIN);
-        
-        //determine angle for the image
-        float theta = (float)Math.acos(vectorToTarget.dot(new Vector2f(1,0)));
-        if(targetY < userY)
-            theta = (float)(2* Math.PI - theta);
-        
+
         //rail image
         Image img = new Image("rail.png");
-        img.setDimensions((float)Math.sqrt(Math.pow(endPoint.x - userX,2) + Math.pow(endPoint.y - userY,2)), 15f);
+        img.setDimensions((float)Math.sqrt(Math.pow(endPoint.x - origin.x,2) + Math.pow(endPoint.y - origin.y,2)), 15f);
         img.setRotationPoint(0, .5f);
-        img.setPosition(userX,userY);
+        img.setPosition(origin.x,origin.y);
         img.setAngle((float)(theta * (180f/Math.PI)));
-        img.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 60, 0, 0));
+        img.addImageEffect(this.getDamageBrightnessEffect());
         
         int[] durations = {30,30};
         Color[] colors = { new Color(1,3,1,1),new Color(1,1,1,1), new Color(1,1,1,0) };
         img.addImageEffect(new MultiImageEffect(ImageEffect.ImageEffectType.COLOR, colors, durations));
         user.getOwningScene().add(img,Layer.MAIN);
+        
+        //dispense muzzle flash
+        Image flash = this.getMuzzleFlash(targetingData, origin);
+        user.getOwningScene().add(flash,Scene.Layer.MAIN);
+        
+        //add smoke
+        AbstractParticleEmitter smokeEmitter = this.getMuzzleEffect(origin);
+        user.getOwningScene().add(smokeEmitter,Scene.Layer.MAIN);
         
         
          //play sound

@@ -126,13 +126,13 @@ public abstract class CombatEntity extends Entity
         //if its a hitbox
         if (other instanceof HitBox) 
         {
-            HitBox hb = (HitBox)other;
+            HitBox hitBox = (HitBox)other;
             
             //take the damage of the projectile
-            if (hb.getDamage() != null && hb.getDamage().getType() != Damage.DamageType.NODAMAGE)
+            if (hitBox.getDamage() != null && hitBox.getDamage().getType() != Damage.DamageType.NODAMAGE && hitBox.getSource() != this)
             {
                 this.lastDmgNormal = new Vector2f(event.getNormal());
-                this.takeDamage(hb.getDamage());
+                this.takeDamage(hitBox.getDamage());
             }
         }
         

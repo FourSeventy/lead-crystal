@@ -23,6 +23,8 @@ import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SmokeE
 import com.silvergobletgames.leadcrystal.entities.*;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.skills.PlayerSkill.TargetingData;
+import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 
@@ -33,7 +35,7 @@ import com.silvergobletgames.sylver.util.SylverVector2f;
  * Cooldown: 5 seconds
  * @author Mike
  */
-public class PlayerBuckshot extends Skill{
+public class PlayerBuckshot extends PlayerSkill{
     
     public PlayerBuckshot()
     {
@@ -53,25 +55,19 @@ public class PlayerBuckshot extends Skill{
         Random r = SylverRandom.random;
         PlayerEntity player = (PlayerEntity) user;
         
+        //get targeting data
+        TargetingData targetingData = this.getTargetingData(origin);
+        SylverVector2f vectorToTarget = targetingData.vectorToTarget;
+        float theta = targetingData.theta;
+        
         //set damage
         int min = 3; 
         int max = 6;
         float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
         damage.getAmountObject().adjustBase(damageAmout);
         damage.setType(Damage.DamageType.PHYSICAL);    
-        damage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, 10, 0.0f, 1f));
+        damage.addImageEffect(this.getDamageBrightnessEffect());
         
-        //Get target X and Y
-        float targetX = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationX;
-        float targetY = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationY;
-        
-        //Get user X and Y
-        float userX = origin.x;
-        float userY = origin.y;
-        
-        //get vector to target
-        Vector2f vectorToTarget = new Vector2f(targetX - userX, targetY - userY);
-        vectorToTarget.normalise();
         
         //build bodies
         Body body = new Body(new Box(18,18), 1.5f);
@@ -128,12 +124,7 @@ public class PlayerBuckshot extends Skill{
         center.getBody().addForce(new Vector2f( 4000 * vectorToTarget.getX(),4000 * vectorToTarget.getY()));
         down.getBody().addForce(new Vector2f( 4000 * downVector.getX(),4000 * downVector.getY()));
         downDown.getBody().addForce(new Vector2f( 4000 * downDownVector.getX(),4000 * downDownVector.getY()));
-        
-        //determine angle for the image
-        float theta = (float)Math.acos(vectorToTarget.dot(new Vector2f(1,0)));
-        if(targetY < userY)
-            theta = (float)(2* Math.PI - theta);
-        
+
         //add to world
         upUp.setPosition(origin.x + vectorToTarget.x * 25, origin.y + vectorToTarget.y * 25);
         upUp.getBody().setRotation((float)theta);
@@ -161,6 +152,13 @@ public class PlayerBuckshot extends Skill{
         user.getOwningScene().add(downDown,Layer.MAIN);
         
         
+        //dispense muzzle flash
+        Image flash = this.getMuzzleFlash(targetingData, origin);
+        user.getOwningScene().add(flash,Scene.Layer.MAIN);
+        
+        //add smoke
+        AbstractParticleEmitter smokeEmitter = this.getMuzzleEffect(origin);
+        user.getOwningScene().add(smokeEmitter,Scene.Layer.MAIN);
         
         
         
@@ -179,11 +177,6 @@ public class PlayerBuckshot extends Skill{
             //this.body.setDamping(1);
             this.body.setGravityEffected(true);
             this.body.setRestitution(.98f);
-            
-            AbstractParticleEmitter smokeEmitter = new SmokeEmitter();
-            smokeEmitter.setDuration(16);
-            smokeEmitter.setParticlesPerFrame(10);
-            this.addEmitter(smokeEmitter);
             
             //label effect for destruction disk
             StateEffect labelEffect = new StateEffect(StateEffect.StateEffectType.LABEL, 1) ;

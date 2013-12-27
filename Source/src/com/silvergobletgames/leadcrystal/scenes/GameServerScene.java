@@ -1171,6 +1171,14 @@ public class GameServerScene extends Scene
         this.sendPacket(packet, clientID);
     }
     
+    public void sendSkillCooldownPacket(UUID clientID, SkillID skill)
+    {
+        SkillCooldownPacket packet = new SkillCooldownPacket();
+        packet.skill = skill;
+        
+        this.sendPacket(packet, clientID);
+    }
+    
     //==============================
     //Handling Messages From Clients
     //==============================

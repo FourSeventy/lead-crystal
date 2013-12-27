@@ -56,6 +56,7 @@ public class SerializationRegistrator
         Kryo kryo = k;
         
         kryo.register(MainObjectiveCompletePacket.class);
+        kryo.register(SkillCooldownPacket.class);
         kryo.register(SideObjectiveCompletePacket.class);
         kryo.register(HoverEntityPacket.class);
         kryo.register(LeadCrystalTextType.class);

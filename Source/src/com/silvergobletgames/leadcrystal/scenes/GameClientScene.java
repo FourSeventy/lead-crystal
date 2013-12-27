@@ -1549,6 +1549,10 @@ public final class GameClientScene extends Scene
         {
             handleMainObjectiveCompletePacket((MainObjectiveCompletePacket)object);
         }
+        else if(object instanceof SkillCooldownPacket)
+        {
+            handleSkillCooldownPacket((SkillCooldownPacket)object);
+        }
     }
     
     private void handleChangeLevelPacket( final ChangeLevelPacket packet)
@@ -1883,6 +1887,12 @@ public final class GameClientScene extends Scene
         }
         
         this.mouseHoverInRange = packet.inRange;
+    }
+    
+    private void handleSkillCooldownPacket(SkillCooldownPacket packet)
+    {
+        this.player.getSkillManager().getSkill(packet.skill).setCooldownRemaining(0);
+        
     }
     
     

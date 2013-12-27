@@ -21,13 +21,13 @@ import com.silvergobletgames.leadcrystal.combat.Damage.DamageType;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.combat.StateEffect.StateEffectType;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
-import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.BlueLaserBitsEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.LaserBitsEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SmokeEmitter;
 import com.silvergobletgames.leadcrystal.entities.*;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.sylver.audio.Sound;
+import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 
@@ -39,7 +39,7 @@ import com.silvergobletgames.sylver.util.SylverVector2f;
  * Cooldown: .5 seconds
  * @author Mike
  */
-public class PlayerLaserShot extends Skill{
+public class PlayerLaserShot extends PlayerSkill{
         
     
     public PlayerLaserShot()
@@ -57,8 +57,12 @@ public class PlayerLaserShot extends Skill{
     public void use(Damage damage, SylverVector2f origin)
     {
         
-        PlayerEntity player = (PlayerEntity) user;
         Random r = SylverRandom.random;
+        
+        //get targeting data
+        TargetingData targetingData = this.getTargetingData(origin);
+        SylverVector2f vectorToTarget = targetingData.vectorToTarget;
+        float theta = targetingData.theta;
                         
         //set damage
         int min = 10; 
@@ -66,12 +70,7 @@ public class PlayerLaserShot extends Skill{
         float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
         damage.getAmountObject().adjustBase(damageAmout);
         damage.setType(Damage.DamageType.PHYSICAL);       
-        
-        //add brightness effect to damage
-        Float[] points = {1f,2f,1f};
-        int[] durations = {10,5};
-        ImageEffect brightnessEffect = new MultiImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, points,durations);
-        damage.addImageEffect(brightnessEffect);
+        damage.addImageEffect(this.getDamageBrightnessEffect());
         
         //build body of the laser
         Body body = new Body(new Box(57,33), 1);
@@ -88,54 +87,28 @@ public class PlayerLaserShot extends Skill{
         blinkEffect.setRepeating(true);
         img.addImageEffect(blinkEffect);
         
-        //Get target X and Y
-        float targetX = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationX;
-        float targetY = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationY;
-        
-        //Get user X and Y
-        float userX = origin.x;
-        float userY = origin.y;
-        
-        //get vector to target
-        Vector2f vectorToTarget = new Vector2f(targetX - userX, targetY - userY);
-        vectorToTarget.normalise();
-        
+           
         //calculate force for the bullet
         float xforce = 2500*vectorToTarget.x;
         float yforce = 2500*vectorToTarget.y;
-        
-        //determine angle for the image
-        float theta = (float)Math.acos(vectorToTarget.dot(new Vector2f(1,0)));
-        if(targetY < userY)
-            theta = (float)(2* Math.PI - theta);
         
         //Dispense laser into the world
         laser.setPosition(origin.x + vectorToTarget.x * 25, origin.y + vectorToTarget.y * 25);
         laser.getBody().addForce(new Vector2f(xforce ,yforce));
         laser.getBody().setRotation((float)theta);
         laser.getImage().setAngle((float)(theta * (180f/Math.PI))); 
-        user.getOwningScene().add(laser,Layer.MAIN);
+        user.getOwningScene().add(laser,Layer.MAIN);      
         
         //dispense muzzle flash
-        Image flash = new Image("flash.png");
-        flash.setScale(.14f);
-        flash.addImageEffect(new ImageEffect(ImageEffectType.DURATION, 7, 1, 1));
-        flash.setRotationPoint(0, .5f);
-        flash.setAnchor(Anchorable.Anchor.LEFTCENTER);
-        flash.setColor(new Color(3f,2f,2f,.45f));
-        flash.setAngle((float)(theta * (180f/Math.PI))); 
-        flash.setPositionAnchored(origin.x - vectorToTarget.x * 15, origin.y - vectorToTarget.y * 15); 
-        user.getOwningScene().add(flash,Layer.MAIN);
+        Image flash = this.getMuzzleFlash(targetingData, origin);
+        user.getOwningScene().add(flash,Scene.Layer.MAIN);
         
         //add smoke
-        AbstractParticleEmitter smokeEmitter = new SmokeEmitter();
-        smokeEmitter.setPosition(origin.x, origin.y);
-        smokeEmitter.setDuration(8);
-        smokeEmitter.setParticlesPerFrame(10);
-        user.getOwningScene().add(smokeEmitter,Layer.MAIN);
-
-      
-         //play sound
+        AbstractParticleEmitter smokeEmitter = this.getMuzzleEffect(origin);
+        user.getOwningScene().add(smokeEmitter,Scene.Layer.MAIN);
+        
+ 
+        //play sound
         Sound sound = Sound.locationSound("buffered/smallLaser.ogg", user.getPosition().x, user.getPosition().y, false, .8f);
         user.getOwningScene().add(sound);
 
@@ -173,11 +146,13 @@ public class PlayerLaserShot extends Skill{
                      angle += 180;
                  
                  //make emitter
-                 AbstractParticleEmitter emitter = new BlueLaserBitsEmitter();
+                 PointParticleEmitter emitter = new LaserBitsEmitter();
                  emitter.setPosition(event.getPoint().getX(), event.getPoint().getY());
                  emitter.setDuration(1);
                  emitter.setAngle(angle);
                  emitter.setParticlesPerFrame(5);
+                 emitter.setColor(new Color(.5f,.5f,2.6f));
+                 emitter.setSize(3);
                  owningScene.add(emitter,Layer.MAIN);
                  
              }

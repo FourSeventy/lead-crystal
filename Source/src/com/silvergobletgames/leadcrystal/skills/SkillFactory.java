@@ -64,7 +64,9 @@ public class SkillFactory
             case PlayerSoulLeech: return new PlayerSoulLeech();
             case PlayerStomp: return new PlayerStompAttack();
             case PlayerRocket: return new PlayerRocket();
+            case PlayerBoomerang: return new PlayerBoomerang();
             case EnemyBossSwipe: return new EnemyBossSwipe();
+            
             
             default: return null;
         }

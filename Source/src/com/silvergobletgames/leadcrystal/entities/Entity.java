@@ -117,10 +117,10 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
         //WARNING - Changing the names of this enum will break save data
         NO_OVERLAP        (0b00_0000), //DEFAULT
         PLAYER            (0b01_0001),
+        PLAYER_TOUCH      (0b00_0001), 
         PVP_PLAYER        (0b11_0001),
         NPE               (0b10_0100),
-        NPE_TOUCH         (0b10_0000), 
-        PLAYER_TOUCH      (0b00_0001), 
+        NPE_TOUCH         (0b10_0000),        
         OVERLAP_ALL       (0b11_1111); //overlaps all
         
         public long value;
