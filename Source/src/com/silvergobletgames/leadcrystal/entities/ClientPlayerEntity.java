@@ -324,24 +324,26 @@ public class ClientPlayerEntity extends PlayerEntity
             
             //start cooldown
             skill.beginCooldown();
+            
+            //dash
+            if(skill instanceof PlayerDashAttack)
+            {
+                //Get target X and Y
+                float targetX = ((GameClientScene)this.getOwningScene()).worldMouseLocation.x;
+                float targetY = ((GameClientScene)this.getOwningScene()).worldMouseLocation.y;
+
+                //Get user X and Y
+                float userX = this.getPosition().x;
+                float userY = this.getPosition().y;
+
+                //get vector to target
+                SylverVector2f vectorToTarget = new SylverVector2f(targetX - userX, targetY - userY);
+                vectorToTarget.normalise();
+                this.handleDash(vectorToTarget);
+            }
         }
         
-        //dash
-        if(skill instanceof PlayerDashAttack)
-        {
-            //Get target X and Y
-            float targetX = ((GameClientScene)this.getOwningScene()).worldMouseLocation.x;
-            float targetY = ((GameClientScene)this.getOwningScene()).worldMouseLocation.y;
-
-            //Get user X and Y
-            float userX = this.getPosition().x;
-            float userY = this.getPosition().y;
-
-            //get vector to target
-            SylverVector2f vectorToTarget = new SylverVector2f(targetX - userX, targetY - userY);
-            vectorToTarget.normalise();
-            this.handleDash(vectorToTarget);
-        }
+        
 
         
     }

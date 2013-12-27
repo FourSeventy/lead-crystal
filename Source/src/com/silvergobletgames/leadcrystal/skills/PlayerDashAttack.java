@@ -30,7 +30,7 @@ public class PlayerDashAttack extends Skill{
     public PlayerDashAttack()
     {
         //super constructor
-        super(SkillID.PlayerDash,SkillType.OFFENSIVE, ExtendedImageAnimations.MELEEATTACK,30, 200);
+        super(SkillID.PlayerDash,SkillType.OFFENSIVE, ExtendedImageAnimations.MELEEATTACK,180, 200);
 
         //set the skillID and the name
         this.icon = new Image("dashIcon.jpg");
@@ -85,7 +85,6 @@ public class PlayerDashAttack extends Skill{
         swipe.setColor(new Color(2f,.7f,.7f));
         DashHitBox box = new DashHitBox(damage,new Body(new Box(100,100),1),swipe, user,vectorToTarget);
         box.getImage().setDimensions(100, 140); 
-        System.out.println(theta);
         box.getBody().setRotation((float)theta);
         box.getImage().setAngle((float)(theta * (180f/Math.PI)));
         box.setPosition(user.getPosition().x + 100 * vectorToTarget.x, user.getPosition().y + 100 * vectorToTarget.y);
