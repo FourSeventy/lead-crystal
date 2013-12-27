@@ -6,7 +6,7 @@ import com.silvergobletgames.leadcrystal.skills.PlayerBuckshot;
 import com.silvergobletgames.leadcrystal.skills.PlayerDashAttack;
 import com.silvergobletgames.leadcrystal.skills.PlayerSnipe;
 import com.silvergobletgames.leadcrystal.skills.PlayerAttackDrone;
-import com.silvergobletgames.leadcrystal.skills.PlayerGuard;
+import com.silvergobletgames.leadcrystal.skills.PlayerGravityShield;
 import com.silvergobletgames.leadcrystal.skills.PlayerWard;
 import com.silvergobletgames.sylver.core.InputHandler;
 import com.silvergobletgames.sylver.graphics.Anchorable;
@@ -147,7 +147,7 @@ public class SkillMenu extends Window {
        //tech
        this.skillSlots[3][0] = new PlayerAttackDrone();
        this.skillSlots[3][1] = new PlayerWard();
-       this.skillSlots[3][2] = new PlayerGuard();
+       this.skillSlots[3][2] = new PlayerGravityShield();
        this.skillSlots[3][3] = new PlayerClusterbomb();
        
        

@@ -166,7 +166,7 @@ public class PlayerBoomerang extends PlayerSkill
 
                          
              //remove if we hit a world object, or an enemy
-             if(other instanceof WorldObjectEntity  )
+             if(other instanceof WorldObjectEntity)
              {
                  
                  //get angle of impact

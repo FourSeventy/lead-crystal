@@ -43,7 +43,7 @@ public abstract class Skill
         PlayerLaser,PlayerBuckshot, PlayerRicochet, PlayerRocket,
         PlayerBashAttack,PlayerDestructionDisk, PlayerFreezeAttack,PlayerSnipe, PlayerBoomerang,
         PlayerStomp,PlayerDash,PlayerStimpack,PlayerSoulLeech,
-        PlayerAttackDrone,PlayerGuard,PlayerWard,PlayerClusterbomb,    
+        PlayerAttackDrone,PlayerGravityShield,PlayerWard,PlayerClusterbomb,    
         EnemyLaser,EnemyMeleeBash,EnemyGooShot,EnemySmallMelee, EnemyAntThrow, EnemyFlierGooBomb,
         EnemyBossSwipe;
     }

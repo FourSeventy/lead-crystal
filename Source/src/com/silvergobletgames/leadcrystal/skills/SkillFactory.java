@@ -51,7 +51,7 @@ public class SkillFactory
             case EnemyAntThrow: return new EnemyAntThrow();
             case EnemyFlierGooBomb: return new EnemyFlierGooBomb();
             case PlayerDash: return new PlayerDashAttack();
-            case PlayerGuard: return new PlayerGuard();
+            case PlayerGravityShield: return new PlayerGravityShield();
             case PlayerFreezeAttack: return new PlayerFreezeAttack();
             case PlayerWard: return new PlayerWard();
             case PlayerBuckshot: return new PlayerBuckshot();

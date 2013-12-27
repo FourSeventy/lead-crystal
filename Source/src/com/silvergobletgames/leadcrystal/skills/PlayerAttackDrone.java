@@ -186,8 +186,8 @@ public class PlayerAttackDrone extends Skill
             //set damage
             Damage damage = new Damage(Damage.DamageType.PHYSICAL, 0, playerReference);
             //set damage
-            int min = 9; 
-            int max = 11;
+            int min = 7; 
+            int max = 9;
             float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
             damage.getAmountObject().adjustBase(damageAmout);
             damage.setType(Damage.DamageType.PHYSICAL);    
