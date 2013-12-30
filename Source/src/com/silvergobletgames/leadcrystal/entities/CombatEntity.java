@@ -440,7 +440,7 @@ public abstract class CombatEntity extends Entity
     
     protected void emitDeathChunks()
     {
-       lastDmgNormal.normalise();
+        lastDmgNormal.normalise();
         Vector2f direction = new Vector2f(-lastDmgNormal.x,-lastDmgNormal.y);
         
         //figure out chunk offsets

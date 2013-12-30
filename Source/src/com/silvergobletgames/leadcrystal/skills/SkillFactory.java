@@ -66,6 +66,7 @@ public class SkillFactory
             case PlayerRocket: return new PlayerRocket();
             case PlayerBoomerang: return new PlayerBoomerang();
             case EnemyBossSwipe: return new EnemyBossSwipe();
+            case PlayerPoisonBomb: return new PlayerPoisonBomb();
             
             
             default: return null;

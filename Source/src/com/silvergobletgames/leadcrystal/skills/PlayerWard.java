@@ -3,7 +3,6 @@ package com.silvergobletgames.leadcrystal.skills;
 import com.silvergobletgames.leadcrystal.entities.CombatEntity;
 import com.silvergobletgames.leadcrystal.entities.HitBox;
 import com.silvergobletgames.leadcrystal.entities.Entity;
-import com.silvergobletgames.leadcrystal.entities.EntityEffect;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.sylver.core.Scene.Layer;
 import com.silvergobletgames.sylver.graphics.Anchorable;
@@ -22,6 +21,7 @@ import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.IceEmi
 import com.silvergobletgames.leadcrystal.entities.*;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.sylver.graphics.*;
+import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 import java.util.UUID;
 import net.phys2d.raw.shapes.Box;
@@ -37,8 +37,8 @@ public class PlayerWard extends PlayerSkill{
     
     public PlayerWard()
     {
-        //super constructor 1800
-        super(SkillID.PlayerWard,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK, 30, Integer.MAX_VALUE);
+        //super constructor 
+        super(SkillID.PlayerWard,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK, 1800, Integer.MAX_VALUE);
         
         //set the skillID and the name
         this.icon = new Image("icetrapIcon.jpg");
@@ -63,7 +63,7 @@ public class PlayerWard extends PlayerSkill{
         Image img = new Image("computer.png");
         img.setAnchor(Anchorable.Anchor.LEFTCENTER);
         img.setDimensions(57, 33);
-        IceTrapHitbox hitbox = new IceTrapHitbox(new Damage(Damage.DamageType.NODAMAGE, 0), body, img, user); 
+        IceTrapHitbox hitbox = new IceTrapHitbox(new Damage(Damage.DamageType.NODAMAGE, 0), body, img, user,damage); 
         
          //calculate force for the bullet
         float xforce = 1000*vectorToTarget.x;
@@ -82,14 +82,19 @@ public class PlayerWard extends PlayerSkill{
        
     }
     
+    
+    
     private class IceTrapHitbox extends HitBox
     {
-        boolean used = false;
-         public IceTrapHitbox(Damage d, Body b, Image i, Entity user)
+        private Damage passthroughDamage;
+        private boolean used = false;
+        
+         public IceTrapHitbox(Damage d, Body b, Image i, Entity user,Damage passthroughDamage)
          { 
             super(d, b, i, user); 
             
             this.getBody().setGravityEffected(true);
+            this.passthroughDamage = passthroughDamage;
             
          }
          
@@ -97,15 +102,27 @@ public class PlayerWard extends PlayerSkill{
          {            
              if(other instanceof WorldObjectEntity && !used)
              {
-                 this.used = true;
+                 //if we landed on the top of a worldObjectEntity
+                if(-event.getNormal().getY() > .75)
+                {
+                    this.used = true;
+
+                    this.getBody().setDamping(1);
+
+
+                    //put in ice damage
+                    IceWardHitbox iceHitbox = new IceWardHitbox((CombatEntity)this.sourceEntity,this.passthroughDamage);
+                    iceHitbox.setPosition(this.getPosition().x, this.getPosition().y);
+                    iceHitbox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 900, 0, 0));
+                    this.getOwningScene().add(iceHitbox, Layer.MAIN); 
+
+                    //put in own duration effect
+                    this.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 1020, 0, 0)); 
+                    ImageEffect fadeEffect =new ImageEffect(ImageEffect.ImageEffectType.COLOR, 100,new Color(Color.white),new Color(Color.transparent));
+                    fadeEffect.setDelay(920);
+                    this.getImage().addImageEffect(fadeEffect); 
+                }
                  
-                 this.getBody().setDamping(1);
-                 
-                 
-                 //put in ice damage
-                 IceWardHitbox iceHitbox = new IceWardHitbox((CombatEntity)this.sourceEntity);
-                 iceHitbox.setPosition(this.getPosition().x, this.getPosition().y);
-                 this.getOwningScene().add(iceHitbox, Layer.MAIN); 
              }
          }
         
@@ -114,8 +131,9 @@ public class PlayerWard extends PlayerSkill{
     
     private class IceWardHitbox extends HitBox
     {
+        private Damage passthroughDamage;
         
-        public IceWardHitbox(CombatEntity user)
+        public IceWardHitbox(CombatEntity user, Damage damage)
         {
             super(new Damage(Damage.DamageType.NODAMAGE, 0), new Body(new Circle(200), 4), new Image("blank.png"),user); 
             
@@ -128,6 +146,10 @@ public class PlayerWard extends PlayerSkill{
             AbstractParticleEmitter emitter = new IceEmitter();
             emitter.setDuration(900);
             this.addEmitter(emitter);
+            
+            this.passthroughDamage = damage;
+            this.passthroughDamage.setType(Damage.DamageType.FROST);
+            this.passthroughDamage.getAmountObject().setBase(1);
         }
         
         public void collidedWith(Entity other, CollisionEvent event)
@@ -144,8 +166,7 @@ public class PlayerWard extends PlayerSkill{
                 ((CombatEntity)other).getImage().setColor(new Color(.5f,.5f,2)); 
                 
                 //apply damage dot
-                Damage healDamage = new Damage(Damage.DamageType.FROST, 1);
-                DotEffect heal = new DotEffect(1, 30, healDamage);
+                DotEffect heal = new DotEffect(1, 30, this.passthroughDamage);
                 heal.setInfinite();                
                 ((CombatEntity)other).getCombatData().addCombatEffect("iceDot", heal);
             }
@@ -180,7 +201,4 @@ public class PlayerWard extends PlayerSkill{
 
     }
      
-    
-     
-
 }

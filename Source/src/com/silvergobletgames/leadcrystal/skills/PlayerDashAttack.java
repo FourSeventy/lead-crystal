@@ -5,7 +5,6 @@ import net.phys2d.math.Vector2f;
 import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
-import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.DashBitsEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.LaserBitsEmitter;
 import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect;
@@ -92,7 +91,7 @@ public class PlayerDashAttack extends Skill{
         box.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 30, 0, 0)); 
         
         //add particle effect
-        PointParticleEmitter emitter =new DashBitsEmitter();
+        PointParticleEmitter emitter =new LaserBitsEmitter();
         emitter.setAngle( 360 - ((float)(theta * (180f/Math.PI)))); 
         emitter.setDuration(20); 
         emitter.setParticlesPerFrame(.5f);
