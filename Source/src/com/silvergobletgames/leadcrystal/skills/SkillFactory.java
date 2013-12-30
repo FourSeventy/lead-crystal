@@ -56,7 +56,6 @@ public class SkillFactory
             case PlayerWard: return new PlayerWard();
             case PlayerBuckshot: return new PlayerBuckshot();
             case PlayerAttackDrone: return new PlayerAttackDrone();
-            case PlayerDestructionDisk: return new PlayerDestructionDisk();
             case PlayerBashAttack: return new PlayerBashAttack();
             case PlayerClusterbomb: return new PlayerClusterbomb();
             case PlayerStimpack: return new PlayerStimpack();
@@ -67,6 +66,7 @@ public class SkillFactory
             case PlayerBoomerang: return new PlayerBoomerang();
             case EnemyBossSwipe: return new EnemyBossSwipe();
             case PlayerPoisonBomb: return new PlayerPoisonBomb();
+            case PlayerBarrelRoll: return new PlayerBarrelRoll();
             
             
             default: return null;

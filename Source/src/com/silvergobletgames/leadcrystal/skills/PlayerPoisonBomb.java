@@ -46,7 +46,7 @@ public class PlayerPoisonBomb extends PlayerSkill{
     
     public PlayerPoisonBomb()
     {
-        super(SkillID.PlayerPoisonBomb,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,720,Integer.MAX_VALUE);
+        super(SkillID.PlayerPoisonBomb,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,1800,Integer.MAX_VALUE);
         
         //set the skillID and the name
         this.icon = new Image("soulLeech.jpg");
@@ -278,7 +278,7 @@ public class PlayerPoisonBomb extends PlayerSkill{
             {
             
                 //apply slow
-                StateEffect slow = new StateEffect(StateEffect.StateEffectType.SLOW, 420, .75f, true);
+                StateEffect slow = new StateEffect(StateEffect.StateEffectType.SLOW, 420, .30f, true);
                ((CombatEntity)other).getCombatData().addCombatEffect("poisonSlow", slow);
                 
                 //apply image effect
