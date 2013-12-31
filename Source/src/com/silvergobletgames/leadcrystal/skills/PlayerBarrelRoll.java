@@ -22,6 +22,8 @@ import com.silvergobletgames.leadcrystal.combat.DotEffect;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.combat.StateEffect.StateEffectType;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.GroundFireEmitter1;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.GroundFireSmokeEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.LaserBitsEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SmokeEmitter;
 import com.silvergobletgames.leadcrystal.entities.*;
@@ -68,8 +70,8 @@ public class PlayerBarrelRoll extends PlayerSkill{
         float theta = targetingData.theta;
                         
         //set damage
-        int min = 18; 
-        int max = 20;
+        int min = 15; 
+        int max = 17;
         float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
         damage.getAmountObject().adjustBase(damageAmout);
         damage.setType(Damage.DamageType.NODAMAGE);       
@@ -144,20 +146,55 @@ public class PlayerBarrelRoll extends PlayerSkill{
              this.getOwningScene().add(explosionHitbox, Layer.MAIN); 
                 
              //shoot out debris
+             for(int i = 0; i < SylverRandom.random.nextInt(2) + 2; i ++)
+             {
+                 this.shootdebris();
+             }
                 
              //lay down damaging fire
-             Body body = new Body(new Box(300,50), 1);
-             body.setDamping(1);
-             Image image = new Image("black.png"); 
-             image.setDimensions(300, 50);
-             BarrelFireHitbox fireHitbox = new BarrelFireHitbox(body,image,this.sourceEntity);
-             fireHitbox.setPosition(this.getPosition().x, this.getPosition().y);
-             fireHitbox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 300, 0, 0));
-             this.getOwningScene().add(fireHitbox, Layer.MAIN); 
+             this.placeFire(this.getPosition().x - 100, this.getPosition().y);
+             this.placeFire(this.getPosition().x - 50, this.getPosition().y);
+             this.placeFire(this.getPosition().x, this.getPosition().y);
+             this.placeFire(this.getPosition().x + 50, this.getPosition().y);            
+             this.placeFire(this.getPosition().x + 100, this.getPosition().y);
                 
              //remove this hitbox from the world
             this.getBody().setVelocity(new Vector2f(0,0));
             this.removeFromOwningScene();
+         }
+         
+         private void placeFire(float x, float y)
+         {
+             //lay down damaging fire
+             Body body = new Body(new Box(50,20), 1);
+             Image image = new Image("blank.png"); 
+             BarrelFireHitbox fireHitbox = new BarrelFireHitbox(body,image,this.sourceEntity);
+             fireHitbox.setPosition(x,y);
+             fireHitbox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 360, 0, 0));
+             
+             //add fire effects
+             AbstractParticleEmitter fire1 = new GroundFireEmitter1(); 
+             fire1.setDuration(360);
+             fireHitbox.addEmitter(fire1);             
+             AbstractParticleEmitter smoke = new GroundFireSmokeEmitter(); 
+             smoke.setDuration(360);
+             fireHitbox.addEmitter(smoke); 
+             this.getOwningScene().add(fireHitbox, Layer.MAIN); 
+         }
+         
+         private void shootdebris()
+         {
+             int variance =SylverRandom.random.nextInt(10);
+             Body body = new Body(new Box(50 -variance ,50 - variance), 2);
+             Image image = new Image("barrelScrap.png"); 
+             image.setDimensions(50 - variance, 50 - variance);
+             BarrelDebrisHitbox fireHitbox = new BarrelDebrisHitbox(new Damage(DamageType.BURN, 5),body,image,this.sourceEntity);
+             fireHitbox.setPosition(this.getPosition().x, this.getPosition().y);
+             fireHitbox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 420, 0, 0));
+             
+             int pos = SylverRandom.random.nextBoolean()?1:-1;
+             fireHitbox.getBody().addForce(new Vector2f(pos *(1500 + (int)(SylverRandom.random.nextDouble() * 800)),2400 + (int)(SylverRandom.random.nextDouble() * 1200)));
+             this.getOwningScene().add(fireHitbox, Layer.MAIN); 
          }
 
          public void collidedWith(Entity other, CollisionEvent event)
@@ -200,6 +237,8 @@ public class PlayerBarrelRoll extends PlayerSkill{
          
     }
     
+    
+    
     public static class BarrelFireHitbox extends HitBox
     {
         
@@ -207,23 +246,30 @@ public class PlayerBarrelRoll extends PlayerSkill{
         {
             super(new Damage(Damage.DamageType.NODAMAGE,0),b,i,user);
             
-            this.getBody().setBitmask(BitMasks.NO_COLLISION.value);
+            this.getBody().setBitmask(BitMasks.COLLIDE_WORLD.value);
             this.getBody().setOverlapMask(OverlapMasks.OVERLAP_ALL.value);
+            this.getBody().setGravityEffected(true);
         }
         
         
         public void collidedWith(Entity other, CollisionEvent event)
         {
+            super.collidedWith(other, event);
+            
+            if(other instanceof WorldObjectEntity)
+            {
+                body.setDamping(1);
+            }
+            
             //if we collided with a player add a heal dot
             if(other instanceof NonPlayerEntity)
             {
                 
                 //apply image effect
-                ((CombatEntity)other).getImage().setColor(new Color(1.3f,.5f,.5f)); 
+                //((CombatEntity)other).getImage().setColor(new Color(1.3f,.5f,.5f)); 
                 
                 //apply damage dot
-                DotEffect fireDot = new DotEffect(1, 30, new Damage(DamageType.BURN, 3));
-                fireDot.setInfinite();                
+                DotEffect fireDot = new DotEffect(360, 30, new Damage(DamageType.BURN, 5));               
                 ((CombatEntity)other).getCombatData().addCombatEffect("fireDot", fireDot);
             }
             
@@ -234,13 +280,68 @@ public class PlayerBarrelRoll extends PlayerSkill{
             if(other instanceof NonPlayerEntity)
             {
                 //remove infinite effects 
-                ((CombatEntity)other).getCombatData().removeCombatEffect("fireDot");
-                ((CombatEntity)other).getImage().setColor(new Color(1,1,1,1));
+//                ((CombatEntity)other).getCombatData().removeCombatEffect("fireDot");
+//                ((CombatEntity)other).getImage().setColor(new Color(1,1,1,1));
                 
             }
         }
         
         
+    }
+    
+    public static class BarrelDebrisHitbox extends HitBox
+    {
+        private int fire = 3;
+        
+        public BarrelDebrisHitbox(Damage d, Body b, Image i, Entity user)
+        {
+            super(d, b, i, user);
+            this.getBody().setGravityEffected(true);
+            
+             //add fire effects
+             AbstractParticleEmitter fire1 = new GroundFireEmitter1(); 
+             fire1.setDuration(360);
+           
+             AbstractParticleEmitter smoke = new GroundFireSmokeEmitter(); 
+             smoke.setDuration(360);
+            this.addEmitter(smoke);
+            this.addEmitter(fire1);
+        }
+        
+        private void placeFire(float x, float y)
+         {
+             fire--;
+             
+             if(fire >0)
+             {
+               
+               //lay down damaging fire
+             Body body = new Body(new Box(50,20), 1);
+             Image image = new Image("blank.png"); 
+             BarrelFireHitbox fireHitbox = new BarrelFireHitbox(body,image,this.sourceEntity);
+             fireHitbox.setPosition(x,y);
+             fireHitbox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 360, 0, 0));
+             
+             //add fire effects
+             AbstractParticleEmitter fire1 = new GroundFireEmitter1(); 
+             fire1.setDuration(360);
+             fireHitbox.addEmitter(fire1);             
+             AbstractParticleEmitter smoke = new GroundFireSmokeEmitter(); 
+             smoke.setDuration(360);
+             fireHitbox.addEmitter(smoke); 
+             this.getOwningScene().add(fireHitbox, Layer.MAIN); 
+             }
+         }
+        
+        public void collidedWith(Entity other, CollisionEvent event)
+        {
+            super.collidedWith(other, event);
+            
+            if(other instanceof WorldObjectEntity)
+            {          
+                this.placeFire(this.getPosition().x, this.getPosition().y);
+            }
+        }
     }
     
 }  
