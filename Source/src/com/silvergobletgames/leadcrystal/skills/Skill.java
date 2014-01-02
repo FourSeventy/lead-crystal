@@ -42,8 +42,8 @@ public abstract class Skill
         //WARNING - Changing the names of this enum will break save data
         PlayerLaser,PlayerBuckshot, PlayerRicochet, PlayerRocket,
         PlayerBashAttack, PlayerDash, PlayerBoomerang, PlayerSnipe, 
-        PlayerPoisonBomb, PlayerBarrelRoll,
-        PlayerAttackDrone,PlayerGravityShield,PlayerWard,PlayerClusterbomb,  
+        PlayerPoisonBomb, PlayerBarrelRoll,PlayerClusterbomb,
+        PlayerAttackDrone,PlayerGravityShield,PlayerWard,PlayerLeechingBlades,  
         PlayerFreezeAttack, PlayerStomp,PlayerStimpack,PlayerSoulLeech,
         EnemyLaser,EnemyMeleeBash,EnemyGooShot,EnemySmallMelee, EnemyAntThrow, EnemyFlierGooBomb,
         EnemyBossSwipe;

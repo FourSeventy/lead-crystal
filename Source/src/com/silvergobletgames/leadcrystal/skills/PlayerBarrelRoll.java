@@ -49,7 +49,7 @@ public class PlayerBarrelRoll extends PlayerSkill{
     
     public PlayerBarrelRoll()
     {
-        super(SkillID.PlayerBarrelRoll,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK,30,Integer.MAX_VALUE);
+        super(SkillID.PlayerBarrelRoll,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK,600,Integer.MAX_VALUE);
         
         //set the skillID and the name
         this.icon = new Image("barrel.png");

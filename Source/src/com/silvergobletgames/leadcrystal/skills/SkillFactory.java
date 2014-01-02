@@ -67,6 +67,7 @@ public class SkillFactory
             case EnemyBossSwipe: return new EnemyBossSwipe();
             case PlayerPoisonBomb: return new PlayerPoisonBomb();
             case PlayerBarrelRoll: return new PlayerBarrelRoll();
+            case PlayerLeechingBlades: return new PlayerLeechingBlades();
             
             
             default: return null;

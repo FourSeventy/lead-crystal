@@ -45,7 +45,7 @@ public class PlayerBoomerang extends PlayerSkill
         
         //set the skillID and the name
         this.icon = new Image("blade_boomerang.png");
-        this.skillName = "Leeching Blade";
+        this.skillName = "Boomerang Throw";
         this.skillDescription = "A boomerang attack that leeches life from all enemies struck, catch the boomerang on the way back to reset the cooldown.";
         this.unlockCost = 1;
         
@@ -66,7 +66,7 @@ public class PlayerBoomerang extends PlayerSkill
         float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
         damage.getAmountObject().adjustBase(damageAmout);
         damage.setType(Damage.DamageType.PHYSICAL);  
-        damage.setLifeLeech(.40f); 
+        damage.setLifeLeech(.30f); 
         
         //add brightness effect to damage
         damage.addImageEffect(this.getDamageBrightnessEffect());
