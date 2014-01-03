@@ -370,8 +370,8 @@ public final class GameClientScene extends Scene
                         //use historical inputs to simulate back to current time
                         for(ClientInputPacket inputPacket: historicalInputList)
                         {
-                            if(player.dashing)
-                                continue;
+//                            if(player.dashing)
+//                                continue;
                             
                             //simulate player forces
                             this.player.simulateInputForPredictionErrorCorrection(inputPacket);
@@ -740,6 +740,11 @@ public final class GameClientScene extends Scene
                 sendSizeTest();
             }
 
+            //handle dashing
+            if(this.player.dashing)
+            {
+                this.player.handleDash(null);
+            }
 
 
             //==============
@@ -1544,6 +1549,10 @@ public final class GameClientScene extends Scene
         {
             handleMainObjectiveCompletePacket((MainObjectiveCompletePacket)object);
         }
+        else if(object instanceof SkillCooldownPacket)
+        {
+            handleSkillCooldownPacket((SkillCooldownPacket)object);
+        }
     }
     
     private void handleChangeLevelPacket( final ChangeLevelPacket packet)
@@ -1878,6 +1887,12 @@ public final class GameClientScene extends Scene
         }
         
         this.mouseHoverInRange = packet.inRange;
+    }
+    
+    private void handleSkillCooldownPacket(SkillCooldownPacket packet)
+    {
+        this.player.getSkillManager().getSkill(packet.skill).setCooldownRemaining(0);
+        
     }
     
     

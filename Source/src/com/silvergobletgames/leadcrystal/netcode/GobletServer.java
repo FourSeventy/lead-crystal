@@ -170,8 +170,10 @@ public class GobletServer implements Runnable
             if(updateAccumulator >= 20* updateTimestep)
                 updateAccumulator = 0;
             
+            //60hz timer
             while(updateAccumulator >= updateTimestep)
             {
+                //for each scene
                 for(Scene currentScene:this.sceneMap.values())
                 {                   
                     //update at least once

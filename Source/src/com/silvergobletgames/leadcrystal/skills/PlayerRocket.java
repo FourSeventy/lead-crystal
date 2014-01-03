@@ -20,6 +20,7 @@ import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.Rocket
 import com.silvergobletgames.leadcrystal.entities.*;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.sylver.audio.Sound;
+import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.graphics.*;
 import com.silvergobletgames.sylver.graphics.ImageEffect.ImageEffectType;
 import com.silvergobletgames.sylver.util.SylverRandom;
@@ -36,7 +37,7 @@ import net.phys2d.raw.shapes.Box;
  * Cooldown: 30 seconds
  * Description: While active, you take 50% damage.  For the first second that Guard is active, you take no damage.
  */
-public class PlayerRocket extends Skill
+public class PlayerRocket extends PlayerSkill
 {
     
     public PlayerRocket()
@@ -49,7 +50,7 @@ public class PlayerRocket extends Skill
         this.skillName = "Rocket Launcher";
         this.skillDescription = "Shoots a rocket that explodes and does AOE damage.";
         
-        this.unlockCost = 3;
+        this.unlockCost = 2;
         
     }
     
@@ -58,6 +59,12 @@ public class PlayerRocket extends Skill
         //get player and random references
         PlayerEntity player = (PlayerEntity) user;
         Random r = SylverRandom.random;
+        
+         //get targeting data
+        TargetingData targetingData = this.getTargetingData(origin);
+        SylverVector2f vectorToTarget = targetingData.vectorToTarget;
+        float theta = targetingData.theta;
+        
                         
         //calculate damage
         int min = 14; 
@@ -65,28 +72,8 @@ public class PlayerRocket extends Skill
         float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
         damage.getAmountObject().adjustBase(damageAmout); 
         damage.setType(Damage.DamageType.NODAMAGE); //this toggles back in the explosion
+        damage.addImageEffect(this.getDamageBrightnessEffect());
         
-        //add brightness effect to damage
-        Float[] points = {1f,2f,1f};
-        int[] durations = {10,5};
-        ImageEffect brightnessEffect = new MultiImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, points,durations);
-        damage.addImageEffect(brightnessEffect);
-        
-        //============================
-        // Calculate Vector To Target
-        //============================
-        
-        //Get target X and Y
-        float targetX = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationX;
-        float targetY = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationY;
-        
-        //Get user X and Y
-        float userX = origin.x;
-        float userY = origin.y;
-        
-        //get vector to target
-        Vector2f vectorToTarget = new Vector2f(targetX - userX, targetY - userY);
-        vectorToTarget.normalise();
         
         //=====================
         // Build Rocket Hitbox
@@ -101,10 +88,7 @@ public class PlayerRocket extends Skill
         //construct hitbox
         RocketHitbox rocket = new RocketHitbox(damage, body, img, user);
         
-        //determine angle for the image
-        float theta = (float)Math.acos(vectorToTarget.dot(new Vector2f(1,0)));
-        if(targetY < userY)
-            theta = (float)(2* Math.PI - theta);
+
         
         //set rocket image
         rocket.getBody().setRotation((float)theta);
@@ -151,22 +135,12 @@ public class PlayerRocket extends Skill
         user.getOwningScene().add(rocket,Layer.MAIN);
         
         //dispense muzzle flash
-        Image muzzleFlash = new Image("flash.png");
-        muzzleFlash.setScale(.14f);
-        muzzleFlash.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 7, 1, 1));
-        muzzleFlash.setRotationPoint(0, .5f);
-        muzzleFlash.setAnchor(Anchorable.Anchor.LEFTCENTER);
-        muzzleFlash.setColor(new Color(3f,2f,2f,.45f));
-        muzzleFlash.setAngle((float)(theta * (180f/Math.PI))); 
-        muzzleFlash.setPositionAnchored(origin.x - vectorToTarget.x * 15, origin.y - vectorToTarget.y * 15); 
-        user.getOwningScene().add(muzzleFlash,Layer.MAIN);
+        Image flash1 = this.getMuzzleFlash(targetingData, origin);
+        user.getOwningScene().add(flash1,Scene.Layer.MAIN);
         
         //add smoke
-//        ParticleEmitter smokeEmitter = new ConcreteParticleEmitters.SmokeEmitter();
-//        smokeEmitter.setPosition(origin.x, origin.y);
-//        smokeEmitter.setDuration(8);
-//        smokeEmitter.setParticlesPerFrame(10);
-//        user.getOwningScene().add(smokeEmitter,Layer.MAIN);
+        AbstractParticleEmitter smokeEmitter = this.getMuzzleEffect(origin);
+        user.getOwningScene().add(smokeEmitter,Scene.Layer.MAIN);
 
       
         //play sound

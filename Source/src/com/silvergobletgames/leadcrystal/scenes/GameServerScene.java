@@ -312,6 +312,12 @@ public class GameServerScene extends Scene
             UUID clientID = (UUID)clientEntry.getKey();           
             PlayerEntity player = (PlayerEntity) this.getSceneObjectManager().get(clientID.toString());
             
+            //dash
+            if(player.dashing)
+            {
+                player.handleDash(null);
+            }
+            
                     
             //=================
             // Handle the Input
@@ -1161,6 +1167,14 @@ public class GameServerScene extends Scene
         packet.currentlyHovering = isHover;
         packet.hoveredID = hoverID;
         packet.inRange = inRange;
+        
+        this.sendPacket(packet, clientID);
+    }
+    
+    public void sendSkillCooldownPacket(UUID clientID, SkillID skill)
+    {
+        SkillCooldownPacket packet = new SkillCooldownPacket();
+        packet.skill = skill;
         
         this.sendPacket(packet, clientID);
     }

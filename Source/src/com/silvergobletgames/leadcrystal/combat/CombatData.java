@@ -139,8 +139,8 @@ public class CombatData
      */
     public void addCombatEffect(String key, CombatEffect effect)
     {
-        effect.owningEntity = this.self;
-        if (effect.canBeApplied())
+        effect.owningEntity = this.self; 
+        if (effect.canBeApplied() && !combatEffects.containsKey(key)) //cant stack effects of the same name
         {
             effect.onApply();
             combatEffects.put(key, effect);

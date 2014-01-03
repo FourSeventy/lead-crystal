@@ -6,7 +6,7 @@ import com.silvergobletgames.leadcrystal.skills.PlayerBuckshot;
 import com.silvergobletgames.leadcrystal.skills.PlayerDashAttack;
 import com.silvergobletgames.leadcrystal.skills.PlayerSnipe;
 import com.silvergobletgames.leadcrystal.skills.PlayerAttackDrone;
-import com.silvergobletgames.leadcrystal.skills.PlayerGuard;
+import com.silvergobletgames.leadcrystal.skills.PlayerGravityShield;
 import com.silvergobletgames.leadcrystal.skills.PlayerWard;
 import com.silvergobletgames.sylver.core.InputHandler;
 import com.silvergobletgames.sylver.graphics.Anchorable;
@@ -71,6 +71,9 @@ public class SkillMenu extends Window {
    protected Image hand;
    protected SkillID handSkillID;
    
+   //skill slots
+   private Skill[][] skillSlots = new Skill[4][4];
+   
    //is locked boolenas
    private boolean[] primaryLock= {true,true,true,true};
    private boolean[] secondaryLock= {true,true,true,true};
@@ -119,6 +122,34 @@ public class SkillMenu extends Window {
        this.skillPoints = new Label(points,165,745);
        this.addComponent(this.skillPoints);
        
+       //==========================
+       // Assigning Skills to Slots
+       //==========================
+       
+       //primary
+       this.skillSlots[0][0] = new PlayerLaserShot();
+       this.skillSlots[0][1] = new PlayerBuckshot();
+       this.skillSlots[0][2] = new PlayerRicochet();
+       this.skillSlots[0][3] = new PlayerRocket();
+       
+       //secondary
+       this.skillSlots[1][0] = new PlayerBashAttack();
+       this.skillSlots[1][1] = new PlayerDashAttack();
+       this.skillSlots[1][2] = new PlayerBoomerang();
+       this.skillSlots[1][3] = new PlayerSnipe();
+       
+       //power
+       this.skillSlots[2][0] = new PlayerPoisonBomb();
+       this.skillSlots[2][1] = new PlayerCrushingStrike();
+       this.skillSlots[2][2] = new PlayerClusterbomb();
+       this.skillSlots[2][3] = new PlayerBarrelRoll();
+       
+       //tech
+       this.skillSlots[3][0] = new PlayerWard();
+       this.skillSlots[3][1] = new PlayerLeechingBlades();
+       this.skillSlots[3][2] = new PlayerGravityShield();
+       this.skillSlots[3][3] = new PlayerAttackDrone();
+       
        
        //=========================
        // Building skill buttons
@@ -127,7 +158,7 @@ public class SkillMenu extends Window {
        //================== Primary ========================//
         
        //laser shot
-       final Skill skill = new PlayerLaserShot();
+       final Skill skill = this.skillSlots[0][0];
        Button b = new Button(skill.getIcon(),100,575,60,70);
        b.addActionListener(new ActionListener(){
        
@@ -161,7 +192,7 @@ public class SkillMenu extends Window {
        this.addComponent(b);
        
        //buckshot
-       final Skill skill5 = new PlayerBuckshot();
+       final Skill skill5 = this.skillSlots[0][1];
        b = new Button(skill5.getIcon(),200,575,60,70);
        b.addActionListener(new ActionListener(){
        
@@ -195,7 +226,7 @@ public class SkillMenu extends Window {
        this.addComponent(b);
        
        //ricochet
-       final Skill skill7 = new PlayerRicochet();
+       final Skill skill7 = this.skillSlots[0][2];
        b = new Button(skill7.getIcon(),300,575,60,70);
        b.addActionListener(new ActionListener(){
        
@@ -229,7 +260,7 @@ public class SkillMenu extends Window {
        this.addComponent(b);
        
        //rocket launcher
-       final Skill blade = new PlayerRocket();
+       final Skill blade = this.skillSlots[0][3];
        b = new Button(blade.getIcon(),400,575,60,70);
        b.addActionListener(new ActionListener(){
        
@@ -264,7 +295,7 @@ public class SkillMenu extends Window {
        
        // =================== Secondary ========================//
        //bash
-       final Skill skill1 = new PlayerBashAttack();
+       final Skill skill1 = this.skillSlots[1][0];
        b = new Button(skill1.getIcon(),102,393,60,70);
        b.addActionListener(new ActionListener(){
        
@@ -297,8 +328,8 @@ public class SkillMenu extends Window {
        });
        this.addComponent(b);       
        
-       //shock
-       final Skill skill3 = new PlayerDestructionDisk();
+       //dash
+       final Skill skill3 = this.skillSlots[1][1];
        b = new Button(skill3.getIcon(),202,393,60,70);
        b.addActionListener(new ActionListener(){
        
@@ -331,8 +362,8 @@ public class SkillMenu extends Window {
        });
        this.addComponent(b);
        
-       //freeze
-       final Skill freezeSkill = new PlayerFreezeAttack();
+       //boomerang
+       final Skill freezeSkill = this.skillSlots[1][2];
        b = new Button(freezeSkill.getIcon(),302,393,60,70);
        b.addActionListener(new ActionListener(){
        
@@ -366,7 +397,7 @@ public class SkillMenu extends Window {
        this.addComponent(b);
        
        //snipe
-       final Skill snipeSkill = new PlayerSnipe();
+       final Skill snipeSkill = this.skillSlots[1][3];
        b = new Button(snipeSkill.getIcon(),402,393,60,70);
        b.addActionListener(new ActionListener(){
        
@@ -402,7 +433,7 @@ public class SkillMenu extends Window {
        //=================== Power ==========================//
        
        //stomp attack
-       final Skill skill6 = new PlayerStompAttack();
+       final Skill skill6 = this.skillSlots[2][0];
        b = new Button(skill6.getIcon(),100,220,60,70);
        b.addActionListener(new ActionListener(){
        
@@ -437,7 +468,7 @@ public class SkillMenu extends Window {
        this.addComponent(b);
        
        //dash attack
-       final Skill flashbangSkill = new PlayerDashAttack();
+       final Skill flashbangSkill =  this.skillSlots[2][1];
        b = new Button(flashbangSkill.getIcon(),200,220,60,70);
        b.addActionListener(new ActionListener(){
        
@@ -472,7 +503,7 @@ public class SkillMenu extends Window {
        this.addComponent(b);
        
        //stimpack
-       final Skill stimSkill = new PlayerStimpack();
+       final Skill stimSkill = this.skillSlots[2][2];
        b = new Button(stimSkill.getIcon(),300,220,60,70);
        b.addActionListener(new ActionListener(){
        
@@ -507,7 +538,7 @@ public class SkillMenu extends Window {
        this.addComponent(b);
        
        //life leech
-       final Skill gravitySkill = new PlayerSoulLeech();
+       final Skill gravitySkill = this.skillSlots[2][3];
        b = new Button(gravitySkill.getIcon(),400,220,60,70);
        b.addActionListener(new ActionListener(){
        
@@ -544,7 +575,7 @@ public class SkillMenu extends Window {
        //=================== Tech =========================
        
        //attack drone
-       final Skill skill2 = new PlayerAttackDrone();
+       final Skill skill2 = this.skillSlots[3][0];
        b = new Button(skill2.getIcon(),100,53,60,70);
        b.addActionListener(new ActionListener(){
        
@@ -578,7 +609,7 @@ public class SkillMenu extends Window {
        this.addComponent(b);
        
        //damage ward
-       final Skill skill4 = new PlayerWard();
+       final Skill skill4 = this.skillSlots[3][1];
        b = new Button(skill4.getIcon(),200,53,60,70);
        b.addActionListener(new ActionListener(){
        
@@ -612,7 +643,7 @@ public class SkillMenu extends Window {
        this.addComponent(b);
        
        //defensive shield
-       final Skill playerGuardSkill = new PlayerGuard();
+       final Skill playerGuardSkill = this.skillSlots[3][2];
        b = new Button(playerGuardSkill.getIcon(),300,53,60,70);
        b.addActionListener(new ActionListener(){
        
@@ -646,7 +677,7 @@ public class SkillMenu extends Window {
        this.addComponent(b);
        
        //flashbang
-       final Skill playerFlashbangSkill = new PlayerFlashbang();
+       final Skill playerFlashbangSkill = this.skillSlots[3][3];
        b = new Button(playerFlashbangSkill.getIcon(),400,53,60,70);
        b.addActionListener(new ActionListener(){
        
@@ -683,7 +714,7 @@ public class SkillMenu extends Window {
        // Build Locked Components
        //=========================
        
-        // ranged1
+        // primary1
         Image i = new Image("black.png");
         i.setColor(new Color(1,1,1,.8f));
         b = new Button(i,100,575,60,70);  
@@ -694,11 +725,11 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         primary1LockedComponents.add(b);
-        Label l = new Label("1",135,555);
+        Label l = new Label(Integer.toString(this.skillSlots[0][0].getUnlockCost()),135,555);
         this.addComponent(l);
         primary1LockedComponents.add(l);
         
-        // ranged2
+        // primary2
         i = new Image("black.png");
         i.setColor(new Color(1,1,1,.8f));
         b = new Button(i,200,575,60,70);  
@@ -709,11 +740,11 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         primary2LockedComponents.add(b);
-        l = new Label("1",235,575);
+        l = new Label(Integer.toString(this.skillSlots[0][1].getUnlockCost()),235,575);
         this.addComponent(l);
         primary2LockedComponents.add(l);
         
-        // ranged3
+        // parimary3
         i = new Image("black.png");
         i.setColor(new Color(1,1,1,.8f));
         b = new Button(i,300,575,60,70);  
@@ -724,11 +755,11 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         primary3LockedComponents.add(b);
-        l = new Label("2",335,575);
+        l = new Label(Integer.toString(this.skillSlots[0][2].getUnlockCost()),335,575);
         this.addComponent(l);
         primary3LockedComponents.add(l);
         
-        // ranged4
+        // primary4
         i = new Image("black.png");
         i.setColor(new Color(1,1,1,.8f));
         b = new Button(i,400,575,60,70);  
@@ -739,12 +770,12 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         primary4LockedComponents.add(b);
-        l = new Label("3",435,575);
+        l = new Label(Integer.toString(this.skillSlots[0][3].getUnlockCost()),435,575);
         this.addComponent(l);
         primary4LockedComponents.add(l);
         
         
-        // melee1
+        // secondary1
         i = new Image("black.png");
         i.setColor(new Color(1,1,1,.8f));
         b = new Button(i,100,393,60,70);  
@@ -755,11 +786,11 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         secondary1LockedComponents.add(b);
-         l = new Label("1",135,393);
+         l = new Label(Integer.toString(this.skillSlots[1][0].getUnlockCost()),135,393);
         this.addComponent(l);
         secondary1LockedComponents.add(l);
         
-        // melee2
+        // secondary2
         i = new Image("black.png");
         i.setColor(new Color(1,1,1,.8f));
         b = new Button(i,200,393,60,70);  
@@ -770,11 +801,11 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         secondary2LockedComponents.add(b);
-         l = new Label("2",235,393);
+         l = new Label(Integer.toString(this.skillSlots[1][1].getUnlockCost()),235,393);
         this.addComponent(l);
         secondary2LockedComponents.add(l);
         
-        // melee3
+        // secondary3
         i = new Image("black.png");
         i.setColor(new Color(1,1,1,.8f));
         b = new Button(i,300,393,60,70);  
@@ -785,11 +816,11 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         secondary3LockedComponents.add(b);
-         l = new Label("3",335,393);
+         l = new Label(Integer.toString(this.skillSlots[1][2].getUnlockCost()),335,393);
         this.addComponent(l);
         secondary3LockedComponents.add(l);
         
-        // melee4
+        // secondary4
         i = new Image("black.png");
         i.setColor(new Color(1,1,1,.8f));
         b = new Button(i,400,393,60,70);  
@@ -800,12 +831,12 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         secondary4LockedComponents.add(b);
-         l = new Label("3",435,393);
+         l = new Label(Integer.toString(this.skillSlots[1][3].getUnlockCost()),435,393);
         this.addComponent(l);
         secondary4LockedComponents.add(l);
         
         
-        // tech1
+        // power1
         i = new Image("black.png");
         i.setColor(new Color(1,1,1,.8f));
         b = new Button(i,100,220,60,70);  
@@ -816,11 +847,11 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         power1LockedComponents.add(b);
-         l = new Label("1",135,220);
+         l = new Label(Integer.toString(this.skillSlots[2][0].getUnlockCost()),135,220);
         this.addComponent(l);
         power1LockedComponents.add(l);
         
-        // tech2
+        // power2
         i = new Image("black.png");
         i.setColor(new Color(1,1,1,.8f));
         b = new Button(i,200,220,60,70);  
@@ -831,11 +862,11 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         power2LockedComponents.add(b);
-         l = new Label("2",235,220);
+         l = new Label(Integer.toString(this.skillSlots[2][1].getUnlockCost()),235,220);
         this.addComponent(l);
         power2LockedComponents.add(l);
         
-        // tech3
+        // power3
         i = new Image("black.png");
         i.setColor(new Color(1,1,1,.8f));
         b = new Button(i,300,220,60,70);  
@@ -846,7 +877,7 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         power3LockedComponents.add(b);
-         l = new Label("3",335,220);
+         l = new Label(Integer.toString(this.skillSlots[2][2].getUnlockCost()),335,220);
         this.addComponent(l);
         power3LockedComponents.add(l);
         
@@ -861,12 +892,12 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         power4LockedComponents.add(b);
-         l = new Label("4",435,220);
+         l = new Label(Integer.toString(this.skillSlots[2][3].getUnlockCost()),435,220);
         this.addComponent(l);
         power4LockedComponents.add(l);
         
         
-        // defense1
+        // tech1
         i = new Image("black.png");
         i.setColor(new Color(1,1,1,.8f));
         b = new Button(i,100,53,60,70);  
@@ -877,11 +908,11 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         tech1LockedComponents.add(b);
-         l = new Label("1",135,53);
+         l = new Label(Integer.toString(this.skillSlots[3][0].getUnlockCost()),135,53);
         this.addComponent(l);
         tech1LockedComponents.add(l);
         
-        // defense2
+        // tech2
         i = new Image("black.png");
         i.setColor(new Color(1,1,1,.8f));
         b = new Button(i,200,53,60,70);  
@@ -892,11 +923,11 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         tech2LockedComponents.add(b);
-         l = new Label("2",235,53);
+         l = new Label(Integer.toString(this.skillSlots[3][1].getUnlockCost()),235,53);
         this.addComponent(l);
         tech2LockedComponents.add(l);
         
-        // defense3
+        // tech3
         i = new Image("black.png");
         i.setColor(new Color(1,1,1,.8f));
         b = new Button(i,300,53,60,70);  
@@ -907,11 +938,11 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         tech3LockedComponents.add(b);
-         l = new Label("3",335,53);
+         l = new Label(Integer.toString(this.skillSlots[3][2].getUnlockCost()),335,53);
         this.addComponent(l);
         tech3LockedComponents.add(l);
         
-        // defense4
+        // tech4
         i = new Image("black.png");
         i.setColor(new Color(1,1,1,.8f));
         b = new Button(i,400,53,60,70);  
@@ -922,7 +953,7 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         tech4LockedComponents.add(b);
-         l = new Label("3",435,53);
+         l = new Label(Integer.toString(this.skillSlots[3][3].getUnlockCost()),435,53);
         this.addComponent(l);
         tech4LockedComponents.add(l);
              
@@ -946,25 +977,25 @@ public class SkillMenu extends Window {
         //update locked
         //===============
         
-        this.primaryLock[0] = !playerReference.getSkillManager().hasSkill(SkillID.PlayerLaser);
-        this.primaryLock[1] = !playerReference.getSkillManager().hasSkill(SkillID.PlayerBuckshot);
-        this.primaryLock[2] = !playerReference.getSkillManager().hasSkill(SkillID.PlayerRicochet);
-        this.primaryLock[3] = !playerReference.getSkillManager().hasSkill(SkillID.PlayerRocket);
+        this.primaryLock[0] = !playerReference.getSkillManager().hasSkill(this.skillSlots[0][0].getSkillID());
+        this.primaryLock[1] = !playerReference.getSkillManager().hasSkill(this.skillSlots[0][1].getSkillID());
+        this.primaryLock[2] = !playerReference.getSkillManager().hasSkill(this.skillSlots[0][2].getSkillID());
+        this.primaryLock[3] = !playerReference.getSkillManager().hasSkill(this.skillSlots[0][3].getSkillID());
         
-        this.secondaryLock[0] = !playerReference.getSkillManager().hasSkill(SkillID.PlayerBashAttack);
-        this.secondaryLock[1] = !playerReference.getSkillManager().hasSkill(SkillID.PlayerDestructionDisk);
-        this.secondaryLock[2] = !playerReference.getSkillManager().hasSkill(SkillID.PlayerFreezeAttack);
-        this.secondaryLock[3] = !playerReference.getSkillManager().hasSkill(SkillID.PlayerSnipe);
+        this.secondaryLock[0] = !playerReference.getSkillManager().hasSkill(this.skillSlots[1][0].getSkillID());
+        this.secondaryLock[1] = !playerReference.getSkillManager().hasSkill(this.skillSlots[1][1].getSkillID());
+        this.secondaryLock[2] = !playerReference.getSkillManager().hasSkill(this.skillSlots[1][2].getSkillID());
+        this.secondaryLock[3] = !playerReference.getSkillManager().hasSkill(this.skillSlots[1][3].getSkillID());
         
-        this.powerLock[0] = !playerReference.getSkillManager().hasSkill(SkillID.PlayerStomp);
-        this.powerLock[1] = !playerReference.getSkillManager().hasSkill(SkillID.PlayerDash);
-        this.powerLock[2] = !playerReference.getSkillManager().hasSkill(SkillID.PlayerStimpack);
-        this.powerLock[3] = !playerReference.getSkillManager().hasSkill(SkillID.PlayerSoulLeech);
+        this.powerLock[0] = !playerReference.getSkillManager().hasSkill(this.skillSlots[2][0].getSkillID());
+        this.powerLock[1] = !playerReference.getSkillManager().hasSkill(this.skillSlots[2][1].getSkillID());
+        this.powerLock[2] = !playerReference.getSkillManager().hasSkill(this.skillSlots[2][2].getSkillID());
+        this.powerLock[3] = !playerReference.getSkillManager().hasSkill(this.skillSlots[2][3].getSkillID());
         
-        this.techLock[0] = !playerReference.getSkillManager().hasSkill(SkillID.PlayerAttackDrone);
-        this.techLock[1] = !playerReference.getSkillManager().hasSkill(SkillID.PlayerWard);
-        this.techLock[2] = !playerReference.getSkillManager().hasSkill(SkillID.PlayerGuard);
-        this.techLock[3] = !playerReference.getSkillManager().hasSkill(SkillID.PlayerFlashbang);
+        this.techLock[0] = !playerReference.getSkillManager().hasSkill(this.skillSlots[3][0].getSkillID());
+        this.techLock[1] = !playerReference.getSkillManager().hasSkill(this.skillSlots[3][1].getSkillID());
+        this.techLock[2] = !playerReference.getSkillManager().hasSkill(this.skillSlots[3][2].getSkillID());
+        this.techLock[3] = !playerReference.getSkillManager().hasSkill(this.skillSlots[3][3].getSkillID());
         
         //==========================
         // Remove Locked Componenets

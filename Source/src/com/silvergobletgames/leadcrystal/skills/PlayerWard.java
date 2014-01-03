@@ -3,7 +3,6 @@ package com.silvergobletgames.leadcrystal.skills;
 import com.silvergobletgames.leadcrystal.entities.CombatEntity;
 import com.silvergobletgames.leadcrystal.entities.HitBox;
 import com.silvergobletgames.leadcrystal.entities.Entity;
-import com.silvergobletgames.leadcrystal.entities.EntityEffect;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.sylver.core.Scene.Layer;
 import com.silvergobletgames.sylver.graphics.Anchorable;
@@ -22,8 +21,10 @@ import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.IceEmi
 import com.silvergobletgames.leadcrystal.entities.*;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.sylver.graphics.*;
+import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 import java.util.UUID;
+import net.phys2d.raw.shapes.Box;
 
 /**
  * 
@@ -32,16 +33,16 @@ import java.util.UUID;
  * Cooldown: 30 seconds
  * Description: While active, you take 50% damage.  For the first second that Guard is active, you take no damage.
  */
-public class PlayerWard extends Skill{
+public class PlayerWard extends PlayerSkill{
     
     public PlayerWard()
     {
-        //super constructor
-        super(SkillID.PlayerWard,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK,1800, Integer.MAX_VALUE);
+        //super constructor 
+        super(SkillID.PlayerWard,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK, 1800, Integer.MAX_VALUE);
         
         //set the skillID and the name
         this.icon = new Image("icetrapIcon.jpg");
-        this.skillName = "Ice Trap";
+        this.skillName = "Ice Ward";
         this.skillDescription = "Places a ward on the ground damaging and slowing all enemies in its radius.";
         
         this.unlockCost = 1;
@@ -50,53 +51,105 @@ public class PlayerWard extends Skill{
     
     public void use(Damage damage, SylverVector2f origin) 
     {
-        PlayerEntity player = (PlayerEntity) user;
         
-         //Get target X and Y
-        float targetX = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationX;
-        float targetY = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationY;
-        
-        //Get user X and Y
-        float userX = origin.x;
-        float userY = origin.y;
-        
-        //get vector to target
-        Vector2f vectorToTarget = new Vector2f(targetX - userX, targetY - userY);
-        vectorToTarget.normalise();
+        //get targeting data
+        TargetingData targetingData = this.getTargetingData(origin);
+        SylverVector2f vectorToTarget = targetingData.vectorToTarget;
+        float theta = targetingData.theta;
         
         //place ice trap hitbox in the world
-        HealingWardHitbox hitbox = new HealingWardHitbox(user);
-        hitbox.setPosition(user.getPosition().x + 150 *vectorToTarget.getX(), user.getPosition().y + 150 * vectorToTarget.getY());
-        hitbox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 900, 1, 1));
-        user.getOwningScene().add(hitbox,Layer.MAIN);
+       //build body of the laser
+        Body body = new Body(new Box(57,33), 1);
+        Image img = new Image("computer.png");
+        img.setAnchor(Anchorable.Anchor.LEFTCENTER);
+        img.setDimensions(57, 33);
+        IceTrapHitbox hitbox = new IceTrapHitbox(new Damage(Damage.DamageType.NODAMAGE, 0), body, img, user,damage); 
         
-        //add image
-        Image img = new Image("wardSprite.png");
-        img.setScale(.35f);
-        img.setAnchor(Anchorable.Anchor.CENTER);
-        img.setPositionAnchored(hitbox.getPosition().x, hitbox.getPosition().y);
-        img.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 900, 0, 0));
-        user.getOwningScene().add(img, Layer.ATTACHED_FG);
+         //calculate force for the bullet
+        float xforce = 1000*vectorToTarget.x;
+        float yforce = 1000*vectorToTarget.y;
         
-        //add its praticle effects
-        AbstractParticleEmitter emitter = new IceEmitter();
-        emitter.setDuration(900);
-        hitbox.addEmitter(emitter);
+        //Dispense laser into the world
+        hitbox.setPosition(origin.x + vectorToTarget.x * 25, origin.y + vectorToTarget.y * 25);
+        hitbox.getBody().addForce(new Vector2f(xforce ,yforce));
+        hitbox.getBody().setRotation((float)theta);
+        hitbox.getImage().setAngle((float)(theta * (180f/Math.PI))); 
+        user.getOwningScene().add(hitbox,Layer.MAIN);     
+        
+        
+     
         
        
     }
     
-    private class HealingWardHitbox extends HitBox
+    
+    
+    private class IceTrapHitbox extends HitBox
     {
+        private Damage passthroughDamage;
+        private boolean used = false;
         
-        public HealingWardHitbox(CombatEntity user)
+         public IceTrapHitbox(Damage d, Body b, Image i, Entity user,Damage passthroughDamage)
+         { 
+            super(d, b, i, user); 
+            
+            this.getBody().setGravityEffected(true);
+            this.passthroughDamage = passthroughDamage;
+            
+         }
+         
+         public void collidedWith(Entity other, CollisionEvent event)
+         {            
+             if(other instanceof WorldObjectEntity && !used)
+             {
+                 //if we landed on the top of a worldObjectEntity
+                if(-event.getNormal().getY() > .75)
+                {
+                    this.used = true;
+
+                    this.getBody().setDamping(1);
+
+
+                    //put in ice damage
+                    IceWardHitbox iceHitbox = new IceWardHitbox((CombatEntity)this.sourceEntity,this.passthroughDamage);
+                    iceHitbox.setPosition(this.getPosition().x, this.getPosition().y);
+                    iceHitbox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 900, 0, 0));
+                    this.getOwningScene().add(iceHitbox, Layer.MAIN); 
+
+                    //put in own duration effect
+                    this.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 1020, 0, 0)); 
+                    ImageEffect fadeEffect =new ImageEffect(ImageEffect.ImageEffectType.COLOR, 100,new Color(Color.white),new Color(Color.transparent));
+                    fadeEffect.setDelay(920);
+                    this.getImage().addImageEffect(fadeEffect); 
+                }
+                 
+             }
+         }
+        
+        
+    }
+    
+    private class IceWardHitbox extends HitBox
+    {
+        private Damage passthroughDamage;
+        
+        public IceWardHitbox(CombatEntity user, Damage damage)
         {
-            super(new Damage(Damage.DamageType.NODAMAGE, 0), new Body(new Circle(200), 1), new Image("blank.png"),user); 
+            super(new Damage(Damage.DamageType.NODAMAGE, 0), new Body(new Circle(200), 4), new Image("blank.png"),user); 
             
             this.body.setGravityEffected(false);
             this.body.removeExcludedBody(user.getBody());
             this.getBody().setBitmask(BitMasks.NO_COLLISION.value);
             this.getBody().setOverlapMask(OverlapMasks.OVERLAP_ALL.value);
+            
+            //add its praticle effects
+            AbstractParticleEmitter emitter = new IceEmitter();
+            emitter.setDuration(900);
+            this.addEmitter(emitter);
+            
+            this.passthroughDamage = damage;
+            this.passthroughDamage.setType(Damage.DamageType.FROST);
+            this.passthroughDamage.getAmountObject().setBase(1);
         }
         
         public void collidedWith(Entity other, CollisionEvent event)
@@ -113,8 +166,7 @@ public class PlayerWard extends Skill{
                 ((CombatEntity)other).getImage().setColor(new Color(.5f,.5f,2)); 
                 
                 //apply damage dot
-                Damage healDamage = new Damage(Damage.DamageType.FROST, 1);
-                DotEffect heal = new DotEffect(1, 30, healDamage);
+                DotEffect heal = new DotEffect(1, 30, this.passthroughDamage);
                 heal.setInfinite();                
                 ((CombatEntity)other).getCombatData().addCombatEffect("iceDot", heal);
             }
@@ -149,7 +201,4 @@ public class PlayerWard extends Skill{
 
     }
      
-    
-     
-
 }

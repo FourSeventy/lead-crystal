@@ -33,29 +33,21 @@ public class CombatText extends Text
      * Takes just text.
      * @param txt 
      */
-    public CombatText(Damage d, CombatEntity oe, Scene os)
+    public CombatText(Damage damage, CombatEntity owningEntity, Scene owningScene)
     {
         super("", LeadCrystalTextType.COMBAT);
-        this.owningScene = os;
-        this.amount = Math.abs((int)d.getAmount());
-        initialize(d, 50, oe);
-    }
-       
-    /**
-     * Sets up some initial field values.
-     */
-    private void initialize(Damage d, int lifetime, CombatEntity owningEntity)
-    {
+        this.owningScene = owningScene;
+        this.amount = Math.abs((int)damage.getAmount());
+        
+        int life = 50;
+        
+        this.setText(Integer.toString(Math.abs((int)damage.getAmount())));
         this.setAnchor(Anchor.CENTER);
-        if(d.getAmount() < 100000)
-           this.setText(Integer.toString(Math.abs((int)d.getAmount())));
-        else
-            this.setText("Headshot");
-        this.damage = d;
-        this.lifetime = lifetime;
+        this.damage = damage;
+        this.lifetime = life;
         this.owningEntity = owningEntity;
-        this.crit = d.isCrit();
-        this.assignColor(d);
+        this.crit = damage.isCrit();
+        this.assignColor(damage);
         this.assignPosition(owningEntity);
         
         float theta = owningEntity.nextDamageDirection();
@@ -63,18 +55,26 @@ public class CombatText extends Text
         if (theta < 0)
             vx = -vx;
         //Initial velocities and fade times.
-        if (d.getType() == Damage.DamageType.BURN){
+        if (damage.getType() == Damage.DamageType.BURN){
             this.setVelocity(new Vector2f(0, -40 + owningEntity.getBody().getVelocity().getY())); 
         }
         else{               
             this.setVelocity(new Vector2f((int)vx + owningEntity.getBody().getVelocity().getX(), 78 + owningEntity.getBody().getVelocity().getY()));
-            if (!d.isCrit())
+            if (!damage.isCrit())
                 this.setAngularVelocity((float)(-vx/1.2));
         }
-        if (d.isCrit())
+        if (damage.isCrit())
             this.setFadeTime(25);
         else
             this.setFadeTime(20);
+    }
+       
+    /**
+     * Sets up some initial field values.
+     */
+    private void initialize(Damage d, int lifetime, CombatEntity owningEntity)
+    {
+        
     }
     
     /**
@@ -95,7 +95,9 @@ public class CombatText extends Text
         
         
         if (d.getType() == Damage.DamageType.HEAL) 
+        {
             c = new Color(0,1f,0,1f);
+        }
         else if (d.getAmount() < 0) //ABSORB
         {
             this.setText("Absorb! " + text);
@@ -105,13 +107,25 @@ public class CombatText extends Text
             c = new Color(0,.7f,.2f,1f);
         }        
         else if (d.getType() == Damage.DamageType.BURN)
+        {
             c = new Color(1f,.60f,0,1f);
+        }
         else if(d.getType() == Damage.DamageType.FROST)
+        {
             c = new Color(Color.blue);
+        }
         else if(d.getType() == Damage.DamageType.SHOCK)
+        {
              c = new Color(Color.yellow);
+        }
+        else if(d.getType() == Damage.DamageType.POISON)
+        {
+            c = new Color(181,47,177);
+        }
         else
+        {
             c = new Color(1f,1f,1f,1f);
+        }
         setColor(c);
     }
     

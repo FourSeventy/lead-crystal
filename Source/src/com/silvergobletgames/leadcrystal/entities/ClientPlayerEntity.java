@@ -120,17 +120,26 @@ public class ClientPlayerEntity extends PlayerEntity
          }
          
          //hanlde dash
-         if(this.dashing)
-         {
-             this.dashTicks++;
-             if(dashTicks > 15)
-             {
-                 this.dashing = false;
-                 this.dashTicks = 0;
-             }
-             this.body.setVelocity(new Vector2f(this.dashVector.x * 100,this.dashVector.y * 100));
-             
-         }
+//         if(this.dashing)
+//         {
+//             
+//             this.dashTicks++;
+//             if(dashTicks > 30)
+//             {
+//                 this.dashing = false;
+//                 this.dashTicks = 0;
+//                 this.getBody().setVelocity(new Vector2f(0f,0f));
+//                 this.getBody().setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value); 
+//                 this.getBody().setOverlapMask(Entity.OverlapMasks.PLAYER.value); 
+//             }
+//             else
+//             {   
+//                 this.getBody().setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value); 
+//                 this.getBody().setVelocity(new Vector2f(this.dashVector.x * 150, this.dashVector.y * 150));
+//             }
+//           
+//             
+//         }
          
          //update skill manager
          skillManager.update();       
@@ -315,24 +324,26 @@ public class ClientPlayerEntity extends PlayerEntity
             
             //start cooldown
             skill.beginCooldown();
+            
+            //dash
+            if(skill instanceof PlayerDashAttack)
+            {
+                //Get target X and Y
+                float targetX = ((GameClientScene)this.getOwningScene()).worldMouseLocation.x;
+                float targetY = ((GameClientScene)this.getOwningScene()).worldMouseLocation.y;
+
+                //Get user X and Y
+                float userX = this.getPosition().x;
+                float userY = this.getPosition().y;
+
+                //get vector to target
+                SylverVector2f vectorToTarget = new SylverVector2f(targetX - userX, targetY - userY);
+                vectorToTarget.normalise();
+                this.handleDash(vectorToTarget);
+            }
         }
         
-        //dash
-        if(skill instanceof PlayerDashAttack)
-        {
-            //Get target X and Y
-            float targetX = ((GameClientScene)this.getOwningScene()).worldMouseLocation.x;
-            float targetY = ((GameClientScene)this.getOwningScene()).worldMouseLocation.y;
-
-            //Get user X and Y
-            float userX = this.getPosition().x;
-            float userY = this.getPosition().y;
-
-            //get vector to target
-            SylverVector2f vectorToTarget = new SylverVector2f(targetX - userX, targetY - userY);
-            vectorToTarget.normalise();
-            this.handleDash(vectorToTarget);
-        }
+        
 
         
     }

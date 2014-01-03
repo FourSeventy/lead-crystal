@@ -7,6 +7,7 @@ import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters;
 import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect.EntityEffectType;
@@ -28,18 +29,18 @@ import net.phys2d.raw.shapes.Circle;
  * Cooldown: 30 seconds
  * Description: While active, you take 50% damage.  For the first second that Guard is active, you take no damage.
  */
-public class PlayerGuard extends Skill{
+public class PlayerGravityShield extends PlayerSkill{
     
-    public PlayerGuard()
+    public PlayerGravityShield()
     {
-        //super constructor
-        super(SkillID.PlayerGuard,SkillType.DEFENSIVE, ExtendedImageAnimations.SPELLATTACK,1800,Integer.MAX_VALUE);
+        //super constructor 
+        super(SkillID.PlayerGravityShield,SkillType.DEFENSIVE, ExtendedImageAnimations.SPELLATTACK,1200,Integer.MAX_VALUE);
  
         //set the skillID and the name
         this.icon = new Image("guardIcon.jpg") ;
         this.skillName = "Guard";
-        this.skillDescription = "Creates a defensive shield around the player mitigating damage. For the first 1 second after use, the damage mitigation is 100%";
-        this.unlockCost = 2;
+        this.skillDescription = "Creates a defensive shield around the player mitigating melee damage and deflecting ranged attacks. ";
+        this.unlockCost = 1;
     }
     
     public void use(Damage damage, SylverVector2f origin) 
@@ -47,21 +48,18 @@ public class PlayerGuard extends Skill{
         //put overlay on
         Image image = new Image("newShield.png");
         image.setAnchor(Anchorable.Anchor.CENTER);
-        image.setColor(new Color(3,3,4,1f));
-        Color[] points = {new Color(4,4,5,1f), new Color(5,5,6.25f,1f), new Color(4,4,5,1f)};
+        image.setColor(new Color(2f,2f,2.5f,1f));
+        Color[] points = {new Color(2f,2f,2.5f,1f), new Color(2.5f,2.5f,3f,1f), new Color(2f,2f,2.5f,1f)};
         int[] durations = {60,60};
         MultiImageEffect renderEffect = new MultiImageEffect(ImageEffect.ImageEffectType.COLOR, points, durations);
         renderEffect.setRepeating(true);
         image.addImageEffect(renderEffect);
         Overlay overlay = new Overlay(image, 300,new SylverVector2f(.5f, .65f));
-        overlay.setRelativeSize(.5f);
+        overlay.setRelativeSize(1.2f);
         user.getImage().addOverlay("guardOverlay", overlay);
         
         //add the combat effect
         user.getCombatData().addCombatEffect(new StateEffect(StateEffect.StateEffectType.DAMAGEREDUCTION, 300, .5f, false));
-        
-        //add the second combat effect that makes 100% damage reduction for the first 1 second
-        user.getCombatData().addCombatEffect(new StateEffect(StateEffect.StateEffectType.DAMAGEREDUCTION, 60, .5f, false));
         
         //create entity that pushes away projectiles
         Body b  = new StaticBody(new Circle(10));
@@ -104,11 +102,36 @@ public class PlayerGuard extends Skill{
                      
                      if(enemyHitbox.getBody() != null && enemyHitbox.distanceAbs(this) < 75 && enemyHitbox.getBody().getOverlapMask() == Entity.OverlapMasks.PLAYER_TOUCH.value)
                      {
+                         //get vector
+                         SylverVector2f v = new SylverVector2f(enemyHitbox.getBody().getVelocity().getX(),enemyHitbox.getBody().getVelocity().getY());
+                         v = v.negate();
+                         
+                         SylverVector2f vecToTarget = new SylverVector2f(v.x,v.y);
+                         vecToTarget.normalise();
+                         
+                        
+                         //add effect
+                         
+                        float theta = (float)Math.acos(vecToTarget.dot(new SylverVector2f(1,0)));
+                        if(enemyHitbox.getPosition().y < this.user.getPosition().y)
+                            theta = (float)(2* Math.PI - theta);                      
+     
+                        //sparks
+                        PointParticleEmitter emitter = new LeadCrystalParticleEmitters.LaserBitsEmitter();
+                        emitter.setPosition(enemyHitbox.getPosition().x, enemyHitbox.getPosition().y);
+                        emitter.setDuration(1);
+                        emitter.setAngle((float)(theta * (180f/Math.PI)));
+                        emitter.setParticlesPerFrame(5);
+                        emitter.setSize(3);
+                        emitter.setColor(new Color(1.5f,1.5f,1.5f));
+                        user.getOwningScene().add(emitter,Scene.Layer.MAIN);
+
+                         //redirect projectile
                         enemyHitbox.getBody().setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value);
                         enemyHitbox.getBody().removeExcludedBody(enemyHitbox.getSource().getBody());
+                        enemyHitbox.setSource(this);
                         
-                        SylverVector2f v = new SylverVector2f(enemyHitbox.getBody().getVelocity().getX(),enemyHitbox.getBody().getVelocity().getY());
-                        v = v.negate();
+                        
                         enemyHitbox.getBody().setVelocity(new Vector2f(v.x,v.y));
 //                        SylverVector2f vector = enemyHitbox.distanceVector(this);
 //                        vector.normalise();

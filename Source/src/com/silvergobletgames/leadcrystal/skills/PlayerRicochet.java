@@ -26,6 +26,7 @@ import com.silvergobletgames.leadcrystal.entities.*;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.sylver.audio.Sound;
+import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 import net.phys2d.raw.shapes.Circle;
@@ -38,7 +39,7 @@ import net.phys2d.raw.shapes.Circle;
  * or the user's target if the target is an enemy.
  * @author Justin Capalbo
  */
-public class PlayerRicochet extends Skill{
+public class PlayerRicochet extends PlayerSkill{
         
     
     /**
@@ -52,7 +53,7 @@ public class PlayerRicochet extends Skill{
         this.icon = new Image("blade.png");
         this.skillName = "Ricochet Blade";
         this.skillDescription = "Shoots a deadly blade that bounces off walls and pierces enemies.";
-        this.unlockCost = 2;
+        this.unlockCost = 1;
 
     }
     
@@ -65,6 +66,11 @@ public class PlayerRicochet extends Skill{
         
         PlayerEntity player = (PlayerEntity) user;
         Random r = SylverRandom.random;
+        
+        //get targeting data
+        TargetingData targetingData = this.getTargetingData(origin);
+        SylverVector2f vectorToTarget = targetingData.vectorToTarget;
+        float theta = targetingData.theta;
                         
         //set damage
         int min = 7; 
@@ -72,13 +78,7 @@ public class PlayerRicochet extends Skill{
         float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
         damage.getAmountObject().adjustBase(damageAmout);
         damage.setType(Damage.DamageType.PHYSICAL);  
-        
-        
-        //add brightness effect to damage
-        Float[] points = {1f,2f,1f};
-        int[] durations = {10,5};
-        ImageEffect brightnessEffect = new MultiImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, points,durations);
-        damage.addImageEffect(brightnessEffect);
+        damage.addImageEffect(this.getDamageBrightnessEffect());
         
         //build body of the blade
         Body body = new Body(new Circle(20), 1);
@@ -95,27 +95,11 @@ public class PlayerRicochet extends Skill{
         //build hitbox
         BladeHitBox blade = new BladeHitBox(damage, body, img, user);  
         
-        //Get target X and Y
-        float targetX = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationX;
-        float targetY = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationY;
-        
-        //Get user X and Y
-        float userX = origin.x;
-        float userY = origin.y;
-        
-        //get vector to target
-        Vector2f vectorToTarget = new Vector2f(targetX - userX, targetY - userY);
-        vectorToTarget.normalise();
-        
+     
         //calculate force for the bullet
         float xforce = 2000*vectorToTarget.x;
         float yforce = 2000*vectorToTarget.y;
-        
-        //determine angle for the image
-        float theta = (float)Math.acos(vectorToTarget.dot(new Vector2f(1,0)));
-        if(targetY < userY)
-            theta = (float)(2* Math.PI - theta);
-        
+
         //Dispense blade into the world
         blade.setPosition(origin.x + vectorToTarget.x * 25, origin.y + vectorToTarget.y * 25);
         blade.getBody().addForce(new Vector2f(xforce ,yforce));
@@ -123,6 +107,13 @@ public class PlayerRicochet extends Skill{
         blade.getImage().setAngle((float)(theta * (180f/Math.PI))); 
         user.getOwningScene().add(blade,Layer.MAIN);
         
+        //dispense muzzle flash
+        Image flash = this.getMuzzleFlash(targetingData, origin);
+        user.getOwningScene().add(flash,Scene.Layer.MAIN);
+        
+        //add smoke
+        AbstractParticleEmitter smokeEmitter = this.getMuzzleEffect(origin);
+        user.getOwningScene().add(smokeEmitter,Scene.Layer.MAIN);
         
         //play sound
 

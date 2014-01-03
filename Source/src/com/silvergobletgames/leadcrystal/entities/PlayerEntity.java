@@ -147,7 +147,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         //set image dimensions and offset
         image.setScale(1f);
-        this.imageOffset = new Vector2f(0,-25);
+        this.imageOffset = new Vector2f(0,-20);
 
         //set body attributes
         body.setFriction(this.BASE_FRICTION);
@@ -294,24 +294,13 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
              this.body.setDamping(this.BASE_DAMPING);
          }
          
-         //hanlde dash
-         if(this.dashing)
-         {
-             this.dashTicks++;
-             if(dashTicks > 15)
-             {
-                 this.dashing = false;
-                 this.dashTicks = 0;
-             }
-             this.body.setVelocity(new Vector2f(this.dashVector.x * 100,this.dashVector.y * 100));
-             
-         }
          
-         //===============================
-         // Calculate Skill Release Point
-         //===============================
          
-         //Get user X and Y
+        //===============================
+        // Calculate Skill Release Point
+        //===============================
+         
+        //Get user X and Y
         float userX = this.getPosition().x;
         float userY = this.getPosition().y;
               
@@ -336,7 +325,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     public void draw(GL2 gl)
     {
         this.updateBodyParts();
-                
+                   
         this.backArm.draw(gl);
         
         super.draw(gl);
@@ -879,19 +868,16 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     
     private void updateBodyParts()
     {
-        //============
-        // Body Parts
-        //============
-       
+
         //Get user X and Y
         float userX = this.getImage().getPosition().x + this.getImage().getWidth() * .5f;
         float userY = this.getImage().getPosition().y + this.getImage().getHeight() * .5f +25;
         
-        //get vector to target
+        //get vector to mouse
         Vector2f vectorToTarget = new Vector2f(this.worldMousePoint.x - userX, this.worldMousePoint.y - userY);
         vectorToTarget.normalise();
 
-        //determine angle for the image
+        //determine angle to mouse
         float theta = (float)Math.acos(vectorToTarget.dot(new Vector2f(1,0)));
         if(this.worldMousePoint.y < userY)
             theta = (float)(2* Math.PI - theta);
@@ -903,183 +889,168 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         else
             flipped = false;
         
+        //flip body if we are flipped
         if(flipped)
             this.image.setHorizontalFlip(true);
         else
             this.image.setHorizontalFlip(false);
 
-        
-          //=========front arm============
+         //=============
+         // Front Arm
+         //=============
          this.frontArm.setHorizontalFlip(flipped);        
-         if(flipped)
+         if(!flipped)
          {
-
+             //twiddle angle stuff
+             float angle =(float)(theta * (180f/Math.PI));
+             if(angle >= 60 && angle <= 90)
+                 angle = 60;
+             else if(angle <= 300 && angle >= 270)
+                 angle = 300;
+             
+             //set angle and rotation point
+             this.frontArm.setAngle(angle + 2);
+             this.frontArm.setRotationPoint(.18f, .53f);
+             this.frontArm.setAnchor(Anchorable.Anchor.LEFTCENTER); 
+                     
+             //set anchored position
+             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
+             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
+             float xPos = -47 +this.image.getPosition().x + this.image.getWidth()*xOffset; 
+             float yPos = -15 + this.image.getPosition().y + this.image.getHeight()*yOffset;            
+             this.frontArm.setPositionAnchored(xPos,yPos);           
+         }
+         else
+         {         
+             //twiddle some angle stuff
              float angle =(float)((theta- Math.PI) * (180f/Math.PI));
              if(angle <= -60 && angle >= -90)
                  angle = -60;
              else if(angle >= 60 && angle <= 90)
                  angle = 60;
              
+             //set angle and rotation point
              this.frontArm.setAngle(angle-2);
              this.frontArm.setRotationPoint(.82f, .55f);
-             this.frontArm.setAnchor(Anchorable.Anchor.LEFTCENTER); 
+             this.frontArm.setAnchor(Anchorable.Anchor.RIGHTCENTER); 
              
-             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
-             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
-             
-             if(this.image.isFlippedHorizontal())
-             {
-                 xOffset = 1 - xOffset;
-           
-             }
-             float xPos = -93 +this.image.getPosition().x + this.image.getWidth()* xOffset; 
-             float yPos = -16 +this.image.getPosition().y + this.image.getHeight()* yOffset;        
+             //set offset
+             float xOffset = 1 - this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
+             float yOffset =  this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
+             float xPos = 47 +this.image.getPosition().x + this.image.getWidth()* xOffset; 
+             float yPos = -15 +this.image.getPosition().y + this.image.getHeight()* yOffset;        
              this.frontArm.setPositionAnchored(xPos,yPos);
-         }
-         else
+         }   
+         
+         //=============
+         // Back Arm
+         //=============
+         this.backArm.setHorizontalFlip(flipped);        
+         if(!flipped)
          {
              
+             //twiddle some angle stuff
              float angle =(float)(theta * (180f/Math.PI));
              if(angle >= 60 && angle <= 90)
                  angle = 60;
-             else if(angle <= 300 && angle >= 270)
-                 angle = 300;
-             this.frontArm.setAngle(angle + 2);
-             this.frontArm.setRotationPoint(.18f, .55f);
-             this.frontArm.setAnchor(Anchorable.Anchor.LEFTCENTER); 
+             else if(angle <= 334 && angle >= 270)
+                 angle = 334;
              
+             //set rotation
+             this.backArm.setAngle(angle +2);
+             this.backArm.setRotationPoint(-.17f, .55f);
+             this.backArm.setAnchor(Anchorable.Anchor.LEFTCENTER); 
+             
+             //set offset
              float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
-             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
-             
-             if(this.image.isFlippedHorizontal())
-             {
-                 xOffset = 1 - xOffset;
-                
-             }
-             
-             float xPos = -47 +this.image.getPosition().x + this.image.getWidth()*xOffset; 
-             float yPos = -16 + this.image.getPosition().y + this.image.getHeight()*yOffset;            
-             this.frontArm.setPositionAnchored(xPos,yPos);
-         }   
-         //this.frontArm.update();
-         
-         //===========back arm===========
-         this.backArm.setHorizontalFlip(flipped);        
-         if(flipped)
+             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;             
+             float xPos = -8 +this.image.getPosition().x + this.image.getWidth()*xOffset; 
+             float yPos = -17 + this.image.getPosition().y + this.image.getHeight()*yOffset;   
+             this.backArm.setPositionAnchored(xPos,yPos);
+            
+         }
+         else
          {
-
+             //twiddle some angle
              float angle =(float)((theta- Math.PI) * (180f/Math.PI));
              if(angle <= -60 && angle >= -90)
                  angle = -60;
-             else if(angle >= 60 && angle <= 90)
-                 angle = 60;
-             this.backArm.setAngle(angle);
-             this.backArm.setRotationPoint(1.3f, .7f);
-             this.backArm.setAnchor(Anchorable.Anchor.LEFTCENTER); 
+             else if(angle >= 26 && angle <= 90)
+                 angle = 26;
              
-             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
+             //set rotation
+             this.backArm.setAngle(angle -2);
+             this.backArm.setRotationPoint(1.17f, .55f);
+             this.backArm.setAnchor(Anchorable.Anchor.RIGHTCENTER); 
+             
+             //set offset
+             float xOffset = 1 -this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
              float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
-             
-             if(this.image.isFlippedHorizontal())
-             {
-                 xOffset = 1 - xOffset;
-           
-             }
-             float xPos = -53 +this.image.getPosition().x + this.image.getWidth()* xOffset; 
-             float yPos = -26 +this.image.getPosition().y + this.image.getHeight()* yOffset;        
-             this.backArm.setPositionAnchored(xPos,yPos);
-         }
-         else
-         {
-             
-             float angle =(float)(theta * (180f/Math.PI));
-             if(angle >= 60 && angle <= 90)
-                 angle = 60;
-             else if(angle <= 300 && angle >= 270)
-                 angle = 300;
-             this.backArm.setAngle(angle);
-             this.backArm.setRotationPoint(-.3f, .7f);
-             this.backArm.setAnchor(Anchorable.Anchor.LEFTCENTER); 
-             
-             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
-             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
-             
-             if(this.image.isFlippedHorizontal())
-             {
-                 xOffset = 1 - xOffset;
-                
-             }
-             
-             float xPos = 0 +this.image.getPosition().x + this.image.getWidth()*xOffset; 
-             float yPos = -26 + this.image.getPosition().y + this.image.getHeight()*yOffset;            
+             float xPos = +8 +this.image.getPosition().x + this.image.getWidth()* xOffset; 
+             float yPos = -17 +this.image.getPosition().y + this.image.getHeight()* yOffset;        
              this.backArm.setPositionAnchored(xPos,yPos);
          }   
-         //this.backArm.update();
+     
          
          
          //=============head============
          this.head.setHorizontalFlip(flipped);
          this.head.setScale(1.10f);
          this.head.setAnchor(Anchorable.Anchor.CENTER);
-         if(flipped)
-         {
-             float angle =(float)((theta- Math.PI) * (180f/Math.PI));
-             if(angle <= -60 && angle >= -90)
-                 angle = -60;
-             else if(angle >= 60 && angle <= 90)
-                 angle = 60;
-             this.head.setRotationPoint(.5f, .25f);
-             this.head.setAngle(angle);   
-             
-             float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
-             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
-             
-             if(this.image.isFlippedHorizontal())
-             {
-                 xOffset = 1 - xOffset;
-                
-             }
-             
-             float xPos = this.image.getPosition().x + this.image.getWidth()*xOffset; 
-             float yPos = 15+this.image.getPosition().y + this.image.getHeight()*yOffset;
-             
-             this.head.setPositionAnchored(xPos,yPos);
-         }
-         else
+         if(!flipped)
          {
              float angle =(float)(theta * (180f/Math.PI));
              if(angle >= 60 && angle <= 90)
                  angle = 60;
-             else if(angle <= 300 && angle >= 270)
-                 angle = 300;
+             else if(angle <= 334 && angle >= 270)
+                 angle = 334;
+             
              this.head.setRotationPoint(.5f, .25f);
              this.head.setAngle(angle);    
              
+             
              float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
-             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;
+             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;           
+             float xPos = -2 +this.image.getPosition().x + this.image.getWidth()*xOffset;
+             float yPos = 15+this.image.getPosition().y + this.image.getHeight()*yOffset;           
+             this.head.setPositionAnchored(xPos,yPos);
              
-             if(this.image.isFlippedHorizontal())
-             {
-                 xOffset = 1 - xOffset;
-             }
+         }
+         else
+         {
+           
+             float angle =(float)((theta- Math.PI) * (180f/Math.PI));
+             if(angle <= -60 && angle >= -90)
+                 angle = -60;
+             else if(angle >= 26 && angle <= 90)
+                 angle = 26;
              
-             float xPos = this.image.getPosition().x + this.image.getWidth()*xOffset;
-             float yPos = 15+this.image.getPosition().y + this.image.getHeight()*yOffset;
+             this.head.setRotationPoint(.5f, .25f);
+             this.head.setAngle(angle);   
              
+             
+             float xOffset = 1- this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
+             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;           
+             float xPos = 2 + this.image.getPosition().x + this.image.getWidth()*xOffset; 
+             float yPos = 15+this.image.getPosition().y + this.image.getHeight()*yOffset;            
              this.head.setPositionAnchored(xPos,yPos);
          }         
-        // this.head.update();
+    
     }
     
     protected void setCorrectAnimation()
     {
-
         //============================
         // Determine Running Animation
         //============================
-        if((this.feetOnTheGround) && !this.onLadder && ((this.body.getVelocity().getX() >= 0 && this.getFacingDirection() == FacingDirection.RIGHT)
-                                  || (this.body.getVelocity().getX() < 0 && this.getFacingDirection() == FacingDirection.LEFT)))
+ 
+        if((this.feetOnTheGround) && !this.onLadder && 
+                                  ((this.body.getVelocity().getX() >= 5 && this.getFacingDirection() == FacingDirection.RIGHT)
+                                  || (this.body.getVelocity().getX() < -5 && this.getFacingDirection() == FacingDirection.LEFT)))
         {
+            
+           
+            
             if(image.getAnimation() == ExtendedImageAnimations.RUNNINGREVERSE)
             {
                 int setIndex = image.getAnimationPack().animationSet.get(ExtendedImageAnimations.RUNNINGREVERSE).size() - 1 -image.getAnimationIndex();
@@ -1096,9 +1067,12 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             }
 
         }
-        else if((this.feetOnTheGround) && !this.onLadder && ((this.body.getVelocity().getX() >= 0 && this.getFacingDirection() == FacingDirection.LEFT)
-                                       || (this.body.getVelocity().getX() < 0 && this.getFacingDirection() == FacingDirection.RIGHT)))
+        else if((this.feetOnTheGround) && !this.onLadder && 
+                                         ((this.body.getVelocity().getX() >= 5 && this.getFacingDirection() == FacingDirection.LEFT)
+                                       || (this.body.getVelocity().getX() < -5 && this.getFacingDirection() == FacingDirection.RIGHT)))
         {
+            
+          
 
             if(image.getAnimation() == ExtendedImageAnimations.RUNNING)
             {
@@ -1124,13 +1098,14 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
          if (!combatData.isDead() && !this.onLadder)
          {
              //change animation if we are in the air
-             if(inAirTimer > 30 || jumpEnergy < this.MAX_JUMP_ENERGY)           
+             if(inAirTimer > 30 || jumpEnergy < this.MAX_JUMP_ENERGY && !(this.feetOnTheGround))           
                  this.image.setAnimation(ExtendedImageAnimations.JUMPING);
              
                  
              //change the animation if we are resting
-             if(this.body.getVelocity().length() < 1.5 && (this.feetOnTheGround))
+             if((Math.abs(this.body.getVelocity().getX()) < 5 || (Math.abs(this.body.getVelocity().getX()) < 20 && body.getVelocity().getX() == body.getLastVelocity().getX()) )  && (this.feetOnTheGround))              
                  this.image.setAnimation(CoreAnimations.IDLE); 
+             
          }
          
          
@@ -1344,9 +1319,32 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     
     public void handleDash(SylverVector2f dashVector)
     {
-        this.dashVector = dashVector;
-        this.dashing = true;
-        this.body.setVelocity(new Vector2f(this.dashVector.x * 100,this.dashVector.y * 100));
+       //handle dash
+         if(this.dashing)
+         {
+              
+             this.dashTicks++;
+             if(dashTicks > 30)
+             {
+                 this.dashing = false;
+                 this.dashTicks = 0;
+                 this.getBody().setVelocity(new Vector2f(0f,0f));
+                 this.getBody().setOverlapMask(Entity.OverlapMasks.PLAYER.value); 
+                 
+             }
+             else
+             {   
+                 this.getBody().setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value); 
+                 this.getBody().setVelocity(new Vector2f(this.dashVector.x * 150, this.dashVector.y * 150));
+             }
+           
+             
+         }
+         else
+         {       
+            this.dashVector = dashVector;
+            this.dashing = true;
+         }
     }
     
     public void handleJumpReleased()

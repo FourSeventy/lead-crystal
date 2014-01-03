@@ -37,8 +37,7 @@ public class Damage
     public enum DamageType{
         //WARNING- changing these names could break save data
         NODAMAGE,
-        PHYSICAL, BURN, FROST, SHOCK, HEAL, //Types for actual damage
-        STUN, SLOW, VULNERABILITY; //Types for status effects/ccs
+        PHYSICAL, BURN, FROST, SHOCK, HEAL,POISON; //Types for actual damage
     }
     
 
