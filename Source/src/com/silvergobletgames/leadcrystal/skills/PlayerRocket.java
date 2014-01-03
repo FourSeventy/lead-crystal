@@ -50,7 +50,7 @@ public class PlayerRocket extends PlayerSkill
         this.skillName = "Rocket Launcher";
         this.skillDescription = "Shoots a rocket that explodes and does AOE damage.";
         
-        this.unlockCost = 3;
+        this.unlockCost = 2;
         
     }
     

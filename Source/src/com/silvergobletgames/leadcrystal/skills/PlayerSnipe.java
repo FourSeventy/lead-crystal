@@ -56,7 +56,7 @@ public class PlayerSnipe extends PlayerSkill
         this.skillName = "Snipe";
         
         this.skillDescription = "Shoots a long range powerful beam of energy that always causes a critical hit.";
-        this.unlockCost = 1;
+        this.unlockCost = 2;
 
     }
 

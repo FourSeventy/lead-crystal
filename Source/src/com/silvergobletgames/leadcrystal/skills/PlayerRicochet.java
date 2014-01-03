@@ -53,7 +53,7 @@ public class PlayerRicochet extends PlayerSkill{
         this.icon = new Image("blade.png");
         this.skillName = "Ricochet Blade";
         this.skillDescription = "Shoots a deadly blade that bounces off walls and pierces enemies.";
-        this.unlockCost = 2;
+        this.unlockCost = 1;
 
     }
     

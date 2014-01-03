@@ -68,6 +68,7 @@ public class SkillFactory
             case PlayerPoisonBomb: return new PlayerPoisonBomb();
             case PlayerBarrelRoll: return new PlayerBarrelRoll();
             case PlayerLeechingBlades: return new PlayerLeechingBlades();
+            case PlayerCrushingStrike: return new PlayerCrushingStrike();
             
             
             default: return null;

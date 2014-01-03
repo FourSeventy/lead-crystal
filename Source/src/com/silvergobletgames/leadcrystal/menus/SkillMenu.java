@@ -140,15 +140,15 @@ public class SkillMenu extends Window {
        
        //power
        this.skillSlots[2][0] = new PlayerPoisonBomb();
-       this.skillSlots[2][1] = new PlayerBarrelRoll();
+       this.skillSlots[2][1] = new PlayerCrushingStrike();
        this.skillSlots[2][2] = new PlayerClusterbomb();
-       this.skillSlots[2][3] = new PlayerSoulLeech();
+       this.skillSlots[2][3] = new PlayerBarrelRoll();
        
        //tech
-       this.skillSlots[3][0] = new PlayerAttackDrone();
-       this.skillSlots[3][1] = new PlayerWard();
+       this.skillSlots[3][0] = new PlayerWard();
+       this.skillSlots[3][1] = new PlayerLeechingBlades();
        this.skillSlots[3][2] = new PlayerGravityShield();
-       this.skillSlots[3][3] = new PlayerLeechingBlades();
+       this.skillSlots[3][3] = new PlayerAttackDrone();
        
        
        //=========================

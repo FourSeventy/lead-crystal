@@ -40,7 +40,7 @@ public class PlayerGravityShield extends PlayerSkill{
         this.icon = new Image("guardIcon.jpg") ;
         this.skillName = "Guard";
         this.skillDescription = "Creates a defensive shield around the player mitigating melee damage and deflecting ranged attacks. ";
-        this.unlockCost = 2;
+        this.unlockCost = 1;
     }
     
     public void use(Damage damage, SylverVector2f origin) 

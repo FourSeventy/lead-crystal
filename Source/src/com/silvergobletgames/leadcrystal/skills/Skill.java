@@ -40,13 +40,16 @@ public abstract class Skill
     
     public static enum SkillID{
         //WARNING - Changing the names of this enum will break save data
-        PlayerLaser,PlayerBuckshot, PlayerRicochet, PlayerRocket,
-        PlayerBashAttack, PlayerDash, PlayerBoomerang, PlayerSnipe, 
-        PlayerPoisonBomb, PlayerBarrelRoll,PlayerClusterbomb,
-        PlayerAttackDrone,PlayerGravityShield,PlayerWard,PlayerLeechingBlades,  
-        PlayerFreezeAttack, PlayerStomp,PlayerStimpack,PlayerSoulLeech,
+        PlayerLaser,PlayerBuckshot, PlayerRicochet, PlayerRocket, //primary
+        PlayerBashAttack, PlayerDash, PlayerBoomerang, PlayerSnipe,  //secondary
+        PlayerPoisonBomb, PlayerBarrelRoll,PlayerClusterbomb, PlayerCrushingStrike, //power
+        PlayerAttackDrone,PlayerGravityShield,PlayerWard,PlayerLeechingBlades,  //tech
         EnemyLaser,EnemyMeleeBash,EnemyGooShot,EnemySmallMelee, EnemyAntThrow, EnemyFlierGooBomb,
-        EnemyBossSwipe;
+        EnemyBossSwipe,
+        
+        //unused
+        PlayerFreezeAttack, PlayerStomp,PlayerStimpack,PlayerSoulLeech;
+        
     }
     
     public static enum SkillType{

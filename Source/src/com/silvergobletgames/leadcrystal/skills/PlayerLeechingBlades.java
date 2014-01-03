@@ -45,7 +45,7 @@ public class PlayerLeechingBlades extends PlayerSkill{
         this.icon = new Image("blade.png") ;
         this.skillName = "Leeching Blades";
         this.skillDescription = "Launches blades that spin around you doing damage and leeching health from enemies.";
-        this.unlockCost = 2;
+        this.unlockCost = 1;
     }
     
     public void use(Damage damage, SylverVector2f origin) 
