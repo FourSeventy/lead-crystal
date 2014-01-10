@@ -32,7 +32,7 @@ public enum LeadCrystalTextType implements TextType{
         Graphics2D java2d = ( Graphics2D)( bufferedImage.createGraphics());
         
          //COMBAT
-        Font font = new Font("IMPACT", Font.BOLD, 24);
+        Font font = new Font("IMPACT", Font.BOLD, 30);
         TextRenderer textRenderer = new TextRenderer(font, true, true,new SylverRenderDelegate());
         textRenderer.setUseVertexArrays(false);
         FontMetrics metrics = java2d.getFontMetrics(font);

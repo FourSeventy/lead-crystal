@@ -68,14 +68,6 @@ public class CombatText extends Text
         else
             this.setFadeTime(20);
     }
-       
-    /**
-     * Sets up some initial field values.
-     */
-    private void initialize(Damage d, int lifetime, CombatEntity owningEntity)
-    {
-        
-    }
     
     /**
      * Initializes the position.
@@ -90,11 +82,16 @@ public class CombatText extends Text
      * @param d
      * @return 
      */
-    private void assignColor(Damage d){
+    private void assignColor(Damage d)
+    {
         Color c;
         
         
-        if (d.getType() == Damage.DamageType.HEAL) 
+        if(d.getType() == Damage.DamageType.PHYSICAL)
+        {
+            c = new Color(1f,1f,1f,1f);
+        }
+        else if (d.getType() == Damage.DamageType.HEAL) 
         {
             c = new Color(0,1f,0,1f);
         }

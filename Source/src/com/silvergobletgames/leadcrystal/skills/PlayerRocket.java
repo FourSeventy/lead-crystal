@@ -57,7 +57,6 @@ public class PlayerRocket extends PlayerSkill
     public void use(Damage damage, SylverVector2f origin) 
     {
         //get player and random references
-        PlayerEntity player = (PlayerEntity) user;
         Random r = SylverRandom.random;
         
          //get targeting data
@@ -184,9 +183,9 @@ public class PlayerRocket extends PlayerSkill
                  Body beh = new StaticBody(new Circle(75));
                  beh.setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value);
                  beh.setBitmask(Entity.BitMasks.NO_COLLISION.value);
-                 damage.setType(Damage.DamageType.PHYSICAL);   
+                 damage.setType(Damage.DamageType.BURN);   
                  HitBox explosionHitbox = new HitBox(damage, beh, img, sourceEntity);
-                 explosionHitbox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 60, 0, 0));
+                 explosionHitbox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 10, 0, 0));
                  explosionHitbox.setPosition(this.getPosition().x, this.getPosition().y);
                  this.getOwningScene().add(explosionHitbox, Layer.MAIN);
                  
