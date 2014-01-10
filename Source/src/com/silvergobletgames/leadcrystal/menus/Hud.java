@@ -28,6 +28,7 @@ import com.silvergobletgames.leadcrystal.netcode.OpenInstructionalTipPacket.Inst
 import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
 import com.silvergobletgames.leadcrystal.skills.Skill.SkillID;
 import com.silvergobletgames.leadcrystal.skills.SkillFactory;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.graphics.Text.CoreTextType;
@@ -91,6 +92,7 @@ public class Hud extends Window
     //you have died text and button
     private Label youHaveDied;
     private Button youDiedButton;
+    private Text youHaveDiedText;
     
     //skill up poppup
     private Button skillUpButton;
@@ -926,27 +928,62 @@ public class Hud extends Window
                 Text dead= new Text("You Have Died", CoreTextType.MENU);
                 dead.setScale(1f);
                 this.youHaveDied = new Label(dead, center - dead.getWidth()/2, 600);
+                youHaveDied.getText().setColor(new Color(1,1,1,0)); 
+                
+                Color[] points2 = {new Color(1,1,1,0),new Color(1,1,1,0),new Color(1,1,1,1)};
+                int[] durations2 = {150,60};
+                MultiTextEffect fadeEffect = new MultiTextEffect(TextEffect.TextEffectType.COLOR, points2,durations2);   
+                youHaveDied.getText().addTextEffect(fadeEffect);
+                
                 this.addComponent(youHaveDied);
                 
-                Text ehh = new Text("Respawn In Town",LeadCrystalTextType.MESSAGE);
-                this.youDiedButton = new Button(ehh, center - 200, 500);
+                
+                
+                final Text ehh = new Text("Respawn In Town",LeadCrystalTextType.MESSAGE);
+                ehh.setPosition(center - 200, 500);
+                this.youHaveDiedText = ehh;
+                this.owningScene.add(ehh, Layer.HUD);
+                this.youDiedButton = new Button(new Image("blank.png"), center - ehh.getWidth()/2, ehh.getPosition().y, ehh.getWidth(), ehh.getHeight());
                 youDiedButton.addActionListener(new ActionListener() {
 
-                    public void actionPerformed(ActionEvent e) {
-                        if (e.getActionCommand().equals("clicked")) {
-                            
-                            ((GameClientScene)owningScene).sendRespawnRequestPacket();
-                        }
-                        if (e.getActionCommand().equals("mouseEntered")) {
-                            youDiedButton.text.setScale(1.2f);
-                            
-                        }
-                        if (e.getActionCommand().equals("mouseExited")) {
-                            youDiedButton.text.setScale(1f);
-                        }
-                    }
-                });
+            public void actionPerformed(ActionEvent e) {
+                if (e.getActionCommand().equals("clicked")) 
+                {
+                    ((GameClientScene)owningScene).sendRespawnRequestPacket();
+                }
+                if (e.getActionCommand().equals("mouseEntered")) 
+                {
+                    
+                      if(ehh.hasTextEffect("small"))
+                          ehh.removeTextEffect("small");
+                      
+                       ehh.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, ehh.getScale(), 1.3));
+                    
+                    //play sound
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true);
+                    owningScene.add(sound);
+                }
+                if (e.getActionCommand().equals("mouseExited"))
+                {
+                        if(ehh.hasTextEffect("big"))
+                           ehh.removeTextEffect("big");
+                        
+                        ehh.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, ehh.getScale(), 1));
+                }
+            }
+        });
+                
+                
+                
+                ehh.setColor(new Color(1,1,1,0)); 
+                Color[] points3 = {new Color(1,1,1,0),new Color(1,1,1,0),new Color(1,1,1,1)};
+                int[] durations3 = {150,60};
+                MultiTextEffect fadeEffect2 = new MultiTextEffect(TextEffect.TextEffectType.COLOR, points3,durations3);   
+                
+                ehh.addTextEffect(fadeEffect2);
+                
                 this.addComponent(youDiedButton);
+                
             }
         }
         else
@@ -955,6 +992,7 @@ public class Hud extends Window
             {
                 this.removeComponent(youHaveDied);
                 this.removeComponent(youDiedButton);
+                this.owningScene.remove(youHaveDiedText); 
                 
                 youHaveDied = null;
                 youDiedButton = null;

@@ -114,6 +114,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     public boolean touchingLadder = false;
     public boolean onLadder = false;
     public boolean respawnWhenEnterTown = false;
+    private RespawnGravestone respawnGravestone;
     
   
     
@@ -325,6 +326,24 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     public void draw(GL2 gl)
     {
         this.updateBodyParts();
+        
+        //if we are dead hide body
+        if(this.combatData.isDead())
+        {
+             //hide body
+            this.getImage().setAlphaBrightness(0);
+            this.head.setAlphaBrightness(0);
+            this.frontArm.setAlphaBrightness(0);
+            this.backArm.setAlphaBrightness(0);
+        }
+        else
+        {
+             //show body
+            this.getImage().setAlphaBrightness(1);
+            this.head.setAlphaBrightness(1);
+            this.frontArm.setAlphaBrightness(1);
+            this.backArm.setAlphaBrightness(1);
+        }
                    
         this.backArm.draw(gl);
         
@@ -509,9 +528,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
 
         //Stop casting
         this.interruptAttacking();
-
-        
-        
+      
         //turn off light
         this.light.turnOff();
         
@@ -525,12 +542,26 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         //emit death chunks
         super.emitDeathChunks();
         
+        //==================
+        //add respawn gravestone
+        //==================
+
+        Body gravestoneBody = new Body(new Box(100,130),1 );
+        gravestoneBody.setBitmask(Entity.BitMasks.NO_COLLISION.value);
+        gravestoneBody.setOverlapMask(Entity.OverlapMasks.NO_OVERLAP.value);
         
-        //==================
-        //add respawn script
-        //==================
+        this.respawnGravestone = new RespawnGravestone(new Image("gravestone.png"),gravestoneBody,this);
+        //this.respawnGravestone.getImage().setDimensions(100, 130);
+        this.respawnGravestone.getImage().setScale(.2f);
+        
+        Float[] points = {0f,0f,1f};
+        int[] durations = {60,60};
+        ImageEffect fadeEffect = new MultiImageEffect(ImageEffect.ImageEffectType.ALPHABRIGHTNESS, points,durations);
+        this.respawnGravestone.getImage().addImageEffect(fadeEffect);
+        
+        //building respawn script
         ScriptPage page = new ScriptPage();
-        page.setScript("if(self.getID() != invoker.getID()){scriptManager.respawnPlayer(self.getID(),invoker.getID());}"); 
+        page.setScript("if(\"" + this.getID() + " \" != invoker.getID()){scriptManager.respawnPlayer(\" " + this.getID() + " \",invoker.getID());}"); 
         
         PageCondition condition = new PageCondition();
         condition.setConditionScript("conditionValue = true;");
@@ -538,17 +569,9 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         ScriptObject obj = new ScriptObject();
         obj.addPage(page, condition);
         obj.setTrigger(ScriptObject.ScriptTrigger.RIGHTCLICK);
-        this.setScriptObject(obj); 
+        this.respawnGravestone.setScriptObject(obj); 
         
-        Float[] points = {0f,0f,1f};
-        int[] durations = {180,10};
-        this.getImage().addImageEffect(new MultiImageEffect(ImageEffect.ImageEffectType.ALPHABRIGHTNESS, points, durations));
-        //gravestone overlay
-        Overlay gravestoneOverlay = new Overlay(new Image("gravestone.png"));
-        gravestoneOverlay.getImage().addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.ALPHABRIGHTNESS, 180, 0, 1));
-        gravestoneOverlay.setRelativeSize(.7f);
-        gravestoneOverlay.setRelativePosition(.05f,0);
-        this.getImage().addOverlay("grave",gravestoneOverlay);
+        this.getOwningScene().add(this.respawnGravestone, Scene.Layer.MAIN);
         
         
         
@@ -582,10 +605,9 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         this.combatData.removeState(CombatState.IMMUNE);
         
         //remove respawn gravestone
-        this.getImage().removeOverlay("grave");
-        
-        //remove respawn script
-        this.setScriptObject(null);
+        this.getOwningScene().remove(this.respawnGravestone);
+        this.respawnGravestone = null;
+       
     }
     
     public void toggleFlashlight()
@@ -1732,6 +1754,62 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
        
         return player;
 
+        
+    }
+    
+    
+    
+    
+    
+    //====================
+    // Respawn Gravestone
+    //====================
+    
+    public static class RespawnGravestone extends Entity
+    {
+        private PlayerEntity player;
+        private int ticks;
+        
+        public RespawnGravestone(Image image, Body body, PlayerEntity player)
+        {
+            super(image,body);
+            
+            this.player = player;
+            
+            Image gearImage =new Image("gear2.png");
+            gearImage.setAnchor(Anchorable.Anchor.CENTER);
+            Overlay gear = new Overlay(gearImage);
+            gear.setRelativePosition(.5f, 1.2f);
+            gear.setRelativeSize(.2f);
+            image.addOverlay("interact",gear );  
+
+            //add overlay movement
+            Object[] points = {1.2f,1.3f,1.2f};
+            int[] durations = {60,60};
+            MultiImageEffect bobEffect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
+            bobEffect.setRepeating(true);
+            image.addImageEffect(bobEffect);
+            
+               Float[] points2 = {0f,0f,1f};
+            int[] durations2 = {60,60};
+            ImageEffect fadeEffect = new MultiImageEffect(ImageEffect.ImageEffectType.ALPHABRIGHTNESS, points2,durations2);
+        gear.getImage().addImageEffect(fadeEffect);
+        }
+        
+        
+        @Override
+        public void update()
+        {
+            super.update();
+            
+            this.ticks++;
+            
+            
+            this.setPosition(player.getPosition().x, player.getPosition().y);
+            
+            
+            
+        }
         
     }
     

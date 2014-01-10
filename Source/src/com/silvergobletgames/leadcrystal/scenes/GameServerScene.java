@@ -492,7 +492,7 @@ public class GameServerScene extends Scene
                     //test
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_M))
                     {
-                       
+                       this.players.get(0).die();
                     }
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_N))
                     {
