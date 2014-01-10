@@ -633,13 +633,13 @@ public final class GameClientScene extends Scene
         if(!hud.chatManager.chatPromptOpen && this.lockInput.get() == false)
         {
             //move left
-            if (inputSnapshot.isKeyPressed(KeyEvent.VK_A))
+            if (inputSnapshot.isKeyPressed(KeyEvent.VK_A) || inputSnapshot.isKeyPressed(KeyEvent.VK_LEFT))
             {
                 player.move(FacingDirection.LEFT);
             }
 
             //move right
-            if (inputSnapshot.isKeyPressed(KeyEvent.VK_D))
+            if (inputSnapshot.isKeyPressed(KeyEvent.VK_D) || inputSnapshot.isKeyPressed(KeyEvent.VK_RIGHT))
             {
                 player.move(FacingDirection.RIGHT);
             }
@@ -657,13 +657,13 @@ public final class GameClientScene extends Scene
             }
 
             //down
-            if (inputSnapshot.isKeyPressed(com.jogamp.newt.event.KeyEvent.VK_S) == true)
+            if (inputSnapshot.isKeyPressed(com.jogamp.newt.event.KeyEvent.VK_S) == true || inputSnapshot.isKeyPressed(KeyEvent.VK_DOWN))
             {
                 player.move(new SylverVector2f(0,-1));
             }
 
             //up
-            if (inputSnapshot.isKeyPressed(com.jogamp.newt.event.KeyEvent.VK_W) == true)
+            if (inputSnapshot.isKeyPressed(com.jogamp.newt.event.KeyEvent.VK_W) == true || inputSnapshot.isKeyPressed(KeyEvent.VK_UP))
             {
                 player.move(new SylverVector2f(0,1));
             }
@@ -701,17 +701,6 @@ public final class GameClientScene extends Scene
                 }
             }
 
-            //open skill menu
-            if (inputSnapshot.isKeyReleased(KeyEvent.VK_T)) 
-            {
-                hud.skillMenu.toggle();
-            }
-            //open inventory menu
-            if (inputSnapshot.isKeyReleased(KeyEvent.VK_I)) 
-            {
-                //toggle the inventory menu
-                hud.inventoryMenu.toggle();
-            }
             //quest menu
             if (inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_L))
             {
@@ -737,7 +726,7 @@ public final class GameClientScene extends Scene
             //debug
             if (inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_M))
             {
-                sendSizeTest();
+            
             }
 
             //handle dashing
@@ -1562,7 +1551,6 @@ public final class GameClientScene extends Scene
         
         //close menus
         hud.mapMenu.close();
-        hud.inventoryMenu.close();
         hud.questMenu.close();
         
         //queue up level change
@@ -1666,17 +1654,12 @@ public final class GameClientScene extends Scene
         {
             case POTION:
                hud.potionsMenu.open();
-               hud.inventoryMenu.open();
             break;
             case ARMOR:
                 hud.armorMenu.open();
-                hud.inventoryMenu.open();
             break;           
             case MAP:
                 hud.mapMenu.open();
-            break;
-            case INVENTORY:
-                hud.inventoryMenu.open();
             break;
             case SKILL:
                 hud.skillMenu.open();
@@ -1691,18 +1674,13 @@ public final class GameClientScene extends Scene
         switch(packet.menu)
         {
             case POTION:
-               hud.potionsMenu.close();
-               hud.inventoryMenu.close();
+               hud.potionsMenu.close();      
             break;
             case ARMOR:
-                hud.armorMenu.close();
-                hud.inventoryMenu.close();
+                hud.armorMenu.close();             
             break;    
             case MAP:
                 hud.mapMenu.close();
-            break;
-            case INVENTORY:
-                hud.inventoryMenu.close();
             break;
             case SKILL:
                 hud.skillMenu.close();

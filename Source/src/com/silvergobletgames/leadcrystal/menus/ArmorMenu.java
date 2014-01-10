@@ -58,10 +58,58 @@ public class ArmorMenu extends Window{
     private ArrayList<WindowComponent> boots3LockedComponents = new ArrayList();
     private ArrayList<WindowComponent> boots4LockedComponents = new ArrayList();
     
+    private Button ranged1Selected;
+    private Button ranged2Selected;
+    private Button ranged3Selected;
+    private Button ranged4Selected;
+    
+    private Button melee1Selected;
+    private Button melee2Selected;
+    private Button melee3Selected;
+    private Button melee4Selected;
+    
+    private Button helm1Selected;
+    private Button helm2Selected;
+    private Button helm3Selected;
+    private Button helm4Selected;
+    
+    private Button chest1Selected;
+    private Button chest2Selected;
+    private Button chest3Selected;
+    private Button chest4Selected;
+    
+    private Button boots1Selected;
+    private Button boots2Selected;
+    private Button boots3Selected;
+    private Button boots4Selected;
+    
+    
+    
     public ArmorMenu( PlayerEntity player, float x, float y)
     {
         super(new Image("armorMenu.png"),x,y,1000,800);
         
+        //close button
+        Button closeButton = new Button("deleteButton.png",950,700,50,50);
+        closeButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                if (e.getActionCommand().equals("mouseEntered")) {
+
+                  
+                }
+                if (e.getActionCommand().equals("mouseExited")) {
+
+                    
+                }
+                if(e.getActionCommand().equals("clicked"))
+                {
+                    close();
+                }
+            }
+       });
+        this.addComponent(closeButton);
+       
         this.playerReference = player;
         
         //================
@@ -117,7 +165,12 @@ public class ArmorMenu extends Window{
         label.getText().setScale(.9f);
         this.addComponent(label);
         ranged1LockedComponents.add(label);
-             
+        //selected component
+        this.ranged1Selected = new Button(new Image("minimapFrame.png"),20,600,230,130);
+        this.ranged1Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
+        this.ranged1Selected.dontKillClick = true;
+        this.addComponent(ranged1Selected);
+              
         
         //ranged2
         final Armor armor2 = player.getArmorManager().getArmor(ArmorID.ATTACHMENT2);
@@ -168,6 +221,11 @@ public class ArmorMenu extends Window{
         label.getText().setScale(.9f);
         this.addComponent(label);
         ranged2LockedComponents.add(label);
+        //selected component
+        this.ranged2Selected = new Button(new Image("minimapFrame.png"),255,600,230,130);
+        this.ranged2Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
+        this.ranged2Selected.dontKillClick = true;
+        this.addComponent(ranged2Selected);
        
         //ranged3
         final Armor armor3 = player.getArmorManager().getArmor(ArmorID.ATTACHMENT3);
@@ -218,6 +276,11 @@ public class ArmorMenu extends Window{
         label.getText().setScale(.9f);
         this.addComponent(label);
         ranged3LockedComponents.add(label);
+        //selected component
+        this.ranged3Selected = new Button(new Image("minimapFrame.png"),495,600,230,130);
+        this.ranged3Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
+        this.ranged3Selected.dontKillClick = true;
+        this.addComponent(ranged3Selected);
 
         
         //ranged4
@@ -269,6 +332,11 @@ public class ArmorMenu extends Window{
         label.getText().setScale(.9f);
         this.addComponent(label);
         ranged4LockedComponents.add(label);
+        //selected component
+        this.ranged4Selected = new Button(new Image("minimapFrame.png"),735,600,230,130);
+        this.ranged4Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
+        this.ranged4Selected.dontKillClick = true;
+        this.addComponent(ranged4Selected);
 
         
         
@@ -326,6 +394,11 @@ public class ArmorMenu extends Window{
         label.getText().setScale(.9f);
         this.addComponent(label);
         melee1LockedComponents.add(label);
+        //selected component
+        this.melee1Selected = new Button(new Image("minimapFrame.png"),20,450,230,130);
+        this.melee1Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
+        this.melee1Selected.dontKillClick = true;
+        this.addComponent(melee1Selected);
 
 
         
@@ -378,6 +451,11 @@ public class ArmorMenu extends Window{
         label.getText().setScale(.9f);
         this.addComponent(label);
         melee2LockedComponents.add(label);
+        //selected component
+        this.melee2Selected = new Button(new Image("minimapFrame.png"),260,450,230,130);
+        this.melee2Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
+        this.melee2Selected.dontKillClick = true;
+        this.addComponent(melee2Selected);
 
         
         //melee3
@@ -429,6 +507,11 @@ public class ArmorMenu extends Window{
         label.getText().setScale(.9f);
         this.addComponent(label);
         melee3LockedComponents.add(label);
+        //selected component
+        this.melee3Selected = new Button(new Image("minimapFrame.png"),495,450,230,130);
+        this.melee3Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
+        this.melee3Selected.dontKillClick = true;
+        this.addComponent(melee3Selected);
         
         
         //melee4
@@ -480,6 +563,11 @@ public class ArmorMenu extends Window{
         label.getText().setScale(.9f);
         this.addComponent(label);
         melee4LockedComponents.add(label);
+        //selected component
+        this.melee4Selected = new Button(new Image("minimapFrame.png"),735,450,230,130);
+        this.melee4Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
+        this.melee4Selected.dontKillClick = true;
+        this.addComponent(melee4Selected);
         
 
         
@@ -537,6 +625,11 @@ public class ArmorMenu extends Window{
         label.getText().setScale(.9f);
         this.addComponent(label);
         helm1LockedComponents.add(label);
+        //selected component
+        this.helm1Selected = new Button(new Image("minimapFrame.png"),20,310,230,130);
+        this.helm1Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
+        this.helm1Selected.dontKillClick = true;
+        this.addComponent(helm1Selected);
         
 
 
@@ -590,6 +683,11 @@ public class ArmorMenu extends Window{
         label.getText().setScale(.9f);
         this.addComponent(label);
         helm2LockedComponents.add(label);
+        //selected component
+        this.helm2Selected = new Button(new Image("minimapFrame.png"),255,310,230,130);
+        this.helm2Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
+        this.helm2Selected.dontKillClick = true;
+        this.addComponent(helm2Selected);
         
 
         
@@ -642,6 +740,11 @@ public class ArmorMenu extends Window{
         label.getText().setScale(.9f);
         this.addComponent(label);
         helm3LockedComponents.add(label);
+        //selected component
+        this.helm3Selected = new Button(new Image("minimapFrame.png"),495,310,230,130);
+        this.helm3Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
+        this.helm3Selected.dontKillClick = true;
+        this.addComponent(helm3Selected);
         
 
         
@@ -694,6 +797,11 @@ public class ArmorMenu extends Window{
         label.getText().setScale(.9f);
         this.addComponent(label);
         helm4LockedComponents.add(label);
+        //selected component
+        this.helm4Selected = new Button(new Image("minimapFrame.png"),735,310,230,130);
+        this.helm4Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
+        this.helm4Selected.dontKillClick = true;
+        this.addComponent(helm4Selected);
         
 
         
@@ -751,6 +859,11 @@ public class ArmorMenu extends Window{
         label.getText().setScale(.9f);
         this.addComponent(label);
         chest1LockedComponents.add(label);
+        //selected component
+        this.chest1Selected = new Button(new Image("minimapFrame.png"),20,150,230,130);
+        this.chest1Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
+        this.chest1Selected.dontKillClick = true;
+        this.addComponent(chest1Selected);
 
 
         
@@ -803,6 +916,11 @@ public class ArmorMenu extends Window{
         label.getText().setScale(.9f);
         this.addComponent(label);
         chest2LockedComponents.add(label);
+        //selected component
+        this.chest2Selected = new Button(new Image("minimapFrame.png"),255,150,230,130);
+        this.chest2Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
+        this.chest2Selected.dontKillClick = true;
+        this.addComponent(chest2Selected);
 
         
         //chest3
@@ -854,6 +972,11 @@ public class ArmorMenu extends Window{
         label.getText().setScale(.9f);
         this.addComponent(label);
         chest3LockedComponents.add(label);
+        //selected component
+        this.chest3Selected = new Button(new Image("minimapFrame.png"),495,150,230,130);
+        this.chest3Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
+        this.chest3Selected.dontKillClick = true;
+        this.addComponent(chest3Selected);
         
 
         
@@ -906,6 +1029,11 @@ public class ArmorMenu extends Window{
         label.getText().setScale(.9f);
         this.addComponent(label);
         chest4LockedComponents.add(label);
+        //selected component
+        this.chest4Selected = new Button(new Image("minimapFrame.png"),735,150,230,130);
+        this.chest4Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
+        this.chest4Selected.dontKillClick = true;
+        this.addComponent(chest4Selected);
         
 
         //================
@@ -961,6 +1089,11 @@ public class ArmorMenu extends Window{
         label.getText().setScale(.9f);
         this.addComponent(label);
         boots1LockedComponents.add(label);
+        //selected component
+        this.boots1Selected = new Button(new Image("minimapFrame.png"),20,5,230,130);
+        this.boots1Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
+        this.boots1Selected.dontKillClick = true;
+        this.addComponent(boots1Selected);
         
         
         //boots2
@@ -1012,6 +1145,11 @@ public class ArmorMenu extends Window{
         label.getText().setScale(.9f);
         this.addComponent(label);
         boots2LockedComponents.add(label);
+        //selected component
+        this.boots2Selected = new Button(new Image("minimapFrame.png"),255,5,230,130);
+        this.boots2Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
+        this.boots2Selected.dontKillClick = true;
+        this.addComponent(boots2Selected);
         
 
         
@@ -1064,6 +1202,11 @@ public class ArmorMenu extends Window{
         label.getText().setScale(.9f);
         this.addComponent(label);
         boots3LockedComponents.add(label);
+        //selected component
+        this.boots3Selected = new Button(new Image("minimapFrame.png"),495,5,230,130);
+        this.boots3Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
+        this.boots3Selected.dontKillClick = true;
+        this.addComponent(boots3Selected);
        
         
         //boots4
@@ -1115,6 +1258,11 @@ public class ArmorMenu extends Window{
         label.getText().setScale(.9f);
         this.addComponent(label);
         boots4LockedComponents.add(label);
+         //selected component
+        this.boots4Selected = new Button(new Image("minimapFrame.png"),735,5,230,130);
+        this.boots4Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
+        this.boots4Selected.dontKillClick = true;
+        this.addComponent(boots4Selected);
 
         
         
@@ -1127,7 +1275,7 @@ public class ArmorMenu extends Window{
         super.update();
         
         //=========================
-        // Ranged Locked Components
+        // Attachment Locked Components
         //==========================
         if(!ranged1LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.ATTACHMENT1))
         {
@@ -1136,6 +1284,15 @@ public class ArmorMenu extends Window{
             
             ranged1LockedComponents.clear();
         }
+        if(playerReference.getArmorManager().getAttachmentEquippedID() == ArmorID.ATTACHMENT1)
+        {
+            this.ranged1Selected.setHidden(false);
+        }
+        else
+        {
+            this.ranged1Selected.setHidden(true);
+        }
+        
         if(!ranged2LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.ATTACHMENT2))
         {
             for(WindowComponent wc: ranged2LockedComponents)
@@ -1143,6 +1300,15 @@ public class ArmorMenu extends Window{
             
             ranged2LockedComponents.clear();
         }
+        if(playerReference.getArmorManager().getAttachmentEquippedID() == ArmorID.ATTACHMENT2)
+        {
+            this.ranged2Selected.setHidden(false);
+        }
+        else
+        {
+            this.ranged2Selected.setHidden(true);
+        }
+        
         if(!ranged3LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.ATTACHMENT3))
         {
             for(WindowComponent wc: ranged3LockedComponents)
@@ -1150,6 +1316,15 @@ public class ArmorMenu extends Window{
             
             ranged3LockedComponents.clear();
         }
+        if(playerReference.getArmorManager().getAttachmentEquippedID() == ArmorID.ATTACHMENT3)
+        {
+            this.ranged3Selected.setHidden(false);
+        }
+        else
+        {
+            this.ranged3Selected.setHidden(true);
+        }
+        
         if(!ranged4LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.ATTACHMENT4))
         {
             for(WindowComponent wc: ranged4LockedComponents)
@@ -1157,9 +1332,17 @@ public class ArmorMenu extends Window{
             
             ranged4LockedComponents.clear();
         }
+        if(playerReference.getArmorManager().getAttachmentEquippedID() == ArmorID.ATTACHMENT4)
+        {
+            this.ranged4Selected.setHidden(false);
+        }
+        else
+        {
+            this.ranged4Selected.setHidden(true);
+        }
         
         //=========================
-        // Melee Locked Components
+        // Modifier Locked Components
         //==========================
         if(!melee1LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.MODIFIER1))
         {
@@ -1168,6 +1351,15 @@ public class ArmorMenu extends Window{
             
             melee1LockedComponents.clear();
         }
+        if(playerReference.getArmorManager().getModifierEquippedID()== ArmorID.MODIFIER1)
+        {
+            this.melee1Selected.setHidden(false);
+        }
+        else
+        {
+            this.melee1Selected.setHidden(true);
+        }
+        
         if(!melee2LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.MODIFIER2))
         {
             for(WindowComponent wc: melee2LockedComponents)
@@ -1175,6 +1367,15 @@ public class ArmorMenu extends Window{
             
             melee2LockedComponents.clear();
         }
+        if(playerReference.getArmorManager().getModifierEquippedID()== ArmorID.MODIFIER2)
+        {
+            this.melee2Selected.setHidden(false);
+        }
+        else
+        {
+            this.melee2Selected.setHidden(true);
+        }
+        
         if(!melee3LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.MODIFIER3))
         {
             for(WindowComponent wc: melee3LockedComponents)
@@ -1182,12 +1383,29 @@ public class ArmorMenu extends Window{
             
             melee3LockedComponents.clear();
         }
+        if(playerReference.getArmorManager().getModifierEquippedID()== ArmorID.MODIFIER3)
+        {
+            this.melee3Selected.setHidden(false);
+        }
+        else
+        {
+            this.melee3Selected.setHidden(true);
+        }
+        
         if(!melee4LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.MODIFIER4))
         {
             for(WindowComponent wc: melee4LockedComponents)
                 this.removeComponent(wc);
             
             melee4LockedComponents.clear();
+        }
+        if(playerReference.getArmorManager().getModifierEquippedID()== ArmorID.MODIFIER4)
+        {
+            this.melee4Selected.setHidden(false);
+        }
+        else
+        {
+            this.melee4Selected.setHidden(true);
         }
         
         
@@ -1201,6 +1419,15 @@ public class ArmorMenu extends Window{
             
             helm1LockedComponents.clear();
         }
+        if(playerReference.getArmorManager().getHelmEquippedID()== ArmorID.HELM1)
+        {
+            this.helm1Selected.setHidden(false);
+        }
+        else
+        {
+            this.helm1Selected.setHidden(true);
+        }
+        
         if(!helm2LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.HELM2))
         {
             for(WindowComponent wc: helm2LockedComponents)
@@ -1208,6 +1435,15 @@ public class ArmorMenu extends Window{
             
             helm2LockedComponents.clear();
         }
+        if(playerReference.getArmorManager().getHelmEquippedID()== ArmorID.HELM2)
+        {
+            this.helm2Selected.setHidden(false);
+        }
+        else
+        {
+            this.helm2Selected.setHidden(true);
+        }
+        
         if(!helm3LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.HELM3))
         {
             for(WindowComponent wc: helm3LockedComponents)
@@ -1215,6 +1451,15 @@ public class ArmorMenu extends Window{
             
             helm3LockedComponents.clear();
         }
+        if(playerReference.getArmorManager().getHelmEquippedID()== ArmorID.HELM3)
+        {
+            this.helm3Selected.setHidden(false);
+        }
+        else
+        {
+            this.helm3Selected.setHidden(true);
+        }
+        
         if(!helm4LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.HELM4))
         {
             for(WindowComponent wc: helm4LockedComponents)
@@ -1222,9 +1467,17 @@ public class ArmorMenu extends Window{
             
             helm4LockedComponents.clear();
         }
+        if(playerReference.getArmorManager().getHelmEquippedID()== ArmorID.HELM4)
+        {
+            this.helm4Selected.setHidden(false);
+        }
+        else
+        {
+            this.helm4Selected.setHidden(true);
+        }
         
         //=========================
-        // Helm Locked Components
+        // Chest Locked Components
         //==========================
         if(!chest1LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.CHEST1))
         {
@@ -1233,6 +1486,15 @@ public class ArmorMenu extends Window{
             
             chest1LockedComponents.clear();
         }
+        if(playerReference.getArmorManager().getChestEquippedID()== ArmorID.CHEST1)
+        {
+            this.chest1Selected.setHidden(false);
+        }
+        else
+        {
+            this.chest1Selected.setHidden(true);
+        }
+        
         if(!chest2LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.CHEST2))
         {
             for(WindowComponent wc: chest2LockedComponents)
@@ -1240,6 +1502,15 @@ public class ArmorMenu extends Window{
             
             chest2LockedComponents.clear();
         }
+        if(playerReference.getArmorManager().getChestEquippedID()== ArmorID.CHEST2)
+        {
+            this.chest2Selected.setHidden(false);
+        }
+        else
+        {
+            this.chest2Selected.setHidden(true);
+        }
+        
         if(!chest3LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.CHEST3))
         {
             for(WindowComponent wc: chest3LockedComponents)
@@ -1247,6 +1518,15 @@ public class ArmorMenu extends Window{
             
             chest3LockedComponents.clear();
         }
+        if(playerReference.getArmorManager().getChestEquippedID()== ArmorID.CHEST3)
+        {
+            this.chest3Selected.setHidden(false);
+        }
+        else
+        {
+            this.chest3Selected.setHidden(true);
+        }
+        
         if(!chest4LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.CHEST4))
         {
             for(WindowComponent wc: chest4LockedComponents)
@@ -1254,9 +1534,17 @@ public class ArmorMenu extends Window{
             
             chest4LockedComponents.clear();
         }
+        if(playerReference.getArmorManager().getChestEquippedID()== ArmorID.CHEST4)
+        {
+            this.chest4Selected.setHidden(false);
+        }
+        else
+        {
+            this.chest4Selected.setHidden(true);
+        }
         
         //=========================
-        // Helm Locked Components
+        // Boots Locked Components
         //==========================
         if(!boots1LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.BOOTS1))
         {
@@ -1265,6 +1553,15 @@ public class ArmorMenu extends Window{
             
             boots1LockedComponents.clear();
         }
+        if(playerReference.getArmorManager().getBootsEquippedID()== ArmorID.BOOTS1)
+        {
+            this.boots1Selected.setHidden(false);
+        }
+        else
+        {
+            this.boots1Selected.setHidden(true);
+        }
+        
         if(!boots2LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.BOOTS2))
         {
             for(WindowComponent wc: boots2LockedComponents)
@@ -1272,6 +1569,15 @@ public class ArmorMenu extends Window{
             
             boots2LockedComponents.clear();
         }
+        if(playerReference.getArmorManager().getBootsEquippedID()== ArmorID.BOOTS2)
+        {
+            this.boots2Selected.setHidden(false);
+        }
+        else
+        {
+            this.boots2Selected.setHidden(true);
+        }
+        
         if(!boots3LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.BOOTS3))
         {
             for(WindowComponent wc: boots3LockedComponents)
@@ -1279,12 +1585,29 @@ public class ArmorMenu extends Window{
             
             boots3LockedComponents.clear();
         }
+        if(playerReference.getArmorManager().getBootsEquippedID()== ArmorID.BOOTS3)
+        {
+            this.boots3Selected.setHidden(false);
+        }
+        else
+        {
+            this.boots3Selected.setHidden(true);
+        }
+        
         if(!boots4LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.BOOTS4))
         {
             for(WindowComponent wc: boots4LockedComponents)
                 this.removeComponent(wc);
             
             boots4LockedComponents.clear();
+        }
+        if(playerReference.getArmorManager().getBootsEquippedID()== ArmorID.BOOTS4)
+        {
+            this.boots4Selected.setHidden(false);
+        }
+        else
+        {
+            this.boots4Selected.setHidden(true);
         }
         
     }
