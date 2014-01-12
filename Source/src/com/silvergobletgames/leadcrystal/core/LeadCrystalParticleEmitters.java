@@ -220,7 +220,7 @@ public class LeadCrystalParticleEmitters
         { 
             
             Random rand = SylverRandom.random;
-            float posMag = (rand.nextFloat() - .5f)*300;
+            float posMag = (rand.nextFloat() - .5f)*400;
             float posAngle = (rand.nextFloat() - .5f) * 720;
             SylverVector2f pos = new SylverVector2f(this.getPosition().x + posMag *(float)Math.cos(posAngle * Math.PI/180) , this.getPosition().y + posMag *(float)Math.sin(posAngle * Math.PI/180));
             float magnitude =  rand.nextFloat() + .3f;

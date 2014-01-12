@@ -32,9 +32,12 @@ import net.phys2d.raw.shapes.Box;
 import net.phys2d.raw.shapes.Polygon;
 import net.phys2d.raw.shapes.Shape;
 import com.silvergobletgames.leadcrystal.entities.Entity;
+import com.silvergobletgames.leadcrystal.entities.MobSpawner;
 import com.silvergobletgames.leadcrystal.entities.NonPlayerEntity;
 import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
+import com.silvergobletgames.leadcrystal.items.DropGenerator;
+import com.silvergobletgames.leadcrystal.items.DropGenerator.DropQuality;
 import com.silvergobletgames.leadcrystal.menus.*;
 import com.silvergobletgames.leadcrystal.netcode.ConnectionException;
 import com.silvergobletgames.leadcrystal.netcode.GobletServer;
@@ -881,6 +884,23 @@ public class MapEditorScene extends Scene {
                 this.viewportLocation.y = this.viewportLocation.y - 10;
             }
             
+            
+            if (inputSnapshot.isKeyPressedCtrlModifier(KeyEvent.VK_M))
+            {
+                ArrayList<SceneObject> allMainObjects = this.getSceneObjectManager().get(Layer.MAIN);
+                
+                for(SceneObject obj: allMainObjects)
+                {
+//                    if(obj instanceof NonPlayerEntity)
+//                    {
+//                        ((NonPlayerEntity)obj).getCombatData().dropQuality = DropQuality.Poor;
+//                    }
+//                    else if(obj instanceof MobSpawner)
+//                    {
+//                        ((MobSpawner)obj).mobToSpawn.getCombatData().dropQuality = DropQuality.Poor;
+//                    }
+                }
+            }
             
             
         }

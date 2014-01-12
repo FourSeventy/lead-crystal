@@ -46,7 +46,7 @@ public class PlayerPoisonBomb extends PlayerSkill{
     
     public PlayerPoisonBomb()
     {
-        super(SkillID.PlayerPoisonBomb,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,1800,Integer.MAX_VALUE);
+        super(SkillID.PlayerPoisonBomb,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,25 * 60,Integer.MAX_VALUE);
         
         //set the skillID and the name
         this.icon = new Image("soulLeech.jpg");

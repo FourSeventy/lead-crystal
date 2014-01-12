@@ -29,7 +29,7 @@ public class PlayerCrushingStrike extends PlayerSkill{
     
     public PlayerCrushingStrike()
     {
-        super(SkillID.PlayerCrushingStrike,SkillType.OFFENSIVE,ExtendedImageAnimations.MELEEATTACK,300,150);
+        super(SkillID.PlayerCrushingStrike,SkillType.OFFENSIVE,ExtendedImageAnimations.MELEEATTACK,6 * 60,150);
         
         //set the name description image and unlock cost
         this.icon = new Image("computer.png");

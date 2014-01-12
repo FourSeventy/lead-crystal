@@ -93,7 +93,7 @@ public class LevelProgressionManager
         //main objective
         objective = new LevelObjective();
         objective.objectiveName = "Find Power Supply";
-        objective.objectiveDescription = "The potion guy has lost a power supply outside the city walls. Find this supply for him and he will be able to make you potions.";
+        objective.objectiveDescription = "The blacksmith has lost a power supply outside the city walls. Find this supply for him and he will be able to make you gear.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         level2.mainObjective = objective;

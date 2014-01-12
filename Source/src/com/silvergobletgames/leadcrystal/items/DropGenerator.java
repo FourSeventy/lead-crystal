@@ -34,7 +34,7 @@ public class DropGenerator {
      */
     public static enum DropQuality
     {
-        VeryPoor, // 1%
+        VeryPoor, // 0%
         Poor, //5%
         Good, //20%
         VeryGood; //100%

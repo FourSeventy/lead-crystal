@@ -45,6 +45,8 @@ import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
 import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
+import com.silvergobletgames.leadcrystal.items.Potion;
+import com.silvergobletgames.leadcrystal.items.PotionManager;
 import com.silvergobletgames.leadcrystal.netcode.*;
 import com.silvergobletgames.leadcrystal.netcode.OpenInstructionalTipPacket.InstructionalTip;
 import com.silvergobletgames.leadcrystal.netcode.OpenMenuPacket.MenuID;
@@ -1280,7 +1282,7 @@ public class GameServerScene extends Scene
         PlayerEntity player = this.clientsInScene.get(potionPacket.getClientID()).player;
         
         //subtract money from player
-        boolean success = player.getCurrencyManager().subtractCurrency(5);;
+        boolean success = player.getCurrencyManager().subtractCurrency(PotionManager.POTION_PRICE) && player.getPotionManager().getNumberOfPotions() <5;
 
         //if the subtraction succeeded, give potion to player
         if(success)

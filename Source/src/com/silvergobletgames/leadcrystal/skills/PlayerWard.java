@@ -108,6 +108,7 @@ public class PlayerWard extends PlayerSkill{
                     this.used = true;
 
                     this.getBody().setDamping(1);
+                    this.getBody().setRotDamping(1);
 
 
                     //put in ice damage
@@ -135,8 +136,8 @@ public class PlayerWard extends PlayerSkill{
         
         public IceWardHitbox(CombatEntity user, Damage damage)
         {
-            super(new Damage(Damage.DamageType.NODAMAGE, 0), new Body(new Circle(200), 4), new Image("blank.png"),user); 
-            
+            super(new Damage(Damage.DamageType.NODAMAGE, 0), new Body(new Circle(250), 4), new Image("blank.png"),user); 
+            this.getImage().setAlphaBrightness(.4f);
             this.body.setGravityEffected(false);
             this.body.removeExcludedBody(user.getBody());
             this.getBody().setBitmask(BitMasks.NO_COLLISION.value);
@@ -154,13 +155,18 @@ public class PlayerWard extends PlayerSkill{
         
         public void collidedWith(Entity other, CollisionEvent event)
         {
-            //if we collided with a player add a heal dot
+            //if we collided with enemy add damage
             if(other instanceof NonPlayerEntity)
             {
                 //apply slow
                 StateEffect slow = new StateEffect(StateEffect.StateEffectType.SLOW, 10, .75f, true);
                 slow.setInfinite();
                 ((CombatEntity)other).getCombatData().addCombatEffect("iceSlow", slow);
+                
+                //apply attack speed slow
+                StateEffect attackSpeedSlow = new StateEffect(StateEffect.StateEffectType.COOLDOWNMODIFIER, 10, 1.5f, true);
+                attackSpeedSlow.setInfinite();
+                ((CombatEntity)other).getCombatData().addCombatEffect("iceAttackSlow", attackSpeedSlow);
                 
                 //apply image effect
                 ((CombatEntity)other).getImage().setColor(new Color(.5f,.5f,2)); 
@@ -180,6 +186,7 @@ public class PlayerWard extends PlayerSkill{
                 //remove infinite effects 
                 ((CombatEntity)other).getCombatData().removeCombatEffect("iceDot");
                 ((CombatEntity)other).getCombatData().removeCombatEffect("iceSlow");
+                ((CombatEntity)other).getCombatData().removeCombatEffect("iceAttackSlow");
                 ((CombatEntity)other).getImage().setColor(new Color(1,1,1,1));
                 
                 //apply finite effects

@@ -25,6 +25,8 @@ public class PotionManager
     public PlayerEntity playerReference;
     private int numberOfPotions;
     
+    public static final int POTION_PRICE = 15;
+    
     //============
     // Constructor
     //============
