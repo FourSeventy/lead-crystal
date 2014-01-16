@@ -1,5 +1,6 @@
 package com.silvergobletgames.leadcrystal.scenes;
 
+import com.jogamp.newt.MonitorDevice;
 import com.jogamp.newt.MonitorMode;
 import com.jogamp.newt.Screen;
 import com.jogamp.newt.event.KeyEvent;
@@ -11,6 +12,7 @@ import com.silvergobletgames.sylver.audio.AudioRenderer;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.*;
 import com.silvergobletgames.sylver.core.EngineSettings.ParticleDensity;
+import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.OpenGLGameWindow;
 import com.silvergobletgames.sylver.graphics.Text;
@@ -33,6 +35,8 @@ public class OptionsMenuScene extends Scene
     private int currentIndex;
     private int newIndex;
     
+    private Text vSyncText;
+    
     //================
     //Constructors
     //================
@@ -45,11 +49,11 @@ public class OptionsMenuScene extends Scene
         //==========================
         
         //get our screen mode
-        Screen screen = Game.getInstance().getGraphicsWindow().glWindow.getScreen();
-        MonitorMode currentScreenMode = screen.getMonitorDevices().get(0).getCurrentMode();
+        MonitorDevice mainMonitor = Game.getInstance().getGraphicsWindow().getMainMonitor();
+        MonitorMode currentScreenMode = mainMonitor.getCurrentMode();
 
         //filters screen modes
-        monitorModes = new ArrayList(screen.getMonitorDevices().get(0).getSupportedModes());
+        monitorModes = new ArrayList(mainMonitor.getSupportedModes());
         if(monitorModes.size()>1) 
         { 
             monitorModes = new ArrayList(MonitorModeUtil.filterByRate(monitorModes, currentScreenMode.getRefreshRate())); 
@@ -144,22 +148,27 @@ public class OptionsMenuScene extends Scene
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("clicked")) 
                 {
-                    if(Game.getInstance().getConfiguration().getEngineSettings().vSync == false)
-                    {
-                        Game.getInstance().getConfiguration().getEngineSettings().vSync = true;
-                        vsyncText.setText("VSync: On");   
-                        Game.getInstance().getGraphicsWindow().toggleVSync();
-                    }
-                    else
-                    {
-                        Game.getInstance().getConfiguration().getEngineSettings().vSync = false;
-                        vsyncText.setText("VSync: Off");
-                        Game.getInstance().getGraphicsWindow().toggleVSync();
+                    
+                    if(Game.getInstance().getGraphicsWindow().isFullscreen())
+                    {                   
+                        if(Game.getInstance().getConfiguration().getEngineSettings().vSync == false)
+                        {
+                            Game.getInstance().getConfiguration().getEngineSettings().vSync = true;
+                            //vsyncText.setText("VSync: On");   
+                            Game.getInstance().getGraphicsWindow().setVSync(true);
+                        }
+                        else
+                        {
+                            Game.getInstance().getConfiguration().getEngineSettings().vSync = false;
+                           // vsyncText.setText("VSync: Off");
+                            Game.getInstance().getGraphicsWindow().setVSync(false);
+                        }
                     }
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
                 {
-                    
+                    if(Game.getInstance().getGraphicsWindow().isFullscreen())
+                    {  
                       if(vsyncText.hasTextEffect("small"))
                           vsyncText.removeTextEffect("small");
                       
@@ -168,16 +177,22 @@ public class OptionsMenuScene extends Scene
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true);
                     add(sound);
+                    }
                 }
                 if (e.getActionCommand().equals("mouseExited"))
                 {
+                    if(Game.getInstance().getGraphicsWindow().isFullscreen())
+                    {  
                         if(vsyncText.hasTextEffect("big"))
                            vsyncText.removeTextEffect("big");
                         
                         vsyncText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, vsyncText.getScale(), 1.2));
+                    }
                 }
             }
-        });      
+        });    
+        
+        this.vSyncText = vsyncText;
         
         //bloom
         final Text bloomText = new Text(Game.getInstance().getConfiguration().getEngineSettings().bloom?"Bloom Effects: ON":"Bloom Effects: OFF",LeadCrystalTextType.MENUBUTTONS);
@@ -362,7 +377,7 @@ public class OptionsMenuScene extends Scene
         });
         
         //resolution
-        final Text resolutionText = new Text("Resolution: " + this.monitorModes.get(newIndex).getSurfaceSize().getResolution(),LeadCrystalTextType.MENUBUTTONS);
+        final Text resolutionText = new Text("Resolution: " + this.monitorModes.get(newIndex).getSurfaceSize().getResolution() +"  (" + this.asFraction(this.monitorModes.get(newIndex).getSurfaceSize().getResolution().getWidth(),this.monitorModes.get(newIndex).getSurfaceSize().getResolution().getHeight()) + ") ",LeadCrystalTextType.MENUBUTTONS);
         resolutionText.setScale(1.2f);
         resolutionText.setPosition(center - resolutionText.getWidth()/2, 275);
         final Button resolutionButton = new Button(new Image("blank.png"), center - resolutionText.getWidth()/2, resolutionText.getPosition().y, resolutionText.getWidth(), resolutionText.getHeight());
@@ -377,7 +392,7 @@ public class OptionsMenuScene extends Scene
                     if(newIndex >= monitorModes.size())
                         newIndex = 0;
                     
-                    resolutionText.setText("Resolution: " + monitorModes.get(newIndex).getSurfaceSize().getResolution());
+                    resolutionText.setText("Resolution: " + monitorModes.get(newIndex).getSurfaceSize().getResolution()+"  (" + asFraction(monitorModes.get(newIndex).getSurfaceSize().getResolution().getWidth(),monitorModes.get(newIndex).getSurfaceSize().getResolution().getHeight()) + ") ");
                     
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
@@ -457,6 +472,18 @@ public class OptionsMenuScene extends Scene
     //=======================
     //Scene Interface Methods
     //=======================
+    
+    public void update()
+    {
+        super.update();
+        
+        this.vSyncText.setText(Game.getInstance().getConfiguration().getEngineSettings().vSync?"VSync: ON":"VSync: OFF"); 
+        
+        if(!Game.getInstance().getGraphicsWindow().isFullscreen())
+           this.vSyncText.setColor(new Color(.66f,.66f,.66f,.6f)); 
+        else
+            this.vSyncText.setColor(new Color(1f,1f,1f,1f)); 
+    }
 
     public void handleInput() 
     {
@@ -487,4 +514,13 @@ public class OptionsMenuScene extends Scene
     {
         Game.getInstance().unloadScene(OptionsMenuScene.class);
     }
+    
+    private static long gcm(long a, long b) {
+    return b == 0 ? a : gcm(b, a % b); // Not bad for one line of code :)
+}
+
+    private static String asFraction(long a, long b) {
+    long gcm = gcm(a, b);
+    return (a / gcm) + ":" + (b / gcm);
+}
 }
