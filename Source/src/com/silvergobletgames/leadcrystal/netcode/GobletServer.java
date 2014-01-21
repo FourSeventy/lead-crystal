@@ -432,6 +432,7 @@ public class GobletServer implements Runnable
             else // just add the player to the level
             {
                 //add our player to this scene
+                clientData.currentLevel = levelToGo;
                 sceneMap.get(clientData.currentLevel).addClient(clientData);
             }            
             
