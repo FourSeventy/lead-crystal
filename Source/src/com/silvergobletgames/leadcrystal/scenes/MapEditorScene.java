@@ -885,20 +885,53 @@ public class MapEditorScene extends Scene {
             }
             
             
-            if (inputSnapshot.isKeyPressedCtrlModifier(KeyEvent.VK_M))
+            if (inputSnapshot.isKeyReleasedCtrlModifier(KeyEvent.VK_M))
             {
-                ArrayList<SceneObject> allMainObjects = this.getSceneObjectManager().get(Layer.MAIN);
-                
-                for(SceneObject obj: allMainObjects)
+                if(selectedItem instanceof WorldObjectEntity)
                 {
-//                    if(obj instanceof NonPlayerEntity)
-//                    {
-//                        ((NonPlayerEntity)obj).getCombatData().dropQuality = DropQuality.Poor;
-//                    }
-//                    else if(obj instanceof MobSpawner)
-//                    {
-//                        ((MobSpawner)obj).mobToSpawn.getCombatData().dropQuality = DropQuality.Poor;
-//                    }
+                     Image img = ((WorldObjectEntity)selectedItem).getImage();
+                     Image newImg = img.copy();
+                     
+                     this.remove(selectedItem);
+                     this.add(newImg,Layer.MAIN);
+                     
+                }
+            }
+            
+            if (inputSnapshot.isKeyReleasedCtrlModifier(KeyEvent.VK_I))
+            {
+                if(selectedItem instanceof WorldObjectEntity)
+                {
+                    float x = ((WorldObjectEntity)selectedItem).getPosition().x;
+                    float y = ((WorldObjectEntity)selectedItem).getPosition().y;
+                    ((WorldObjectEntity)selectedItem).setPosition(x,y+1);
+                }
+            }
+            if (inputSnapshot.isKeyReleasedCtrlModifier(KeyEvent.VK_K))
+            {
+                if(selectedItem instanceof WorldObjectEntity)
+                {
+                    float x = ((WorldObjectEntity)selectedItem).getPosition().x;
+                    float y = ((WorldObjectEntity)selectedItem).getPosition().y;
+                    ((WorldObjectEntity)selectedItem).setPosition(x,y-1);
+                }
+            }
+            if (inputSnapshot.isKeyReleasedCtrlModifier(KeyEvent.VK_J))
+            {
+                if(selectedItem instanceof WorldObjectEntity)
+                {
+                    float x = ((WorldObjectEntity)selectedItem).getPosition().x;
+                    float y = ((WorldObjectEntity)selectedItem).getPosition().y;
+                    ((WorldObjectEntity)selectedItem).setPosition(x-1,y);
+                }
+            }
+            if (inputSnapshot.isKeyReleasedCtrlModifier(KeyEvent.VK_L))
+            {
+                if(selectedItem instanceof WorldObjectEntity)
+                {
+                    float x = ((WorldObjectEntity)selectedItem).getPosition().x;
+                    float y = ((WorldObjectEntity)selectedItem).getPosition().y;
+                    ((WorldObjectEntity)selectedItem).setPosition(x+1,y);
                 }
             }
             
