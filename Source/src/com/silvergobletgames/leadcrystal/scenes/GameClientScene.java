@@ -300,9 +300,12 @@ public final class GameClientScene extends Scene
                     //if the data does concern our player, handle the special case
                     else if(renderDataChanges.ID.equals( this.clientID.toString()))
                     {        
-                        //keep track of our player in server time
-                        this.playerServerTime.reconcileRenderDataChanges(1,1,renderDataChanges);  
-                        this.playerServerTime.interpolate(1);
+                        if(GameplaySettings.getInstance().drawPlayerServerTime == true)
+                        {
+                            //keep track of our player in server time
+                            this.playerServerTime.reconcileRenderDataChanges(1,1,renderDataChanges);  
+                            this.playerServerTime.interpolate(1);
+                         }
 
                         //reconcile player data
                         this.player.reconcileRenderDataChanges(this.renderPacketArrivedTimestamp - interpolationTime,this.renderPacketArrivedTimestamp,renderDataChanges);                          
@@ -370,8 +373,6 @@ public final class GameClientScene extends Scene
                         //use historical inputs to simulate back to current time
                         for(ClientInputPacket inputPacket: historicalInputList)
                         {
-//                            if(player.dashing)
-//                                continue;
                             
                             //simulate player forces
                             this.player.simulateInputForPredictionErrorCorrection(inputPacket);

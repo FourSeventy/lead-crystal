@@ -1451,12 +1451,13 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         renderData.data.add(5,this.armorManager.dumpRenderData());
         renderData.data.add(6,this.levelProgressionManager.dumpRenderData());
         renderData.data.add(7,this.worldMousePoint);
-        renderData.data.add(8,null); 
-        renderData.data.add(9,null);
-        renderData.data.add(10,null);
+        renderData.data.add(8,this.head.dumpRenderData()); 
+        renderData.data.add(9,this.frontArm.dumpRenderData());
+        renderData.data.add(10,this.backArm.dumpRenderData());
         renderData.data.add(11,this.entityTooltip.dumpRenderData());
         renderData.data.add(12,this.getName());
         renderData.data.add(13,this.potionManager.dumpRenderData());
+        renderData.data.add(14,this.frontArm.getAnimation());
             
         
         return renderData;
@@ -1468,7 +1469,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         Image image = Image.buildFromRenderData((SceneObjectRenderData)renderData.data.get(0));
         
         //build the player
-        PlayerEntity player = new PlayerEntity(image,new Image("bash-head0.png"),new Image(new BashBrownBackArmAnimationPack()),new Image(new BashBlackFrontArmAnimationPack()));
+        PlayerEntity player = new PlayerEntity(image,Image.buildFromRenderData((SceneObjectRenderData)renderData.data.get(8)),Image.buildFromRenderData((SceneObjectRenderData)renderData.data.get(10)),Image.buildFromRenderData((SceneObjectRenderData)renderData.data.get(9)));
         player.setID(renderData.getID());
         player.setImage(image);
         
@@ -1560,6 +1561,9 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         }
         
         
+
+        
+        
         if(entityTooltip != null)
         {
             SceneObjectRenderDataChanges tooltipChanges = this.entityTooltip.generateRenderDataChanges((RenderData)oldData.data.get(11), (RenderData)newData.data.get(11));
@@ -1576,6 +1580,13 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         {
             changeList.add(potionChanges);
             changeMap += 1L <<13;
+        }
+        
+        if(!oldData.data.get(14).equals( newData.data.get(14)))
+        {
+            System.out.println("detected changed");
+            changeList.add(newData.data.get(14));
+            changeMap += 1L << 14;
         }
         
         changes.fields = changeMap;
@@ -1605,7 +1616,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         //construct an arraylist of data that we got, nulls will go where we didnt get any data
         ArrayList changeData = new ArrayList();
-        for(int i = 0; i <12; i ++)
+        for(int i = 0; i <15; i ++)
         {
             // The bit was set
             if ((fieldMap & (1L << i)) != 0)
@@ -1637,6 +1648,13 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             this.worldMousePoint = new SylverVector2f((SylverVector2f)changeData.get(7));
         }
         
+        if(changeData.get(14) != null)
+        {
+            System.out.println("reconciling: " + changeData.get(14));
+            this.frontArm.setAnimation((ImageAnimation)changeData.get(14));
+            this.backArm.setAnimation((ImageAnimation)changeData.get(14));
+        }
+        
 
     }
     
@@ -1651,6 +1669,12 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
 
         if(entityTooltip != null)
             entityTooltip.interpolate(currentTime);
+        
+        if(frontArm != null)
+           this.frontArm.update();
+        
+        if(backArm != null)
+            this.backArm.update();
     }  
     
     public PlayerPredictionData dumpPredictionData()
