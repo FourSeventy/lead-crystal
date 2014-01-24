@@ -387,7 +387,7 @@ public class GameServerScene extends Scene
                             else // mouse is outside an entity
                             {
                                 //if the old hovered entity is equal to this entity 
-                                if (clientData.lastHoveredEntityID != null && clientData.lastHoveredEntityID.endsWith(entity.getID()))                                                                            
+                                if (clientData.lastHoveredEntityID != null )                                                                            
                                     clientData.hoveredEntityExited = true;                                                 
                             }
                         }

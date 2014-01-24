@@ -1860,9 +1860,12 @@ public final class GameClientScene extends Scene
             Entity hoveredEntity = (Entity)this.getSceneObjectManager().get(packet.hoveredID);
             
             
-            //remove hover effect
-            hoveredEntity.getImage().removeImageEffect("hover");
-            hoveredEntity.getImage().setBrightness(1);
+            if(hoveredEntity != null) //prevents race condition timing bugs
+            {
+                //remove hover effect
+                hoveredEntity.getImage().removeImageEffect("hover");
+                hoveredEntity.getImage().setBrightness(1);
+            }
         }
         
         this.mouseHoverInRange = packet.inRange;
