@@ -605,7 +605,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         //building respawn script
         ScriptPage page = new ScriptPage();
-        page.setScript("if(\"" + this.getID() + " \" != invoker.getID()){scriptManager.respawnPlayer(\" " + this.getID() + " \",invoker.getID());}"); 
+        page.setScript("if(\"" + this.getID() + "\" != invoker.getID()){scriptManager.respawnPlayer(\"" + this.getID() + "\",invoker.getID());}"); 
         
         PageCondition condition = new PageCondition();
         condition.setConditionScript("conditionValue = true;");
