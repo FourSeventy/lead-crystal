@@ -714,6 +714,103 @@ public class AnimationPackClasses {
         }
     }
     
+    public static class JumperAnimationPack extends AnimationPack
+    {
+        public JumperAnimationPack()
+        {
+             //Idle
+            ArrayList<Texture> idle = new ArrayList();
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_idle0.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_idle1.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_idle2.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_idle3.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_idle4.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_idle5.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_idle6.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_idle7.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_idle8.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_idle9.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_idle10.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_idle11.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_idle12.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_idle13.png"));
+            this.animationSet.put(CoreAnimations.IDLE, idle);
+            
+            //Idle
+            idle = new ArrayList();
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk0.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk1.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk2.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk3.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk4.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk5.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk6.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk7.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk8.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk9.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk10.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk11.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk12.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk13.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk14.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk15.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk16.png"));               
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk17.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk18.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk19.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk20.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk21.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk22.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk23.png"));
+            this.animationSet.put(ExtendedImageAnimations.RUNNING, idle);
+            
+            //Spawn
+            ArrayList<Texture> spawn = new ArrayList();
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_spawn1.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_spawn2.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_spawn3.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_spawn4.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_spawn5.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_spawn6.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_spawn7.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_spawn8.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_spawn9.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_spawn10.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_spawn11.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_spawn12.png"));
+            this.animationSet.put(ExtendedImageAnimations.SPAWN, spawn);
+
+            
+            //death
+            ArrayList<Texture> dying = new ArrayList();
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_head.png"));                
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_upperLeg.png"));
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_midLeg.png"));               
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_body.png"));
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_spike.png"));
+            this.animationSet.put(ExtendedImageAnimations.DEATH, dying); 
+            
+            
+            //=====================
+            // Build Delay Map
+            //=====================        
+
+            //========================
+            // Build Skill Offset Map
+            //========================
+            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0011_1101_1010_0111_0111_0111_0000_0000),
+                                                                                        Float.intBitsToFloat(0b0111_1010_1000_0101_0111_0000_0000_0000)));
+                  
+            
+            //================
+            // Build FPT Map
+            //================
+            this.fptMap.put(ExtendedImageAnimations.RUNNING, 5);
+            this.fptMap.put(ExtendedImageAnimations.SPAWN, 3);
+            this.fptMap.put(CoreAnimations.IDLE, 7);
+        }
+    }
+    
     
     //==============
     // Bash Brown 

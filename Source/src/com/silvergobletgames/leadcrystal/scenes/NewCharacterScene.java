@@ -224,8 +224,14 @@ public class NewCharacterScene extends Scene
                     //dev settings
                     if(player.getName().equals("devtest"))
                     {
-                        player.getSkillManager().setSkillPoints(40);
-                        player.getCurrencyManager().addCurrency(1000); 
+//                        player.getSkillManager().setSkillPoints(20);
+//                        player.getCurrencyManager().addCurrency(5000); 
+                        player.getLevelProgressionManager().completeMainObjective(0); 
+                        player.getLevelProgressionManager().completeMainObjective(1); 
+                        player.getLevelProgressionManager().completeMainObjective(2); 
+                        player.getLevelProgressionManager().completeMainObjective(3); 
+                        player.getLevelProgressionManager().completeMainObjective(4); 
+                        player.getLevelProgressionManager().completeMainObjective(5); 
                     }
 
                     SaveGame save = new SaveGame();

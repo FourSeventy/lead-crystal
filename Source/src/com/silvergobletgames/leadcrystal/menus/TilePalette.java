@@ -1,6 +1,7 @@
 package com.silvergobletgames.leadcrystal.menus;
 
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.FlierAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.JumperAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.MoleAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.NPC2AnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.NPC3AnimationPack;
@@ -129,6 +130,7 @@ public class TilePalette extends Menu {
         characters.add(new Image(new NPC7AnimationPack()));
         characters.add(new Image(new FlierAnimationPack()));
         characters.add(new Image(new MoleAnimationPack()));
+        characters.add(new Image(new JumperAnimationPack()));
         
         //animated images
         

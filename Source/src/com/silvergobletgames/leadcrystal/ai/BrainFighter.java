@@ -220,7 +220,7 @@ public class BrainFighter extends BrainGround
         }
         
         //if we are ranged, and its been a while since we attacked, declare lost target
-        if(this.selectedSkill.getRange() > 150 && this.timeSinceAttack > 300)
+        if(this.selectedSkill != null && this.selectedSkill.getRange() > 150 && this.timeSinceAttack > 300)
         {
             this.getStateMachine().changeState(StateID.LOSTTARGET);
             this.timeSinceAttack = 0;

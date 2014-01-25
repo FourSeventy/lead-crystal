@@ -11,6 +11,7 @@ import com.silvergobletgames.leadcrystal.menus.FileMenu;
 import com.silvergobletgames.leadcrystal.core.LevelData;
 import com.silvergobletgames.leadcrystal.core.SaveGame;
 import com.silvergobletgames.leadcrystal.core.*;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.FlierAnimationPack;
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
 import com.silvergobletgames.sylver.core.*;
 import com.silvergobletgames.sylver.graphics.*;
@@ -887,53 +888,26 @@ public class MapEditorScene extends Scene {
             
             if (inputSnapshot.isKeyReleasedCtrlModifier(KeyEvent.VK_M))
             {
-                if(selectedItem instanceof WorldObjectEntity)
+                for(SceneObject so: this.getSceneObjectManager().get(Layer.MAIN))
                 {
-                     Image img = ((WorldObjectEntity)selectedItem).getImage();
-                     Image newImg = img.copy();
-                     
-                     this.remove(selectedItem);
-                     this.add(newImg,Layer.MAIN);
-                     
+                    if(so instanceof NonPlayerEntity)
+                    {
+                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof FlierAnimationPack)
+                        {
+                            ((NonPlayerEntity)so).getCombatData().baseDamage.setBase(10);
+                        }
+                    }
+                    else if(so instanceof MobSpawner)
+                    {
+                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof FlierAnimationPack)
+                        {
+                            ((MobSpawner)so).mobToSpawn.getCombatData().baseDamage.setBase(10);
+                        }
+                            
+                    }
                 }
             }
             
-            if (inputSnapshot.isKeyReleasedCtrlModifier(KeyEvent.VK_I))
-            {
-                if(selectedItem instanceof WorldObjectEntity)
-                {
-                    float x = ((WorldObjectEntity)selectedItem).getPosition().x;
-                    float y = ((WorldObjectEntity)selectedItem).getPosition().y;
-                    ((WorldObjectEntity)selectedItem).setPosition(x,y+1);
-                }
-            }
-            if (inputSnapshot.isKeyReleasedCtrlModifier(KeyEvent.VK_K))
-            {
-                if(selectedItem instanceof WorldObjectEntity)
-                {
-                    float x = ((WorldObjectEntity)selectedItem).getPosition().x;
-                    float y = ((WorldObjectEntity)selectedItem).getPosition().y;
-                    ((WorldObjectEntity)selectedItem).setPosition(x,y-1);
-                }
-            }
-            if (inputSnapshot.isKeyReleasedCtrlModifier(KeyEvent.VK_J))
-            {
-                if(selectedItem instanceof WorldObjectEntity)
-                {
-                    float x = ((WorldObjectEntity)selectedItem).getPosition().x;
-                    float y = ((WorldObjectEntity)selectedItem).getPosition().y;
-                    ((WorldObjectEntity)selectedItem).setPosition(x-1,y);
-                }
-            }
-            if (inputSnapshot.isKeyReleasedCtrlModifier(KeyEvent.VK_L))
-            {
-                if(selectedItem instanceof WorldObjectEntity)
-                {
-                    float x = ((WorldObjectEntity)selectedItem).getPosition().x;
-                    float y = ((WorldObjectEntity)selectedItem).getPosition().y;
-                    ((WorldObjectEntity)selectedItem).setPosition(x+1,y);
-                }
-            }
             
             
         }

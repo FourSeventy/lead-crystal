@@ -634,13 +634,13 @@ public final class GameClientScene extends Scene
         if(!hud.chatManager.chatPromptOpen && this.lockInput.get() == false)
         {
             //move left
-            if (inputSnapshot.isKeyPressed(KeyEvent.VK_A) || inputSnapshot.isKeyPressed(KeyEvent.VK_LEFT))
+            if (inputSnapshot.isKeyPressed(KeyEvent.VK_A) )
             {
                 player.move(FacingDirection.LEFT);
             }
 
             //move right
-            if (inputSnapshot.isKeyPressed(KeyEvent.VK_D) || inputSnapshot.isKeyPressed(KeyEvent.VK_RIGHT))
+            if (inputSnapshot.isKeyPressed(KeyEvent.VK_D) )
             {
                 player.move(FacingDirection.RIGHT);
             }
@@ -658,13 +658,13 @@ public final class GameClientScene extends Scene
             }
 
             //down
-            if (inputSnapshot.isKeyPressed(com.jogamp.newt.event.KeyEvent.VK_S) == true || inputSnapshot.isKeyPressed(KeyEvent.VK_DOWN))
+            if (inputSnapshot.isKeyPressed(com.jogamp.newt.event.KeyEvent.VK_S) == true )
             {
                 player.move(new SylverVector2f(0,-1));
             }
 
             //up
-            if (inputSnapshot.isKeyPressed(com.jogamp.newt.event.KeyEvent.VK_W) == true || inputSnapshot.isKeyPressed(KeyEvent.VK_UP))
+            if (inputSnapshot.isKeyPressed(com.jogamp.newt.event.KeyEvent.VK_W) == true )
             {
                 player.move(new SylverVector2f(0,1));
             }
