@@ -58,10 +58,18 @@ public abstract class PlayerSkill extends Skill
         SylverVector2f vectorToTarget = new SylverVector2f(targetX - userX, targetY - userY);
         vectorToTarget.normalise();
         
-        
+        SylverVector2f target = new SylverVector2f(targetX,targetY);
+        SylverVector2f playerpos = user.getPosition();
+        if( playerpos.distance(target)< playerpos.distance(origin))
+        {
+            vectorToTarget = vectorToTarget.negate();
+        }
+
         float theta = (float)Math.acos(vectorToTarget.dot(new SylverVector2f(1,0)));
-        if(targetY < userY)
+        if(targetY < playerpos.y)
             theta = (float)(2* Math.PI - theta);
+        
+        
         
         return new TargetingData(vectorToTarget,theta);
     }

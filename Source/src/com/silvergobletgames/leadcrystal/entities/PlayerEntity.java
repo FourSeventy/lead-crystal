@@ -301,16 +301,60 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         // Calculate Skill Release Point
         //===============================
          
+         //determine flipped
+        boolean flipped;
+        if(this.worldMousePoint.x < this.getPosition().x)
+             flipped = true;
+        else
+            flipped = false;
+        
         //Get user X and Y
-        float userX = this.getPosition().x;
-        float userY = this.getPosition().y;
+        float userX; 
+        float userY; 
+        
+        if(!flipped)
+        {
+            userX = this.getPosition().x-16;
+            userY = this.getPosition().y  + 6;
+        }
+        else
+        {
+            userX = this.getPosition().x+16;
+            userY = this.getPosition().y  + 6;
+        }
               
         //get vector to target
         Vector2f vectorToTarget = new Vector2f(this.worldMousePoint.x - userX, this.worldMousePoint.y - userY);
         vectorToTarget.normalise();
         
+        float theta = (float)Math.acos(vectorToTarget.dot(new Vector2f(1,0)));
+        if(this.worldMousePoint.y < userY)
+            theta = (float)(2* Math.PI - theta);
+        
+        theta = (float)Math.toDegrees(theta);
+        if(theta >= 60 && theta <= 90)
+        {
+            //set vector to 60
+            vectorToTarget = new Vector2f((float)Math.cos(Math.toRadians(60)),(float)Math.sin(Math.toRadians(60)));
+        }
+        else if(theta > 90 && theta <= 120)
+        {
+            //set vector to 120
+            vectorToTarget = new Vector2f((float)Math.cos(Math.toRadians(120)),(float)Math.sin(Math.toRadians(120)));
+        }
+        else if(theta >= 240 && theta < 270)
+        {
+            //set to 240
+            vectorToTarget = new Vector2f((float)Math.cos(Math.toRadians(240)),(float)Math.sin(Math.toRadians(240)));
+        }
+        else if(theta >= 270 && theta <= 300)
+        {
+            //set to 300
+            vectorToTarget = new Vector2f((float)Math.cos(Math.toRadians(300)),(float)Math.sin(Math.toRadians(300)));
+        }
+        
         vectorToTarget.scale(this.getFrontArm().getWidth()* .5f) ;
-        vectorToTarget.add(new Vector2f(this.getPosition().x,this.getPosition().y)); 
+        vectorToTarget.add(new Vector2f(userX,userY)); 
         this.skillReleasePoint = new SylverVector2f(vectorToTarget.x,vectorToTarget.y);
         
         //update body parts
@@ -890,10 +934,27 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     
     private void updateBodyParts()
     {
-
+        //determine flipped
+        boolean flipped;
+        if(this.worldMousePoint.x < this.getImage().getPosition().x + this.getImage().getWidth() * .5f)
+             flipped = true;
+        else
+            flipped = false;
+        
         //Get user X and Y
-        float userX = this.getImage().getPosition().x + this.getImage().getWidth() * .5f;
-        float userY = this.getImage().getPosition().y + this.getImage().getHeight() * .5f +25;
+        float userX; 
+        float userY; 
+        
+        if(!flipped)
+        {
+            userX = this.getImage().getPosition().x + this.getImage().getWidth() * .5f -15;
+            userY = this.getImage().getPosition().y + this.getImage().getHeight() * .5f +25;
+        }
+        else
+        {
+            userX = this.getImage().getPosition().x + this.getImage().getWidth() * .5f +15;
+            userY = this.getImage().getPosition().y + this.getImage().getHeight() * .5f +25;
+        }
         
         //get vector to mouse
         Vector2f vectorToTarget = new Vector2f(this.worldMousePoint.x - userX, this.worldMousePoint.y - userY);
@@ -904,12 +965,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         if(this.worldMousePoint.y < userY)
             theta = (float)(2* Math.PI - theta);
         
-        //determine flipped
-        boolean flipped;
-        if(this.worldMousePoint.x < userX)
-             flipped = true;
-        else
-            flipped = false;
+        
         
         //flip body if we are flipped
         if(flipped)
@@ -952,7 +1008,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                  angle = 60;
              
              //set angle and rotation point
-             this.frontArm.setAngle(angle-2);
+             this.frontArm.setAngle(angle -2);
              this.frontArm.setRotationPoint(.82f, .55f);
              this.frontArm.setAnchor(Anchorable.Anchor.RIGHTCENTER); 
              
@@ -979,7 +1035,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                  angle = 334;
              
              //set rotation
-             this.backArm.setAngle(angle +2);
+             this.backArm.setAngle(angle +2 );
              this.backArm.setRotationPoint(-.17f, .55f);
              this.backArm.setAnchor(Anchorable.Anchor.LEFTCENTER); 
              
@@ -1584,7 +1640,6 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         if(!oldData.data.get(14).equals( newData.data.get(14)))
         {
-            System.out.println("detected changed");
             changeList.add(newData.data.get(14));
             changeMap += 1L << 14;
         }
@@ -1650,7 +1705,6 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         if(changeData.get(14) != null)
         {
-            System.out.println("reconciling: " + changeData.get(14));
             this.frontArm.setAnimation((ImageAnimation)changeData.get(14));
             this.backArm.setAnimation((ImageAnimation)changeData.get(14));
         }
