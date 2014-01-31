@@ -45,11 +45,13 @@ public class SkillFactory
             case PlayerLaser: return new PlayerLaserShot();
             case PlayerSnipe: return new PlayerSnipe();
             case EnemyLaser: return new EnemyLaserShot();
+            case EnemyRangedSwipe: return new EnemyRangedSwipe();
             case EnemyMeleeBash: return new EnemyMeleeBash();
             case EnemySmallMelee: return new EnemyMoleSmallMelee();
             case EnemyGooShot: return new EnemySpitterGooShot();
             case EnemyAntThrow: return new EnemyAntThrow();
             case EnemyFlierGooBomb: return new EnemyFlierGooBomb();
+            case EnemyJumperSpikes: return new EnemyJumperSpikes();
             case PlayerDash: return new PlayerDashAttack();
             case PlayerGravityShield: return new PlayerGravityShield();
             case PlayerFreezeAttack: return new PlayerFreezeAttack();

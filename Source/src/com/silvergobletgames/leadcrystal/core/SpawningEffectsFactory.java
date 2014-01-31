@@ -1,6 +1,7 @@
 package com.silvergobletgames.leadcrystal.core;
 
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.FlierAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.JumperAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.MoleAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.PlantAnimationPack;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.GreenGooEmitter;
@@ -30,6 +31,10 @@ public class SpawningEffectsFactory
         else if(pack instanceof FlierAnimationPack)
         {
             effects.add(new SimpleEntry(new GreenGooEmitter(),new SylverVector2f(0,0f)));
+        }
+        else if(pack instanceof JumperAnimationPack)
+        {
+            effects.add(new SimpleEntry(new SandSpawnEmitter(),new SylverVector2f(0,-.70f)));
         }
         return effects;
     }

@@ -795,6 +795,8 @@ public class AnimationPackClasses {
             // Build Delay Map
             //=====================        
 
+            this.timingMap.put(ExtendedImageAnimations.RANGEDATTACK, 15);
+            
             //========================
             // Build Skill Offset Map
             //========================

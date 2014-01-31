@@ -37,6 +37,9 @@ public abstract class BrainGround extends Brain
     protected float currentPatternGoal;
     
     
+    protected long moveCheckTimer = 0;
+    
+    
     //====================
     // Movement Methods
     //====================
@@ -48,6 +51,9 @@ public abstract class BrainGround extends Brain
      */
     public void moveTowardsPoint(SylverVector2f destinationPoint, boolean edgeDetection)
     {
+        //increment timer
+        this.moveCheckTimer++;
+        
         //face towards target
         if (destinationPoint.x < self.getPosition().x)          
             self.face(Entity.FacingDirection.LEFT);           
@@ -89,7 +95,7 @@ public abstract class BrainGround extends Brain
         }
 
         //if we have edge detection check for ground  
-        if(edgeDetection)
+        if(edgeDetection && this.moveCheckTimer % 5 == 0)
         {
             if( this.checkForGround() == true)
                 self.move(new SylverVector2f(directionToMove.x,0));

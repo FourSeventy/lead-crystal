@@ -26,26 +26,30 @@ import com.silvergobletgames.sylver.util.SylverVector2f;
  * to behave in a certain way.
  * @author Justin Capalbo
  */
-public class BrainFighter extends BrainGround
+public class BrainJumper extends BrainGround
 {
+    
     private int timeWithThisSkill = 0;
     private float timeWithSkillFuzz = 1;
     private int timeSinceAttack = 0;
     private int lostLOSCounter = 0;
     private long fuzzyLogicTimer = 0;
     private float maxRangeFuzz = 1f;
+    
     private SylverVector2f lostTargetPosition = new SylverVector2f();
     Random r = SylverRandom.random;
+    
+    
     
     
     /**
      * Fighter brain.
      */
-    public BrainFighter() 
+    public BrainJumper() 
     {
         super();
         relevantGroups.add(ExtendedSceneObjectGroups.FIGHTER);
-        ID = BrainID.Fighter;
+        ID = BrainID.Jumper;
     }
 
   
@@ -79,59 +83,6 @@ public class BrainFighter extends BrainGround
        
     }
     
-    public void selectSkill()
-    {        
-        //if we dont have a target, select a random skill
-        if(self.getTarget() == null)
-        {
-            super.selectSkill();
-            return;
-        }
-
-        //get all offensive skills
-        ArrayList<Skill> skillPool = self.getSkillManager().getKnownSkillsOfType(SkillType.OFFENSIVE);
-        
-        Random r = SylverRandom.random;
-        
-        //get range from target
-        float rangeToTarget = self.distanceAbs(self.getTarget());
-        //blur the range
-        rangeToTarget = (float)Math.abs(r.nextGaussian()  * (rangeToTarget/6) + rangeToTarget);
-        
-        //try to select the skill that has the smallest range that is still in range
-        float skillRange = Float.MAX_VALUE;
-        Skill closestSkill = null;      
-        for(Skill skill: skillPool)
-        {
-            //if this skill is in range, and it is smaller than the current skill range
-            if(skill.getRange() >= rangeToTarget && skill.getRange() < skillRange)
-            {
-                skillRange = skill.getRange();
-                closestSkill = skill;               
-            }
-        }
-        
-        //if none of the skills were in range, select the skill with the largest range
-        if(closestSkill == null)
-        {
-            skillRange = Float.MIN_VALUE;
-            for(Skill skill: skillPool)
-            {
-                //if this skill is in range, and it is smaller than the current skill range
-                if(skill.getRange() >= skillRange )
-                {
-                    skillRange = skill.getRange();
-                    closestSkill = skill;               
-                }
-            }
-            
-        }
-        
-        
-        //set active skill
-        this.selectedSkill = closestSkill;
-           
-    }
     
     protected void spawningEnter()
     {
@@ -202,6 +153,7 @@ public class BrainFighter extends BrainGround
             return;
         }
                  
+        
         //if our selected skill is null, select a skill to use
         if(this.selectedSkill == null)
         {
@@ -238,15 +190,15 @@ public class BrainFighter extends BrainGround
             this.timeWithSkillFuzz = .5f + r.nextFloat();
         }
         
+        
         //if our y distance is large and our x distance is close to 0, target is unreachable
 //        if(Math.abs(self.getTarget().distanceVector(self).x) < 50 && Math.abs(self.getTarget().distanceVector(self).y) > 250)
 //        {   
 //            this.getStateMachine().changeState(StateID.LOSTTARGET);
 //            return;
 //        }
-            
-
-        //===============================
+           
+         //===============================
         // Attempt to use selected Skill
         //===============================
         if(this.selectedSkill != null)
@@ -263,17 +215,12 @@ public class BrainFighter extends BrainGround
             //if we are out of range of the skill move into range with some fuzzy logic in there
             if((self.getTarget().distanceAbs(self) * this.maxRangeFuzz) > this.selectedSkill.getRange())
             {               
-             
-                
-                //if the selected skill is melee, move towards target without edge detection
-                if(this.selectedSkill.getRange() <= 150)
-                    this.moveTowardsPoint(self.getTarget().getPosition(), false);
-                else
-                    this.moveTowardsPoint(self.getTarget().getPosition(), true);
-                
+                //move into range
+                if(self.inAirTimer < 10)
+                   this.moveTowardsPoint(self.getTarget().getPosition(), false);
 
                 //random chance to jump
-                if(Math.random()< .001f)
+                if(Math.random()< .005f)
                     self.jump();
                 
                 //increment time since attack
@@ -283,13 +230,33 @@ public class BrainFighter extends BrainGround
             else // if we are in range, cast the skill
             {
                 //TODO- random delay
-                self.faceTarget();        
-                self.attack(selectedSkill);
-                this.selectedSkill = null;
-                this.timeSinceAttack = 0;
+                
+                if(selectedSkill.isUsable())
+                {
+                    if(self.inAirTimer <2)
+                        self.jump(self.getFacingDirection().value * 3000,7500);
+                    
+                    self.faceTarget();        
+                    self.attack(selectedSkill);
+                    this.selectedSkill = null;
+                    this.timeSinceAttack = 0;
+                }
+                else
+                {
+                    if(self.inAirTimer < 10)
+                       this.moveTowardsPoint(self.getTarget().getPosition(), false);
+                }
             }
         }
         
+//      this.moveTowardsPoint(self.getTarget().getPosition(), false);
+//      
+//      
+//      if(self.distanceAbs(self.getTarget()) < 400)
+//      {
+//          self.jump(6500);
+//      }
+
     }
     
     public void aggressiveExit()
