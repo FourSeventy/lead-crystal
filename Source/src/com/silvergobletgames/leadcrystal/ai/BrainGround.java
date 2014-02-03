@@ -95,7 +95,7 @@ public abstract class BrainGround extends Brain
         }
 
         //if we have edge detection check for ground  
-        if(edgeDetection && this.moveCheckTimer % 5 == 0)
+        if(edgeDetection && this.moveCheckTimer % 10 == 0)
         {
             if( this.checkForGround() == true)
                 self.move(new SylverVector2f(directionToMove.x,0));
@@ -148,9 +148,9 @@ public abstract class BrainGround extends Brain
         if( this.currentWanderGoal == 0 || //dont have a goal
             Math.abs(self.getPosition().x - wanderPoint.x) > self.getWanderDistance()|| //are greater than max wander, and our current goal isnt moving us in the right direction
             Math.abs(self.getPosition().x - (wanderPoint.x + this.currentWanderGoal)) < 2|| //reached wander goal           
-            (!(groundCheck = this.checkForGround()) && edgeDetection == true) // we hit an edge
+            (edgeDetection == true && this.moveCheckTimer %10 == 0 &&!(groundCheck = this.checkForGround())  ) // we hit an edge
           )
-        {
+        { 
            //============ Roll a new goal ======================
             
             if(Math.random() < .3f)
@@ -215,8 +215,8 @@ public abstract class BrainGround extends Brain
         //decide if we need to turn around or not
         if(             
             (Math.abs(self.getPosition().x - patrolPoint.x) > self.getWanderDistance()) && ((self.getFacingDirection().value > 0 && self.getPosition().x > self.placedLocation.x) || (self.getFacingDirection().value < 0 && self.getPosition().x < self.placedLocation.x))|| //are greater than max wander, and our current goal isnt moving us in the right direction                      
-            (this.checkForGround() == false && edgeDetection == true)||// we hit an edge
-             this.checkForWall() == true //we hit a wall
+            (edgeDetection == true && this.moveCheckTimer %10 == 0 && this.checkForGround() == false )||// we hit an edge
+             (this.moveCheckTimer %10 == 0 &&this.checkForWall() == true) //we hit a wall
           )
         {
             //turn around

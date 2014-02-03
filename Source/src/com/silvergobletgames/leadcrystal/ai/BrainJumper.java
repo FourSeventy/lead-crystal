@@ -220,8 +220,8 @@ public class BrainJumper extends BrainGround
                    this.moveTowardsPoint(self.getTarget().getPosition(), false);
 
                 //random chance to jump
-                if(Math.random()< .005f)
-                    self.jump();
+//                if(Math.random()< .005f)
+//                    self.jump();
                 
                 //increment time since attack
                 this.timeSinceAttack++;
@@ -233,8 +233,10 @@ public class BrainJumper extends BrainGround
                 
                 if(selectedSkill.isUsable())
                 {
-                    if(self.inAirTimer <2)
+                    if(self.inAirTimer <1 && self.getBody().getEnergy() < 8_000)
+                    {                         
                         self.jump(self.getFacingDirection().value * 3000,7500);
+                    }
                     
                     self.faceTarget();        
                     self.attack(selectedSkill);
