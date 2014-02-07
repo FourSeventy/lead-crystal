@@ -148,47 +148,62 @@ public class AnimationPackClasses {
         {
             //Idle
             ArrayList<Texture> idle = new ArrayList();
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_idle0.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_idle1.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_idle2.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_idle3.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_idle4.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_idle5.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_idle6.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_idle7.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_idle8.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_idle9.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_idle10.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-idle0.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-idle1.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-idle2.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-idle3.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-idle4.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-idle5.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-idle6.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-idle7.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-idle8.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-idle9.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-idle10.png"));
             this.animationSet.put(CoreAnimations.IDLE, idle);
 
             //Running
             ArrayList<Texture> running = new ArrayList();
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_walking0.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_walking1.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_walking2.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_walking3.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_walking4.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_walking5.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_walking6.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_walking7.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_walking8.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_walking9.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_walking10.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_walking11.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_walking12.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_walking13.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_walking14.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_walking15.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk0.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk1.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk2.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk3.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk4.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk5.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk6.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk7.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk8.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk9.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk10.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk11.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk12.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk13.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk14.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk15.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk16.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk17.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk18.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk19.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk20.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk21.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk22.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk23.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk24.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-walk25.png"));
             this.animationSet.put(ExtendedImageAnimations.RUNNING, running);
 
             //Ranged Attack
             ArrayList<Texture> ranged = new ArrayList();
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_ranged0.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_ranged1.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_ranged2.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_ranged3.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_ranged4.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_ranged5.png"));                              
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-ranged0.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-ranged1.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-ranged2.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-ranged3.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-ranged4.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-ranged5.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-ranged6.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-ranged7.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-ranged8.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-ranged9.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-ranged10.png"));
             this.animationSet.put(ExtendedImageAnimations.RANGEDATTACK ,ranged); 
 
             //death
@@ -199,7 +214,7 @@ public class AnimationPackClasses {
             dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_rightarm.png"));
             dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_righthand.png"));
             dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_leftleg.png"));
-            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_rightleg.png"));  
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_rightfoot.png"));  
             dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_leftfoot.png"));                    
             this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
 
@@ -221,8 +236,10 @@ public class AnimationPackClasses {
             //================
             // Build FPT Map
             //================
-             this.fptMap.put(ExtendedImageAnimations.RUNNING, 3);
+            this.fptMap.put(ExtendedImageAnimations.RANGEDATTACK, 3);
+             this.fptMap.put(ExtendedImageAnimations.RUNNING, 5);
               
+
 
         }
     }
@@ -233,47 +250,62 @@ public class AnimationPackClasses {
         {
             //Idle
             ArrayList<Texture> idle = new ArrayList();
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_idle0.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_idle1.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_idle2.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_idle3.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_idle4.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_idle5.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_idle6.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_idle7.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_idle8.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_idle9.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_idle10.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-idle0.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-idle1.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-idle2.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-idle3.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-idle4.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-idle5.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-idle6.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-idle7.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-idle8.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-idle9.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-idle10.png"));
             this.animationSet.put(CoreAnimations.IDLE, idle);
 
             //Running
             ArrayList<Texture> running = new ArrayList();
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_walking0.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_walking1.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_walking2.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_walking3.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_walking4.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_walking5.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_walking6.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_walking7.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_walking8.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_walking9.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_walking10.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_walking11.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_walking12.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_walking13.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_walking14.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_walking15.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk0.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk1.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk2.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk3.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk4.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk5.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk6.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk7.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk8.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk9.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk10.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk11.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk12.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk13.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk14.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk15.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk16.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk17.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk18.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk19.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk20.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk21.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk22.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk23.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk24.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-walk25.png"));
             this.animationSet.put(ExtendedImageAnimations.RUNNING, running);
 
             //Ranged Attack
             ArrayList<Texture> ranged = new ArrayList();
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_ranged0.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_ranged1.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_ranged2.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_ranged3.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_ranged4.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_ranged5.png"));                              
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-ranged0.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-ranged1.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-ranged2.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-ranged3.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-ranged4.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-ranged5.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-ranged6.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-ranged7.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-ranged8.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-ranged9.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2-ranged10.png"));
             this.animationSet.put(ExtendedImageAnimations.RANGEDATTACK ,ranged); 
 
             //death
@@ -284,7 +316,7 @@ public class AnimationPackClasses {
             dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_rightarm.png"));
             dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_righthand.png"));
             dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_leftleg.png"));
-            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_rightleg.png"));  
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_rightfoot.png"));  
             dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_leftfoot.png"));                    
             this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
 
@@ -306,7 +338,8 @@ public class AnimationPackClasses {
             //================
             // Build FPT Map
             //================
-             this.fptMap.put(ExtendedImageAnimations.RUNNING, 3);
+            this.fptMap.put(ExtendedImageAnimations.RANGEDATTACK, 3);
+            this.fptMap.put(ExtendedImageAnimations.RUNNING, 3);
               
 
         }
@@ -318,47 +351,62 @@ public class AnimationPackClasses {
         {
             //Idle
             ArrayList<Texture> idle = new ArrayList();
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_idle0.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_idle1.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_idle2.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_idle3.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_idle4.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_idle5.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_idle6.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_idle7.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_idle8.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_idle9.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_idle10.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle0.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle1.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle2.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle3.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle4.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle5.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle6.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle7.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle8.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle9.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle10.png"));
             this.animationSet.put(CoreAnimations.IDLE, idle);
 
             //Running
             ArrayList<Texture> running = new ArrayList();
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_walking0.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_walking1.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_walking2.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_walking3.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_walking4.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_walking5.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_walking6.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_walking7.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_walking8.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_walking9.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_walking10.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_walking11.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_walking12.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_walking13.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_walking14.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_walking15.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk0.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk1.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk2.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk3.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk4.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk5.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk6.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk7.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk8.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk9.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk10.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk11.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk12.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk13.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk14.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk15.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk16.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk17.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk18.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk19.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk20.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk21.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk22.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk23.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk24.png"));
+            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk25.png"));
             this.animationSet.put(ExtendedImageAnimations.RUNNING, running);
 
             //Ranged Attack
             ArrayList<Texture> ranged = new ArrayList();
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_ranged0.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_ranged1.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_ranged2.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_ranged3.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_ranged4.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_ranged5.png"));                              
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged0.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged1.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged2.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged3.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged4.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged5.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged6.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged7.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged8.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged9.png"));
+            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged10.png"));
             this.animationSet.put(ExtendedImageAnimations.RANGEDATTACK ,ranged); 
 
             //death
@@ -369,7 +417,7 @@ public class AnimationPackClasses {
             dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_rightarm.png"));
             dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_righthand.png"));
             dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_leftleg.png"));
-            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_rightleg.png"));  
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_rightfoot.png"));  
             dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_leftfoot.png"));                    
             this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
 
@@ -391,6 +439,7 @@ public class AnimationPackClasses {
             //================
             // Build FPT Map
             //================
+            this.fptMap.put(ExtendedImageAnimations.RANGEDATTACK, 3);
              this.fptMap.put(ExtendedImageAnimations.RUNNING, 3);
               
 
