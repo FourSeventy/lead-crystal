@@ -190,6 +190,8 @@ public class BrainJumper extends BrainGround
             this.timeWithSkillFuzz = .5f + r.nextFloat();
         }
         
+        if(self.inAirTimer > 5)
+            self.getImage().setAnimation(ExtendedImageAnimations.JUMPING);
         
         //if our y distance is large and our x distance is close to 0, target is unreachable
 //        if(Math.abs(self.getTarget().distanceVector(self).x) < 50 && Math.abs(self.getTarget().distanceVector(self).y) > 250)

@@ -24,7 +24,7 @@ public class EnemyRangedSwipe extends Skill{
     
     public EnemyRangedSwipe()
     {
-        super(SkillID.EnemyRangedSwipe,Skill.SkillType.OFFENSIVE, ExtendedImageAnimations.MELEEATTACK,180,400);
+        super(SkillID.EnemyRangedSwipe,Skill.SkillType.OFFENSIVE, ExtendedImageAnimations.MELEEATTACK,180,250);
         
 
     }
@@ -55,9 +55,15 @@ public class EnemyRangedSwipe extends Skill{
         
         HitBox hitBox = new HitBox(damage,body,image,this.user);
         hitBox.getBody().setBitmask(Entity.BitMasks.NO_COLLISION.value);
-        hitBox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 300, 1, 1));
         hitBox.setPosition(origin.x,origin.y);
         hitBox.getBody().addForce(new Vector2f(1000*user.getFacingDirection().value,0));
+        
+        //put in own duration effect
+        hitBox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 60, 0, 0)); 
+        ImageEffect fadeEffect =new ImageEffect(ImageEffect.ImageEffectType.COLOR, 30,new Color(Color.white),new Color(Color.transparent));
+        fadeEffect.setDelay(30);
+        hitBox.getImage().addImageEffect(fadeEffect); 
+                    
         this.user.getOwningScene().add(hitBox,Layer.MAIN);        
     }
     

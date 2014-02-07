@@ -264,7 +264,7 @@ public abstract class BrainGround extends Brain
         if( this.currentPatternGoal == 0 || //dont have a goal
             Math.abs(self.getPosition().x - holdingPoint.x) > self.getWanderDistance()/2|| //are greater than max wander, and our current goal isnt moving us in the right direction
             Math.abs(self.getPosition().x - (holdingPoint.x + this.currentPatternGoal)) < 2|| //reached wander goal           
-            (!(groundCheck = this.checkForGround())) // we hit an edge
+            (this.moveCheckTimer %10 == 0 && !(groundCheck = this.checkForGround())) // we hit an edge
           )
         {
            //============ Roll a new goal ======================             

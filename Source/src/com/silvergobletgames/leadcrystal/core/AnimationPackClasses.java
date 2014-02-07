@@ -719,7 +719,7 @@ public class AnimationPackClasses {
         public JumperAnimationPack()
         {
              //Idle
-            ArrayList<Texture> idle = new ArrayList();
+            ArrayList<Texture> idle = new ArrayList<>();
                 idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_idle0.png"));
                 idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_idle1.png"));
                 idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_idle2.png"));
@@ -737,6 +737,26 @@ public class AnimationPackClasses {
             this.animationSet.put(CoreAnimations.IDLE, idle);
             
             //Idle
+            ArrayList<Texture> floating = new ArrayList<>();
+                floating.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_float0.png"));
+                floating.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_float1.png"));
+                floating.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_float2.png"));
+                floating.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_float3.png"));
+                floating.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_float4.png"));
+                floating.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_float5.png"));
+                floating.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_float6.png"));
+                floating.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_float7.png"));
+                floating.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_float8.png"));
+                floating.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_float9.png"));
+                floating.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_float10.png"));
+                floating.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_float11.png"));
+                floating.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_float12.png"));
+                floating.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_float13.png"));
+                floating.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_float14.png"));
+                floating.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_float15.png"));
+                floating.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_float16.png"));               
+            this.animationSet.put(ExtendedImageAnimations.JUMPING, floating);
+            
             idle = new ArrayList();
                 idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk0.png"));
                 idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("jumper_walk1.png"));
@@ -807,6 +827,7 @@ public class AnimationPackClasses {
             //================
             // Build FPT Map
             //================
+            this.fptMap.put(ExtendedImageAnimations.JUMPING, 5);
             this.fptMap.put(ExtendedImageAnimations.RUNNING, 5);
             this.fptMap.put(ExtendedImageAnimations.SPAWN, 3);
             this.fptMap.put(CoreAnimations.IDLE, 7);
