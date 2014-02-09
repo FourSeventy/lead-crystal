@@ -44,7 +44,6 @@ public class SkillFactory
         {
             case PlayerLaser: return new PlayerLaserShot();
             case PlayerSnipe: return new PlayerSnipe();
-            case EnemyLaser: return new EnemyLaserShot();
             case EnemyRangedSwipe: return new EnemyRangedSwipe();
             case EnemyMeleeBash: return new EnemyMeleeBash();
             case EnemySmallMelee: return new EnemyMoleSmallMelee();
@@ -71,6 +70,7 @@ public class SkillFactory
             case PlayerBarrelRoll: return new PlayerBarrelRoll();
             case PlayerLeechingBlades: return new PlayerLeechingBlades();
             case PlayerCrushingStrike: return new PlayerCrushingStrike();
+            case EnemyTriShot: return new EnemyTriShot();
             
             
             default: return null;

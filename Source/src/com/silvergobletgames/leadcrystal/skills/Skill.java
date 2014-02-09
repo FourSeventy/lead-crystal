@@ -44,8 +44,8 @@ public abstract class Skill
         PlayerBashAttack, PlayerDash, PlayerBoomerang, PlayerSnipe,  //secondary
         PlayerPoisonBomb, PlayerBarrelRoll,PlayerClusterbomb, PlayerCrushingStrike, //power
         PlayerAttackDrone,PlayerGravityShield,PlayerWard,PlayerLeechingBlades,  //tech
-        EnemyLaser,EnemyMeleeBash,EnemyGooShot,EnemySmallMelee, EnemyAntThrow, EnemyFlierGooBomb,
-        EnemyBossSwipe, EnemyJumperSpikes,EnemyRangedSwipe,
+        EnemyMeleeBash,EnemyGooShot,EnemySmallMelee, EnemyAntThrow, EnemyFlierGooBomb,
+        EnemyBossSwipe, EnemyJumperSpikes,EnemyRangedSwipe,EnemyTriShot,
         
         //unused
         PlayerFreezeAttack, PlayerStomp,PlayerStimpack,PlayerSoulLeech;
