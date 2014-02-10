@@ -24,6 +24,7 @@ import com.silvergobletgames.leadcrystal.entities.*;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.leadcrystal.skills.PlayerSkill.TargetingData;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
@@ -160,6 +161,9 @@ public class PlayerBuckshot extends PlayerSkill{
         AbstractParticleEmitter smokeEmitter = this.getMuzzleEffect(origin);
         user.getOwningScene().add(smokeEmitter,Scene.Layer.MAIN);
         
+        
+        Sound sound = Sound.locationSound("buffered/shotgunBlast.wav", user.getPosition().x, user.getPosition().y, false, .45f,1.8f);
+        user.getOwningScene().add(sound);
         
         
     }

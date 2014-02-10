@@ -18,12 +18,12 @@ public class SoundPack
     public static enum SoundPackID
     { 
         //WARNING - Changing the names of this enum will break save data
-        None,Human,Bug,Monster
+        None,Human,Bug,Mammal
     }
     
     public static enum SoundPackType 
     {
-        IDLE, DEATH, AGGRO, ATTACK, DAMAGED, GREETING, FAREWELL;
+        IDLE, DEATH, AGGRO, DAMAGED, GREETING, FAREWELL;
     }
 
     //==============
