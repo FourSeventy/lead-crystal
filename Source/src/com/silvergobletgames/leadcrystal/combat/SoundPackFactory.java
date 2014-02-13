@@ -42,8 +42,8 @@ public class SoundPackFactory
         //build mammal pack
         soundMap = new HashMap<>();
         soundList = new ArrayList();
-        soundList.add("buffered/mammalDeath1.wav");
-        soundList.add("buffered/mammalDeath2.wav");
+        soundList.add("buffered/mammalDeath1.ogg");
+        soundList.add("buffered/mammalDeath2.ogg");
         soundMap.put(SoundPackType.DEATH, soundList);
         pack = new SoundPack(soundMap,SoundPackID.Mammal);
         packMap.put(SoundPackID.Mammal,pack);

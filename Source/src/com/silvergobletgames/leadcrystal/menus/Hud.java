@@ -880,7 +880,7 @@ public class Hud extends Window
                        ehh.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, ehh.getScale(), 1.3));
                     
                     //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true);
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
                     owningScene.add(sound);
                 }
                 if (e.getActionCommand().equals("mouseExited"))

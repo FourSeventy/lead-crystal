@@ -37,7 +37,7 @@ public class EscapeMenu extends Window
                 if (e.getActionCommand().equals("mouseEntered")) {
                     returnToGameButton.text.setScale(2);
                     //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true);
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
                     owningScene.add(sound);
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
@@ -58,7 +58,7 @@ public class EscapeMenu extends Window
                 }
                 if (e.getActionCommand().equals("mouseEntered")) {
                     optionsButton.text.setScale(2);
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true);
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
                     owningScene.add(sound);
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
@@ -84,7 +84,7 @@ public class EscapeMenu extends Window
                 }
                 if (e.getActionCommand().equals("mouseEntered")) {
                     quitButton.text.setScale(2);
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true );
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true );
                     owningScene.add(sound);
                 }
                 if (e.getActionCommand().equals("mouseExited")) {

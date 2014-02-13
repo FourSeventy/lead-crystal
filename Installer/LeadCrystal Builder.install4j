@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="5.1.7" transformSequenceNumber="4">
-  <directoryPresets config="X:/Lead Crystal/Assets/Build Assets/Configurations/gameSettings.ini" />
-  <application name="Lead Crystal" distributionSourceDir="" applicationId="0938-5269-1317-3306" mediaDir="X:/Lead Crystal/Distributions/${compiler:sys.version}" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="LeadCrystal" publisher="Silver Goblet Games" publisherWeb="http://www.silvergobletgames.com" version="0.7.9" allPathsRelative="false" backupOnSave="false" autoSave="false" convertDotsToUnderscores="false" macSignature="????" installerName="" javaMinVersion="1.7" javaMaxVersion="" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
+  <directoryPresets config="X:/Lead Crystal/Assets/Installer Images" />
+  <application name="Lead Crystal" distributionSourceDir="" applicationId="0938-5269-1317-3306" mediaDir="X:/Lead Crystal/Distributions/${compiler:sys.version}" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="LeadCrystal" publisher="Silver Goblet Games" publisherWeb="http://www.silvergobletgames.com" version="0.7.10" allPathsRelative="false" backupOnSave="false" autoSave="false" convertDotsToUnderscores="false" macSignature="????" installerName="" javaMinVersion="1.7" javaMaxVersion="" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
       <additionalLanguages />
@@ -28,7 +28,7 @@
       <mountPoint id="124" root="" location="Sounds" mode="755" />
     </mountPoints>
     <entries>
-      <dirEntry mountPoint="23" file="X:/Lead Crystal/Assets/Build Assets/Levels" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="Levels" excludeSuffixes="" dirMode="755" overrideDirMode="false">
+      <dirEntry mountPoint="23" file="X:/Lead Crystal/Assets/Levels" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="Levels" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
       <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/kryonet/onejar/kryonet-1.04-all.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
@@ -48,13 +48,13 @@
       <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/Sylver Engine/natives/joal-natives-windows-i586.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/Sylver Engine/natives/jogl-all-natives-windows-amd64.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/Sylver Engine/natives/jogl-all-natives-windows-i586.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
-      <fileEntry mountPoint="26" file="X:/Lead Crystal/Assets/Build Assets/Configurations/engineSettings.ini" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="26" file="X:/Lead Crystal/Assets/Configurations/engineSettings.ini" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="26" file="X:/Lead Crystal/Source/dist/LeadCrystal.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
-      <fileEntry mountPoint="26" file="X:/Lead Crystal/Assets/Build Assets/Configurations/gameSettings.ini" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
-      <dirEntry mountPoint="123" file="X:/Lead Crystal/Assets/Build Assets/Graphics" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="Graphics" excludeSuffixes="" dirMode="755" overrideDirMode="false">
+      <fileEntry mountPoint="26" file="X:/Lead Crystal/Assets/Configurations/gameSettings.ini" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <dirEntry mountPoint="123" file="X:/Lead Crystal/Assets/Build Graphics/Graphics" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="Graphics" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
-      <dirEntry mountPoint="124" file="X:/Lead Crystal/Assets/Build Assets/Sounds" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="Sounds" excludeSuffixes="" dirMode="755" overrideDirMode="false">
+      <dirEntry mountPoint="124" file="X:/Lead Crystal/Assets/Sounds" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="Sounds" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
     </entries>
@@ -65,7 +65,7 @@
       <executable name="LeadCrystal" type="1" iconSet="true" iconFile="" executableDir="" redirectStderr="true" stderrFile="error.log" stderrMode="append" redirectStdout="true" stdoutFile="output.log" stdoutMode="append" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="." singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false">
         <versionInfo include="false" fileVersion="" fileDescription="" legalCopyright="" internalName="" productName="" />
       </executable>
-      <splashScreen show="true" autoOff="true" alwaysOnTop="true" width="0" height="0" bitmapFile="X:/Lead Crystal/Assets/Build Assets/Installer Images/silver-goblet.png" java6SplashScreen="false">
+      <splashScreen show="true" autoOff="true" alwaysOnTop="true" width="0" height="0" bitmapFile="X:/Lead Crystal/Assets/Installer Images/silver-goblet.png" java6SplashScreen="false">
         <text>
           <statusLine x="20" y="20" text="" font="Arial" fontSize="8" fontColor="0,0,0" fontWeight="500" />
           <versionLine x="20" y="40" text="version ${compiler:sys.version}" font="Arial" fontSize="8" fontColor="0,0,0" fontWeight="500" />
@@ -89,7 +89,7 @@
         <content />
       </infoPlist>
       <iconImageFiles>
-        <file path="X:/Lead Crystal/Assets/Build Assets/Installer Images/silver-goblet-icon.png" />
+        <file path="X:/Lead Crystal/Assets/Installer Images/silver-goblet-icon.png" />
       </iconImageFiles>
     </launcher>
   </launchers>
@@ -260,7 +260,7 @@
                     <object class="com.install4j.runtime.beans.actions.desktop.RegisterAddRemoveAction">
                       <void property="icon">
                         <object class="com.install4j.api.beans.ExternalFile">
-                          <string>X:/Lead Crystal/Assets/Build Assets/Installer Images/silver-goblet-icon.ico</string>
+                          <string>X:/Lead Crystal/Assets/Installer Images/silver-goblet-icon.ico</string>
                         </object>
                       </void>
                       <void property="itemName">

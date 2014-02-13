@@ -116,7 +116,7 @@ public class PlayerRicochet extends PlayerSkill{
         user.getOwningScene().add(smokeEmitter,Scene.Layer.MAIN);
         
         //play sound
-        Sound sound = Sound.locationSound("buffered/clang1.wav", user.getPosition().x, user.getPosition().y, false, .8f,1f);
+        Sound sound = Sound.locationSound("buffered/clang1.ogg", user.getPosition().x, user.getPosition().y, false, .8f,1f);
         user.getOwningScene().add(sound);
 
     }
@@ -145,7 +145,7 @@ public class PlayerRicochet extends PlayerSkill{
              super.collidedWith(other,event); 
              
               //play sound
-                Sound sound = Sound.locationSound("buffered/clang1.wav", this.getPosition().x, this.getPosition().y, false, .4f,2f);
+                Sound sound = Sound.locationSound("buffered/clang1.ogg", this.getPosition().x, this.getPosition().y, false, .3f,2f);
                 this.getOwningScene().add(sound);
              
              //laser bits
