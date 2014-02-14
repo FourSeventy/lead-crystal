@@ -1846,7 +1846,7 @@ public final class GameClientScene extends Scene
             Entity hoveredEntity = (Entity)this.getSceneObjectManager().get(packet.hoveredID);
             
             //apply brightness effect
-            if(!hoveredEntity.getImage().hasImageEffect("hover"))
+            if(hoveredEntity != null && !hoveredEntity.getImage().hasImageEffect("hover"))
             {
                 Float[] points = {1.3f,1.6f,1.3f};
                 int[] durations = {60,60};

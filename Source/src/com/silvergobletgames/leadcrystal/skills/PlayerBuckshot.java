@@ -162,7 +162,7 @@ public class PlayerBuckshot extends PlayerSkill{
         user.getOwningScene().add(smokeEmitter,Scene.Layer.MAIN);
         
         
-        Sound sound = Sound.locationSound("buffered/shotgunBlast.ogg", user.getPosition().x, user.getPosition().y, false, .45f,1.8f);
+        Sound sound = Sound.locationSound("buffered/bang.ogg", user.getPosition().x, user.getPosition().y, false, .45f,1f);
         user.getOwningScene().add(sound);
         
         

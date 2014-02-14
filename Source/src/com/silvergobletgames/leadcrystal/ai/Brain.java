@@ -316,6 +316,29 @@ public class Brain
     }
     
     
+    
+    /**
+     * Behavior executed when entering the move state
+     */
+    protected void moveEnter(){
+        
+    }
+    
+    /**
+     * Behavior executed while in the move state
+     */
+    protected void moveExecute(){
+        
+    }
+    
+    /**
+     * Behavior executed leaving the move state
+     */
+    protected void moveExit(){
+        
+    }
+    
+    
     /**
      * Behavior executed when entering the lostTarget state
      */

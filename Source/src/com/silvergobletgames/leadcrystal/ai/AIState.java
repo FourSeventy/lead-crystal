@@ -13,7 +13,7 @@ public abstract class AIState
     
     
     public static enum StateID{
-        DEAD,IDLE,AGGRESSIVE,LOSTTARGET,DYING,ASSIST,SPAWNING;
+        DEAD,IDLE,AGGRESSIVE,LOSTTARGET,DYING,ASSIST,SPAWNING,MOVE;
     }
     
       
@@ -31,6 +31,7 @@ public abstract class AIState
             case ASSIST: return AIStateAssist.getInstance();
             case SPAWNING: return AIStateSpawning.getInstance();
             case LOSTTARGET: return AIStateLostTarget.getInstance();
+            case MOVE: return  AIStateMove.getInstance();
             default: return null;              
         }
     }

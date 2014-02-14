@@ -116,7 +116,10 @@ public class PlayerRicochet extends PlayerSkill{
         user.getOwningScene().add(smokeEmitter,Scene.Layer.MAIN);
         
         //play sound
-        Sound sound = Sound.locationSound("buffered/clang1.ogg", user.getPosition().x, user.getPosition().y, false, .8f,1f);
+        Sound sound = Sound.locationSound("buffered/bang.ogg", user.getPosition().x, user.getPosition().y, false, .45f,1f);
+        user.getOwningScene().add(sound);
+        
+        sound = Sound.locationSound("buffered/clang1.ogg", user.getPosition().x, user.getPosition().y, false, .8f,1f);
         user.getOwningScene().add(sound);
 
     }
