@@ -163,6 +163,26 @@ public class Brain
         return closestPlayer;
     }
     
+    public final PlayerEntity getClosestPlayer()
+    {
+        float closestDistance = Float.MAX_VALUE;
+        PlayerEntity closestPlayer = null;
+        
+        ArrayList<PlayerEntity> players = ((GameServerScene)self.getOwningScene()).getPlayers(); 
+        for(PlayerEntity player: players)
+        {
+            if(self.distanceAbs(player) < closestDistance)
+            {
+                closestDistance = self.distanceAbs(player);
+                closestPlayer = player;
+            }
+        }
+        
+       
+        
+        return closestPlayer;
+    }
+    
     /**
      * This method will select a random known skill. This method should be overridden to allow 
      * more advanced skill selection

@@ -71,6 +71,7 @@ public class SkillFactory
             case PlayerLeechingBlades: return new PlayerLeechingBlades();
             case PlayerCrushingStrike: return new PlayerCrushingStrike();
             case EnemyTriShot: return new EnemyTriShot();
+            case EnemyGooHeal: return new EnemyGooHeal();
             
             
             default: return null;

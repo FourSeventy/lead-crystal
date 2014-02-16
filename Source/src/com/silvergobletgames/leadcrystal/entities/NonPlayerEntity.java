@@ -129,7 +129,7 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
         {
                      
             //update brain if we are near a player
-            PlayerEntity p = this.brain.targetClosestPlayer();
+            PlayerEntity p = this.brain.getClosestPlayer();
             if(p != null && this.distanceAbs(p) <= 2000)
                 brain.update();
 
