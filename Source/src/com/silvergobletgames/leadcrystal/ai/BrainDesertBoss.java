@@ -143,8 +143,8 @@ public class BrainDesertBoss extends BrainGround
             
             float scaling = 1;
             if(mag < 400)
-                scaling = .65f;
-            self.jump((int)(20_000* scaling * distanceVector.x), (int)(24_000* scaling * distanceVector.y)); 
+                scaling = .55f;
+            self.jump((int)(20_000* scaling * distanceVector.x), (int)(28_000* scaling * distanceVector.y)); 
         }
         
         //if we are stuck
@@ -209,7 +209,7 @@ public class BrainDesertBoss extends BrainGround
             
         }
         
-         if( r.nextFloat() < .0015f)
+         if( r.nextFloat() < .0025f)
         {
             this.getStateMachine().changeState(StateID.MOVE);
         }

@@ -85,9 +85,7 @@ public class EnemyAntThrow extends Skill {
         }
         //play sound
 
-    
-        
-        
+           
     }
     
     
