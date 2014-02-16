@@ -46,37 +46,35 @@ public class EnemyTriShot extends Skill
         damage.setType(Damage.DamageType.PHYSICAL);
         
         
-        
-       TriShotProducer producer = new TriShotProducer(damage,this.user,this.user.getTarget(),origin);
+     
+       TriShotProducer producer = new TriShotProducer(damage,user.distanceVector(user.getTarget()),user.getTarget().getPosition(),user,origin);
        producer.setPosition(origin.getX(), origin.getY());
        
        user.getOwningScene().add(producer, Layer.MAIN); 
        
-        
    
- 
-        
-
-        
     }
     
     private class TriShotProducer extends Entity
     {
         private long ticks = 0;
-        private Entity target;
-        private Entity user;
         private SylverVector2f origin;
         private Damage passthroughDamage;
+        private SylverVector2f vectorToTarget;
+        private SylverVector2f targetPosition;
+        private CombatEntity caster;
         
-        public TriShotProducer(Damage passthroughDamage, Entity user, Entity target, SylverVector2f origin)
+        
+        public TriShotProducer(Damage passthroughDamage, SylverVector2f vectorToTarget,SylverVector2f targetPosition, CombatEntity caster,SylverVector2f origin)
         { 
            super( new Image("blank.png"),new Body(new Box(10,10), 1));
            this.getBody().setGravityEffected(false);
            this.getBody().setOverlapMask(Entity.OverlapMasks.NO_OVERLAP.value);
            this.getBody().setBitmask(Entity.BitMasks.NO_COLLISION.value);
            this.passthroughDamage = passthroughDamage;
-           this.user = user;
-           this.target = target;
+           this.vectorToTarget = vectorToTarget;
+           this.targetPosition = targetPosition;
+           this.caster = caster;
            this.origin = origin;
         }
         
@@ -89,40 +87,40 @@ public class EnemyTriShot extends Skill
             if(this.ticks == 1)
             {
                 
-                SylverVector2f vectorToTarget = user.distanceVector(target);
+                SylverVector2f vectorToTarget = new SylverVector2f(this.vectorToTarget);
                 vectorToTarget.normalise();
-                float degrees = Math.copySign(7 +SylverRandom.random.nextInt(6), vectorToTarget.getX())  ;
+                float degrees = Math.copySign(7 +SylverRandom.random.nextInt(6), vectorToTarget.getX());
                 
                 SylverVector2f upVector = new SylverVector2f((float)(Math.cos(degrees * Math.PI/180) *vectorToTarget.x  - (Math.sin(degrees * Math.PI/180))*vectorToTarget.y ),(float)((Math.sin(degrees * Math.PI/180))*vectorToTarget.x  + (Math.cos(degrees * Math.PI/180))*vectorToTarget.y )); // 5 degreees
                 upVector.normalise();
         
-                this.shootBullet(upVector, passthroughDamage, user, origin);
+                this.shootBullet(upVector, passthroughDamage, this.targetPosition,caster, origin);
                 
                
             }
             else if(this.ticks == 10)
             {
                 
-                 SylverVector2f vectorToTarget = user.distanceVector(target);
+                 SylverVector2f vectorToTarget = new SylverVector2f(this.vectorToTarget);
                 vectorToTarget.normalise();
                 int degrees = 0;
                 
                 SylverVector2f upVector = new SylverVector2f((float)(Math.cos(degrees * Math.PI/180) *vectorToTarget.x  - (Math.sin(degrees * Math.PI/180))*vectorToTarget.y ),(float)((Math.sin(degrees * Math.PI/180))*vectorToTarget.x  + (Math.cos(degrees * Math.PI/180))*vectorToTarget.y )); // 5 degreees
                 upVector.normalise();
         
-                this.shootBullet(upVector, passthroughDamage, user, origin);
+                this.shootBullet(upVector, passthroughDamage, this.targetPosition, caster, origin);
             }
             else if(this.ticks == 20)
             {
                     
-                 SylverVector2f vectorToTarget = user.distanceVector(target);
+                 SylverVector2f vectorToTarget = new SylverVector2f(this.vectorToTarget);
                 vectorToTarget.normalise();
                 float degrees = - Math.copySign(7 +SylverRandom.random.nextInt(6), vectorToTarget.getX())  ;              
                 
                 SylverVector2f upVector = new SylverVector2f((float)(Math.cos(degrees * Math.PI/180) *vectorToTarget.x  - (Math.sin(degrees * Math.PI/180))*vectorToTarget.y ),(float)((Math.sin(degrees * Math.PI/180))*vectorToTarget.x  + (Math.cos(degrees * Math.PI/180))*vectorToTarget.y )); // 5 degreees
                 upVector.normalise();
         
-                this.shootBullet(upVector, passthroughDamage, user, origin);
+                this.shootBullet(upVector, passthroughDamage, this.targetPosition,caster, origin);
             }
             if(this.ticks > 180)
             {
@@ -132,7 +130,7 @@ public class EnemyTriShot extends Skill
             
         }
         
-        private void shootBullet(SylverVector2f vectorToTarget, Damage d, Entity target, SylverVector2f origin)
+        private void shootBullet(SylverVector2f vectorToTarget, Damage d, SylverVector2f targetPosition, CombatEntity caster, SylverVector2f origin)
         {
             //Damage is scaled with base
             Damage damage = new Damage(d);
@@ -143,27 +141,27 @@ public class EnemyTriShot extends Skill
             img.setAnchor(Anchorable.Anchor.LEFTCENTER);
             img.setDimensions(57, 33);
             img.setColor(new Color(1.5f,1f,1f,1f)); 
-            TriShotHitBox goo1 = new TriShotHitBox(damage, body, img, this.user);                   
+            TriShotHitBox goo1 = new TriShotHitBox(damage, body, img, caster);                   
             
              // Bullet force
             float xforce1 = 10000*vectorToTarget.x;
             float yforce1 = 10000*vectorToTarget.y;
             
-            SylverVector2f myPos = user.getPosition();
+            SylverVector2f myPos = caster.getPosition();
             if( myPos.distance(vectorToTarget)< myPos.distance(origin))
             {
                 vectorToTarget = vectorToTarget.negate();
             }
 
             float theta = (float)Math.acos(vectorToTarget.dot(new SylverVector2f(1,0)));
-            if(target.getPosition().y < myPos.y)
+            if(targetPosition.y < myPos.y)
             theta = (float)(2* Math.PI - theta);
         
             goo1.setPosition(origin.x, origin.y);
             goo1.getBody().addForce(new Vector2f((int)xforce1 ,(int)yforce1));
             goo1.getBody().setRotation((float)theta);
             goo1.getImage().setAngle((float)(theta * 180f/Math.PI)); 
-            user.getOwningScene().add(goo1,Layer.MAIN);  
+            this.getOwningScene().add(goo1,Layer.MAIN);  
         
         }
         

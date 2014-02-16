@@ -40,6 +40,10 @@ public class EnemyGooHeal extends Skill
     
     public void use(Damage damage, SylverVector2f origin)
     {       
+        if(user.getTarget() == null)
+        {
+            return;
+        }
         //Damage is scaled with base
         float dAmount = this.getBaseDamage(); 
         damage.getAmountObject().adjustBase(dAmount);
