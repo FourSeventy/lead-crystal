@@ -33,9 +33,9 @@ public class EnemyBossSwipe extends Skill{
     public void use(Damage damage, SylverVector2f origin)
     {
         
-        System.err.println("HUEH?");
+     
         //Damage is scaled with base damage
-        float dAmount = this.getBaseDamage(); 
+        float dAmount = this.getBaseDamage()/2; 
         damage.getAmountObject().adjustBase(dAmount);
         damage.setType(Damage.DamageType.PHYSICAL);
         
@@ -79,7 +79,6 @@ public class EnemyBossSwipe extends Skill{
             hitBox.getBody().setRotation((float)theta);
             hitBox.getImage().setAngle((float)(theta * 180f/Math.PI)); 
             
-            System.out.println(theta);
             
             this.user.getOwningScene().add(hitBox,Layer.MAIN);  
             
