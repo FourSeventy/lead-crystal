@@ -84,6 +84,7 @@ public class TilePalette extends Menu {
     private ArrayList<Image> desertTiles = new ArrayList<>();
     private ArrayList<Image> desertTiles2 = new ArrayList<>();
     private ArrayList<Image> desertDoodads = new ArrayList<>();
+    private ArrayList<Image> templeTiles = new ArrayList<>();
     private ArrayList<Image> specialDoodads = new ArrayList<>();
     
     
@@ -95,6 +96,7 @@ public class TilePalette extends Menu {
     private ArrayList<WorldObjectEntity> desertTilesWO = new ArrayList<>();
     private ArrayList<WorldObjectEntity> desertTiles2WO = new ArrayList<>();
     private ArrayList<WorldObjectEntity> desertRocksWO = new ArrayList<>();
+    private ArrayList<WorldObjectEntity> templeTilesWO = new ArrayList<>();
     
     
     //current npe radio set selection
@@ -189,6 +191,17 @@ public class TilePalette extends Menu {
         }
         catch(Exception e){ System.err.println("Error getting Desert Doodads folder");}
         
+        //temple Tiles
+        try
+        {
+            ArrayList<String> templeDoodadStrings = this.getTexturesInFolder(Game.getInstance().getConfiguration().getTextureRootFolder().resolve( "terrain/templeTiles"));
+            for(String string: templeDoodadStrings)
+            {
+                templeTiles.add(new Image(string));
+            }
+        }
+        catch(Exception e){ System.err.println("Error getting Temple Tiles folder");}
+        
         //special doodads
         try
         {
@@ -207,6 +220,7 @@ public class TilePalette extends Menu {
         imageGroupMap.put("desertDoodads", desertDoodads);
         imageGroupMap.put("desertTiles", desertTiles);
         imageGroupMap.put("desertTiles2",desertTiles2);
+        imageGroupMap.put("templeTiles",templeTiles);
         imageGroupMap.put("townDoodads", townDoodads); 
         imageGroupMap.put("backgrounds", backgrounds);
         imageGroupMap.put("animatedImages", animatedTerrain);
@@ -218,6 +232,7 @@ public class TilePalette extends Menu {
         woGroupMap.put("deserttiles2", desertTiles2WO); 
         woGroupMap.put("town", townWO);       
         woGroupMap.put("desertdoodads", desertRocksWO); 
+        woGroupMap.put("templetiles", templeTilesWO);
         
         //build npe group mapping
         npeGroupMap.put("town", townEnemies);
@@ -249,6 +264,7 @@ public class TilePalette extends Menu {
         ra.addElement(new SimpleEntry("Desert Doodads","desertDoodads" ));
         ra.addElement(new SimpleEntry("Desert Tiles2","desertTiles2" )); 
         ra.addElement(new SimpleEntry("Desert Tiles","desertTiles" )); 
+        ra.addElement(new SimpleEntry("Temple Tiles","templeTiles"));
         ra.addElement(new SimpleEntry("Town Doodads","townDoodads" ));
         ra.addElement(new SimpleEntry("Backgrounds","backgrounds" ));
         ra.addElement(new SimpleEntry("Animated","animatedImages" ));
