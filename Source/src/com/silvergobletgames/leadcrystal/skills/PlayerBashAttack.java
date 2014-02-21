@@ -15,6 +15,7 @@ import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.entities.*;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.ImageEffect;
 import com.silvergobletgames.sylver.util.SylverRandom;
@@ -88,6 +89,9 @@ public class PlayerBashAttack extends Skill{
         hitBox.setPosition(user.getPosition().x + 100*vectorToTarget.x, user.getPosition().y + 100*vectorToTarget.y);
         this.user.getOwningScene().add(hitBox,Layer.MAIN);    
         
+        //play sound
+        Sound sound = Sound.locationSound("buffered/swipe.ogg", user.getPosition().x, user.getPosition().y, false, 1f, .5f);
+        user.getOwningScene().add(sound);
         
     }
 

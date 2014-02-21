@@ -1,7 +1,6 @@
 
 package com.silvergobletgames.leadcrystal.menus;
 
-import com.silvergobletgames.leadcrystal.skills.PlayerFreezeAttack;
 import com.silvergobletgames.leadcrystal.skills.PlayerBuckshot;
 import com.silvergobletgames.leadcrystal.skills.PlayerDashAttack;
 import com.silvergobletgames.leadcrystal.skills.PlayerSnipe;

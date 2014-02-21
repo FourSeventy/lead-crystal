@@ -53,16 +53,12 @@ public class SkillFactory
             case EnemyJumperSpikes: return new EnemyJumperSpikes();
             case PlayerDash: return new PlayerDashAttack();
             case PlayerGravityShield: return new PlayerGravityShield();
-            case PlayerFreezeAttack: return new PlayerFreezeAttack();
             case PlayerWard: return new PlayerWard();
             case PlayerBuckshot: return new PlayerBuckshot();
             case PlayerAttackDrone: return new PlayerAttackDrone();
             case PlayerBashAttack: return new PlayerBashAttack();
             case PlayerClusterbomb: return new PlayerClusterbomb();
-            case PlayerStimpack: return new PlayerStimpack();
             case PlayerRicochet: return new PlayerRicochet();
-            case PlayerSoulLeech: return new PlayerSoulLeech();
-            case PlayerStomp: return new PlayerStompAttack();
             case PlayerRocket: return new PlayerRocket();
             case PlayerBoomerang: return new PlayerBoomerang();
             case EnemyBossSwipe: return new EnemyBossSwipe();

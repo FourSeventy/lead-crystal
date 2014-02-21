@@ -15,6 +15,7 @@ import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.entities.*;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.graphics.Anchorable;
 import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.ImageEffect;
@@ -85,7 +86,10 @@ public class PlayerCrushingStrike extends PlayerSkill{
         hitBox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 300, 1, 1));
         hitBox.setPosition(origin.x,origin.y);
         hitBox.getBody().addForce(new Vector2f(xforce,yforce));
-        this.user.getOwningScene().add(hitBox,Layer.MAIN);      
+        this.user.getOwningScene().add(hitBox,Layer.MAIN);  
+        
+        Sound sound = Sound.locationSound("buffered/clang1.ogg", user.getPosition().x, user.getPosition().y, false, 1f,1f);
+        user.getOwningScene().add(sound);
         
         
     }

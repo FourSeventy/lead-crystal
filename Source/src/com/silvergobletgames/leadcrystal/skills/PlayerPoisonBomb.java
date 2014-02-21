@@ -110,9 +110,8 @@ public class PlayerPoisonBomb extends PlayerSkill{
         user.getOwningScene().add(smokeEmitter,Scene.Layer.MAIN);
         
  
-        //play sound
-//        Sound sound = Sound.locationSound("buffered/smallLaser.ogg", user.getPosition().x, user.getPosition().y, false, .8f);
-//        user.getOwningScene().add(sound);
+        Sound sound = Sound.locationSound("buffered/bang.ogg", user.getPosition().x, user.getPosition().y, false, .6f,.89f);
+        user.getOwningScene().add(sound);
 
 
     }

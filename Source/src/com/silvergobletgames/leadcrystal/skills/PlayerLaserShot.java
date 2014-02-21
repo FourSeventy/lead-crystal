@@ -162,7 +162,7 @@ public class PlayerLaserShot extends PlayerSkill{
              if(other instanceof WorldObjectEntity || other instanceof CombatEntity)
              {
                  //play sound
-                Sound sound = Sound.locationSound("buffered/smallLaser.ogg", this.getPosition().x, this.getPosition().y, false, .6f,2);
+                Sound sound = Sound.locationSound("buffered/smallLaser.ogg", this.getPosition().x, this.getPosition().y, false, .5f,2);
                 this.getOwningScene().add(sound);
         
                 this.getBody().setVelocity(new Vector2f(0,0));

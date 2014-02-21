@@ -457,7 +457,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                 {                                   
                     if(this.getOwningScene() instanceof GameClientScene)
                     {
-                        Sound sound = Sound.locationSound("buffered/bodyFall.ogg", this.getPosition().x, this.getPosition().y, false,1.5f);
+                        Sound sound = Sound.locationSound("buffered/bodyFall.ogg", this.getPosition().x, this.getPosition().y, false,.40f);
                         this.getOwningScene().add(sound);
                     }
                 }
@@ -1244,7 +1244,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                 //play the jump sound   
                 if(this.getOwningScene() instanceof GameClientScene)
                 {
-                    Sound jumpSound = Sound.locationSound("buffered/jump.ogg", this.getPosition().x, this.getPosition().y, false, 2f);               
+                    Sound jumpSound = Sound.locationSound("buffered/jump.ogg", this.getPosition().x, this.getPosition().y, false, .4f);               
                     this.getOwningScene().add(jumpSound);
                 }
             } 

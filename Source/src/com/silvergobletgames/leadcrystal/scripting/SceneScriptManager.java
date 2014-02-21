@@ -357,7 +357,7 @@ public class SceneScriptManager
     {
         Sound sound =Sound.changeBGM(soundRef, 500, 500);   
         this.owningScene.add(sound);
-        sound = Sound.adjustSourceVolume("BGM", .25f);
+        sound = Sound.adjustSourceVolume("BGM", .2f);
         this.owningScene.add(sound);
     }
     

@@ -1,4 +1,4 @@
-package com.silvergobletgames.leadcrystal.skills;
+ package com.silvergobletgames.leadcrystal.skills;
 
 import com.silvergobletgames.sylver.graphics.Image;
 import net.phys2d.math.Vector2f;
@@ -11,6 +11,7 @@ import com.silvergobletgames.leadcrystal.entities.EntityEffect;
 import com.silvergobletgames.leadcrystal.entities.HitBox;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.ImageEffect;
@@ -101,6 +102,10 @@ public class PlayerDashAttack extends Skill{
         
         //tell player to handle dash
         ((PlayerEntity)user).handleDash(vectorToTarget);
+        
+        //play sound
+        Sound sound = Sound.locationSound("buffered/woosh2.ogg", user.getPosition().x, user.getPosition().y, false, 1f,.4f);
+        user.getOwningScene().add(sound);
         
         
     }

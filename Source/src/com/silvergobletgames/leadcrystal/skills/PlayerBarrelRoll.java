@@ -106,8 +106,8 @@ public class PlayerBarrelRoll extends PlayerSkill{
         
  
         //play sound
-//        Sound sound = Sound.locationSound("buffered/smallLaser.ogg", user.getPosition().x, user.getPosition().y, false, .8f);
-//        user.getOwningScene().add(sound);
+        Sound sound = Sound.locationSound("buffered/jump.ogg", user.getPosition().x, user.getPosition().y, false, .8f, 1.4f);
+        user.getOwningScene().add(sound);
 
 
     }
@@ -157,6 +157,9 @@ public class PlayerBarrelRoll extends PlayerSkill{
              this.placeFire(this.getPosition().x, this.getPosition().y);
              this.placeFire(this.getPosition().x + 50, this.getPosition().y);            
              this.placeFire(this.getPosition().x + 100, this.getPosition().y);
+             
+             Sound sound = Sound.locationSound("buffered/explosion.ogg", this.getPosition().x, this.getPosition().y, false, 1f, 1f);
+                this.getOwningScene().add(sound);
                 
              //remove this hitbox from the world
             this.getBody().setVelocity(new Vector2f(0,0));

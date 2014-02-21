@@ -20,6 +20,7 @@ import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.IceEmitter;
 import com.silvergobletgames.leadcrystal.entities.*;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.graphics.*;
 import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
@@ -76,7 +77,9 @@ public class PlayerWard extends PlayerSkill{
         hitbox.getImage().setAngle((float)(theta * (180f/Math.PI))); 
         user.getOwningScene().add(hitbox,Layer.MAIN);     
         
-        
+        //play sound
+        Sound sound = Sound.locationSound("buffered/jump.ogg", user.getPosition().x, user.getPosition().y, false, .8f, 1.4f);
+        user.getOwningScene().add(sound);
      
         
        
