@@ -143,7 +143,7 @@ public class PlayerRocket extends PlayerSkill
 
       
         //play sound
-        Sound sound = Sound.locationSound("buffered/shotgunBlast.ogg", user.getPosition().x, user.getPosition().y, false, .45f,.2f);
+        Sound sound = Sound.locationSound("buffered/rocketShoot.ogg", user.getPosition().x, user.getPosition().y, false, 1f,1f);
         user.getOwningScene().add(sound);
         
     }
@@ -198,11 +198,16 @@ public class PlayerRocket extends PlayerSkill
                  this.getOwningScene().add(explosionEmitter, Layer.ATTACHED_FG);
                  
                  //flying chunks 
+                  //play sound
+                Sound sound = Sound.locationSound("buffered/bang.ogg", this.getPosition().x, this.getPosition().y, false, .90f,.4f);
+                this.getOwningScene().add(sound);
                  
                  
                  //remove this hitbox
                  this.getBody().setVelocity(new Vector2f(0,0));
                  this.removeFromOwningScene();
+                 
+                
              }
          }
          
