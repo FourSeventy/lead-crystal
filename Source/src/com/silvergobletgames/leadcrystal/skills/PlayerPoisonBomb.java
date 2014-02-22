@@ -112,6 +112,9 @@ public class PlayerPoisonBomb extends PlayerSkill{
  
         Sound sound = Sound.locationSound("buffered/bang.ogg", user.getPosition().x, user.getPosition().y, false, .6f,.89f);
         user.getOwningScene().add(sound);
+        
+        sound = Sound.locationSound("buffered/steam.ogg", user.getPosition().x, user.getPosition().y, false, .6f,.89f);
+        user.getOwningScene().add(sound);
 
 
     }

@@ -239,6 +239,10 @@ public class PlayerAttackDrone extends Skill
             laser.getBody().setRotation((float)theta);
             laser.getImage().setAngle((float)(theta * (180f/Math.PI))); 
             user.getOwningScene().add(laser,Layer.MAIN);
+            
+            //play sound
+            Sound sound = Sound.locationSound("buffered/smallLaser.ogg", this.getPosition().x, this.getPosition().y, false, 1f,1f);
+            this.getOwningScene().add(sound);
         }
         
         public boolean checkLOS()
