@@ -225,7 +225,7 @@ public class NewCharacterScene extends Scene
                     if(player.getName().equals("devtest"))
                     {
                         
-//                        player.getCurrencyManager().addCurrency(5000); 
+                        player.getCurrencyManager().addCurrency(5000); 
                         player.getLevelProgressionManager().completeMainObjective(0); 
                         player.getLevelProgressionManager().completeMainObjective(1); 
                         player.getLevelProgressionManager().completeMainObjective(2); 
