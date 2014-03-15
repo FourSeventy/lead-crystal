@@ -232,6 +232,7 @@ public class NewCharacterScene extends Scene
                         player.getLevelProgressionManager().completeMainObjective(3); 
                         player.getLevelProgressionManager().completeMainObjective(4); 
                         player.getLevelProgressionManager().completeMainObjective(5); 
+                        player.getLevelProgressionManager().completeMainObjective(6); 
                         player.getSkillManager().setSkillPoints(20);
                     }
 

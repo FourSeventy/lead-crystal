@@ -693,6 +693,59 @@ public class MapMenu extends Window{
        this.addComponent(button5);
        
        
+       //================== cave 2========================
+  
+        final Button button6 = new Button("blank.png",1600,625,50,50);
+        
+        correctOverlay = new Overlay(new Image("mapLock.png"));  
+       //if this map is complete
+       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(7).mainObjective.complete)
+       {
+           correctOverlay = new Overlay(new Image("arrow.png"));
+           correctOverlay.getImage().setColor(new Color(Color.green));
+       }
+       //if the prereqs are complete
+       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(6).mainObjective.complete)
+       {
+           correctOverlay = new Overlay(new Image("arrow.png"));
+           Object points[] = {0,.5,0};
+           int durations[] = {90,90};
+           MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
+           effect.setRepeating(true);
+           button6.getImage().addImageEffect(effect);
+       }
+       
+       
+       correctOverlay.getImage().setDimensions(50, 50);
+       correctOverlay.useRelativeSize = false;  
+       button6.getImage().addOverlay("img",correctOverlay);
+       button6.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                if (e.getActionCommand().equals("mouseEntered")) {
+                     if(!button6.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png")) 
+                     {
+                        button6.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        repaintLevelDetails(7);
+                     }
+                }
+                if (e.getActionCommand().equals("mouseExited")) {
+                     if(!button6.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     {
+                        button6.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        repaintLevelDetails(-1);
+                     }
+                }
+                if(e.getActionCommand().equals("clicked"))
+                {
+                     if(!button6.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                        ((GameClientScene)owningScene).sendChooseLevelPacket(7);
+                }
+            }
+       });
+       this.levelButtons.add(button6);
+       this.addComponent(button6);
+       
     }
     
 }
