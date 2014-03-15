@@ -45,6 +45,10 @@ public class LevelProgressionManager
             this.cutsceneCompleteMap.put(cutscene, Boolean.FALSE);
         }
         
+        //=================
+        // Desert Levels
+        //=================
+        
         //desert 0
         Level level0 = new Level();
         level0.levelDataName = "desert0.lv";
@@ -166,21 +170,24 @@ public class LevelProgressionManager
         //adding to map
         this.levelMap.put(5, level5);
         
-        //desert 6
+        //================
+        // Cave Levels
+        //================
+        //cave 1
         Level cave1 = new Level(); 
         cave1.levelDataName = "cave1.lv";
-        cave1.levelName = "Search and Destroy";
+        cave1.levelName = "Water Pumps";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Kill Mutant Scorpion";
-        objective.objectiveDescription = "Kill the giant scorpion seen in the area.";
+        objective.objectiveName = "Reactivate Water Pumps";
+        objective.objectiveDescription = "Find and activate the three water pumps.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         cave1.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Side Objective";
-        objective.objectiveDescription = "Side Objective stuff";
+        objective.objectiveName = "Lost Artifacts";
+        objective.objectiveDescription = "Find the lost artifact.";
         objective.currencyAward = 25;
         cave1.sideObjective = objective;
         //adding to map

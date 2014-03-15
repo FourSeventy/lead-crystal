@@ -136,11 +136,11 @@ public class EnhancedViewport extends Viewport{
            return true;
        
        Vector2f rightIntersection = line.intersect(blockerRight);
-       if(rightIntersection != null && rightIntersection.y > blockerRight.getStart().getY() && rightIntersection.y < blockerRight.getEnd().getY() && rightIntersection.x < line.getStart().getX() && rightIntersection.x > line.getEnd().getX())
+       if(rightIntersection != null && rightIntersection.y > blockerRight.getStart().getY() && rightIntersection.y < blockerRight.getEnd().getY() && rightIntersection.x < line.getStart().getX() && rightIntersection.x > line.getEnd().getX() && (viewportBlocker.getHeight() > viewportBlocker.getWidth()) )
            return true;
       
        Vector2f leftIntersection = line.intersect(blockerLeft);
-       if(leftIntersection != null && leftIntersection.y < blockerLeft.getStart().getY() && leftIntersection.y > blockerLeft.getEnd().getY() && leftIntersection.x < line.getStart().getX() && leftIntersection.x > line.getEnd().getX())
+       if(leftIntersection != null && leftIntersection.y < blockerLeft.getStart().getY() && leftIntersection.y > blockerLeft.getEnd().getY() && leftIntersection.x < line.getStart().getX() && leftIntersection.x > line.getEnd().getX()&& (viewportBlocker.getHeight() > viewportBlocker.getWidth()))
            return true;
        
        return false;
