@@ -86,6 +86,7 @@ public class TilePalette extends Menu {
     private ArrayList<Image> desertDoodads = new ArrayList<>();
     private ArrayList<Image> templeTiles = new ArrayList<>();
     private ArrayList<Image> specialDoodads = new ArrayList<>();
+    private ArrayList<Image> caveDoodads = new ArrayList<>();
     
     
     //current world object radio set selection
@@ -212,6 +213,17 @@ public class TilePalette extends Menu {
             }
         }
         catch(Exception e){ System.err.println("Error getting Special Doodads folder");}
+        
+        //cave doodads
+        try
+        {
+            ArrayList<String> caveStrings = this.getTexturesInFolder(Game.getInstance().getConfiguration().getTextureRootFolder().resolve("terrain/caveDoodads"));
+            for(String string: caveStrings)
+            {
+                caveDoodads.add(new Image(string));
+            }
+        }
+        catch(Exception e){ System.err.println("Error getting Cave Doodads folder");}
 
 
         //build the image group mappings
@@ -225,6 +237,7 @@ public class TilePalette extends Menu {
         imageGroupMap.put("backgrounds", backgrounds);
         imageGroupMap.put("animatedImages", animatedTerrain);
         imageGroupMap.put("characters", characters); 
+        imageGroupMap.put("caveDoodads",caveDoodads);
                
         
         //build world object group mapping
@@ -258,7 +271,7 @@ public class TilePalette extends Menu {
         });
         
         //build radio set for images
-        final RadioSet<String> ra = new RadioSet<>(10, 430);
+        final RadioSet<String> ra = new RadioSet<>(10, 400);
         ra.addElement(new SimpleEntry("Saved","savedImages" )); 
         ra.addElement(new SimpleEntry("Spcial Doodads","specialDoodads" ));     
         ra.addElement(new SimpleEntry("Desert Doodads","desertDoodads" ));
@@ -269,6 +282,7 @@ public class TilePalette extends Menu {
         ra.addElement(new SimpleEntry("Backgrounds","backgrounds" ));
         ra.addElement(new SimpleEntry("Animated","animatedImages" ));
         ra.addElement(new SimpleEntry("Characters","characters" ));
+        ra.addElement(new SimpleEntry("Cave Doodads","caveDoodads" ));
 
         
       
