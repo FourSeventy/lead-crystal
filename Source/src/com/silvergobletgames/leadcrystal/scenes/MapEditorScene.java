@@ -888,24 +888,27 @@ public class MapEditorScene extends Scene {
             
             if (inputSnapshot.isKeyReleasedCtrlModifier(KeyEvent.VK_M))
             {
-                for(SceneObject so: this.getSceneObjectManager().get(Layer.MAIN))
-                {
-                    if(so instanceof NonPlayerEntity)
-                    {
-                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof FlierAnimationPack)
-                        {
-                            ((NonPlayerEntity)so).getCombatData().baseDamage.setBase(10);
-                        }
-                    }
-                    else if(so instanceof MobSpawner)
-                    {
-                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof FlierAnimationPack)
-                        {
-                            ((MobSpawner)so).mobToSpawn.getCombatData().baseDamage.setBase(10);
-                        }
-                            
-                    }
-                }
+                
+              
+                
+//                for(SceneObject so: this.getSceneObjectManager().get(Layer.MAIN))
+//                {
+//                    if(so instanceof NonPlayerEntity)
+//                    {
+//                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof FlierAnimationPack)
+//                        {
+//                            ((NonPlayerEntity)so).getCombatData().baseDamage.setBase(10);
+//                        }
+//                    }
+//                    else if(so instanceof MobSpawner)
+//                    {
+//                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof FlierAnimationPack)
+//                        {
+//                            ((MobSpawner)so).mobToSpawn.getCombatData().baseDamage.setBase(10);
+//                        }
+//                            
+//                    }
+//                }
             }
             
             
