@@ -889,6 +889,19 @@ public class MapEditorScene extends Scene {
             if (inputSnapshot.isKeyReleasedCtrlModifier(KeyEvent.VK_M))
             {
                 
+                for(SceneObject so: this.getSceneObjectManager().get(Layer.MAIN))
+                {
+                    if(so instanceof WorldObjectEntity)
+                    {
+                        WorldObjectEntity wo = (WorldObjectEntity)so;
+                        if(wo.getLight() != null && wo.getLight().isOn())
+                        {
+                            wo.getLight().setIntensity(0.6f);
+                            wo.getLight().setSize(wo.getLight().getSize() + 200); 
+                        }
+                    }
+                
+                }
               
                 
 //                for(SceneObject so: this.getSceneObjectManager().get(Layer.MAIN))

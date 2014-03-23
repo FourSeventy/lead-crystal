@@ -191,7 +191,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         this.light.setColor(new Color(.9f,.9f,1f));
         this.light.setSize(600);
         this.light.setConicalRadius(40);
-        this.light.setIntensity(0.40f);
+        this.light.setIntensity(0.90f);
         this.light.turnOff();
         
         //entity tooltip
