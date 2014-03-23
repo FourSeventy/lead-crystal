@@ -114,6 +114,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     public boolean touchingLadder = false;
     public boolean onLadder = false;
     public boolean respawnWhenEnterTown = false;
+    private RespawnGravestone respawnGravestone;
     
   
     
@@ -300,16 +301,60 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         // Calculate Skill Release Point
         //===============================
          
+         //determine flipped
+        boolean flipped;
+        if(this.worldMousePoint.x < this.getPosition().x)
+             flipped = true;
+        else
+            flipped = false;
+        
         //Get user X and Y
-        float userX = this.getPosition().x;
-        float userY = this.getPosition().y;
+        float userX; 
+        float userY; 
+        
+        if(!flipped)
+        {
+            userX = this.getPosition().x-16;
+            userY = this.getPosition().y  + 6;
+        }
+        else
+        {
+            userX = this.getPosition().x+16;
+            userY = this.getPosition().y  + 6;
+        }
               
         //get vector to target
         Vector2f vectorToTarget = new Vector2f(this.worldMousePoint.x - userX, this.worldMousePoint.y - userY);
         vectorToTarget.normalise();
         
+        float theta = (float)Math.acos(vectorToTarget.dot(new Vector2f(1,0)));
+        if(this.worldMousePoint.y < userY)
+            theta = (float)(2* Math.PI - theta);
+        
+        theta = (float)Math.toDegrees(theta);
+        if(theta >= 60 && theta <= 90)
+        {
+            //set vector to 60
+            vectorToTarget = new Vector2f((float)Math.cos(Math.toRadians(60)),(float)Math.sin(Math.toRadians(60)));
+        }
+        else if(theta > 90 && theta <= 120)
+        {
+            //set vector to 120
+            vectorToTarget = new Vector2f((float)Math.cos(Math.toRadians(120)),(float)Math.sin(Math.toRadians(120)));
+        }
+        else if(theta >= 240 && theta < 270)
+        {
+            //set to 240
+            vectorToTarget = new Vector2f((float)Math.cos(Math.toRadians(240)),(float)Math.sin(Math.toRadians(240)));
+        }
+        else if(theta >= 270 && theta <= 300)
+        {
+            //set to 300
+            vectorToTarget = new Vector2f((float)Math.cos(Math.toRadians(300)),(float)Math.sin(Math.toRadians(300)));
+        }
+        
         vectorToTarget.scale(this.getFrontArm().getWidth()* .5f) ;
-        vectorToTarget.add(new Vector2f(this.getPosition().x,this.getPosition().y)); 
+        vectorToTarget.add(new Vector2f(userX,userY)); 
         this.skillReleasePoint = new SylverVector2f(vectorToTarget.x,vectorToTarget.y);
         
         //update body parts
@@ -325,6 +370,24 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     public void draw(GL2 gl)
     {
         this.updateBodyParts();
+        
+        //if we are dead hide body
+        if(this.combatData.isDead())
+        {
+             //hide body
+            this.getImage().setAlphaBrightness(0);
+            this.head.setAlphaBrightness(0);
+            this.frontArm.setAlphaBrightness(0);
+            this.backArm.setAlphaBrightness(0);
+        }
+        else
+        {
+             //show body
+            this.getImage().setAlphaBrightness(1);
+            this.head.setAlphaBrightness(1);
+            this.frontArm.setAlphaBrightness(1);
+            this.backArm.setAlphaBrightness(1);
+        }
                    
         this.backArm.draw(gl);
         
@@ -394,7 +457,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                 {                                   
                     if(this.getOwningScene() instanceof GameClientScene)
                     {
-                        Sound sound = Sound.locationSound("buffered/bodyFall.ogg", this.getPosition().x, this.getPosition().y, false,.95f);
+                        Sound sound = Sound.locationSound("buffered/bodyFall.ogg", this.getPosition().x, this.getPosition().y, false,.40f);
                         this.getOwningScene().add(sound);
                     }
                 }
@@ -509,9 +572,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
 
         //Stop casting
         this.interruptAttacking();
-
-        
-        
+      
         //turn off light
         this.light.turnOff();
         
@@ -525,12 +586,26 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         //emit death chunks
         super.emitDeathChunks();
         
+        //==================
+        //add respawn gravestone
+        //==================
+
+        Body gravestoneBody = new Body(new Box(100,130),1 );
+        gravestoneBody.setBitmask(Entity.BitMasks.NO_COLLISION.value);
+        gravestoneBody.setOverlapMask(Entity.OverlapMasks.NO_OVERLAP.value);
         
-        //==================
-        //add respawn script
-        //==================
+        this.respawnGravestone = new RespawnGravestone(new Image("gravestone.png"),gravestoneBody,this);
+        //this.respawnGravestone.getImage().setDimensions(100, 130);
+        this.respawnGravestone.getImage().setScale(.2f);
+        
+        Float[] points = {0f,0f,1f};
+        int[] durations = {60,60};
+        ImageEffect fadeEffect = new MultiImageEffect(ImageEffect.ImageEffectType.ALPHABRIGHTNESS, points,durations);
+        this.respawnGravestone.getImage().addImageEffect(fadeEffect);
+        
+        //building respawn script
         ScriptPage page = new ScriptPage();
-        page.setScript("if(self.getID() != invoker.getID()){scriptManager.respawnPlayer(self.getID(),invoker.getID());}"); 
+        page.setScript("if(\"" + this.getID() + "\" != invoker.getID()){scriptManager.respawnPlayer(\"" + this.getID() + "\",invoker.getID());}"); 
         
         PageCondition condition = new PageCondition();
         condition.setConditionScript("conditionValue = true;");
@@ -538,17 +613,9 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         ScriptObject obj = new ScriptObject();
         obj.addPage(page, condition);
         obj.setTrigger(ScriptObject.ScriptTrigger.RIGHTCLICK);
-        this.setScriptObject(obj); 
+        this.respawnGravestone.setScriptObject(obj); 
         
-        Float[] points = {0f,0f,1f};
-        int[] durations = {180,10};
-        this.getImage().addImageEffect(new MultiImageEffect(ImageEffect.ImageEffectType.ALPHABRIGHTNESS, points, durations));
-        //gravestone overlay
-        Overlay gravestoneOverlay = new Overlay(new Image("gravestone.png"));
-        gravestoneOverlay.getImage().addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.ALPHABRIGHTNESS, 180, 0, 1));
-        gravestoneOverlay.setRelativeSize(.7f);
-        gravestoneOverlay.setRelativePosition(.05f,0);
-        this.getImage().addOverlay("grave",gravestoneOverlay);
+        this.getOwningScene().add(this.respawnGravestone, Scene.Layer.MAIN);
         
         
         
@@ -582,10 +649,9 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         this.combatData.removeState(CombatState.IMMUNE);
         
         //remove respawn gravestone
-        this.getImage().removeOverlay("grave");
-        
-        //remove respawn script
-        this.setScriptObject(null);
+        this.getOwningScene().remove(this.respawnGravestone);
+        this.respawnGravestone = null;
+       
     }
     
     public void toggleFlashlight()
@@ -740,13 +806,14 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     
     private static ROVector2f[] getBodyVertices()
     {
-        ROVector2f[] vertices = new ROVector2f[11];
+        ROVector2f[] vertices = new ROVector2f[12];
                 
         vertices[0] = new Vector2f(15,55);
-        vertices[1] = new Vector2f(-15,55); 
+        vertices[1] = new Vector2f(0,65);
+        vertices[2] = new Vector2f(-15,55); 
         
         //points on circle radius 25
-        int ehh = 2;
+        int ehh = 3;
         for(double t = Math.PI; t <= 2* Math.PI + Math.PI/10; t+= Math.PI/8)
         {
           double x = 25*Math.cos(t) + 0;
@@ -868,10 +935,27 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     
     private void updateBodyParts()
     {
-
+        //determine flipped
+        boolean flipped;
+        if(this.worldMousePoint.x < this.getImage().getPosition().x + this.getImage().getWidth() * .5f)
+             flipped = true;
+        else
+            flipped = false;
+        
         //Get user X and Y
-        float userX = this.getImage().getPosition().x + this.getImage().getWidth() * .5f;
-        float userY = this.getImage().getPosition().y + this.getImage().getHeight() * .5f +25;
+        float userX; 
+        float userY; 
+        
+        if(!flipped)
+        {
+            userX = this.getImage().getPosition().x + this.getImage().getWidth() * .5f -15;
+            userY = this.getImage().getPosition().y + this.getImage().getHeight() * .5f +25;
+        }
+        else
+        {
+            userX = this.getImage().getPosition().x + this.getImage().getWidth() * .5f +15;
+            userY = this.getImage().getPosition().y + this.getImage().getHeight() * .5f +25;
+        }
         
         //get vector to mouse
         Vector2f vectorToTarget = new Vector2f(this.worldMousePoint.x - userX, this.worldMousePoint.y - userY);
@@ -882,12 +966,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         if(this.worldMousePoint.y < userY)
             theta = (float)(2* Math.PI - theta);
         
-        //determine flipped
-        boolean flipped;
-        if(this.worldMousePoint.x < userX)
-             flipped = true;
-        else
-            flipped = false;
+        
         
         //flip body if we are flipped
         if(flipped)
@@ -930,7 +1009,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                  angle = 60;
              
              //set angle and rotation point
-             this.frontArm.setAngle(angle-2);
+             this.frontArm.setAngle(angle -2);
              this.frontArm.setRotationPoint(.82f, .55f);
              this.frontArm.setAnchor(Anchorable.Anchor.RIGHTCENTER); 
              
@@ -957,7 +1036,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                  angle = 334;
              
              //set rotation
-             this.backArm.setAngle(angle +2);
+             this.backArm.setAngle(angle +2 );
              this.backArm.setRotationPoint(-.17f, .55f);
              this.backArm.setAnchor(Anchorable.Anchor.LEFTCENTER); 
              
@@ -1165,7 +1244,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                 //play the jump sound   
                 if(this.getOwningScene() instanceof GameClientScene)
                 {
-                    Sound jumpSound = Sound.locationSound("buffered/jump.ogg", this.getPosition().x, this.getPosition().y, false, .75f);               
+                    Sound jumpSound = Sound.locationSound("buffered/jump.ogg", this.getPosition().x, this.getPosition().y, false, .4f);               
                     this.getOwningScene().add(jumpSound);
                 }
             } 
@@ -1429,12 +1508,13 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         renderData.data.add(5,this.armorManager.dumpRenderData());
         renderData.data.add(6,this.levelProgressionManager.dumpRenderData());
         renderData.data.add(7,this.worldMousePoint);
-        renderData.data.add(8,null); 
-        renderData.data.add(9,null);
-        renderData.data.add(10,null);
+        renderData.data.add(8,this.head.dumpRenderData()); 
+        renderData.data.add(9,this.frontArm.dumpRenderData());
+        renderData.data.add(10,this.backArm.dumpRenderData());
         renderData.data.add(11,this.entityTooltip.dumpRenderData());
         renderData.data.add(12,this.getName());
         renderData.data.add(13,this.potionManager.dumpRenderData());
+        renderData.data.add(14,this.frontArm.getAnimation());
             
         
         return renderData;
@@ -1446,7 +1526,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         Image image = Image.buildFromRenderData((SceneObjectRenderData)renderData.data.get(0));
         
         //build the player
-        PlayerEntity player = new PlayerEntity(image,new Image("bash-head0.png"),new Image(new BashBrownBackArmAnimationPack()),new Image(new BashBlackFrontArmAnimationPack()));
+        PlayerEntity player = new PlayerEntity(image,Image.buildFromRenderData((SceneObjectRenderData)renderData.data.get(8)),Image.buildFromRenderData((SceneObjectRenderData)renderData.data.get(10)),Image.buildFromRenderData((SceneObjectRenderData)renderData.data.get(9)));
         player.setID(renderData.getID());
         player.setImage(image);
         
@@ -1538,6 +1618,9 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         }
         
         
+
+        
+        
         if(entityTooltip != null)
         {
             SceneObjectRenderDataChanges tooltipChanges = this.entityTooltip.generateRenderDataChanges((RenderData)oldData.data.get(11), (RenderData)newData.data.get(11));
@@ -1554,6 +1637,12 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         {
             changeList.add(potionChanges);
             changeMap += 1L <<13;
+        }
+        
+        if(!oldData.data.get(14).equals( newData.data.get(14)))
+        {
+            changeList.add(newData.data.get(14));
+            changeMap += 1L << 14;
         }
         
         changes.fields = changeMap;
@@ -1583,7 +1672,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         //construct an arraylist of data that we got, nulls will go where we didnt get any data
         ArrayList changeData = new ArrayList();
-        for(int i = 0; i <12; i ++)
+        for(int i = 0; i <15; i ++)
         {
             // The bit was set
             if ((fieldMap & (1L << i)) != 0)
@@ -1615,6 +1704,12 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             this.worldMousePoint = new SylverVector2f((SylverVector2f)changeData.get(7));
         }
         
+        if(changeData.get(14) != null)
+        {
+            this.frontArm.setAnimation((ImageAnimation)changeData.get(14));
+            this.backArm.setAnimation((ImageAnimation)changeData.get(14));
+        }
+        
 
     }
     
@@ -1629,6 +1724,12 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
 
         if(entityTooltip != null)
             entityTooltip.interpolate(currentTime);
+        
+        if(frontArm != null)
+           this.frontArm.update();
+        
+        if(backArm != null)
+            this.backArm.update();
     }  
     
     public PlayerPredictionData dumpPredictionData()
@@ -1732,6 +1833,62 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
        
         return player;
 
+        
+    }
+    
+    
+    
+    
+    
+    //====================
+    // Respawn Gravestone
+    //====================
+    
+    public static class RespawnGravestone extends Entity
+    {
+        private PlayerEntity player;
+        private int ticks;
+        
+        public RespawnGravestone(Image image, Body body, PlayerEntity player)
+        {
+            super(image,body);
+            
+            this.player = player;
+            
+            Image gearImage =new Image("gear2.png");
+            gearImage.setAnchor(Anchorable.Anchor.CENTER);
+            Overlay gear = new Overlay(gearImage);
+            gear.setRelativePosition(.5f, 1.2f);
+            gear.setRelativeSize(.2f);
+            image.addOverlay("interact",gear );  
+
+            //add overlay movement
+            Object[] points = {1.2f,1.3f,1.2f};
+            int[] durations = {60,60};
+            MultiImageEffect bobEffect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
+            bobEffect.setRepeating(true);
+            image.addImageEffect(bobEffect);
+            
+               Float[] points2 = {0f,0f,1f};
+            int[] durations2 = {60,60};
+            ImageEffect fadeEffect = new MultiImageEffect(ImageEffect.ImageEffectType.ALPHABRIGHTNESS, points2,durations2);
+        gear.getImage().addImageEffect(fadeEffect);
+        }
+        
+        
+        @Override
+        public void update()
+        {
+            super.update();
+            
+            this.ticks++;
+            
+            
+            this.setPosition(player.getPosition().x, player.getPosition().y);
+            
+            
+            
+        }
         
     }
     

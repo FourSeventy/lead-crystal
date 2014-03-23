@@ -28,6 +28,7 @@ import com.silvergobletgames.leadcrystal.netcode.OpenInstructionalTipPacket.Inst
 import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
 import com.silvergobletgames.leadcrystal.skills.Skill.SkillID;
 import com.silvergobletgames.leadcrystal.skills.SkillFactory;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.graphics.Text.CoreTextType;
@@ -71,8 +72,6 @@ public class Hud extends Window
     private Button skillButton3;  private Label skillHotkey3; private Label skillCooldown3; private SkillCooldownGraphic skillCooldownBlack3;
     private Button skillButton4;  private Label skillHotkey4; private Label skillCooldown4; private SkillCooldownGraphic skillCooldownBlack4;
     private Button questButton;
-    private Button skillButton;
-    private Button inventoryButton;
     
     //radar stuffs
     private Button radarFrame;
@@ -91,9 +90,8 @@ public class Hud extends Window
     //you have died text and button
     private Label youHaveDied;
     private Button youDiedButton;
+    private Text youHaveDiedText;
     
-    //skill up poppup
-    private Button skillUpButton;
     
     //==================
     // networking stats
@@ -112,7 +110,6 @@ public class Hud extends Window
     //Menus
     //=======
     private ArrayList<Window> menuList = new ArrayList<>();
-    public InventoryMenu inventoryMenu;
     public SkillMenu skillMenu;  
     public EscapeMenu escapeMenu;
     public PotionsMenu potionsMenu;
@@ -159,26 +156,6 @@ public class Hud extends Window
         // Menus
         //==============
         
-        //initializing inventory menu
-        inventoryMenu = new InventoryMenu(right - 560,100,playerReference);
-        inventoryMenu.addActionListener(new ActionListener(){     
-            public void actionPerformed(ActionEvent e)
-            {
-                if(e.getActionCommand().equals("mouseEntered"))
-                {
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND)); 
-                }
-                else if(e.getActionCommand().equals("mouseExited"))
-                {
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE)); 
-                }
-            }
-        });               
-        inventoryMenu.update();
-        inventoryMenu.close();
-        inventoryMenu.setOwningScene(scene);
-        menuList.add(inventoryMenu);
-        
         //initialize potions menu
         potionsMenu = new PotionsMenu(2,100);
         potionsMenu.addActionListener(new ActionListener(){     
@@ -200,7 +177,8 @@ public class Hud extends Window
         menuList.add(potionsMenu);
         
         //initializing armor menu
-        armorMenu = new ArmorMenu(playerReference,2,100);
+        armorMenu = new ArmorMenu(playerReference,0,100);
+        armorMenu.setPosition(center - armorMenu.getWidth()/2, 100);
         armorMenu.addActionListener(new ActionListener(){     
             public void actionPerformed(ActionEvent e)
             {
@@ -577,54 +555,19 @@ public class Hud extends Window
         this.addComponent(radarFrame);
         
         //Menu Buttons      
-        this.questButton = new Button("questScreenButton.png",right - 220,820,30,43);
+        this.questButton = new Button("questScreenButton.png",right - 230,775,30,43);
         questButton.addActionListener(new ActionListener()  {           
             public void actionPerformed(ActionEvent e) 
             {
                 if(e.getActionCommand().equals("clicked"))
                 {
-                    if(!skillMenu.isOpen() && !inventoryMenu.isOpen())
-                         questMenu.toggle();
-                                                          
+               
+                  questMenu.toggle();
                 }                
             }      
         });      
         this.addComponent(questButton);  
-        
-        this.skillButton = new Button("skillScreenButton.png",right - 230 ,775,30,43);
-        this.addComponent(skillButton);  
-         skillButton.addActionListener(new ActionListener()  {           
-            public void actionPerformed(ActionEvent e) 
-            {
-                if(e.getActionCommand().equals("clicked"))
-                {
-                    if(!skillMenu.isOpen() && !inventoryMenu.isOpen())
-                    {
-                        skillMenu.toggle();
-                        inventoryMenu.close();
-                    }
-                }
-                
-            }      
-        });
-        
-        this.inventoryButton = new Button("inventoryScreenButton.png",right - 220,730,30,43);
-        inventoryButton.addActionListener(new ActionListener()  {         
-            public void actionPerformed(ActionEvent e) 
-            {
-                 if(e.getActionCommand().equals("clicked"))
-                {
-                    if(!skillMenu.isOpen() && !inventoryMenu.isOpen())
-                    {
-                        inventoryMenu.toggle();
-                        skillMenu.close();
-                    }
-                }
-                
-            }      
-        });
-        this.addComponent(inventoryButton);   
-              
+
         //networking stats 
         pingText = new Label("0ms",right - 140, 70);     
         packetLossText= new Label("0% pl",right - 140,50);        
@@ -669,27 +612,6 @@ public class Hud extends Window
         this.rightClickInteract.dontKillClick = true;
         this.addComponent(rightClickInteract); 
         
-        this.skillUpButton = new Button(new Image("skillUp.png"),center -40,90,80,80);
-        this.skillUpButton.setHidden(true);
-        this.skillUpButton.addActionListener(new ActionListener(){
-        
-            public void actionPerformed(ActionEvent e) 
-            {
-                if(e.getActionCommand().equals("clicked"))
-                {
-                    if(!skillMenu.isOpen() && !inventoryMenu.isOpen())
-                    {
-                        skillMenu.open();
-                        skillUpButton.getImage().removeAllImageEffects();
-                        skillUpButton.setHidden(true);
-                        
-                    }
-                }
-                
-            }   
-        
-        });
-        this.addComponent(this.skillUpButton);
         
         //set up skills
         this.setUpSkillBar();
@@ -926,27 +848,62 @@ public class Hud extends Window
                 Text dead= new Text("You Have Died", CoreTextType.MENU);
                 dead.setScale(1f);
                 this.youHaveDied = new Label(dead, center - dead.getWidth()/2, 600);
+                youHaveDied.getText().setColor(new Color(1,1,1,0)); 
+                
+                Color[] points2 = {new Color(1,1,1,0),new Color(1,1,1,0),new Color(1,1,1,1)};
+                int[] durations2 = {150,60};
+                MultiTextEffect fadeEffect = new MultiTextEffect(TextEffect.TextEffectType.COLOR, points2,durations2);   
+                youHaveDied.getText().addTextEffect(fadeEffect);
+                
                 this.addComponent(youHaveDied);
                 
-                Text ehh = new Text("Respawn In Town",LeadCrystalTextType.MESSAGE);
-                this.youDiedButton = new Button(ehh, center - 200, 500);
+                
+                
+                final Text ehh = new Text("Respawn In Town",LeadCrystalTextType.MESSAGE);
+                ehh.setPosition(center - 200, 500);
+                this.youHaveDiedText = ehh;
+                this.owningScene.add(ehh, Layer.HUD);
+                this.youDiedButton = new Button(new Image("blank.png"), center - ehh.getWidth()/2, ehh.getPosition().y, ehh.getWidth(), ehh.getHeight());
                 youDiedButton.addActionListener(new ActionListener() {
 
-                    public void actionPerformed(ActionEvent e) {
-                        if (e.getActionCommand().equals("clicked")) {
-                            
-                            ((GameClientScene)owningScene).sendRespawnRequestPacket();
-                        }
-                        if (e.getActionCommand().equals("mouseEntered")) {
-                            youDiedButton.text.setScale(1.2f);
-                            
-                        }
-                        if (e.getActionCommand().equals("mouseExited")) {
-                            youDiedButton.text.setScale(1f);
-                        }
-                    }
-                });
+            public void actionPerformed(ActionEvent e) {
+                if (e.getActionCommand().equals("clicked")) 
+                {
+                    ((GameClientScene)owningScene).sendRespawnRequestPacket();
+                }
+                if (e.getActionCommand().equals("mouseEntered")) 
+                {
+                    
+                      if(ehh.hasTextEffect("small"))
+                          ehh.removeTextEffect("small");
+                      
+                       ehh.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, ehh.getScale(), 1.3));
+                    
+                    //play sound
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
+                    owningScene.add(sound);
+                }
+                if (e.getActionCommand().equals("mouseExited"))
+                {
+                        if(ehh.hasTextEffect("big"))
+                           ehh.removeTextEffect("big");
+                        
+                        ehh.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, ehh.getScale(), 1));
+                }
+            }
+        });
+                
+                
+                
+                ehh.setColor(new Color(1,1,1,0)); 
+                Color[] points3 = {new Color(1,1,1,0),new Color(1,1,1,0),new Color(1,1,1,1)};
+                int[] durations3 = {150,60};
+                MultiTextEffect fadeEffect2 = new MultiTextEffect(TextEffect.TextEffectType.COLOR, points3,durations3);   
+                
+                ehh.addTextEffect(fadeEffect2);
+                
                 this.addComponent(youDiedButton);
+                
             }
         }
         else
@@ -955,6 +912,7 @@ public class Hud extends Window
             {
                 this.removeComponent(youHaveDied);
                 this.removeComponent(youDiedButton);
+                this.owningScene.remove(youHaveDiedText); 
                 
                 youHaveDied = null;
                 youDiedButton = null;
@@ -962,36 +920,17 @@ public class Hud extends Window
         }
         
         //disable menu buttons
-         if(skillMenu.isOpen() || inventoryMenu.isOpen())
+         if(skillMenu.isOpen() )
          {
              this.questButton.setDisabled(true);
-             this.skillButton.setDisabled(true);
-             this.inventoryButton.setDisabled(true);
+
          }
          else
          {
              this.questButton.setDisabled(false);
-             this.skillButton.setDisabled(false);
-             this.inventoryButton.setDisabled(false);
          }
          
-         
-         //check if we want to glow the buttons
-         if(playerReference.getSkillManager().getSkillPoints() > 0 && !this.skillButton.getImage().hasImageEffect("glow"))
-         {
-          
-             Float[] points = {1.3f,3.0f,1.3f};
-             int[] durations = {60,60};
-             ImageEffect brightnessEffect = new MultiImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, points,durations);      
-                
-             this.skillButton.getImage().addImageEffect("glow",brightnessEffect);
-                       
-         }
-         else if(playerReference.getSkillManager().getSkillPoints()  == 0)
-         {
-             this.skillButton.getImage().removeImageEffect("glow");
-             this.skillButton.getImage().setBrightness(1);
-         }
+
     
     }
         
@@ -1158,16 +1097,6 @@ public class Hud extends Window
             case Jumpthrough: this.jumpThrough.setHidden(false); break;
             case Sprint: this.sprint.setHidden(false); break;
             case RightClick: this.rightClickInteract.setHidden(false); break;
-            case SkillUp: 
-                {
-                    Float[] points = {1.3f,3.0f,1.3f};
-                    int[] durations = {60,60};
-                    ImageEffect brightnessEffect = new MultiImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, points,durations);      
-                    brightnessEffect.setRepeating(true);
-                    this.skillUpButton.getImage().addImageEffect(brightnessEffect);
-                    this.skillUpButton.setHidden(false);
-                } 
-                break;
         }
     }
     
@@ -1183,11 +1112,6 @@ public class Hud extends Window
             case Jumpthrough: this.jumpThrough.setHidden(true); break;
             case Sprint: this.sprint.setHidden(true); break;
             case RightClick: this.rightClickInteract.setHidden(true); break;
-            case SkillUp:
-                {
-                    this.skillUpButton.getImage().removeAllImageEffects();
-                    this.skillUpButton.setHidden(true);
-                } break;
         }
     }
     

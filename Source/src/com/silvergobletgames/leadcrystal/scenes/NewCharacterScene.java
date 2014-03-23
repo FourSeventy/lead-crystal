@@ -149,7 +149,7 @@ public class NewCharacterScene extends Scene
                        headText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, headText.getScale(), 1.5));
                     
                     //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true);
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
                     add(sound);
                 }
                 if (e.getActionCommand().equals("mouseExited"))
@@ -189,7 +189,7 @@ public class NewCharacterScene extends Scene
                        bodyText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, bodyText.getScale(), 1.5));
                     
                     //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true);
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
                     add(sound);
                 }
                 if (e.getActionCommand().equals("mouseExited"))
@@ -224,8 +224,16 @@ public class NewCharacterScene extends Scene
                     //dev settings
                     if(player.getName().equals("devtest"))
                     {
-                        player.getSkillManager().setSkillPoints(40);
-                        player.getCurrencyManager().addCurrency(1000); 
+                        
+                        player.getCurrencyManager().addCurrency(5000); 
+                        player.getLevelProgressionManager().completeMainObjective(0); 
+                        player.getLevelProgressionManager().completeMainObjective(1); 
+                        player.getLevelProgressionManager().completeMainObjective(2); 
+                        player.getLevelProgressionManager().completeMainObjective(3); 
+                        player.getLevelProgressionManager().completeMainObjective(4); 
+                        player.getLevelProgressionManager().completeMainObjective(5); 
+                        player.getLevelProgressionManager().completeMainObjective(6); 
+                        player.getSkillManager().setSkillPoints(20);
                     }
 
                     SaveGame save = new SaveGame();
@@ -248,7 +256,7 @@ public class NewCharacterScene extends Scene
                        okText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, okText.getScale(), 1.5));
                     
                     //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true);
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
                     add(sound);
                 }
                 if (e.getActionCommand().equals("mouseExited"))
@@ -289,7 +297,7 @@ public class NewCharacterScene extends Scene
                        backText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, backText.getScale(), 1.5));
                     
                     //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true);
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
                     add(sound);
                 }
                 if (e.getActionCommand().equals("mouseExited"))

@@ -11,6 +11,7 @@ import com.silvergobletgames.leadcrystal.menus.FileMenu;
 import com.silvergobletgames.leadcrystal.core.LevelData;
 import com.silvergobletgames.leadcrystal.core.SaveGame;
 import com.silvergobletgames.leadcrystal.core.*;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.FlierAnimationPack;
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
 import com.silvergobletgames.sylver.core.*;
 import com.silvergobletgames.sylver.graphics.*;
@@ -32,9 +33,12 @@ import net.phys2d.raw.shapes.Box;
 import net.phys2d.raw.shapes.Polygon;
 import net.phys2d.raw.shapes.Shape;
 import com.silvergobletgames.leadcrystal.entities.Entity;
+import com.silvergobletgames.leadcrystal.entities.MobSpawner;
 import com.silvergobletgames.leadcrystal.entities.NonPlayerEntity;
 import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
+import com.silvergobletgames.leadcrystal.items.DropGenerator;
+import com.silvergobletgames.leadcrystal.items.DropGenerator.DropQuality;
 import com.silvergobletgames.leadcrystal.menus.*;
 import com.silvergobletgames.leadcrystal.netcode.ConnectionException;
 import com.silvergobletgames.leadcrystal.netcode.GobletServer;
@@ -879,6 +883,32 @@ public class MapEditorScene extends Scene {
             }
             else if (inputSnapshot.isKeyPressed(KeyEvent.VK_DOWN)) {
                 this.viewportLocation.y = this.viewportLocation.y - 10;
+            }
+            
+            
+            if (inputSnapshot.isKeyReleasedCtrlModifier(KeyEvent.VK_M))
+            {
+                
+              
+                
+//                for(SceneObject so: this.getSceneObjectManager().get(Layer.MAIN))
+//                {
+//                    if(so instanceof NonPlayerEntity)
+//                    {
+//                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof FlierAnimationPack)
+//                        {
+//                            ((NonPlayerEntity)so).getCombatData().baseDamage.setBase(10);
+//                        }
+//                    }
+//                    else if(so instanceof MobSpawner)
+//                    {
+//                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof FlierAnimationPack)
+//                        {
+//                            ((MobSpawner)so).mobToSpawn.getCombatData().baseDamage.setBase(10);
+//                        }
+//                            
+//                    }
+//                }
             }
             
             

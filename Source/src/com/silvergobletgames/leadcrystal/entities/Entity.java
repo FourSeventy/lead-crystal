@@ -120,8 +120,10 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
         PLAYER_TOUCH      (0b00_0001), 
         PVP_PLAYER        (0b11_0001),
         NPE               (0b10_0100),
-        NPE_TOUCH         (0b10_0000),        
+        NPE_TOUCH         (0b10_0000),  
+        ITEM              (0b01_0000),
         OVERLAP_ALL       (0b11_1111); //overlaps all
+        
         
         public long value;
 

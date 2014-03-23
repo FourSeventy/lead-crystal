@@ -116,6 +116,11 @@ public class PlayerRicochet extends PlayerSkill{
         user.getOwningScene().add(smokeEmitter,Scene.Layer.MAIN);
         
         //play sound
+        Sound sound = Sound.locationSound("buffered/bang.ogg", user.getPosition().x, user.getPosition().y, false, .6f,1f);
+        user.getOwningScene().add(sound);
+        
+        sound = Sound.locationSound("buffered/clang1.ogg", user.getPosition().x, user.getPosition().y, false, 1f,1f);
+        user.getOwningScene().add(sound);
 
     }
     
@@ -142,6 +147,10 @@ public class PlayerRicochet extends PlayerSkill{
          {
              super.collidedWith(other,event); 
              
+              //play sound
+                Sound sound = Sound.locationSound("buffered/clang1.ogg", this.getPosition().x, this.getPosition().y, false, .45f,2f);
+                this.getOwningScene().add(sound);
+             
              //laser bits
              if(!(other instanceof HitBox))
              {
@@ -166,6 +175,8 @@ public class PlayerRicochet extends PlayerSkill{
              //remove if we hit a world object, or an enemy
              if(this.removeOnNextContact &&(other instanceof WorldObjectEntity || other instanceof CombatEntity))
              {
+                
+        
                 this.getBody().setVelocity(new Vector2f(0,0));
                 this.removeFromOwningScene();
              }

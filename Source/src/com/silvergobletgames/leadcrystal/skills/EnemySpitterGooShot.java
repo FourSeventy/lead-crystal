@@ -39,7 +39,7 @@ public class EnemySpitterGooShot extends Skill
     {       
         
         //Damage is scaled with base
-        float dAmount = this.getBaseDamage() * .5f; 
+        float dAmount = this.getBaseDamage() * .33f; 
         damage.getAmountObject().adjustBase(dAmount);
         damage.setType(Damage.DamageType.PHYSICAL);
         

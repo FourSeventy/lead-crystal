@@ -28,7 +28,6 @@ import com.silvergobletgames.sylver.util.SylverVector2f;
  */
 public class BrainFighter extends BrainGround
 {
-
     private int timeWithThisSkill = 0;
     private float timeWithSkillFuzz = 1;
     private int timeSinceAttack = 0;
@@ -210,17 +209,20 @@ public class BrainFighter extends BrainGround
         }
         
         //check los
-        if(this.checkLOS(self.getTarget()) == false)
-            this.lostLOSCounter++;       
-        if(this.lostLOSCounter > 30)
+        if(fuzzyLogicTimer %60 == 0) //check once per second
         {
-            this.getStateMachine().changeState(StateID.LOSTTARGET);
-            this.lostLOSCounter = 0;
-            return;
+            if(this.checkLOS(self.getTarget()) == false)
+                this.lostLOSCounter++;       
+            if(this.lostLOSCounter > 30)
+            {
+                this.getStateMachine().changeState(StateID.LOSTTARGET);
+                this.lostLOSCounter = 0;
+                return;
+            }
         }
         
         //if we are ranged, and its been a while since we attacked, declare lost target
-        if(this.selectedSkill.getRange() > 150 && this.timeSinceAttack > 300)
+        if(this.selectedSkill != null && this.selectedSkill.getRange() > 150 && this.timeSinceAttack > 300)
         {
             this.getStateMachine().changeState(StateID.LOSTTARGET);
             this.timeSinceAttack = 0;
@@ -271,7 +273,7 @@ public class BrainFighter extends BrainGround
                 
 
                 //random chance to jump
-                if(Math.random()< .005f)
+                if(Math.random()< .001f)
                     self.jump();
                 
                 //increment time since attack

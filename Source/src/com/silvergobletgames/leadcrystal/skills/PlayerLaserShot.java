@@ -109,7 +109,7 @@ public class PlayerLaserShot extends PlayerSkill{
         
  
         //play sound
-        Sound sound = Sound.locationSound("buffered/smallLaser.ogg", user.getPosition().x, user.getPosition().y, false, .8f);
+        Sound sound = Sound.locationSound("buffered/smallLaser.ogg", user.getPosition().x, user.getPosition().y, false, 1f,1f);
         user.getOwningScene().add(sound);
 
 
@@ -162,7 +162,7 @@ public class PlayerLaserShot extends PlayerSkill{
              if(other instanceof WorldObjectEntity || other instanceof CombatEntity)
              {
                  //play sound
-                Sound sound = Sound.locationSound("buffered/smallLaser.ogg", this.getPosition().x, this.getPosition().y, false, .35f,2);
+                Sound sound = Sound.locationSound("buffered/smallLaser.ogg", this.getPosition().x, this.getPosition().y, false, .5f,2);
                 this.getOwningScene().add(sound);
         
                 this.getBody().setVelocity(new Vector2f(0,0));

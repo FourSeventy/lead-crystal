@@ -44,24 +44,21 @@ public class SkillFactory
         {
             case PlayerLaser: return new PlayerLaserShot();
             case PlayerSnipe: return new PlayerSnipe();
-            case EnemyLaser: return new EnemyLaserShot();
+            case EnemyRangedSwipe: return new EnemyRangedSwipe();
             case EnemyMeleeBash: return new EnemyMeleeBash();
             case EnemySmallMelee: return new EnemyMoleSmallMelee();
             case EnemyGooShot: return new EnemySpitterGooShot();
             case EnemyAntThrow: return new EnemyAntThrow();
             case EnemyFlierGooBomb: return new EnemyFlierGooBomb();
+            case EnemyJumperSpikes: return new EnemyJumperSpikes();
             case PlayerDash: return new PlayerDashAttack();
             case PlayerGravityShield: return new PlayerGravityShield();
-            case PlayerFreezeAttack: return new PlayerFreezeAttack();
             case PlayerWard: return new PlayerWard();
             case PlayerBuckshot: return new PlayerBuckshot();
             case PlayerAttackDrone: return new PlayerAttackDrone();
             case PlayerBashAttack: return new PlayerBashAttack();
             case PlayerClusterbomb: return new PlayerClusterbomb();
-            case PlayerStimpack: return new PlayerStimpack();
             case PlayerRicochet: return new PlayerRicochet();
-            case PlayerSoulLeech: return new PlayerSoulLeech();
-            case PlayerStomp: return new PlayerStompAttack();
             case PlayerRocket: return new PlayerRocket();
             case PlayerBoomerang: return new PlayerBoomerang();
             case EnemyBossSwipe: return new EnemyBossSwipe();
@@ -69,6 +66,8 @@ public class SkillFactory
             case PlayerBarrelRoll: return new PlayerBarrelRoll();
             case PlayerLeechingBlades: return new PlayerLeechingBlades();
             case PlayerCrushingStrike: return new PlayerCrushingStrike();
+            case EnemyTriShot: return new EnemyTriShot();
+            case EnemyGooHeal: return new EnemyGooHeal();
             
             
             default: return null;

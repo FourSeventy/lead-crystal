@@ -300,9 +300,12 @@ public final class GameClientScene extends Scene
                     //if the data does concern our player, handle the special case
                     else if(renderDataChanges.ID.equals( this.clientID.toString()))
                     {        
-                        //keep track of our player in server time
-                        this.playerServerTime.reconcileRenderDataChanges(1,1,renderDataChanges);  
-                        this.playerServerTime.interpolate(1);
+                        if(GameplaySettings.getInstance().drawPlayerServerTime == true)
+                        {
+                            //keep track of our player in server time
+                            this.playerServerTime.reconcileRenderDataChanges(1,1,renderDataChanges);  
+                            this.playerServerTime.interpolate(1);
+                         }
 
                         //reconcile player data
                         this.player.reconcileRenderDataChanges(this.renderPacketArrivedTimestamp - interpolationTime,this.renderPacketArrivedTimestamp,renderDataChanges);                          
@@ -370,8 +373,6 @@ public final class GameClientScene extends Scene
                         //use historical inputs to simulate back to current time
                         for(ClientInputPacket inputPacket: historicalInputList)
                         {
-//                            if(player.dashing)
-//                                continue;
                             
                             //simulate player forces
                             this.player.simulateInputForPredictionErrorCorrection(inputPacket);
@@ -633,13 +634,13 @@ public final class GameClientScene extends Scene
         if(!hud.chatManager.chatPromptOpen && this.lockInput.get() == false)
         {
             //move left
-            if (inputSnapshot.isKeyPressed(KeyEvent.VK_A))
+            if (inputSnapshot.isKeyPressed(KeyEvent.VK_A) )
             {
                 player.move(FacingDirection.LEFT);
             }
 
             //move right
-            if (inputSnapshot.isKeyPressed(KeyEvent.VK_D))
+            if (inputSnapshot.isKeyPressed(KeyEvent.VK_D) )
             {
                 player.move(FacingDirection.RIGHT);
             }
@@ -657,13 +658,13 @@ public final class GameClientScene extends Scene
             }
 
             //down
-            if (inputSnapshot.isKeyPressed(com.jogamp.newt.event.KeyEvent.VK_S) == true)
+            if (inputSnapshot.isKeyPressed(com.jogamp.newt.event.KeyEvent.VK_S) == true )
             {
                 player.move(new SylverVector2f(0,-1));
             }
 
             //up
-            if (inputSnapshot.isKeyPressed(com.jogamp.newt.event.KeyEvent.VK_W) == true)
+            if (inputSnapshot.isKeyPressed(com.jogamp.newt.event.KeyEvent.VK_W) == true )
             {
                 player.move(new SylverVector2f(0,1));
             }
@@ -701,17 +702,6 @@ public final class GameClientScene extends Scene
                 }
             }
 
-            //open skill menu
-            if (inputSnapshot.isKeyReleased(KeyEvent.VK_T)) 
-            {
-                hud.skillMenu.toggle();
-            }
-            //open inventory menu
-            if (inputSnapshot.isKeyReleased(KeyEvent.VK_I)) 
-            {
-                //toggle the inventory menu
-                hud.inventoryMenu.toggle();
-            }
             //quest menu
             if (inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_L))
             {
@@ -737,7 +727,7 @@ public final class GameClientScene extends Scene
             //debug
             if (inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_M))
             {
-                sendSizeTest();
+            
             }
 
             //handle dashing
@@ -1562,7 +1552,6 @@ public final class GameClientScene extends Scene
         
         //close menus
         hud.mapMenu.close();
-        hud.inventoryMenu.close();
         hud.questMenu.close();
         
         //queue up level change
@@ -1666,17 +1655,12 @@ public final class GameClientScene extends Scene
         {
             case POTION:
                hud.potionsMenu.open();
-               hud.inventoryMenu.open();
             break;
             case ARMOR:
                 hud.armorMenu.open();
-                hud.inventoryMenu.open();
             break;           
             case MAP:
                 hud.mapMenu.open();
-            break;
-            case INVENTORY:
-                hud.inventoryMenu.open();
             break;
             case SKILL:
                 hud.skillMenu.open();
@@ -1691,18 +1675,13 @@ public final class GameClientScene extends Scene
         switch(packet.menu)
         {
             case POTION:
-               hud.potionsMenu.close();
-               hud.inventoryMenu.close();
+               hud.potionsMenu.close();      
             break;
             case ARMOR:
-                hud.armorMenu.close();
-                hud.inventoryMenu.close();
+                hud.armorMenu.close();             
             break;    
             case MAP:
                 hud.mapMenu.close();
-            break;
-            case INVENTORY:
-                hud.inventoryMenu.close();
             break;
             case SKILL:
                 hud.skillMenu.close();
@@ -1867,7 +1846,7 @@ public final class GameClientScene extends Scene
             Entity hoveredEntity = (Entity)this.getSceneObjectManager().get(packet.hoveredID);
             
             //apply brightness effect
-            if(!hoveredEntity.getImage().hasImageEffect("hover"))
+            if(hoveredEntity != null && !hoveredEntity.getImage().hasImageEffect("hover"))
             {
                 Float[] points = {1.3f,1.6f,1.3f};
                 int[] durations = {60,60};
@@ -1881,9 +1860,12 @@ public final class GameClientScene extends Scene
             Entity hoveredEntity = (Entity)this.getSceneObjectManager().get(packet.hoveredID);
             
             
-            //remove hover effect
-            hoveredEntity.getImage().removeImageEffect("hover");
-            hoveredEntity.getImage().setBrightness(1);
+            if(hoveredEntity != null) //prevents race condition timing bugs
+            {
+                //remove hover effect
+                hoveredEntity.getImage().removeImageEffect("hover");
+                hoveredEntity.getImage().setBrightness(1);
+            }
         }
         
         this.mouseHoverInRange = packet.inRange;

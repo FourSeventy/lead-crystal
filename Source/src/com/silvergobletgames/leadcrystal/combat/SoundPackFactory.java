@@ -26,8 +26,8 @@ public class SoundPackFactory
     private SoundPackFactory()
     {
         //build Human pack and add it to the map
-        HashMap<SoundPackType,ArrayList<String>> soundMap = new HashMap();
-        ArrayList<String> soundList = new ArrayList();
+        HashMap<SoundPackType,ArrayList<String>> soundMap = new HashMap<>();
+        ArrayList<String> soundList = new ArrayList<>();
         soundList.add("buffered/bodyFall.ogg");
         soundList.add("buffered/bodyFall.ogg");
         soundMap.put(SoundPackType.DEATH, soundList);
@@ -35,9 +35,19 @@ public class SoundPackFactory
         packMap.put(SoundPackID.Human,pack );
         
         //build none pack
-        soundMap = new HashMap();
+        soundMap = new HashMap<>();
         pack = new SoundPack(soundMap,SoundPackID.None);
         packMap.put(SoundPackID.None,pack);
+        
+        //build mammal pack
+        soundMap = new HashMap<>();
+        soundList = new ArrayList();
+        soundList.add("buffered/mammalDeath1.ogg");
+        soundList.add("buffered/mammalDeath2.ogg");
+        soundMap.put(SoundPackType.DEATH, soundList);
+        pack = new SoundPack(soundMap,SoundPackID.Mammal);
+        packMap.put(SoundPackID.Mammal,pack);
+        
         
     }
     

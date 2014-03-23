@@ -1,7 +1,6 @@
 
 package com.silvergobletgames.leadcrystal.menus;
 
-import com.silvergobletgames.leadcrystal.skills.PlayerFreezeAttack;
 import com.silvergobletgames.leadcrystal.skills.PlayerBuckshot;
 import com.silvergobletgames.leadcrystal.skills.PlayerDashAttack;
 import com.silvergobletgames.leadcrystal.skills.PlayerSnipe;
@@ -113,6 +112,27 @@ public class SkillMenu extends Window {
     {
        //super constructor call, setting the background sprite and initial position
        super(new Image("SkillScreen.png"),x,y,550,800);
+       
+        //close button
+        Button closeButton = new Button("deleteButton.png",500,750,50,50);
+        closeButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                if (e.getActionCommand().equals("mouseEntered")) {
+
+                  
+                }
+                if (e.getActionCommand().equals("mouseExited")) {
+
+                    
+                }
+                if(e.getActionCommand().equals("clicked"))
+                {
+                    close();
+                }
+            }
+       });
+        this.addComponent(closeButton);
        
        //get new player referene
        playerReference =player;

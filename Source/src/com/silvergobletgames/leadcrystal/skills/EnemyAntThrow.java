@@ -41,9 +41,9 @@ public class EnemyAntThrow extends Skill {
      */
     public void use(Damage damage, SylverVector2f origin)
     {
-        
+        Random r = new Random();
         //Damage is scaled with weapon damage
-        float dAmount = this.getBaseDamage(); 
+        float dAmount = this.getBaseDamage()/2; 
         damage.getAmountObject().adjustBase(dAmount);
         damage.setType(Damage.DamageType.PHYSICAL);
         
@@ -56,39 +56,36 @@ public class EnemyAntThrow extends Skill {
 
         for( int i = 0; i <=1; i++)
         {
-        //build body
-        Body body = new Body(new Box(60,60), 10);
-        Image img = new Image(new MoleAnimationPack());
-        img.setScale(.8f);
-        ImageEffect spin = new ImageEffect(ImageEffect.ImageEffectType.ROTATION, 60, 0, 360);
-        spin.setRepeating(true);
-        img.addImageEffect(spin);
-        AntHitbox tossedAnt = new AntHitbox(damage, body, img, user);        
-        
-        //Determine vector to target
-        SylverVector2f distanceVector = user.distanceVector(user.getTarget());
-        distanceVector.add(new SylverVector2f(0,400));
-        distanceVector.normalise();
-         
-        // Bullet force
-        float scale = 10_000 + (float)Math.random() * 20_000;
-        float xforce = scale*distanceVector.x;
-        float yforce = scale*distanceVector.y;
-       
-        //Dispense ant into the world
-        float theta = (float)Math.atan(distanceVector.y/distanceVector.x);
-        tossedAnt.setPosition(origin.x, origin.y);
-        tossedAnt.getBody().addForce(new Vector2f((int)xforce ,(int)yforce));
-        tossedAnt.getBody().setRotation((float)theta);
-        tossedAnt.getImage().setAngle((float)(theta * 180f/Math.PI)); 
+            //build body
+            Body body = new Body(new Box(60,60), 10);
+            Image img = new Image(new MoleAnimationPack());
+            img.setScale(.8f);
+            ImageEffect spin = new ImageEffect(ImageEffect.ImageEffectType.ROTATION, 60, 0, 360);
+            spin.setRepeating(true);
+            img.addImageEffect(spin);
+            AntHitbox tossedAnt = new AntHitbox(damage, body, img, user);        
 
-        user.getOwningScene().add(tossedAnt,Layer.MAIN);
+            //Determine vector to target
+            SylverVector2f distanceVector = new SylverVector2f(user.getFacingDirection().value * r.nextFloat() ,1);//user.distanceVector(user.getTarget());
+            distanceVector.normalise();
+
+            // Bullet force
+            float scale = 10_000 + (float)Math.random() * 10_000;
+            float xforce = scale*distanceVector.x;
+            float yforce = scale*distanceVector.y;
+
+            //Dispense ant into the world
+            float theta = (float)Math.atan(distanceVector.y/distanceVector.x);
+            tossedAnt.setPosition(origin.x, origin.y);
+            tossedAnt.getBody().addForce(new Vector2f((int)xforce ,(int)yforce));
+            tossedAnt.getBody().setRotation((float)theta);
+            tossedAnt.getImage().setAngle((float)(theta * 180f/Math.PI)); 
+
+            user.getOwningScene().add(tossedAnt,Layer.MAIN);
         }
         //play sound
 
-    
-        
-        
+           
     }
     
     
@@ -98,14 +95,16 @@ public class EnemyAntThrow extends Skill {
         { 
             super(d, b, i, user); 
             this.body.setGravityEffected(true);
-            this.body.setOverlapMask(Entity.OverlapMasks.NPE.value);
+            this.body.setOverlapMask(Entity.OverlapMasks.ITEM.value);
+            this.body.setBitmask(Entity.BitMasks.COLLIDE_WORLD.value);
+            
          }
         
         public void collidedWith(Entity other, CollisionEvent event)
         {
             
              //if we collided with a world object or player
-             if(other instanceof WorldObjectEntity )
+             if(other instanceof WorldObjectEntity || other instanceof PlayerEntity)
              {
                  
                  //==================
@@ -124,7 +123,8 @@ public class EnemyAntThrow extends Skill {
                  ant.getSkillManager().learnSkill(SkillID.EnemySmallMelee);
                  ant.getCombatData().baseDamage.setBase(5);
                  ant.getCombatData().maxHealth.setBase(30);
-                 ant.getCombatData().currentHealth = 20;
+                 ant.getCombatData().currentHealth = 30;
+                 ant.getCombatData().xVelocity.setBase(25);
                  ant.setPosition(this.body.getLastPosition().getX(), this.body.getLastPosition().getY() + 10);
                  ant.getBrain().getStateMachine().changeState(AIState.StateID.SPAWNING);
                  this.getOwningScene().add(ant,Layer.MAIN);

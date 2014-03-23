@@ -18,6 +18,7 @@ import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
 import com.silvergobletgames.leadcrystal.entities.*;
 import com.silvergobletgames.leadcrystal.skills.PlayerLaserShot.LaserHitbox;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.graphics.*;
 import com.silvergobletgames.sylver.util.SylverRandom;
@@ -59,6 +60,10 @@ public class PlayerAttackDrone extends Skill
         img.setScale(1.3f);
         Drone drone = new Drone(img,new StaticBody(new Circle(20)),(PlayerEntity)this.user);
         user.getOwningScene().add(drone,Layer.MAIN);
+        
+        //play sound
+        Sound sound = Sound.locationSound("buffered/jump.ogg", user.getPosition().x, user.getPosition().y, false, .8f, 1.4f);
+        user.getOwningScene().add(sound);
         
     }
     
@@ -234,6 +239,10 @@ public class PlayerAttackDrone extends Skill
             laser.getBody().setRotation((float)theta);
             laser.getImage().setAngle((float)(theta * (180f/Math.PI))); 
             user.getOwningScene().add(laser,Layer.MAIN);
+            
+            //play sound
+            Sound sound = Sound.locationSound("buffered/smallLaser.ogg", this.getPosition().x, this.getPosition().y, false, 1f,1f);
+            this.getOwningScene().add(sound);
         }
         
         public boolean checkLOS()

@@ -161,7 +161,7 @@ public class ClientPlayerEntity extends PlayerEntity
         
         //construct an arraylist of data that we got, nulls will go where we didnt get any data
         ArrayList changeData = new ArrayList();
-        for(int i = 0; i <14; i ++)
+        for(int i = 0; i <15; i ++)
         {
             // The bit was set
             if ((fieldMap & (1L << i)) != 0)

@@ -121,9 +121,9 @@ public class PlayerClusterbomb extends PlayerSkill
         bomb3.getBody().addForce(new Vector2f( (1500 + (int)(r.nextDouble() * 500) )* downVector.getX(),(1400 + (int)(r.nextDouble() * 600) ) * downVector.getY()));
        
         
-
-      
         //play sound
+        Sound sound = Sound.locationSound("buffered/jump.ogg", user.getPosition().x, user.getPosition().y, false, .8f, 1.4f);
+        user.getOwningScene().add(sound);
         
     }
 
@@ -203,6 +203,10 @@ public class PlayerClusterbomb extends PlayerSkill
 //                explosionHitbox.setLight(l);
                 explosionHitbox.setPosition(this.getPosition().x, this.getPosition().y);
                 this.getOwningScene().add(explosionHitbox, Layer.MAIN);
+                
+                //play sound
+                Sound sound = Sound.locationSound("buffered/explosion.ogg", user.getPosition().x, user.getPosition().y, false, 1f, 1f);
+                user.getOwningScene().add(sound);
 
 
                 //remove this hitbox

@@ -45,7 +45,11 @@ public class LevelProgressionManager
             this.cutsceneCompleteMap.put(cutscene, Boolean.FALSE);
         }
         
-        //level 0
+        //=================
+        // Desert Levels
+        //=================
+        
+        //desert 0
         Level level0 = new Level();
         level0.levelDataName = "desert0.lv";
         level0.levelName = "Reach Town";
@@ -65,7 +69,7 @@ public class LevelProgressionManager
         //adding to map
         this.levelMap.put(0, level0);
         
-        //level 1
+        //desert 1
         Level level1 = new Level();
         level1.levelDataName = "desert1.lv";
         level1.levelName = "Clear Antenna";
@@ -86,14 +90,14 @@ public class LevelProgressionManager
         //adding to map
         this.levelMap.put(1, level1);
         
-        //level 2
+        //desert 2
         Level level2 = new Level();
         level2.levelDataName = "desert2.lv";
         level2.levelName = "Missing Power Supply";
         //main objective
         objective = new LevelObjective();
         objective.objectiveName = "Find Power Supply";
-        objective.objectiveDescription = "The potion guy has lost a power supply outside the city walls. Find this supply for him and he will be able to make you potions.";
+        objective.objectiveDescription = "The blacksmith has lost a power supply outside the city walls. Find this supply for him and he will be able to make you gear.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         level2.mainObjective = objective;
@@ -106,7 +110,7 @@ public class LevelProgressionManager
         //adding to map
         this.levelMap.put(2, level2);
         
-        //level 3
+        //desert 3
         Level level3 = new Level();
         level3.levelDataName = "desert3.lv";
         level3.levelName = "Destroy Large Dabat Nest";
@@ -126,7 +130,7 @@ public class LevelProgressionManager
         //adding to map
         this.levelMap.put(3, level3);
         
-        //level 4
+        //desert 4
         Level level4 = new Level();
         level4.levelDataName = "desert4.lv";
         level4.levelName = "Restart Power Generator";
@@ -146,7 +150,7 @@ public class LevelProgressionManager
         //adding to map
         this.levelMap.put(4, level4);
         
-        //level 5
+        //desert 5
         Level level5 = new Level();
         level5.levelDataName = "desert5.lv";
         level5.levelName = "Search and Rescue";
@@ -166,25 +170,48 @@ public class LevelProgressionManager
         //adding to map
         this.levelMap.put(5, level5);
         
-        //level 6
-        Level level6 = new Level();
-        level6.levelDataName = "desert6.lv";
-        level6.levelName = "Search and Destroy";
+        //================
+        // Cave Levels
+        //================
+        //cave 1
+        Level cave1 = new Level(); 
+        cave1.levelDataName = "cave1.lv";
+        cave1.levelName = "Water Pumps";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Kill Mutant Scorpion";
-        objective.objectiveDescription = "Kill the giant scorpion seen in the area.";
+        objective.objectiveName = "Reactivate Water Pumps";
+        objective.objectiveDescription = "Find and activate the three water pumps.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
-        level6.mainObjective = objective;
+        cave1.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Side Objective";
-        objective.objectiveDescription = "Side Objective stuff";
+        objective.objectiveName = "Lost Artifacts";
+        objective.objectiveDescription = "Find the lost artifact.";
         objective.currencyAward = 25;
-        level6.sideObjective = objective;
+        cave1.sideObjective = objective;
         //adding to map
-        this.levelMap.put(6, level6);
+        this.levelMap.put(6, cave1);
+        
+        //cave 2
+        Level cave2 = new Level(); 
+        cave2.levelDataName = "cave2.lv";
+        cave2.levelName = "Cave 2";
+        //main objective
+        objective = new LevelObjective();
+        objective.objectiveName = "Fix broken Water Pump";
+        objective.objectiveDescription = "Fix the broken water pump.";
+        objective.skillPointAward = true;
+        objective.currencyAward = 50;
+        cave2.mainObjective = objective;
+        //side objective 1
+        objective = new LevelObjective();
+        objective.objectiveName = "Do something";
+        objective.objectiveDescription = "Do something.";
+        objective.currencyAward = 25;
+        cave2.sideObjective = objective;
+        //adding to map
+        this.levelMap.put(7, cave2);
         
         
         

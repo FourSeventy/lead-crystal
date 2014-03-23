@@ -163,6 +163,26 @@ public class Brain
         return closestPlayer;
     }
     
+    public final PlayerEntity getClosestPlayer()
+    {
+        float closestDistance = Float.MAX_VALUE;
+        PlayerEntity closestPlayer = null;
+        
+        ArrayList<PlayerEntity> players = ((GameServerScene)self.getOwningScene()).getPlayers(); 
+        for(PlayerEntity player: players)
+        {
+            if(self.distanceAbs(player) < closestDistance)
+            {
+                closestDistance = self.distanceAbs(player);
+                closestPlayer = player;
+            }
+        }
+        
+       
+        
+        return closestPlayer;
+    }
+    
     /**
      * This method will select a random known skill. This method should be overridden to allow 
      * more advanced skill selection
@@ -312,6 +332,29 @@ public class Brain
      * Behavior executed leaving the aggressive state
      */
     protected void aggressiveExit(){
+        
+    }
+    
+    
+    
+    /**
+     * Behavior executed when entering the move state
+     */
+    protected void moveEnter(){
+        
+    }
+    
+    /**
+     * Behavior executed while in the move state
+     */
+    protected void moveExecute(){
+        
+    }
+    
+    /**
+     * Behavior executed leaving the move state
+     */
+    protected void moveExit(){
         
     }
     

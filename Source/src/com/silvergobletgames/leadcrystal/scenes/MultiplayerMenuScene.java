@@ -110,7 +110,7 @@ public class MultiplayerMenuScene extends Scene
                        joinText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, joinText.getScale(), 1.8));
                     
                     //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true);
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
                     add(sound);
                 }
                 if (e.getActionCommand().equals("mouseExited"))
@@ -170,7 +170,7 @@ public class MultiplayerMenuScene extends Scene
                        hostText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, hostText.getScale(), 1.8));
                     
                     //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true);
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
                     add(sound);
                 }
                 if (e.getActionCommand().equals("mouseExited"))
@@ -252,7 +252,7 @@ public class MultiplayerMenuScene extends Scene
                        startText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, startText.getScale(), 1.8));
                     
                    //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true);
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
                     add(sound);
                 }
                 if (e.getActionCommand().equals("mouseExited"))
@@ -304,7 +304,7 @@ public class MultiplayerMenuScene extends Scene
                        backText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, backText.getScale(), 1.8));
                     
                     //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true);
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
                     add(sound);
                 }
                 if (e.getActionCommand().equals("mouseExited"))

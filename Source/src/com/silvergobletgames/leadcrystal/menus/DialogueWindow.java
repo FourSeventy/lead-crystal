@@ -49,6 +49,8 @@ public class DialogueWindow extends Window {
                     if (e.getActionCommand().equals("clicked")) 
                     {                        
                         ((GameClientScene)owningScene).hud.closeDialogue();
+                        Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE)); 
+                    
                     }
                     if (e.getActionCommand().equals("mouseEntered")) 
                     {

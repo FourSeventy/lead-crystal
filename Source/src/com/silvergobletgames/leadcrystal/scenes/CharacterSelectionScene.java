@@ -90,7 +90,7 @@ public class CharacterSelectionScene extends Scene
                        selectText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, selectText.getScale(), 1.8));
                     
                     //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true);
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
                     add(sound);
                 }
                 if (e.getActionCommand().equals("mouseExited"))
@@ -125,7 +125,7 @@ public class CharacterSelectionScene extends Scene
                        deleteText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, deleteText.getScale(), 1.8));
                     
                     //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true);
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
                     add(sound);
                 }
                 if (e.getActionCommand().equals("mouseExited"))
@@ -160,7 +160,7 @@ public class CharacterSelectionScene extends Scene
                        newCharacterText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, newCharacterText.getScale(), 1.8));
                     
                     //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true);
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
                     add(sound);
                 }
                 if (e.getActionCommand().equals("mouseExited"))
@@ -195,7 +195,7 @@ public class CharacterSelectionScene extends Scene
                        backText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, backText.getScale(), 1.8));
                     
                     //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true);
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
                     add(sound);
                 }
                 if (e.getActionCommand().equals("mouseExited"))
@@ -327,7 +327,7 @@ public class CharacterSelectionScene extends Scene
                             selectionArrow.setAlphaBrightness(1);
                         }
                         //play sound
-                        Sound sound = Sound.ambientSound("buffered/buttonBoop.wav", true );
+                        Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true );
                         add(sound);
                     }
                     

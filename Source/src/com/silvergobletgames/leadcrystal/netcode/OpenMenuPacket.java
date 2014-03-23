@@ -12,7 +12,7 @@ public class OpenMenuPacket extends Packet{
     public MenuID menu;
     
     public static enum MenuID{
-        POTION,ARMOR,INVENTORY,SKILL,MAP
+        POTION,ARMOR,SKILL,MAP
     }
     
     public OpenMenuPacket()

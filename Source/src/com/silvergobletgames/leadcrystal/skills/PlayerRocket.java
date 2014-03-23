@@ -57,7 +57,6 @@ public class PlayerRocket extends PlayerSkill
     public void use(Damage damage, SylverVector2f origin) 
     {
         //get player and random references
-        PlayerEntity player = (PlayerEntity) user;
         Random r = SylverRandom.random;
         
          //get targeting data
@@ -144,6 +143,8 @@ public class PlayerRocket extends PlayerSkill
 
       
         //play sound
+        Sound sound = Sound.locationSound("buffered/rocketShoot.ogg", user.getPosition().x, user.getPosition().y, false, 1f,1f);
+        user.getOwningScene().add(sound);
         
     }
 
@@ -184,9 +185,9 @@ public class PlayerRocket extends PlayerSkill
                  Body beh = new StaticBody(new Circle(75));
                  beh.setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value);
                  beh.setBitmask(Entity.BitMasks.NO_COLLISION.value);
-                 damage.setType(Damage.DamageType.PHYSICAL);   
+                 damage.setType(Damage.DamageType.BURN);   
                  HitBox explosionHitbox = new HitBox(damage, beh, img, sourceEntity);
-                 explosionHitbox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 60, 0, 0));
+                 explosionHitbox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 10, 0, 0));
                  explosionHitbox.setPosition(this.getPosition().x, this.getPosition().y);
                  this.getOwningScene().add(explosionHitbox, Layer.MAIN);
                  
@@ -197,11 +198,16 @@ public class PlayerRocket extends PlayerSkill
                  this.getOwningScene().add(explosionEmitter, Layer.ATTACHED_FG);
                  
                  //flying chunks 
+                  //play sound
+                Sound sound = Sound.locationSound("buffered/bang.ogg", this.getPosition().x, this.getPosition().y, false, .90f,.4f);
+                this.getOwningScene().add(sound);
                  
                  
                  //remove this hitbox
                  this.getBody().setVelocity(new Vector2f(0,0));
                  this.removeFromOwningScene();
+                 
+                
              }
          }
          

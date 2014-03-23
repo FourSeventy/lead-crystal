@@ -76,7 +76,7 @@ public class ArmorManager {
         armor.image = new Image("ranged.png");
         armor.name = "Weapon Attachment: Damage";
         armor.description = "20% increased damage.";
-        armor.currencyCost = 40;
+        armor.currencyCost = 150;
         this.armorMap.put(ArmorID.ATTACHMENT1, armor);
         
         //attachment 2
@@ -96,7 +96,7 @@ public class ArmorManager {
         armor.image = new Image("ranged.png");
         armor.name = "Weapon Attachment: Speed";
         armor.description = "30% cooldown reduction.";
-        armor.currencyCost = 60;
+        armor.currencyCost = 200;
         this.armorMap.put(ArmorID.ATTACHMENT2, armor);
         
         //attachment 3
@@ -116,7 +116,7 @@ public class ArmorManager {
         armor.image = new Image("ranged.png");
         armor.name = "Weapon Attachment: Crit";
         armor.description = "+10% chance to crit.";
-        armor.currencyCost = 80;
+        armor.currencyCost = 275;
         this.armorMap.put(ArmorID.ATTACHMENT3, armor);
         
         //attachment 4
@@ -138,7 +138,7 @@ public class ArmorManager {
         armor.image = new Image("ranged.png");
         armor.name = "Weapon Attachment: Leech";
         armor.description = "10% life leech";
-        armor.currencyCost = 100;
+        armor.currencyCost = 375;
         this.armorMap.put(ArmorID.ATTACHMENT4, armor);
         
         
@@ -165,7 +165,7 @@ public class ArmorManager {
         armor.image = new Image("melee1.png");
         armor.name = "Weapon Modifier: Slow";
         armor.description = "10% chance to slow enemies by 75% for 6 seconds.";
-        armor.currencyCost = 40;
+        armor.currencyCost = 150;
         this.armorMap.put(ArmorID.MODIFIER1, armor);
         
         //weapon modifier 2
@@ -186,7 +186,7 @@ public class ArmorManager {
         armor.image = new Image("melee2.png");
         armor.name = "Weapon Modifier: Stun";
         armor.description = "5% chance for attacks to stun enemies for 3 seconds.";
-        armor.currencyCost = 60;
+        armor.currencyCost = 200;
         this.armorMap.put(ArmorID.MODIFIER2, armor);
         
         //weapon modifier 3
@@ -207,7 +207,7 @@ public class ArmorManager {
         armor.image = new Image("melee3.png");
         armor.name = "Weapon Modifier: Bleed";
         armor.description = "15% chance for attacks to bleed for 10 additional damage.";
-        armor.currencyCost = 80;
+        armor.currencyCost = 275;
         this.armorMap.put(ArmorID.MODIFIER3, armor);
         
         //weapon modifier 4
@@ -228,7 +228,7 @@ public class ArmorManager {
         armor.image = new Image("melee4.png");
         armor.name = "Weapon Modifier: Critical";
         armor.description = "Critical hits do 100% more damage.";
-        armor.currencyCost = 100;
+        armor.currencyCost = 375;
         this.armorMap.put(ArmorID.MODIFIER4, armor);
         
         
@@ -255,7 +255,7 @@ public class ArmorManager {
         armor.image = new Image("body1.png");
         armor.name = "Body Armor: Mitigation";
         armor.description = "Take 20% less damage";
-        armor.currencyCost = 40;
+        armor.currencyCost = 150;
         this.armorMap.put(ArmorID.CHEST1, armor);
         
         //chest 2
@@ -277,7 +277,7 @@ public class ArmorManager {
         armor.image = new Image("body2.png");
         armor.name = "Body Armor: Recovery";
         armor.description = "All healing is 100% as effective.";
-        armor.currencyCost = 60;
+        armor.currencyCost = 200;
         this.armorMap.put(ArmorID.CHEST2, armor);
         
         //chest 3
@@ -299,7 +299,7 @@ public class ArmorManager {
         armor.image = new Image("body3.png");
         armor.name = "Body Armor: Resistance";
         armor.description = "75% CC reduction";
-        armor.currencyCost = 80;
+        armor.currencyCost = 275;
         this.armorMap.put(ArmorID.CHEST3, armor);
         
         //chest 4 
@@ -322,7 +322,7 @@ public class ArmorManager {
         armor.image = new Image("body4.png");
         armor.name = "Body Armor: Last Will";
         armor.description = "Damage taken has a %3 chance to make you immune for 5 seconds.";
-        armor.currencyCost = 100;
+        armor.currencyCost = 375;
         this.armorMap.put(ArmorID.CHEST4, armor);
         
         
@@ -349,7 +349,7 @@ public class ArmorManager {
         armor.image = new Image("boots1.png");
         armor.name = "Boots: Mobility";
         armor.description = "20% faster movement speed.";
-        armor.currencyCost = 40;
+        armor.currencyCost = 150;
         this.armorMap.put(ArmorID.BOOTS1, armor);
         
         //chest 2
@@ -361,7 +361,7 @@ public class ArmorManager {
         armor.image = new Image("boots2.png");
         armor.name = "Boots: Double Jump";
         armor.description = "Press space again at the peak of your first jump to do a double jump.";
-        armor.currencyCost = 60;
+        armor.currencyCost = 200;
         this.armorMap.put(ArmorID.BOOTS2, armor);
         
         //chest 3
@@ -373,7 +373,7 @@ public class ArmorManager {
         armor.image = new Image("boots3.png");
         armor.name = "Boots: Jetpack";
         armor.description = "Press space again at the peak of your first jump to use the jetpack.";
-        armor.currencyCost = 80;
+        armor.currencyCost = 275;
         this.armorMap.put(ArmorID.BOOTS3, armor);
         
         //chest 4
@@ -385,7 +385,7 @@ public class ArmorManager {
         armor.image = new Image("boots4.png");
         armor.name = "Boots: Teleport";
         armor.description = "Press space again at the peak of your first jump to teleport to your mouse.";
-        armor.currencyCost = 100;
+        armor.currencyCost = 375;
         this.armorMap.put(ArmorID.BOOTS4, armor);
         
         
@@ -408,7 +408,7 @@ public class ArmorManager {
         armor.image = new Image("helm1.png");
         armor.name = "Eyepiece: Weakness";
         armor.description = "See enemy health";
-        armor.currencyCost = 40;
+        armor.currencyCost = 150;
         this.armorMap.put(ArmorID.HELM1, armor);
         
         //helm 2
@@ -420,10 +420,10 @@ public class ArmorManager {
         armor.image = new Image("helm2.png");
         armor.name = "Eyepiece: Secondary";
         armor.description = "See secondary objectives on the radar.";
-        armor.currencyCost = 60;
+        armor.currencyCost = 200;
         this.armorMap.put(ArmorID.HELM2, armor);
         
-        //helm 3 //TODO work on this one
+        //helm 3 //TODO work on this one, see enemies on the radar
         armor = new Armor(){
             public void onEquip(PlayerEntity player)
             {
@@ -438,7 +438,7 @@ public class ArmorManager {
         armor.image = new Image("helm3.png");
         armor.name = "Eyepiece: Secrets";
         armor.description = "See secret locations on the radar.";
-        armor.currencyCost = 80;
+        armor.currencyCost = 275;
         this.armorMap.put(ArmorID.HELM3, armor);
         
         //helm 4
@@ -456,7 +456,7 @@ public class ArmorManager {
         armor.image = new Image("helm4.png");
         armor.name = "Eyepiece: Spidey Sense";
         armor.description = "Can see where enemies will spawn.";
-        armor.currencyCost = 100;
+        armor.currencyCost = 375;
         this.armorMap.put(ArmorID.HELM4, armor);
         
         

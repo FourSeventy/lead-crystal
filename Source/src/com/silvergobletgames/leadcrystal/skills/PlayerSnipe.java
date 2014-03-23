@@ -169,7 +169,7 @@ public class PlayerSnipe extends PlayerSkill
         //=======================
                 
         //build body of the snipe 
-        Body railBody = new StaticBody(new Box(20,20));
+        Body railBody = new StaticBody(new Box(35,35));
         railBody.setBitmask(Entity.BitMasks.NO_COLLISION.value);
         railBody.setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value); 
         SnipeHitBox snipe = new SnipeHitBox(damage, railBody, new Image("blank.png"), user);  

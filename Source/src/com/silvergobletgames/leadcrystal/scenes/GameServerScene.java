@@ -45,6 +45,8 @@ import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
 import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
+import com.silvergobletgames.leadcrystal.items.Potion;
+import com.silvergobletgames.leadcrystal.items.PotionManager;
 import com.silvergobletgames.leadcrystal.netcode.*;
 import com.silvergobletgames.leadcrystal.netcode.OpenInstructionalTipPacket.InstructionalTip;
 import com.silvergobletgames.leadcrystal.netcode.OpenMenuPacket.MenuID;
@@ -385,7 +387,7 @@ public class GameServerScene extends Scene
                             else // mouse is outside an entity
                             {
                                 //if the old hovered entity is equal to this entity 
-                                if (clientData.lastHoveredEntityID != null && clientData.lastHoveredEntityID.endsWith(entity.getID()))                                                                            
+                                if (clientData.lastHoveredEntityID != null )                                                                            
                                     clientData.hoveredEntityExited = true;                                                 
                             }
                         }
@@ -492,7 +494,7 @@ public class GameServerScene extends Scene
                     //test
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_M))
                     {
-                       
+                       this.players.get(0).die();
                     }
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_N))
                     {
@@ -1280,7 +1282,7 @@ public class GameServerScene extends Scene
         PlayerEntity player = this.clientsInScene.get(potionPacket.getClientID()).player;
         
         //subtract money from player
-        boolean success = player.getCurrencyManager().subtractCurrency(5);;
+        boolean success = player.getCurrencyManager().subtractCurrency(PotionManager.POTION_PRICE) && player.getPotionManager().getNumberOfPotions() <5;
 
         //if the subtraction succeeded, give potion to player
         if(success)

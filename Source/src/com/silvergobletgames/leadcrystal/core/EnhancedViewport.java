@@ -31,7 +31,7 @@ public class EnhancedViewport extends Viewport{
         
         //lines
         topLine = new Line(new Vector2f(getCenterCoordinates().x,yPos + height - 200),new Vector2f(getCenterCoordinates().x, getCenterCoordinates().y));
-        bottomLine = new Line(new Vector2f(getCenterCoordinates().x, getCenterCoordinates().y),new Vector2f(getCenterCoordinates().x,yPos +200));
+        bottomLine = new Line(new Vector2f(getCenterCoordinates().x, getCenterCoordinates().y),new Vector2f(getCenterCoordinates().x,yPos +140));
         leftLine = new Line(new Vector2f(getCenterCoordinates().x, getCenterCoordinates().y),new Vector2f(xPos + 150,getCenterCoordinates().y));
         rightLine = new Line(new Vector2f(xPos + width - 150,getCenterCoordinates().y),new Vector2f(getCenterCoordinates().x, getCenterCoordinates().y));
     }
@@ -42,7 +42,7 @@ public class EnhancedViewport extends Viewport{
         
         //lines
         topLine.set(new Vector2f(getCenterCoordinates().x,yPos + height - 200), new Vector2f(getCenterCoordinates().x, getCenterCoordinates().y));
-        bottomLine.set(new Vector2f(getCenterCoordinates().x, getCenterCoordinates().y),new Vector2f(getCenterCoordinates().x,yPos +200));
+        bottomLine.set(new Vector2f(getCenterCoordinates().x, getCenterCoordinates().y),new Vector2f(getCenterCoordinates().x,yPos +140));
         leftLine.set(new Vector2f(getCenterCoordinates().x, getCenterCoordinates().y),new Vector2f(xPos + 150,getCenterCoordinates().y));
         rightLine.set(new Vector2f(xPos + width - 150,getCenterCoordinates().y),new Vector2f(getCenterCoordinates().x, getCenterCoordinates().y));
     }
@@ -136,11 +136,11 @@ public class EnhancedViewport extends Viewport{
            return true;
        
        Vector2f rightIntersection = line.intersect(blockerRight);
-       if(rightIntersection != null && rightIntersection.y > blockerRight.getStart().getY() && rightIntersection.y < blockerRight.getEnd().getY() && rightIntersection.x < line.getStart().getX() && rightIntersection.x > line.getEnd().getX())
+       if(rightIntersection != null && rightIntersection.y > blockerRight.getStart().getY() && rightIntersection.y < blockerRight.getEnd().getY() && rightIntersection.x < line.getStart().getX() && rightIntersection.x > line.getEnd().getX() && (viewportBlocker.getHeight() > viewportBlocker.getWidth()) )
            return true;
       
        Vector2f leftIntersection = line.intersect(blockerLeft);
-       if(leftIntersection != null && leftIntersection.y < blockerLeft.getStart().getY() && leftIntersection.y > blockerLeft.getEnd().getY() && leftIntersection.x < line.getStart().getX() && leftIntersection.x > line.getEnd().getX())
+       if(leftIntersection != null && leftIntersection.y < blockerLeft.getStart().getY() && leftIntersection.y > blockerLeft.getEnd().getY() && leftIntersection.x < line.getStart().getX() && leftIntersection.x > line.getEnd().getX()&& (viewportBlocker.getHeight() > viewportBlocker.getWidth()))
            return true;
        
        return false;

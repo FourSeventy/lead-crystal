@@ -115,9 +115,8 @@ public class PlayerBoomerang extends PlayerSkill
 
 
       
-         //play sound
-//        Sound sound = Sound.locationSound("buffered/smallLaser.ogg", user.getPosition().x, user.getPosition().y, false, .8f);
-//        user.getOwningScene().add(sound);
+        Sound sound = Sound.locationSound("buffered/clang1.ogg", user.getPosition().x, user.getPosition().y, false, 1f,1f);
+        user.getOwningScene().add(sound);
 
 
     }
@@ -189,8 +188,8 @@ public class PlayerBoomerang extends PlayerSkill
                  owningScene.add(emitter,Scene.Layer.MAIN);
                  
                  //play sound
-//                Sound sound = Sound.locationSound("buffered/smallLaser.ogg", this.getPosition().x, this.getPosition().y, false, .35f,2);
-//                this.getOwningScene().add(sound);
+                Sound sound = Sound.locationSound("buffered/clang1.ogg", this.getPosition().x, this.getPosition().y, false, .45f,1.7f);
+                this.getOwningScene().add(sound);
         
                 this.getBody().setVelocity(new Vector2f(0,0));
                 this.removeFromOwningScene();
@@ -216,6 +215,10 @@ public class PlayerBoomerang extends PlayerSkill
                 effectImage.addImageEffect(new MultiImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, points3, durations3));
                 Overlay o = new Overlay(effectImage, 25, new SylverVector2f(.5f,.5f));
                 sourceEntity.getImage().addOverlay(o);
+                
+                //play sound
+                Sound sound = Sound.locationSound("buffered/bigLaser.ogg", this.getPosition().x, this.getPosition().y, false, 1,.5f);
+                this.getOwningScene().add(sound);
                  
                 this.getBody().setVelocity(new Vector2f(0,0));
                 this.removeFromOwningScene();

@@ -13,6 +13,7 @@ import com.silvergobletgames.leadcrystal.entities.EntityEffect;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect.EntityEffectType;
 import com.silvergobletgames.leadcrystal.entities.HitBox;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.core.SceneObjectManager;
@@ -69,6 +70,10 @@ public class PlayerGravityShield extends PlayerSkill{
         well.getBody().setOverlapMask(Entity.OverlapMasks.NO_OVERLAP.value);
         well.addEntityEffect(new EntityEffect(EntityEffectType.DURATION, 300, 0, 0));
         user.getOwningScene().add(well, Scene.Layer.MAIN);
+        
+        //play sound
+        Sound sound = Sound.locationSound("buffered/powerUpShort.ogg", user.getPosition().x, user.getPosition().y, false, 1f,1.2f);
+        user.getOwningScene().add(sound);
         
     }
 
@@ -143,6 +148,10 @@ public class PlayerGravityShield extends PlayerSkill{
 //                        Vector2f vec = new Vector2f(vector.x,vector.y);
 //                        vec = vec.negate();
 //                        enemyHitbox.getBody().addForce(vec);
+                        
+                         //play sound
+                        Sound sound = Sound.locationSound("buffered/powerBoop.ogg", user.getPosition().x, user.getPosition().y, false, 1f,1.2f);
+                        user.getOwningScene().add(sound);
                          
                      }
                  }

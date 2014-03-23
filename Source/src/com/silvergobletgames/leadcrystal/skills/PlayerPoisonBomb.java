@@ -46,7 +46,7 @@ public class PlayerPoisonBomb extends PlayerSkill{
     
     public PlayerPoisonBomb()
     {
-        super(SkillID.PlayerPoisonBomb,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,1800,Integer.MAX_VALUE);
+        super(SkillID.PlayerPoisonBomb,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,25 * 60,Integer.MAX_VALUE);
         
         //set the skillID and the name
         this.icon = new Image("soulLeech.jpg");
@@ -110,9 +110,11 @@ public class PlayerPoisonBomb extends PlayerSkill{
         user.getOwningScene().add(smokeEmitter,Scene.Layer.MAIN);
         
  
-        //play sound
-//        Sound sound = Sound.locationSound("buffered/smallLaser.ogg", user.getPosition().x, user.getPosition().y, false, .8f);
-//        user.getOwningScene().add(sound);
+        Sound sound = Sound.locationSound("buffered/bang.ogg", user.getPosition().x, user.getPosition().y, false, .6f,.89f);
+        user.getOwningScene().add(sound);
+        
+        sound = Sound.locationSound("buffered/steam.ogg", user.getPosition().x, user.getPosition().y, false, .6f,.89f);
+        user.getOwningScene().add(sound);
 
 
     }

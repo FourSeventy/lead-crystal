@@ -7,6 +7,7 @@ import com.silvergobletgames.sylver.windowsystem.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import com.silvergobletgames.leadcrystal.items.Potion;
+import com.silvergobletgames.leadcrystal.items.PotionManager;
 import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
 
 /**
@@ -45,7 +46,7 @@ public class PotionsMenu extends Window{
        //price
        b = new Button(new Image("currency2.png"),95,640,20,20);
        this.addComponent(b);
-       label = new Label("5",120,642);
+       label = new Label(Integer.toString(PotionManager.POTION_PRICE),120,642);
        label.getText().setScale(.9f);
        this.addComponent(label);
        

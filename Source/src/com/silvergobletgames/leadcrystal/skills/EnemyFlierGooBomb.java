@@ -46,6 +46,9 @@ public class EnemyFlierGooBomb extends Skill
         damage.getAmountObject().adjustBase(dAmount);
         damage.setType(Damage.DamageType.PHYSICAL);
         
+        //add slow
+        damage.addCombatEffect(new StateEffect(StateEffect.StateEffectType.SLOW, 240,.5f,true));
+        
         //build goo
         Body body = new Body(new Circle(22), 1);
         Image img = new Image("plantSpit.png");
@@ -134,7 +137,9 @@ public class EnemyFlierGooBomb extends Skill
                 normalVector3.normalise();
                 
                 //Damage is scaled with base
-                Damage dam = new Damage(DamageType.PHYSICAL, damage.getAmount()/2);
+                Damage dam = new Damage(DamageType.PHYSICAL, damage.getAmount()/3);
+                //add slow
+                dam.addCombatEffect(new StateEffect(StateEffect.StateEffectType.SLOW, 240,.25f,true));
 
                 //build goo
                 Body body = new Body(new Circle(10), 1);

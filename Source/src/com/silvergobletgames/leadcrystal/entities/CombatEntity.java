@@ -42,7 +42,7 @@ public abstract class CombatEntity extends Entity
     //Sound pack
     protected SoundPack soundPack;
     
-    
+    public int inAirTimer = 0;
     //Last direction that a damage number was thrown
     private int lastDmgDir = 1;
     //Last Damage Information
@@ -97,6 +97,9 @@ public abstract class CombatEntity extends Entity
         //update skill manager
         skillManager.update();
         
+        if(!this.feetOnTheGround)
+            this.inAirTimer++;
+        
         
         //===================
         // Handle Attacking
@@ -139,6 +142,11 @@ public abstract class CombatEntity extends Entity
         //if we collided with the ground
         if (other instanceof WorldObjectEntity) 
         {  
+            //if we landed on the top of a worldObjectEntity
+            if(-event.getNormal().getY() > .75)
+            {
+                this.inAirTimer = 0 ;
+            }
              //if we collided with a jumpthrouh block
             if (((WorldObjectEntity)other).isJumpthrough())
             {
@@ -497,6 +505,7 @@ public abstract class CombatEntity extends Entity
             //set up body
             Box shape = new Box(chunkImage.getWidth() * .8f,chunkImage.getHeight() * .8f);
             float mass = chunkImage.getWidth() * chunkImage.getHeight() /1000; //calculating mass based on side of image
+            mass = Math.max(.4f, mass); //mass cant be lower than .2f
             Body chunkBody = new Body(shape, mass);
             chunkBody.setRestitution(.8f);           
             chunkBody.setBitmask(Entity.BitMasks.COLLIDE_WORLD.value);

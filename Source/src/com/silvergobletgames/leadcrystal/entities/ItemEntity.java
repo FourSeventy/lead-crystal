@@ -30,7 +30,7 @@ public abstract class ItemEntity extends Entity implements SavableSceneObject
         
         //sets bitmasks and overlap masks
         body.setBitmask(BitMasks.COLLIDE_WORLD.value);
-        body.setOverlapMask(OverlapMasks.PLAYER_TOUCH.value);
+        body.setOverlapMask(OverlapMasks.ITEM.value);
         body.setRotatable(false);
         body.setFriction(2);
         

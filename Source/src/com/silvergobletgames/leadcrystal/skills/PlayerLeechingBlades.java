@@ -15,6 +15,7 @@ import com.silvergobletgames.leadcrystal.entities.EntityEffect.EntityEffectType;
 import com.silvergobletgames.leadcrystal.entities.HitBox;
 import com.silvergobletgames.leadcrystal.entities.NonPlayerEntity;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.core.SceneObjectManager;
@@ -126,6 +127,8 @@ public class PlayerLeechingBlades extends PlayerSkill{
         blade.setPosition(user.getPosition().x, user.getPosition().y);
         this.user.getOwningScene().add(blade, Scene.Layer.MAIN);
         
+        Sound sound = Sound.locationSound("buffered/clang1.ogg", user.getPosition().x, user.getPosition().y, false, 1f,1f);
+        user.getOwningScene().add(sound);
     }
 
     
