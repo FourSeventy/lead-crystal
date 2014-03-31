@@ -21,7 +21,7 @@ public class EnhancedViewport extends Viewport{
     
     
     //collision lines
-    public Line topLine;
+    //public Line topLine;
     public Line bottomLine;
     public Line leftLine;
     public Line rightLine;
@@ -30,7 +30,7 @@ public class EnhancedViewport extends Viewport{
     {       
         
         //lines
-        topLine = new Line(new Vector2f(getCenterCoordinates().x,yPos + height - 200),new Vector2f(getCenterCoordinates().x, getCenterCoordinates().y));
+       // topLine = new Line(new Vector2f(getCenterCoordinates().x,yPos + height - 200),new Vector2f(getCenterCoordinates().x, getCenterCoordinates().y));
         bottomLine = new Line(new Vector2f(getCenterCoordinates().x, getCenterCoordinates().y),new Vector2f(getCenterCoordinates().x,yPos +140));
         leftLine = new Line(new Vector2f(getCenterCoordinates().x, getCenterCoordinates().y),new Vector2f(xPos + 150,getCenterCoordinates().y));
         rightLine = new Line(new Vector2f(xPos + width - 150,getCenterCoordinates().y),new Vector2f(getCenterCoordinates().x, getCenterCoordinates().y));
@@ -41,7 +41,7 @@ public class EnhancedViewport extends Viewport{
         super.setPosition(x,y);
         
         //lines
-        topLine.set(new Vector2f(getCenterCoordinates().x,yPos + height - 200), new Vector2f(getCenterCoordinates().x, getCenterCoordinates().y));
+      //  topLine.set(new Vector2f(getCenterCoordinates().x,yPos + height - 200), new Vector2f(getCenterCoordinates().x, getCenterCoordinates().y));
         bottomLine.set(new Vector2f(getCenterCoordinates().x, getCenterCoordinates().y),new Vector2f(getCenterCoordinates().x,yPos +140));
         leftLine.set(new Vector2f(getCenterCoordinates().x, getCenterCoordinates().y),new Vector2f(xPos + 150,getCenterCoordinates().y));
         rightLine.set(new Vector2f(xPos + width - 150,getCenterCoordinates().y),new Vector2f(getCenterCoordinates().x, getCenterCoordinates().y));
@@ -57,10 +57,10 @@ public class EnhancedViewport extends Viewport{
         for(Entity blocker: viewportBlockers)
         {
             //while there is an intersection with the topline, move down
-            while(determineIntersectionWithBlocker(topLine,blocker))
-            {
-                this.setPosition(xPos, yPos -1); 
-            }
+//            while(determineIntersectionWithBlocker(topLine,blocker))
+//            {
+//                this.setPosition(xPos, yPos -1); 
+//            }
             //while there is an intersection with the bottom line, move up
             while(determineIntersectionWithBlocker(bottomLine,blocker))
             {
@@ -91,10 +91,10 @@ public class EnhancedViewport extends Viewport{
         for(Entity blocker: viewportBlockers)
         {
             //while there is an intersection with the topline, move down
-            while(determineIntersectionWithBlocker(topLine,blocker))
-            {
-                this.setPosition(xPos, yPos -1); 
-            }
+//            while(determineIntersectionWithBlocker(topLine,blocker))
+//            {
+//                this.setPosition(xPos, yPos -1); 
+//            }
             //while there is an intersection with the bottom line, move up
             while(determineIntersectionWithBlocker(bottomLine,blocker))
             {

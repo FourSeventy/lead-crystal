@@ -557,12 +557,12 @@ public final class GameClientScene extends Scene
             gl.glLoadIdentity();
             glu.gluLookAt(viewport.getBottomLeftCoordinate().x * Layer.MAIN.coordinateScalingFactor, viewport.getBottomLeftCoordinate().y * Layer.MAIN.coordinateScalingFactor, 1, viewport.getBottomLeftCoordinate().x * Layer.MAIN.coordinateScalingFactor, viewport.getBottomLeftCoordinate().y * Layer.MAIN.coordinateScalingFactor, 0, 0, 1, 0);
 
-            gl.glColor4f(1,0,0,1);
-            gl.glLineWidth(2);
-            gl.glBegin(GL3bc.GL_LINES);
-                gl.glVertex2f(viewport.topLine.getStart().getX(),viewport.topLine.getStart().getY());
-                gl.glVertex2f(viewport.topLine.getEnd().getX(),viewport.topLine.getEnd().getY());
-            gl.glEnd();
+//            gl.glColor4f(1,0,0,1);
+//            gl.glLineWidth(2);
+//            gl.glBegin(GL3bc.GL_LINES);
+//                gl.glVertex2f(viewport.topLine.getStart().getX(),viewport.topLine.getStart().getY());
+//                gl.glVertex2f(viewport.topLine.getEnd().getX(),viewport.topLine.getEnd().getY());
+//            gl.glEnd();
 
             gl.glColor4f(0,1,0,1);
             gl.glBegin(GL3bc.GL_LINES);
