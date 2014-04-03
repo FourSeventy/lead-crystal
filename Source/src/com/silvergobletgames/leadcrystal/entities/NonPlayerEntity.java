@@ -21,6 +21,7 @@ import com.silvergobletgames.leadcrystal.entities.EntityTooltip.EntityTooltipFie
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.leadcrystal.skills.SkillManager;
 import com.silvergobletgames.leadcrystal.combat.SoundPack.SoundPackID;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.CommonCrateAnimationPack;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
 import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
@@ -72,7 +73,10 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
         setBrain(new Brain());
         
         //body settings
-        body.setRotatable(false);
+        if(!(this.getImage().getAnimationPack() instanceof CommonCrateAnimationPack))
+        {
+          body.setRotatable(false);
+        }
         body.setDamping(.05f);
 
     }
@@ -93,10 +97,12 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
             this.scriptObject.runScript(this);
         }
         
+        brain.getStateMachine().changeState(AIState.StateID.DEAD);
+        
         //super die
         super.die();
         
-        brain.getStateMachine().changeState(AIState.StateID.DEAD);
+        
         
         //set tooltip to dead
         this.entityTooltip.specialDoNotDisplay = true;      
@@ -142,7 +148,7 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
             entityTooltip.setHealthField(combatData.percentHealth());
 
             //animation handling
-            if(this.image.getAnimation() != ExtendedImageAnimations.MELEEATTACK && this.image.getAnimation() != ExtendedImageAnimations.RANGEDATTACK && this.image.getAnimation() != ExtendedImageAnimations.SPELLATTACK && this.image.getAnimation() != ExtendedImageAnimations.SPAWN)
+            if(this.image.getAnimation() != ExtendedImageAnimations.MELEEATTACK && this.image.getAnimation() != ExtendedImageAnimations.RANGEDATTACK && this.image.getAnimation() != ExtendedImageAnimations.SPELLATTACK && this.image.getAnimation() != ExtendedImageAnimations.SPAWN && !(this.image.getAnimationPack() instanceof CommonCrateAnimationPack))
             {
                 if (Math.abs(body.getVelocity().getX()) < 2)  
                 { 

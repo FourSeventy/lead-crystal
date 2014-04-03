@@ -886,6 +886,50 @@ public class AnimationPackClasses {
         }
     }
     
+    public static class CommonCrateAnimationPack extends AnimationPack
+    {
+        public CommonCrateAnimationPack()
+        {
+             //Idle
+            ArrayList<Texture> idle = new ArrayList<>();
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("crate.png"));
+            this.animationSet.put(CoreAnimations.IDLE, idle);
+            
+            
+            
+            idle = new ArrayList();
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("crateDamaged.png"));
+            this.animationSet.put(ExtendedImageAnimations.RUNNING, idle);
+            
+
+            
+            //death
+            ArrayList<Texture> dying = new ArrayList();
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("crateChunk1.png"));                
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("crateChunk2.png"));
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("crateChunk3.png"));               
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("crateChunk4.png"));
+            this.animationSet.put(ExtendedImageAnimations.DEATH, dying); 
+            
+            
+            //=====================
+            // Build Delay Map
+            //=====================        
+
+            
+            //========================
+            // Build Skill Offset Map
+            //========================
+            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0000_1111_0000_1111_0000_0000_0000_0000),
+                                                                                        Float.intBitsToFloat(0b0111_1111_0010_0010_0000_0000_0000_0000)));
+                  
+            
+            //================
+            // Build FPT Map
+            //================
+        }
+    }
+    
     
     //==============
     // Bash Brown 

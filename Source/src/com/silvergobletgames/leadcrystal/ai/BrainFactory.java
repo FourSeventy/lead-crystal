@@ -14,7 +14,7 @@ public class BrainFactory
     public static enum BrainID
     { 
         //WARNING - Changing the names of this enum will break save data
-        None,Fighter,NPC,FlyingFighter,Jumper,DesertBoss,Healer
+        None,Fighter,NPC,FlyingFighter,Jumper,DesertBoss,Healer,Crate
     }
 
     private static BrainFactory instance = new BrainFactory();
@@ -49,6 +49,7 @@ public class BrainFactory
             case Jumper: return new BrainJumper();
             case DesertBoss: return new BrainDesertBoss();
             case Healer: return new BrainHealer();
+            case Crate: return new BrainCrate();
             default: return new Brain();
         }    
     }

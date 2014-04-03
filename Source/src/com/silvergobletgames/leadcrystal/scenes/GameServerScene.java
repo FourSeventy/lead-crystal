@@ -582,6 +582,23 @@ public class GameServerScene extends Scene
             if (layer == Layer.MAIN)
             {
                 physicsWorld.add(((Entity) item).getBody());
+                
+                //if the group is crate, add all other crates into included bodies
+                if(((Entity)item).isInGroup(ExtendedSceneObjectGroups.CRATE))
+                {
+                    //get list of all other crates
+                    ArrayList<SceneObject> otherCrates = this.getSceneObjectManager().get(ExtendedSceneObjectGroups.CRATE);
+                                     
+                    for(SceneObject crate: otherCrates)
+                    {
+                        //add all other creates to this creates included list
+                        ((Entity)crate).getBody().addIncludedBody(((Entity)item).getBody());
+                        
+                        //add this crate to all other crates included list
+                        ((Entity)item).getBody().addIncludedBody(((Entity)crate).getBody());
+                    }
+                    
+                }
             }
         }   
     }

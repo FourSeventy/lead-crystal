@@ -83,7 +83,8 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
     {
         //WARNING - Changing the names of this enum will break save data
         PLAYER          (0b0_0000_0000_0001),
-        NPE             (0b0_0000_0000_0010),     
+        NPE             (0b0_0000_0000_0010), 
+        DESTRUCTIBLE    (0b0_0000_0000_0100), 
         COLLIDE_WORLD   (0b0_0000_0111_1111),
         WORLD_OBJ       (0b0_0000_1000_0000),
         COLLIDE_ALL     (0b0_0000_0000_0000),
@@ -120,7 +121,7 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
         PLAYER_TOUCH      (0b00_0001), 
         PVP_PLAYER        (0b11_0001),
         NPE               (0b10_0100),
-        NPE_TOUCH         (0b10_0000),  
+        NPE_TOUCH         (0b10_0000),
         ITEM              (0b01_0000),
         OVERLAP_ALL       (0b11_1111); //overlaps all
         
@@ -815,7 +816,7 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
         return name;
     }
     
-    protected EntityTooltip getTooltip()
+    public EntityTooltip getTooltip()
     {
         return this.entityTooltip;
     }

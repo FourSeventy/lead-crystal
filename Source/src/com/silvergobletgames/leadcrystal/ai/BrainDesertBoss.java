@@ -15,9 +15,12 @@ import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
+import com.silvergobletgames.leadcrystal.items.DropGenerator;
+import com.silvergobletgames.leadcrystal.items.LootSpewer;
 import com.silvergobletgames.leadcrystal.skills.Skill;
 import com.silvergobletgames.leadcrystal.skills.Skill.SkillID;
 import com.silvergobletgames.leadcrystal.skills.Skill.SkillType;
+import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 
@@ -266,6 +269,14 @@ public class BrainDesertBoss extends BrainGround
 //                }
 //            }
 //        }
+    }
+    
+    public void deadEnter()
+    {
+ 
+        //add spewer to the world
+        self.getOwningScene().add(new LootSpewer(60 * 3), Scene.Layer.MAIN);
+        
     }
     
     

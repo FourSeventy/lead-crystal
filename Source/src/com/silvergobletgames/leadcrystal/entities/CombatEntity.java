@@ -14,6 +14,8 @@ import net.phys2d.raw.shapes.Box;
 import com.silvergobletgames.leadcrystal.combat.Damage.DamageType;
 import com.silvergobletgames.leadcrystal.combat.ProcEffect.ProcType;
 import com.silvergobletgames.leadcrystal.combat.StateEffect.StateEffectType;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.CommonCrateAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.FlierAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.PlantAnimationPack;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.BloodEmitter;
@@ -326,7 +328,7 @@ public abstract class CombatEntity extends Entity
             
             
             //add damage text to the world
-            if (incomingDamage.getType() != DamageType.NODAMAGE)
+            if (incomingDamage.getType() != DamageType.NODAMAGE && !(this.getImage().getAnimationPack() instanceof CommonCrateAnimationPack))
                 owningScene.add(new CombatText(incomingDamage, this, owningScene), Layer.WORLD_HUD);
             
             //Apply the effects and overlays of the damage to this entity
@@ -425,7 +427,7 @@ public abstract class CombatEntity extends Entity
         //Drop items
         if(!(this instanceof PlayerEntity))
         {
-            ArrayList<ItemEntity> items = DropGenerator.generateDrops(this.combatData.dropQuality, this.combatData.dropChance);
+            ArrayList<ItemEntity> items = DropGenerator.generateDrops(this.combatData.dropPotionChance, this.combatData.dropGoldChance);
             for (ItemEntity item : items) 
             {                
                 //set the items position and give it some initial velocity
@@ -505,7 +507,7 @@ public abstract class CombatEntity extends Entity
             //set up body
             Box shape = new Box(chunkImage.getWidth() * .8f,chunkImage.getHeight() * .8f);
             float mass = chunkImage.getWidth() * chunkImage.getHeight() /1000; //calculating mass based on side of image
-            mass = Math.max(.4f, mass); //mass cant be lower than .2f
+            mass = Math.max(.6f, mass); //mass cant be lower than .6f
             Body chunkBody = new Body(shape, mass);
             chunkBody.setRestitution(.8f);           
             chunkBody.setBitmask(Entity.BitMasks.COLLIDE_WORLD.value);
@@ -552,12 +554,17 @@ public abstract class CombatEntity extends Entity
             //add blood emitter TODO add more blood with more mass
             if(SylverRandom.random.nextFloat() > .30f)
             {
-                if(this.getImage().getAnimationPack() instanceof PlantAnimationPack)
+                if(this.getImage().getAnimationPack() instanceof PlantAnimationPack
+                   ||this.getImage().getAnimationPack() instanceof FlierAnimationPack)
                 {
                     AbstractParticleEmitter emitter = new GreenBloodEmitter();
                     emitter.setDuration(250);
                     emitter.setPosition(this.getPosition().x,this.getPosition().y);
                     chunk.addEmitter(emitter); 
+                }
+                else if(this.getImage().getAnimationPack() instanceof CommonCrateAnimationPack)
+                {
+                    //dont add emitter
                 }
                 else
                 {

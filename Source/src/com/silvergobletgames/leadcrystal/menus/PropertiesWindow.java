@@ -1868,8 +1868,8 @@ public class PropertiesWindow extends Menu
             
             NonPlayerEntity selectedItem = (NonPlayerEntity)((MapEditorScene)owningScene).selectedItem;
             
-            chance = selectedItem.getCombatData().dropChance;
-            quality = selectedItem.getCombatData().dropQuality;
+            chance = selectedItem.getCombatData().dropGoldChance;
+            quality = selectedItem.getCombatData().dropPotionChance;
             if(selectedItem.getSoundPack() != null)
             soundPack = selectedItem.getSoundPack().getID();
         }
@@ -2192,8 +2192,8 @@ public class PropertiesWindow extends Menu
             NPE.getCombatData().baseDamage.setBase(baseDamage);
             NPE.getCombatData().xVelocity.setBase(baseX);
             NPE.getCombatData().yVelocity.setBase(baseY);
-            NPE.getCombatData().dropChance = chance;
-            NPE.getCombatData().dropQuality = quality;
+            NPE.getCombatData().dropGoldChance = chance;
+            NPE.getCombatData().dropPotionChance = quality;
             NPE.getCombatData().ccResistance.setBase(ccResistance);
             NPE.setLocateDistance(locateDistance);
             NPE.setWanderDistance(wanderDistance);

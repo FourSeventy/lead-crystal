@@ -58,8 +58,8 @@ public class CombatData
     //misc
     public int timeOfDeath;
     public float overkill;
-    public DropGenerator.DropChance dropChance = DropGenerator.DropChance.NONE;
-    public DropGenerator.DropQuality dropQuality = DropGenerator.DropQuality.VeryPoor;
+    public DropGenerator.DropChance dropGoldChance = DropGenerator.DropChance.NONE; //$$ chance
+    public DropGenerator.DropQuality dropPotionChance = DropGenerator.DropQuality.VeryPoor; //potion chance
     
      
     /**
@@ -474,8 +474,8 @@ public class CombatData
         saveData.dataMap.put("resourceRegen",cooldownModifier.dumpFullData());
         saveData.dataMap.put("critChance",critChance.dumpFullData());
         saveData.dataMap.put("critModifier",critModifier.dumpFullData());
-        saveData.dataMap.put("dropChance",dropChance.name());
-        saveData.dataMap.put("dropQuality",dropQuality.name());
+        saveData.dataMap.put("dropChance",dropGoldChance.name());
+        saveData.dataMap.put("dropQuality",dropPotionChance.name());
         saveData.dataMap.put("damageResistance",damageResistance.dumpFullData());
         saveData.dataMap.put("ccResistance",ccResistance.dumpFullData());
         saveData.dataMap.put("xVelocity",xVelocity.dumpFullData());
@@ -501,8 +501,8 @@ public class CombatData
          combatData.currentHealth = combatData.maxHealth.getTotalValue();
          combatData.critChance = Stat.buildFromFullData((SaveData)saved.dataMap.get("critChance"));
          combatData.critModifier = Stat.buildFromFullData((SaveData)saved.dataMap.get("critModifier"));
-         combatData.dropChance = DropChance.valueOf((String)saved.dataMap.get("dropChance"));      
-         combatData.dropQuality = DropQuality.valueOf((String)saved.dataMap.get("dropQuality")); 
+         combatData.dropGoldChance = DropChance.valueOf((String)saved.dataMap.get("dropChance"));      
+         combatData.dropPotionChance = DropQuality.valueOf((String)saved.dataMap.get("dropQuality")); 
          combatData.damageResistance = Stat.buildFromFullData((SaveData)saved.dataMap.get("damageResistance"));
          combatData.ccResistance = Stat.buildFromFullData((SaveData)saved.dataMap.get("ccResistance"));
          combatData.xVelocity = Stat.buildFromFullData((SaveData)saved.dataMap.get("xVelocity"));
