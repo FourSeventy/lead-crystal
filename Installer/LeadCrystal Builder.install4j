@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<install4j version="5.1.7" transformSequenceNumber="4">
+<install4j version="5.1.11" transformSequenceNumber="4">
   <directoryPresets config="X:/Lead Crystal/Assets/Installer Images" />
-  <application name="Lead Crystal" distributionSourceDir="" applicationId="0938-5269-1317-3306" mediaDir="X:/Lead Crystal/Distributions/${compiler:sys.version}" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="LeadCrystal" publisher="Silver Goblet Games" publisherWeb="http://www.silvergobletgames.com" version="0.7.12" allPathsRelative="false" backupOnSave="false" autoSave="false" convertDotsToUnderscores="false" macSignature="????" installerName="" javaMinVersion="1.7" javaMaxVersion="" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
+  <application name="Lead Crystal" distributionSourceDir="" applicationId="0938-5269-1317-3306" mediaDir="X:/Lead Crystal/Distributions/${compiler:sys.version}" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="LeadCrystal" publisher="Silver Goblet Games" publisherWeb="http://www.silvergobletgames.com" version="0.7.13" allPathsRelative="false" backupOnSave="false" autoSave="false" convertDotsToUnderscores="false" macSignature="????" installerName="" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
       <additionalLanguages />
@@ -62,7 +62,7 @@
   </files>
   <launchers>
     <launcher name="LeadCrystal" id="28" customizedId="" external="false" excludeFromMenu="false" unixMode="755" menuName="" icnsFile="" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="false" fileset="" macBundleBinary="JavaApplicationStub" addMacEntitlements="false" macEntitlementsFile="">
-      <executable name="LeadCrystal" type="1" iconSet="true" iconFile="" executableDir="" redirectStderr="true" stderrFile="error.log" stderrMode="append" redirectStdout="true" stdoutFile="output.log" stdoutMode="append" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="." singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false">
+      <executable name="LeadCrystal" type="1" iconSet="true" iconFile="" executableDir="" redirectStderr="true" stderrFile="error.log" stderrMode="append" redirectStdout="true" stdoutFile="output.log" stdoutMode="append" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="." singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="highestAvailable" checkConsoleParameter="false" globalSingleInstance="false">
         <versionInfo include="false" fileVersion="" fileDescription="" legalCopyright="" internalName="" productName="" />
       </executable>
       <splashScreen show="true" autoOff="true" alwaysOnTop="true" width="0" height="0" bitmapFile="X:/Lead Crystal/Assets/Installer Images/silver-goblet.png" java6SplashScreen="false">
@@ -389,7 +389,7 @@
     </applications>
   </installerGui>
   <mediaSets>
-    <windows name="Windows(64bit)" id="29" customizedId="" mediaFileName="" installDir="LeadCrystal" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="windows-amd64-1.7.0_07" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="true" customInstallBaseDir="" contentFilesType="1" downloadURL="" verifyIntegrity="true">
+    <windows name="Windows(64bit)" id="29" customizedId="" mediaFileName="" installDir="LeadCrystal" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="windows-amd64-1.8.0" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="true" customInstallBaseDir="" contentFilesType="1" downloadURL="" verifyIntegrity="true">
       <excludedLaunchers />
       <excludedBeans />
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
@@ -402,7 +402,7 @@
       <excludedComponents />
       <includedDownloadableComponents />
     </windows>
-    <windows name="Windows(32bit)" id="122" customizedId="" mediaFileName="" installDir="LeadCrystal" overridePrincipalLanguage="false" jreBitType="32" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="windows-x86-1.7.0_07" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" downloadURL="" verifyIntegrity="true">
+    <windows name="Windows(32bit)" id="122" customizedId="" mediaFileName="" installDir="LeadCrystal" overridePrincipalLanguage="false" jreBitType="32" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="windows-x86-1.8.0" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" downloadURL="" verifyIntegrity="true">
       <excludedLaunchers />
       <excludedBeans />
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />

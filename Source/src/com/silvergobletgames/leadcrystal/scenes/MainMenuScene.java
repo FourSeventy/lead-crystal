@@ -259,7 +259,7 @@ public class MainMenuScene extends Scene
 
     public void sceneEntered(ArrayList args)
     {
-        if(args != null && args.get(0) == true)
+        if(args != null && args.get(0) instanceof Boolean && (boolean)args.get(0) == true)
         {
             Sound sound = Sound.newBGM("streaming/mainMenu.ogg");
             add(sound);
