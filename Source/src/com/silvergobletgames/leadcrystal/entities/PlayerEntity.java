@@ -33,7 +33,6 @@ import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SandSp
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SmokeEmitter;
 import com.silvergobletgames.leadcrystal.entities.EntityTooltip.EntityTooltipField;
 import com.silvergobletgames.leadcrystal.items.*;
-import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorID;
 import com.silvergobletgames.leadcrystal.netcode.ClientInputPacket;
 import com.silvergobletgames.leadcrystal.netcode.PlayerPredictionData;
 import com.silvergobletgames.leadcrystal.scripting.PageCondition;
@@ -254,7 +253,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     {
         //Update the superclass
         super.update();
-       
+
         //position flashlight
         this.light.setPosition((int) this.body.getPosition().getX() + 20, (int) this.body.getPosition().getY());
         //angle flashlight
@@ -1255,7 +1254,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             }
         } 
         //double jumping
-        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 && this.armorManager.getBootsEquippedID() == ArmorID.BOOTS2) 
+        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 && this.getCombatData().containsEffect("dJump"))  
         {
             if(this.doubleJumpEnergy == this.MAX_JUMP_ENERGY-20)
             {
@@ -1270,7 +1269,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             }
         }
         //jetpacking
-        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 &&this.jumpEnergy < this.MAX_JUMP_ENERGY && this.armorManager.getBootsEquippedID() == ArmorID.BOOTS3) 
+        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 &&this.jumpEnergy < this.MAX_JUMP_ENERGY && this.getCombatData().containsEffect("jetpack")) 
         {
                  //add jetpack emitters
                 if( this.doubleJumpEnergy == this.MAX_JUMP_ENERGY -20)
@@ -1295,7 +1294,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         }
         
         //teleport
-        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 &&this.jumpEnergy < this.MAX_JUMP_ENERGY && this.armorManager.getBootsEquippedID() == ArmorID.BOOTS4) 
+        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 &&this.jumpEnergy < this.MAX_JUMP_ENERGY && this.getCombatData().containsEffect("teleport")) 
         {
             this.handleTeleport(x,y);
             this.doubleJumpAvailable = false;

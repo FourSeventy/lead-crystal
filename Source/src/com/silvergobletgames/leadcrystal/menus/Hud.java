@@ -1,5 +1,6 @@
 package com.silvergobletgames.leadcrystal.menus;
 
+import com.jogamp.newt.event.KeyEvent;
 import com.silvergobletgames.leadcrystal.core.CursorFactory;
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
 import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
@@ -22,7 +23,6 @@ import com.silvergobletgames.leadcrystal.items.Potion;
 import com.silvergobletgames.leadcrystal.entities.ItemEntity;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.items.ArmorManager;
-import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorID;
 import com.silvergobletgames.leadcrystal.netcode.ChatManager;
 import com.silvergobletgames.leadcrystal.netcode.OpenInstructionalTipPacket.InstructionalTip;
 import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
@@ -177,8 +177,8 @@ public class Hud extends Window
         menuList.add(potionsMenu);
         
         //initializing armor menu
-        armorMenu = new ArmorMenu(playerReference,0,100);
-        armorMenu.setPosition(center - armorMenu.getWidth()/2, 100);
+        armorMenu = new ArmorMenu(playerReference,center - 600,0);
+        armorMenu.setPosition(center - armorMenu.getWidth()/2, 0);
         armorMenu.addActionListener(new ActionListener(){     
             public void actionPerformed(ActionEvent e)
             {
@@ -623,7 +623,7 @@ public class Hud extends Window
     public void update()
     {
         super.update();
-        
+               
         //position variables 
         float center = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x/2;
         float right = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x;
@@ -776,7 +776,7 @@ public class Hud extends Window
             }
             
             //get secondary objectives and build their arrows
-            if(playerReference.getArmorManager().getHelmEquippedID() == ArmorID.HELM2)
+            if(playerReference.getCombatData().containsEffect("showSecondary"))
             {
                 ArrayList<SceneObject> secondaryObjectiveEntities = this.playerReference.getOwningScene().getSceneObjectManager().get(ExtendedSceneObjectGroups.SECONDARYOBJECTIVE);
                 for(SceneObject secondaryObjectiveSO: secondaryObjectiveEntities)

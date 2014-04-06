@@ -34,7 +34,7 @@ import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect.EntityEffectType;
 import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity.WorldObjectType;
 import com.silvergobletgames.leadcrystal.entities.EntityTooltip.EntityTooltipField;
-import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorID;
+import com.silvergobletgames.leadcrystal.items.ArmorManager;
 import com.silvergobletgames.leadcrystal.items.Potion;
 import com.silvergobletgames.leadcrystal.netcode.JoinResponse.ReasonCode;
 import com.silvergobletgames.leadcrystal.netcode.OpenInstructionalTipPacket.InstructionalTip;
@@ -55,6 +55,8 @@ public class SerializationRegistrator
     {
         Kryo kryo = k;
         
+        kryo.register(ArmorManager.ArmorStat.ArmorStatID.class);
+        kryo.register(BuyStatPacket.class);
         kryo.register(MainObjectiveCompletePacket.class);
         kryo.register(SkillCooldownPacket.class);
         kryo.register(SideObjectiveCompletePacket.class);
@@ -76,11 +78,8 @@ public class SerializationRegistrator
         kryo.register(CoreAnimations.class);
         kryo.register(ChooseLevelPacket.class);
         kryo.register(ExtendedSceneObjectClasses.class);
-        kryo.register(ArmorAdjustPacket.class);
         kryo.register(MenuID.class);
         kryo.register(CloseMenuPacket.class);
-        kryo.register(BuyArmorPacket.class);
-        kryo.register(ArmorID.class);
         kryo.register(BuyPotionPacket.class);
         kryo.register(OpenMenuPacket.class);
         kryo.register(Layer.class);

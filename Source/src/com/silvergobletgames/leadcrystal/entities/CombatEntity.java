@@ -305,18 +305,11 @@ public abstract class CombatEntity extends Entity
             this.lastDamage = incomingDamage;
                         
             
-            //get the damage amount after resistances are applied
-            if(incomingDamage.getType() != DamageType.HEAL)
-            {
-                float resistance = this.combatData.damageResistance.getTotalValue();        
-                incomingDamage.getAmountObject().adjustPercentModifier( -resistance);
-            }
-            
-            
             //Handle modification of  health   
             if(incomingDamage.getType() != DamageType.HEAL)
             {   
-                
+                float resistance = this.combatData.damageResistance.getTotalValue(); 
+                incomingDamage.getAmountObject().adjustPercentModifier( -resistance);
                 this.combatData.currentHealth -= incomingDamage.getAmount();
             }
             else

@@ -28,30 +28,7 @@ import java.util.ArrayList;
 import javax.media.opengl.GL2;
 
 
-/**
- * Justin edit:
- *
- * When an item in the inventory grid is clicked on, it becomes 'attached'
- * to the cursor. When the item becomes attached to the cursor it is no longer associated
- * in the grid space it use to occupy. Whether the item is
- * 'attached' to the cursor or not determines whether or not it will be drawn
- * in its grid location, or at the cursor coordinates.
- *
- * When an item is held, clicking an empty slot in the grid will cause the swap
- * method to be called, and null will be swapped with an item.
- *
- * Clicking a spot with an item will swap the items
- *
- * Clicking the spot that the item originally came from will put it back.
- *
- * Clicking outside the menu will cause the item to be dropped.
- *
- * Clicking inside an equipment slot will cause a check as to whether the item
- * can be equipped, and if so, it will be swapped with whatever is in that
- * equipment slot.
- *
- * @author mike
- */
+
 public class SkillMenu extends Window {
 
    //local reference to the player

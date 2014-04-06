@@ -1,34 +1,5 @@
 package com.silvergobletgames.leadcrystal.scenes;
 
-import com.silvergobletgames.leadcrystal.netcode.SizeTest;
-import com.silvergobletgames.leadcrystal.netcode.SerializationRegistrator;
-import com.silvergobletgames.leadcrystal.netcode.CursorChangePacket;
-import com.silvergobletgames.leadcrystal.netcode.ChatPacket;
-import com.silvergobletgames.leadcrystal.netcode.BuyPotionPacket;
-import com.silvergobletgames.leadcrystal.netcode.MovePlayerToPointPacket;
-import com.silvergobletgames.leadcrystal.netcode.SkillDataPacket;
-import com.silvergobletgames.leadcrystal.netcode.OpenDialoguePacket;
-import com.silvergobletgames.leadcrystal.netcode.ArmorAdjustPacket;
-import com.silvergobletgames.leadcrystal.netcode.DisconnectRequest;
-import com.silvergobletgames.leadcrystal.netcode.ClientInputPacket;
-import com.silvergobletgames.leadcrystal.netcode.SoundDataPacket;
-import com.silvergobletgames.leadcrystal.netcode.ChooseLevelPacket;
-import com.silvergobletgames.leadcrystal.netcode.JoinRequest;
-import com.silvergobletgames.leadcrystal.netcode.BuyArmorPacket;
-import com.silvergobletgames.leadcrystal.netcode.RenderDataPacket;
-import com.silvergobletgames.leadcrystal.netcode.SaveGamePacket;
-import com.silvergobletgames.leadcrystal.netcode.CloseMenuPacket;
-import com.silvergobletgames.leadcrystal.netcode.RespawnPacket;
-import com.silvergobletgames.leadcrystal.netcode.ChangeLevelPacket;
-import com.silvergobletgames.leadcrystal.netcode.OpenMenuPacket;
-import com.silvergobletgames.leadcrystal.netcode.ConnectionException;
-import com.silvergobletgames.leadcrystal.entities.HitBox;
-import com.silvergobletgames.leadcrystal.entities.ClientPlayerEntity;
-import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
-import com.silvergobletgames.leadcrystal.core.EnhancedViewport;
-import com.silvergobletgames.leadcrystal.menus.Hud;
-import com.silvergobletgames.leadcrystal.core.LevelData;
-import com.silvergobletgames.leadcrystal.core.SaveGame;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
@@ -37,41 +8,68 @@ import com.jogamp.newt.event.KeyEvent;
 import com.silvergobletgames.leadcrystal.combat.LevelProgressionManager;
 import com.silvergobletgames.leadcrystal.core.*;
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
+import com.silvergobletgames.leadcrystal.core.EnhancedViewport;
+import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
+import com.silvergobletgames.leadcrystal.core.LevelData;
+import com.silvergobletgames.leadcrystal.core.SaveGame;
 import com.silvergobletgames.leadcrystal.cutscenes.CutsceneManager;
 import com.silvergobletgames.leadcrystal.entities.*;
+import com.silvergobletgames.leadcrystal.entities.ClientPlayerEntity;
+import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
+import com.silvergobletgames.leadcrystal.entities.HitBox;
+import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat.ArmorStatID;
+import com.silvergobletgames.leadcrystal.menus.Hud;
+import com.silvergobletgames.leadcrystal.netcode.*;
+import com.silvergobletgames.leadcrystal.netcode.BuyPotionPacket;
+import com.silvergobletgames.leadcrystal.netcode.ChangeLevelPacket;
+import com.silvergobletgames.leadcrystal.netcode.ChatPacket;
+import com.silvergobletgames.leadcrystal.netcode.ChooseLevelPacket;
+import com.silvergobletgames.leadcrystal.netcode.ClientInputPacket;
+import com.silvergobletgames.leadcrystal.netcode.CloseMenuPacket;
+import com.silvergobletgames.leadcrystal.netcode.ConnectionException;
+import com.silvergobletgames.leadcrystal.netcode.CursorChangePacket;
+import com.silvergobletgames.leadcrystal.netcode.DisconnectRequest;
+import com.silvergobletgames.leadcrystal.netcode.JoinRequest;
+import com.silvergobletgames.leadcrystal.netcode.JoinResponse.ReasonCode;
+import com.silvergobletgames.leadcrystal.netcode.MovePlayerToPointPacket;
+import com.silvergobletgames.leadcrystal.netcode.OpenDialoguePacket;
+import com.silvergobletgames.leadcrystal.netcode.OpenMenuPacket;
+import com.silvergobletgames.leadcrystal.netcode.RenderDataPacket;
+import com.silvergobletgames.leadcrystal.netcode.RespawnPacket;
+import com.silvergobletgames.leadcrystal.netcode.SaveGamePacket;
+import com.silvergobletgames.leadcrystal.netcode.SerializationRegistrator;
+import com.silvergobletgames.leadcrystal.netcode.SizeTest;
+import com.silvergobletgames.leadcrystal.netcode.SkillDataPacket;
+import com.silvergobletgames.leadcrystal.netcode.SoundDataPacket;
+import com.silvergobletgames.leadcrystal.skills.Skill.SkillID;
+import com.silvergobletgames.sylver.audio.AudioRenderer;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.*;
 import com.silvergobletgames.sylver.core.SceneEffectsManager.PostEffectExecutor;
+import com.silvergobletgames.sylver.core.SceneObject.CoreGroups;
+import com.silvergobletgames.sylver.graphics.*;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.OpenGLGameWindow;
 import com.silvergobletgames.sylver.graphics.RenderingPipelineGL3;
 import com.silvergobletgames.sylver.netcode.*;
 import com.silvergobletgames.sylver.util.SerializableEntry;
+import com.silvergobletgames.sylver.util.SylverVector2f;
 import java.awt.Point;
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.AbstractMap.SimpleEntry;
 import java.util.*;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
+import javax.media.opengl.GL2;
 import javax.media.opengl.GL3bc;
+import javax.media.opengl.glu.GLU;
 import net.phys2d.math.Vector2f;
+import net.phys2d.raw.*;
 import net.phys2d.raw.StaticBody;
 import net.phys2d.raw.World;
 import net.phys2d.raw.strategies.QuadSpaceStrategy;
-import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
-import com.silvergobletgames.leadcrystal.skills.Skill.SkillID;
-import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorID;
-import com.silvergobletgames.leadcrystal.netcode.*;
-import com.silvergobletgames.leadcrystal.netcode.JoinResponse.ReasonCode;
-import com.silvergobletgames.sylver.audio.AudioRenderer;
-import com.silvergobletgames.sylver.audio.Sound;
-import com.silvergobletgames.sylver.core.SceneObject.CoreGroups;
-import com.silvergobletgames.sylver.graphics.*;
-import com.silvergobletgames.sylver.util.SylverVector2f;
-import java.util.concurrent.CopyOnWriteArrayList;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.GLU;
-import net.phys2d.raw.*;
 
 
 public final class GameClientScene extends Scene 
@@ -1350,21 +1348,11 @@ public final class GameClientScene extends Scene
         this.sendPacket(packet);
     }
     
-    public void sendBuyArmorPacket(ArmorID id)
+    public void sendBuyStatPacket(ArmorStatID statId)
     {
         //build the packet
-        BuyArmorPacket packet = new BuyArmorPacket();
-        packet.armor = id;
-        
-        //send packet
-        this.sendPacket(packet);
-    }
-    
-    public void sendArmorAdjustPacket(ArmorID id)
-    {
-        //build the packet
-        ArmorAdjustPacket packet = new ArmorAdjustPacket();
-        packet.armorToEquip = id;
+        BuyStatPacket packet = new BuyStatPacket();
+        packet.statId = statId;
         
         //send packet
         this.sendPacket(packet);

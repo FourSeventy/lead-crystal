@@ -1,65 +1,65 @@
 package com.silvergobletgames.leadcrystal.scenes;
 
-import com.silvergobletgames.leadcrystal.netcode.CursorChangePacket;
-import com.silvergobletgames.leadcrystal.netcode.ClientData;
-import com.silvergobletgames.leadcrystal.netcode.ChatPacket;
-import com.silvergobletgames.leadcrystal.netcode.MovePlayerToPointPacket;
-import com.silvergobletgames.leadcrystal.netcode.GobletServer;
-import com.silvergobletgames.leadcrystal.netcode.BuyPotionPacket;
-import com.silvergobletgames.leadcrystal.netcode.OpenDialoguePacket;
-import com.silvergobletgames.leadcrystal.netcode.SkillDataPacket;
-import com.silvergobletgames.leadcrystal.netcode.ArmorAdjustPacket;
-import com.silvergobletgames.leadcrystal.netcode.ClientInputPacket;
-import com.silvergobletgames.leadcrystal.netcode.SoundDataPacket;
-import com.silvergobletgames.leadcrystal.netcode.ChooseLevelPacket;
-import com.silvergobletgames.leadcrystal.netcode.RenderDataPacket;
-import com.silvergobletgames.leadcrystal.netcode.BuyArmorPacket;
-import com.silvergobletgames.leadcrystal.netcode.SaveGamePacket;
-import com.silvergobletgames.leadcrystal.netcode.CloseMenuPacket;
-import com.silvergobletgames.leadcrystal.netcode.RespawnPacket;
-import com.silvergobletgames.leadcrystal.netcode.ChangeLevelPacket;
-import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
-import com.silvergobletgames.leadcrystal.core.CollisionHandler;
-import com.silvergobletgames.leadcrystal.core.LevelData;
 import com.jogamp.newt.event.KeyEvent;
-import com.silvergobletgames.sylver.core.*;
-import com.silvergobletgames.sylver.graphics.OpenGLGameWindow;
-import com.silvergobletgames.sylver.graphics.AbstractParticleEmitter;
-import com.silvergobletgames.sylver.netcode.Packet;
-import com.silvergobletgames.sylver.netcode.SceneObjectRenderData;
-import com.silvergobletgames.sylver.netcode.SceneObjectRenderDataChanges;
-import com.silvergobletgames.sylver.util.SerializableEntry;
-import java.awt.Point;
-import java.util.AbstractMap.SimpleEntry;
-import java.util.Map.Entry;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import net.phys2d.math.Vector2f;
-import net.phys2d.raw.Body;
-import net.phys2d.raw.World;
-import net.phys2d.raw.shapes.Box;
-import net.phys2d.raw.shapes.Shape;
-import net.phys2d.raw.strategies.QuadSpaceStrategy;
 import com.silvergobletgames.leadcrystal.core.*;
+import com.silvergobletgames.leadcrystal.core.CollisionHandler;
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
+import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
+import com.silvergobletgames.leadcrystal.core.LevelData;
 import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
+import com.silvergobletgames.leadcrystal.items.ArmorManager;
+import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat;
 import com.silvergobletgames.leadcrystal.items.Potion;
 import com.silvergobletgames.leadcrystal.items.PotionManager;
 import com.silvergobletgames.leadcrystal.netcode.*;
+import com.silvergobletgames.leadcrystal.netcode.BuyPotionPacket;
+import com.silvergobletgames.leadcrystal.netcode.ChangeLevelPacket;
+import com.silvergobletgames.leadcrystal.netcode.ChatPacket;
+import com.silvergobletgames.leadcrystal.netcode.ChooseLevelPacket;
+import com.silvergobletgames.leadcrystal.netcode.ClientData;
+import com.silvergobletgames.leadcrystal.netcode.ClientInputPacket;
+import com.silvergobletgames.leadcrystal.netcode.CloseMenuPacket;
+import com.silvergobletgames.leadcrystal.netcode.CursorChangePacket;
+import com.silvergobletgames.leadcrystal.netcode.GobletServer;
+import com.silvergobletgames.leadcrystal.netcode.MovePlayerToPointPacket;
+import com.silvergobletgames.leadcrystal.netcode.OpenDialoguePacket;
 import com.silvergobletgames.leadcrystal.netcode.OpenInstructionalTipPacket.InstructionalTip;
 import com.silvergobletgames.leadcrystal.netcode.OpenMenuPacket.MenuID;
+import com.silvergobletgames.leadcrystal.netcode.RenderDataPacket;
+import com.silvergobletgames.leadcrystal.netcode.RespawnPacket;
+import com.silvergobletgames.leadcrystal.netcode.SaveGamePacket;
+import com.silvergobletgames.leadcrystal.netcode.SkillDataPacket;
+import com.silvergobletgames.leadcrystal.netcode.SoundDataPacket;
 import com.silvergobletgames.leadcrystal.scripting.SceneScriptManager;
 import com.silvergobletgames.leadcrystal.scripting.ScriptObject.ScriptTrigger;
 import com.silvergobletgames.leadcrystal.skills.Skill;
 import com.silvergobletgames.leadcrystal.skills.Skill.SkillID;
 import com.silvergobletgames.leadcrystal.skills.SkillFactory;
 import com.silvergobletgames.sylver.audio.Sound;
+import com.silvergobletgames.sylver.core.*;
 import com.silvergobletgames.sylver.graphics.*;
+import com.silvergobletgames.sylver.graphics.AbstractParticleEmitter;
+import com.silvergobletgames.sylver.graphics.OpenGLGameWindow;
 import com.silvergobletgames.sylver.netcode.NetworkedSceneObject;
+import com.silvergobletgames.sylver.netcode.Packet;
+import com.silvergobletgames.sylver.netcode.SceneObjectRenderData;
+import com.silvergobletgames.sylver.netcode.SceneObjectRenderDataChanges;
+import com.silvergobletgames.sylver.util.SerializableEntry;
 import com.silvergobletgames.sylver.util.SylverVector2f;
+import java.awt.Point;
+import java.util.*;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 import javax.media.opengl.GL2;
+import net.phys2d.math.Vector2f;
+import net.phys2d.raw.Body;
+import net.phys2d.raw.World;
+import net.phys2d.raw.shapes.Box;
+import net.phys2d.raw.shapes.Shape;
+import net.phys2d.raw.strategies.QuadSpaceStrategy;
 
 /**
  * Server architechture for holding Client, Connection info, Metadata
@@ -1212,14 +1212,6 @@ public class GameServerScene extends Scene
         {
             handleBuyPotionPacket((BuyPotionPacket)packet);
         }
-        else if(packet instanceof BuyArmorPacket)
-        {
-            handleBuyArmorPacket((BuyArmorPacket)packet);
-        }
-        else if(packet instanceof ArmorAdjustPacket)
-        {
-            handleArmorAdjustPacket((ArmorAdjustPacket)packet);
-        }
         else if(packet instanceof ChooseLevelPacket)
         {
             handleChooseLevelPacket((ChooseLevelPacket)packet);
@@ -1239,6 +1231,10 @@ public class GameServerScene extends Scene
         else if(packet instanceof RespawnRequestPacket)
         {
             handleRespawnRequestPacket((RespawnRequestPacket)packet);
+        }
+        else if(packet instanceof BuyStatPacket)
+        {
+            handleBuyStatPacket((BuyStatPacket)packet);
         }
     }
     
@@ -1299,53 +1295,34 @@ public class GameServerScene extends Scene
         PlayerEntity player = this.clientsInScene.get(potionPacket.getClientID()).player;
         
         //subtract money from player
-        boolean success = player.getCurrencyManager().subtractCurrency(PotionManager.POTION_PRICE) && player.getPotionManager().getNumberOfPotions() <5;
+        boolean success = player.getCurrencyManager().getBalence()>=PotionManager.POTION_PRICE && player.getPotionManager().getNumberOfPotions() <5;
 
         //if the subtraction succeeded, give potion to player
         if(success)
         {
+            player.getCurrencyManager().subtractCurrency(PotionManager.POTION_PRICE);
             player.getPotionManager().addPotion(1);
         }   
-    }   
+    }  
     
-    public void handleBuyArmorPacket(BuyArmorPacket packet)
+    public void handleBuyStatPacket(BuyStatPacket statPacket)
     {
-        PlayerEntity player = this.clientsInScene.get(packet.getClientID()).player;
         
-        //subtract money
-        boolean success = true;
-        success &= player.getCurrencyManager().subtractCurrency(player.getArmorManager().getArmor(packet.armor).currencyCost);
+        PlayerEntity player = this.clientsInScene.get(statPacket.getClientID()).player;
+        
+        //subtract money from player
+        boolean success = player.getCurrencyManager().getBalence()>=player.getArmorManager().armorStats.get(statPacket.statId).cost 
+                          && player.getArmorManager().armorStats.get(statPacket.statId).points < ArmorStat.MAX_POINTS;
 
-        //if the player has the available funds unlock the item
+        //if the subtraction succeeded, give potion to player
         if(success)
         {
-            player.getArmorManager().unlock(packet.armor);
-        }
-    }
+            player.getCurrencyManager().subtractCurrency(player.getArmorManager().armorStats.get(statPacket.statId).cost);
+            player.getArmorManager().armorStats.get(statPacket.statId).addPoint(1); 
+        }   
+    }  
     
-    public void handleArmorAdjustPacket(ArmorAdjustPacket packet)
-    {
-        PlayerEntity player = this.clientsInScene.get(packet.getClientID()).player;
-         
-        switch(packet.armorToEquip)
-        {
-            case ATTACHMENT1: case ATTACHMENT2: case ATTACHMENT3: case ATTACHMENT4:
-                player.getArmorManager().equipRanged(packet.armorToEquip);
-            break;                        
-            case MODIFIER1: case MODIFIER2: case MODIFIER3: case MODIFIER4:
-                player.getArmorManager().equipMelee(packet.armorToEquip);
-            break;
-            case HELM1: case HELM2: case HELM3: case HELM4:
-                player.getArmorManager().equipHelm(packet.armorToEquip);
-            break;
-            case CHEST1: case CHEST2: case CHEST3: case CHEST4:
-                player.getArmorManager().equipChest(packet.armorToEquip);
-            break;
-            case BOOTS1: case BOOTS2: case BOOTS3: case BOOTS4:
-                player.getArmorManager().equipBoots(packet.armorToEquip);
-            break;    
-        }
-    }
+   
     
     public void handleChooseLevelPacket(ChooseLevelPacket packet)
     {

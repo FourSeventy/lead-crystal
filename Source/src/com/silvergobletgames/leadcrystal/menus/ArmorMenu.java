@@ -1,6 +1,14 @@
 package com.silvergobletgames.leadcrystal.menus;
 
+import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
+import com.silvergobletgames.leadcrystal.items.ArmorManager;
+import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat;
+import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
+import com.silvergobletgames.leadcrystal.skills.Skill;
+import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.Image;
+import com.silvergobletgames.sylver.graphics.Text;
+import com.silvergobletgames.sylver.windowsystem.*;
 import com.silvergobletgames.sylver.windowsystem.Button;
 import com.silvergobletgames.sylver.windowsystem.Label;
 import com.silvergobletgames.sylver.windowsystem.Window;
@@ -8,15 +16,6 @@ import com.silvergobletgames.sylver.windowsystem.WindowComponent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
-import com.silvergobletgames.leadcrystal.items.ArmorManager;
-import com.silvergobletgames.leadcrystal.items.ArmorManager.Armor;
-import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorID;
-import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
-import com.silvergobletgames.leadcrystal.skills.Skill;
-import com.silvergobletgames.sylver.graphics.Color;
-import com.silvergobletgames.sylver.graphics.Text;
-import com.silvergobletgames.sylver.windowsystem.*;
 
 /**
  *
@@ -26,6 +25,8 @@ public class ArmorMenu extends Window{
  
     PlayerEntity playerReference;
     
+    private TabPane tabPane;
+    
     //item hovered tooltip
     private Button skillTooltipBackground;
     private Label skillTooltipName;
@@ -33,173 +34,48 @@ public class ArmorMenu extends Window{
     private TextBlock skillTooltipTextBlock;
     private Label infoTextBox;
     
-    private ArrayList<WindowComponent> ranged1LockedComponents = new ArrayList();
-    private ArrayList<WindowComponent> ranged2LockedComponents = new ArrayList();
-    private ArrayList<WindowComponent> ranged3LockedComponents = new ArrayList();
-    private ArrayList<WindowComponent> ranged4LockedComponents = new ArrayList();
     
-    private ArrayList<WindowComponent> melee1LockedComponents = new ArrayList();
-    private ArrayList<WindowComponent> melee2LockedComponents = new ArrayList();
-    private ArrayList<WindowComponent> melee3LockedComponents = new ArrayList();
-    private ArrayList<WindowComponent> melee4LockedComponents = new ArrayList();
+    //helm stat labels
+    private Text helmHealthStatText;
+    private Text helmDamageReductionStatText;
+    private Text ccReductionStatText;
+    private Text healingEffectivenessStatText;
     
-    private ArrayList<WindowComponent> helm1LockedComponents = new ArrayList();
-    private ArrayList<WindowComponent> helm2LockedComponents = new ArrayList();
-    private ArrayList<WindowComponent> helm3LockedComponents = new ArrayList();
-    private ArrayList<WindowComponent> helm4LockedComponents = new ArrayList();
-    
-    private ArrayList<WindowComponent> chest1LockedComponents = new ArrayList();
-    private ArrayList<WindowComponent> chest2LockedComponents = new ArrayList();
-    private ArrayList<WindowComponent> chest3LockedComponents = new ArrayList();
-    private ArrayList<WindowComponent> chest4LockedComponents = new ArrayList();
-    
-    private ArrayList<WindowComponent> boots1LockedComponents = new ArrayList();
-    private ArrayList<WindowComponent> boots2LockedComponents = new ArrayList();
-    private ArrayList<WindowComponent> boots3LockedComponents = new ArrayList();
-    private ArrayList<WindowComponent> boots4LockedComponents = new ArrayList();
-    
-    private Button ranged1Selected;
-    private Button ranged2Selected;
-    private Button ranged3Selected;
-    private Button ranged4Selected;
-    
-    private Button melee1Selected;
-    private Button melee2Selected;
-    private Button melee3Selected;
-    private Button melee4Selected;
-    
-    private Button helm1Selected;
-    private Button helm2Selected;
-    private Button helm3Selected;
-    private Button helm4Selected;
-    
-    private Button chest1Selected;
-    private Button chest2Selected;
-    private Button chest3Selected;
-    private Button chest4Selected;
-    
-    private Button boots1Selected;
-    private Button boots2Selected;
-    private Button boots3Selected;
-    private Button boots4Selected;
+  
     
     
     
     public ArmorMenu( PlayerEntity player, float x, float y)
     {
-        super(new Image("armorMenu.png"),x,y,1000,800);
+        super(new Image("armorMenu.png"),x,y,1200,900);
         
-        //close button
-        Button closeButton = new Button("deleteButton.png",950,700,50,50);
-        closeButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e)
-            {
-                if (e.getActionCommand().equals("mouseEntered")) {
-
-                  
-                }
-                if (e.getActionCommand().equals("mouseExited")) {
-
-                    
-                }
-                if(e.getActionCommand().equals("clicked"))
-                {
-                    close();
-                }
-            }
-       });
-        this.addComponent(closeButton);
-       
         this.playerReference = player;
         
-        //================
-        // Ranged Row
-        //================
+        this.tabPane = new TabPane(50,50,1100,800);
+        this.tabPane.addTab("Helm");
+        this.tabPane.addTab("Body");
+        this.tabPane.addTab("Weapon");
+        this.tabPane.addTab("Boots");
+        this.addComponent(tabPane);
         
-        //ranged1
-        final Armor armor = player.getArmorManager().getArmor(ArmorID.ATTACHMENT1);
-        Button b = new Button(armor.image.copy(),85,640,60,70);
+        //add helm components
+        this.tabPane.addComponent(new Button(new Text("Upgrades"), 600, 500), 0);
+        
+        final ArmorStat stat = this.playerReference.getArmorManager().helmHealthStat;
+        Button b = new Button(stat.image.copy(), 600, 350, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
            {
                if(e.getActionCommand().equals("clicked"))
                {
-                   //if the armor is not unlocked, buy it, else equip it
-                   if(!playerReference.getArmorManager().isUnlocked(ArmorID.ATTACHMENT1))
-                      ((GameClientScene)owningScene).sendBuyArmorPacket(ArmorID.ATTACHMENT1); 
-                   else
-                      ((GameClientScene)owningScene).sendArmorAdjustPacket(ArmorID.ATTACHMENT1); 
-                   
-                   //client side purchace check for error messages and info box text
-                   if(playerReference.getArmorManager().getArmor(ArmorID.ATTACHMENT1).currencyCost <= playerReference.getCurrencyManager().getBalence())
-                   {
-                      infoTextBox.getText().setText("Click to equip this item"); 
-                   }
-                   else
-                   {
-                       //error message
-                   }
+                   //buy stat
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(armor,ArmorID.ATTACHMENT1,220,450);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-        });
-        this.addComponent(b);           
-        //locked components
-        b = new Button(new Image("black.png"),20,600,230,130);  
-        b.getImage().setColor(new Color(1,1,1,.6f));
-        b.dontKillClick = true;
-        this.addComponent(b);
-        ranged1LockedComponents.add(b);
-        b = new Button(new Image("currency2.png"),85,610,20,20);
-        this.addComponent(b);
-        ranged1LockedComponents.add(b);
-        Label label = new Label(Integer.toString(armor.currencyCost),110,612);
-        label.getText().setScale(.9f);
-        this.addComponent(label);
-        ranged1LockedComponents.add(label);
-        //selected component
-        this.ranged1Selected = new Button(new Image("minimapFrame.png"),20,600,230,130);
-        this.ranged1Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
-        this.ranged1Selected.dontKillClick = true;
-        this.addComponent(ranged1Selected);
-              
-        
-        //ranged2
-        final Armor armor2 = player.getArmorManager().getArmor(ArmorID.ATTACHMENT2);
-        b = new Button(armor2.image.copy(),320,640,60,70);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   //if the armor is not unlocked, buy it, else equip it
-                   if(!playerReference.getArmorManager().isUnlocked(ArmorID.ATTACHMENT2))
-                      ((GameClientScene)owningScene).sendBuyArmorPacket(ArmorID.ATTACHMENT2); 
-                   else
-                      ((GameClientScene)owningScene).sendArmorAdjustPacket(ArmorID.ATTACHMENT2); 
-                   
-                   //client side purchace check for error messages and info box text
-                   if(playerReference.getArmorManager().getArmor(ArmorID.ATTACHMENT2).currencyCost <= playerReference.getCurrencyManager().getBalence())
-                   {
-                      infoTextBox.getText().setText("Click to equip this item"); 
-                   }
-                   else
-                   {
-                       //error message
-                   }
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(armor2,ArmorID.ATTACHMENT2,455,450);
+                   openTooltip(700,450,stat.name,stat.image,stat.description);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -207,54 +83,25 @@ public class ArmorMenu extends Window{
                }
            }
        });
-        this.addComponent(b);      
-        //locked components
-        b = new Button(new Image("black.png"),255,600,230,130); 
-        b.getImage().setColor(new Color(1,1,1,.6f));
-        b.dontKillClick = true;
-        this.addComponent(b);
-        ranged2LockedComponents.add(b);     
-        b = new Button(new Image("currency2.png"),325,610,20,20);
-        this.addComponent(b);
-        ranged2LockedComponents.add(b);
-        label = new Label(Integer.toString(armor2.currencyCost),350,612);
-        label.getText().setScale(.9f);
-        this.addComponent(label);
-        ranged2LockedComponents.add(label);
-        //selected component
-        this.ranged2Selected = new Button(new Image("minimapFrame.png"),255,600,230,130);
-        this.ranged2Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
-        this.ranged2Selected.dontKillClick = true;
-        this.addComponent(ranged2Selected);
-       
-        //ranged3
-        final Armor armor3 = player.getArmorManager().getArmor(ArmorID.ATTACHMENT3);
-        b = new Button(armor3.image.copy(),560,640,60,70);
+        this.tabPane.addComponent(b, 0);
+        this.helmHealthStatText = new Text(Byte.toString(stat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
+        this.helmHealthStatText.setScale(1.2f);
+        this.tabPane.addComponent(new Label(this.helmHealthStatText,625,350), 0);
+        
+        final ArmorStat stat2 = this.playerReference.getArmorManager().helmDamageReductionStat;
+        b = new Button(stat2.image.copy(), 725, 350, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
            {
                if(e.getActionCommand().equals("clicked"))
                {
-                   //if the armor is not unlocked, buy it, else equip it
-                   if(!playerReference.getArmorManager().isUnlocked(ArmorID.ATTACHMENT3))
-                      ((GameClientScene)owningScene).sendBuyArmorPacket(ArmorID.ATTACHMENT3); 
-                   else
-                      ((GameClientScene)owningScene).sendArmorAdjustPacket(ArmorID.ATTACHMENT3); 
-                   
-                   //client side purchace check for error messages and info box text
-                   if(playerReference.getArmorManager().getArmor(ArmorID.ATTACHMENT3).currencyCost <= playerReference.getCurrencyManager().getBalence())
-                   {
-                      infoTextBox.getText().setText("Click to equip this item"); 
-                   }
-                   else
-                   {
-                       //error message
-                   }
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat2.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(armor3,ArmorID.ATTACHMENT3,700,450);
+                   openTooltip(700,450,stat2.name,stat2.image,stat2.description);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -262,55 +109,26 @@ public class ArmorMenu extends Window{
                }
            }
        });
-        this.addComponent(b);        
-        //locked components
-        b = new Button(new Image("black.png"),495,600,230,130);   
-        b.getImage().setColor(new Color(1,1,1,.6f));
-        b.dontKillClick = true;
-        this.addComponent(b);
-        ranged3LockedComponents.add(b);      
-        b = new Button(new Image("currency2.png"),565,610,20,20);
-        this.addComponent(b);
-        ranged3LockedComponents.add(b);
-        label = new Label(Integer.toString(armor3.currencyCost),590,612);
-        label.getText().setScale(.9f);
-        this.addComponent(label);
-        ranged3LockedComponents.add(label);
-        //selected component
-        this.ranged3Selected = new Button(new Image("minimapFrame.png"),495,600,230,130);
-        this.ranged3Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
-        this.ranged3Selected.dontKillClick = true;
-        this.addComponent(ranged3Selected);
-
+        this.tabPane.addComponent(b, 0);
+        this.helmDamageReductionStatText = new Text(Byte.toString(stat2.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
+        this.helmDamageReductionStatText.setScale(1.2f);
+        this.tabPane.addComponent(new Label(this.helmDamageReductionStatText,750,350), 0);
         
-        //ranged4
-        final Armor armor4 = player.getArmorManager().getArmor(ArmorID.ATTACHMENT4);
-        b = new Button(armor4.image.copy(),800,640,60,70);
+        ArmorStat stat3 = this.playerReference.getArmorManager().ccReductionStat;
+        b = new Button(stat3.image.copy(), 600, 225, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
            {
                if(e.getActionCommand().equals("clicked"))
                {
-                   //if the armor is not unlocked, buy it, else equip it
-                   if(!playerReference.getArmorManager().isUnlocked(ArmorID.ATTACHMENT4))
-                      ((GameClientScene)owningScene).sendBuyArmorPacket(ArmorID.ATTACHMENT4); 
-                   else
-                      ((GameClientScene)owningScene).sendArmorAdjustPacket(ArmorID.ATTACHMENT4);
-                   
-                   //client side purchace check for error messages and info box text
-                   if(playerReference.getArmorManager().getArmor(ArmorID.ATTACHMENT4).currencyCost <= playerReference.getCurrencyManager().getBalence())
-                   {
-                      infoTextBox.getText().setText("Click to equip this item"); 
-                   }
-                   else
-                   {
-                       //error message
-                   }
+                   //buy stat
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat3.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(armor4,ArmorID.ATTACHMENT4,935,450);
+                   openTooltip(700,450,stat3.name,stat3.image,stat3.description);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -318,61 +136,25 @@ public class ArmorMenu extends Window{
                }
            }
        });
-        this.addComponent(b);                      
-        //locked componenets 
-        b = new Button(new Image("black.png"),735,600,230,130);  
-        b.getImage().setColor(new Color(1,1,1,.6f));
-        b.dontKillClick = true;
-        this.addComponent(b);
-        ranged4LockedComponents.add(b); 
-        b = new Button(new Image("currency2.png"),805,610,20,20);
-        this.addComponent(b);
-        ranged4LockedComponents.add(b);
-        label = new Label(Integer.toString(armor4.currencyCost),830,612);
-        label.getText().setScale(.9f);
-        this.addComponent(label);
-        ranged4LockedComponents.add(label);
-        //selected component
-        this.ranged4Selected = new Button(new Image("minimapFrame.png"),735,600,230,130);
-        this.ranged4Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
-        this.ranged4Selected.dontKillClick = true;
-        this.addComponent(ranged4Selected);
-
+        this.tabPane.addComponent(b, 0);
+        this.ccReductionStatText = new Text(Byte.toString(stat3.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
+        this.ccReductionStatText.setScale(1.2f);
+        this.tabPane.addComponent(new Label(this.ccReductionStatText,625,250), 0);
         
-        
-        
-        //================
-        // Melee Row
-        //================
-        
-        //melee1
-        final Armor armor5 = player.getArmorManager().getArmor(ArmorID.MODIFIER1);
-        b = new Button(armor5.image.copy(),80,490,60,70);
-        b.addActionListener(new ActionListener(){
+        ArmorStat stat4 = this.playerReference.getArmorManager().healingEffectivenessStat;
+        b = new Button(stat4.image.copy(), 725, 225, 100, 100);
+         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
            {
                if(e.getActionCommand().equals("clicked"))
                {
-                   //if the armor is not unlocked, buy it, else equip it
-                   if(!playerReference.getArmorManager().isUnlocked(ArmorID.MODIFIER1))
-                      ((GameClientScene)owningScene).sendBuyArmorPacket(ArmorID.MODIFIER1); 
-                   else
-                      ((GameClientScene)owningScene).sendArmorAdjustPacket(ArmorID.MODIFIER1); 
-                   
-                   //client side purchace check for error messages and info box text
-                   if(playerReference.getArmorManager().getArmor(ArmorID.MODIFIER1).currencyCost <= playerReference.getCurrencyManager().getBalence())
-                   {
-                      infoTextBox.getText().setText("Click to equip this item"); 
-                   }
-                   else
-                   {
-                       //error message
-                   }
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat4.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(armor5,ArmorID.MODIFIER1,220,300);
+                   openTooltip(700,450,stat4.name,stat4.image,stat4.description);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -380,891 +162,10 @@ public class ArmorMenu extends Window{
                }
            }
        });
-        this.addComponent(b);     
-        //locked components
-        b = new Button(new Image("black.png"),20,450,230,130);  
-        b.getImage().setColor(new Color(1,1,1,.6f));
-        b.dontKillClick = true;
-        this.addComponent(b);
-        melee1LockedComponents.add(b);      
-        b = new Button(new Image("currency2.png"),85,460,20,20);
-        this.addComponent(b);
-        melee1LockedComponents.add(b);
-        label = new Label(Integer.toString(armor5.currencyCost),110,462);
-        label.getText().setScale(.9f);
-        this.addComponent(label);
-        melee1LockedComponents.add(label);
-        //selected component
-        this.melee1Selected = new Button(new Image("minimapFrame.png"),20,450,230,130);
-        this.melee1Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
-        this.melee1Selected.dontKillClick = true;
-        this.addComponent(melee1Selected);
-
-
-        
-        //melee2
-        final Armor armor6 = player.getArmorManager().getArmor(ArmorID.MODIFIER2);
-        b = new Button(armor6.image.copy(),320,490,60,70);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   //if the armor is not unlocked, buy it, else equip it
-                   if(!playerReference.getArmorManager().isUnlocked(ArmorID.MODIFIER2))
-                      ((GameClientScene)owningScene).sendBuyArmorPacket(ArmorID.MODIFIER2); 
-                   else
-                      ((GameClientScene)owningScene).sendArmorAdjustPacket(ArmorID.MODIFIER2); 
-                   
-                   //client side purchace check for error messages and info box text
-                   if(playerReference.getArmorManager().getArmor(ArmorID.MODIFIER2).currencyCost <= playerReference.getCurrencyManager().getBalence())
-                   {
-                      infoTextBox.getText().setText("Click to equip this item"); 
-                   }
-                   else
-                   {
-                       //error message
-                   }
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(armor6,ArmorID.MODIFIER2,460,300);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.addComponent(b);
-        //locked componenets
-        b = new Button(new Image("black.png"),260,450,230,130); 
-        b.getImage().setColor(new Color(1,1,1,.6f));
-        b.dontKillClick = true;
-        this.addComponent(b);
-        melee2LockedComponents.add(b);     
-        b = new Button(new Image("currency2.png"),325,460,20,20);
-        this.addComponent(b);
-        melee2LockedComponents.add(b);
-        label = new Label(Integer.toString(armor6.currencyCost),350,462);
-        label.getText().setScale(.9f);
-        this.addComponent(label);
-        melee2LockedComponents.add(label);
-        //selected component
-        this.melee2Selected = new Button(new Image("minimapFrame.png"),260,450,230,130);
-        this.melee2Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
-        this.melee2Selected.dontKillClick = true;
-        this.addComponent(melee2Selected);
-
-        
-        //melee3
-        final Armor armor7 = player.getArmorManager().getArmor(ArmorID.MODIFIER3);
-        b = new Button(armor7.image.copy(),560,490,60,70);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   //if the armor is not unlocked, buy it, else equip it
-                   if(!playerReference.getArmorManager().isUnlocked(ArmorID.MODIFIER3))
-                      ((GameClientScene)owningScene).sendBuyArmorPacket(ArmorID.MODIFIER3); 
-                   else
-                      ((GameClientScene)owningScene).sendArmorAdjustPacket(ArmorID.MODIFIER3);
-                   
-                    //client side purchace check for error messages and info box text
-                   if(playerReference.getArmorManager().getArmor(ArmorID.MODIFIER3).currencyCost <= playerReference.getCurrencyManager().getBalence())
-                   {
-                      infoTextBox.getText().setText("Click to equip this item"); 
-                   }
-                   else
-                   {
-                       //error message
-                   }
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(armor7,ArmorID.MODIFIER3,700,300);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.addComponent(b);
-        //locked components
-        b = new Button(new Image("black.png"),495,450,230,130); 
-        b.getImage().setColor(new Color(1,1,1,.6f));
-        b.dontKillClick = true;
-        this.addComponent(b);
-        melee3LockedComponents.add(b);     
-        b = new Button(new Image("currency2.png"),565,460,20,20);
-        this.addComponent(b);
-        melee3LockedComponents.add(b);
-        label = new Label(Integer.toString(armor7.currencyCost),590,462);
-        label.getText().setScale(.9f);
-        this.addComponent(label);
-        melee3LockedComponents.add(label);
-        //selected component
-        this.melee3Selected = new Button(new Image("minimapFrame.png"),495,450,230,130);
-        this.melee3Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
-        this.melee3Selected.dontKillClick = true;
-        this.addComponent(melee3Selected);
-        
-        
-        //melee4
-        final Armor armor8 = player.getArmorManager().getArmor(ArmorID.MODIFIER4);
-        b = new Button(armor8.image.copy(),800,490,60,70);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   //if the armor is not unlocked, buy it, else equip it
-                   if(!playerReference.getArmorManager().isUnlocked(ArmorID.MODIFIER4))
-                      ((GameClientScene)owningScene).sendBuyArmorPacket(ArmorID.MODIFIER4); 
-                   else
-                      ((GameClientScene)owningScene).sendArmorAdjustPacket(ArmorID.MODIFIER4); 
-                   
-                    //client side purchace check for error messages and info box text
-                   if(playerReference.getArmorManager().getArmor(ArmorID.MODIFIER4).currencyCost <= playerReference.getCurrencyManager().getBalence())
-                   {
-                      infoTextBox.getText().setText("Click to equip this item"); 
-                   }
-                   else
-                   {
-                       //error message
-                   }
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(armor8,ArmorID.MODIFIER4,935,300);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.addComponent(b);
-        //locked components
-        b = new Button(new Image("black.png"),735,450,230,130);
-        b.getImage().setColor(new Color(1,1,1,.6f));
-        b.dontKillClick = true;
-        this.addComponent(b);
-        melee4LockedComponents.add(b);   
-        b = new Button(new Image("currency2.png"),805,460,20,20);
-        this.addComponent(b);
-        melee4LockedComponents.add(b);
-        label = new Label(Integer.toString(armor8.currencyCost),830,462);
-        label.getText().setScale(.9f);
-        this.addComponent(label);
-        melee4LockedComponents.add(label);
-        //selected component
-        this.melee4Selected = new Button(new Image("minimapFrame.png"),735,450,230,130);
-        this.melee4Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
-        this.melee4Selected.dontKillClick = true;
-        this.addComponent(melee4Selected);
-        
-
-        
-        
-        //================
-        // Helm Row
-        //================
-        
-        //helm1
-        final Armor armor9 = player.getArmorManager().getArmor(ArmorID.HELM1);
-        b = new Button(armor9.image.copy(),80,350,60,70);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   //if the armor is not unlocked, buy it, else equip it
-                   if(!playerReference.getArmorManager().isUnlocked(ArmorID.HELM1))
-                      ((GameClientScene)owningScene).sendBuyArmorPacket(ArmorID.HELM1); 
-                   else
-                      ((GameClientScene)owningScene).sendArmorAdjustPacket(ArmorID.HELM1); 
-                   
-                    //client side purchace check for error messages and info box text
-                   if(playerReference.getArmorManager().getArmor(ArmorID.HELM1).currencyCost <= playerReference.getCurrencyManager().getBalence())
-                   {
-                      infoTextBox.getText().setText("Click to equip this item"); 
-                   }
-                   else
-                   {
-                       //error message
-                   }
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(armor9,ArmorID.HELM1,220,160);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.addComponent(b);
-        //locked components
-        b = new Button(new Image("black.png"),20,310,230,130); 
-        b.getImage().setColor(new Color(1,1,1,.6f));
-        b.dontKillClick = true;
-        this.addComponent(b);
-        helm1LockedComponents.add(b);      
-        b = new Button(new Image("currency2.png"),85,320,20,20);
-        this.addComponent(b);
-        helm1LockedComponents.add(b);
-        label = new Label(Integer.toString(armor9.currencyCost),110,322);
-        label.getText().setScale(.9f);
-        this.addComponent(label);
-        helm1LockedComponents.add(label);
-        //selected component
-        this.helm1Selected = new Button(new Image("minimapFrame.png"),20,310,230,130);
-        this.helm1Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
-        this.helm1Selected.dontKillClick = true;
-        this.addComponent(helm1Selected);
-        
-
-
-        
-        //helm2
-        final Armor  armor10 = player.getArmorManager().getArmor(ArmorID.HELM2);
-        b = new Button(armor10.image.copy(),320,350,60,70);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   //if the armor is not unlocked, buy it, else equip it
-                   if(!playerReference.getArmorManager().isUnlocked(ArmorID.HELM2))
-                      ((GameClientScene)owningScene).sendBuyArmorPacket(ArmorID.HELM2); 
-                   else
-                      ((GameClientScene)owningScene).sendArmorAdjustPacket(ArmorID.HELM2); 
-                   
-                    //client side purchace check for error messages and info box text
-                   if(playerReference.getArmorManager().getArmor(ArmorID.HELM2).currencyCost <= playerReference.getCurrencyManager().getBalence())
-                   {
-                      infoTextBox.getText().setText("Click to equip this item"); 
-                   }
-                   else
-                   {
-                       //error message
-                   }
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(armor10,ArmorID.HELM2,455,160);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.addComponent(b);
-        //locked components
-        b = new Button(new Image("black.png"),255,310,230,130);  
-        b.getImage().setColor(new Color(1,1,1,.6f));
-        b.dontKillClick = true;
-        this.addComponent(b);
-        helm2LockedComponents.add(b);     
-        b = new Button(new Image("currency2.png"),325,320,20,20);
-        this.addComponent(b);
-        helm2LockedComponents.add(b);
-        label = new Label(Integer.toString(armor10.currencyCost),350,322);
-        label.getText().setScale(.9f);
-        this.addComponent(label);
-        helm2LockedComponents.add(label);
-        //selected component
-        this.helm2Selected = new Button(new Image("minimapFrame.png"),255,310,230,130);
-        this.helm2Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
-        this.helm2Selected.dontKillClick = true;
-        this.addComponent(helm2Selected);
-        
-
-        
-        //helm3
-        final Armor armor11 = player.getArmorManager().getArmor(ArmorID.HELM3);
-        b = new Button(armor11.image.copy(),560,350,60,70);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   //if the armor is not unlocked, buy it, else equip it
-                   if(!playerReference.getArmorManager().isUnlocked(ArmorID.HELM3))
-                      ((GameClientScene)owningScene).sendBuyArmorPacket(ArmorID.HELM3); 
-                   else
-                      ((GameClientScene)owningScene).sendArmorAdjustPacket(ArmorID.HELM3); 
-                   
-                    //client side purchace check for error messages and info box text
-                   if(playerReference.getArmorManager().getArmor(ArmorID.HELM3).currencyCost <= playerReference.getCurrencyManager().getBalence())
-                   {
-                      infoTextBox.getText().setText("Click to equip this item"); 
-                   }
-                   else
-                   {
-                       //error message
-                   }
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(armor11,ArmorID.HELM3,700,160);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.addComponent(b);
-        //locked components
-        b = new Button(new Image("black.png"),495,310,230,130); 
-        b.getImage().setColor(new Color(1,1,1,.6f));
-        b.dontKillClick = true;
-        this.addComponent(b);
-        helm3LockedComponents.add(b);      
-        b = new Button(new Image("currency2.png"),565,320,20,20);
-        this.addComponent(b);
-        helm3LockedComponents.add(b);
-        label = new Label(Integer.toString(armor11.currencyCost),590,322);
-        label.getText().setScale(.9f);
-        this.addComponent(label);
-        helm3LockedComponents.add(label);
-        //selected component
-        this.helm3Selected = new Button(new Image("minimapFrame.png"),495,310,230,130);
-        this.helm3Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
-        this.helm3Selected.dontKillClick = true;
-        this.addComponent(helm3Selected);
-        
-
-        
-        //helm4
-        final Armor armor12 = player.getArmorManager().getArmor(ArmorID.HELM4);
-        b = new Button(armor12.image.copy(),800,350,60,70);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   //if the armor is not unlocked, buy it, else equip it
-                   if(!playerReference.getArmorManager().isUnlocked(ArmorID.HELM4))
-                      ((GameClientScene)owningScene).sendBuyArmorPacket(ArmorID.HELM4); 
-                   else
-                      ((GameClientScene)owningScene).sendArmorAdjustPacket(ArmorID.HELM4); 
-                   
-                    //client side purchace check for error messages and info box text
-                   if(playerReference.getArmorManager().getArmor(ArmorID.HELM4).currencyCost <= playerReference.getCurrencyManager().getBalence())
-                   {
-                      infoTextBox.getText().setText("Click to equip this item"); 
-                   }
-                   else
-                   {
-                       //error message
-                   }
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(armor12,ArmorID.HELM4,935,160);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.addComponent(b);
-        //locked components
-        b = new Button(new Image("black.png"),735,310,230,130);
-        b.getImage().setColor(new Color(1,1,1,.6f));
-        b.dontKillClick = true;
-        this.addComponent(b);
-        helm4LockedComponents.add(b);
-        b = new Button(new Image("currency2.png"),805,320,20,20);
-        this.addComponent(b);
-        helm4LockedComponents.add(b);
-        label = new Label(Integer.toString(armor12.currencyCost),830,322);
-        label.getText().setScale(.9f);
-        this.addComponent(label);
-        helm4LockedComponents.add(label);
-        //selected component
-        this.helm4Selected = new Button(new Image("minimapFrame.png"),735,310,230,130);
-        this.helm4Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
-        this.helm4Selected.dontKillClick = true;
-        this.addComponent(helm4Selected);
-        
-
-        
-        
-        //================
-        // Chest Row
-        //================
-        
-        //chest1
-        final Armor armor13 = player.getArmorManager().getArmor(ArmorID.CHEST1);
-        b = new Button(armor13.image.copy(),80,200,60,70);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   //if the armor is not unlocked, buy it, else equip it
-                   if(!playerReference.getArmorManager().isUnlocked(ArmorID.CHEST1))
-                      ((GameClientScene)owningScene).sendBuyArmorPacket(ArmorID.CHEST1); 
-                   else
-                      ((GameClientScene)owningScene).sendArmorAdjustPacket(ArmorID.CHEST1); 
-                   
-                    //client side purchace check for error messages and info box text
-                   if(playerReference.getArmorManager().getArmor(ArmorID.CHEST1).currencyCost <= playerReference.getCurrencyManager().getBalence())
-                   {
-                      infoTextBox.getText().setText("Click to equip this item"); 
-                   }
-                   else
-                   {
-                       //error message
-                   }
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(armor13,ArmorID.CHEST1,220,80);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.addComponent(b);
-        //locked components
-        b = new Button(new Image("black.png"),20,150,230,130);
-        b.getImage().setColor(new Color(1,1,1,.6f));
-        b.dontKillClick = true;
-        this.addComponent(b);
-        chest1LockedComponents.add(b);   
-        b = new Button(new Image("currency2.png"),85,170,20,20);
-        this.addComponent(b);
-        chest1LockedComponents.add(b);
-        label = new Label(Integer.toString(armor13.currencyCost),110,172);
-        label.getText().setScale(.9f);
-        this.addComponent(label);
-        chest1LockedComponents.add(label);
-        //selected component
-        this.chest1Selected = new Button(new Image("minimapFrame.png"),20,150,230,130);
-        this.chest1Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
-        this.chest1Selected.dontKillClick = true;
-        this.addComponent(chest1Selected);
-
-
-        
-        //chest2
-        final Armor armor14 = player.getArmorManager().getArmor(ArmorID.CHEST2);
-        b = new Button(armor14.image.copy(),320,200,60,70);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   //if the armor is not unlocked, buy it, else equip it
-                   if(!playerReference.getArmorManager().isUnlocked(ArmorID.CHEST2))
-                      ((GameClientScene)owningScene).sendBuyArmorPacket(ArmorID.CHEST2); 
-                   else
-                      ((GameClientScene)owningScene).sendArmorAdjustPacket(ArmorID.CHEST2); 
-                   
-                     //client side purchace check for error messages and info box text
-                   if(playerReference.getArmorManager().getArmor(ArmorID.CHEST2).currencyCost <= playerReference.getCurrencyManager().getBalence())
-                   {
-                      infoTextBox.getText().setText("Click to equip this item"); 
-                   }
-                   else
-                   {
-                       //error message
-                   }
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(armor14,ArmorID.CHEST2,455,80);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.addComponent(b);
-        //locked components
-        b = new Button(new Image("black.png"),255,150,230,130);
-        b.getImage().setColor(new Color(1,1,1,.6f));
-        b.dontKillClick = true;
-        this.addComponent(b);
-        chest2LockedComponents.add(b);
-        b = new Button(new Image("currency2.png"),325,170,20,20);
-        this.addComponent(b);
-        chest2LockedComponents.add(b);
-        label = new Label(Integer.toString(armor14.currencyCost),350,172);
-        label.getText().setScale(.9f);
-        this.addComponent(label);
-        chest2LockedComponents.add(label);
-        //selected component
-        this.chest2Selected = new Button(new Image("minimapFrame.png"),255,150,230,130);
-        this.chest2Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
-        this.chest2Selected.dontKillClick = true;
-        this.addComponent(chest2Selected);
-
-        
-        //chest3
-        final Armor armor15 = player.getArmorManager().getArmor(ArmorID.CHEST3);
-        b = new Button(armor15.image.copy(),560,200,60,70);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   //if the armor is not unlocked, buy it, else equip it
-                   if(!playerReference.getArmorManager().isUnlocked(ArmorID.CHEST3))
-                      ((GameClientScene)owningScene).sendBuyArmorPacket(ArmorID.CHEST3); 
-                   else
-                      ((GameClientScene)owningScene).sendArmorAdjustPacket(ArmorID.CHEST3); 
-                   
-                      //client side purchace check for error messages and info box text
-                   if(playerReference.getArmorManager().getArmor(ArmorID.CHEST3).currencyCost <= playerReference.getCurrencyManager().getBalence())
-                   {
-                      infoTextBox.getText().setText("Click to equip this item"); 
-                   }
-                   else
-                   {
-                       //error message
-                   }
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(armor15,ArmorID.CHEST3,700,80);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.addComponent(b);
-        //locked components
-        b = new Button(new Image("black.png"),495,150,230,130);
-        b.getImage().setColor(new Color(1,1,1,.6f));
-        b.dontKillClick = true;
-        this.addComponent(b);
-        chest3LockedComponents.add(b);
-        b = new Button(new Image("currency2.png"),565,170,20,20);
-        this.addComponent(b);
-        chest3LockedComponents.add(b);
-        label = new Label(Integer.toString(armor15.currencyCost),590,172);
-        label.getText().setScale(.9f);
-        this.addComponent(label);
-        chest3LockedComponents.add(label);
-        //selected component
-        this.chest3Selected = new Button(new Image("minimapFrame.png"),495,150,230,130);
-        this.chest3Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
-        this.chest3Selected.dontKillClick = true;
-        this.addComponent(chest3Selected);
-        
-
-        
-        //chest4
-        final Armor armor16 = player.getArmorManager().getArmor(ArmorID.CHEST4);
-        b = new Button(armor16.image.copy(),800,200,60,70);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   //if the armor is not unlocked, buy it, else equip it
-                   if(!playerReference.getArmorManager().isUnlocked(ArmorID.CHEST4))
-                      ((GameClientScene)owningScene).sendBuyArmorPacket(ArmorID.CHEST4); 
-                   else
-                      ((GameClientScene)owningScene).sendArmorAdjustPacket(ArmorID.CHEST4);  
-                   
-                       //client side purchace check for error messages and info box text
-                   if(playerReference.getArmorManager().getArmor(ArmorID.CHEST4).currencyCost <= playerReference.getCurrencyManager().getBalence())
-                   {
-                      infoTextBox.getText().setText("Click to equip this item"); 
-                   }
-                   else
-                   {
-                       //error message
-                   }
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(armor16,ArmorID.CHEST4,935,80);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.addComponent(b);
-        //locked components
-        b = new Button(new Image("black.png"),735,150,230,130);
-        b.getImage().setColor(new Color(1,1,1,.6f));
-        b.dontKillClick = true;
-        this.addComponent(b);
-        chest4LockedComponents.add(b);
-        b = new Button(new Image("currency2.png"),805,170,20,20);
-        this.addComponent(b);
-        chest4LockedComponents.add(b);
-        label = new Label(Integer.toString(armor16.currencyCost),830,172);
-        label.getText().setScale(.9f);
-        this.addComponent(label);
-        chest4LockedComponents.add(label);
-        //selected component
-        this.chest4Selected = new Button(new Image("minimapFrame.png"),735,150,230,130);
-        this.chest4Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
-        this.chest4Selected.dontKillClick = true;
-        this.addComponent(chest4Selected);
-        
-
-        //================
-        // Boots Row
-        //================
-        
-        //boots1
-        final Armor armor17 = player.getArmorManager().getArmor(ArmorID.BOOTS1);
-        b = new Button(armor17.image.copy(),80,50,60,70);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                  //if the armor is not unlocked, buy it, else equip it
-                   if(!playerReference.getArmorManager().isUnlocked(ArmorID.BOOTS1))
-                      ((GameClientScene)owningScene).sendBuyArmorPacket(ArmorID.BOOTS1); 
-                   else
-                      ((GameClientScene)owningScene).sendArmorAdjustPacket(ArmorID.BOOTS1); 
-                   
-                    //client side purchace check for error messages and info box text
-                   if(playerReference.getArmorManager().getArmor(ArmorID.BOOTS1).currencyCost <= playerReference.getCurrencyManager().getBalence())
-                   {
-                      infoTextBox.getText().setText("Click to equip this item"); 
-                   }
-                   else
-                   {
-                       //error message
-                   }
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(armor17,ArmorID.BOOTS1,220,5);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.addComponent(b);
-        //locked components
-        b = new Button(new Image("black.png"),20,5,230,130);
-        b.getImage().setColor(new Color(1,1,1,.6f));
-        b.dontKillClick = true;
-        this.addComponent(b);
-        boots1LockedComponents.add(b);    
-        b = new Button(new Image("currency2.png"),85,20,20,20);
-        this.addComponent(b);
-        boots1LockedComponents.add(b);
-        label = new Label(Integer.toString(armor17.currencyCost),110,22);
-        label.getText().setScale(.9f);
-        this.addComponent(label);
-        boots1LockedComponents.add(label);
-        //selected component
-        this.boots1Selected = new Button(new Image("minimapFrame.png"),20,5,230,130);
-        this.boots1Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
-        this.boots1Selected.dontKillClick = true;
-        this.addComponent(boots1Selected);
-        
-        
-        //boots2
-        final Armor armor18 = player.getArmorManager().getArmor(ArmorID.BOOTS2);
-        b = new Button(armor18.image.copy(),320,50,60,70);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   //if the armor is not unlocked, buy it, else equip it
-                   if(!playerReference.getArmorManager().isUnlocked(ArmorID.BOOTS2))
-                      ((GameClientScene)owningScene).sendBuyArmorPacket(ArmorID.BOOTS2); 
-                   else
-                      ((GameClientScene)owningScene).sendArmorAdjustPacket(ArmorID.BOOTS2);
-                   
-                    //client side purchace check for error messages and info box text
-                   if(playerReference.getArmorManager().getArmor(ArmorID.BOOTS2).currencyCost <= playerReference.getCurrencyManager().getBalence())
-                   {
-                      infoTextBox.getText().setText("Click to equip this item"); 
-                   }
-                   else
-                   {
-                       //error message
-                   }
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(armor18,ArmorID.BOOTS2,450,5);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.addComponent(b);
-        //locked components
-        b = new Button(new Image("black.png"),255,5,230,130);
-        b.getImage().setColor(new Color(1,1,1,.6f));
-        b.dontKillClick = true;
-        this.addComponent(b);
-        boots2LockedComponents.add(b);
-        b = new Button(new Image("currency2.png"),325,20,20,20);
-        this.addComponent(b);
-        boots2LockedComponents.add(b);
-        label = new Label(Integer.toString(armor18.currencyCost),350,22);
-        label.getText().setScale(.9f);
-        this.addComponent(label);
-        boots2LockedComponents.add(label);
-        //selected component
-        this.boots2Selected = new Button(new Image("minimapFrame.png"),255,5,230,130);
-        this.boots2Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
-        this.boots2Selected.dontKillClick = true;
-        this.addComponent(boots2Selected);
-        
-
-        
-        //boots3
-        final Armor armor19 = player.getArmorManager().getArmor(ArmorID.BOOTS3);
-        b = new Button(armor19.image.copy(),560,50,60,70);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   //if the armor is not unlocked, buy it, else equip it
-                   if(!playerReference.getArmorManager().isUnlocked(ArmorID.BOOTS3))
-                      ((GameClientScene)owningScene).sendBuyArmorPacket(ArmorID.BOOTS3); 
-                   else
-                      ((GameClientScene)owningScene).sendArmorAdjustPacket(ArmorID.BOOTS3); 
-                   
-                     //client side purchace check for error messages and info box text
-                   if(playerReference.getArmorManager().getArmor(ArmorID.BOOTS3).currencyCost <= playerReference.getCurrencyManager().getBalence())
-                   {
-                      infoTextBox.getText().setText("Click to equip this item"); 
-                   }
-                   else
-                   {
-                       //error message
-                   }
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(armor19,ArmorID.BOOTS3,700,5);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.addComponent(b);
-        //locked components
-        b = new Button(new Image("black.png"),495,5,230,130);
-        b.getImage().setColor(new Color(1,1,1,.6f));
-        b.dontKillClick = true;
-        this.addComponent(b);
-        boots3LockedComponents.add(b); 
-        b = new Button(new Image("currency2.png"),565,20,20,20);
-        this.addComponent(b);
-        boots3LockedComponents.add(b);
-        label = new Label(Integer.toString(armor19.currencyCost),590,22);
-        label.getText().setScale(.9f);
-        this.addComponent(label);
-        boots3LockedComponents.add(label);
-        //selected component
-        this.boots3Selected = new Button(new Image("minimapFrame.png"),495,5,230,130);
-        this.boots3Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
-        this.boots3Selected.dontKillClick = true;
-        this.addComponent(boots3Selected);
-       
-        
-        //boots4
-        final Armor armo20 = player.getArmorManager().getArmor(ArmorID.BOOTS4);
-        b = new Button(armo20.image.copy(),800,50,60,70);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   //if the armor is not unlocked, buy it, else equip it
-                   if(!playerReference.getArmorManager().isUnlocked(ArmorID.BOOTS4))
-                      ((GameClientScene)owningScene).sendBuyArmorPacket(ArmorID.BOOTS4); 
-                   else
-                      ((GameClientScene)owningScene).sendArmorAdjustPacket(ArmorID.BOOTS4);  
-                   
-                        //client side purchace check for error messages and info box text
-                   if(playerReference.getArmorManager().getArmor(ArmorID.BOOTS4).currencyCost <= playerReference.getCurrencyManager().getBalence())
-                   {
-                      infoTextBox.getText().setText("Click to equip this item"); 
-                   }
-                   else
-                   {
-                       //error message
-                   }
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(armo20,ArmorID.BOOTS4,935,5);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.addComponent(b);
-        //locked components
-        b = new Button(new Image("black.png"),735,5,230,130);
-        b.getImage().setColor(new Color(1,1,1,.6f));
-        b.dontKillClick = true;
-        this.addComponent(b);
-        boots4LockedComponents.add(b);
-        b = new Button(new Image("currency2.png"),805,20,20,20);
-        this.addComponent(b);
-        boots4LockedComponents.add(b);
-        label = new Label(Integer.toString(armo20.currencyCost),830,22);
-        label.getText().setScale(.9f);
-        this.addComponent(label);
-        boots4LockedComponents.add(label);
-         //selected component
-        this.boots4Selected = new Button(new Image("minimapFrame.png"),735,5,230,130);
-        this.boots4Selected.getImage().setColor(new Color(1.5f,.3f,.3f));
-        this.boots4Selected.dontKillClick = true;
-        this.addComponent(boots4Selected);
-
-        
+        this.tabPane.addComponent(b, 0);
+        this.healingEffectivenessStatText= new Text(Byte.toString(stat4.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
+        this.healingEffectivenessStatText.setScale(1.2f);
+        this.tabPane.addComponent(new Label(this.healingEffectivenessStatText,750,250), 0);
         
         
     }
@@ -1274,345 +175,21 @@ public class ArmorMenu extends Window{
     {
         super.update();
         
-        //=========================
-        // Attachment Locked Components
-        //==========================
-        if(!ranged1LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.ATTACHMENT1))
-        {
-            for(WindowComponent wc: ranged1LockedComponents)
-                this.removeComponent(wc);
-            
-            ranged1LockedComponents.clear();
-        }
-        if(playerReference.getArmorManager().getAttachmentEquippedID() == ArmorID.ATTACHMENT1)
-        {
-            this.ranged1Selected.setHidden(false);
-        }
-        else
-        {
-            this.ranged1Selected.setHidden(true);
-        }
-        
-        if(!ranged2LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.ATTACHMENT2))
-        {
-            for(WindowComponent wc: ranged2LockedComponents)
-                this.removeComponent(wc);
-            
-            ranged2LockedComponents.clear();
-        }
-        if(playerReference.getArmorManager().getAttachmentEquippedID() == ArmorID.ATTACHMENT2)
-        {
-            this.ranged2Selected.setHidden(false);
-        }
-        else
-        {
-            this.ranged2Selected.setHidden(true);
-        }
-        
-        if(!ranged3LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.ATTACHMENT3))
-        {
-            for(WindowComponent wc: ranged3LockedComponents)
-                this.removeComponent(wc);
-            
-            ranged3LockedComponents.clear();
-        }
-        if(playerReference.getArmorManager().getAttachmentEquippedID() == ArmorID.ATTACHMENT3)
-        {
-            this.ranged3Selected.setHidden(false);
-        }
-        else
-        {
-            this.ranged3Selected.setHidden(true);
-        }
-        
-        if(!ranged4LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.ATTACHMENT4))
-        {
-            for(WindowComponent wc: ranged4LockedComponents)
-                this.removeComponent(wc);
-            
-            ranged4LockedComponents.clear();
-        }
-        if(playerReference.getArmorManager().getAttachmentEquippedID() == ArmorID.ATTACHMENT4)
-        {
-            this.ranged4Selected.setHidden(false);
-        }
-        else
-        {
-            this.ranged4Selected.setHidden(true);
-        }
-        
-        //=========================
-        // Modifier Locked Components
-        //==========================
-        if(!melee1LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.MODIFIER1))
-        {
-            for(WindowComponent wc: melee1LockedComponents)
-                this.removeComponent(wc);
-            
-            melee1LockedComponents.clear();
-        }
-        if(playerReference.getArmorManager().getModifierEquippedID()== ArmorID.MODIFIER1)
-        {
-            this.melee1Selected.setHidden(false);
-        }
-        else
-        {
-            this.melee1Selected.setHidden(true);
-        }
-        
-        if(!melee2LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.MODIFIER2))
-        {
-            for(WindowComponent wc: melee2LockedComponents)
-                this.removeComponent(wc);
-            
-            melee2LockedComponents.clear();
-        }
-        if(playerReference.getArmorManager().getModifierEquippedID()== ArmorID.MODIFIER2)
-        {
-            this.melee2Selected.setHidden(false);
-        }
-        else
-        {
-            this.melee2Selected.setHidden(true);
-        }
-        
-        if(!melee3LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.MODIFIER3))
-        {
-            for(WindowComponent wc: melee3LockedComponents)
-                this.removeComponent(wc);
-            
-            melee3LockedComponents.clear();
-        }
-        if(playerReference.getArmorManager().getModifierEquippedID()== ArmorID.MODIFIER3)
-        {
-            this.melee3Selected.setHidden(false);
-        }
-        else
-        {
-            this.melee3Selected.setHidden(true);
-        }
-        
-        if(!melee4LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.MODIFIER4))
-        {
-            for(WindowComponent wc: melee4LockedComponents)
-                this.removeComponent(wc);
-            
-            melee4LockedComponents.clear();
-        }
-        if(playerReference.getArmorManager().getModifierEquippedID()== ArmorID.MODIFIER4)
-        {
-            this.melee4Selected.setHidden(false);
-        }
-        else
-        {
-            this.melee4Selected.setHidden(true);
-        }
-        
-        
-        //=========================
-        // Helm Locked Components
-        //==========================
-        if(!helm1LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.HELM1))
-        {
-            for(WindowComponent wc: helm1LockedComponents)
-                this.removeComponent(wc);
-            
-            helm1LockedComponents.clear();
-        }
-        if(playerReference.getArmorManager().getHelmEquippedID()== ArmorID.HELM1)
-        {
-            this.helm1Selected.setHidden(false);
-        }
-        else
-        {
-            this.helm1Selected.setHidden(true);
-        }
-        
-        if(!helm2LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.HELM2))
-        {
-            for(WindowComponent wc: helm2LockedComponents)
-                this.removeComponent(wc);
-            
-            helm2LockedComponents.clear();
-        }
-        if(playerReference.getArmorManager().getHelmEquippedID()== ArmorID.HELM2)
-        {
-            this.helm2Selected.setHidden(false);
-        }
-        else
-        {
-            this.helm2Selected.setHidden(true);
-        }
-        
-        if(!helm3LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.HELM3))
-        {
-            for(WindowComponent wc: helm3LockedComponents)
-                this.removeComponent(wc);
-            
-            helm3LockedComponents.clear();
-        }
-        if(playerReference.getArmorManager().getHelmEquippedID()== ArmorID.HELM3)
-        {
-            this.helm3Selected.setHidden(false);
-        }
-        else
-        {
-            this.helm3Selected.setHidden(true);
-        }
-        
-        if(!helm4LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.HELM4))
-        {
-            for(WindowComponent wc: helm4LockedComponents)
-                this.removeComponent(wc);
-            
-            helm4LockedComponents.clear();
-        }
-        if(playerReference.getArmorManager().getHelmEquippedID()== ArmorID.HELM4)
-        {
-            this.helm4Selected.setHidden(false);
-        }
-        else
-        {
-            this.helm4Selected.setHidden(true);
-        }
-        
-        //=========================
-        // Chest Locked Components
-        //==========================
-        if(!chest1LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.CHEST1))
-        {
-            for(WindowComponent wc: chest1LockedComponents)
-                this.removeComponent(wc);
-            
-            chest1LockedComponents.clear();
-        }
-        if(playerReference.getArmorManager().getChestEquippedID()== ArmorID.CHEST1)
-        {
-            this.chest1Selected.setHidden(false);
-        }
-        else
-        {
-            this.chest1Selected.setHidden(true);
-        }
-        
-        if(!chest2LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.CHEST2))
-        {
-            for(WindowComponent wc: chest2LockedComponents)
-                this.removeComponent(wc);
-            
-            chest2LockedComponents.clear();
-        }
-        if(playerReference.getArmorManager().getChestEquippedID()== ArmorID.CHEST2)
-        {
-            this.chest2Selected.setHidden(false);
-        }
-        else
-        {
-            this.chest2Selected.setHidden(true);
-        }
-        
-        if(!chest3LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.CHEST3))
-        {
-            for(WindowComponent wc: chest3LockedComponents)
-                this.removeComponent(wc);
-            
-            chest3LockedComponents.clear();
-        }
-        if(playerReference.getArmorManager().getChestEquippedID()== ArmorID.CHEST3)
-        {
-            this.chest3Selected.setHidden(false);
-        }
-        else
-        {
-            this.chest3Selected.setHidden(true);
-        }
-        
-        if(!chest4LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.CHEST4))
-        {
-            for(WindowComponent wc: chest4LockedComponents)
-                this.removeComponent(wc);
-            
-            chest4LockedComponents.clear();
-        }
-        if(playerReference.getArmorManager().getChestEquippedID()== ArmorID.CHEST4)
-        {
-            this.chest4Selected.setHidden(false);
-        }
-        else
-        {
-            this.chest4Selected.setHidden(true);
-        }
-        
-        //=========================
-        // Boots Locked Components
-        //==========================
-        if(!boots1LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.BOOTS1))
-        {
-            for(WindowComponent wc: boots1LockedComponents)
-                this.removeComponent(wc);
-            
-            boots1LockedComponents.clear();
-        }
-        if(playerReference.getArmorManager().getBootsEquippedID()== ArmorID.BOOTS1)
-        {
-            this.boots1Selected.setHidden(false);
-        }
-        else
-        {
-            this.boots1Selected.setHidden(true);
-        }
-        
-        if(!boots2LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.BOOTS2))
-        {
-            for(WindowComponent wc: boots2LockedComponents)
-                this.removeComponent(wc);
-            
-            boots2LockedComponents.clear();
-        }
-        if(playerReference.getArmorManager().getBootsEquippedID()== ArmorID.BOOTS2)
-        {
-            this.boots2Selected.setHidden(false);
-        }
-        else
-        {
-            this.boots2Selected.setHidden(true);
-        }
-        
-        if(!boots3LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.BOOTS3))
-        {
-            for(WindowComponent wc: boots3LockedComponents)
-                this.removeComponent(wc);
-            
-            boots3LockedComponents.clear();
-        }
-        if(playerReference.getArmorManager().getBootsEquippedID()== ArmorID.BOOTS3)
-        {
-            this.boots3Selected.setHidden(false);
-        }
-        else
-        {
-            this.boots3Selected.setHidden(true);
-        }
-        
-        if(!boots4LockedComponents.isEmpty() && playerReference.getArmorManager().isUnlocked(ArmorID.BOOTS4))
-        {
-            for(WindowComponent wc: boots4LockedComponents)
-                this.removeComponent(wc);
-            
-            boots4LockedComponents.clear();
-        }
-        if(playerReference.getArmorManager().getBootsEquippedID()== ArmorID.BOOTS4)
-        {
-            this.boots4Selected.setHidden(false);
-        }
-        else
-        {
-            this.boots4Selected.setHidden(true);
-        }
-        
+        //update helm stat points
+        this.helmHealthStatText.setText(Byte.toString(this.playerReference.getArmorManager().helmHealthStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
+        this.helmDamageReductionStatText.setText(Byte.toString(this.playerReference.getArmorManager().helmDamageReductionStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
+        this.ccReductionStatText.setText(Byte.toString(this.playerReference.getArmorManager().ccReductionStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
+        this.healingEffectivenessStatText.setText(Byte.toString(this.playerReference.getArmorManager().healingEffectivenessStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
     }
     
-    private void openTooltip(Armor armor, ArmorID id, float x, float y)
+    
+    
+    
+    
+    
+    
+    
+    private void openTooltip( float x, float y, String name, Image image, String description)
     {
         //remove old components
         this.removeComponent(skillTooltipBackground);
@@ -1630,33 +207,19 @@ public class ArmorMenu extends Window{
         this.addComponent(skillTooltipBackground);
         
         //name
-        Text text = new Text(armor.name);
+        Text text = new Text(name);
         text.setScale(1.3f);
         skillTooltipName = new Label(text, x + 200 - text.getWidth()/2, y + 250);
         this.addComponent(skillTooltipName);
         
         //icon
-        skillTooltipIcon = new Button(armor.image.copy(),x + 25, y + 160,50,50);
+        skillTooltipIcon = new Button(image.copy(),x + 25, y + 160,50,50);
         this.addComponent(skillTooltipIcon);
         
         //description
-        text = new Text(armor.description);
+        text = new Text(description);
         skillTooltipTextBlock = new TextBlock(x + 85, y + 190, 300, text);
-        this.addComponent(skillTooltipTextBlock);
-        
-        if(!playerReference.getArmorManager().isUnlocked(id))
-        {
-            text = new Text("Click to purchase this item");
-            infoTextBox = new Label( text,x + 50, y + 20  );
-            this.addComponent(infoTextBox);
-        }
-        else
-        {
-            text = new Text("Click to equip this item");
-            infoTextBox = new Label( text,x + 50, y + 20 );
-            this.addComponent(infoTextBox);
-        }
-        
+        this.addComponent(skillTooltipTextBlock);    
         
     }
     
