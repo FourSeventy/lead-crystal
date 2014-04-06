@@ -75,6 +75,21 @@ public class LootSpewer extends Entity {
         drop.getBody().addForce(force);
                 
         this.getOwningScene().add(drop, Scene.Layer.MAIN); 
+        
+        // 10% chance for potion
+        if(r.nextFloat() <=.1f)
+        {
+             drop = new Potion();
+             
+             drop.setPosition(this.getPosition().x, this.getPosition().y);
+             sign = 1;
+            if (Math.random()<.5)
+                sign = -1;
+             force = new Vector2f( 500 + sign*(r.nextFloat()*1500), 2000 + r.nextFloat()*5000 );
+            drop.getBody().addForce(force);
+                
+        this.getOwningScene().add(drop, Scene.Layer.MAIN); 
+        }
     }
     
 }
