@@ -2,6 +2,7 @@ package com.silvergobletgames.leadcrystal.menus;
 
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.items.ArmorManager;
+import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorModifier;
 import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat;
 import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
 import com.silvergobletgames.leadcrystal.skills.Skill;
@@ -73,9 +74,9 @@ public class ArmorMenu extends Window{
         this.tabPane.addTab("Boots");
         this.addComponent(tabPane);
         
-        //=================
-        // Helm Components
-        //=================
+        //======================
+        // Helm Stat Components
+        //======================
         this.tabPane.addComponent(new Button(new Text("Upgrades:"), 600, 400), 0);
         
         final ArmorStat stat = this.playerReference.getArmorManager().helmHealthStat;
@@ -160,7 +161,7 @@ public class ArmorMenu extends Window{
         
         ArmorStat stat4 = this.playerReference.getArmorManager().healingEffectivenessStat;
         b = new Button(stat4.image.copy(), 725, 125, 100, 100);
-         b.addActionListener(new ActionListener(){
+        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
            {
@@ -184,6 +185,186 @@ public class ArmorMenu extends Window{
         this.healingEffectivenessStatText.setScale(1.2f);
         this.tabPane.addComponent(new Label(this.healingEffectivenessStatText,750,125), 0);
         
+        //=========================
+        // Helm Modifier Components
+        //=========================
+        
+        this.tabPane.addComponent(new Button(new Text("Modifiers:"), 200, 400), 0);
+        
+        ArmorModifier modifier = this.playerReference.getArmorManager().seeEnemyHealthModifier;      
+        b = new Button(modifier.image.copy(),200,225,100,100);
+        b.addActionListener(new ActionListener(){     
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                 //do stuff
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(400,450,modifier.name,modifier.image,modifier.description);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.tabPane.addComponent(b,0);
+        
+        ArmorModifier modifier2 = this.playerReference.getArmorManager().doubleGoldFindModifier;
+        b = new Button(modifier2.image.copy(),325,225,100,100);
+        b.addActionListener(new ActionListener(){     
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                 //do stuff
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(400,450,modifier2.name,modifier2.image,modifier2.description);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.tabPane.addComponent(b,0);
+        
+        ArmorModifier modifier3 = this.playerReference.getArmorManager().revealSecretAreasModifier;
+        b = new Button(modifier3.image.copy(),200,100,100,100);
+        b.addActionListener(new ActionListener(){     
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                 //do stuff
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(400,450,modifier3.name,modifier3.image,modifier3.description);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.tabPane.addComponent(b,0);
+        
+        ArmorModifier modifier4 = this.playerReference.getArmorManager().seeSecondaryObjectivesModifier;
+        b = new Button(modifier4.image.copy(),325,100,100,100);
+        b.addActionListener(new ActionListener(){     
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                 //do stuff
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(400,450,modifier4.name,modifier4.image,modifier4.description);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.tabPane.addComponent(b,0);
+        
+        
+        //=========================
+        //Body Modifier Components
+        //=========================
+        
+        this.tabPane.addComponent(new Button(new Text("Modifiers:"), 200, 400), 1);
+        
+        ArmorModifier modifier5 = this.playerReference.getArmorManager().doubleCCResistModifier;      
+        b = new Button(modifier5.image.copy(),200,225,100,100);
+        b.addActionListener(new ActionListener(){     
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                 //do stuff
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(400,450,modifier5.name,modifier5.image,modifier5.description);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.tabPane.addComponent(b,1);
+        
+        ArmorModifier modifier6 = this.playerReference.getArmorManager().doubleHealingModifier;
+        b = new Button(modifier6.image.copy(),325,225,100,100);
+        b.addActionListener(new ActionListener(){     
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                 //do stuff
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(400,450,modifier6.name,modifier6.image,modifier6.description);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.tabPane.addComponent(b,1);
+        
+        ArmorModifier modifier7 = this.playerReference.getArmorManager().tenPotionsModifier;
+        b = new Button(modifier7.image.copy(),200,100,100,100);
+        b.addActionListener(new ActionListener(){     
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                 //do stuff
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(400,450,modifier7.name,modifier7.image,modifier7.description);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.tabPane.addComponent(b,1);
+        
+        ArmorModifier modifier8 = this.playerReference.getArmorManager().chanceAbsorbModifier;
+        b = new Button(modifier8.image.copy(),325,100,100,100);
+        b.addActionListener(new ActionListener(){     
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                 //do stuff
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(400,450,modifier8.name,modifier8.image,modifier8.description);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.tabPane.addComponent(b,1);
         
         //=================
         // Body Components

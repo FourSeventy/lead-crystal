@@ -41,12 +41,20 @@ public class ArmorManager {
     public ArmorStat healingEffectivenessStat;
     
     //body
+    public ArmorModifier doubleCCResistModifier;
+    public ArmorModifier doubleHealingModifier;
+    public ArmorModifier tenPotionsModifier;
+    public ArmorModifier chanceAbsorbModifier;
     public ArmorStat bodyHealthStat;
     public ArmorStat bodyDamageReductionStat;
     public ArmorStat lifeLeech;
     public ArmorStat lifeRegen;
     
     //weapon
+    public ArmorModifier concecutiveHitsModifier;
+    public ArmorModifier meleeAttackDamageModifier;
+    public ArmorModifier rangedAttackSlowModifier;
+    public ArmorModifier criticalHitDamageModifier;
     public ArmorStat weaponDamageStat;
     public ArmorStat weaponAttackSpeedStat;
     public ArmorStat critChanceStat;
@@ -69,16 +77,16 @@ public class ArmorManager {
         //================
         // Helm Modifiers
         //================
-        this.seeEnemyHealthModifier = new ArmorModifier(ArmorModifierID.ENEMY_HEALTH, new Image("blank.png"), "See Enemy Health", 150);
+        this.seeEnemyHealthModifier = new ArmorModifier(ArmorModifierID.ENEMY_HEALTH, new Image("healthStat.jpg"), "See Enemy Health");
         this.armorModifiers.put(this.seeEnemyHealthModifier.id,this.seeEnemyHealthModifier);
         
-        this.doubleGoldFindModifier = new ArmorModifier(ArmorModifierID.GOLD_FIND, new Image("blank.png"), "Double Gold Find", 300);
+        this.doubleGoldFindModifier = new ArmorModifier(ArmorModifierID.GOLD_FIND, new Image("healthStat.jpg"), "Double Gold Find");
         this.armorModifiers.put(this.doubleGoldFindModifier.id,this.doubleGoldFindModifier);
        
-        this.seeSecondaryObjectivesModifier = new ArmorModifier(ArmorModifierID.SECONDARY_OBJECTIVES, new Image("blank.png"), "See Secondary Objectives", 500);
+        this.seeSecondaryObjectivesModifier = new ArmorModifier(ArmorModifierID.SECONDARY_OBJECTIVES, new Image("healthStat.jpg"), "See Secondary Objectives");
         this.armorModifiers.put(this.seeSecondaryObjectivesModifier.id,this.seeSecondaryObjectivesModifier);
         
-        this.revealSecretAreasModifier = new ArmorModifier(ArmorModifierID.REVEAL_SECRETS, new Image("blank.png"), "Reveal Secret Objectives", 1000);
+        this.revealSecretAreasModifier = new ArmorModifier(ArmorModifierID.REVEAL_SECRETS, new Image("healthStat.jpg"), "Reveal Secret Objectives");
         this.armorModifiers.put(this.revealSecretAreasModifier.id,this.revealSecretAreasModifier);
        
         //===============
@@ -105,6 +113,22 @@ public class ArmorManager {
         this.healingEffectivenessStat.description = "+5% healing effectiveness per point.";
         this.healingEffectivenessStat.setAddPointAction(()->{this.getPlayerReference().getCombatData().healingModifier.adjustBase(.05f);}); 
         this.armorStats.put(this.healingEffectivenessStat.id,this.healingEffectivenessStat);
+        
+        //================
+        // Body Modifiers
+        //================
+        this.doubleCCResistModifier = new ArmorModifier(ArmorModifierID.DOUBLE_CC, new Image("healthStat.jpg"), "Double CC Resist");
+        this.armorModifiers.put(this.doubleCCResistModifier.id,this.doubleCCResistModifier);
+        
+        this.doubleHealingModifier = new ArmorModifier(ArmorModifierID.DOUBLE_HEALING, new Image("healthStat.jpg"), "Double Healing Effectiveness");
+        this.armorModifiers.put(this.doubleHealingModifier.id,this.doubleHealingModifier);
+       
+        this.tenPotionsModifier = new ArmorModifier(ArmorModifierID.TEN_POTIONS, new Image("healthStat.jpg"), "Additional Potions");
+        this.armorModifiers.put(this.tenPotionsModifier.id,this.tenPotionsModifier);
+        
+        this.chanceAbsorbModifier = new ArmorModifier(ArmorModifierID.CHANCE_ABSORB, new Image("healthStat.jpg"), "Chance to Absorb Projectiles");
+        this.armorModifiers.put(this.chanceAbsorbModifier.id,this.chanceAbsorbModifier);
+        
         
         //===============
         // Body Stats
@@ -207,13 +231,12 @@ public class ArmorManager {
     
     public static class ArmorModifier
     {
-        protected ArmorModifierID id;
-        protected Image image;
-        protected String name;
-        protected String description;
-        protected int cost;
-        protected boolean unlocked;
-        protected boolean equipped;
+        public ArmorModifierID id;
+        public Image image;
+        public String name;
+        public String description;
+        public boolean unlocked;
+        public boolean equipped;
         private ArmorAction equipAction;
         private ArmorAction unequipAction;
         
@@ -227,6 +250,9 @@ public class ArmorManager {
             //helm modifiers
             ENEMY_HEALTH, GOLD_FIND, SECONDARY_OBJECTIVES, REVEAL_SECRETS,
             //body modifiers
+            DOUBLE_CC, DOUBLE_HEALING, TEN_POTIONS, CHANCE_ABSORB,
+            //weapon modifiers
+            CONCECUTIVE_HITS,MELEE_ATTACK_DMG,RANGED_ATTACK_SLOW,CRIT_DMG,
         }
         
         
@@ -241,12 +267,11 @@ public class ArmorManager {
          * @param name
          * @param cost 
          */
-        public ArmorModifier(ArmorModifierID id,Image image, String name, int cost)
+        public ArmorModifier(ArmorModifierID id,Image image, String name)
         {
             this.id = id;
             this.image = image;
             this.name = name;
-            this.cost = cost;
             
             this.description = "";
             this.unlocked= false;
