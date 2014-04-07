@@ -50,7 +50,13 @@ public class ArmorManager {
     public ArmorStat weaponDamageStat;
     public ArmorStat weaponAttackSpeedStat;
     public ArmorStat critChanceStat;
-    public ArmorStat critDamageStat;
+    public ArmorStat critDamageStat; 
+    
+    //boots
+    public ArmorStat bootsDamageStat;
+    public ArmorStat bootsAttackSpeedStat;
+    public ArmorStat moveSpeedStat;
+    public ArmorStat jumpHeightStat;
     
 
     
@@ -144,10 +150,37 @@ public class ArmorManager {
         this.critChanceStat.setAddPointAction(()->{this.getPlayerReference().getCombatData().critChance.adjustBase(.03f);}); 
         this.armorStats.put(this.critChanceStat.id,this.critChanceStat);
         
-        this.critDamageStat = new ArmorStat(ArmorStat.ArmorStatID.CRIT_CHANCE, new Image("critDamageStat.jpg"), "Critical Hit Damage", 75);
+        this.critDamageStat = new ArmorStat(ArmorStat.ArmorStatID.CRIT_DAMAGE, new Image("critDamageStat.jpg"), "Critical Hit Damage", 75);
         this.critDamageStat.description = "+10% crit damage per point";
         this.critDamageStat.setAddPointAction(()->{this.getPlayerReference().getCombatData().critModifier.adjustBase(.10f);}); 
         this.armorStats.put(this.critDamageStat.id,this.critDamageStat);
+        
+        
+        
+        
+        //==============
+        // Boots Stats
+        //==============
+        
+        this.bootsDamageStat = new ArmorStat(ArmorStat.ArmorStatID.BOOTS_DAMAGE, new Image("damageStat.jpg"), "Damage", 50);
+        this.bootsDamageStat.description = "+2% damage per point";
+        this.bootsDamageStat.setAddPointAction(()->{this.getPlayerReference().getCombatData().baseDamage.adjustPercentModifier(.02f);}); 
+        this.armorStats.put(this.bootsDamageStat.id,this.bootsDamageStat);
+        
+        this.bootsAttackSpeedStat = new ArmorStat(ArmorStat.ArmorStatID.BOOTS_ATTACK_SPEED, new Image("attackSpeedStat.jpg"), "Attack Speed", 50);
+        this.bootsAttackSpeedStat.description = "+2% attack speed per point";
+        this.bootsAttackSpeedStat.setAddPointAction(()->{this.getPlayerReference().getCombatData().cooldownModifier.adjustBase(-.20f);}); 
+        this.armorStats.put(this.bootsAttackSpeedStat.id,this.bootsAttackSpeedStat);
+        
+        this.moveSpeedStat = new ArmorStat(ArmorStat.ArmorStatID.MOVE_SPEED, new Image("moveSpeedStat.jpg"), "Move Speed", 75);
+        this.moveSpeedStat.description = "+5% move speed per point";
+        this.moveSpeedStat.setAddPointAction(()->{this.getPlayerReference().getCombatData().xVelocity.adjustPercentModifier(.05f);}); 
+        this.armorStats.put(this.moveSpeedStat.id,this.moveSpeedStat);
+        
+        this.jumpHeightStat = new ArmorStat(ArmorStat.ArmorStatID.JUMP_HEIGHT, new Image("jumpHeightStat.jpg"), "Jump Height", 75);
+        this.jumpHeightStat.description = "+5% move speed per point";
+        this.jumpHeightStat.setAddPointAction(()->{System.out.println("jump height");}); 
+        this.armorStats.put(this.jumpHeightStat.id,this.jumpHeightStat);
     }
     
     
@@ -281,6 +314,8 @@ public class ArmorManager {
             BODY_HEALTH,BODY_DAMAGE_REDUCTION,LIFE_LEECH,LIFE_REGEN,
             //weapon
             WEAPON_DAMAGE, WEAPON_ATTACK_SPEED,CRIT_CHANCE,CRIT_DAMAGE,
+            //boots
+            BOOTS_DAMAGE,BOOTS_ATTACK_SPEED,MOVE_SPEED, JUMP_HEIGHT
             
         }
         
@@ -414,6 +449,10 @@ public class ArmorManager {
          renderData.data.add(9,weaponAttackSpeedStat.dumpRenderData());
          renderData.data.add(10,critChanceStat.dumpRenderData());
          renderData.data.add(11,critDamageStat.dumpRenderData());        
+         renderData.data.add(12,bootsDamageStat.dumpRenderData()); 
+         renderData.data.add(13,bootsAttackSpeedStat.dumpRenderData()); 
+         renderData.data.add(14,moveSpeedStat.dumpRenderData()); 
+         renderData.data.add(15,jumpHeightStat.dumpRenderData()); 
 
          return renderData;        
      }
@@ -511,6 +550,35 @@ public class ArmorManager {
             changeList.add(renderChanges);
             changeMap += 1L <<11;
         }
+        
+        //12
+        renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(12), (RenderData)newData.data.get(12));
+        if(renderChanges != null)
+        {
+            changeList.add(renderChanges);
+            changeMap += 1L <<12;
+        }
+        //13
+        renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(13), (RenderData)newData.data.get(13));
+        if(renderChanges != null)
+        {
+            changeList.add(renderChanges);
+            changeMap += 1L <<13;
+        }
+        //14
+        renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(14), (RenderData)newData.data.get(14));
+        if(renderChanges != null)
+        {
+            changeList.add(renderChanges);
+            changeMap += 1L <<14;
+        }
+        //15
+        renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(15), (RenderData)newData.data.get(15));
+        if(renderChanges != null)
+        {
+            changeList.add(renderChanges);
+            changeMap += 1L <<15;
+        }
                        
          
          changes.fields = changeMap;
@@ -530,7 +598,7 @@ public class ArmorManager {
             ArrayList rawData = new ArrayList();
             rawData.addAll(Arrays.asList(renderDataChanges.data));           
             ArrayList changeData = new ArrayList();
-            for(byte i = 0; i <10; i ++)
+            for(byte i = 0; i <16; i ++)
             {
                 // The bit was set
                 if ((fieldMap & (1L << i)) != 0)
@@ -593,6 +661,22 @@ public class ArmorManager {
                 this.critDamageStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(11));
             }
            
+            if(changeData.get(12) != null)
+            {
+                this.bootsDamageStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(12));
+            }
+            if(changeData.get(13) != null)
+            {
+                this.bootsAttackSpeedStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(13));
+            }
+            if(changeData.get(14) != null)
+            {
+                this.moveSpeedStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(14));
+            }
+            if(changeData.get(15) != null)
+            {
+                this.jumpHeightStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(15));
+            }
                      
 
      }

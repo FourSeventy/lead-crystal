@@ -46,6 +46,16 @@ public class ArmorMenu extends Window{
     private Text lifeLeechText;
     private Text lifeRegenText;
     
+    private Text weaponDamageStatText;
+    private Text weaponAttackSpeedStatText;
+    private Text critChanceStatText;
+    private Text critDamageStatText;
+    
+    private Text bootsDamageStatText;
+    private Text bootsAttackSpeedStatText;
+    private Text moveSpeedStatText;
+    private Text jumpHeightStatText;
+    
   
     
     
@@ -66,7 +76,7 @@ public class ArmorMenu extends Window{
         //=================
         // Helm Components
         //=================
-        this.tabPane.addComponent(new Button(new Text("Upgrades:"), 600, 500), 0);
+        this.tabPane.addComponent(new Button(new Text("Upgrades:"), 600, 400), 0);
         
         final ArmorStat stat = this.playerReference.getArmorManager().helmHealthStat;
         Button b = new Button(stat.image.copy(), 600, 250, 100, 100);
@@ -178,7 +188,7 @@ public class ArmorMenu extends Window{
         //=================
         // Body Components
         //=================
-        this.tabPane.addComponent(new Button(new Text("Upgrades:"), 600, 500), 1);
+        this.tabPane.addComponent(new Button(new Text("Upgrades:"), 600, 400), 1);
         
         final ArmorStat stat5 = this.playerReference.getArmorManager().bodyHealthStat;
         b = new Button(stat5.image.copy(), 600, 250, 100, 100);
@@ -285,6 +295,225 @@ public class ArmorMenu extends Window{
         this.lifeRegenText.setScale(1.2f);
         this.tabPane.addComponent(new Label(this.lifeRegenText,750,125), 1);
         
+        //===================
+        // Weapon Components
+        //===================
+        this.tabPane.addComponent(new Button(new Text("Upgrades:"), 600, 400), 2);
+        
+        final ArmorStat stat9 = this.playerReference.getArmorManager().weaponDamageStat;
+        b = new Button(stat9.image.copy(), 600, 250, 100, 100);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat9.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat9.name,stat9.image,stat9.description);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.tabPane.addComponent(b, 2);
+        this.weaponDamageStatText = new Text(Byte.toString(stat9.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
+        this.weaponDamageStatText.setScale(1.2f);
+        this.tabPane.addComponent(new Label(this.weaponDamageStatText,625,250), 2);
+        
+        final ArmorStat stat10 = this.playerReference.getArmorManager().weaponAttackSpeedStat;
+        b = new Button(stat10.image.copy(), 725, 250, 100, 100);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat10.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat10.name,stat10.image,stat10.description);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           } 
+       });
+        this.tabPane.addComponent(b, 2);
+        this.weaponAttackSpeedStatText = new Text(Byte.toString(stat10.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
+        this.weaponAttackSpeedStatText.setScale(1.2f);
+        this.tabPane.addComponent(new Label(this.weaponAttackSpeedStatText,750,250), 2);
+        
+        ArmorStat stat11 = this.playerReference.getArmorManager().critChanceStat;
+        b = new Button(stat11.image.copy(), 600, 125, 100, 100);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat11.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat11.name,stat11.image,stat11.description);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.tabPane.addComponent(b, 2);
+        this.critChanceStatText = new Text(Byte.toString(stat11.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
+        this.critChanceStatText.setScale(1.2f);
+        this.tabPane.addComponent(new Label(this.critChanceStatText,625,125), 2);
+        
+        ArmorStat stat12 = this.playerReference.getArmorManager().critDamageStat;
+        b = new Button(stat12.image.copy(), 725, 125, 100, 100);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat12.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat12.name,stat12.image,stat12.description);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.tabPane.addComponent(b, 2);
+        this.critDamageStatText= new Text(Byte.toString(stat12.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
+        this.critDamageStatText.setScale(1.2f);
+        this.tabPane.addComponent(new Label(this.critDamageStatText,750,125), 2);
+        
+        //===================
+        // Boots Components
+        //===================
+        this.tabPane.addComponent(new Button(new Text("Upgrades:"), 600, 400), 3);
+        
+        final ArmorStat stat13 = this.playerReference.getArmorManager().bootsDamageStat;
+        b = new Button(stat13.image.copy(), 600, 250, 100, 100);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat13.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat13.name,stat13.image,stat13.description);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.tabPane.addComponent(b, 3);
+        this.bootsDamageStatText = new Text(Byte.toString(stat13.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
+        this.bootsDamageStatText.setScale(1.2f);
+        this.tabPane.addComponent(new Label(this.bootsDamageStatText,625,250), 3);
+        
+        final ArmorStat stat14 = this.playerReference.getArmorManager().bootsAttackSpeedStat;
+        b = new Button(stat14.image.copy(), 725, 250, 100, 100);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat14.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat14.name,stat14.image,stat14.description);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           } 
+       });
+        this.tabPane.addComponent(b, 3);
+        this.bootsAttackSpeedStatText = new Text(Byte.toString(stat14.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
+        this.bootsAttackSpeedStatText.setScale(1.2f);
+        this.tabPane.addComponent(new Label(this.bootsAttackSpeedStatText,750,250), 3);
+        
+        ArmorStat stat15 = this.playerReference.getArmorManager().moveSpeedStat;
+        b = new Button(stat15.image.copy(), 600, 125, 100, 100);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat15.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat15.name,stat15.image,stat15.description);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.tabPane.addComponent(b, 3);
+        this.moveSpeedStatText = new Text(Byte.toString(stat15.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
+        this.moveSpeedStatText.setScale(1.2f);
+        this.tabPane.addComponent(new Label(this.moveSpeedStatText,625,125), 3);
+        
+        ArmorStat stat16 = this.playerReference.getArmorManager().jumpHeightStat;
+        b = new Button(stat16.image.copy(), 725, 125, 100, 100);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat16.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat16.name,stat16.image,stat16.description);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.tabPane.addComponent(b, 3);
+        this.jumpHeightStatText= new Text(Byte.toString(stat16.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
+        this.jumpHeightStatText.setScale(1.2f);
+        this.tabPane.addComponent(new Label(this.jumpHeightStatText,750,125), 3);
     }
     
     @Override
@@ -304,7 +533,17 @@ public class ArmorMenu extends Window{
         this.lifeLeechText.setText(Byte.toString(this.playerReference.getArmorManager().lifeLeech.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
         this.lifeRegenText.setText(Byte.toString(this.playerReference.getArmorManager().lifeRegen.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
    
-    
+        //weapon
+        this.weaponDamageStatText.setText(Byte.toString(this.playerReference.getArmorManager().weaponDamageStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
+        this.weaponAttackSpeedStatText.setText(Byte.toString(this.playerReference.getArmorManager().weaponAttackSpeedStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
+        this.critChanceStatText.setText(Byte.toString(this.playerReference.getArmorManager().critChanceStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
+        this.critDamageStatText.setText(Byte.toString(this.playerReference.getArmorManager().critDamageStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));    
+
+        //boots
+        this.bootsDamageStatText.setText(Byte.toString(this.playerReference.getArmorManager().bootsDamageStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
+        this.bootsAttackSpeedStatText.setText(Byte.toString(this.playerReference.getArmorManager().bootsAttackSpeedStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
+        this.moveSpeedStatText.setText(Byte.toString(this.playerReference.getArmorManager().moveSpeedStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
+        this.jumpHeightStatText.setText(Byte.toString(this.playerReference.getArmorManager().jumpHeightStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));    
 
     
     }
