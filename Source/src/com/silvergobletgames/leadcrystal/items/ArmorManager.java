@@ -155,6 +155,22 @@ public class ArmorManager {
         this.lifeRegen.setAddPointAction(()->{System.out.println("health regen up");}); 
         this.armorStats.put(this.lifeRegen.id,this.lifeRegen);
         
+        //=================
+        // Weapon Modifiers
+        //=================
+        this.concecutiveHitsModifier = new ArmorModifier(ArmorModifierID.CONCECUTIVE_HITS, new Image("healthStat.jpg"), "Concecutive Hits Bonus");
+        this.armorModifiers.put(this.concecutiveHitsModifier.id,this.concecutiveHitsModifier);
+        
+        this.meleeAttackDamageModifier = new ArmorModifier(ArmorModifierID.MELEE_ATTACK_DMG, new Image("healthStat.jpg"), "Melee Damage Increase");
+        this.armorModifiers.put(this.meleeAttackDamageModifier.id,this.meleeAttackDamageModifier);
+       
+        this.rangedAttackSlowModifier = new ArmorModifier(ArmorModifierID.TEN_POTIONS, new Image("healthStat.jpg"), "Ranged Attack Slow");
+        this.armorModifiers.put(this.rangedAttackSlowModifier.id,this.rangedAttackSlowModifier);
+        
+        this.criticalHitDamageModifier = new ArmorModifier(ArmorModifierID.CHANCE_ABSORB, new Image("healthStat.jpg"), "Critical Hit Damage");
+        this.armorModifiers.put(this.criticalHitDamageModifier.id,this.criticalHitDamageModifier);
+        
+
         
         //==============
         // Weapon Stats
@@ -478,6 +494,7 @@ public class ArmorManager {
          renderData.data.add(13,bootsAttackSpeedStat.dumpRenderData()); 
          renderData.data.add(14,moveSpeedStat.dumpRenderData()); 
          renderData.data.add(15,jumpHeightStat.dumpRenderData()); 
+         
 
          return renderData;        
      }

@@ -366,9 +366,9 @@ public class ArmorMenu extends Window{
        });
         this.tabPane.addComponent(b,1);
         
-        //=================
-        // Body Components
-        //=================
+        //======================
+        // Body Stat Components
+        //======================
         this.tabPane.addComponent(new Button(new Text("Upgrades:"), 600, 400), 1);
         
         final ArmorStat stat5 = this.playerReference.getArmorManager().bodyHealthStat;
@@ -476,9 +476,99 @@ public class ArmorMenu extends Window{
         this.lifeRegenText.setScale(1.2f);
         this.tabPane.addComponent(new Label(this.lifeRegenText,750,125), 1);
         
-        //===================
-        // Weapon Components
-        //===================
+        //============================
+        // Weapon Modifier Components
+        //============================
+        
+        this.tabPane.addComponent(new Button(new Text("Modifiers:"), 200, 400), 2);
+        
+        ArmorModifier modifier9 = this.playerReference.getArmorManager().concecutiveHitsModifier;      
+        b = new Button(modifier9.image.copy(),200,225,100,100);
+        b.addActionListener(new ActionListener(){     
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                 //do stuff
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(400,450,modifier9.name,modifier9.image,modifier9.description);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.tabPane.addComponent(b,2);
+        
+        ArmorModifier modifier10 = this.playerReference.getArmorManager().meleeAttackDamageModifier;
+        b = new Button(modifier10.image.copy(),325,225,100,100);
+        b.addActionListener(new ActionListener(){     
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                 //do stuff
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(400,450,modifier10.name,modifier10.image,modifier10.description);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.tabPane.addComponent(b,2);
+        
+        ArmorModifier modifier11 = this.playerReference.getArmorManager().rangedAttackSlowModifier;
+        b = new Button(modifier11.image.copy(),200,100,100,100);
+        b.addActionListener(new ActionListener(){     
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                 //do stuff
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(400,450,modifier11.name,modifier11.image,modifier11.description);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.tabPane.addComponent(b,2);
+        
+        ArmorModifier modifier12 = this.playerReference.getArmorManager().criticalHitDamageModifier;
+        b = new Button(modifier12.image.copy(),325,100,100,100);
+        b.addActionListener(new ActionListener(){     
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                 //do stuff
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(400,450,modifier12.name,modifier12.image,modifier12.description);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.tabPane.addComponent(b,2);
+        
+        //========================
+        // Weapon Stat Components
+        //========================
         this.tabPane.addComponent(new Button(new Text("Upgrades:"), 600, 400), 2);
         
         final ArmorStat stat9 = this.playerReference.getArmorManager().weaponDamageStat;
