@@ -494,7 +494,7 @@ public class GameServerScene extends Scene
                     //test
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_M))
                     {
-                       this.players.get(0).die();
+                       this.players.get(0).getArmorManager().seeEnemyHealthModifier.unlocked = true;
                     }
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_N))
                     {

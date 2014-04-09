@@ -61,6 +61,10 @@ public class ArmorManager {
     public ArmorStat critDamageStat; 
     
     //boots
+    public ArmorModifier ccBonusModifier;
+    public ArmorModifier doubleJumpModifier;
+    public ArmorModifier jetpackModifier;
+    public ArmorModifier teleportModifier;
     public ArmorStat bootsDamageStat;
     public ArmorStat bootsAttackSpeedStat;
     public ArmorStat moveSpeedStat;
@@ -79,7 +83,7 @@ public class ArmorManager {
         //================
         this.seeEnemyHealthModifier = new ArmorModifier(ArmorModifierID.ENEMY_HEALTH, new Image("healthStat.jpg"), "See Enemy Health");
         this.armorModifiers.put(this.seeEnemyHealthModifier.id,this.seeEnemyHealthModifier);
-        
+       
         this.doubleGoldFindModifier = new ArmorModifier(ArmorModifierID.GOLD_FIND, new Image("healthStat.jpg"), "Double Gold Find");
         this.armorModifiers.put(this.doubleGoldFindModifier.id,this.doubleGoldFindModifier);
        
@@ -113,6 +117,7 @@ public class ArmorManager {
         this.healingEffectivenessStat.description = "+5% healing effectiveness per point.";
         this.healingEffectivenessStat.setAddPointAction(()->{this.getPlayerReference().getCombatData().healingModifier.adjustBase(.05f);}); 
         this.armorStats.put(this.healingEffectivenessStat.id,this.healingEffectivenessStat);
+       
         
         //================
         // Body Modifiers
@@ -196,7 +201,21 @@ public class ArmorManager {
         this.armorStats.put(this.critDamageStat.id,this.critDamageStat);
         
         
+        //================
+        // Boots Modfiers
+        //================
         
+        this.ccBonusModifier = new ArmorModifier(ArmorModifierID.CC_REDUCTION, new Image("healthStat.jpg"), "+15% CC Reduction");
+        this.armorModifiers.put(this.ccBonusModifier.id,this.ccBonusModifier);
+        
+        this.doubleJumpModifier = new ArmorModifier(ArmorModifierID.DOUBLE_JUMP, new Image("healthStat.jpg"), "Double Jump");
+        this.armorModifiers.put(this.doubleJumpModifier.id,this.doubleJumpModifier);
+       
+        this.jetpackModifier = new ArmorModifier(ArmorModifierID.JETPACK, new Image("healthStat.jpg"), "Jetpack");
+        this.armorModifiers.put(this.jetpackModifier.id,this.jetpackModifier);
+        
+        this.teleportModifier = new ArmorModifier(ArmorModifierID.TELEPORT, new Image("healthStat.jpg"), "Teleport");
+        this.armorModifiers.put(this.teleportModifier.id,this.teleportModifier);
         
         //==============
         // Boots Stats
@@ -232,6 +251,9 @@ public class ArmorManager {
     public void setPlayerReference(PlayerEntity player)
     {
         this.playerReference = player;
+        
+        
+        //add
         
     }
     
@@ -269,6 +291,8 @@ public class ArmorManager {
             DOUBLE_CC, DOUBLE_HEALING, TEN_POTIONS, CHANCE_ABSORB,
             //weapon modifiers
             CONCECUTIVE_HITS,MELEE_ATTACK_DMG,RANGED_ATTACK_SLOW,CRIT_DMG,
+            //boot modifiers
+            CC_REDUCTION, DOUBLE_JUMP,JETPACK,TELEPORT
         }
         
         
@@ -327,7 +351,81 @@ public class ArmorManager {
            this.equipped = false;
            this.unequipAction.doAction();
        }
-               
+        
+        //=======================
+        // Seralization Methods
+        //=======================
+        
+        public RenderData dumpRenderData()
+        {
+            RenderData renderData = new RenderData();
+            renderData.data.add(0,this.equipped);
+            renderData.data.add(1,this.unlocked);
+
+
+            return renderData;        
+        }
+
+        public SceneObjectRenderDataChanges generateRenderDataChanges(RenderData oldData,RenderData newData)
+        {
+            SceneObjectRenderDataChanges changes = new SceneObjectRenderDataChanges();
+
+            int changeMap = 0;
+            ArrayList changeList = new ArrayList();
+
+            for(int i = 0; i <2; i++)
+            {                  
+                if( !oldData.data.get(i).equals( newData.data.get(i)))
+                {                 
+                    changeList.add(newData.data.get(i));
+                    changeMap += 1L << i;
+                }
+            }
+
+
+            changes.fields = changeMap;
+            changes.data = changeList.toArray();
+
+            if(changeList.size() > 0)
+               return changes;
+           else
+               return null;
+
+        }
+
+        public void reconcileRenderDataChanges(long lastTime,long futureTime,SceneObjectRenderDataChanges renderDataChanges)
+        {
+            //construct an arraylist of data that we got, nulls will go where we didnt get any data    
+            int fieldMap = renderDataChanges.fields;
+            ArrayList rawData = new ArrayList();
+            rawData.addAll(Arrays.asList(renderDataChanges.data));           
+            ArrayList changeData = new ArrayList();
+            for(byte i = 0; i <2; i ++)
+            {
+                // The bit was set
+                if ((fieldMap & (1L << i)) != 0)
+                {
+                    changeData.add(rawData.get(0));
+                    rawData.remove(0);
+                }
+                else
+                {
+                    changeData.add(null); 
+                }
+            }
+            
+            if(changeData.get(0) != null)
+            {
+                this.equipped = (boolean)changeData.get(0);
+            }
+            if(changeData.get(1) != null)
+            {
+                this.unlocked = (boolean)changeData.get(1);
+            }
+
+     }
+        
+             
     }
     
     
@@ -495,6 +593,25 @@ public class ArmorManager {
          renderData.data.add(14,moveSpeedStat.dumpRenderData()); 
          renderData.data.add(15,jumpHeightStat.dumpRenderData()); 
          
+         renderData.data.add(16,seeEnemyHealthModifier.dumpRenderData()); 
+         renderData.data.add(17,doubleGoldFindModifier.dumpRenderData()); 
+         renderData.data.add(18,seeSecondaryObjectivesModifier.dumpRenderData()); 
+         renderData.data.add(19,revealSecretAreasModifier.dumpRenderData());    
+         
+         renderData.data.add(20,doubleCCResistModifier.dumpRenderData()); 
+         renderData.data.add(21,doubleHealingModifier.dumpRenderData()); 
+         renderData.data.add(22,tenPotionsModifier.dumpRenderData()); 
+         renderData.data.add(23,chanceAbsorbModifier.dumpRenderData());    
+         
+         renderData.data.add(24,concecutiveHitsModifier.dumpRenderData()); 
+         renderData.data.add(25,meleeAttackDamageModifier.dumpRenderData()); 
+         renderData.data.add(26,rangedAttackSlowModifier.dumpRenderData()); 
+         renderData.data.add(27,criticalHitDamageModifier.dumpRenderData()); 
+         
+         renderData.data.add(28,ccBonusModifier.dumpRenderData()); 
+         renderData.data.add(29,doubleJumpModifier.dumpRenderData()); 
+         renderData.data.add(30,jetpackModifier.dumpRenderData()); 
+         renderData.data.add(31,teleportModifier.dumpRenderData()); 
 
          return renderData;        
      }
@@ -508,120 +625,26 @@ public class ArmorManager {
          
          ArmorStat dummyStat = this.armorStats.get(ArmorStatID.CC_REDUCTION);
          
-        //0
-        SceneObjectRenderDataChanges renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(0), (RenderData)newData.data.get(0));
-        if(renderChanges != null)
-        {
-            changeList.add(renderChanges);
-            changeMap += 1L <<0;
+        for(int i=0; i<=15; i++)
+        {//0
+            SceneObjectRenderDataChanges renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(i), (RenderData)newData.data.get(i));
+            if(renderChanges != null)
+            {
+                changeList.add(renderChanges);
+                changeMap += 1L <<i;
+            }
         }
-        //1
-        renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(1), (RenderData)newData.data.get(1));
-        if(renderChanges != null)
-        {
-            changeList.add(renderChanges);
-            changeMap += 1L <<1;
-        }
-        //2
-        renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(2), (RenderData)newData.data.get(2));
-        if(renderChanges != null)
-        {
-            changeList.add(renderChanges);
-            changeMap += 1L <<2;
-        }
-        //3
-        renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(3), (RenderData)newData.data.get(3));
-        if(renderChanges != null)
-        {
-            changeList.add(renderChanges);
-            changeMap += 1L <<3;
-        }
-        //4
-        renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(4), (RenderData)newData.data.get(4));
-        if(renderChanges != null)
-        {
-            changeList.add(renderChanges);
-            changeMap += 1L <<4;
-        }
-        //5
-        renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(5), (RenderData)newData.data.get(5));
-        if(renderChanges != null)
-        {
-            changeList.add(renderChanges);
-            changeMap += 1L <<5;
-        }
-        //6
-        renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(6), (RenderData)newData.data.get(6));
-        if(renderChanges != null)
-        {
-            changeList.add(renderChanges);
-            changeMap += 1L <<6;
-        }
-        //7
-        renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(7), (RenderData)newData.data.get(7));
-        if(renderChanges != null)
-        {
-            changeList.add(renderChanges);
-            changeMap += 1L <<7;
-        }      
-        //8
-        renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(8), (RenderData)newData.data.get(8));
-        if(renderChanges != null)
-        {
-            changeList.add(renderChanges);
-            changeMap += 1L <<8;
-        }
-        //9
-        renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(9), (RenderData)newData.data.get(9));
-        if(renderChanges != null)
-        {
-            changeList.add(renderChanges);
-            changeMap += 1L <<9;
-        }
-        //10
-        renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(10), (RenderData)newData.data.get(10));
-        if(renderChanges != null)
-        {
-            changeList.add(renderChanges);
-            changeMap += 1L <<10;
-        }
-        //11
-        renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(11), (RenderData)newData.data.get(11));
-        if(renderChanges != null)
-        {
-            changeList.add(renderChanges);
-            changeMap += 1L <<11;
-        }
-        
-        //12
-        renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(12), (RenderData)newData.data.get(12));
-        if(renderChanges != null)
-        {
-            changeList.add(renderChanges);
-            changeMap += 1L <<12;
-        }
-        //13
-        renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(13), (RenderData)newData.data.get(13));
-        if(renderChanges != null)
-        {
-            changeList.add(renderChanges);
-            changeMap += 1L <<13;
-        }
-        //14
-        renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(14), (RenderData)newData.data.get(14));
-        if(renderChanges != null)
-        {
-            changeList.add(renderChanges);
-            changeMap += 1L <<14;
-        }
-        //15
-        renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(15), (RenderData)newData.data.get(15));
-        if(renderChanges != null)
-        {
-            changeList.add(renderChanges);
-            changeMap += 1L <<15;
-        }
-                       
+       
+        ArmorModifier dummyModifier = this.armorModifiers.get(ArmorModifierID.CC_REDUCTION);
+        for(int i=16; i<=31; i++)
+        {//0
+            SceneObjectRenderDataChanges renderChanges = dummyModifier.generateRenderDataChanges((RenderData)oldData.data.get(i), (RenderData)newData.data.get(i));
+            if(renderChanges != null)
+            {
+                changeList.add(renderChanges);
+                changeMap += 1L <<i;
+            }
+        }                     
          
          changes.fields = changeMap;
          changes.data = changeList.toArray();
@@ -640,7 +663,7 @@ public class ArmorManager {
             ArrayList rawData = new ArrayList();
             rawData.addAll(Arrays.asList(renderDataChanges.data));           
             ArrayList changeData = new ArrayList();
-            for(byte i = 0; i <16; i ++)
+            for(byte i = 0; i <32; i ++)
             {
                 // The bit was set
                 if ((fieldMap & (1L << i)) != 0)
@@ -719,6 +742,76 @@ public class ArmorManager {
             {
                 this.jumpHeightStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(15));
             }
+            
+            if(changeData.get(16) != null)
+            {
+                this.seeEnemyHealthModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(16));
+            }
+            if(changeData.get(17) != null)
+            {
+                this.doubleGoldFindModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(17));
+            }
+            if(changeData.get(18) != null)
+            {
+                this.seeSecondaryObjectivesModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(18));
+            }
+            if(changeData.get(19) != null)
+            {
+                this.revealSecretAreasModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(19));
+            }
+            
+            if(changeData.get(20) != null)
+            {
+                this.doubleCCResistModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(20));
+            }
+            if(changeData.get(21) != null)
+            {
+                this.doubleHealingModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(21));
+            }
+            if(changeData.get(22) != null)
+            {
+                this.tenPotionsModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(22));
+            }
+            if(changeData.get(23) != null)
+            {
+                this.chanceAbsorbModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(23));
+            }
+            
+            if(changeData.get(24) != null)
+            {
+                this.concecutiveHitsModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(24));
+            }
+            if(changeData.get(25) != null)
+            {
+                this.meleeAttackDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(25));
+            }
+            if(changeData.get(26) != null)
+            {
+                this.rangedAttackSlowModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(26));
+            }
+            if(changeData.get(27) != null)
+            {
+                this.criticalHitDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(27));
+            }
+            
+            if(changeData.get(28) != null)
+            {
+                this.criticalHitDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(28));
+            }
+            if(changeData.get(29) != null)
+            {
+                this.criticalHitDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(29));
+            }
+            if(changeData.get(30) != null)
+            {
+                this.criticalHitDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(30));
+            }
+            if(changeData.get(31) != null)
+            {
+                this.criticalHitDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(31));
+            }
+            
+   
                      
 
      }
@@ -736,7 +829,20 @@ public class ArmorManager {
         //======================================
        
        SaveData saveData = new SaveData();
+       
+       //save all stat data
+       for(Entry<ArmorStatID,ArmorStat> entry: this.armorStats.entrySet())
+       {          
+            saveData.dataMap.put(entry.getKey().name(), entry.getValue().points);
+       }
       
+       //save all armor modifier data
+       for(Entry<ArmorModifierID,ArmorModifier> entry: this.armorModifiers.entrySet())
+       {          
+            saveData.dataMap.put((entry.getKey()).name() + "-a", (entry.getValue()).unlocked);
+            saveData.dataMap.put((entry.getKey()).name() + "-b", (entry.getValue()).equipped);
+       
+       }
         
         return saveData;
    }
@@ -751,6 +857,23 @@ public class ArmorManager {
        
        ArmorManager armorManager = new ArmorManager();
        
+       //go through all stats setting points
+       for(Entry<ArmorStatID,ArmorStat> entry: armorManager.armorStats.entrySet())
+       {          
+           byte points = (byte)saveData.dataMap.get(((ArmorStatID)entry.getKey()).name()); 
+           entry.getValue().points = points;
+
+       }
+       
+       //go through all modifieres setting equipped, unlocked
+       for(Entry<ArmorModifierID,ArmorModifier> entry: armorManager.armorModifiers.entrySet())
+       {          
+           boolean unlocked = (boolean)saveData.dataMap.get((entry.getKey()).name() + "-a");
+           boolean equipped = (boolean)saveData.dataMap.get((entry.getKey()).name() + "-b");
+           entry.getValue().equipped = equipped;
+           entry.getValue().unlocked = unlocked;
+       
+       }
      
           
        return armorManager;
