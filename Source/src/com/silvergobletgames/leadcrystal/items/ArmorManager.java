@@ -82,19 +82,15 @@ public class ArmorManager {
         // Helm Modifiers
         //================
         this.seeEnemyHealthModifier = new ArmorModifier(ArmorModifierID.ENEMY_HEALTH, new Image("healthStat.jpg"), "See Enemy Health");
-        this.seeEnemyHealthModifier.unlocked = true;
         this.armorModifiers.put(this.seeEnemyHealthModifier.id,this.seeEnemyHealthModifier);
        
         this.doubleGoldFindModifier = new ArmorModifier(ArmorModifierID.GOLD_FIND, new Image("healthStat.jpg"), "Double Gold Find");
-        this.doubleGoldFindModifier.unlocked = true;
         this.armorModifiers.put(this.doubleGoldFindModifier.id,this.doubleGoldFindModifier);
        
         this.seeSecondaryObjectivesModifier = new ArmorModifier(ArmorModifierID.SECONDARY_OBJECTIVES, new Image("healthStat.jpg"), "See Secondary Objectives");
-        this.seeSecondaryObjectivesModifier.unlocked = true;
         this.armorModifiers.put(this.seeSecondaryObjectivesModifier.id,this.seeSecondaryObjectivesModifier);
         
         this.revealSecretAreasModifier = new ArmorModifier(ArmorModifierID.REVEAL_SECRETS, new Image("healthStat.jpg"), "Reveal Secret Objectives");
-        this.revealSecretAreasModifier.unlocked = true;
         this.armorModifiers.put(this.revealSecretAreasModifier.id,this.revealSecretAreasModifier);
        
         //===============

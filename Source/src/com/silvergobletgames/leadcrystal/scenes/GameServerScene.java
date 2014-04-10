@@ -495,11 +495,11 @@ public class GameServerScene extends Scene
                     //test
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_M))
                     {
-                       this.players.get(0).getArmorManager().seeEnemyHealthModifier.unlocked = true;
+                       this.getScriptManager().completeSideObjective(3);
                     }
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_N))
                     {
-                        this.players.get(0).getArmorManager().concecutiveHitsModifier.unlocked = true;
+                     
                        
                     }
 
