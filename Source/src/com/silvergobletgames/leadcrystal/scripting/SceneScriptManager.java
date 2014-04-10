@@ -6,15 +6,16 @@ import com.silvergobletgames.leadcrystal.entities.EntityEffect;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect.EntityEffectType;
 import com.silvergobletgames.leadcrystal.entities.MobSpawner;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
+import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorModifier.ArmorModifierID;
 import com.silvergobletgames.leadcrystal.netcode.GobletServer;
 import com.silvergobletgames.leadcrystal.netcode.OpenInstructionalTipPacket.InstructionalTip;
 import com.silvergobletgames.leadcrystal.netcode.OpenMenuPacket.MenuID;
 import com.silvergobletgames.leadcrystal.netcode.SideObjectiveCompletePacket;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
-import com.silvergobletgames.sylver.core.Game;
-import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.audio.Sound;
+import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.core.Scene;
+import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.ImageEffect;
 import com.silvergobletgames.sylver.graphics.ImageEffect.ImageEffectType;
@@ -216,11 +217,15 @@ public class SceneScriptManager
             
             //send side objective complete packet
             short currencyReward =0;
+            ArmorModifierID id = null;
             if(sideObjectiveNewlyCompleted)
             {
-                currencyReward = (short)player.getLevelProgressionManager().levelMap.get(levelNumber).sideObjective.currencyAward;
+                currencyReward = (short)player.getLevelProgressionManager().levelMap.get(levelNumber).sideObjective.currencyAward;           
+                id = player.getLevelProgressionManager().levelMap.get(levelNumber).sideObjective.modifierReward;
+                
             }
-            owningScene.sendSideObjectiveCompletePacket(player.getID(), currencyReward);
+            
+            owningScene.sendSideObjectiveCompletePacket(player.getID(), currencyReward,id);
             
            
         

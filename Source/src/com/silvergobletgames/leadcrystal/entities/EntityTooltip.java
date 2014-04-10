@@ -105,7 +105,7 @@ public class EntityTooltip
     {    
         if(!specialDoNotDisplay)
         {
-            if ((this.specialDisplay && GameplaySettings.getInstance().showHealthBars))
+            if ((this.specialDisplay))
             {
                 //draw name component
                 if(tooltipFields.contains((EntityTooltipField.NAME))&& (!tooltipFields.contains(EntityTooltipField.HEALTH) || this.percentHealth > 0)) 

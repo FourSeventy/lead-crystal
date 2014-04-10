@@ -11,6 +11,7 @@ import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.items.ArmorManager;
 import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorModifier;
+import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorModifier.ArmorModifierID;
 import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat;
 import com.silvergobletgames.leadcrystal.items.Potion;
 import com.silvergobletgames.leadcrystal.items.PotionManager;
@@ -1097,11 +1098,12 @@ public class GameServerScene extends Scene
         }
     }
     
-    public void sendSideObjectiveCompletePacket(String client, short currencyReward)
+    public void sendSideObjectiveCompletePacket(String client, short currencyReward, ArmorModifierID modifierId)
     {
             //send out side objective complete packet
            SideObjectiveCompletePacket packet = new SideObjectiveCompletePacket();           
            packet.currencyReward = currencyReward;
+           packet.modifierID = modifierId;
            this.sendPacket(packet,UUID.fromString(client));             
     }
     

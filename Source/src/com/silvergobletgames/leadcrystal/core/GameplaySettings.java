@@ -58,7 +58,6 @@ public class GameplaySettings{
     //===================
     // Gameplay Settings
     //=================== 
-    public boolean showHealthBars = false;
     public boolean showSpawnLocations = false;
     public boolean showCooldownTimers = false;
     
@@ -85,8 +84,6 @@ public class GameplaySettings{
             iniSaver.setProperty("debug_packetSizeDebugging", Boolean.toString(this.packetSizeDebugging));
             iniSaver.setProperty("debug_drawNetworkingStats", Boolean.toString(this.drawNetworkingStats));
             iniSaver.setProperty("debug_debugEnemies",Boolean.toString(this.debugEnemies));
-            
-            iniSaver.setProperty("showHealthBars",Boolean.toString(this.showHealthBars));
             iniSaver.setProperty("showCooldownTimers",Boolean.toString(this.showCooldownTimers));
 
             //open output stream
@@ -126,8 +123,6 @@ public class GameplaySettings{
             this.packetSizeDebugging = Boolean.parseBoolean(iniLoader.getProperty("debug_packetSizeDebugging"));
             this.drawNetworkingStats = Boolean.parseBoolean(iniLoader.getProperty("debug_drawNetworkingStats"));
             this.debugEnemies = Boolean.parseBoolean(iniLoader.getProperty("debug_debugEnemies"));
-            
-            this.showHealthBars = Boolean.parseBoolean(iniLoader.getProperty("showHealthBars"));
             this.showCooldownTimers = Boolean.parseBoolean(iniLoader.getProperty("showCooldownTimers"));
 
         }

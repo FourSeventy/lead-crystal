@@ -1,24 +1,34 @@
 package com.silvergobletgames.leadcrystal.entities;
 
 
-import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
 import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectClasses;
+import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
 import com.silvergobletgames.leadcrystal.core.GameplaySettings;
 import com.silvergobletgames.leadcrystal.netcode.GobletServer;
+import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
+import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scripting.ScriptObject;
+import com.silvergobletgames.leadcrystal.scripting.ScriptObject.ScriptTrigger;
+import com.silvergobletgames.sylver.core.Game;
+import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.core.Scene.Layer;
 import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.core.SceneObjectManager;
 import com.silvergobletgames.sylver.graphics.*;
+import com.silvergobletgames.sylver.graphics.AnimationPack.ImageAnimation;
+import com.silvergobletgames.sylver.netcode.NetworkedSceneObject;
 import com.silvergobletgames.sylver.netcode.RenderData;
 import com.silvergobletgames.sylver.netcode.SaveData;
 import com.silvergobletgames.sylver.netcode.SceneObjectRenderData;
 import com.silvergobletgames.sylver.netcode.SceneObjectRenderDataChanges;
 import com.silvergobletgames.sylver.util.LinearInterpolator;
 import com.silvergobletgames.sylver.util.SerializableEntry;
+import com.silvergobletgames.sylver.util.SylverVector2f;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
+import javax.media.opengl.GL2;
 import javax.media.opengl.GL3bc;
 import net.phys2d.math.ROVector2f;
 import net.phys2d.math.Vector2f;
@@ -26,15 +36,6 @@ import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.StaticBody;
 import net.phys2d.raw.shapes.*;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
-import com.silvergobletgames.leadcrystal.scripting.ScriptObject;
-import com.silvergobletgames.leadcrystal.scripting.ScriptObject.ScriptTrigger;
-import com.silvergobletgames.sylver.core.Game;
-import com.silvergobletgames.sylver.core.Scene;
-import com.silvergobletgames.sylver.graphics.AnimationPack.ImageAnimation;
-import com.silvergobletgames.sylver.netcode.NetworkedSceneObject;
-import com.silvergobletgames.sylver.util.SylverVector2f;
-import javax.media.opengl.GL2;
 
 /**
  * An Entity is a heavyweight SceneObject that is effected by physics, has an Image, and optional lights and emitters.
@@ -294,7 +295,7 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
             image.draw(gl);
         
         //draws entityTooltip
-        if(entityTooltip != null)
+        if(entityTooltip != null && ((GameClientScene)this.getOwningScene()).player.getArmorManager().seeEnemyHealthModifier.equipped)
             entityTooltip.draw(gl); 
         
         
