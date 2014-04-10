@@ -220,6 +220,7 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                  //do stuff
+                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -241,6 +242,7 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                  //do stuff
+                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier2.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -262,6 +264,7 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                  //do stuff
+                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier3.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -283,6 +286,7 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                  //do stuff
+                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier4.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -311,6 +315,7 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                  //do stuff
+                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier5.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -332,6 +337,7 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                  //do stuff
+                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier6.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -353,6 +359,7 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                  //do stuff
+                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier7.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -374,6 +381,7 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                  //do stuff
+                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier8.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -511,6 +519,7 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                  //do stuff
+                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier9.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -532,6 +541,7 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                  //do stuff
+                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier10.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -553,6 +563,7 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                  //do stuff
+                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier11.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -574,6 +585,7 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                  //do stuff
+                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier12.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -711,6 +723,7 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                  //do stuff
+                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier13.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -732,6 +745,7 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                  //do stuff
+                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier14.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -753,6 +767,7 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                  //do stuff
+                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier15.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -774,6 +789,7 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                  //do stuff
+                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier16.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {

@@ -421,7 +421,8 @@ public class ArmorManager {
         public void equip()
         {
           this.equipped = true;
-          this.equipAction.doAction();
+          if(this.equipAction!= null)
+              this.equipAction.doAction();
        }
        
         /**
@@ -430,7 +431,8 @@ public class ArmorManager {
         public void unequip()
         {
            this.equipped = false;
-           this.unequipAction.doAction();
+           if(this.unequipAction != null)
+               this.unequipAction.doAction();
        }
         
         //=======================

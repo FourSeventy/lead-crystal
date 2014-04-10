@@ -1,40 +1,23 @@
 package com.silvergobletgames.leadcrystal.netcode;
 
-import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectClasses;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.Serializer;
 import com.esotericsoftware.kryo.serialize.SerializableSerializer;
-import com.silvergobletgames.sylver.core.InputHandler;
-import com.silvergobletgames.sylver.core.Scene.Layer;
-import com.silvergobletgames.sylver.core.SceneObject.CoreClasses;
-import com.silvergobletgames.sylver.graphics.Anchorable.Anchor;
-import com.silvergobletgames.sylver.graphics.Color;
-import com.silvergobletgames.sylver.graphics.LightEffect.LightEffectType;
-import com.silvergobletgames.sylver.graphics.ImageEffect.ImageEffectType;
-import com.silvergobletgames.sylver.graphics.Text;
-import com.silvergobletgames.sylver.netcode.*;
-import com.silvergobletgames.sylver.util.SerializableEntry;
-import java.awt.Point;
-import java.net.URL;
-import java.nio.ByteBuffer;
-import java.util.AbstractMap.SimpleEntry;
-import java.util.Map.Entry;
-import java.util.*;
-import net.phys2d.math.ROVector2f;
-import net.phys2d.math.Vector2f;
 import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.combat.ProcEffect.ProcType;
 import com.silvergobletgames.leadcrystal.combat.Stat;
 import com.silvergobletgames.leadcrystal.combat.StateEffect.StateEffectType;
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
+import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectClasses;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.cutscenes.CutsceneManager.Cutscenes;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect.EntityEffectType;
-import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity.WorldObjectType;
 import com.silvergobletgames.leadcrystal.entities.EntityTooltip.EntityTooltipField;
+import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity.WorldObjectType;
 import com.silvergobletgames.leadcrystal.items.ArmorManager;
+import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorModifier.ArmorModifierID;
 import com.silvergobletgames.leadcrystal.items.Potion;
 import com.silvergobletgames.leadcrystal.netcode.JoinResponse.ReasonCode;
 import com.silvergobletgames.leadcrystal.netcode.OpenInstructionalTipPacket.InstructionalTip;
@@ -42,11 +25,29 @@ import com.silvergobletgames.leadcrystal.netcode.OpenMenuPacket.MenuID;
 import com.silvergobletgames.leadcrystal.skills.Skill.SkillID;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.audio.Sound.SoundType;
+import com.silvergobletgames.sylver.core.InputHandler;
+import com.silvergobletgames.sylver.core.Scene.Layer;
+import com.silvergobletgames.sylver.core.SceneObject.CoreClasses;
+import com.silvergobletgames.sylver.graphics.Anchorable.Anchor;
 import com.silvergobletgames.sylver.graphics.AnimationPack.CoreAnimations;
 import com.silvergobletgames.sylver.graphics.AnimationPack.ImageAnimation;
+import com.silvergobletgames.sylver.graphics.Color;
+import com.silvergobletgames.sylver.graphics.ImageEffect.ImageEffectType;
+import com.silvergobletgames.sylver.graphics.LightEffect.LightEffectType;
+import com.silvergobletgames.sylver.graphics.Text;
 import com.silvergobletgames.sylver.graphics.Text.CoreTextType;
 import com.silvergobletgames.sylver.graphics.TextEffect.TextEffectType;
+import com.silvergobletgames.sylver.netcode.*;
+import com.silvergobletgames.sylver.util.SerializableEntry;
 import com.silvergobletgames.sylver.util.SylverVector2f;
+import java.awt.Point;
+import java.net.URL;
+import java.nio.ByteBuffer;
+import java.util.*;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.Map.Entry;
+import net.phys2d.math.ROVector2f;
+import net.phys2d.math.Vector2f;
 
 public class SerializationRegistrator 
 {
@@ -55,6 +56,7 @@ public class SerializationRegistrator
     {
         Kryo kryo = k;
         
+        kryo.register(ArmorModifierID.class);
         kryo.register(EquipModifierPacket.class);
         kryo.register(ArmorManager.ArmorStat.ArmorStatID.class);
         kryo.register(BuyStatPacket.class);
