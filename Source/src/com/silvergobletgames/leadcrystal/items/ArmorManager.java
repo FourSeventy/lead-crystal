@@ -98,24 +98,24 @@ public class ArmorManager {
         //===============
         this.helmHealthStat = new ArmorStat(ArmorStat.ArmorStatID.HELM_HEALTH, new Image("healthStat.jpg"), "Health", 50);
         this.helmHealthStat.description = "+10 health per point.";
-        this.helmHealthStat.setAddPointAction(()->{this.getPlayerReference().getCombatData().maxHealth.adjustBase(10); 
-                                                   this.getPlayerReference().getCombatData().currentHealth+=10;
-                                                   }); 
+        this.helmHealthStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().maxHealth.adjustBase(10); 
+                                                   getPlayerReference().getCombatData().currentHealth+=10;
+                                                   }}); 
         this.armorStats.put(this.helmHealthStat.id,this.helmHealthStat);
         
         this.helmDamageReductionStat = new ArmorStat(ArmorStat.ArmorStatID.HELM_DAMAGE_REDUCTION, new Image("armorStat.jpg"), "Damage Reduction", 50);
         this.helmDamageReductionStat.description = "+2% damage reduction per point.";
-        this.helmDamageReductionStat.setAddPointAction(()->{this.getPlayerReference().getCombatData().damageResistance.adjustBase(.02f);}); 
+        this.helmDamageReductionStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().damageResistance.adjustBase(.02f);}}); 
         this.armorStats.put(this.helmDamageReductionStat.id,this.helmDamageReductionStat);
         
         this.ccReductionStat = new ArmorStat(ArmorStat.ArmorStatID.CC_REDUCTION, new Image("CCStat.jpg"), "CC Reduction", 75);
         this.ccReductionStat.description = "+5% CC reduction per point.";
-        this.ccReductionStat.setAddPointAction(()->{this.getPlayerReference().getCombatData().ccResistance.adjustBase(.05f);}); 
+        this.ccReductionStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().ccResistance.adjustBase(.05f);}}); 
         this.armorStats.put(this.ccReductionStat.id,this.ccReductionStat);
         
         this.healingEffectivenessStat = new ArmorStat(ArmorStat.ArmorStatID.HEALING_EFFECTIVENESS, new Image("healingStat.jpg"), "Healing Effectiveness", 75);
         this.healingEffectivenessStat.description = "+5% healing effectiveness per point.";
-        this.healingEffectivenessStat.setAddPointAction(()->{this.getPlayerReference().getCombatData().healingModifier.adjustBase(.05f);}); 
+        this.healingEffectivenessStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().healingModifier.adjustBase(.05f);}}); 
         this.armorStats.put(this.healingEffectivenessStat.id,this.healingEffectivenessStat);
        
         
@@ -140,24 +140,24 @@ public class ArmorManager {
         //===============
         this.bodyHealthStat = new ArmorStat(ArmorStat.ArmorStatID.BODY_HEALTH, new Image("healthStat.jpg"), "Health", 75);
         this.bodyHealthStat.description = "+10 health per point.";
-        this.bodyHealthStat.setAddPointAction(()->{this.getPlayerReference().getCombatData().maxHealth.adjustBase(10); 
-                                                   this.getPlayerReference().getCombatData().currentHealth+=10;
-                                                   }); 
+        this.bodyHealthStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().maxHealth.adjustBase(10); 
+                                                   getPlayerReference().getCombatData().currentHealth+=10;
+                                                   }}); 
         this.armorStats.put(this.bodyHealthStat.id,this.bodyHealthStat);
         
         this.bodyDamageReductionStat = new ArmorStat(ArmorStat.ArmorStatID.BODY_DAMAGE_REDUCTION, new Image("armorStat.jpg"), "Damage Reduction", 50);
         this.bodyDamageReductionStat.description = "+2% damage reduction per point.";
-        this.bodyDamageReductionStat.setAddPointAction(()->{this.getPlayerReference().getCombatData().damageResistance.adjustBase(.02f);}); 
+        this.bodyDamageReductionStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().damageResistance.adjustBase(.02f);}}); 
         this.armorStats.put(this.bodyDamageReductionStat.id,this.bodyDamageReductionStat);
         
         this.lifeLeech = new ArmorStat(ArmorStat.ArmorStatID.LIFE_LEECH, new Image("lifeLeechStat.jpg"), "Life Leech", 75);
         this.lifeLeech.description = "+5% life leech per point.";
-        this.lifeLeech.setAddPointAction(()->{this.getPlayerReference().getCombatData().lifeLeech.adjustBase(.05f);}); 
+        this.lifeLeech.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().lifeLeech.adjustBase(.05f);}}); 
         this.armorStats.put(this.lifeLeech.id,this.lifeLeech);
         
         this.lifeRegen = new ArmorStat(ArmorStat.ArmorStatID.LIFE_REGEN, new Image("lifeRegenStat.jpg"), "Life Regen", 75);
         this.lifeRegen.description = "+1 health regen/s per point.";
-        this.lifeRegen.setAddPointAction(()->{System.out.println("health regen up");}); 
+        this.lifeRegen.setAddPointAction(new ArmorAction(){ public void doAction(){System.out.println("health regen up");}}); 
         this.armorStats.put(this.lifeRegen.id,this.lifeRegen);
         
         //=================
@@ -182,22 +182,22 @@ public class ArmorManager {
         //==============
         this.weaponDamageStat = new ArmorStat(ArmorStat.ArmorStatID.WEAPON_DAMAGE, new Image("damageStat.jpg"), "Damage", 50);
         this.weaponDamageStat.description = "+2% damage per point";
-        this.weaponDamageStat.setAddPointAction(()->{this.getPlayerReference().getCombatData().baseDamage.adjustPercentModifier(.02f);}); 
+        this.weaponDamageStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().baseDamage.adjustPercentModifier(.02f);}}); 
         this.armorStats.put(this.weaponDamageStat.id,this.weaponDamageStat);
         
         this.weaponAttackSpeedStat = new ArmorStat(ArmorStat.ArmorStatID.WEAPON_ATTACK_SPEED, new Image("attackSpeedStat.jpg"), "Attack Speed", 50);
         this.weaponAttackSpeedStat.description = "+2% attack speed per point";
-        this.weaponAttackSpeedStat.setAddPointAction(()->{this.getPlayerReference().getCombatData().cooldownModifier.adjustBase(-.20f);}); 
+        this.weaponAttackSpeedStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().cooldownModifier.adjustBase(-.20f);}}); 
         this.armorStats.put(this.weaponAttackSpeedStat.id,this.weaponAttackSpeedStat);
         
         this.critChanceStat = new ArmorStat(ArmorStat.ArmorStatID.CRIT_CHANCE, new Image("critChanceStat.jpg"), "Critical Hit Chance", 75);
         this.critChanceStat.description = "+3% crit chance per point";
-        this.critChanceStat.setAddPointAction(()->{this.getPlayerReference().getCombatData().critChance.adjustBase(.03f);}); 
+        this.critChanceStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().critChance.adjustBase(.03f);}}); 
         this.armorStats.put(this.critChanceStat.id,this.critChanceStat);
         
         this.critDamageStat = new ArmorStat(ArmorStat.ArmorStatID.CRIT_DAMAGE, new Image("critDamageStat.jpg"), "Critical Hit Damage", 75);
         this.critDamageStat.description = "+10% crit damage per point";
-        this.critDamageStat.setAddPointAction(()->{this.getPlayerReference().getCombatData().critModifier.adjustBase(.10f);}); 
+        this.critDamageStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().critModifier.adjustBase(.10f);}}); 
         this.armorStats.put(this.critDamageStat.id,this.critDamageStat);
         
         
@@ -223,22 +223,22 @@ public class ArmorManager {
         
         this.bootsDamageStat = new ArmorStat(ArmorStat.ArmorStatID.BOOTS_DAMAGE, new Image("damageStat.jpg"), "Damage", 50);
         this.bootsDamageStat.description = "+2% damage per point";
-        this.bootsDamageStat.setAddPointAction(()->{this.getPlayerReference().getCombatData().baseDamage.adjustPercentModifier(.02f);}); 
+        this.bootsDamageStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().baseDamage.adjustPercentModifier(.02f);}}); 
         this.armorStats.put(this.bootsDamageStat.id,this.bootsDamageStat);
         
         this.bootsAttackSpeedStat = new ArmorStat(ArmorStat.ArmorStatID.BOOTS_ATTACK_SPEED, new Image("attackSpeedStat.jpg"), "Attack Speed", 50);
         this.bootsAttackSpeedStat.description = "+2% attack speed per point";
-        this.bootsAttackSpeedStat.setAddPointAction(()->{this.getPlayerReference().getCombatData().cooldownModifier.adjustBase(-.20f);}); 
+        this.bootsAttackSpeedStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().cooldownModifier.adjustBase(-.20f);}}); 
         this.armorStats.put(this.bootsAttackSpeedStat.id,this.bootsAttackSpeedStat);
         
         this.moveSpeedStat = new ArmorStat(ArmorStat.ArmorStatID.MOVE_SPEED, new Image("moveSpeedStat.jpg"), "Move Speed", 75);
         this.moveSpeedStat.description = "+5% move speed per point";
-        this.moveSpeedStat.setAddPointAction(()->{this.getPlayerReference().getCombatData().xVelocity.adjustPercentModifier(.05f);}); 
+        this.moveSpeedStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().xVelocity.adjustPercentModifier(.05f);}}); 
         this.armorStats.put(this.moveSpeedStat.id,this.moveSpeedStat);
         
         this.jumpHeightStat = new ArmorStat(ArmorStat.ArmorStatID.JUMP_HEIGHT, new Image("jumpHeightStat.jpg"), "Jump Height", 75);
         this.jumpHeightStat.description = "2m jump height per point";
-        this.jumpHeightStat.setAddPointAction(()->{System.out.println("jump height");}); 
+        this.jumpHeightStat.setAddPointAction(new ArmorAction(){ public void doAction(){System.out.println("jump height");}}); 
         this.armorStats.put(this.jumpHeightStat.id,this.jumpHeightStat);
     }
     
@@ -344,6 +344,11 @@ public class ArmorManager {
     // Inner Classes
     //=====================
     
+    public static abstract class ArmorAction
+    {
+            public abstract void doAction();
+        }
+    
     public static class ArmorModifier
     {
         public ArmorModifierID id;
@@ -355,10 +360,7 @@ public class ArmorManager {
         private ArmorAction equipAction;
         private ArmorAction unequipAction;
         
-        public interface ArmorAction
-        {
-            public void doAction();
-        }
+        
         
         public static enum ArmorModifierID
         {   
@@ -519,10 +521,6 @@ public class ArmorManager {
         public static final int MAX_POINTS = 5;
         protected ArmorAction addPointAction;
         
-        public interface ArmorAction
-        {
-            public void doAction();
-        }
         
         public static enum ArmorStatID
         {

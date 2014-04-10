@@ -153,7 +153,7 @@ public class ArmorMenu extends Window{
         this.helmDamageReductionStatText.setScale(1.2f);
         this.tabPane.addComponent(new Label(this.helmDamageReductionStatText,750,250), 0);
         
-        ArmorStat stat3 = this.playerReference.getArmorManager().ccReductionStat;
+        final ArmorStat stat3 = this.playerReference.getArmorManager().ccReductionStat;
         b = new Button(stat3.image.copy(), 600, 125, 100, 100);
         b.addActionListener(new ActionListener(){
        
@@ -180,7 +180,7 @@ public class ArmorMenu extends Window{
         this.ccReductionStatText.setScale(1.2f);
         this.tabPane.addComponent(new Label(this.ccReductionStatText,625,125), 0);
         
-        ArmorStat stat4 = this.playerReference.getArmorManager().healingEffectivenessStat;
+        final ArmorStat stat4 = this.playerReference.getArmorManager().healingEffectivenessStat;
         b = new Button(stat4.image.copy(), 725, 125, 100, 100);
         b.addActionListener(new ActionListener(){
        
@@ -212,7 +212,7 @@ public class ArmorMenu extends Window{
         
         this.tabPane.addComponent(new Button(new Text("Modifiers:"), 200, 400), 0);
         
-        ArmorModifier modifier = this.playerReference.getArmorManager().seeEnemyHealthModifier;      
+        final ArmorModifier modifier = this.playerReference.getArmorManager().seeEnemyHealthModifier;      
         this.seeEnemyHealthModifier = new Button(modifier.image.copy(),200,225,100,100);
         this.seeEnemyHealthModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
@@ -234,7 +234,7 @@ public class ArmorMenu extends Window{
        });
         this.tabPane.addComponent(this.seeEnemyHealthModifier,0);
         
-        ArmorModifier modifier2 = this.playerReference.getArmorManager().doubleGoldFindModifier;
+        final ArmorModifier modifier2 = this.playerReference.getArmorManager().doubleGoldFindModifier;
         this.doubleGoldFindModifier = new Button(modifier2.image.copy(),325,225,100,100);
         this.doubleGoldFindModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
@@ -256,7 +256,7 @@ public class ArmorMenu extends Window{
        });
         this.tabPane.addComponent(this.doubleGoldFindModifier,0);
         
-        ArmorModifier modifier3 = this.playerReference.getArmorManager().revealSecretAreasModifier;
+        final ArmorModifier modifier3 = this.playerReference.getArmorManager().revealSecretAreasModifier;
         this.revealSecretAreasModifier = new Button(modifier3.image.copy(),200,100,100,100);
         this.revealSecretAreasModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
@@ -278,7 +278,7 @@ public class ArmorMenu extends Window{
        });
         this.tabPane.addComponent(this.revealSecretAreasModifier,0);
         
-        ArmorModifier modifier4 = this.playerReference.getArmorManager().seeSecondaryObjectivesModifier;
+        final ArmorModifier modifier4 = this.playerReference.getArmorManager().seeSecondaryObjectivesModifier;
         this.seeSecondaryObjectivesModifier = new Button(modifier4.image.copy(),325,100,100,100);
         this.seeSecondaryObjectivesModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
@@ -307,7 +307,7 @@ public class ArmorMenu extends Window{
         
         this.tabPane.addComponent(new Button(new Text("Modifiers:"), 200, 400), 1);
         
-        ArmorModifier modifier5 = this.playerReference.getArmorManager().doubleCCResistModifier;      
+        final ArmorModifier modifier5 = this.playerReference.getArmorManager().doubleCCResistModifier;      
         this.doubleCCResistModifier = new Button(modifier5.image.copy(),200,225,100,100);
         this.doubleCCResistModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
@@ -329,7 +329,7 @@ public class ArmorMenu extends Window{
        });
         this.tabPane.addComponent(this.doubleCCResistModifier,1);
         
-        ArmorModifier modifier6 = this.playerReference.getArmorManager().doubleHealingModifier;
+        final ArmorModifier modifier6 = this.playerReference.getArmorManager().doubleHealingModifier;
         this.doubleHealingModifier = new Button(modifier6.image.copy(),325,225,100,100);
         this.doubleHealingModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
@@ -351,7 +351,7 @@ public class ArmorMenu extends Window{
        });
         this.tabPane.addComponent(this.doubleHealingModifier,1);
         
-        ArmorModifier modifier7 = this.playerReference.getArmorManager().tenPotionsModifier;
+        final ArmorModifier modifier7 = this.playerReference.getArmorManager().tenPotionsModifier;
         this.tenPotionsModifier = new Button(modifier7.image.copy(),200,100,100,100);
         this.tenPotionsModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
@@ -373,7 +373,7 @@ public class ArmorMenu extends Window{
        });
         this.tabPane.addComponent(this.tenPotionsModifier,1);
         
-        ArmorModifier modifier8 = this.playerReference.getArmorManager().chanceAbsorbModifier;
+       final ArmorModifier modifier8 = this.playerReference.getArmorManager().chanceAbsorbModifier;
         this.chanceAbsorbModifier = new Button(modifier8.image.copy(),325,100,100,100);
         this.chanceAbsorbModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
@@ -452,7 +452,7 @@ public class ArmorMenu extends Window{
         this.bodyDamageReductionStatText.setScale(1.2f);
         this.tabPane.addComponent(new Label(this.bodyDamageReductionStatText,750,250), 1);
         
-        ArmorStat stat7 = this.playerReference.getArmorManager().lifeLeech;
+        final ArmorStat stat7 = this.playerReference.getArmorManager().lifeLeech;
         b = new Button(stat7.image.copy(), 600, 125, 100, 100);
         b.addActionListener(new ActionListener(){
        
@@ -479,7 +479,7 @@ public class ArmorMenu extends Window{
         this.lifeLeechText.setScale(1.2f);
         this.tabPane.addComponent(new Label(this.lifeLeechText,625,125), 1);
         
-        ArmorStat stat8 = this.playerReference.getArmorManager().lifeRegen;
+        final ArmorStat stat8 = this.playerReference.getArmorManager().lifeRegen;
         b = new Button(stat8.image.copy(), 725, 125, 100, 100);
         b.addActionListener(new ActionListener(){
        
@@ -511,7 +511,7 @@ public class ArmorMenu extends Window{
         
         this.tabPane.addComponent(new Button(new Text("Modifiers:"), 200, 400), 2);
         
-        ArmorModifier modifier9 = this.playerReference.getArmorManager().concecutiveHitsModifier;      
+       final ArmorModifier modifier9 = this.playerReference.getArmorManager().concecutiveHitsModifier;      
         this.concecutiveHitsModifier = new Button(modifier9.image.copy(),200,225,100,100);
         this.concecutiveHitsModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
@@ -533,7 +533,7 @@ public class ArmorMenu extends Window{
        });
         this.tabPane.addComponent(this.concecutiveHitsModifier,2);
         
-        ArmorModifier modifier10 = this.playerReference.getArmorManager().meleeAttackDamageModifier;
+       final ArmorModifier modifier10 = this.playerReference.getArmorManager().meleeAttackDamageModifier;
         this.meleeAttackDamageModifier = new Button(modifier10.image.copy(),325,225,100,100);
         this.meleeAttackDamageModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
@@ -555,7 +555,7 @@ public class ArmorMenu extends Window{
        });
         this.tabPane.addComponent(this.meleeAttackDamageModifier,2);
         
-        ArmorModifier modifier11 = this.playerReference.getArmorManager().rangedAttackSlowModifier;
+       final ArmorModifier modifier11 = this.playerReference.getArmorManager().rangedAttackSlowModifier;
         this.rangedAttackSlowModifier = new Button(modifier11.image.copy(),200,100,100,100);
         this.rangedAttackSlowModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
@@ -577,7 +577,7 @@ public class ArmorMenu extends Window{
        });
         this.tabPane.addComponent(this.rangedAttackSlowModifier,2);
         
-        ArmorModifier modifier12 = this.playerReference.getArmorManager().criticalHitDamageModifier;
+       final ArmorModifier modifier12 = this.playerReference.getArmorManager().criticalHitDamageModifier;
         this.criticalHitDamageModifier = new Button(modifier12.image.copy(),325,100,100,100);
         this.criticalHitDamageModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
@@ -656,7 +656,7 @@ public class ArmorMenu extends Window{
         this.weaponAttackSpeedStatText.setScale(1.2f);
         this.tabPane.addComponent(new Label(this.weaponAttackSpeedStatText,750,250), 2);
         
-        ArmorStat stat11 = this.playerReference.getArmorManager().critChanceStat;
+       final ArmorStat stat11 = this.playerReference.getArmorManager().critChanceStat;
         b = new Button(stat11.image.copy(), 600, 125, 100, 100);
         b.addActionListener(new ActionListener(){
        
@@ -683,7 +683,7 @@ public class ArmorMenu extends Window{
         this.critChanceStatText.setScale(1.2f);
         this.tabPane.addComponent(new Label(this.critChanceStatText,625,125), 2);
         
-        ArmorStat stat12 = this.playerReference.getArmorManager().critDamageStat;
+       final ArmorStat stat12 = this.playerReference.getArmorManager().critDamageStat;
         b = new Button(stat12.image.copy(), 725, 125, 100, 100);
         b.addActionListener(new ActionListener(){
        
@@ -715,7 +715,7 @@ public class ArmorMenu extends Window{
         
         this.tabPane.addComponent(new Button(new Text("Modifiers:"), 200, 400), 3);
         
-        ArmorModifier modifier13 = this.playerReference.getArmorManager().ccBonusModifier;      
+      final  ArmorModifier modifier13 = this.playerReference.getArmorManager().ccBonusModifier;      
         this.ccBonusModifier = new Button(modifier13.image.copy(),200,225,100,100);
         this.ccBonusModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
@@ -737,7 +737,7 @@ public class ArmorMenu extends Window{
        });
         this.tabPane.addComponent(this.ccBonusModifier,3);
         
-        ArmorModifier modifier14 = this.playerReference.getArmorManager().doubleJumpModifier;
+       final ArmorModifier modifier14 = this.playerReference.getArmorManager().doubleJumpModifier;
         this.doubleJumpModifier = new Button(modifier14.image.copy(),325,225,100,100);
         this.doubleJumpModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
@@ -759,7 +759,7 @@ public class ArmorMenu extends Window{
        });
         this.tabPane.addComponent(this.doubleJumpModifier,3);
         
-        ArmorModifier modifier15 = this.playerReference.getArmorManager().jetpackModifier;
+       final ArmorModifier modifier15 = this.playerReference.getArmorManager().jetpackModifier;
         this.jetpackModifier = new Button(modifier15.image.copy(),200,100,100,100);
         this.jetpackModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
@@ -781,7 +781,7 @@ public class ArmorMenu extends Window{
        });
         this.tabPane.addComponent(this.jetpackModifier,3);
         
-        ArmorModifier modifier16 = this.playerReference.getArmorManager().teleportModifier;
+       final ArmorModifier modifier16 = this.playerReference.getArmorManager().teleportModifier;
         this.teleportModifier = new Button(modifier16.image.copy(),325,100,100,100);
         this.teleportModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
@@ -860,7 +860,7 @@ public class ArmorMenu extends Window{
         this.bootsAttackSpeedStatText.setScale(1.2f);
         this.tabPane.addComponent(new Label(this.bootsAttackSpeedStatText,750,250), 3);
         
-        ArmorStat stat15 = this.playerReference.getArmorManager().moveSpeedStat;
+      final  ArmorStat stat15 = this.playerReference.getArmorManager().moveSpeedStat;
         b = new Button(stat15.image.copy(), 600, 125, 100, 100);
         b.addActionListener(new ActionListener(){
        
@@ -887,7 +887,7 @@ public class ArmorMenu extends Window{
         this.moveSpeedStatText.setScale(1.2f);
         this.tabPane.addComponent(new Label(this.moveSpeedStatText,625,125), 3);
         
-        ArmorStat stat16 = this.playerReference.getArmorManager().jumpHeightStat;
+       final ArmorStat stat16 = this.playerReference.getArmorManager().jumpHeightStat;
         b = new Button(stat16.image.copy(), 725, 125, 100, 100);
         b.addActionListener(new ActionListener(){
        
