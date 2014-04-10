@@ -17,6 +17,7 @@ import com.silvergobletgames.leadcrystal.entities.*;
 import com.silvergobletgames.leadcrystal.entities.ClientPlayerEntity;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.entities.HitBox;
+import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorModifier.ArmorModifierID;
 import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat.ArmorStatID;
 import com.silvergobletgames.leadcrystal.menus.Hud;
 import com.silvergobletgames.leadcrystal.netcode.*;
@@ -1353,6 +1354,16 @@ public final class GameClientScene extends Scene
         //build the packet
         BuyStatPacket packet = new BuyStatPacket();
         packet.statId = statId;
+        
+        //send packet
+        this.sendPacket(packet);
+    }
+    
+    public void sendEquipModifierPacket(ArmorModifierID modifierID)
+    {
+        //build the packet
+        EquipModifierPacket packet = new EquipModifierPacket();
+        packet.modifierID = modifierID;
         
         //send packet
         this.sendPacket(packet);

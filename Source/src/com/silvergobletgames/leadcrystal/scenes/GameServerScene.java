@@ -10,6 +10,7 @@ import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.items.ArmorManager;
+import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorModifier;
 import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat;
 import com.silvergobletgames.leadcrystal.items.Potion;
 import com.silvergobletgames.leadcrystal.items.PotionManager;
@@ -498,7 +499,7 @@ public class GameServerScene extends Scene
                     }
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_N))
                     {
-                        
+                        this.players.get(0).getArmorManager().concecutiveHitsModifier.unlocked = true;
                        
                     }
 
@@ -1204,7 +1205,11 @@ public class GameServerScene extends Scene
     
     public void delegatePacket(Packet packet)
     {
-        if(packet instanceof SkillDataPacket)
+        if(packet instanceof ClientInputPacket)
+        {
+            handleClientInputPacket((ClientInputPacket)packet);
+        }
+        else if(packet instanceof SkillDataPacket)
         {
             handleSkillDataPacket((SkillDataPacket)packet);
         }
@@ -1215,11 +1220,7 @@ public class GameServerScene extends Scene
         else if(packet instanceof ChooseLevelPacket)
         {
             handleChooseLevelPacket((ChooseLevelPacket)packet);
-        }
-        else if(packet instanceof ClientInputPacket)
-        {
-            handleClientInputPacket((ClientInputPacket)packet);
-        }
+        }       
         else if(packet instanceof ClientChatPacket)
         {
             handleClientChatPacket((ClientChatPacket)packet);
@@ -1235,6 +1236,10 @@ public class GameServerScene extends Scene
         else if(packet instanceof BuyStatPacket)
         {
             handleBuyStatPacket((BuyStatPacket)packet);
+        }
+        else if(packet instanceof EquipModifierPacket)
+        {
+            handleEquipModifierPacket((EquipModifierPacket)packet);
         }
     }
     
@@ -1321,6 +1326,14 @@ public class GameServerScene extends Scene
             player.getArmorManager().armorStats.get(statPacket.statId).addPoint(1); 
         }   
     }  
+    
+    public void handleEquipModifierPacket(EquipModifierPacket modifierPacket)
+    {
+        PlayerEntity player = this.clientsInScene.get(modifierPacket.getClientID()).player;
+        
+         player.getArmorManager().equipModifier(modifierPacket.modifierID);
+     
+    }
     
    
     

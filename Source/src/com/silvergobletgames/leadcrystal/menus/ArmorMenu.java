@@ -8,6 +8,7 @@ import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
 import com.silvergobletgames.leadcrystal.skills.Skill;
 import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.Image;
+import com.silvergobletgames.sylver.graphics.Overlay;
 import com.silvergobletgames.sylver.graphics.Text;
 import com.silvergobletgames.sylver.windowsystem.*;
 import com.silvergobletgames.sylver.windowsystem.Button;
@@ -928,8 +929,7 @@ public class ArmorMenu extends Window{
 
         
         
-        //show/hide modifiers
-        
+         //show/hide modifiers       
          if(this.playerReference.getArmorManager().seeEnemyHealthModifier.unlocked == false)
          {
              this.seeEnemyHealthModifier.setDisabled(true);
@@ -1093,6 +1093,141 @@ public class ArmorMenu extends Window{
          {
              this.teleportModifier.setDisabled(false);
              this.teleportModifier.setHidden(false);
+         }
+         
+          
+         //toggle equipped highlight
+         if(this.playerReference.getArmorManager().seeEnemyHealthModifier.equipped == true)
+         {
+             this.seeEnemyHealthModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+         }
+         else
+         {
+             this.seeEnemyHealthModifier.getImage().removeAllOverlays();
+         }
+        
+    
+         if(this.playerReference.getArmorManager().doubleGoldFindModifier.equipped== true)
+         {
+             this.doubleGoldFindModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+         }
+         else
+         {
+             this.doubleGoldFindModifier.getImage().removeAllOverlays();
+         }
+        if(this.playerReference.getArmorManager().seeSecondaryObjectivesModifier.equipped== true)
+         {
+             this.seeSecondaryObjectivesModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+         }
+         else
+         {
+             this.seeSecondaryObjectivesModifier.getImage().removeAllOverlays();
+         }
+         if(this.playerReference.getArmorManager().revealSecretAreasModifier.equipped== true)
+         {
+             this.revealSecretAreasModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+         }
+         else
+         {
+             this.revealSecretAreasModifier.getImage().removeAllOverlays();
+         }
+        if(this.playerReference.getArmorManager().doubleCCResistModifier.equipped== true)
+         {
+             this.doubleCCResistModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+         }
+         else
+         {
+             this.doubleCCResistModifier.getImage().removeAllOverlays();
+         }
+         if(this.playerReference.getArmorManager().doubleHealingModifier.equipped== true)
+         {
+             this.doubleHealingModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+         }
+         else
+         {
+             this.doubleHealingModifier.getImage().removeAllOverlays();
+         }
+         if(this.playerReference.getArmorManager().tenPotionsModifier.equipped== true)
+         {
+             this.tenPotionsModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+         }
+         else
+         {
+             this.tenPotionsModifier.getImage().removeAllOverlays();
+         }
+        if(this.playerReference.getArmorManager().chanceAbsorbModifier.equipped== true)
+         {
+             this.chanceAbsorbModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+         }
+         else
+         {
+             this.chanceAbsorbModifier.getImage().removeAllOverlays();
+         }
+
+         if(this.playerReference.getArmorManager().concecutiveHitsModifier.equipped== true)
+         {
+             this.concecutiveHitsModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+         }
+         else
+         {
+             this.concecutiveHitsModifier.getImage().removeAllOverlays();
+         }
+        if(this.playerReference.getArmorManager().meleeAttackDamageModifier.equipped== true)
+         {
+             this.meleeAttackDamageModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+         }
+         else
+         {
+             this.meleeAttackDamageModifier.getImage().removeAllOverlays();
+         }
+        if(this.playerReference.getArmorManager().rangedAttackSlowModifier.equipped== true)
+         {
+             this.rangedAttackSlowModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+         }
+         else
+         {
+             this.rangedAttackSlowModifier.getImage().removeAllOverlays();
+         }
+         if(this.playerReference.getArmorManager().criticalHitDamageModifier.equipped== true)
+         {
+             this.criticalHitDamageModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+         }
+         else
+         {
+             this.criticalHitDamageModifier.getImage().removeAllOverlays();
+         }
+
+        if(this.playerReference.getArmorManager().ccBonusModifier.equipped== true)
+         {
+             this.ccBonusModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+         }
+         else
+         {
+             this.ccBonusModifier.getImage().removeAllOverlays();
+         }
+         if(this.playerReference.getArmorManager().doubleJumpModifier.equipped== true)
+         {
+             this.doubleJumpModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+         }
+         else
+         {
+             this.doubleJumpModifier.getImage().removeAllOverlays();
+         }
+         if(this.playerReference.getArmorManager().jetpackModifier.equipped== true)
+         {
+             this.jetpackModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+         }
+         else
+         {
+             this.jetpackModifier.getImage().removeAllOverlays();
+         }
+         if(this.playerReference.getArmorManager().teleportModifier.equipped== true)
+         {
+             this.teleportModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+         }
+         else
+         {
+             this.teleportModifier.getImage().removeAllOverlays();
          }
         
         

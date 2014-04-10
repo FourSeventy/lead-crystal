@@ -55,6 +55,7 @@ public class SerializationRegistrator
     {
         Kryo kryo = k;
         
+        kryo.register(EquipModifierPacket.class);
         kryo.register(ArmorManager.ArmorStat.ArmorStatID.class);
         kryo.register(BuyStatPacket.class);
         kryo.register(MainObjectiveCompletePacket.class);

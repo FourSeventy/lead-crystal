@@ -82,15 +82,19 @@ public class ArmorManager {
         // Helm Modifiers
         //================
         this.seeEnemyHealthModifier = new ArmorModifier(ArmorModifierID.ENEMY_HEALTH, new Image("healthStat.jpg"), "See Enemy Health");
+        this.seeEnemyHealthModifier.unlocked = true;
         this.armorModifiers.put(this.seeEnemyHealthModifier.id,this.seeEnemyHealthModifier);
        
         this.doubleGoldFindModifier = new ArmorModifier(ArmorModifierID.GOLD_FIND, new Image("healthStat.jpg"), "Double Gold Find");
+        this.doubleGoldFindModifier.unlocked = true;
         this.armorModifiers.put(this.doubleGoldFindModifier.id,this.doubleGoldFindModifier);
        
         this.seeSecondaryObjectivesModifier = new ArmorModifier(ArmorModifierID.SECONDARY_OBJECTIVES, new Image("healthStat.jpg"), "See Secondary Objectives");
+        this.seeSecondaryObjectivesModifier.unlocked = true;
         this.armorModifiers.put(this.seeSecondaryObjectivesModifier.id,this.seeSecondaryObjectivesModifier);
         
         this.revealSecretAreasModifier = new ArmorModifier(ArmorModifierID.REVEAL_SECRETS, new Image("healthStat.jpg"), "Reveal Secret Objectives");
+        this.revealSecretAreasModifier.unlocked = true;
         this.armorModifiers.put(this.revealSecretAreasModifier.id,this.revealSecretAreasModifier);
        
         //===============
@@ -237,7 +241,7 @@ public class ArmorManager {
         this.armorStats.put(this.moveSpeedStat.id,this.moveSpeedStat);
         
         this.jumpHeightStat = new ArmorStat(ArmorStat.ArmorStatID.JUMP_HEIGHT, new Image("jumpHeightStat.jpg"), "Jump Height", 75);
-        this.jumpHeightStat.description = "+5% move speed per point";
+        this.jumpHeightStat.description = "2m jump height per point";
         this.jumpHeightStat.setAddPointAction(()->{System.out.println("jump height");}); 
         this.armorStats.put(this.jumpHeightStat.id,this.jumpHeightStat);
     }
@@ -253,13 +257,90 @@ public class ArmorManager {
         this.playerReference = player;
         
         
-        //add
+        //go through each stat and add the points
+        for(ArmorStat stat: this.armorStats.values())
+        {
+            
+            for( int i = 0; i < stat.points; i++)
+            {
+                stat.addPointAction.doAction();
+            }
+        }
+        
+        //go through modifiers and apply equipped ones
+        for(ArmorModifier modifier: this.armorModifiers.values())
+        {
+            if(modifier.equipped == true)
+            {
+                modifier.equip();
+            }
+        }
         
     }
     
     public PlayerEntity getPlayerReference()
-    {
-        return this.playerReference;
+    {            
+        return this.playerReference;  
+    }
+    
+    public void equipModifier(ArmorModifierID id)
+    {      
+        
+        //modifier must be unlocked to equip it
+        if(!this.armorModifiers.get(id).unlocked)
+        {
+            return;
+        }
+        
+        // hardcode groupings of modifiers
+        ArrayList<ArmorModifier> helmModifiers =new ArrayList<>();   
+        helmModifiers.add(this.seeEnemyHealthModifier);
+        helmModifiers.add(this.doubleGoldFindModifier);
+        helmModifiers.add(this.seeSecondaryObjectivesModifier);
+        helmModifiers.add(this.revealSecretAreasModifier);
+
+        ArrayList<ArmorModifier> bodyModifiers =new ArrayList<>(); 
+        bodyModifiers.add(this.doubleCCResistModifier);
+        bodyModifiers.add(this.doubleHealingModifier);
+        bodyModifiers.add(this.tenPotionsModifier);
+        bodyModifiers.add(this.chanceAbsorbModifier);
+    
+        ArrayList<ArmorModifier> weaponModifiers = new ArrayList<>();
+        bodyModifiers.add(this.concecutiveHitsModifier);
+        bodyModifiers.add(this.meleeAttackDamageModifier);
+        bodyModifiers.add(this.rangedAttackSlowModifier);
+        bodyModifiers.add(this.criticalHitDamageModifier);
+
+        ArrayList<ArmorModifier> bootsModifiers = new ArrayList<>();
+        bootsModifiers.add(this.ccBonusModifier);
+        bootsModifiers.add(this.doubleJumpModifier);
+        bootsModifiers.add(this.jetpackModifier);
+        bootsModifiers.add(this.teleportModifier);
+    
+        
+        ArrayList<ArmorModifier> correctGrouping;
+        
+        ArmorModifier parameterMod = this.armorModifiers.get(id);
+         //find out which grouping this one is in
+        if(helmModifiers.contains(parameterMod))
+            correctGrouping = helmModifiers;
+        else if(bodyModifiers.contains(parameterMod))
+            correctGrouping = bodyModifiers;
+        else if(weaponModifiers.contains(parameterMod))
+            correctGrouping = weaponModifiers;
+        else 
+            correctGrouping = bootsModifiers;
+       
+        //iterate over group
+        for(ArmorModifier modifier: correctGrouping)
+        {
+            //if equipped unequip
+            if(modifier.equipped)
+                modifier.unequip();
+        }
+                   
+        //equip this modifier
+        parameterMod.equip();
     }
     
         
@@ -438,7 +519,7 @@ public class ArmorManager {
         public int cost;
         public byte points;
         public static final int MAX_POINTS = 5;
-        private ArmorAction addPointAction;
+        protected ArmorAction addPointAction;
         
         public interface ArmorAction
         {
