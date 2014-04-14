@@ -78,6 +78,8 @@ public class ArmorMenu extends Window{
     private Button doubleJumpModifier;
     private Button jetpackModifier;
     private Button teleportModifier;
+    
+    
   
     
     
@@ -88,20 +90,24 @@ public class ArmorMenu extends Window{
         
         this.playerReference = player;
         
-        this.tabPane = new TabPane(50,50,1100,800);
+        this.tabPane = new TabPane(50,75,1100,700);
         this.tabPane.addTab("Helm");
         this.tabPane.addTab("Body");
         this.tabPane.addTab("Weapon");
         this.tabPane.addTab("Boots");
         this.addComponent(tabPane);
         
+        
+        int statBaseX = 600;
+        int statBaseY = 150;
+        
         //======================
         // Helm Stat Components
         //======================
-        this.tabPane.addComponent(new Button(new Text("Upgrades:"), 600, 400), 0);
+        this.tabPane.addComponent(new Button(new Text("Upgrades:"), statBaseX, statBaseY + 250), 0);
         
         final ArmorStat stat = this.playerReference.getArmorManager().helmHealthStat;
-        Button b = new Button(stat.image.copy(), 600, 250, 100, 100);
+        Button b = new Button(stat.image.copy(), statBaseX, statBaseY, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -125,10 +131,10 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(b, 0);
         this.helmHealthStatText = new Text(Byte.toString(stat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
         this.helmHealthStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.helmHealthStatText,625,250), 0);
+        this.tabPane.addComponent(new Label(this.helmHealthStatText,statBaseX +25,statBaseY), 0);
         
         final ArmorStat stat2 = this.playerReference.getArmorManager().helmDamageReductionStat;
-        b = new Button(stat2.image.copy(), 725, 250, 100, 100);
+        b = new Button(stat2.image.copy(), statBaseX + 125, statBaseY, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -151,10 +157,10 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(b, 0);
         this.helmDamageReductionStatText = new Text(Byte.toString(stat2.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
         this.helmDamageReductionStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.helmDamageReductionStatText,750,250), 0);
+        this.tabPane.addComponent(new Label(this.helmDamageReductionStatText,statBaseX +150,statBaseY), 0);
         
         final ArmorStat stat3 = this.playerReference.getArmorManager().ccReductionStat;
-        b = new Button(stat3.image.copy(), 600, 125, 100, 100);
+        b = new Button(stat3.image.copy(), statBaseX, statBaseY -125, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -178,10 +184,10 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(b, 0);
         this.ccReductionStatText = new Text(Byte.toString(stat3.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
         this.ccReductionStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.ccReductionStatText,625,125), 0);
+        this.tabPane.addComponent(new Label(this.ccReductionStatText,statBaseX+25,statBaseY -125), 0);
         
         final ArmorStat stat4 = this.playerReference.getArmorManager().healingEffectivenessStat;
-        b = new Button(stat4.image.copy(), 725, 125, 100, 100);
+        b = new Button(stat4.image.copy(), statBaseX+125, statBaseY -125, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -204,7 +210,7 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(b, 0);
         this.healingEffectivenessStatText= new Text(Byte.toString(stat4.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
         this.healingEffectivenessStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.healingEffectivenessStatText,750,125), 0);
+        this.tabPane.addComponent(new Label(this.healingEffectivenessStatText,statBaseX+150,statBaseY-125), 0);
         
         //=========================
         // Helm Modifier Components
@@ -401,7 +407,7 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(new Button(new Text("Upgrades:"), 600, 400), 1);
         
         final ArmorStat stat5 = this.playerReference.getArmorManager().bodyHealthStat;
-        b = new Button(stat5.image.copy(), 600, 250, 100, 100);
+        b = new Button(stat5.image.copy(), statBaseX, statBaseY, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -424,10 +430,10 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(b, 1);
         this.bodyHealthStatText = new Text(Byte.toString(stat5.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
         this.bodyHealthStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.bodyHealthStatText,625,250), 1);
+        this.tabPane.addComponent(new Label(this.bodyHealthStatText,statBaseX+25,statBaseY), 1);
         
         final ArmorStat stat6 = this.playerReference.getArmorManager().bodyDamageReductionStat;
-        b = new Button(stat6.image.copy(), 725, 250, 100, 100);
+        b = new Button(stat6.image.copy(), statBaseX+125, statBaseY, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -450,10 +456,10 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(b, 1);
         this.bodyDamageReductionStatText = new Text(Byte.toString(stat6.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
         this.bodyDamageReductionStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.bodyDamageReductionStatText,750,250), 1);
+        this.tabPane.addComponent(new Label(this.bodyDamageReductionStatText,statBaseX+150,statBaseY), 1);
         
         final ArmorStat stat7 = this.playerReference.getArmorManager().lifeLeech;
-        b = new Button(stat7.image.copy(), 600, 125, 100, 100);
+        b = new Button(stat7.image.copy(), statBaseX, statBaseY-125, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -477,10 +483,10 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(b, 1);
         this.lifeLeechText = new Text(Byte.toString(stat7.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
         this.lifeLeechText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.lifeLeechText,625,125), 1);
+        this.tabPane.addComponent(new Label(this.lifeLeechText,statBaseX+25,statBaseY -125), 1);
         
         final ArmorStat stat8 = this.playerReference.getArmorManager().lifeRegen;
-        b = new Button(stat8.image.copy(), 725, 125, 100, 100);
+        b = new Button(stat8.image.copy(), statBaseX+125, statBaseY-125, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -503,7 +509,7 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(b, 1);
         this.lifeRegenText= new Text(Byte.toString(stat8.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
         this.lifeRegenText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.lifeRegenText,750,125), 1);
+        this.tabPane.addComponent(new Label(this.lifeRegenText,statBaseX+150,statBaseY -125), 1);
         
         //============================
         // Weapon Modifier Components
@@ -605,7 +611,7 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(new Button(new Text("Upgrades:"), 600, 400), 2);
         
         final ArmorStat stat9 = this.playerReference.getArmorManager().weaponDamageStat;
-        b = new Button(stat9.image.copy(), 600, 250, 100, 100);
+        b = new Button(stat9.image.copy(), statBaseX, statBaseY, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -628,10 +634,10 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(b, 2);
         this.weaponDamageStatText = new Text(Byte.toString(stat9.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
         this.weaponDamageStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.weaponDamageStatText,625,250), 2);
+        this.tabPane.addComponent(new Label(this.weaponDamageStatText,statBaseX +25,statBaseY), 2);
         
         final ArmorStat stat10 = this.playerReference.getArmorManager().weaponAttackSpeedStat;
-        b = new Button(stat10.image.copy(), 725, 250, 100, 100);
+        b = new Button(stat10.image.copy(), statBaseX+125, statBaseY, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -654,10 +660,10 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(b, 2);
         this.weaponAttackSpeedStatText = new Text(Byte.toString(stat10.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
         this.weaponAttackSpeedStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.weaponAttackSpeedStatText,750,250), 2);
+        this.tabPane.addComponent(new Label(this.weaponAttackSpeedStatText,statBaseX +150,statBaseY), 2);
         
        final ArmorStat stat11 = this.playerReference.getArmorManager().critChanceStat;
-        b = new Button(stat11.image.copy(), 600, 125, 100, 100);
+        b = new Button(stat11.image.copy(), statBaseX, statBaseY-125, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -681,10 +687,10 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(b, 2);
         this.critChanceStatText = new Text(Byte.toString(stat11.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
         this.critChanceStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.critChanceStatText,625,125), 2);
+        this.tabPane.addComponent(new Label(this.critChanceStatText,statBaseX +25,statBaseY-125), 2);
         
        final ArmorStat stat12 = this.playerReference.getArmorManager().critDamageStat;
-        b = new Button(stat12.image.copy(), 725, 125, 100, 100);
+        b = new Button(stat12.image.copy(), statBaseX+125, statBaseY-125, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -707,7 +713,7 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(b, 2);
         this.critDamageStatText= new Text(Byte.toString(stat12.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
         this.critDamageStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.critDamageStatText,750,125), 2);
+        this.tabPane.addComponent(new Label(this.critDamageStatText,statBaseX +150,statBaseY-125), 2);
         
         //==================
         // Boots Modifiers
@@ -809,7 +815,7 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(new Button(new Text("Upgrades:"), 600, 400), 3);
         
         final ArmorStat stat13 = this.playerReference.getArmorManager().bootsDamageStat;
-        b = new Button(stat13.image.copy(), 600, 250, 100, 100);
+        b = new Button(stat13.image.copy(), statBaseX, statBaseY, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -832,10 +838,10 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(b, 3);
         this.bootsDamageStatText = new Text(Byte.toString(stat13.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
         this.bootsDamageStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.bootsDamageStatText,625,250), 3);
+        this.tabPane.addComponent(new Label(this.bootsDamageStatText,statBaseX +25,statBaseY), 3);
         
         final ArmorStat stat14 = this.playerReference.getArmorManager().bootsAttackSpeedStat;
-        b = new Button(stat14.image.copy(), 725, 250, 100, 100);
+        b = new Button(stat14.image.copy(), statBaseX+125, statBaseY, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -858,10 +864,10 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(b, 3);
         this.bootsAttackSpeedStatText = new Text(Byte.toString(stat14.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
         this.bootsAttackSpeedStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.bootsAttackSpeedStatText,750,250), 3);
+        this.tabPane.addComponent(new Label(this.bootsAttackSpeedStatText,statBaseX +150,statBaseY), 3);
         
       final  ArmorStat stat15 = this.playerReference.getArmorManager().moveSpeedStat;
-        b = new Button(stat15.image.copy(), 600, 125, 100, 100);
+        b = new Button(stat15.image.copy(), statBaseX, statBaseY-125, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -885,10 +891,10 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(b, 3);
         this.moveSpeedStatText = new Text(Byte.toString(stat15.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
         this.moveSpeedStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.moveSpeedStatText,625,125), 3);
+        this.tabPane.addComponent(new Label(this.moveSpeedStatText,statBaseX +25,statBaseY-125), 3);
         
        final ArmorStat stat16 = this.playerReference.getArmorManager().jumpHeightStat;
-        b = new Button(stat16.image.copy(), 725, 125, 100, 100);
+        b = new Button(stat16.image.copy(), statBaseX+125, statBaseY-125, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -911,7 +917,7 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(b, 3);
         this.jumpHeightStatText= new Text(Byte.toString(stat16.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
         this.jumpHeightStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.jumpHeightStatText,750,125), 3);
+        this.tabPane.addComponent(new Label(this.jumpHeightStatText,statBaseX +150,statBaseY-125), 3);
     }
     
     @Override

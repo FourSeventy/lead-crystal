@@ -81,16 +81,20 @@ public class ArmorManager {
         //================
         // Helm Modifiers
         //================
-        this.seeEnemyHealthModifier = new ArmorModifier(ArmorModifierID.ENEMY_HEALTH, new Image("healthStat.jpg"), "See Enemy Health");
+        this.seeEnemyHealthModifier = new ArmorModifier(ArmorModifierID.ENEMY_HEALTH, new Image("enemyHealthModifier.jpg"), "See Enemy Health");
+        this.seeEnemyHealthModifier.description = "Gives the ability to see enemy health bars.";
         this.armorModifiers.put(this.seeEnemyHealthModifier.id,this.seeEnemyHealthModifier);
        
-        this.doubleGoldFindModifier = new ArmorModifier(ArmorModifierID.GOLD_FIND, new Image("healthStat.jpg"), "Double Gold Find");
+        this.doubleGoldFindModifier = new ArmorModifier(ArmorModifierID.GOLD_FIND, new Image("doubleGoldFindModifier.jpg"), "Double Gold Find");
+        this.doubleGoldFindModifier.description = "Doubles the value of each gold you pick up.";
         this.armorModifiers.put(this.doubleGoldFindModifier.id,this.doubleGoldFindModifier);
        
-        this.seeSecondaryObjectivesModifier = new ArmorModifier(ArmorModifierID.SECONDARY_OBJECTIVES, new Image("healthStat.jpg"), "See Secondary Objectives");
+        this.seeSecondaryObjectivesModifier = new ArmorModifier(ArmorModifierID.SECONDARY_OBJECTIVES, new Image("seeSecondaryObjectiveModifier.jpg"), "See Secondary Objectives");
+        this.seeSecondaryObjectivesModifier.description = "Allows secondary objectives to show up on your radar.";
         this.armorModifiers.put(this.seeSecondaryObjectivesModifier.id,this.seeSecondaryObjectivesModifier);
         
-        this.revealSecretAreasModifier = new ArmorModifier(ArmorModifierID.REVEAL_SECRETS, new Image("healthStat.jpg"), "Reveal Secret Objectives");
+        this.revealSecretAreasModifier = new ArmorModifier(ArmorModifierID.REVEAL_SECRETS, new Image("revealSecretModifier.jpg"), "Reveal Secret Objectives");
+        this.revealSecretAreasModifier.description = "Allows secret areas to show up on your radar.";
         this.armorModifiers.put(this.revealSecretAreasModifier.id,this.revealSecretAreasModifier);
        
         //===============
@@ -122,16 +126,20 @@ public class ArmorManager {
         //================
         // Body Modifiers
         //================
-        this.doubleCCResistModifier = new ArmorModifier(ArmorModifierID.DOUBLE_CC, new Image("healthStat.jpg"), "Double CC Resist");
+        this.doubleCCResistModifier = new ArmorModifier(ArmorModifierID.DOUBLE_CC, new Image("ccStat.jpg"), "Double CC Resist");
+        this.doubleCCResistModifier.description = "Doubles your CC resistance.";
         this.armorModifiers.put(this.doubleCCResistModifier.id,this.doubleCCResistModifier);
         
         this.doubleHealingModifier = new ArmorModifier(ArmorModifierID.DOUBLE_HEALING, new Image("healthStat.jpg"), "Double Healing Effectiveness");
+        this.doubleHealingModifier.description ="Doubles the effectiveness of all healing";
         this.armorModifiers.put(this.doubleHealingModifier.id,this.doubleHealingModifier);
        
-        this.tenPotionsModifier = new ArmorModifier(ArmorModifierID.TEN_POTIONS, new Image("healthStat.jpg"), "Additional Potions");
+        this.tenPotionsModifier = new ArmorModifier(ArmorModifierID.TEN_POTIONS, new Image("healingStat.jpg"), "Additional Potions");
+        this.tenPotionsModifier.description = "Allows you to carry up to 10 potions";
         this.armorModifiers.put(this.tenPotionsModifier.id,this.tenPotionsModifier);
         
-        this.chanceAbsorbModifier = new ArmorModifier(ArmorModifierID.CHANCE_ABSORB, new Image("healthStat.jpg"), "Chance to Absorb Projectiles");
+        this.chanceAbsorbModifier = new ArmorModifier(ArmorModifierID.CHANCE_ABSORB, new Image("armorStat.jpg"), "Chance to Absorb Projectiles");
+        this.chanceAbsorbModifier.description = "When hit by an enemy projectile, you have a 15% chance to absorb it.";
         this.armorModifiers.put(this.chanceAbsorbModifier.id,this.chanceAbsorbModifier);
         
         
@@ -163,16 +171,18 @@ public class ArmorManager {
         //=================
         // Weapon Modifiers
         //=================
-        this.concecutiveHitsModifier = new ArmorModifier(ArmorModifierID.CONCECUTIVE_HITS, new Image("healthStat.jpg"), "Concecutive Hits Bonus");
+        this.concecutiveHitsModifier = new ArmorModifier(ArmorModifierID.CONCECUTIVE_HITS, new Image("critChanceStat.jpg"), "Concecutive Hits Bonus");
+        this.concecutiveHitsModifier.description = "With each concecutive hit to an enemy you gain 5% crit chance";
         this.armorModifiers.put(this.concecutiveHitsModifier.id,this.concecutiveHitsModifier);
         
-        this.meleeAttackDamageModifier = new ArmorModifier(ArmorModifierID.MELEE_ATTACK_DMG, new Image("healthStat.jpg"), "Melee Damage Increase");
+        this.meleeAttackDamageModifier = new ArmorModifier(ArmorModifierID.MELEE_ATTACK_DMG, new Image("meleeDamageModifier.jpg"), "Melee Damage Increase");
+        this.meleeAttackDamageModifier.description = "Increases the damage of melee attacks by 50%";
         this.armorModifiers.put(this.meleeAttackDamageModifier.id,this.meleeAttackDamageModifier);
        
-        this.rangedAttackSlowModifier = new ArmorModifier(ArmorModifierID.TEN_POTIONS, new Image("healthStat.jpg"), "Ranged Attack Slow");
+        this.rangedAttackSlowModifier = new ArmorModifier(ArmorModifierID.RANGED_ATTACK_SLOW, new Image("healthStat.jpg"), "Ranged Attack Slow");
         this.armorModifiers.put(this.rangedAttackSlowModifier.id,this.rangedAttackSlowModifier);
         
-        this.criticalHitDamageModifier = new ArmorModifier(ArmorModifierID.CHANCE_ABSORB, new Image("healthStat.jpg"), "Critical Hit Damage");
+        this.criticalHitDamageModifier = new ArmorModifier(ArmorModifierID.CRIT_DMG, new Image("critDamageStat.jpg"), "Critical Hit Damage");
         this.armorModifiers.put(this.criticalHitDamageModifier.id,this.criticalHitDamageModifier);
         
 
