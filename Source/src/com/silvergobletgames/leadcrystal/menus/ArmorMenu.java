@@ -35,9 +35,11 @@ public class ArmorMenu extends Window{
     private Button skillTooltipIcon;
     private TextBlock skillTooltipTextBlock;
     private Label infoTextBox;
+    private Label tooltipCost;
     
-    
-    //helm stat labels
+    //==============
+    // stat labels
+    //==============
     private Text helmHealthStatText;
     private Text helmDamageReductionStatText;
     private Text ccReductionStatText;
@@ -59,6 +61,38 @@ public class ArmorMenu extends Window{
     private Text jumpHeightStatText;
     
     
+    //================
+    // Detail Section
+    //================
+    
+    private Text helmHealthDetailText;
+    private Text helmDamageDetailText;
+    private Text ccReductionDetailText;
+    private Text healingEffectivenessDetailText;
+    private Text helmModifierDetailText;
+    
+    private Text bodyHealthDetailText;
+    private Text bodyDamageReductionDetailText;
+    private Text lifeLeechDetailText;
+    private Text lifeRegenDetailText;
+    private Text bodyModifierDetailText;
+    
+    private Text weaponDamageDetailText;
+    private Text weaponAttackSpeedDetailText;
+    private Text critChanceDetailText;
+    private Text critDamageDetailText;
+    private Text weaponModifierDetailText;
+    
+    private Text bootsDamageDetailText;
+    private Text bootsAttackSpeedDetailText;
+    private Text moveSpeedDetailText;
+    private Text jumpHeightDetailText;
+    private Text bootsModifierDetailText;
+    
+    
+    //==============
+    // Modifier
+    //==============
     private Button seeEnemyHealthModifier;
     private Button doubleGoldFindModifier;
     private Button seeSecondaryObjectivesModifier;
@@ -101,10 +135,13 @@ public class ArmorMenu extends Window{
         int statBaseX = 600;
         int statBaseY = 150;
         
+        int modifierBaseX = 200;
+        int modifierBaseY = 150;
+        
         //======================
         // Helm Stat Components
         //======================
-        this.tabPane.addComponent(new Button(new Text("Upgrades:"), statBaseX, statBaseY + 250), 0);
+        this.tabPane.addComponent(new Button(new Text("Upgrades:"), statBaseX, statBaseY + 120), 0);
         
         final ArmorStat stat = this.playerReference.getArmorManager().helmHealthStat;
         Button b = new Button(stat.image.copy(), statBaseX, statBaseY, 100, 100);
@@ -120,7 +157,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat.name,stat.image,stat.description);
+                   openTooltip(700,450,stat.name,stat.image,stat.description, stat.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -146,7 +183,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat2.name,stat2.image,stat2.description);
+                   openTooltip(700,450,stat2.name,stat2.image,stat2.description, stat2.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -173,7 +210,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat3.name,stat3.image,stat3.description);
+                   openTooltip(700,450,stat3.name,stat3.image,stat3.description, stat3.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -199,7 +236,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat4.name,stat4.image,stat4.description);
+                   openTooltip(700,450,stat4.name,stat4.image,stat4.description, stat4.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -216,10 +253,10 @@ public class ArmorMenu extends Window{
         // Helm Modifier Components
         //=========================
         
-        this.tabPane.addComponent(new Button(new Text("Modifiers:"), 200, 400), 0);
+        this.tabPane.addComponent(new Button(new Text("Modifiers:"), modifierBaseX, modifierBaseY+120), 0);
         
         final ArmorModifier modifier = this.playerReference.getArmorManager().seeEnemyHealthModifier;      
-        this.seeEnemyHealthModifier = new Button(modifier.image.copy(),200,225,100,100);
+        this.seeEnemyHealthModifier = new Button(modifier.image.copy(),modifierBaseX,modifierBaseY,100,100);
         this.seeEnemyHealthModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
            {
@@ -230,7 +267,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(400,450,modifier.name,modifier.image,modifier.description);
+                   openTooltip(400,450,modifier.name,modifier.image,modifier.description, null);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -241,7 +278,7 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(this.seeEnemyHealthModifier,0);
         
         final ArmorModifier modifier2 = this.playerReference.getArmorManager().doubleGoldFindModifier;
-        this.doubleGoldFindModifier = new Button(modifier2.image.copy(),325,225,100,100);
+        this.doubleGoldFindModifier = new Button(modifier2.image.copy(),modifierBaseX+125,modifierBaseY,100,100);
         this.doubleGoldFindModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
            {
@@ -252,7 +289,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(400,450,modifier2.name,modifier2.image,modifier2.description);
+                   openTooltip(400,450,modifier2.name,modifier2.image,modifier2.description, null);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -263,7 +300,7 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(this.doubleGoldFindModifier,0);
         
         final ArmorModifier modifier3 = this.playerReference.getArmorManager().revealSecretAreasModifier;
-        this.revealSecretAreasModifier = new Button(modifier3.image.copy(),200,100,100,100);
+        this.revealSecretAreasModifier = new Button(modifier3.image.copy(),modifierBaseX,modifierBaseY-125,100,100);
         this.revealSecretAreasModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
            {
@@ -274,7 +311,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(400,450,modifier3.name,modifier3.image,modifier3.description);
+                   openTooltip(400,450,modifier3.name,modifier3.image,modifier3.description, null);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -285,7 +322,7 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(this.revealSecretAreasModifier,0);
         
         final ArmorModifier modifier4 = this.playerReference.getArmorManager().seeSecondaryObjectivesModifier;
-        this.seeSecondaryObjectivesModifier = new Button(modifier4.image.copy(),325,100,100,100);
+        this.seeSecondaryObjectivesModifier = new Button(modifier4.image.copy(),modifierBaseX+125,modifierBaseY-125,100,100);
         this.seeSecondaryObjectivesModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
            {
@@ -296,7 +333,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(400,450,modifier4.name,modifier4.image,modifier4.description);
+                   openTooltip(400,450,modifier4.name,modifier4.image,modifier4.description, null);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -311,10 +348,10 @@ public class ArmorMenu extends Window{
         //Body Modifier Components
         //=========================
         
-        this.tabPane.addComponent(new Button(new Text("Modifiers:"), 200, 400), 1);
+        this.tabPane.addComponent(new Button(new Text("Modifiers:"), modifierBaseX, modifierBaseY+125), 1);
         
         final ArmorModifier modifier5 = this.playerReference.getArmorManager().doubleCCResistModifier;      
-        this.doubleCCResistModifier = new Button(modifier5.image.copy(),200,225,100,100);
+        this.doubleCCResistModifier = new Button(modifier5.image.copy(),modifierBaseX,modifierBaseY,100,100);
         this.doubleCCResistModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
            {
@@ -325,7 +362,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(400,450,modifier5.name,modifier5.image,modifier5.description);
+                   openTooltip(400,450,modifier5.name,modifier5.image,modifier5.description, null);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -336,7 +373,7 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(this.doubleCCResistModifier,1);
         
         final ArmorModifier modifier6 = this.playerReference.getArmorManager().doubleHealingModifier;
-        this.doubleHealingModifier = new Button(modifier6.image.copy(),325,225,100,100);
+        this.doubleHealingModifier = new Button(modifier6.image.copy(),modifierBaseX+125,modifierBaseY,100,100);
         this.doubleHealingModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
            {
@@ -347,7 +384,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(400,450,modifier6.name,modifier6.image,modifier6.description);
+                   openTooltip(400,450,modifier6.name,modifier6.image,modifier6.description, null);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -358,7 +395,7 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(this.doubleHealingModifier,1);
         
         final ArmorModifier modifier7 = this.playerReference.getArmorManager().tenPotionsModifier;
-        this.tenPotionsModifier = new Button(modifier7.image.copy(),200,100,100,100);
+        this.tenPotionsModifier = new Button(modifier7.image.copy(),modifierBaseX,modifierBaseY-125,100,100);
         this.tenPotionsModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
            {
@@ -369,7 +406,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(400,450,modifier7.name,modifier7.image,modifier7.description);
+                   openTooltip(400,450,modifier7.name,modifier7.image,modifier7.description, null);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -380,7 +417,7 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(this.tenPotionsModifier,1);
         
        final ArmorModifier modifier8 = this.playerReference.getArmorManager().chanceAbsorbModifier;
-        this.chanceAbsorbModifier = new Button(modifier8.image.copy(),325,100,100,100);
+        this.chanceAbsorbModifier = new Button(modifier8.image.copy(),modifierBaseX+125,modifierBaseY-125,100,100);
         this.chanceAbsorbModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
            {
@@ -391,7 +428,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(400,450,modifier8.name,modifier8.image,modifier8.description);
+                   openTooltip(400,450,modifier8.name,modifier8.image,modifier8.description, null);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -404,7 +441,7 @@ public class ArmorMenu extends Window{
         //======================
         // Body Stat Components
         //======================
-        this.tabPane.addComponent(new Button(new Text("Upgrades:"), 600, 400), 1);
+        this.tabPane.addComponent(new Button(new Text("Upgrades:"), statBaseX, statBaseY + 120), 1);
         
         final ArmorStat stat5 = this.playerReference.getArmorManager().bodyHealthStat;
         b = new Button(stat5.image.copy(), statBaseX, statBaseY, 100, 100);
@@ -419,7 +456,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat5.name,stat5.image,stat5.description);
+                   openTooltip(700,450,stat5.name,stat5.image,stat5.description, stat5.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -445,7 +482,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat6.name,stat6.image,stat6.description);
+                   openTooltip(700,450,stat6.name,stat6.image,stat6.description, stat6.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -472,7 +509,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat7.name,stat7.image,stat7.description);
+                   openTooltip(700,450,stat7.name,stat7.image,stat7.description, stat7.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -498,7 +535,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat8.name,stat8.image,stat8.description);
+                   openTooltip(700,450,stat8.name,stat8.image,stat8.description, stat8.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -515,10 +552,10 @@ public class ArmorMenu extends Window{
         // Weapon Modifier Components
         //============================
         
-        this.tabPane.addComponent(new Button(new Text("Modifiers:"), 200, 400), 2);
+        this.tabPane.addComponent(new Button(new Text("Modifiers:"), modifierBaseX, modifierBaseY+125), 2);
         
        final ArmorModifier modifier9 = this.playerReference.getArmorManager().concecutiveHitsModifier;      
-        this.concecutiveHitsModifier = new Button(modifier9.image.copy(),200,225,100,100);
+        this.concecutiveHitsModifier = new Button(modifier9.image.copy(),modifierBaseX,modifierBaseY,100,100);
         this.concecutiveHitsModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
            {
@@ -529,7 +566,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(400,450,modifier9.name,modifier9.image,modifier9.description);
+                   openTooltip(400,450,modifier9.name,modifier9.image,modifier9.description, null);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -540,7 +577,7 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(this.concecutiveHitsModifier,2);
         
        final ArmorModifier modifier10 = this.playerReference.getArmorManager().meleeAttackDamageModifier;
-        this.meleeAttackDamageModifier = new Button(modifier10.image.copy(),325,225,100,100);
+        this.meleeAttackDamageModifier = new Button(modifier10.image.copy(),modifierBaseX+125,modifierBaseY,100,100);
         this.meleeAttackDamageModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
            {
@@ -551,7 +588,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(400,450,modifier10.name,modifier10.image,modifier10.description);
+                   openTooltip(400,450,modifier10.name,modifier10.image,modifier10.description, null);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -562,7 +599,7 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(this.meleeAttackDamageModifier,2);
         
        final ArmorModifier modifier11 = this.playerReference.getArmorManager().rangedAttackSlowModifier;
-        this.rangedAttackSlowModifier = new Button(modifier11.image.copy(),200,100,100,100);
+        this.rangedAttackSlowModifier = new Button(modifier11.image.copy(),modifierBaseX,modifierBaseY-125,100,100);
         this.rangedAttackSlowModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
            {
@@ -573,7 +610,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(400,450,modifier11.name,modifier11.image,modifier11.description);
+                   openTooltip(400,450,modifier11.name,modifier11.image,modifier11.description, null);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -584,7 +621,7 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(this.rangedAttackSlowModifier,2);
         
        final ArmorModifier modifier12 = this.playerReference.getArmorManager().criticalHitDamageModifier;
-        this.criticalHitDamageModifier = new Button(modifier12.image.copy(),325,100,100,100);
+        this.criticalHitDamageModifier = new Button(modifier12.image.copy(),modifierBaseX+125,modifierBaseY-125,100,100);
         this.criticalHitDamageModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
            {
@@ -595,7 +632,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(400,450,modifier12.name,modifier12.image,modifier12.description);
+                   openTooltip(400,450,modifier12.name,modifier12.image,modifier12.description, null);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -608,7 +645,7 @@ public class ArmorMenu extends Window{
         //========================
         // Weapon Stat Components
         //========================
-        this.tabPane.addComponent(new Button(new Text("Upgrades:"), 600, 400), 2);
+        this.tabPane.addComponent(new Button(new Text("Upgrades:"), statBaseX, statBaseY + 120), 2);
         
         final ArmorStat stat9 = this.playerReference.getArmorManager().weaponDamageStat;
         b = new Button(stat9.image.copy(), statBaseX, statBaseY, 100, 100);
@@ -623,7 +660,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat9.name,stat9.image,stat9.description);
+                   openTooltip(700,450,stat9.name,stat9.image,stat9.description, stat9.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -649,7 +686,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat10.name,stat10.image,stat10.description);
+                   openTooltip(700,450,stat10.name,stat10.image,stat10.description, stat10.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -676,7 +713,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat11.name,stat11.image,stat11.description);
+                   openTooltip(700,450,stat11.name,stat11.image,stat11.description, stat11.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -702,7 +739,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat12.name,stat12.image,stat12.description);
+                   openTooltip(700,450,stat12.name,stat12.image,stat12.description, stat12.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -719,10 +756,10 @@ public class ArmorMenu extends Window{
         // Boots Modifiers
         //==================
         
-        this.tabPane.addComponent(new Button(new Text("Modifiers:"), 200, 400), 3);
+        this.tabPane.addComponent(new Button(new Text("Modifiers:"), modifierBaseX, modifierBaseY+125), 3);
         
       final  ArmorModifier modifier13 = this.playerReference.getArmorManager().ccBonusModifier;      
-        this.ccBonusModifier = new Button(modifier13.image.copy(),200,225,100,100);
+        this.ccBonusModifier = new Button(modifier13.image.copy(),modifierBaseX,modifierBaseY,100,100);
         this.ccBonusModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
            {
@@ -733,7 +770,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(400,450,modifier13.name,modifier13.image,modifier13.description);
+                   openTooltip(400,450,modifier13.name,modifier13.image,modifier13.description, null);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -744,7 +781,7 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(this.ccBonusModifier,3);
         
        final ArmorModifier modifier14 = this.playerReference.getArmorManager().doubleJumpModifier;
-        this.doubleJumpModifier = new Button(modifier14.image.copy(),325,225,100,100);
+        this.doubleJumpModifier = new Button(modifier14.image.copy(),modifierBaseX+125,modifierBaseY,100,100);
         this.doubleJumpModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
            {
@@ -755,7 +792,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(400,450,modifier14.name,modifier14.image,modifier14.description);
+                   openTooltip(400,450,modifier14.name,modifier14.image,modifier14.description, null);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -766,7 +803,7 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(this.doubleJumpModifier,3);
         
        final ArmorModifier modifier15 = this.playerReference.getArmorManager().jetpackModifier;
-        this.jetpackModifier = new Button(modifier15.image.copy(),200,100,100,100);
+        this.jetpackModifier = new Button(modifier15.image.copy(),modifierBaseX,modifierBaseY-125,100,100);
         this.jetpackModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
            {
@@ -777,7 +814,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(400,450,modifier15.name,modifier15.image,modifier15.description);
+                   openTooltip(400,450,modifier15.name,modifier15.image,modifier15.description, null);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -788,7 +825,7 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(this.jetpackModifier,3);
         
        final ArmorModifier modifier16 = this.playerReference.getArmorManager().teleportModifier;
-        this.teleportModifier = new Button(modifier16.image.copy(),325,100,100,100);
+        this.teleportModifier = new Button(modifier16.image.copy(),modifierBaseX+125,modifierBaseY-125,100,100);
         this.teleportModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
            {
@@ -799,7 +836,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(400,450,modifier16.name,modifier16.image,modifier16.description);
+                   openTooltip(400,450,modifier16.name,modifier16.image,modifier16.description, null);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -812,7 +849,7 @@ public class ArmorMenu extends Window{
         //========================
         // Boots Stats Components
         //========================
-        this.tabPane.addComponent(new Button(new Text("Upgrades:"), 600, 400), 3);
+        this.tabPane.addComponent(new Button(new Text("Upgrades:"), statBaseX, statBaseY + 120), 3);
         
         final ArmorStat stat13 = this.playerReference.getArmorManager().bootsDamageStat;
         b = new Button(stat13.image.copy(), statBaseX, statBaseY, 100, 100);
@@ -827,7 +864,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat13.name,stat13.image,stat13.description);
+                   openTooltip(700,450,stat13.name,stat13.image,stat13.description, stat13.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -853,7 +890,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat14.name,stat14.image,stat14.description);
+                   openTooltip(700,450,stat14.name,stat14.image,stat14.description, stat14.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -880,7 +917,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat15.name,stat15.image,stat15.description);
+                   openTooltip(700,450,stat15.name,stat15.image,stat15.description, stat15.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -906,7 +943,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat16.name,stat16.image,stat16.description);
+                   openTooltip(700,450,stat16.name,stat16.image,stat16.description, stat16.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -918,6 +955,56 @@ public class ArmorMenu extends Window{
         this.jumpHeightStatText= new Text(Byte.toString(stat16.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
         this.jumpHeightStatText.setScale(1.2f);
         this.tabPane.addComponent(new Label(this.jumpHeightStatText,statBaseX +150,statBaseY-125), 3);
+        
+        
+        //==================
+        // Detail Text
+        //===================
+        
+       this.helmHealthDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.helmHealthDetailText,400,400),0);
+       this.helmDamageDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.helmDamageDetailText,400,375),0);
+       this.ccReductionDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.ccReductionDetailText,400,350),0);
+       this.healingEffectivenessDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.healingEffectivenessDetailText,400,325),0);
+       this.helmModifierDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.helmModifierDetailText,400,300),0);
+       
+       this.bodyHealthDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.bodyHealthDetailText,400,400),1);
+       this.bodyDamageReductionDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.bodyDamageReductionDetailText,400,375),1);
+       this.lifeLeechDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.lifeLeechDetailText,400,350),1);
+       this.lifeRegenDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.lifeRegenDetailText,400,325),1);
+       this.bodyModifierDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.bodyModifierDetailText,400,300),1);
+       
+       this.weaponDamageDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.weaponDamageDetailText,400,400),2);
+       this.weaponAttackSpeedDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.weaponAttackSpeedDetailText,400,375),2);
+       this.critChanceDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.critChanceDetailText,400,350),2);
+       this.critDamageDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.critDamageDetailText,400,325),2);
+       this.weaponModifierDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.weaponModifierDetailText,400,300),2);
+       
+       this.bootsDamageDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.bootsDamageDetailText,400,400),3);
+       this.bootsAttackSpeedDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.bootsAttackSpeedDetailText,400,375),3);
+       this.moveSpeedDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.moveSpeedDetailText,400,350),3);
+       this.jumpHeightDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.jumpHeightDetailText,400,325),3);
+       this.bootsModifierDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.bootsModifierDetailText,400,300),3);
+ 
     }
     
     @Override
@@ -930,7 +1017,7 @@ public class ArmorMenu extends Window{
         this.helmDamageReductionStatText.setText(Byte.toString(this.playerReference.getArmorManager().helmDamageReductionStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
         this.ccReductionStatText.setText(Byte.toString(this.playerReference.getArmorManager().ccReductionStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
         this.healingEffectivenessStatText.setText(Byte.toString(this.playerReference.getArmorManager().healingEffectivenessStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
-   
+
         //update body stat points
         this.bodyHealthStatText.setText(Byte.toString(this.playerReference.getArmorManager().bodyHealthStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
         this.bodyDamageReductionStatText.setText(Byte.toString(this.playerReference.getArmorManager().bodyDamageReductionStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
@@ -951,7 +1038,36 @@ public class ArmorMenu extends Window{
 
         
         
-         //show/hide modifiers       
+        //=============
+        // Detail Text
+        //=============
+        
+    
+      this.helmHealthDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().helmHealthStat.points * 10)  + " health.");
+      this.helmDamageDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().helmDamageReductionStat.points * 2) + "% damage reduction.");
+      this.ccReductionDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().ccReductionStat.points * 5) + "% CC reduction.");
+      this.healingEffectivenessDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().healingEffectivenessStat.points* 5) + "% bonus to healing.");
+
+      this.bodyHealthDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().bodyHealthStat.points * 10)  + " health.");
+      this.bodyDamageReductionDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().bodyDamageReductionStat.points * 2) + "% damage reduction.");
+      this.lifeLeechDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().lifeLeech.points * 5) + "% life leech.");
+      this.lifeRegenDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().lifeRegen.points* 5) + " health regen per second.");
+
+      this.weaponDamageDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().weaponDamageStat.points * 2)  + "% damage.");
+      this.weaponAttackSpeedDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().weaponAttackSpeedStat.points * 2) + "% attack speed.");
+      this.critChanceDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().critChanceStat.points * 3) + "% critical hit chance.");
+      this.critDamageDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().critDamageStat.points* 10) + " critical hit damage.");
+
+      this.bootsDamageDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().bootsDamageStat.points * 2)  + "% damage.");
+      this.bootsAttackSpeedDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().bootsAttackSpeedStat.points * 2) + "% attack speed.");
+      this.moveSpeedDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().moveSpeedStat.points * 5) + "% movement speed.");
+      this.jumpHeightDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().jumpHeightStat.points* 2) + "m jump height.");
+
+      
+      //====================
+      // Show/Hide Modifiers
+      //=====================
+            
          if(this.playerReference.getArmorManager().seeEnemyHealthModifier.unlocked == false)
          {
              this.seeEnemyHealthModifier.setDisabled(true);
@@ -961,6 +1077,7 @@ public class ArmorMenu extends Window{
          {
              this.seeEnemyHealthModifier.setDisabled(false);
              this.seeEnemyHealthModifier.setHidden(false);
+             
          }
         
     
@@ -973,6 +1090,7 @@ public class ArmorMenu extends Window{
          {
              this.doubleGoldFindModifier.setDisabled(false);
              this.doubleGoldFindModifier.setHidden(false);
+             
          }
         if(this.playerReference.getArmorManager().seeSecondaryObjectivesModifier.unlocked== false)
          {
@@ -983,6 +1101,7 @@ public class ArmorMenu extends Window{
          {
              this.seeSecondaryObjectivesModifier.setDisabled(false);
              this.seeSecondaryObjectivesModifier.setHidden(false);
+            
          }
          if(this.playerReference.getArmorManager().revealSecretAreasModifier.unlocked== false)
          {
@@ -993,6 +1112,7 @@ public class ArmorMenu extends Window{
          {
              this.revealSecretAreasModifier.setDisabled(false);
              this.revealSecretAreasModifier.setHidden(false);
+             
          }
         if(this.playerReference.getArmorManager().doubleCCResistModifier.unlocked== false)
          {
@@ -1003,6 +1123,7 @@ public class ArmorMenu extends Window{
          {
              this.doubleCCResistModifier.setDisabled(false);
              this.doubleCCResistModifier.setHidden(false);
+             
          }
          if(this.playerReference.getArmorManager().doubleHealingModifier.unlocked== false)
          {
@@ -1013,6 +1134,7 @@ public class ArmorMenu extends Window{
          {
              this.doubleHealingModifier.setDisabled(false);
              this.doubleHealingModifier.setHidden(false);
+             
          }
          if(this.playerReference.getArmorManager().tenPotionsModifier.unlocked== false)
          {
@@ -1023,6 +1145,7 @@ public class ArmorMenu extends Window{
          {
              this.tenPotionsModifier.setDisabled(false);
              this.tenPotionsModifier.setHidden(false);
+             
          }
         if(this.playerReference.getArmorManager().chanceAbsorbModifier.unlocked== false)
          {
@@ -1033,6 +1156,7 @@ public class ArmorMenu extends Window{
          {
              this.chanceAbsorbModifier.setDisabled(false);
              this.chanceAbsorbModifier.setHidden(false);
+             
          }
 
          if(this.playerReference.getArmorManager().concecutiveHitsModifier.unlocked== false)
@@ -1044,6 +1168,7 @@ public class ArmorMenu extends Window{
          {
              this.concecutiveHitsModifier.setDisabled(false);
              this.concecutiveHitsModifier.setHidden(false);
+            
          }
         if(this.playerReference.getArmorManager().meleeAttackDamageModifier.unlocked== false)
          {
@@ -1054,6 +1179,7 @@ public class ArmorMenu extends Window{
          {
              this.meleeAttackDamageModifier.setDisabled(false);
              this.meleeAttackDamageModifier.setHidden(false);
+            
          }
         if(this.playerReference.getArmorManager().rangedAttackSlowModifier.unlocked== false)
          {
@@ -1064,6 +1190,7 @@ public class ArmorMenu extends Window{
          {
              this.rangedAttackSlowModifier.setDisabled(false);
              this.rangedAttackSlowModifier.setHidden(false);
+             
          }
          if(this.playerReference.getArmorManager().criticalHitDamageModifier.unlocked== false)
          {
@@ -1074,6 +1201,7 @@ public class ArmorMenu extends Window{
          {
              this.criticalHitDamageModifier.setDisabled(false);
              this.criticalHitDamageModifier.setHidden(false);
+             
          }
 
         if(this.playerReference.getArmorManager().ccBonusModifier.unlocked== false)
@@ -1085,6 +1213,7 @@ public class ArmorMenu extends Window{
          {
              this.ccBonusModifier.setDisabled(false);
              this.ccBonusModifier.setHidden(false);
+            
          }
          if(this.playerReference.getArmorManager().doubleJumpModifier.unlocked== false)
          {
@@ -1095,6 +1224,7 @@ public class ArmorMenu extends Window{
          {
              this.doubleJumpModifier.setDisabled(false);
              this.doubleJumpModifier.setHidden(false);
+             
          }
          if(this.playerReference.getArmorManager().jetpackModifier.unlocked== false)
          {
@@ -1105,6 +1235,7 @@ public class ArmorMenu extends Window{
          {
              this.jetpackModifier.setDisabled(false);
              this.jetpackModifier.setHidden(false);
+             
          }
          if(this.playerReference.getArmorManager().teleportModifier.unlocked== false)
          {
@@ -1115,6 +1246,7 @@ public class ArmorMenu extends Window{
          {
              this.teleportModifier.setDisabled(false);
              this.teleportModifier.setHidden(false);
+             
          }
          
           
@@ -1122,6 +1254,7 @@ public class ArmorMenu extends Window{
          if(this.playerReference.getArmorManager().seeEnemyHealthModifier.equipped == true)
          {
              this.seeEnemyHealthModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+             this.helmModifierDetailText.setText("Equipped Modifier: See Enemy Health");
          }
          else
          {
@@ -1132,6 +1265,7 @@ public class ArmorMenu extends Window{
          if(this.playerReference.getArmorManager().doubleGoldFindModifier.equipped== true)
          {
              this.doubleGoldFindModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+             this.helmModifierDetailText.setText("Equipped Modifier: Double Gold Find");
          }
          else
          {
@@ -1140,6 +1274,7 @@ public class ArmorMenu extends Window{
         if(this.playerReference.getArmorManager().seeSecondaryObjectivesModifier.equipped== true)
          {
              this.seeSecondaryObjectivesModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+              this.helmModifierDetailText.setText("Equipped Modifier: See Secondary Objectives");
          }
          else
          {
@@ -1148,6 +1283,7 @@ public class ArmorMenu extends Window{
          if(this.playerReference.getArmorManager().revealSecretAreasModifier.equipped== true)
          {
              this.revealSecretAreasModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+             this.helmModifierDetailText.setText("Equipped Modifier: Reveal Secret Areas");
          }
          else
          {
@@ -1156,6 +1292,7 @@ public class ArmorMenu extends Window{
         if(this.playerReference.getArmorManager().doubleCCResistModifier.equipped== true)
          {
              this.doubleCCResistModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+             this.bodyModifierDetailText.setText("Equipped Modifier: Double CC Resist");
          }
          else
          {
@@ -1164,6 +1301,7 @@ public class ArmorMenu extends Window{
          if(this.playerReference.getArmorManager().doubleHealingModifier.equipped== true)
          {
              this.doubleHealingModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+             this.bodyModifierDetailText.setText("Equipped Modifier: Double Healing Effectiveness");
          }
          else
          {
@@ -1172,6 +1310,7 @@ public class ArmorMenu extends Window{
          if(this.playerReference.getArmorManager().tenPotionsModifier.equipped== true)
          {
              this.tenPotionsModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+             this.bodyModifierDetailText.setText("Equipped Modifier: Additional Potions");
          }
          else
          {
@@ -1180,6 +1319,7 @@ public class ArmorMenu extends Window{
         if(this.playerReference.getArmorManager().chanceAbsorbModifier.equipped== true)
          {
              this.chanceAbsorbModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+             this.bodyModifierDetailText.setText("Equipped Modifier: Chance to Absorb Projectiles");
          }
          else
          {
@@ -1189,6 +1329,7 @@ public class ArmorMenu extends Window{
          if(this.playerReference.getArmorManager().concecutiveHitsModifier.equipped== true)
          {
              this.concecutiveHitsModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+              this.weaponModifierDetailText.setText("Equipped Modifier: Concecutive Hits Bonus");
          }
          else
          {
@@ -1197,6 +1338,7 @@ public class ArmorMenu extends Window{
         if(this.playerReference.getArmorManager().meleeAttackDamageModifier.equipped== true)
          {
              this.meleeAttackDamageModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+              this.weaponModifierDetailText.setText("Equipped Modifier: Melee Damage Increase");
          }
          else
          {
@@ -1205,6 +1347,7 @@ public class ArmorMenu extends Window{
         if(this.playerReference.getArmorManager().rangedAttackSlowModifier.equipped== true)
          {
              this.rangedAttackSlowModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+             this.weaponModifierDetailText.setText("Equipped Modifier: Ranged Attack Slow");
          }
          else
          {
@@ -1212,7 +1355,8 @@ public class ArmorMenu extends Window{
          }
          if(this.playerReference.getArmorManager().criticalHitDamageModifier.equipped== true)
          {
-             this.criticalHitDamageModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+             this.criticalHitDamageModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png")));
+             this.weaponModifierDetailText.setText("Equipped Modifier: Critical Hit Damagee");
          }
          else
          {
@@ -1222,6 +1366,7 @@ public class ArmorMenu extends Window{
         if(this.playerReference.getArmorManager().ccBonusModifier.equipped== true)
          {
              this.ccBonusModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+              this.bootsModifierDetailText.setText("Equipped Modifier: CC Reduction Modifier");
          }
          else
          {
@@ -1230,6 +1375,7 @@ public class ArmorMenu extends Window{
          if(this.playerReference.getArmorManager().doubleJumpModifier.equipped== true)
          {
              this.doubleJumpModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+             this.bootsModifierDetailText.setText("Equipped Modifier: Double Jump");
          }
          else
          {
@@ -1237,7 +1383,8 @@ public class ArmorMenu extends Window{
          }
          if(this.playerReference.getArmorManager().jetpackModifier.equipped== true)
          {
-             this.jetpackModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+             this.jetpackModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png")));
+             this.bootsModifierDetailText.setText("Equipped Modifier: Jetpack");
          }
          else
          {
@@ -1246,6 +1393,7 @@ public class ArmorMenu extends Window{
          if(this.playerReference.getArmorManager().teleportModifier.equipped== true)
          {
              this.teleportModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+             this.bootsModifierDetailText.setText("Equipped Modifier: Teleport");
          }
          else
          {
@@ -1258,12 +1406,7 @@ public class ArmorMenu extends Window{
     
     
     
-    
-    
-    
-    
-    
-    private void openTooltip( float x, float y, String name, Image image, String description)
+    private void openTooltip( float x, float y, String name, Image image, String description, Integer cost)
     {
         //remove old components
         this.removeComponent(skillTooltipBackground);
@@ -1271,6 +1414,7 @@ public class ArmorMenu extends Window{
         this.removeComponent(skillTooltipIcon);
         this.removeComponent(skillTooltipTextBlock);
         this.removeComponent(this.infoTextBox);
+        this.removeComponent(this.tooltipCost);
         
         //===============
         //build tooltip
@@ -1295,6 +1439,14 @@ public class ArmorMenu extends Window{
         skillTooltipTextBlock = new TextBlock(x + 85, y + 190, 300, text);
         this.addComponent(skillTooltipTextBlock);    
         
+        //cost
+        if(cost != null)
+        {
+            text = new Text("Cost: " + cost.toString());
+            tooltipCost = new Label(text, x + 200 - text.getWidth()/2, y + 50);
+            this.addComponent(tooltipCost);
+        }
+        
     }
     
     private void closeTooltip()
@@ -1305,5 +1457,6 @@ public class ArmorMenu extends Window{
         this.removeComponent(skillTooltipIcon);
         this.removeComponent(skillTooltipTextBlock);
         this.removeComponent(infoTextBox);
+        this.removeComponent(this.tooltipCost);
     }
 }
