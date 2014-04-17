@@ -148,6 +148,7 @@ public class LevelProgressionManager
         objective.objectiveName = "Lost Weapons";
         objective.objectiveDescription = " Find the lost weapons cache.";
         objective.currencyAward = 25;
+        objective.modifierReward = ArmorModifierID.DOUBLE_CC;
         level4.sideObjective = objective;
         //adding to map
         this.levelMap.put(4, level4);
@@ -158,16 +159,18 @@ public class LevelProgressionManager
         level5.levelName = "Search and Rescue";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Rescue Survivors";
+        objective.objectiveName = "Search For Survivors";
         objective.objectiveDescription = "We lost contact with a caravan carrying supplies to the town, go investigate";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
+        objective.modifierReward = ArmorModifierID.CONCECUTIVE_HITS;
         level5.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
         objective.objectiveName = "Nests";
         objective.objectiveDescription = "Destroy at least 2 of the smaller Dabat nests in the area";
         objective.currencyAward = 25;
+        objective.modifierReward = ArmorModifierID.CC_REDUCTION;
         level5.sideObjective = objective;
         //adding to map
         this.levelMap.put(5, level5);
@@ -257,6 +260,11 @@ public class LevelProgressionManager
 
             //add currency rewards
             playerReference.getCurrencyManager().addCurrency(level.mainObjective.currencyAward);
+            
+            //add armor modifier reward
+            if(level.mainObjective.modifierReward != null)
+                playerReference.getArmorManager().armorModifiers.get(level.mainObjective.modifierReward).unlocked = true;
+        
         }
                 
         //mark complete
