@@ -1107,11 +1107,12 @@ public class GameServerScene extends Scene
            this.sendPacket(packet,UUID.fromString(client));             
     }
     
-    public void sendMainObjectiveCompletePacket(String client, short currencyReward)
+    public void sendMainObjectiveCompletePacket(String client, short currencyReward,ArmorModifierID modifierId)
     {
            //send out side objective complete packet
            MainObjectiveCompletePacket packet = new MainObjectiveCompletePacket();           
            packet.currencyReward = currencyReward;
+           packet.modifierID = modifierId;
            this.sendPacket(packet,UUID.fromString(client));             
     }
     

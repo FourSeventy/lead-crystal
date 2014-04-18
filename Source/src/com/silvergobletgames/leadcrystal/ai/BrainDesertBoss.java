@@ -273,9 +273,11 @@ public class BrainDesertBoss extends BrainGround
     
     public void deadEnter()
     {
- 
+
         //add spewer to the world
-        self.getOwningScene().add(new LootSpewer(60 * 3), Scene.Layer.MAIN);
+        LootSpewer spew = new LootSpewer(60 * 6);
+        spew.setPosition(self.getPosition().x, self.getPosition().y);
+        self.getOwningScene().add(spew, Scene.Layer.MAIN);
         
     }
     

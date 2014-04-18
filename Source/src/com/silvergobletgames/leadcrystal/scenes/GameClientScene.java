@@ -1811,6 +1811,18 @@ public final class GameClientScene extends Scene
         skillText.setPosition(center- skillText.getWidth()/2 - 20, 540);
         skillText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 240, 0, 0));
         
+        //modifier text
+        Text modifierText = null;
+        if(packet.modifierID != null)
+        {
+            //modifier text
+            String modifierString = "Unlocked \"" + this.player.getArmorManager().armorModifiers.get(packet.modifierID).name +"\" Armor Modifier";
+            modifierText = new Text(modifierString,LeadCrystalTextType.MESSAGE);
+            modifierText.setScale(.5f);
+            modifierText.setPosition(center- modifierText.getWidth()/2 - 20, 550);
+            modifierText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 240, 0, 0));
+        }
+        
         
         //add fade effects
         TextEffect fade = new TextEffect(TextEffect.TextEffectType.COLOR, 30, new Color(Color.green), new Color(Color.green,0));

@@ -1,6 +1,7 @@
 package com.silvergobletgames.leadcrystal.netcode;
 
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
+import com.silvergobletgames.leadcrystal.items.ArmorManager;
 import com.silvergobletgames.sylver.netcode.Packet;
 
 
@@ -11,6 +12,7 @@ import com.silvergobletgames.sylver.netcode.Packet;
 public class MainObjectiveCompletePacket extends Packet
 {
     public short currencyReward = 0;
+    public ArmorManager.ArmorModifier.ArmorModifierID modifierID;
     
     
     public MainObjectiveCompletePacket()

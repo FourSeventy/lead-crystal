@@ -259,13 +259,17 @@ public class SceneScriptManager
             
             //calculate currency reward 
             short currencyAward = 0;
+            ArmorModifierID id = null;
             if(mainObjectiveNewleyCompleted)
             {
                 currencyAward = (short)player.getLevelProgressionManager().levelMap.get(levelNumber).mainObjective.currencyAward;
+               id = player.getLevelProgressionManager().levelMap.get(levelNumber).mainObjective.modifierReward;
+                
+           
             }
             
             //send main objective complete packet
-            owningScene.sendMainObjectiveCompletePacket(player.getID(), currencyAward); 
+            owningScene.sendMainObjectiveCompletePacket(player.getID(), currencyAward,id); 
             
             //complete main objective
             player.getLevelProgressionManager().completeMainObjective(levelNumber);          
