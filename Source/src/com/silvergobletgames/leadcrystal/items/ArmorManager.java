@@ -34,10 +34,9 @@ public class ArmorManager {
     public ArmorModifier seeEnemyHealthModifier;
     public ArmorModifier doubleGoldFindModifier;
     public ArmorModifier seeSecondaryObjectivesModifier;
-    public ArmorModifier revealSecretAreasModifier;
-    public ArmorStat helmHealthStat;
-    public ArmorStat helmDamageReductionStat;
-    public ArmorStat ccReductionStat;
+    public ArmorModifier revealSecretAreasModifier;   
+    public ArmorStat lifeLeech;
+    public ArmorStat lifeRegen;
     public ArmorStat healingEffectivenessStat;
     
     //body
@@ -45,10 +44,11 @@ public class ArmorManager {
     public ArmorModifier doubleHealingModifier;
     public ArmorModifier tenPotionsModifier;
     public ArmorModifier chanceAbsorbModifier;
-    public ArmorStat bodyHealthStat;
-    public ArmorStat bodyDamageReductionStat;
-    public ArmorStat lifeLeech;
-    public ArmorStat lifeRegen;
+    public ArmorStat healthStat;
+    public ArmorStat damageReductionStat;
+    public ArmorStat numberOfPotionsStat;
+    
+  
     
     //weapon
     public ArmorModifier concecutiveHitsModifier;
@@ -58,15 +58,13 @@ public class ArmorManager {
     public ArmorStat weaponDamageStat;
     public ArmorStat weaponAttackSpeedStat;
     public ArmorStat critChanceStat;
-    public ArmorStat critDamageStat; 
     
     //boots
     public ArmorModifier ccBonusModifier;
     public ArmorModifier doubleJumpModifier;
     public ArmorModifier jetpackModifier;
     public ArmorModifier teleportModifier;
-    public ArmorStat bootsDamageStat;
-    public ArmorStat bootsAttackSpeedStat;
+    public ArmorStat ccReductionStat;
     public ArmorStat moveSpeedStat;
     public ArmorStat jumpHeightStat;
     
@@ -100,22 +98,16 @@ public class ArmorManager {
         //===============
         // Helm Stats
         //===============
-        this.helmHealthStat = new ArmorStat(ArmorStat.ArmorStatID.HELM_HEALTH, new Image("healthStat.jpg"), "Health", 50);
-        this.helmHealthStat.description = "+10 health per point.";
-        this.helmHealthStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().maxHealth.adjustBase(10); 
-                                                   getPlayerReference().getCombatData().currentHealth+=10;
-                                                   }}); 
-        this.armorStats.put(this.helmHealthStat.id,this.helmHealthStat);
+          
+        this.lifeLeech = new ArmorStat(ArmorStat.ArmorStatID.LIFE_LEECH, new Image("lifeLeechStat.jpg"), "Life Leech", 75);
+        this.lifeLeech.description = "+5% life leech per point.";
+        this.lifeLeech.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().lifeLeech.adjustBase(.05f);}}); 
+        this.armorStats.put(this.lifeLeech.id,this.lifeLeech);
         
-        this.helmDamageReductionStat = new ArmorStat(ArmorStat.ArmorStatID.HELM_DAMAGE_REDUCTION, new Image("armorStat.jpg"), "Damage Reduction", 50);
-        this.helmDamageReductionStat.description = "+2% damage reduction per point.";
-        this.helmDamageReductionStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().damageResistance.adjustBase(.02f);}}); 
-        this.armorStats.put(this.helmDamageReductionStat.id,this.helmDamageReductionStat);
-        
-        this.ccReductionStat = new ArmorStat(ArmorStat.ArmorStatID.CC_REDUCTION, new Image("CCStat.jpg"), "CC Reduction", 75);
-        this.ccReductionStat.description = "+5% CC reduction per point.";
-        this.ccReductionStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().ccResistance.adjustBase(.05f);}}); 
-        this.armorStats.put(this.ccReductionStat.id,this.ccReductionStat);
+        this.lifeRegen = new ArmorStat(ArmorStat.ArmorStatID.LIFE_REGEN, new Image("lifeRegenStat.jpg"), "Life Regen", 75);
+        this.lifeRegen.description = "+1 health regen/s per point.";
+        this.lifeRegen.setAddPointAction(new ArmorAction(){ public void doAction(){System.out.println("health regen up");}}); 
+        this.armorStats.put(this.lifeRegen.id,this.lifeRegen);
         
         this.healingEffectivenessStat = new ArmorStat(ArmorStat.ArmorStatID.HEALING_EFFECTIVENESS, new Image("healingStat.jpg"), "Healing Effectiveness", 75);
         this.healingEffectivenessStat.description = "+5% healing effectiveness per point.";
@@ -146,27 +138,23 @@ public class ArmorManager {
         //===============
         // Body Stats
         //===============
-        this.bodyHealthStat = new ArmorStat(ArmorStat.ArmorStatID.BODY_HEALTH, new Image("healthStat.jpg"), "Health", 75);
-        this.bodyHealthStat.description = "+10 health per point.";
-        this.bodyHealthStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().maxHealth.adjustBase(10); 
+        this.healthStat = new ArmorStat(ArmorStat.ArmorStatID.BODY_HEALTH, new Image("healthStat.jpg"), "Health", 75);
+        this.healthStat.description = "+10 health per point.";
+        this.healthStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().maxHealth.adjustBase(10); 
                                                    getPlayerReference().getCombatData().currentHealth+=10;
                                                    }}); 
-        this.armorStats.put(this.bodyHealthStat.id,this.bodyHealthStat);
+        this.armorStats.put(this.healthStat.id,this.healthStat);
         
-        this.bodyDamageReductionStat = new ArmorStat(ArmorStat.ArmorStatID.BODY_DAMAGE_REDUCTION, new Image("armorStat.jpg"), "Damage Reduction", 50);
-        this.bodyDamageReductionStat.description = "+2% damage reduction per point.";
-        this.bodyDamageReductionStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().damageResistance.adjustBase(.02f);}}); 
-        this.armorStats.put(this.bodyDamageReductionStat.id,this.bodyDamageReductionStat);
+        this.damageReductionStat = new ArmorStat(ArmorStat.ArmorStatID.BODY_DAMAGE_REDUCTION, new Image("armorStat.jpg"), "Damage Reduction", 50);
+        this.damageReductionStat.description = "+2% damage reduction per point.";
+        this.damageReductionStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().damageResistance.adjustBase(.02f);}}); 
+        this.armorStats.put(this.damageReductionStat.id,this.damageReductionStat);
         
-        this.lifeLeech = new ArmorStat(ArmorStat.ArmorStatID.LIFE_LEECH, new Image("lifeLeechStat.jpg"), "Life Leech", 75);
-        this.lifeLeech.description = "+5% life leech per point.";
-        this.lifeLeech.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().lifeLeech.adjustBase(.05f);}}); 
-        this.armorStats.put(this.lifeLeech.id,this.lifeLeech);
-        
-        this.lifeRegen = new ArmorStat(ArmorStat.ArmorStatID.LIFE_REGEN, new Image("lifeRegenStat.jpg"), "Life Regen", 75);
-        this.lifeRegen.description = "+1 health regen/s per point.";
-        this.lifeRegen.setAddPointAction(new ArmorAction(){ public void doAction(){System.out.println("health regen up");}}); 
-        this.armorStats.put(this.lifeRegen.id,this.lifeRegen);
+        this.numberOfPotionsStat = new ArmorStat(ArmorStat.ArmorStatID.NUMBER_POTIONS, new Image("armorStat.jpg"), "Number of Potions", 50);
+        this.numberOfPotionsStat.description = "+1 additional potion per point.";
+        this.numberOfPotionsStat.setAddPointAction(new ArmorAction(){ public void doAction(){}}); 
+        this.armorStats.put(this.numberOfPotionsStat.id,this.numberOfPotionsStat);
+      
         
         //=================
         // Weapon Modifiers
@@ -205,11 +193,6 @@ public class ArmorManager {
         this.critChanceStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().critChance.adjustBase(.03f);}}); 
         this.armorStats.put(this.critChanceStat.id,this.critChanceStat);
         
-        this.critDamageStat = new ArmorStat(ArmorStat.ArmorStatID.CRIT_DAMAGE, new Image("critDamageStat.jpg"), "Critical Hit Damage", 75);
-        this.critDamageStat.description = "+10% crit damage per point";
-        this.critDamageStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().critModifier.adjustBase(.10f);}}); 
-        this.armorStats.put(this.critDamageStat.id,this.critDamageStat);
-        
         
         //================
         // Boots Modfiers
@@ -230,16 +213,11 @@ public class ArmorManager {
         //==============
         // Boots Stats
         //==============
-        
-        this.bootsDamageStat = new ArmorStat(ArmorStat.ArmorStatID.BOOTS_DAMAGE, new Image("damageStat.jpg"), "Damage", 50);
-        this.bootsDamageStat.description = "+2% damage per point";
-        this.bootsDamageStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().baseDamage.adjustPercentModifier(.02f);}}); 
-        this.armorStats.put(this.bootsDamageStat.id,this.bootsDamageStat);
-        
-        this.bootsAttackSpeedStat = new ArmorStat(ArmorStat.ArmorStatID.BOOTS_ATTACK_SPEED, new Image("attackSpeedStat.jpg"), "Attack Speed", 50);
-        this.bootsAttackSpeedStat.description = "+2% attack speed per point";
-        this.bootsAttackSpeedStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().cooldownModifier.adjustBase(-.20f);}}); 
-        this.armorStats.put(this.bootsAttackSpeedStat.id,this.bootsAttackSpeedStat);
+                      
+        this.ccReductionStat = new ArmorStat(ArmorStat.ArmorStatID.CC_REDUCTION, new Image("CCStat.jpg"), "CC Reduction", 75);
+        this.ccReductionStat.description = "+5% CC reduction per point.";
+        this.ccReductionStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().ccResistance.adjustBase(.05f);}}); 
+        this.armorStats.put(this.ccReductionStat.id,this.ccReductionStat);
         
         this.moveSpeedStat = new ArmorStat(ArmorStat.ArmorStatID.MOVE_SPEED, new Image("moveSpeedStat.jpg"), "Move Speed", 75);
         this.moveSpeedStat.description = "+5% move speed per point";
@@ -535,13 +513,13 @@ public class ArmorManager {
         public static enum ArmorStatID
         {
             //helm
-            HELM_HEALTH,HELM_DAMAGE_REDUCTION, CC_REDUCTION,HEALING_EFFECTIVENESS,
+            LIFE_LEECH,LIFE_REGEN,HEALING_EFFECTIVENESS,
             //body
-            BODY_HEALTH,BODY_DAMAGE_REDUCTION,LIFE_LEECH,LIFE_REGEN,
+            BODY_HEALTH,BODY_DAMAGE_REDUCTION,NUMBER_POTIONS,
             //weapon
-            WEAPON_DAMAGE, WEAPON_ATTACK_SPEED,CRIT_CHANCE,CRIT_DAMAGE,
+            WEAPON_DAMAGE, WEAPON_ATTACK_SPEED,CRIT_CHANCE,
             //boots
-            BOOTS_DAMAGE,BOOTS_ATTACK_SPEED,MOVE_SPEED, JUMP_HEIGHT
+            CC_REDUCTION,MOVE_SPEED, JUMP_HEIGHT
             
         }
         
@@ -663,42 +641,35 @@ public class ArmorManager {
      {
          RenderData renderData = new RenderData();
 
-         renderData.data.add(0,helmHealthStat.dumpRenderData());
-         renderData.data.add(1,helmDamageReductionStat.dumpRenderData());
-         renderData.data.add(2,ccReductionStat.dumpRenderData());
-         renderData.data.add(3,healingEffectivenessStat.dumpRenderData());
-         renderData.data.add(4,bodyHealthStat.dumpRenderData());
-         renderData.data.add(5,bodyDamageReductionStat.dumpRenderData());
-         renderData.data.add(6,lifeLeech.dumpRenderData());
-         renderData.data.add(7,lifeRegen.dumpRenderData());        
-         renderData.data.add(8,weaponDamageStat.dumpRenderData());
-         renderData.data.add(9,weaponAttackSpeedStat.dumpRenderData());
-         renderData.data.add(10,critChanceStat.dumpRenderData());
-         renderData.data.add(11,critDamageStat.dumpRenderData());        
-         renderData.data.add(12,bootsDamageStat.dumpRenderData()); 
-         renderData.data.add(13,bootsAttackSpeedStat.dumpRenderData()); 
-         renderData.data.add(14,moveSpeedStat.dumpRenderData()); 
-         renderData.data.add(15,jumpHeightStat.dumpRenderData()); 
+         renderData.data.add(0,numberOfPotionsStat.dumpRenderData());
+         renderData.data.add(1,ccReductionStat.dumpRenderData());
+         renderData.data.add(2,healingEffectivenessStat.dumpRenderData());
+         renderData.data.add(3,healthStat.dumpRenderData());
+         renderData.data.add(4,damageReductionStat.dumpRenderData());
+         renderData.data.add(5,lifeLeech.dumpRenderData());
+         renderData.data.add(6,lifeRegen.dumpRenderData());        
+         renderData.data.add(7,weaponDamageStat.dumpRenderData());
+         renderData.data.add(8,weaponAttackSpeedStat.dumpRenderData());
+         renderData.data.add(9,critChanceStat.dumpRenderData());
+         renderData.data.add(10,moveSpeedStat.dumpRenderData()); 
+         renderData.data.add(11,jumpHeightStat.dumpRenderData()); 
          
-         renderData.data.add(16,seeEnemyHealthModifier.dumpRenderData()); 
-         renderData.data.add(17,doubleGoldFindModifier.dumpRenderData()); 
-         renderData.data.add(18,seeSecondaryObjectivesModifier.dumpRenderData()); 
-         renderData.data.add(19,revealSecretAreasModifier.dumpRenderData());    
-         
-         renderData.data.add(20,doubleCCResistModifier.dumpRenderData()); 
-         renderData.data.add(21,doubleHealingModifier.dumpRenderData()); 
-         renderData.data.add(22,tenPotionsModifier.dumpRenderData()); 
-         renderData.data.add(23,chanceAbsorbModifier.dumpRenderData());    
-         
-         renderData.data.add(24,concecutiveHitsModifier.dumpRenderData()); 
-         renderData.data.add(25,meleeAttackDamageModifier.dumpRenderData()); 
-         renderData.data.add(26,rangedAttackSlowModifier.dumpRenderData()); 
-         renderData.data.add(27,criticalHitDamageModifier.dumpRenderData()); 
-         
-         renderData.data.add(28,ccBonusModifier.dumpRenderData()); 
-         renderData.data.add(29,doubleJumpModifier.dumpRenderData()); 
-         renderData.data.add(30,jetpackModifier.dumpRenderData()); 
-         renderData.data.add(31,teleportModifier.dumpRenderData()); 
+         renderData.data.add(12,seeEnemyHealthModifier.dumpRenderData()); 
+         renderData.data.add(13,doubleGoldFindModifier.dumpRenderData()); 
+         renderData.data.add(14,seeSecondaryObjectivesModifier.dumpRenderData()); 
+         renderData.data.add(15,revealSecretAreasModifier.dumpRenderData());         
+         renderData.data.add(16,doubleCCResistModifier.dumpRenderData()); 
+         renderData.data.add(17,doubleHealingModifier.dumpRenderData()); 
+         renderData.data.add(18,tenPotionsModifier.dumpRenderData()); 
+         renderData.data.add(19,chanceAbsorbModifier.dumpRenderData());          
+         renderData.data.add(20,concecutiveHitsModifier.dumpRenderData()); 
+         renderData.data.add(21,meleeAttackDamageModifier.dumpRenderData()); 
+         renderData.data.add(22,rangedAttackSlowModifier.dumpRenderData()); 
+         renderData.data.add(23,criticalHitDamageModifier.dumpRenderData());        
+         renderData.data.add(24,ccBonusModifier.dumpRenderData()); 
+         renderData.data.add(25,doubleJumpModifier.dumpRenderData()); 
+         renderData.data.add(26,jetpackModifier.dumpRenderData()); 
+         renderData.data.add(27,teleportModifier.dumpRenderData()); 
 
          return renderData;        
      }
@@ -712,7 +683,7 @@ public class ArmorManager {
          
          ArmorStat dummyStat = this.armorStats.get(ArmorStatID.CC_REDUCTION);
          
-        for(int i=0; i<=15; i++)
+        for(int i=0; i<=11; i++)
         {//0
             SceneObjectRenderDataChanges renderChanges = dummyStat.generateRenderDataChanges((RenderData)oldData.data.get(i), (RenderData)newData.data.get(i));
             if(renderChanges != null)
@@ -723,7 +694,7 @@ public class ArmorManager {
         }
        
         ArmorModifier dummyModifier = this.armorModifiers.get(ArmorModifierID.CC_REDUCTION);
-        for(int i=16; i<=31; i++)
+        for(int i=12; i<=27; i++)
         {//0
             SceneObjectRenderDataChanges renderChanges = dummyModifier.generateRenderDataChanges((RenderData)oldData.data.get(i), (RenderData)newData.data.get(i));
             if(renderChanges != null)
@@ -766,136 +737,123 @@ public class ArmorManager {
             
             if(changeData.get(0) != null)
             {
-                this.helmHealthStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(0));
+                this.numberOfPotionsStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(0));
             }
             if(changeData.get(1) != null)
             {
-                this.helmDamageReductionStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(1));
+                this.ccReductionStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(1));
             }
             if(changeData.get(2) != null)
             {
-                this.ccReductionStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(2));
+                this.healingEffectivenessStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(2));
             }
             if(changeData.get(3) != null)
             {
-                this.healingEffectivenessStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(3));
+                this.healthStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(3));
             }
             if(changeData.get(4) != null)
             {
-                this.bodyHealthStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(4));
+                this.damageReductionStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(4));
             }
             if(changeData.get(5) != null)
             {
-                this.bodyDamageReductionStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(5));
+                this.lifeLeech.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(5));
             }
             if(changeData.get(6) != null)
             {
-                this.lifeLeech.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(6));
-            }
+                this.lifeRegen.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(6));
+            }          
             if(changeData.get(7) != null)
             {
-                this.lifeRegen.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(7));
-            }          
+                this.weaponDamageStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(7));
+            }
             if(changeData.get(8) != null)
             {
-                this.weaponDamageStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(8));
+                this.weaponAttackSpeedStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(8));
             }
             if(changeData.get(9) != null)
             {
-                this.weaponAttackSpeedStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(9));
+                this.critChanceStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(9));
             }
             if(changeData.get(10) != null)
             {
-                this.critChanceStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(10));
+                this.moveSpeedStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(10));
             }
             if(changeData.get(11) != null)
             {
-                this.critDamageStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(11));
+                this.jumpHeightStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(11));
             }
-           
+            
+            
+            
+            
+            
             if(changeData.get(12) != null)
             {
-                this.bootsDamageStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(12));
+                this.seeEnemyHealthModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(12));
             }
             if(changeData.get(13) != null)
             {
-                this.bootsAttackSpeedStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(13));
+                this.doubleGoldFindModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(13));
             }
             if(changeData.get(14) != null)
             {
-                this.moveSpeedStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(14));
+                this.seeSecondaryObjectivesModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(14));
             }
             if(changeData.get(15) != null)
             {
-                this.jumpHeightStat.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(15));
+                this.revealSecretAreasModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(15));
             }
             
             if(changeData.get(16) != null)
             {
-                this.seeEnemyHealthModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(16));
+                this.doubleCCResistModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(16));
             }
             if(changeData.get(17) != null)
             {
-                this.doubleGoldFindModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(17));
+                this.doubleHealingModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(17));
             }
             if(changeData.get(18) != null)
             {
-                this.seeSecondaryObjectivesModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(18));
+                this.tenPotionsModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(18));
             }
             if(changeData.get(19) != null)
             {
-                this.revealSecretAreasModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(19));
+                this.chanceAbsorbModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(19));
             }
             
             if(changeData.get(20) != null)
             {
-                this.doubleCCResistModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(20));
+                this.concecutiveHitsModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(20));
             }
             if(changeData.get(21) != null)
             {
-                this.doubleHealingModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(21));
+                this.meleeAttackDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(21));
             }
             if(changeData.get(22) != null)
             {
-                this.tenPotionsModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(22));
+                this.rangedAttackSlowModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(22));
             }
             if(changeData.get(23) != null)
             {
-                this.chanceAbsorbModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(23));
+                this.criticalHitDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(23));
             }
             
             if(changeData.get(24) != null)
             {
-                this.concecutiveHitsModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(24));
+                this.criticalHitDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(24));
             }
             if(changeData.get(25) != null)
             {
-                this.meleeAttackDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(25));
+                this.criticalHitDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(25));
             }
             if(changeData.get(26) != null)
             {
-                this.rangedAttackSlowModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(26));
+                this.criticalHitDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(26));
             }
             if(changeData.get(27) != null)
             {
                 this.criticalHitDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(27));
-            }
-            
-            if(changeData.get(28) != null)
-            {
-                this.criticalHitDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(28));
-            }
-            if(changeData.get(29) != null)
-            {
-                this.criticalHitDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(29));
-            }
-            if(changeData.get(30) != null)
-            {
-                this.criticalHitDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(30));
-            }
-            if(changeData.get(31) != null)
-            {
-                this.criticalHitDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(31));
             }
             
    

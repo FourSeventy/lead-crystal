@@ -40,23 +40,21 @@ public class ArmorMenu extends Window{
     //==============
     // stat labels
     //==============
-    private Text helmHealthStatText;
-    private Text helmDamageReductionStatText;
-    private Text ccReductionStatText;
+
+
+    private Text lifeLeechText;
+    private Text lifeRegenText;
     private Text healingEffectivenessStatText;
     
     private Text bodyHealthStatText;
     private Text bodyDamageReductionStatText;
-    private Text lifeLeechText;
-    private Text lifeRegenText;
-    
+    private Text numberOfPotionsStatText;
+
     private Text weaponDamageStatText;
     private Text weaponAttackSpeedStatText;
     private Text critChanceStatText;
-    private Text critDamageStatText;
     
-    private Text bootsDamageStatText;
-    private Text bootsAttackSpeedStatText;
+    private Text ccReductionStatText;
     private Text moveSpeedStatText;
     private Text jumpHeightStatText;
     
@@ -65,26 +63,23 @@ public class ArmorMenu extends Window{
     // Detail Section
     //================
     
-    private Text helmHealthDetailText;
-    private Text helmDamageDetailText;
-    private Text ccReductionDetailText;
+
+    private Text lifeLeechDetailText;
+    private Text lifeRegenDetailText;
     private Text healingEffectivenessDetailText;
     private Text helmModifierDetailText;
     
     private Text bodyHealthDetailText;
     private Text bodyDamageReductionDetailText;
-    private Text lifeLeechDetailText;
-    private Text lifeRegenDetailText;
+    private Text bodyNumberOfPotionsDetailText;
     private Text bodyModifierDetailText;
     
     private Text weaponDamageDetailText;
     private Text weaponAttackSpeedDetailText;
     private Text critChanceDetailText;
-    private Text critDamageDetailText;
     private Text weaponModifierDetailText;
-    
-    private Text bootsDamageDetailText;
-    private Text bootsAttackSpeedDetailText;
+     
+    private Text ccReductionDetailText;
     private Text moveSpeedDetailText;
     private Text jumpHeightDetailText;
     private Text bootsModifierDetailText;
@@ -143,8 +138,8 @@ public class ArmorMenu extends Window{
         //======================
         this.tabPane.addComponent(new Button(new Text("Upgrades:"), statBaseX, statBaseY + 120), 0);
         
-        final ArmorStat stat = this.playerReference.getArmorManager().helmHealthStat;
-        Button b = new Button(stat.image.copy(), statBaseX, statBaseY, 100, 100);
+        final ArmorStat stat7 = this.playerReference.getArmorManager().lifeLeech;
+        Button b = new Button(stat7.image.copy(), statBaseX, statBaseY, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -153,11 +148,11 @@ public class ArmorMenu extends Window{
                {
                    //buy stat
                    //buy stat
-                   ((GameClientScene)owningScene).sendBuyStatPacket(stat.id);
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat7.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat.name,stat.image,stat.description, stat.cost);
+                   openTooltip(700,450,stat7.name,stat7.image,stat7.description, stat7.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -166,12 +161,12 @@ public class ArmorMenu extends Window{
            }
        });
         this.tabPane.addComponent(b, 0);
-        this.helmHealthStatText = new Text(Byte.toString(stat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.helmHealthStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.helmHealthStatText,statBaseX +25,statBaseY), 0);
+        this.lifeLeechText = new Text(Byte.toString(stat7.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
+        this.lifeLeechText.setScale(1.2f);
+        this.tabPane.addComponent(new Label(this.lifeLeechText,statBaseX+25,statBaseY), 0);
         
-        final ArmorStat stat2 = this.playerReference.getArmorManager().helmDamageReductionStat;
-        b = new Button(stat2.image.copy(), statBaseX + 125, statBaseY, 100, 100);
+        final ArmorStat stat8 = this.playerReference.getArmorManager().lifeRegen;
+        b = new Button(stat8.image.copy(), statBaseX+125, statBaseY, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -179,11 +174,11 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameClientScene)owningScene).sendBuyStatPacket(stat2.id);
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat8.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat2.name,stat2.image,stat2.description, stat2.cost);
+                   openTooltip(700,450,stat8.name,stat8.image,stat8.description, stat8.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -192,39 +187,13 @@ public class ArmorMenu extends Window{
            }
        });
         this.tabPane.addComponent(b, 0);
-        this.helmDamageReductionStatText = new Text(Byte.toString(stat2.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.helmDamageReductionStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.helmDamageReductionStatText,statBaseX +150,statBaseY), 0);
-        
-        final ArmorStat stat3 = this.playerReference.getArmorManager().ccReductionStat;
-        b = new Button(stat3.image.copy(), statBaseX, statBaseY -125, 100, 100);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   //buy stat
-                   //buy stat
-                   ((GameClientScene)owningScene).sendBuyStatPacket(stat3.id);
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(700,450,stat3.name,stat3.image,stat3.description, stat3.cost);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.tabPane.addComponent(b, 0);
-        this.ccReductionStatText = new Text(Byte.toString(stat3.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.ccReductionStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.ccReductionStatText,statBaseX+25,statBaseY -125), 0);
+        this.lifeRegenText= new Text(Byte.toString(stat8.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
+        this.lifeRegenText.setScale(1.2f);
+        this.tabPane.addComponent(new Label(this.lifeRegenText,statBaseX+150,statBaseY ), 0);
+
         
         final ArmorStat stat4 = this.playerReference.getArmorManager().healingEffectivenessStat;
-        b = new Button(stat4.image.copy(), statBaseX+125, statBaseY -125, 100, 100);
+        b = new Button(stat4.image.copy(), statBaseX, statBaseY -125, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -247,7 +216,7 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(b, 0);
         this.healingEffectivenessStatText= new Text(Byte.toString(stat4.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
         this.healingEffectivenessStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.healingEffectivenessStatText,statBaseX+150,statBaseY-125), 0);
+        this.tabPane.addComponent(new Label(this.healingEffectivenessStatText,statBaseX+25,statBaseY-125), 0);
         
         //=========================
         // Helm Modifier Components
@@ -443,7 +412,7 @@ public class ArmorMenu extends Window{
         //======================
         this.tabPane.addComponent(new Button(new Text("Upgrades:"), statBaseX, statBaseY + 120), 1);
         
-        final ArmorStat stat5 = this.playerReference.getArmorManager().bodyHealthStat;
+        final ArmorStat stat5 = this.playerReference.getArmorManager().healthStat;
         b = new Button(stat5.image.copy(), statBaseX, statBaseY, 100, 100);
         b.addActionListener(new ActionListener(){
        
@@ -469,7 +438,7 @@ public class ArmorMenu extends Window{
         this.bodyHealthStatText.setScale(1.2f);
         this.tabPane.addComponent(new Label(this.bodyHealthStatText,statBaseX+25,statBaseY), 1);
         
-        final ArmorStat stat6 = this.playerReference.getArmorManager().bodyDamageReductionStat;
+        final ArmorStat stat6 = this.playerReference.getArmorManager().damageReductionStat;
         b = new Button(stat6.image.copy(), statBaseX+125, statBaseY, 100, 100);
         b.addActionListener(new ActionListener(){
        
@@ -495,8 +464,8 @@ public class ArmorMenu extends Window{
         this.bodyDamageReductionStatText.setScale(1.2f);
         this.tabPane.addComponent(new Label(this.bodyDamageReductionStatText,statBaseX+150,statBaseY), 1);
         
-        final ArmorStat stat7 = this.playerReference.getArmorManager().lifeLeech;
-        b = new Button(stat7.image.copy(), statBaseX, statBaseY-125, 100, 100);
+        final ArmorStat stat99 = this.playerReference.getArmorManager().numberOfPotionsStat;
+        b = new Button(stat99.image.copy(), statBaseX, statBaseY-125, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -504,49 +473,24 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   //buy stat
-                   ((GameClientScene)owningScene).sendBuyStatPacket(stat7.id);
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat99.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat7.name,stat7.image,stat7.description, stat7.cost);
+                   openTooltip(700,450,stat99.name,stat99.image,stat99.description, stat99.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
                    closeTooltip();
                }
-           }
+           } 
        });
         this.tabPane.addComponent(b, 1);
-        this.lifeLeechText = new Text(Byte.toString(stat7.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.lifeLeechText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.lifeLeechText,statBaseX+25,statBaseY -125), 1);
+        this.numberOfPotionsStatText = new Text(Byte.toString(stat6.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
+        this.numberOfPotionsStatText.setScale(1.2f);
+        this.tabPane.addComponent(new Label(this.numberOfPotionsStatText,statBaseX+25,statBaseY-125), 1);
         
-        final ArmorStat stat8 = this.playerReference.getArmorManager().lifeRegen;
-        b = new Button(stat8.image.copy(), statBaseX+125, statBaseY-125, 100, 100);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   //buy stat
-                   ((GameClientScene)owningScene).sendBuyStatPacket(stat8.id);
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(700,450,stat8.name,stat8.image,stat8.description, stat8.cost);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.tabPane.addComponent(b, 1);
-        this.lifeRegenText= new Text(Byte.toString(stat8.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.lifeRegenText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.lifeRegenText,statBaseX+150,statBaseY -125), 1);
+
         
         //============================
         // Weapon Modifier Components
@@ -726,31 +670,6 @@ public class ArmorMenu extends Window{
         this.critChanceStatText.setScale(1.2f);
         this.tabPane.addComponent(new Label(this.critChanceStatText,statBaseX +25,statBaseY-125), 2);
         
-       final ArmorStat stat12 = this.playerReference.getArmorManager().critDamageStat;
-        b = new Button(stat12.image.copy(), statBaseX+125, statBaseY-125, 100, 100);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   //buy stat
-                   ((GameClientScene)owningScene).sendBuyStatPacket(stat12.id);
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(700,450,stat12.name,stat12.image,stat12.description, stat12.cost);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.tabPane.addComponent(b, 2);
-        this.critDamageStatText= new Text(Byte.toString(stat12.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.critDamageStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.critDamageStatText,statBaseX +150,statBaseY-125), 2);
         
         //==================
         // Boots Modifiers
@@ -851,8 +770,8 @@ public class ArmorMenu extends Window{
         //========================
         this.tabPane.addComponent(new Button(new Text("Upgrades:"), statBaseX, statBaseY + 120), 3);
         
-        final ArmorStat stat13 = this.playerReference.getArmorManager().bootsDamageStat;
-        b = new Button(stat13.image.copy(), statBaseX, statBaseY, 100, 100);
+        final ArmorStat stat3 = this.playerReference.getArmorManager().ccReductionStat;
+        b = new Button(stat3.image.copy(), statBaseX, statBaseY, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -860,11 +779,12 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameClientScene)owningScene).sendBuyStatPacket(stat13.id);
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat3.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat13.name,stat13.image,stat13.description, stat13.cost);
+                   openTooltip(700,450,stat3.name,stat3.image,stat3.description, stat3.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -872,39 +792,13 @@ public class ArmorMenu extends Window{
                }
            }
        });
-        this.tabPane.addComponent(b, 3);
-        this.bootsDamageStatText = new Text(Byte.toString(stat13.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.bootsDamageStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.bootsDamageStatText,statBaseX +25,statBaseY), 3);
-        
-        final ArmorStat stat14 = this.playerReference.getArmorManager().bootsAttackSpeedStat;
-        b = new Button(stat14.image.copy(), statBaseX+125, statBaseY, 100, 100);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   //buy stat
-                   ((GameClientScene)owningScene).sendBuyStatPacket(stat14.id);
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(700,450,stat14.name,stat14.image,stat14.description, stat14.cost);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           } 
-       });
-        this.tabPane.addComponent(b, 3);
-        this.bootsAttackSpeedStatText = new Text(Byte.toString(stat14.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.bootsAttackSpeedStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.bootsAttackSpeedStatText,statBaseX +150,statBaseY), 3);
+        this.tabPane.addComponent(b,3);
+        this.ccReductionStatText = new Text(Byte.toString(stat3.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
+        this.ccReductionStatText.setScale(1.2f);
+        this.tabPane.addComponent(new Label(this.ccReductionStatText,statBaseX+25,statBaseY ), 3);
         
       final  ArmorStat stat15 = this.playerReference.getArmorManager().moveSpeedStat;
-        b = new Button(stat15.image.copy(), statBaseX, statBaseY-125, 100, 100);
+        b = new Button(stat15.image.copy(), statBaseX+125, statBaseY, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -928,10 +822,10 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(b, 3);
         this.moveSpeedStatText = new Text(Byte.toString(stat15.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
         this.moveSpeedStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.moveSpeedStatText,statBaseX +25,statBaseY-125), 3);
+        this.tabPane.addComponent(new Label(this.moveSpeedStatText,statBaseX +150,statBaseY), 3);
         
        final ArmorStat stat16 = this.playerReference.getArmorManager().jumpHeightStat;
-        b = new Button(stat16.image.copy(), statBaseX+125, statBaseY-125, 100, 100);
+        b = new Button(stat16.image.copy(), statBaseX, statBaseY-125, 100, 100);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -954,34 +848,31 @@ public class ArmorMenu extends Window{
         this.tabPane.addComponent(b, 3);
         this.jumpHeightStatText= new Text(Byte.toString(stat16.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
         this.jumpHeightStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.jumpHeightStatText,statBaseX +150,statBaseY-125), 3);
+        this.tabPane.addComponent(new Label(this.jumpHeightStatText,statBaseX +25,statBaseY-125), 3);
         
         
         //==================
         // Detail Text
         //===================
         
-       this.helmHealthDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.helmHealthDetailText,400,400),0);
-       this.helmDamageDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.helmDamageDetailText,400,375),0);
-       this.ccReductionDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.ccReductionDetailText,400,350),0);
+
+       this.lifeLeechDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.lifeLeechDetailText,400,400),0);
+       this.lifeRegenDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.lifeRegenDetailText,400,375),0);
        this.healingEffectivenessDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.healingEffectivenessDetailText,400,325),0);
+       this.tabPane.addComponent(new Label(this.healingEffectivenessDetailText,400,350),0);    
        this.helmModifierDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.helmModifierDetailText,400,300),0);
+       this.tabPane.addComponent(new Label(this.helmModifierDetailText,400,325),0);
        
        this.bodyHealthDetailText = new Text("");
        this.tabPane.addComponent(new Label(this.bodyHealthDetailText,400,400),1);
        this.bodyDamageReductionDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.bodyDamageReductionDetailText,400,375),1);
-       this.lifeLeechDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.lifeLeechDetailText,400,350),1);
-       this.lifeRegenDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.lifeRegenDetailText,400,325),1);
+       this.tabPane.addComponent(new Label(this.bodyDamageReductionDetailText,400,375),1);  
+       this.bodyNumberOfPotionsDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.bodyNumberOfPotionsDetailText,400,350),1);
        this.bodyModifierDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.bodyModifierDetailText,400,300),1);
+       this.tabPane.addComponent(new Label(this.bodyModifierDetailText,400,325),1);
        
        this.weaponDamageDetailText = new Text("");
        this.tabPane.addComponent(new Label(this.weaponDamageDetailText,400,400),2);
@@ -989,21 +880,17 @@ public class ArmorMenu extends Window{
        this.tabPane.addComponent(new Label(this.weaponAttackSpeedDetailText,400,375),2);
        this.critChanceDetailText = new Text("");
        this.tabPane.addComponent(new Label(this.critChanceDetailText,400,350),2);
-       this.critDamageDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.critDamageDetailText,400,325),2);
        this.weaponModifierDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.weaponModifierDetailText,400,300),2);
+       this.tabPane.addComponent(new Label(this.weaponModifierDetailText,400,325),2);
        
-       this.bootsDamageDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.bootsDamageDetailText,400,400),3);
-       this.bootsAttackSpeedDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.bootsAttackSpeedDetailText,400,375),3);
+       this.ccReductionDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.ccReductionDetailText,400,400),3);
        this.moveSpeedDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.moveSpeedDetailText,400,350),3);
+       this.tabPane.addComponent(new Label(this.moveSpeedDetailText,400,375),3);
        this.jumpHeightDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.jumpHeightDetailText,400,325),3);
+       this.tabPane.addComponent(new Label(this.jumpHeightDetailText,400,350),3);
        this.bootsModifierDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.bootsModifierDetailText,400,300),3);
+       this.tabPane.addComponent(new Label(this.bootsModifierDetailText,400,325),3);
  
     }
     
@@ -1013,26 +900,22 @@ public class ArmorMenu extends Window{
         super.update();
         
         //update helm stat points
-        this.helmHealthStatText.setText(Byte.toString(this.playerReference.getArmorManager().helmHealthStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.helmDamageReductionStatText.setText(Byte.toString(this.playerReference.getArmorManager().helmDamageReductionStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
-        this.ccReductionStatText.setText(Byte.toString(this.playerReference.getArmorManager().ccReductionStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
+        this.lifeLeechText.setText(Byte.toString(this.playerReference.getArmorManager().lifeLeech.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
+        this.lifeRegenText.setText(Byte.toString(this.playerReference.getArmorManager().lifeRegen.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
         this.healingEffectivenessStatText.setText(Byte.toString(this.playerReference.getArmorManager().healingEffectivenessStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
 
         //update body stat points
-        this.bodyHealthStatText.setText(Byte.toString(this.playerReference.getArmorManager().bodyHealthStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
-        this.bodyDamageReductionStatText.setText(Byte.toString(this.playerReference.getArmorManager().bodyDamageReductionStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
-        this.lifeLeechText.setText(Byte.toString(this.playerReference.getArmorManager().lifeLeech.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
-        this.lifeRegenText.setText(Byte.toString(this.playerReference.getArmorManager().lifeRegen.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
-   
+        this.bodyHealthStatText.setText(Byte.toString(this.playerReference.getArmorManager().healthStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
+        this.bodyDamageReductionStatText.setText(Byte.toString(this.playerReference.getArmorManager().damageReductionStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
+        this.numberOfPotionsStatText.setText(Byte.toString(this.playerReference.getArmorManager().numberOfPotionsStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
+      
         //weapon
         this.weaponDamageStatText.setText(Byte.toString(this.playerReference.getArmorManager().weaponDamageStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
         this.weaponAttackSpeedStatText.setText(Byte.toString(this.playerReference.getArmorManager().weaponAttackSpeedStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
         this.critChanceStatText.setText(Byte.toString(this.playerReference.getArmorManager().critChanceStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
-        this.critDamageStatText.setText(Byte.toString(this.playerReference.getArmorManager().critDamageStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));    
 
         //boots
-        this.bootsDamageStatText.setText(Byte.toString(this.playerReference.getArmorManager().bootsDamageStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
-        this.bootsAttackSpeedStatText.setText(Byte.toString(this.playerReference.getArmorManager().bootsAttackSpeedStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
+        this.ccReductionStatText.setText(Byte.toString(this.playerReference.getArmorManager().ccReductionStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));      
         this.moveSpeedStatText.setText(Byte.toString(this.playerReference.getArmorManager().moveSpeedStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
         this.jumpHeightStatText.setText(Byte.toString(this.playerReference.getArmorManager().jumpHeightStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));    
 
@@ -1042,24 +925,23 @@ public class ArmorMenu extends Window{
         // Detail Text
         //=============
         
-    
-      this.helmHealthDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().helmHealthStat.points * 10)  + " health.");
-      this.helmDamageDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().helmDamageReductionStat.points * 2) + "% damage reduction.");
-      this.ccReductionDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().ccReductionStat.points * 5) + "% CC reduction.");
+      //helm
+     this.lifeLeechDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().lifeLeech.points * 5) + "% life leech.");
+      this.lifeRegenDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().lifeRegen.points* 5) + " health regen per second.");
       this.healingEffectivenessDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().healingEffectivenessStat.points* 5) + "% bonus to healing.");
 
-      this.bodyHealthDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().bodyHealthStat.points * 10)  + " health.");
-      this.bodyDamageReductionDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().bodyDamageReductionStat.points * 2) + "% damage reduction.");
-      this.lifeLeechDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().lifeLeech.points * 5) + "% life leech.");
-      this.lifeRegenDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().lifeRegen.points* 5) + " health regen per second.");
-
+      //body
+      this.bodyNumberOfPotionsDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().numberOfPotionsStat.points )  + " potions.");
+      this.bodyHealthDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().healthStat.points * 10)  + " health.");
+      this.bodyDamageReductionDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().damageReductionStat.points * 2) + "% damage reduction.");
+      
+      //weapon
       this.weaponDamageDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().weaponDamageStat.points * 2)  + "% damage.");
       this.weaponAttackSpeedDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().weaponAttackSpeedStat.points * 2) + "% attack speed.");
       this.critChanceDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().critChanceStat.points * 3) + "% critical hit chance.");
-      this.critDamageDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().critDamageStat.points* 10) + " critical hit damage.");
-
-      this.bootsDamageDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().bootsDamageStat.points * 2)  + "% damage.");
-      this.bootsAttackSpeedDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().bootsAttackSpeedStat.points * 2) + "% attack speed.");
+     
+      //boots
+      this.ccReductionDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().ccReductionStat.points * 5) + "% CC reduction.");
       this.moveSpeedDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().moveSpeedStat.points * 5) + "% movement speed.");
       this.jumpHeightDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().jumpHeightStat.points* 2) + "m jump height.");
 

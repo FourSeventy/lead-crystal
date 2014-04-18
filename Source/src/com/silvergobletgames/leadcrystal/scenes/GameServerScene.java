@@ -496,7 +496,6 @@ public class GameServerScene extends Scene
                     //test
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_M))
                     {
-                       this.getScriptManager().completeSideObjective(3);
                     }
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_N))
                     {
