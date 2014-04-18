@@ -159,7 +159,7 @@ public class LevelProgressionManager
         level5.levelName = "Search and Rescue";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Search For Survivors";
+        objective.objectiveName = "Search For Caravan";
         objective.objectiveDescription = "We lost contact with a caravan carrying supplies to the town, go investigate";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
@@ -167,8 +167,8 @@ public class LevelProgressionManager
         level5.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Nests";
-        objective.objectiveDescription = "Destroy at least 2 of the smaller Dabat nests in the area";
+        objective.objectiveName = "Survivors";
+        objective.objectiveDescription = "Search for any survivors of the caravan";
         objective.currencyAward = 25;
         objective.modifierReward = ArmorModifierID.CC_REDUCTION;
         level5.sideObjective = objective;

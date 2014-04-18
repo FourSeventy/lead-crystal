@@ -275,7 +275,7 @@ public class BrainDesertBoss extends BrainGround
     {
 
         //add spewer to the world
-        LootSpewer spew = new LootSpewer(60 * 6);
+        LootSpewer spew = new LootSpewer(60 * 5);
         spew.setPosition(self.getPosition().x, self.getPosition().y);
         self.getOwningScene().add(spew, Scene.Layer.MAIN);
         
