@@ -40,15 +40,14 @@ public class ArmorMenu extends Window{
     //==============
     // stat labels
     //==============
-
-
+    
     private Text lifeLeechText;
-    private Text lifeRegenText;
+    private Text numberOfPotionsText;
     private Text healingEffectivenessStatText;
     
     private Text bodyHealthStatText;
     private Text bodyDamageReductionStatText;
-    private Text numberOfPotionsStatText;
+    private Text thornsStatText;
 
     private Text weaponDamageStatText;
     private Text weaponAttackSpeedStatText;
@@ -71,7 +70,7 @@ public class ArmorMenu extends Window{
     
     private Text bodyHealthDetailText;
     private Text bodyDamageReductionDetailText;
-    private Text bodyNumberOfPotionsDetailText;
+    private Text bodyThornsDamageDetailText;
     private Text bodyModifierDetailText;
     
     private Text weaponDamageDetailText;
@@ -165,7 +164,7 @@ public class ArmorMenu extends Window{
         this.lifeLeechText.setScale(1.2f);
         this.tabPane.addComponent(new Label(this.lifeLeechText,statBaseX+25,statBaseY), 0);
         
-        final ArmorStat stat8 = this.playerReference.getArmorManager().lifeRegen;
+        final ArmorStat stat8 = this.playerReference.getArmorManager().numberOfPotionsStat;
         b = new Button(stat8.image.copy(), statBaseX+125, statBaseY, 100, 100);
         b.addActionListener(new ActionListener(){
        
@@ -187,9 +186,9 @@ public class ArmorMenu extends Window{
            }
        });
         this.tabPane.addComponent(b, 0);
-        this.lifeRegenText= new Text(Byte.toString(stat8.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.lifeRegenText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.lifeRegenText,statBaseX+150,statBaseY ), 0);
+        this.numberOfPotionsText= new Text(Byte.toString(stat8.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
+        this.numberOfPotionsText.setScale(1.2f);
+        this.tabPane.addComponent(new Label(this.numberOfPotionsText,statBaseX+150,statBaseY ), 0);
 
         
         final ArmorStat stat4 = this.playerReference.getArmorManager().healingEffectivenessStat;
@@ -464,7 +463,7 @@ public class ArmorMenu extends Window{
         this.bodyDamageReductionStatText.setScale(1.2f);
         this.tabPane.addComponent(new Label(this.bodyDamageReductionStatText,statBaseX+150,statBaseY), 1);
         
-        final ArmorStat stat99 = this.playerReference.getArmorManager().numberOfPotionsStat;
+        final ArmorStat stat99 = this.playerReference.getArmorManager().thornsDamage;
         b = new Button(stat99.image.copy(), statBaseX, statBaseY-125, 100, 100);
         b.addActionListener(new ActionListener(){
        
@@ -486,9 +485,9 @@ public class ArmorMenu extends Window{
            } 
        });
         this.tabPane.addComponent(b, 1);
-        this.numberOfPotionsStatText = new Text(Byte.toString(stat6.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.numberOfPotionsStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.numberOfPotionsStatText,statBaseX+25,statBaseY-125), 1);
+        this.thornsStatText = new Text(Byte.toString(stat99.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
+        this.thornsStatText.setScale(1.2f);
+        this.tabPane.addComponent(new Label(this.thornsStatText,statBaseX+25,statBaseY-125), 1);
         
 
         
@@ -869,8 +868,8 @@ public class ArmorMenu extends Window{
        this.tabPane.addComponent(new Label(this.bodyHealthDetailText,400,400),1);
        this.bodyDamageReductionDetailText = new Text("");
        this.tabPane.addComponent(new Label(this.bodyDamageReductionDetailText,400,375),1);  
-       this.bodyNumberOfPotionsDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.bodyNumberOfPotionsDetailText,400,350),1);
+       this.bodyThornsDamageDetailText = new Text("");
+       this.tabPane.addComponent(new Label(this.bodyThornsDamageDetailText,400,350),1);
        this.bodyModifierDetailText = new Text("");
        this.tabPane.addComponent(new Label(this.bodyModifierDetailText,400,325),1);
        
@@ -901,13 +900,13 @@ public class ArmorMenu extends Window{
         
         //update helm stat points
         this.lifeLeechText.setText(Byte.toString(this.playerReference.getArmorManager().lifeLeech.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
-        this.lifeRegenText.setText(Byte.toString(this.playerReference.getArmorManager().lifeRegen.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
+        this.numberOfPotionsText.setText(Byte.toString(this.playerReference.getArmorManager().numberOfPotionsStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
         this.healingEffectivenessStatText.setText(Byte.toString(this.playerReference.getArmorManager().healingEffectivenessStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
 
         //update body stat points
         this.bodyHealthStatText.setText(Byte.toString(this.playerReference.getArmorManager().healthStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
         this.bodyDamageReductionStatText.setText(Byte.toString(this.playerReference.getArmorManager().damageReductionStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
-        this.numberOfPotionsStatText.setText(Byte.toString(this.playerReference.getArmorManager().numberOfPotionsStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
+        this.thornsStatText.setText(Byte.toString(this.playerReference.getArmorManager().thornsDamage.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
       
         //weapon
         this.weaponDamageStatText.setText(Byte.toString(this.playerReference.getArmorManager().weaponDamageStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
@@ -927,11 +926,11 @@ public class ArmorMenu extends Window{
         
       //helm
      this.lifeLeechDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().lifeLeech.points * 5) + "% life leech.");
-      this.lifeRegenDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().lifeRegen.points* 5) + " health regen per second.");
+      this.lifeRegenDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().numberOfPotionsStat.points* 1) + " potions.");
       this.healingEffectivenessDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().healingEffectivenessStat.points* 5) + "% bonus to healing.");
 
       //body
-      this.bodyNumberOfPotionsDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().numberOfPotionsStat.points )  + " potions.");
+      this.bodyThornsDamageDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().thornsDamage.points * 5 )  + "% thorns damage.");
       this.bodyHealthDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().healthStat.points * 10)  + " health.");
       this.bodyDamageReductionDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().damageReductionStat.points * 2) + "% damage reduction.");
       

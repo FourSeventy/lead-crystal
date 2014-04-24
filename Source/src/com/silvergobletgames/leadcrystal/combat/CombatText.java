@@ -1,12 +1,13 @@
 package com.silvergobletgames.leadcrystal.combat;
 
-import com.silvergobletgames.sylver.core.Scene;
-import com.silvergobletgames.sylver.graphics.Color;
-import com.silvergobletgames.sylver.graphics.Text;
-import net.phys2d.math.Vector2f;
 import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.entities.CombatEntity;
+import com.silvergobletgames.sylver.core.Scene;
+import com.silvergobletgames.sylver.graphics.Color;
+import com.silvergobletgames.sylver.graphics.Text;
+import java.text.DecimalFormat;
+import net.phys2d.math.Vector2f;
 
 /**
  * Text object that we can give "velocities" to for each of its different properties.
@@ -23,7 +24,7 @@ public class CombatText extends Text
     protected float fadeAmt;
     
     protected Damage damage;
-    protected int amount;
+    protected float amount;
     protected boolean crit;
     
     //The entity that I belong to.
@@ -37,14 +38,25 @@ public class CombatText extends Text
     {
         super("", LeadCrystalTextType.COMBAT);
         this.owningScene = owningScene;
-        this.amount = Math.abs((int)damage.getAmount());
+        this.amount = Math.abs(damage.getAmount());
         
-        int life = 50;
+        String damageString = Float.toString(this.amount);
+//        if(this.amount >= 1)
+//        {
+//            damageString = new DecimalFormat("#").format(this.amount); 
+//        }
+//        else
+//        {
+//            damageString = new DecimalFormat(".##").format(this.amount); 
+//        }
         
-        this.setText(Integer.toString(Math.abs((int)damage.getAmount())));
+        
+        
+        
+        this.setText(damageString);
         this.setAnchor(Anchor.CENTER);
         this.damage = damage;
-        this.lifetime = life;
+        this.lifetime = 50;
         this.owningEntity = owningEntity;
         this.crit = damage.isCrit();
         this.assignColor(damage);

@@ -282,79 +282,100 @@ public abstract class CombatEntity extends Entity
     public void takeDamage(Damage dmg)
     {
         //if we are immune or dead we wont take any damage
-        if (!combatData.getState(CombatData.CombatState.IMMUNE) && !combatData.isDead())  
+        if (combatData.getState(CombatData.CombatState.IMMUNE) || combatData.isDead())  
         { 
+            return;
+        }
                        
-            //go through on damage procs
-            for(CombatEffect effect: this.combatData.getCombatEffects())
+        //go through on damage procs
+        for(CombatEffect effect: this.combatData.getCombatEffects())
+        {
+            if(effect instanceof ProcEffect && ((ProcEffect)effect).getProcType() == ProcType.TAKEDAMAGE)
             {
-                if(effect instanceof ProcEffect && ((ProcEffect)effect).getProcType() == ProcType.TAKEDAMAGE)
-                {
-                    boolean procResult = ((ProcEffect)effect).rollProc();
+                boolean procResult = ((ProcEffect)effect).rollProc();
 
-                    if(procResult == true)
-                    {
-                        this.combatData.addCombatEffect(((ProcEffect)effect).getProccedEffect());
-                    }
-                }
-            }
-            
-            
-            //get a copy of our incoming damage
-            Damage incomingDamage = new Damage(dmg);
-            this.lastDamage = incomingDamage;
-                        
-            
-            //Handle modification of  health   
-            if(incomingDamage.getType() != DamageType.HEAL)
-            {   
-                float resistance = this.combatData.damageResistance.getTotalValue(); 
-                incomingDamage.getAmountObject().adjustPercentModifier( -resistance);
-                this.combatData.currentHealth -= incomingDamage.getAmount();
-            }
-            else
-            {
-                float healAmount = incomingDamage.getAmount();
-                healAmount *= combatData.healingModifier.getTotalValue();
-                this.combatData.currentHealth += healAmount;
-            }
-            
-            
-            //add damage text to the world
-            if (incomingDamage.getType() != DamageType.NODAMAGE && !(this.getImage().getAnimationPack() instanceof CommonCrateAnimationPack))
-                owningScene.add(new CombatText(incomingDamage, this, owningScene), Layer.WORLD_HUD);
-            
-            //Apply the effects and overlays of the damage to this entity
-            for(CombatEffect combatEffect: incomingDamage.getCombatEffects())
-            {
-                //reduce the duration of cc's with ccreduction
-                if(combatEffect instanceof StateEffect)
+                if(procResult == true)
                 {
-                    if(((StateEffect)combatEffect).getStateEffectType() == StateEffectType.STUN ||
-                       ((StateEffect)combatEffect).getStateEffectType() == StateEffectType.SLOW)
-                    {
-                        ((StateEffect)combatEffect).setDuration((int)(combatEffect.getDuration() * (1 - combatData.ccResistance.getTotalValue()))); 
-                    }
+                    this.combatData.addCombatEffect(((ProcEffect)effect).getProccedEffect());
                 }
-                this.combatData.addCombatEffect(combatEffect);
-            }
-            
-            for(ImageEffect renderEffect: incomingDamage.getImageEffects())
-                this.image.addImageEffect(renderEffect);
-            
-            for(Overlay overlay: incomingDamage.getOverlays())
-                this.image.addOverlay(overlay);                   
-            
-            //TODO - interrupt casting
-            
-            //handle life leech
-            float leechAmount = incomingDamage.getAmount() * incomingDamage.getLifeLeech();
-            if(leechAmount > 0)
-            {
-                Damage leechHeal = new Damage(DamageType.HEAL, leechAmount, this);
-                incomingDamage.getSource().takeDamage(leechHeal);
             }
         }
+
+
+        //get a copy of our incoming damage
+        Damage incomingDamage = new Damage(dmg);
+        this.lastDamage = incomingDamage;
+        
+        //flatten damage amount object so we can adjust its percentage correctly
+        incomingDamage.getAmountObject().setBase(incomingDamage.getAmount());
+        incomingDamage.getAmountObject().setAbsoluteModifier(0);
+        incomingDamage.getAmountObject().setPercentModifier(1f);
+        
+        //handle adjustment of incoming damage from resistances
+        if(incomingDamage.getType() == DamageType.HEAL)
+        {
+            float healingModifier = combatData.healingModifier.getTotalValue();
+            incomingDamage.getAmountObject().setPercentModifier(healingModifier); 
+        }
+        else
+        {
+            float resistance = this.combatData.damageResistance.getTotalValue(); 
+            incomingDamage.getAmountObject().adjustPercentModifier( -resistance);
+        }
+
+        //Handle modification of  health   
+        if(incomingDamage.getType() != DamageType.HEAL)
+        {   
+            this.combatData.currentHealth -= incomingDamage.getAmount();
+        }
+        else
+        {
+            this.combatData.currentHealth += incomingDamage.getAmount();
+        }
+
+        //add damage text to the world
+        if (incomingDamage.getType() != DamageType.NODAMAGE && !(this.getImage().getAnimationPack() instanceof CommonCrateAnimationPack))
+            owningScene.add(new CombatText(incomingDamage, this, owningScene), Layer.WORLD_HUD);
+
+        //Apply the effects and overlays of the damage to this entity
+        for(CombatEffect combatEffect: incomingDamage.getCombatEffects())
+        {
+            //reduce the duration of cc's with ccreduction
+            if(combatEffect instanceof StateEffect)
+            {
+                if(((StateEffect)combatEffect).getStateEffectType() == StateEffectType.STUN ||
+                   ((StateEffect)combatEffect).getStateEffectType() == StateEffectType.SLOW)
+                {
+                    ((StateEffect)combatEffect).setDuration((int)(combatEffect.getDuration() * (1 - combatData.ccResistance.getTotalValue()))); 
+                }
+            }
+            this.combatData.addCombatEffect(combatEffect);
+        }
+
+        for(ImageEffect renderEffect: incomingDamage.getImageEffects())
+            this.image.addImageEffect(renderEffect);
+
+        for(Overlay overlay: incomingDamage.getOverlays())
+            this.image.addOverlay(overlay);                   
+
+        //TODO - interrupt casting
+
+        //handle life leech
+        float leechAmount = incomingDamage.getAmount() * incomingDamage.getLifeLeech();
+        if(leechAmount > 0)
+        {
+            Damage leechHeal = new Damage(DamageType.HEAL, leechAmount, this);
+            incomingDamage.getSource().takeDamage(leechHeal);
+        }
+        
+        //handle thorns damage
+        float thornsAmount = incomingDamage.getAmount() * this.getCombatData().thornsDamage.getTotalValue();
+        if(thornsAmount > 0)
+        {
+            Damage thornsDamage = new Damage(DamageType.PHYSICAL,thornsAmount,this);
+            incomingDamage.getSource().takeDamage(thornsDamage);
+        }
+        
     }
 
     /**

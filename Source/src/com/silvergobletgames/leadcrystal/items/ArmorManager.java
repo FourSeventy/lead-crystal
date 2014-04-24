@@ -36,7 +36,7 @@ public class ArmorManager {
     public ArmorModifier seeSecondaryObjectivesModifier;
     public ArmorModifier revealSecretAreasModifier;   
     public ArmorStat lifeLeech;
-    public ArmorStat lifeRegen;
+    public ArmorStat numberOfPotionsStat;
     public ArmorStat healingEffectivenessStat;
     
     //body
@@ -46,10 +46,9 @@ public class ArmorManager {
     public ArmorModifier chanceAbsorbModifier;
     public ArmorStat healthStat;
     public ArmorStat damageReductionStat;
-    public ArmorStat numberOfPotionsStat;
+    public ArmorStat thornsDamage;
     
-  
-    
+       
     //weapon
     public ArmorModifier concecutiveHitsModifier;
     public ArmorModifier meleeAttackDamageModifier;
@@ -99,17 +98,17 @@ public class ArmorManager {
         // Helm Stats
         //===============
           
-        this.lifeLeech = new ArmorStat(ArmorStat.ArmorStatID.LIFE_LEECH, new Image("lifeLeechStat.jpg"), "Life Leech", 75);
+        this.lifeLeech = new ArmorStat(ArmorStat.ArmorStatID.LIFE_LEECH, new Image("lifeLeechStat.jpg"), "Life Leech", 50);
         this.lifeLeech.description = "+5% life leech per point.";
         this.lifeLeech.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().lifeLeech.adjustBase(.05f);}}); 
         this.armorStats.put(this.lifeLeech.id,this.lifeLeech);
         
-        this.lifeRegen = new ArmorStat(ArmorStat.ArmorStatID.LIFE_REGEN, new Image("lifeRegenStat.jpg"), "Life Regen", 75);
-        this.lifeRegen.description = "+1 health regen/s per point.";
-        this.lifeRegen.setAddPointAction(new ArmorAction(){ public void doAction(){System.out.println("health regen up");}}); 
-        this.armorStats.put(this.lifeRegen.id,this.lifeRegen);
+        this.numberOfPotionsStat = new ArmorStat(ArmorStat.ArmorStatID.NUMBER_POTIONS, new Image("armorStat.jpg"), "Number of Potions", 50);
+        this.numberOfPotionsStat.description = "+1 additional potion per point.";
+        this.numberOfPotionsStat.setAddPointAction(new ArmorAction(){ public void doAction(){}}); 
+        this.armorStats.put(this.numberOfPotionsStat.id,this.numberOfPotionsStat);
         
-        this.healingEffectivenessStat = new ArmorStat(ArmorStat.ArmorStatID.HEALING_EFFECTIVENESS, new Image("healingStat.jpg"), "Healing Effectiveness", 75);
+        this.healingEffectivenessStat = new ArmorStat(ArmorStat.ArmorStatID.HEALING_EFFECTIVENESS, new Image("healingStat.jpg"), "Healing Effectiveness", 50);
         this.healingEffectivenessStat.description = "+5% healing effectiveness per point.";
         this.healingEffectivenessStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().healingModifier.adjustBase(.05f);}}); 
         this.armorStats.put(this.healingEffectivenessStat.id,this.healingEffectivenessStat);
@@ -138,7 +137,7 @@ public class ArmorManager {
         //===============
         // Body Stats
         //===============
-        this.healthStat = new ArmorStat(ArmorStat.ArmorStatID.BODY_HEALTH, new Image("healthStat.jpg"), "Health", 75);
+        this.healthStat = new ArmorStat(ArmorStat.ArmorStatID.BODY_HEALTH, new Image("healthStat.jpg"), "Health", 50);
         this.healthStat.description = "+10 health per point.";
         this.healthStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().maxHealth.adjustBase(10); 
                                                    getPlayerReference().getCombatData().currentHealth+=10;
@@ -150,10 +149,10 @@ public class ArmorManager {
         this.damageReductionStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().damageResistance.adjustBase(.02f);}}); 
         this.armorStats.put(this.damageReductionStat.id,this.damageReductionStat);
         
-        this.numberOfPotionsStat = new ArmorStat(ArmorStat.ArmorStatID.NUMBER_POTIONS, new Image("armorStat.jpg"), "Number of Potions", 50);
-        this.numberOfPotionsStat.description = "+1 additional potion per point.";
-        this.numberOfPotionsStat.setAddPointAction(new ArmorAction(){ public void doAction(){}}); 
-        this.armorStats.put(this.numberOfPotionsStat.id,this.numberOfPotionsStat);
+        this.thornsDamage = new ArmorStat(ArmorStat.ArmorStatID.THORNS_DAMAGE, new Image("lifeRegenStat.jpg"), "Thorns", 50);
+        this.thornsDamage.description = "+5% thorns damage per point.";
+        this.thornsDamage.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().thornsDamage.adjustBase(.05f);}}); 
+        this.armorStats.put(this.thornsDamage.id,this.thornsDamage);
       
         
         //=================
@@ -188,7 +187,7 @@ public class ArmorManager {
         this.weaponAttackSpeedStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().cooldownModifier.adjustBase(-.20f);}}); 
         this.armorStats.put(this.weaponAttackSpeedStat.id,this.weaponAttackSpeedStat);
         
-        this.critChanceStat = new ArmorStat(ArmorStat.ArmorStatID.CRIT_CHANCE, new Image("critChanceStat.jpg"), "Critical Hit Chance", 75);
+        this.critChanceStat = new ArmorStat(ArmorStat.ArmorStatID.CRIT_CHANCE, new Image("critChanceStat.jpg"), "Critical Hit Chance", 50);
         this.critChanceStat.description = "+3% crit chance per point";
         this.critChanceStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().critChance.adjustBase(.03f);}}); 
         this.armorStats.put(this.critChanceStat.id,this.critChanceStat);
@@ -214,17 +213,17 @@ public class ArmorManager {
         // Boots Stats
         //==============
                       
-        this.ccReductionStat = new ArmorStat(ArmorStat.ArmorStatID.CC_REDUCTION, new Image("CCStat.jpg"), "CC Reduction", 75);
+        this.ccReductionStat = new ArmorStat(ArmorStat.ArmorStatID.CC_REDUCTION, new Image("CCStat.jpg"), "CC Reduction", 50);
         this.ccReductionStat.description = "+5% CC reduction per point.";
         this.ccReductionStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().ccResistance.adjustBase(.05f);}}); 
         this.armorStats.put(this.ccReductionStat.id,this.ccReductionStat);
         
-        this.moveSpeedStat = new ArmorStat(ArmorStat.ArmorStatID.MOVE_SPEED, new Image("moveSpeedStat.jpg"), "Move Speed", 75);
+        this.moveSpeedStat = new ArmorStat(ArmorStat.ArmorStatID.MOVE_SPEED, new Image("moveSpeedStat.jpg"), "Move Speed", 50);
         this.moveSpeedStat.description = "+5% move speed per point";
         this.moveSpeedStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().xVelocity.adjustPercentModifier(.05f);}}); 
         this.armorStats.put(this.moveSpeedStat.id,this.moveSpeedStat);
         
-        this.jumpHeightStat = new ArmorStat(ArmorStat.ArmorStatID.JUMP_HEIGHT, new Image("jumpHeightStat.jpg"), "Jump Height", 75);
+        this.jumpHeightStat = new ArmorStat(ArmorStat.ArmorStatID.JUMP_HEIGHT, new Image("jumpHeightStat.jpg"), "Jump Height", 50);
         this.jumpHeightStat.description = "2m jump height per point";
         this.jumpHeightStat.setAddPointAction(new ArmorAction(){ public void doAction(){System.out.println("jump height");}}); 
         this.armorStats.put(this.jumpHeightStat.id,this.jumpHeightStat);
@@ -513,9 +512,9 @@ public class ArmorManager {
         public static enum ArmorStatID
         {
             //helm
-            LIFE_LEECH,LIFE_REGEN,HEALING_EFFECTIVENESS,
+            LIFE_LEECH,NUMBER_POTIONS,HEALING_EFFECTIVENESS,
             //body
-            BODY_HEALTH,BODY_DAMAGE_REDUCTION,NUMBER_POTIONS,
+            BODY_HEALTH,BODY_DAMAGE_REDUCTION,THORNS_DAMAGE,
             //weapon
             WEAPON_DAMAGE, WEAPON_ATTACK_SPEED,CRIT_CHANCE,
             //boots
@@ -647,7 +646,7 @@ public class ArmorManager {
          renderData.data.add(3,healthStat.dumpRenderData());
          renderData.data.add(4,damageReductionStat.dumpRenderData());
          renderData.data.add(5,lifeLeech.dumpRenderData());
-         renderData.data.add(6,lifeRegen.dumpRenderData());        
+         renderData.data.add(6,thornsDamage.dumpRenderData());        
          renderData.data.add(7,weaponDamageStat.dumpRenderData());
          renderData.data.add(8,weaponAttackSpeedStat.dumpRenderData());
          renderData.data.add(9,critChanceStat.dumpRenderData());
@@ -761,7 +760,7 @@ public class ArmorManager {
             }
             if(changeData.get(6) != null)
             {
-                this.lifeRegen.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(6));
+                this.thornsDamage.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(6));
             }          
             if(changeData.get(7) != null)
             {

@@ -38,6 +38,7 @@ public class CombatData
     public Stat critModifier = new Stat(0);
     public Stat cooldownModifier = new Stat(1);
     public Stat lifeLeech = new Stat(0);
+    public Stat thornsDamage = new Stat(0);
     
     //movement speed
     public Stat xVelocity = new Stat(15);
@@ -287,13 +288,14 @@ public class CombatData
         renderData.data.add(12,new Stat(this.damageResistance));
         renderData.data.add(13,new Stat(this.ccResistance));
         renderData.data.add(14,new Stat(this.healingModifier));
+        renderData.data.add(15,new Stat(this.thornsDamage));
         
         //combat effects
          ArrayList<SerializableEntry> combatEffectData = new ArrayList();
          for(String key: this.combatEffects.keySet()){
              combatEffectData.add(new SerializableEntry(key,this.combatEffects.get(key).dumpRenderData()));
          }
-         renderData.data.add(15,combatEffectData);
+         renderData.data.add(16,combatEffectData);
 
         
         return renderData;     
@@ -306,7 +308,7 @@ public class CombatData
         int changeMap = 0;
         ArrayList changeList = new ArrayList();
 
-        for(int i = 0; i <= 14; i++)
+        for(int i = 0; i <= 15; i++)
         {
 
             if(!oldData.data.get(i).equals( newData.data.get(i)))
@@ -322,8 +324,8 @@ public class CombatData
         
         ArrayList<SerializableEntry<String,SceneObjectRenderData>> combatAdds = new ArrayList();
         ArrayList<String> combatRemoves = new ArrayList();
-        ArrayList<SerializableEntry> oldEffectData = (ArrayList)oldData.data.get(15);
-        ArrayList<SerializableEntry> newEffectData = (ArrayList)newData.data.get(15);
+        ArrayList<SerializableEntry> oldEffectData = (ArrayList)oldData.data.get(16);
+        ArrayList<SerializableEntry> newEffectData = (ArrayList)newData.data.get(16);
         
         HashMap<String, SceneObjectRenderData> oldEffectMap = new HashMap();
         for (SerializableEntry<String, SceneObjectRenderData> entry : oldEffectData)
@@ -351,12 +353,12 @@ public class CombatData
          if(!combatAdds.isEmpty())
         {
             changeList.add(combatAdds);
-            changeMap += 1L << 15;
+            changeMap += 1L << 16;
         }
         if(!combatRemoves.isEmpty())
         {
             changeList.add(combatRemoves);
-            changeMap += 1L << 16;
+            changeMap += 1L << 17;
         }
         
         
@@ -378,7 +380,7 @@ public class CombatData
         
         //construct an arraylist of data that we got, nulls will go where we didnt get any data
         ArrayList changeData = new ArrayList();
-        for(byte i = 0; i <=16; i ++)
+        for(byte i = 0; i <=17; i ++)
         {
             // The bit was set
             if ((fieldMap & (1L << i)) != 0)
@@ -420,12 +422,14 @@ public class CombatData
             this.ccResistance = (Stat)changeData.get(13);
         if(changeData.get(14) != null)
             this.healingModifier = (Stat)changeData.get(14);
+        if(changeData.get(15) != null)
+            this.thornsDamage = (Stat)changeData.get(15);
 
         
         //added renderEffects
-        if(changeData.get(15) != null)
+        if(changeData.get(16) != null)
         {
-             ArrayList<SerializableEntry<String, SceneObjectRenderData>> renderAdds = (ArrayList)changeData.get(15);
+             ArrayList<SerializableEntry<String, SceneObjectRenderData>> renderAdds = (ArrayList)changeData.get(16);
             for (SerializableEntry<String, SceneObjectRenderData> entry : renderAdds)
             {
                 CombatEffect effect;
@@ -440,9 +444,9 @@ public class CombatData
         }
         
         //removed renderEffects
-        if(changeData.get(16) != null)
+        if(changeData.get(17) != null)
         {
-            ArrayList<String> removeList = (ArrayList<String>)changeData.get(16);
+            ArrayList<String> removeList = (ArrayList<String>)changeData.get(17);
             
             for(String key: removeList)
                 this.combatEffects.remove(key);
@@ -482,6 +486,7 @@ public class CombatData
         saveData.dataMap.put("yVelocity",yVelocity.dumpFullData());
         saveData.dataMap.put("lifeLeech",this.lifeLeech.dumpFullData());
         saveData.dataMap.put("healing",this.healingModifier.dumpFullData());
+        saveData.dataMap.put("thorns", this.thornsDamage.dumpFullData());
         
         return saveData;
      }
@@ -509,6 +514,9 @@ public class CombatData
          combatData.yVelocity = Stat.buildFromFullData((SaveData)saved.dataMap.get("yVelocity"));
          combatData.lifeLeech = Stat.buildFromFullData((SaveData)saved.dataMap.get("lifeLeech"));
          combatData.healingModifier = Stat.buildFromFullData((SaveData)saved.dataMap.get("healing"));
+         
+         if((SaveData)saved.dataMap.get("thorns") != null)
+             combatData.thornsDamage = Stat.buildFromFullData((SaveData)saved.dataMap.get("thorns")); 
          
          return combatData;
      }
