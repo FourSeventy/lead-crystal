@@ -936,7 +936,7 @@ public class ArmorMenu extends Window{
       
       //weapon
       this.weaponDamageDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().weaponDamageStat.points * 2)  + "% damage.");
-      this.weaponAttackSpeedDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().weaponAttackSpeedStat.points * 2) + "% attack speed.");
+      this.weaponAttackSpeedDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().weaponAttackSpeedStat.points * 5) + "% attack speed.");
       this.critChanceDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().critChanceStat.points * 3) + "% critical hit chance.");
      
       //boots

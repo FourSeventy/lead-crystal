@@ -145,6 +145,7 @@ public class Brain
      */
     public final PlayerEntity targetClosestPlayer()
     {
+        
         float closestDistance = Float.MAX_VALUE;
         PlayerEntity closestPlayer = null;
         
@@ -209,6 +210,12 @@ public class Brain
      */
     public void messageGroup(ExtendedSceneObjectGroups group, float range, int msgType) 
     {
+        //if owning scene is null return
+        if(self.getOwningScene() == null)
+        {
+            return;
+        }
+        
         //First, get the list of the group
         ArrayList<SceneObject> groupList = self.getOwningScene().getSceneObjectManager().get(group);
         

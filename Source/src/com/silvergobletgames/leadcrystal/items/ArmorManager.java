@@ -105,7 +105,7 @@ public class ArmorManager {
         
         this.numberOfPotionsStat = new ArmorStat(ArmorStat.ArmorStatID.NUMBER_POTIONS, new Image("armorStat.jpg"), "Number of Potions", 50);
         this.numberOfPotionsStat.description = "+1 additional potion per point.";
-        this.numberOfPotionsStat.setAddPointAction(new ArmorAction(){ public void doAction(){}}); 
+        this.numberOfPotionsStat.setAddPointAction(new ArmorAction(){ public void doAction(){playerReference.getPotionManager().increaseMaxPotions(1);}}); 
         this.armorStats.put(this.numberOfPotionsStat.id,this.numberOfPotionsStat);
         
         this.healingEffectivenessStat = new ArmorStat(ArmorStat.ArmorStatID.HEALING_EFFECTIVENESS, new Image("healingStat.jpg"), "Healing Effectiveness", 50);
@@ -183,8 +183,8 @@ public class ArmorManager {
         this.armorStats.put(this.weaponDamageStat.id,this.weaponDamageStat);
         
         this.weaponAttackSpeedStat = new ArmorStat(ArmorStat.ArmorStatID.WEAPON_ATTACK_SPEED, new Image("attackSpeedStat.jpg"), "Attack Speed", 50);
-        this.weaponAttackSpeedStat.description = "+2% attack speed per point";
-        this.weaponAttackSpeedStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().cooldownModifier.adjustBase(-.20f);}}); 
+        this.weaponAttackSpeedStat.description = "+5% attack speed per point";
+        this.weaponAttackSpeedStat.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().cooldownModifier.adjustBase(-.05f);}}); 
         this.armorStats.put(this.weaponAttackSpeedStat.id,this.weaponAttackSpeedStat);
         
         this.critChanceStat = new ArmorStat(ArmorStat.ArmorStatID.CRIT_CHANCE, new Image("critChanceStat.jpg"), "Critical Hit Chance", 50);

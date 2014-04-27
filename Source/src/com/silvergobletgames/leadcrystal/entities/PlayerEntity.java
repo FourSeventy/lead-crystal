@@ -175,7 +175,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         combatData = new CombatData(this);
         combatData.maxHealth.setBase(100);
         combatData.baseDamage.setBase(10);
-        combatData.critChance.setBase(.05f);
+        combatData.critChance.setBase(.1f);
         combatData.critModifier.setBase(.50f);
         combatData.xVelocity.setBase(this.BASE_PLAYER_VELOCITY.x);
         combatData.yVelocity.setBase(this.BASE_PLAYER_VELOCITY.y);
@@ -411,8 +411,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         //if we collided with currency, collect it and remove it from the world
         if (other instanceof Currency)
         {
-            
-            
+                    
             //add to currency manager
             this.currencyManager.addCurrency(((Currency)other).getAmount());
 
@@ -435,8 +434,18 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         //if we collided with a potion add it to the potion manager
         if(other instanceof Potion)
         {
-            //add the potion
-            this.potionManager.addPotion(1);
+            
+            if(this.potionManager.getNumberOfPotions() < this.potionManager.getMaxPotions())
+            {
+                //add the potion
+                this.potionManager.addPotion(1);
+            }
+            else
+            {
+                //use the potion
+                this.potionManager.addPotion(1);
+                this.potionManager.usePotion();
+            }
             
             //remove the item from the world
             other.removeFromOwningScene();

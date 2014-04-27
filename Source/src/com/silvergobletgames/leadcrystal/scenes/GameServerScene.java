@@ -1302,7 +1302,7 @@ public class GameServerScene extends Scene
         PlayerEntity player = this.clientsInScene.get(potionPacket.getClientID()).player;
         
         //subtract money from player
-        boolean success = player.getCurrencyManager().getBalence()>=PotionManager.POTION_PRICE && player.getPotionManager().getNumberOfPotions() <5;
+        boolean success = player.getCurrencyManager().getBalence()>=PotionManager.POTION_PRICE && player.getPotionManager().getNumberOfPotions() < player.getPotionManager().getMaxPotions();
 
         //if the subtraction succeeded, give potion to player
         if(success)

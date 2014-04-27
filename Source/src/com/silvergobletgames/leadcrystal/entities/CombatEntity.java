@@ -365,7 +365,10 @@ public abstract class CombatEntity extends Entity
         if(leechAmount > 0)
         {
             Damage leechHeal = new Damage(DamageType.HEAL, leechAmount, this);
-            incomingDamage.getSource().takeDamage(leechHeal);
+            if(incomingDamage.getSource() != null)
+            {
+                incomingDamage.getSource().takeDamage(leechHeal);
+            }
         }
         
         //handle thorns damage
@@ -373,7 +376,10 @@ public abstract class CombatEntity extends Entity
         if(thornsAmount > 0)
         {
             Damage thornsDamage = new Damage(DamageType.PHYSICAL,thornsAmount,this);
-            incomingDamage.getSource().takeDamage(thornsDamage);
+            if(incomingDamage.getSource() != null)
+            {              
+                incomingDamage.getSource().takeDamage(thornsDamage);
+            }
         }
         
     }

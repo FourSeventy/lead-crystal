@@ -175,6 +175,12 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
      */
     public void takeDamage(Damage d)
     {      
+        //if we dont have an owning scene get out of here
+        if(this.getOwningScene() == null)
+        {
+            return;
+        }
+
         super.takeDamage(d);
         
         brain.damageTaken(d);

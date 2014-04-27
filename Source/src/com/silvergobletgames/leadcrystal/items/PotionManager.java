@@ -24,6 +24,7 @@ public class PotionManager
 {
     public PlayerEntity playerReference;
     private int numberOfPotions;
+    private int maxPotions = 5;
     
     public static final int POTION_PRICE = 15;
     
@@ -46,9 +47,19 @@ public class PotionManager
         this.numberOfPotions += amount;
     }
     
+    public void increaseMaxPotions(int amount)
+    {
+        this.maxPotions += amount;
+    }
+    
     public int getNumberOfPotions()
     {
         return this.numberOfPotions;
+    }
+    
+    public int getMaxPotions()
+    {
+        return this.maxPotions;
     }
     
     public void usePotion()
@@ -86,6 +97,7 @@ public class PotionManager
          RenderData renderData = new RenderData();
          
          renderData.data.add(0,this.numberOfPotions);
+         renderData.data.add(1,this.maxPotions);
 
          
          return renderData;        
@@ -95,6 +107,7 @@ public class PotionManager
      {
          PotionManager currencyManager = new PotionManager(null);
          currencyManager.numberOfPotions = (int)renderData.data.get(0);
+         currencyManager.maxPotions = (int)renderData.data.get(1);
          
          return currencyManager;
      }
@@ -106,7 +119,7 @@ public class PotionManager
          int changeMap = 0;
          ArrayList changeList = new ArrayList();
          
-         for(int i = 0; i <1; i++)
+         for(int i = 0; i <2; i++)
          {                  
              if(!oldData.data.get(i).equals( newData.data.get(i)))
              {                 
@@ -133,7 +146,7 @@ public class PotionManager
             ArrayList rawData = new ArrayList();
             rawData.addAll(Arrays.asList(renderDataChanges.data));           
             ArrayList changeData = new ArrayList();
-            for(byte i = 0; i <1; i ++)
+            for(byte i = 0; i <2; i ++)
             {
                 // The bit was set
                 if ((fieldMap & (1L << i)) != 0)
@@ -147,6 +160,8 @@ public class PotionManager
 
             if(changeData.get(0) != null)         
                 this.numberOfPotions = (int)changeData.get(0);
+            if(changeData.get(1) != null)
+                this.maxPotions = (int)changeData.get(1);
 
      }
     
