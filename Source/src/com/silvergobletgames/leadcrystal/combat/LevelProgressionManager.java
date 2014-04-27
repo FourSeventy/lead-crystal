@@ -148,7 +148,7 @@ public class LevelProgressionManager
         objective.objectiveName = "Lost Weapons";
         objective.objectiveDescription = " Find the lost weapons cache.";
         objective.currencyAward = 25;
-        objective.modifierReward = ArmorModifierID.DOUBLE_CC;
+        objective.modifierReward = ArmorModifierID.DR_BONUS;
         level4.sideObjective = objective;
         //adding to map
         this.levelMap.put(4, level4);
@@ -163,14 +163,14 @@ public class LevelProgressionManager
         objective.objectiveDescription = "We lost contact with a caravan carrying supplies to the town, go investigate";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
-        objective.modifierReward = ArmorModifierID.CONCECUTIVE_HITS;
+        objective.modifierReward = ArmorModifierID.MELEE_ATTACK_DMG;
         level5.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
         objective.objectiveName = "Survivors";
         objective.objectiveDescription = "Search for any survivors of the caravan";
         objective.currencyAward = 25;
-        objective.modifierReward = ArmorModifierID.CC_REDUCTION;
+        objective.modifierReward = ArmorModifierID.DOUBLE_JUMP;
         level5.sideObjective = objective;
         //adding to map
         this.levelMap.put(5, level5);

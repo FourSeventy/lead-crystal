@@ -89,20 +89,16 @@ public class ArmorMenu extends Window{
     //==============
     private Button seeEnemyHealthModifier;
     private Button doubleGoldFindModifier;
-    private Button seeSecondaryObjectivesModifier;
-    private Button revealSecretAreasModifier;
+    private Button upgradedRadarModifier;
     
-    private Button doubleCCResistModifier;
-    private Button doubleHealingModifier;
-    private Button tenPotionsModifier;
-    private Button chanceAbsorbModifier;
+    private Button toughToKillModifier;
+    private Button noCritsModifier;
+    private Button increasedThornsModifier; 
     
-    private Button concecutiveHitsModifier;
     private Button meleeAttackDamageModifier;
-    private Button rangedAttackSlowModifier;
+    private Button potionResetModifier;
     private Button criticalHitDamageModifier;
 
-    private Button ccBonusModifier;
     private Button doubleJumpModifier;
     private Button jetpackModifier;
     private Button teleportModifier;
@@ -267,31 +263,9 @@ public class ArmorMenu extends Window{
        });
         this.tabPane.addComponent(this.doubleGoldFindModifier,0);
         
-        final ArmorModifier modifier3 = this.playerReference.getArmorManager().revealSecretAreasModifier;
-        this.revealSecretAreasModifier = new Button(modifier3.image.copy(),modifierBaseX,modifierBaseY-125,100,100);
-        this.revealSecretAreasModifier.addActionListener(new ActionListener(){     
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                 //do stuff
-                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier3.id);
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(400,450,modifier3.name,modifier3.image,modifier3.description, null);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.tabPane.addComponent(this.revealSecretAreasModifier,0);
-        
-        final ArmorModifier modifier4 = this.playerReference.getArmorManager().seeSecondaryObjectivesModifier;
-        this.seeSecondaryObjectivesModifier = new Button(modifier4.image.copy(),modifierBaseX+125,modifierBaseY-125,100,100);
-        this.seeSecondaryObjectivesModifier.addActionListener(new ActionListener(){     
+        final ArmorModifier modifier4 = this.playerReference.getArmorManager().upgradedRadarModifier;
+        this.upgradedRadarModifier = new Button(modifier4.image.copy(),modifierBaseX+125,modifierBaseY-125,100,100);
+        this.upgradedRadarModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
            {
                if(e.getActionCommand().equals("clicked"))
@@ -309,7 +283,7 @@ public class ArmorMenu extends Window{
                }
            }
        });
-        this.tabPane.addComponent(this.seeSecondaryObjectivesModifier,0);
+        this.tabPane.addComponent(this.upgradedRadarModifier,0);
         
         
         //=========================
@@ -318,31 +292,9 @@ public class ArmorMenu extends Window{
         
         this.tabPane.addComponent(new Button(new Text("Modifiers:"), modifierBaseX, modifierBaseY+125), 1);
         
-        final ArmorModifier modifier5 = this.playerReference.getArmorManager().doubleCCResistModifier;      
-        this.doubleCCResistModifier = new Button(modifier5.image.copy(),modifierBaseX,modifierBaseY,100,100);
-        this.doubleCCResistModifier.addActionListener(new ActionListener(){     
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                 //do stuff
-                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier5.id);
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(400,450,modifier5.name,modifier5.image,modifier5.description, null);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.tabPane.addComponent(this.doubleCCResistModifier,1);
-        
-        final ArmorModifier modifier6 = this.playerReference.getArmorManager().doubleHealingModifier;
-        this.doubleHealingModifier = new Button(modifier6.image.copy(),modifierBaseX+125,modifierBaseY,100,100);
-        this.doubleHealingModifier.addActionListener(new ActionListener(){     
+        final ArmorModifier modifier6 = this.playerReference.getArmorManager().reducedCriticalHitModifier;
+        this.toughToKillModifier = new Button(modifier6.image.copy(),modifierBaseX+125,modifierBaseY,100,100);
+        this.toughToKillModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
            {
                if(e.getActionCommand().equals("clicked"))
@@ -360,11 +312,11 @@ public class ArmorMenu extends Window{
                }
            }
        });
-        this.tabPane.addComponent(this.doubleHealingModifier,1);
+        this.tabPane.addComponent(this.toughToKillModifier,1);
         
-        final ArmorModifier modifier7 = this.playerReference.getArmorManager().tenPotionsModifier;
-        this.tenPotionsModifier = new Button(modifier7.image.copy(),modifierBaseX,modifierBaseY-125,100,100);
-        this.tenPotionsModifier.addActionListener(new ActionListener(){     
+        final ArmorModifier modifier7 = this.playerReference.getArmorManager().bonusThornsDamageModifier;
+        this.noCritsModifier = new Button(modifier7.image.copy(),modifierBaseX,modifierBaseY-125,100,100);
+        this.noCritsModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
            {
                if(e.getActionCommand().equals("clicked"))
@@ -382,11 +334,11 @@ public class ArmorMenu extends Window{
                }
            }
        });
-        this.tabPane.addComponent(this.tenPotionsModifier,1);
+        this.tabPane.addComponent(this.noCritsModifier,1);
         
-       final ArmorModifier modifier8 = this.playerReference.getArmorManager().chanceAbsorbModifier;
-        this.chanceAbsorbModifier = new Button(modifier8.image.copy(),modifierBaseX+125,modifierBaseY-125,100,100);
-        this.chanceAbsorbModifier.addActionListener(new ActionListener(){     
+       final ArmorModifier modifier8 = this.playerReference.getArmorManager().damageReductionBonusModifier;
+        this.increasedThornsModifier = new Button(modifier8.image.copy(),modifierBaseX+125,modifierBaseY-125,100,100);
+        this.increasedThornsModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
            {
                if(e.getActionCommand().equals("clicked"))
@@ -404,7 +356,7 @@ public class ArmorMenu extends Window{
                }
            }
        });
-        this.tabPane.addComponent(this.chanceAbsorbModifier,1);
+        this.tabPane.addComponent(this.increasedThornsModifier,1);
         
         //======================
         // Body Stat Components
@@ -497,28 +449,6 @@ public class ArmorMenu extends Window{
         
         this.tabPane.addComponent(new Button(new Text("Modifiers:"), modifierBaseX, modifierBaseY+125), 2);
         
-       final ArmorModifier modifier9 = this.playerReference.getArmorManager().concecutiveHitsModifier;      
-        this.concecutiveHitsModifier = new Button(modifier9.image.copy(),modifierBaseX,modifierBaseY,100,100);
-        this.concecutiveHitsModifier.addActionListener(new ActionListener(){     
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                 //do stuff
-                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier9.id);
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(400,450,modifier9.name,modifier9.image,modifier9.description, null);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.tabPane.addComponent(this.concecutiveHitsModifier,2);
-        
        final ArmorModifier modifier10 = this.playerReference.getArmorManager().meleeAttackDamageModifier;
         this.meleeAttackDamageModifier = new Button(modifier10.image.copy(),modifierBaseX+125,modifierBaseY,100,100);
         this.meleeAttackDamageModifier.addActionListener(new ActionListener(){     
@@ -541,9 +471,9 @@ public class ArmorMenu extends Window{
        });
         this.tabPane.addComponent(this.meleeAttackDamageModifier,2);
         
-       final ArmorModifier modifier11 = this.playerReference.getArmorManager().rangedAttackSlowModifier;
-        this.rangedAttackSlowModifier = new Button(modifier11.image.copy(),modifierBaseX,modifierBaseY-125,100,100);
-        this.rangedAttackSlowModifier.addActionListener(new ActionListener(){     
+       final ArmorModifier modifier11 = this.playerReference.getArmorManager().potionCooldownResetModifier;
+        this.potionResetModifier = new Button(modifier11.image.copy(),modifierBaseX,modifierBaseY-125,100,100);
+        this.potionResetModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
            {
                if(e.getActionCommand().equals("clicked"))
@@ -561,7 +491,7 @@ public class ArmorMenu extends Window{
                }
            }
        });
-        this.tabPane.addComponent(this.rangedAttackSlowModifier,2);
+        this.tabPane.addComponent(this.potionResetModifier,2);
         
        final ArmorModifier modifier12 = this.playerReference.getArmorManager().criticalHitDamageModifier;
         this.criticalHitDamageModifier = new Button(modifier12.image.copy(),modifierBaseX+125,modifierBaseY-125,100,100);
@@ -675,28 +605,6 @@ public class ArmorMenu extends Window{
         //==================
         
         this.tabPane.addComponent(new Button(new Text("Modifiers:"), modifierBaseX, modifierBaseY+125), 3);
-        
-      final  ArmorModifier modifier13 = this.playerReference.getArmorManager().ccBonusModifier;      
-        this.ccBonusModifier = new Button(modifier13.image.copy(),modifierBaseX,modifierBaseY,100,100);
-        this.ccBonusModifier.addActionListener(new ActionListener(){     
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                 //do stuff
-                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier13.id);
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(400,450,modifier13.name,modifier13.image,modifier13.description, null);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.tabPane.addComponent(this.ccBonusModifier,3);
         
        final ArmorModifier modifier14 = this.playerReference.getArmorManager().doubleJumpModifier;
         this.doubleJumpModifier = new Button(modifier14.image.copy(),modifierBaseX+125,modifierBaseY,100,100);
@@ -959,9 +867,7 @@ public class ArmorMenu extends Window{
              this.seeEnemyHealthModifier.setDisabled(false);
              this.seeEnemyHealthModifier.setHidden(false);
              
-         }
-        
-    
+         } 
          if(this.playerReference.getArmorManager().doubleGoldFindModifier.unlocked== false)
          {
              this.doubleGoldFindModifier.setDisabled(true);
@@ -973,84 +879,58 @@ public class ArmorMenu extends Window{
              this.doubleGoldFindModifier.setHidden(false);
              
          }
-        if(this.playerReference.getArmorManager().seeSecondaryObjectivesModifier.unlocked== false)
+        if(this.playerReference.getArmorManager().upgradedRadarModifier.unlocked== false)
          {
-             this.seeSecondaryObjectivesModifier.setDisabled(true);
-             this.seeSecondaryObjectivesModifier.setHidden(true);
+             this.upgradedRadarModifier.setDisabled(true);
+             this.upgradedRadarModifier.setHidden(true);
          }
          else
          {
-             this.seeSecondaryObjectivesModifier.setDisabled(false);
-             this.seeSecondaryObjectivesModifier.setHidden(false);
+             this.upgradedRadarModifier.setDisabled(false);
+             this.upgradedRadarModifier.setHidden(false);
             
          }
-         if(this.playerReference.getArmorManager().revealSecretAreasModifier.unlocked== false)
+
+        
+        
+
+         if(this.playerReference.getArmorManager().damageReductionBonusModifier.unlocked== false)
          {
-             this.revealSecretAreasModifier.setDisabled(true);
-             this.revealSecretAreasModifier.setHidden(true);
+             this.toughToKillModifier.setDisabled(true);
+             this.toughToKillModifier.setHidden(true);
          }
          else
          {
-             this.revealSecretAreasModifier.setDisabled(false);
-             this.revealSecretAreasModifier.setHidden(false);
+             this.toughToKillModifier.setDisabled(false);
+             this.toughToKillModifier.setHidden(false);
              
          }
-        if(this.playerReference.getArmorManager().doubleCCResistModifier.unlocked== false)
+         if(this.playerReference.getArmorManager().reducedCriticalHitModifier.unlocked== false)
          {
-             this.doubleCCResistModifier.setDisabled(true);
-             this.doubleCCResistModifier.setHidden(true);
+             this.noCritsModifier.setDisabled(true);
+             this.noCritsModifier.setHidden(true);
          }
          else
          {
-             this.doubleCCResistModifier.setDisabled(false);
-             this.doubleCCResistModifier.setHidden(false);
+             this.noCritsModifier.setDisabled(false);
+             this.noCritsModifier.setHidden(false);
              
          }
-         if(this.playerReference.getArmorManager().doubleHealingModifier.unlocked== false)
+        if(this.playerReference.getArmorManager().bonusThornsDamageModifier.unlocked== false)
          {
-             this.doubleHealingModifier.setDisabled(true);
-             this.doubleHealingModifier.setHidden(true);
+             this.increasedThornsModifier.setDisabled(true);
+             this.increasedThornsModifier.setHidden(true);
          }
          else
          {
-             this.doubleHealingModifier.setDisabled(false);
-             this.doubleHealingModifier.setHidden(false);
-             
-         }
-         if(this.playerReference.getArmorManager().tenPotionsModifier.unlocked== false)
-         {
-             this.tenPotionsModifier.setDisabled(true);
-             this.tenPotionsModifier.setHidden(true);
-         }
-         else
-         {
-             this.tenPotionsModifier.setDisabled(false);
-             this.tenPotionsModifier.setHidden(false);
-             
-         }
-        if(this.playerReference.getArmorManager().chanceAbsorbModifier.unlocked== false)
-         {
-             this.chanceAbsorbModifier.setDisabled(true);
-             this.chanceAbsorbModifier.setHidden(true);
-         }
-         else
-         {
-             this.chanceAbsorbModifier.setDisabled(false);
-             this.chanceAbsorbModifier.setHidden(false);
+             this.increasedThornsModifier.setDisabled(false);
+             this.increasedThornsModifier.setHidden(false);
              
          }
 
-         if(this.playerReference.getArmorManager().concecutiveHitsModifier.unlocked== false)
-         {
-             this.concecutiveHitsModifier.setDisabled(true);
-             this.concecutiveHitsModifier.setHidden(true);
-         }
-         else
-         {
-             this.concecutiveHitsModifier.setDisabled(false);
-             this.concecutiveHitsModifier.setHidden(false);
-            
-         }
+        
+        
+        
         if(this.playerReference.getArmorManager().meleeAttackDamageModifier.unlocked== false)
          {
              this.meleeAttackDamageModifier.setDisabled(true);
@@ -1062,15 +942,15 @@ public class ArmorMenu extends Window{
              this.meleeAttackDamageModifier.setHidden(false);
             
          }
-        if(this.playerReference.getArmorManager().rangedAttackSlowModifier.unlocked== false)
+        if(this.playerReference.getArmorManager().potionCooldownResetModifier.unlocked== false)
          {
-             this.rangedAttackSlowModifier.setDisabled(true);
-             this.rangedAttackSlowModifier.setHidden(true);
+             this.potionResetModifier.setDisabled(true);
+             this.potionResetModifier.setHidden(true);
          }
          else
          {
-             this.rangedAttackSlowModifier.setDisabled(false);
-             this.rangedAttackSlowModifier.setHidden(false);
+             this.potionResetModifier.setDisabled(false);
+             this.potionResetModifier.setHidden(false);
              
          }
          if(this.playerReference.getArmorManager().criticalHitDamageModifier.unlocked== false)
@@ -1085,17 +965,8 @@ public class ArmorMenu extends Window{
              
          }
 
-        if(this.playerReference.getArmorManager().ccBonusModifier.unlocked== false)
-         {
-             this.ccBonusModifier.setDisabled(true);
-             this.ccBonusModifier.setHidden(true);
-         }
-         else
-         {
-             this.ccBonusModifier.setDisabled(false);
-             this.ccBonusModifier.setHidden(false);
-            
-         }
+
+         
          if(this.playerReference.getArmorManager().doubleJumpModifier.unlocked== false)
          {
              this.doubleJumpModifier.setDisabled(true);
@@ -1152,70 +1023,47 @@ public class ArmorMenu extends Window{
          {
              this.doubleGoldFindModifier.getImage().removeAllOverlays();
          }
-        if(this.playerReference.getArmorManager().seeSecondaryObjectivesModifier.equipped== true)
+        if(this.playerReference.getArmorManager().upgradedRadarModifier.equipped== true)
          {
-             this.seeSecondaryObjectivesModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
-              this.helmModifierDetailText.setText("Equipped Modifier: See Secondary Objectives");
+             this.upgradedRadarModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+              this.helmModifierDetailText.setText("Equipped Modifier: Upgraded Radar");
          }
          else
          {
-             this.seeSecondaryObjectivesModifier.getImage().removeAllOverlays();
+             this.upgradedRadarModifier.getImage().removeAllOverlays();
          }
-         if(this.playerReference.getArmorManager().revealSecretAreasModifier.equipped== true)
+        
+        
+        
+        if(this.playerReference.getArmorManager().damageReductionBonusModifier.equipped== true)
          {
-             this.revealSecretAreasModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
-             this.helmModifierDetailText.setText("Equipped Modifier: Reveal Secret Areas");
-         }
-         else
-         {
-             this.revealSecretAreasModifier.getImage().removeAllOverlays();
-         }
-        if(this.playerReference.getArmorManager().doubleCCResistModifier.equipped== true)
-         {
-             this.doubleCCResistModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
-             this.bodyModifierDetailText.setText("Equipped Modifier: Double CC Resist");
+             this.toughToKillModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+             this.bodyModifierDetailText.setText("Equipped Modifier: Tough To kill");
          }
          else
          {
-             this.doubleCCResistModifier.getImage().removeAllOverlays();
+             this.toughToKillModifier.getImage().removeAllOverlays();
          }
-         if(this.playerReference.getArmorManager().doubleHealingModifier.equipped== true)
+         if(this.playerReference.getArmorManager().reducedCriticalHitModifier.equipped== true)
          {
-             this.doubleHealingModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
-             this.bodyModifierDetailText.setText("Equipped Modifier: Double Healing Effectiveness");
-         }
-         else
-         {
-             this.doubleHealingModifier.getImage().removeAllOverlays();
-         }
-         if(this.playerReference.getArmorManager().tenPotionsModifier.equipped== true)
-         {
-             this.tenPotionsModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
-             this.bodyModifierDetailText.setText("Equipped Modifier: Additional Potions");
+             this.noCritsModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+             this.bodyModifierDetailText.setText("Equipped Modifier: Hardened Armor");
          }
          else
          {
-             this.tenPotionsModifier.getImage().removeAllOverlays();
+             this.noCritsModifier.getImage().removeAllOverlays();
          }
-        if(this.playerReference.getArmorManager().chanceAbsorbModifier.equipped== true)
+         if(this.playerReference.getArmorManager().bonusThornsDamageModifier.equipped== true)
          {
-             this.chanceAbsorbModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
-             this.bodyModifierDetailText.setText("Equipped Modifier: Chance to Absorb Projectiles");
+             this.increasedThornsModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+             this.bodyModifierDetailText.setText("Equipped Modifier: Increased Thorns Damage");
          }
          else
          {
-             this.chanceAbsorbModifier.getImage().removeAllOverlays();
+             this.increasedThornsModifier.getImage().removeAllOverlays();
          }
 
-         if(this.playerReference.getArmorManager().concecutiveHitsModifier.equipped== true)
-         {
-             this.concecutiveHitsModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
-              this.weaponModifierDetailText.setText("Equipped Modifier: Concecutive Hits Bonus");
-         }
-         else
-         {
-             this.concecutiveHitsModifier.getImage().removeAllOverlays();
-         }
+
         if(this.playerReference.getArmorManager().meleeAttackDamageModifier.equipped== true)
          {
              this.meleeAttackDamageModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
@@ -1225,14 +1073,14 @@ public class ArmorMenu extends Window{
          {
              this.meleeAttackDamageModifier.getImage().removeAllOverlays();
          }
-        if(this.playerReference.getArmorManager().rangedAttackSlowModifier.equipped== true)
+        if(this.playerReference.getArmorManager().potionCooldownResetModifier.equipped== true)
          {
-             this.rangedAttackSlowModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
-             this.weaponModifierDetailText.setText("Equipped Modifier: Ranged Attack Slow");
+             this.potionResetModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
+             this.weaponModifierDetailText.setText("Equipped Modifier: Potion Cooldown Reset");
          }
          else
          {
-             this.rangedAttackSlowModifier.getImage().removeAllOverlays();
+             this.potionResetModifier.getImage().removeAllOverlays();
          }
          if(this.playerReference.getArmorManager().criticalHitDamageModifier.equipped== true)
          {
@@ -1244,15 +1092,7 @@ public class ArmorMenu extends Window{
              this.criticalHitDamageModifier.getImage().removeAllOverlays();
          }
 
-        if(this.playerReference.getArmorManager().ccBonusModifier.equipped== true)
-         {
-             this.ccBonusModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
-              this.bootsModifierDetailText.setText("Equipped Modifier: CC Reduction Modifier");
-         }
-         else
-         {
-             this.ccBonusModifier.getImage().removeAllOverlays();
-         }
+
          if(this.playerReference.getArmorManager().doubleJumpModifier.equipped== true)
          {
              this.doubleJumpModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 

@@ -496,6 +496,9 @@ public class GameServerScene extends Scene
                     //test
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_M))
                     {
+                        player.getLevelProgressionManager().completeSideObjective(3);
+                        player.getLevelProgressionManager().completeSideObjective(4);
+                        player.getLevelProgressionManager().completeSideObjective(5);
                     }
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_N))
                     {

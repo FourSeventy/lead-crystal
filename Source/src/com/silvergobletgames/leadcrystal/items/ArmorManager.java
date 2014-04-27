@@ -33,33 +33,29 @@ public class ArmorManager {
     //helm
     public ArmorModifier seeEnemyHealthModifier;
     public ArmorModifier doubleGoldFindModifier;
-    public ArmorModifier seeSecondaryObjectivesModifier;
-    public ArmorModifier revealSecretAreasModifier;   
+    public ArmorModifier upgradedRadarModifier;
     public ArmorStat lifeLeech;
     public ArmorStat numberOfPotionsStat;
     public ArmorStat healingEffectivenessStat;
     
     //body
-    public ArmorModifier doubleCCResistModifier;
-    public ArmorModifier doubleHealingModifier;
-    public ArmorModifier tenPotionsModifier;
-    public ArmorModifier chanceAbsorbModifier;
+    public ArmorModifier damageReductionBonusModifier;
+    public ArmorModifier reducedCriticalHitModifier;
+    public ArmorModifier bonusThornsDamageModifier;
     public ArmorStat healthStat;
     public ArmorStat damageReductionStat;
     public ArmorStat thornsDamage;
     
        
     //weapon
-    public ArmorModifier concecutiveHitsModifier;
     public ArmorModifier meleeAttackDamageModifier;
-    public ArmorModifier rangedAttackSlowModifier;
+    public ArmorModifier potionCooldownResetModifier;
     public ArmorModifier criticalHitDamageModifier;
     public ArmorStat weaponDamageStat;
     public ArmorStat weaponAttackSpeedStat;
     public ArmorStat critChanceStat;
     
     //boots
-    public ArmorModifier ccBonusModifier;
     public ArmorModifier doubleJumpModifier;
     public ArmorModifier jetpackModifier;
     public ArmorModifier teleportModifier;
@@ -86,13 +82,10 @@ public class ArmorManager {
         this.doubleGoldFindModifier.description = "Doubles the value of each gold you pick up.";
         this.armorModifiers.put(this.doubleGoldFindModifier.id,this.doubleGoldFindModifier);
        
-        this.seeSecondaryObjectivesModifier = new ArmorModifier(ArmorModifierID.SECONDARY_OBJECTIVES, new Image("seeSecondaryObjectiveModifier.jpg"), "See Secondary Objectives");
-        this.seeSecondaryObjectivesModifier.description = "Allows secondary objectives to show up on your radar.";
-        this.armorModifiers.put(this.seeSecondaryObjectivesModifier.id,this.seeSecondaryObjectivesModifier);
-        
-        this.revealSecretAreasModifier = new ArmorModifier(ArmorModifierID.REVEAL_SECRETS, new Image("revealSecretModifier.jpg"), "Reveal Secret Objectives");
-        this.revealSecretAreasModifier.description = "Allows secret areas to show up on your radar.";
-        this.armorModifiers.put(this.revealSecretAreasModifier.id,this.revealSecretAreasModifier);
+        this.upgradedRadarModifier = new ArmorModifier(ArmorModifierID.UPGRADED_RADAR, new Image("seeSecondaryObjectiveModifier.jpg"), "Improved radar");
+        this.upgradedRadarModifier.description = "Allows secondary objectives to show up on your radar.";
+        this.armorModifiers.put(this.upgradedRadarModifier.id,this.upgradedRadarModifier);
+
        
         //===============
         // Helm Stats
@@ -117,21 +110,18 @@ public class ArmorManager {
         //================
         // Body Modifiers
         //================
-        this.doubleCCResistModifier = new ArmorModifier(ArmorModifierID.DOUBLE_CC, new Image("ccStat.jpg"), "Double CC Resist");
-        this.doubleCCResistModifier.description = "Doubles your CC resistance.";
-        this.armorModifiers.put(this.doubleCCResistModifier.id,this.doubleCCResistModifier);
+        this.damageReductionBonusModifier = new ArmorModifier(ArmorModifierID.DR_BONUS, new Image("ccStat.jpg"), "Hard To Kill");
+        this.damageReductionBonusModifier.description = "When below 33% health, DR is incresed +50%";
+        this.armorModifiers.put(this.damageReductionBonusModifier.id,this.damageReductionBonusModifier);
         
-        this.doubleHealingModifier = new ArmorModifier(ArmorModifierID.DOUBLE_HEALING, new Image("healthStat.jpg"), "Double Healing Effectiveness");
-        this.doubleHealingModifier.description ="Doubles the effectiveness of all healing";
-        this.armorModifiers.put(this.doubleHealingModifier.id,this.doubleHealingModifier);
+        this.reducedCriticalHitModifier = new ArmorModifier(ArmorModifierID.NO_CRITS, new Image("healthStat.jpg"), "Hardened Armor");
+        this.reducedCriticalHitModifier.description ="Enemies can no longer critical hit you.";
+        this.armorModifiers.put(this.reducedCriticalHitModifier.id,this.reducedCriticalHitModifier);
        
-        this.tenPotionsModifier = new ArmorModifier(ArmorModifierID.TEN_POTIONS, new Image("healingStat.jpg"), "Additional Potions");
-        this.tenPotionsModifier.description = "Allows you to carry up to 10 potions";
-        this.armorModifiers.put(this.tenPotionsModifier.id,this.tenPotionsModifier);
-        
-        this.chanceAbsorbModifier = new ArmorModifier(ArmorModifierID.CHANCE_ABSORB, new Image("armorStat.jpg"), "Chance to Absorb Projectiles");
-        this.chanceAbsorbModifier.description = "When hit by an enemy projectile, you have a 15% chance to absorb it.";
-        this.armorModifiers.put(this.chanceAbsorbModifier.id,this.chanceAbsorbModifier);
+        this.bonusThornsDamageModifier = new ArmorModifier(ArmorModifierID.INCREASED_THORNS, new Image("healingStat.jpg"), "Additional Thorns");
+        this.bonusThornsDamageModifier.description = "Thorns damage is increased when you are in close proximity.";
+        this.armorModifiers.put(this.bonusThornsDamageModifier.id,this.bonusThornsDamageModifier);
+
         
         
         //===============
@@ -158,18 +148,17 @@ public class ArmorManager {
         //=================
         // Weapon Modifiers
         //=================
-        this.concecutiveHitsModifier = new ArmorModifier(ArmorModifierID.CONCECUTIVE_HITS, new Image("critChanceStat.jpg"), "Concecutive Hits Bonus");
-        this.concecutiveHitsModifier.description = "With each concecutive hit to an enemy you gain 5% crit chance";
-        this.armorModifiers.put(this.concecutiveHitsModifier.id,this.concecutiveHitsModifier);
-        
+
         this.meleeAttackDamageModifier = new ArmorModifier(ArmorModifierID.MELEE_ATTACK_DMG, new Image("meleeDamageModifier.jpg"), "Melee Damage Increase");
         this.meleeAttackDamageModifier.description = "Increases the damage of melee attacks by 50%";
         this.armorModifiers.put(this.meleeAttackDamageModifier.id,this.meleeAttackDamageModifier);
        
-        this.rangedAttackSlowModifier = new ArmorModifier(ArmorModifierID.RANGED_ATTACK_SLOW, new Image("healthStat.jpg"), "Ranged Attack Slow");
-        this.armorModifiers.put(this.rangedAttackSlowModifier.id,this.rangedAttackSlowModifier);
+        this.potionCooldownResetModifier = new ArmorModifier(ArmorModifierID.POTION_RESET, new Image("healthStat.jpg"), "Potion Cooldown Reset");
+        this.potionCooldownResetModifier.description = "Using a potion will instantly reset all cooldowns.";
+        this.armorModifiers.put(this.potionCooldownResetModifier.id,this.potionCooldownResetModifier);
         
         this.criticalHitDamageModifier = new ArmorModifier(ArmorModifierID.CRIT_DMG, new Image("critDamageStat.jpg"), "Critical Hit Damage");
+        this.criticalHitDamageModifier.description = "Critical hit damaged increased by 100%.";
         this.armorModifiers.put(this.criticalHitDamageModifier.id,this.criticalHitDamageModifier);
         
 
@@ -196,9 +185,6 @@ public class ArmorManager {
         //================
         // Boots Modfiers
         //================
-        
-        this.ccBonusModifier = new ArmorModifier(ArmorModifierID.CC_REDUCTION, new Image("healthStat.jpg"), "+15% CC Reduction");
-        this.armorModifiers.put(this.ccBonusModifier.id,this.ccBonusModifier);
         
         this.doubleJumpModifier = new ArmorModifier(ArmorModifierID.DOUBLE_JUMP, new Image("healthStat.jpg"), "Double Jump");
         this.armorModifiers.put(this.doubleJumpModifier.id,this.doubleJumpModifier);
@@ -279,23 +265,20 @@ public class ArmorManager {
         ArrayList<ArmorModifier> helmModifiers =new ArrayList<>();   
         helmModifiers.add(this.seeEnemyHealthModifier);
         helmModifiers.add(this.doubleGoldFindModifier);
-        helmModifiers.add(this.seeSecondaryObjectivesModifier);
-        helmModifiers.add(this.revealSecretAreasModifier);
+        helmModifiers.add(this.upgradedRadarModifier);
 
         ArrayList<ArmorModifier> bodyModifiers =new ArrayList<>(); 
-        bodyModifiers.add(this.doubleCCResistModifier);
-        bodyModifiers.add(this.doubleHealingModifier);
-        bodyModifiers.add(this.tenPotionsModifier);
-        bodyModifiers.add(this.chanceAbsorbModifier);
+        bodyModifiers.add(this.damageReductionBonusModifier);
+        bodyModifiers.add(this.reducedCriticalHitModifier);
+        bodyModifiers.add(this.bonusThornsDamageModifier);
+
     
         ArrayList<ArmorModifier> weaponModifiers = new ArrayList<>();
-        bodyModifiers.add(this.concecutiveHitsModifier);
         bodyModifiers.add(this.meleeAttackDamageModifier);
-        bodyModifiers.add(this.rangedAttackSlowModifier);
+        bodyModifiers.add(this.potionCooldownResetModifier);
         bodyModifiers.add(this.criticalHitDamageModifier);
 
         ArrayList<ArmorModifier> bootsModifiers = new ArrayList<>();
-        bootsModifiers.add(this.ccBonusModifier);
         bootsModifiers.add(this.doubleJumpModifier);
         bootsModifiers.add(this.jetpackModifier);
         bootsModifiers.add(this.teleportModifier);
@@ -352,13 +335,13 @@ public class ArmorManager {
         public static enum ArmorModifierID
         {   
             //helm modifiers
-            ENEMY_HEALTH, GOLD_FIND, SECONDARY_OBJECTIVES, REVEAL_SECRETS,
+            ENEMY_HEALTH, GOLD_FIND, UPGRADED_RADAR,
             //body modifiers
-            DOUBLE_CC, DOUBLE_HEALING, TEN_POTIONS, CHANCE_ABSORB,
+            DR_BONUS, NO_CRITS, INCREASED_THORNS, 
             //weapon modifiers
-            CONCECUTIVE_HITS,MELEE_ATTACK_DMG,RANGED_ATTACK_SLOW,CRIT_DMG,
+            MELEE_ATTACK_DMG,POTION_RESET,CRIT_DMG,
             //boot modifiers
-            CC_REDUCTION, DOUBLE_JUMP,JETPACK,TELEPORT
+            DOUBLE_JUMP,JETPACK,TELEPORT
         }
         
         
@@ -655,20 +638,16 @@ public class ArmorManager {
          
          renderData.data.add(12,seeEnemyHealthModifier.dumpRenderData()); 
          renderData.data.add(13,doubleGoldFindModifier.dumpRenderData()); 
-         renderData.data.add(14,seeSecondaryObjectivesModifier.dumpRenderData()); 
-         renderData.data.add(15,revealSecretAreasModifier.dumpRenderData());         
-         renderData.data.add(16,doubleCCResistModifier.dumpRenderData()); 
-         renderData.data.add(17,doubleHealingModifier.dumpRenderData()); 
-         renderData.data.add(18,tenPotionsModifier.dumpRenderData()); 
-         renderData.data.add(19,chanceAbsorbModifier.dumpRenderData());          
-         renderData.data.add(20,concecutiveHitsModifier.dumpRenderData()); 
-         renderData.data.add(21,meleeAttackDamageModifier.dumpRenderData()); 
-         renderData.data.add(22,rangedAttackSlowModifier.dumpRenderData()); 
-         renderData.data.add(23,criticalHitDamageModifier.dumpRenderData());        
-         renderData.data.add(24,ccBonusModifier.dumpRenderData()); 
-         renderData.data.add(25,doubleJumpModifier.dumpRenderData()); 
-         renderData.data.add(26,jetpackModifier.dumpRenderData()); 
-         renderData.data.add(27,teleportModifier.dumpRenderData()); 
+         renderData.data.add(14,upgradedRadarModifier.dumpRenderData());         
+         renderData.data.add(15,damageReductionBonusModifier.dumpRenderData()); 
+         renderData.data.add(16,reducedCriticalHitModifier.dumpRenderData()); 
+         renderData.data.add(17,bonusThornsDamageModifier.dumpRenderData()); 
+         renderData.data.add(18,meleeAttackDamageModifier.dumpRenderData()); 
+         renderData.data.add(19,potionCooldownResetModifier.dumpRenderData()); 
+         renderData.data.add(20,criticalHitDamageModifier.dumpRenderData());        
+         renderData.data.add(21,doubleJumpModifier.dumpRenderData()); 
+         renderData.data.add(22,jetpackModifier.dumpRenderData()); 
+         renderData.data.add(23,teleportModifier.dumpRenderData()); 
 
          return renderData;        
      }
@@ -692,8 +671,8 @@ public class ArmorManager {
             }
         }
        
-        ArmorModifier dummyModifier = this.armorModifiers.get(ArmorModifierID.CC_REDUCTION);
-        for(int i=12; i<=27; i++)
+        ArmorModifier dummyModifier = this.armorModifiers.get(ArmorModifierID.DOUBLE_JUMP);
+        for(int i=12; i<=23; i++)
         {//0
             SceneObjectRenderDataChanges renderChanges = dummyModifier.generateRenderDataChanges((RenderData)oldData.data.get(i), (RenderData)newData.data.get(i));
             if(renderChanges != null)
@@ -797,63 +776,47 @@ public class ArmorManager {
             }
             if(changeData.get(14) != null)
             {
-                this.seeSecondaryObjectivesModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(14));
-            }
-            if(changeData.get(15) != null)
-            {
-                this.revealSecretAreasModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(15));
+                this.upgradedRadarModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(14));
             }
             
+            if(changeData.get(15) != null)
+            {
+                this.damageReductionBonusModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(15));
+            }
             if(changeData.get(16) != null)
             {
-                this.doubleCCResistModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(16));
+                this.reducedCriticalHitModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(16));
             }
             if(changeData.get(17) != null)
             {
-                this.doubleHealingModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(17));
+                this.bonusThornsDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(17));
             }
             if(changeData.get(18) != null)
             {
-                this.tenPotionsModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(18));
+                this.meleeAttackDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(18));
             }
             if(changeData.get(19) != null)
             {
-                this.chanceAbsorbModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(19));
+                this.potionCooldownResetModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(19));
             }
-            
             if(changeData.get(20) != null)
             {
-                this.concecutiveHitsModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(20));
+                this.criticalHitDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(20));
             }
+            
             if(changeData.get(21) != null)
             {
-                this.meleeAttackDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(21));
+                this.doubleJumpModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(21));
             }
             if(changeData.get(22) != null)
             {
-                this.rangedAttackSlowModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(22));
+                this.jetpackModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(22));
             }
             if(changeData.get(23) != null)
             {
-                this.criticalHitDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(23));
+                this.teleportModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(23));
             }
-            
-            if(changeData.get(24) != null)
-            {
-                this.criticalHitDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(24));
-            }
-            if(changeData.get(25) != null)
-            {
-                this.criticalHitDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(25));
-            }
-            if(changeData.get(26) != null)
-            {
-                this.criticalHitDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(26));
-            }
-            if(changeData.get(27) != null)
-            {
-                this.criticalHitDamageModifier.reconcileRenderDataChanges(0, 1, (SceneObjectRenderDataChanges)changeData.get(27));
-            }
+
             
    
                      
