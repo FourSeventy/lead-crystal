@@ -260,7 +260,7 @@ public class CombatData
         return this.combatStates.get(CombatState.DEAD);
     }
     
-    public float percentHealth() {
+    public float getPercentHealth() {
         return  currentHealth /  this.maxHealth.getTotalValue();
     }
     

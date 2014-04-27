@@ -300,6 +300,18 @@ public abstract class CombatEntity extends Entity
                 }
             }
         }
+        
+        if(this instanceof PlayerEntity) // lol ehhh
+        {
+            if(((PlayerEntity)this).getArmorManager().reducedCriticalHitModifier.equipped == true)
+            {
+                if(dmg.isCrit())
+                {
+                    dmg.getAmountObject().setPercentModifier(1f);
+                    dmg.setCrit(false);
+                }
+            }
+        }
 
 
         //get a copy of our incoming damage
@@ -371,7 +383,7 @@ public abstract class CombatEntity extends Entity
             }
         }
         
-        //handle thorns damage
+        //handle thorns damage      
         float thornsAmount = incomingDamage.getAmount() * this.getCombatData().thornsDamage.getTotalValue();
         if(thornsAmount > 0)
         {

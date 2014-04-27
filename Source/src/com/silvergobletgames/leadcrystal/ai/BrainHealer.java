@@ -199,7 +199,7 @@ public class BrainHealer extends BrainGround
         {
             this.targetClosestDamagedFriendly();
         }
-        else if(((CombatEntity)self.getTarget()).getCombatData().isDead() || ((CombatEntity)self.getTarget()).getCombatData().percentHealth() == 1)
+        else if(((CombatEntity)self.getTarget()).getCombatData().isDead() || ((CombatEntity)self.getTarget()).getCombatData().getPercentHealth() == 1)
         {
             self.target(null);
         }
@@ -395,7 +395,7 @@ public class BrainHealer extends BrainGround
         
         for(SceneObject fighter: fighters)
         {
-            if(self.distanceAbs((Entity)fighter) < closestDistance && ((CombatEntity)fighter).getCombatData().percentHealth() < 1)
+            if(self.distanceAbs((Entity)fighter) < closestDistance && ((CombatEntity)fighter).getCombatData().getPercentHealth() < 1)
             {
                 closestDistance = self.distanceAbs((Entity)fighter);
                 closestFriendly = (NonPlayerEntity)fighter;

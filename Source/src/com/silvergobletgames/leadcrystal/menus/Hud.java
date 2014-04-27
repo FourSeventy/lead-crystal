@@ -837,7 +837,7 @@ public class Hud extends Window
         this.creditLabel.getText().setText(Integer.toString(this.playerReference.getCurrencyManager().getBalence()));
         
         //set pain alpha 
-        this.painOverlay.getImage().setColor(new Color(1,1,1,1 - this.playerReference.getCombatData().percentHealth())); 
+        this.painOverlay.getImage().setColor(new Color(1,1,1,1 - this.playerReference.getCombatData().getPercentHealth())); 
       
         
         //check for death

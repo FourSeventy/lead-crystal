@@ -292,7 +292,7 @@ public class ArmorMenu extends Window{
         
         this.tabPane.addComponent(new Button(new Text("Modifiers:"), modifierBaseX, modifierBaseY+125), 1);
         
-        final ArmorModifier modifier6 = this.playerReference.getArmorManager().reducedCriticalHitModifier;
+        final ArmorModifier modifier6 = this.playerReference.getArmorManager().damageReductionBonusModifier;
         this.toughToKillModifier = new Button(modifier6.image.copy(),modifierBaseX+125,modifierBaseY,100,100);
         this.toughToKillModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
@@ -314,7 +314,7 @@ public class ArmorMenu extends Window{
        });
         this.tabPane.addComponent(this.toughToKillModifier,1);
         
-        final ArmorModifier modifier7 = this.playerReference.getArmorManager().bonusThornsDamageModifier;
+        final ArmorModifier modifier7 = this.playerReference.getArmorManager().reducedCriticalHitModifier;
         this.noCritsModifier = new Button(modifier7.image.copy(),modifierBaseX,modifierBaseY-125,100,100);
         this.noCritsModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)
@@ -336,7 +336,7 @@ public class ArmorMenu extends Window{
        });
         this.tabPane.addComponent(this.noCritsModifier,1);
         
-       final ArmorModifier modifier8 = this.playerReference.getArmorManager().damageReductionBonusModifier;
+       final ArmorModifier modifier8 = this.playerReference.getArmorManager().bonusThornsDamageModifier;
         this.increasedThornsModifier = new Button(modifier8.image.copy(),modifierBaseX+125,modifierBaseY-125,100,100);
         this.increasedThornsModifier.addActionListener(new ActionListener(){     
            public void actionPerformed(ActionEvent e)

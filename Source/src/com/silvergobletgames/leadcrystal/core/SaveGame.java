@@ -59,6 +59,10 @@ public class SaveGame
         //build the player
         save.player = PlayerEntity.buildFromFullData((SceneObjectSaveData)save.rawSaveGameData.get(0));
         
+        //close file
+        ois.close();
+        f.close();
+        
         //return the save game
         return save;
          

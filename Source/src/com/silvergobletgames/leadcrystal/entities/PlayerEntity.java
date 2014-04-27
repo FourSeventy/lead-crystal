@@ -1,29 +1,12 @@
 package com.silvergobletgames.leadcrystal.entities;
 
-import com.silvergobletgames.leadcrystal.items.ArmorManager;
-import com.silvergobletgames.leadcrystal.items.Potion;
-import com.silvergobletgames.leadcrystal.items.Currency;
-import com.silvergobletgames.leadcrystal.items.CurrencyManager;
 import com.silvergobletgames.leadcrystal.combat.CombatData;
-import com.silvergobletgames.leadcrystal.combat.LevelProgressionManager;
-import com.silvergobletgames.sylver.graphics.Color;
-import com.silvergobletgames.sylver.graphics.Image;
-import com.silvergobletgames.sylver.graphics.LightSource;
-import com.silvergobletgames.sylver.netcode.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.UUID;
-import net.phys2d.math.Vector2f;
-import net.phys2d.raw.Body;
-import net.phys2d.raw.CollisionEvent;
-import net.phys2d.raw.StaticBody;
-import net.phys2d.raw.shapes.Circle;
-import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.leadcrystal.combat.CombatData.CombatState;
 import com.silvergobletgames.leadcrystal.combat.CombatEffect;
 import com.silvergobletgames.leadcrystal.combat.Damage;
+import com.silvergobletgames.leadcrystal.combat.LevelProgressionManager;
 import com.silvergobletgames.leadcrystal.combat.ProcEffect;
+import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.core.*;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBlackFrontArmAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownBackArmAnimationPack;
@@ -33,30 +16,48 @@ import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SandSp
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SmokeEmitter;
 import com.silvergobletgames.leadcrystal.entities.EntityTooltip.EntityTooltipField;
 import com.silvergobletgames.leadcrystal.items.*;
+import com.silvergobletgames.leadcrystal.items.ArmorManager;
+import com.silvergobletgames.leadcrystal.items.Currency;
+import com.silvergobletgames.leadcrystal.items.CurrencyManager;
+import com.silvergobletgames.leadcrystal.items.Potion;
 import com.silvergobletgames.leadcrystal.netcode.ClientInputPacket;
 import com.silvergobletgames.leadcrystal.netcode.PlayerPredictionData;
+import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
+import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.leadcrystal.scripting.PageCondition;
 import com.silvergobletgames.leadcrystal.scripting.ScriptObject;
 import com.silvergobletgames.leadcrystal.scripting.ScriptPage;
 import com.silvergobletgames.leadcrystal.skills.Skill;
 import com.silvergobletgames.leadcrystal.skills.Skill.SkillID;
 import com.silvergobletgames.leadcrystal.skills.SkillManager;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.InputSnapshot;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.core.SceneObject;
-import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.graphics.*;
 import com.silvergobletgames.sylver.graphics.AnimationPack.CoreAnimations;
 import com.silvergobletgames.sylver.graphics.AnimationPack.ImageAnimation;
+import com.silvergobletgames.sylver.graphics.Color;
+import com.silvergobletgames.sylver.graphics.Image;
+import com.silvergobletgames.sylver.graphics.LightSource;
+import com.silvergobletgames.sylver.netcode.*;
 import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 import java.awt.Point;
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.UUID;
 import javax.media.opengl.GL2;
 import net.phys2d.math.ROVector2f;
+import net.phys2d.math.Vector2f;
 import net.phys2d.raw.*;
+import net.phys2d.raw.Body;
+import net.phys2d.raw.CollisionEvent;
+import net.phys2d.raw.StaticBody;
 import net.phys2d.raw.shapes.Box;
+import net.phys2d.raw.shapes.Circle;
 import net.phys2d.raw.shapes.Line;
 import net.phys2d.raw.shapes.Polygon;
 
@@ -278,7 +279,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
            
     
          //entity tooltip
-         entityTooltip.setHealthField(combatData.percentHealth());        
+         entityTooltip.setHealthField(combatData.getPercentHealth());        
          
          //update ladder settings
          if(this.onLadder)
@@ -411,12 +412,18 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         //if we collided with currency, collect it and remove it from the world
         if (other instanceof Currency)
         {
-                    
+            int currencyAmount = ((Currency)other).getAmount();
+            
+            if(this.getArmorManager().doubleGoldFindModifier.equipped == true)
+            {
+                currencyAmount *= 2;
+            }
+            
             //add to currency manager
-            this.currencyManager.addCurrency(((Currency)other).getAmount());
+            this.currencyManager.addCurrency(currencyAmount);
 
             //add currency text
-            Text currencyText = new Text("+" + Integer.toString(((Currency)other).getAmount()), LeadCrystalTextType.COMBAT);
+            Text currencyText = new Text("+" + Integer.toString(currencyAmount), LeadCrystalTextType.COMBAT);
             currencyText.setColor(new Color(Color.blue));
             currencyText.setPosition(other.getPosition().x + SylverRandom.random.nextInt(10), other.getPosition().y + 100);
             currencyText.addTextEffect(new TextEffect(TextEffect.TextEffectType.YTRANSLATE, 120, other.getPosition().y, other.getPosition().y + 250));
@@ -735,6 +742,30 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                 this.finishAttack();             
            
         }
+    }
+    
+    @Override
+    public void takeDamage(Damage dmg)
+    {
+       super.takeDamage(dmg);
+       
+       //handle damageReductionBonusModifier 
+       if(this.armorManager.damageReductionBonusModifier.equipped == true)
+       {           
+           if(this.combatData.getPercentHealth() <= .33f)
+           {
+               if(!this.combatData.containsEffect("DRModifier"))
+               {
+                  CombatEffect effect = new StateEffect(StateEffect.StateEffectType.DAMAGEREDUCTION, 500, .50f, false);
+                  effect.setInfinite();
+                  this.combatData.addCombatEffect("DRModifier",effect );
+               }
+           }
+           else
+           {
+               this.combatData.removeCombatEffect("DRModifier"); 
+           }
+       }
     }
     
     @Override

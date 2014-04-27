@@ -140,12 +140,12 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
                 brain.update();
 
             //some entity tooltip settings
-            if(this.combatData.percentHealth() != 1 )
+            if(this.combatData.getPercentHealth() != 1 )
                 entityTooltip.specialDisplay = true;
             else
                 entityTooltip.specialDisplay = false;
 
-            entityTooltip.setHealthField(combatData.percentHealth());
+            entityTooltip.setHealthField(combatData.getPercentHealth());
 
             //animation handling
             if(this.image.getAnimation() != ExtendedImageAnimations.MELEEATTACK && this.image.getAnimation() != ExtendedImageAnimations.RANGEDATTACK && this.image.getAnimation() != ExtendedImageAnimations.SPELLATTACK && this.image.getAnimation() != ExtendedImageAnimations.SPAWN && !(this.image.getAnimationPack() instanceof CommonCrateAnimationPack))
@@ -479,6 +479,9 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
         combatData.setOwner(newNpe);
         newNpe.setCombatData(combatData);
         
+        combatData.critChance.setBase(.05f);
+        combatData.critModifier.setBase(.50f);
+        
         //Sound Pack       
         if(soundID != null)
         {
@@ -490,7 +493,7 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
         newNpe.ID = (String)saveData.dataMap.get("id");
         newNpe.setName(name); 
         
-        newNpe.entityTooltip.setHealthField(combatData.percentHealth());
+        newNpe.entityTooltip.setHealthField(combatData.getPercentHealth());
         
         Float imageOffsetX = (Float)saveData.dataMap.get("imageOffsetX");
         Float imageOffsetY = (Float)saveData.dataMap.get("imageOffsetY");

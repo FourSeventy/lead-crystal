@@ -112,6 +112,12 @@ public class ArmorManager {
         //================
         this.damageReductionBonusModifier = new ArmorModifier(ArmorModifierID.DR_BONUS, new Image("ccStat.jpg"), "Hard To Kill");
         this.damageReductionBonusModifier.description = "When below 33% health, DR is incresed +50%";
+        this.damageReductionBonusModifier.setUnequipMethod(new ArmorAction(){
+           public void doAction()
+           {
+               getPlayerReference().getCombatData().removeCombatEffect("DRModifier"); 
+           }
+        });
         this.armorModifiers.put(this.damageReductionBonusModifier.id,this.damageReductionBonusModifier);
         
         this.reducedCriticalHitModifier = new ArmorModifier(ArmorModifierID.NO_CRITS, new Image("healthStat.jpg"), "Hardened Armor");
@@ -119,7 +125,19 @@ public class ArmorManager {
         this.armorModifiers.put(this.reducedCriticalHitModifier.id,this.reducedCriticalHitModifier);
        
         this.bonusThornsDamageModifier = new ArmorModifier(ArmorModifierID.INCREASED_THORNS, new Image("healingStat.jpg"), "Additional Thorns");
-        this.bonusThornsDamageModifier.description = "Thorns damage is increased when you are in close proximity.";
+        this.bonusThornsDamageModifier.description = "Thorns damage is doubled.";
+        this.bonusThornsDamageModifier.setEquipMethod(new ArmorAction(){
+           public void doAction()
+           {
+               getPlayerReference().getCombatData().thornsDamage.setPercentModifier(2f); 
+           }
+        });
+        this.bonusThornsDamageModifier.setUnequipMethod(new ArmorAction(){
+           public void doAction()
+           {
+               getPlayerReference().getCombatData().thornsDamage.setPercentModifier(1f);
+           }
+        });
         this.armorModifiers.put(this.bonusThornsDamageModifier.id,this.bonusThornsDamageModifier);
 
         
@@ -159,6 +177,18 @@ public class ArmorManager {
         
         this.criticalHitDamageModifier = new ArmorModifier(ArmorModifierID.CRIT_DMG, new Image("critDamageStat.jpg"), "Critical Hit Damage");
         this.criticalHitDamageModifier.description = "Critical hit damaged increased by 100%.";
+        this.criticalHitDamageModifier.setEquipMethod(new ArmorAction(){
+           public void doAction()
+           {
+               getPlayerReference().getCombatData().critModifier.adjustBase(1f); 
+           }
+        });
+        this.criticalHitDamageModifier.setUnequipMethod(new ArmorAction(){
+           public void doAction()
+           {
+               getPlayerReference().getCombatData().critModifier.adjustBase(-1f); 
+           }
+        });
         this.armorModifiers.put(this.criticalHitDamageModifier.id,this.criticalHitDamageModifier);
         
 
@@ -375,12 +405,12 @@ public class ArmorManager {
        
         public void setEquipMethod(ArmorAction action)
         {
-            this.equipAction.doAction();
+            this.equipAction = action;
         }
         
         public void setUnequipMethod(ArmorAction action)
         {
-            this.unequipAction.doAction();
+            this.unequipAction = action;
         }
         
         /**
@@ -611,10 +641,7 @@ public class ArmorManager {
     }
     
  
-  
-    
-    
-    
+
     
     //====================
     // RenderData Methods

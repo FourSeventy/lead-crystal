@@ -289,7 +289,7 @@ public class Brain
     public void damageTaken(Damage d) 
     {
         //if we are less than 15% health, enter the dying state
-        if(self.getCombatData().percentHealth() <= .15)
+        if(self.getCombatData().getPercentHealth() <= .15)
             this.stateMachine.changeState(StateID.DYING);
         else if(this.stateMachine.getCurrentState().stateID == StateID.DYING) //if we are in the dying state but are above 15% health, revert
         {

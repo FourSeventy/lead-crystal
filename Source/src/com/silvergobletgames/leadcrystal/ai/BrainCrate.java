@@ -56,7 +56,7 @@ public class BrainCrate extends BrainGround
     public void damageTaken(Damage d) 
     {
 
-        if(self.getCombatData().percentHealth() <= .5f)
+        if(self.getCombatData().getPercentHealth() <= .5f)
         {
             //switch animation to damaged
             self.getImage().setAnimation(ExtendedImageAnimations.RUNNING); 
