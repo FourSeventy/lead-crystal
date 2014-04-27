@@ -225,7 +225,7 @@ public class ArmorManager {
         
         this.jumpHeightStat = new ArmorStat(ArmorStat.ArmorStatID.JUMP_HEIGHT, new Image("jumpHeightStat.jpg"), "Jump Height", 50);
         this.jumpHeightStat.description = "2m jump height per point";
-        this.jumpHeightStat.setAddPointAction(new ArmorAction(){ public void doAction(){System.out.println("jump height");}}); 
+        this.jumpHeightStat.setAddPointAction(new ArmorAction(){ public void doAction(){playerReference.setMaxJumpEnergy(playerReference.getMaxJumpEnergy() + 20);}});  
         this.armorStats.put(this.jumpHeightStat.id,this.jumpHeightStat);
     }
     

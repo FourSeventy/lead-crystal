@@ -91,7 +91,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     
     //jumping variables
     protected int inAirTimer = 0;
-    protected final float MAX_JUMP_ENERGY = 125;
+    protected float MAX_JUMP_ENERGY = 125;
     protected float jumpEnergy = MAX_JUMP_ENERGY;
     protected boolean jumpReleased = true;
     protected boolean waitingToResetEnergy = false;
@@ -810,6 +810,16 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         }
     }
     
+    public float getMaxJumpEnergy()
+    {
+        return this.MAX_JUMP_ENERGY;
+    }
+    
+    public void setMaxJumpEnergy(float maxEnergy)
+    {
+        this.MAX_JUMP_ENERGY = maxEnergy;
+    }
+    
   
     
     private static ROVector2f[] getBodyVertices()
@@ -1240,13 +1250,13 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         //if we can move and have jump energy
         if(combatData.canMove() && this.jumpEnergy > 0  ) 
         {
+
             //if its the first press for the jump give the player an extra boost
             if (this.jumpEnergy == MAX_JUMP_ENERGY) 
             {   
-                //image.setAnimation(ExtendedImageAnimations.JUMPING);
 
                 //add the jump force
-                this.jumpEnergy -= 20; //20 /100
+                this.jumpEnergy -= 20; 
                 this.getBody().addSoftForce(new Vector2f(0, 15_000));
                 
                 //play the jump sound   
@@ -1259,7 +1269,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             else //add the normal amount of jump force
             {
                 this.jumpEnergy -= 6; //6 /100
-                this.getBody().addSoftForce(new Vector2f(0, 4_500));
+                this.getBody().addSoftForce(new Vector2f(0, 50_000));
             }
         } 
         //double jumping
@@ -1523,6 +1533,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         renderData.data.add(12,this.getName());
         renderData.data.add(13,this.potionManager.dumpRenderData());
         renderData.data.add(14,this.frontArm.getAnimation());
+        renderData.data.add(15,this.MAX_JUMP_ENERGY);
             
         
         return renderData;
@@ -1653,6 +1664,12 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             changeMap += 1L << 14;
         }
         
+        if(!oldData.data.get(15).equals( newData.data.get(15)))
+        {
+            changeList.add(newData.data.get(15));
+            changeMap += 1L << 15;
+        }
+        
         changes.fields = changeMap;
         changes.data = changeList.toArray();
         
@@ -1680,7 +1697,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         //construct an arraylist of data that we got, nulls will go where we didnt get any data
         ArrayList changeData = new ArrayList();
-        for(int i = 0; i <15; i ++)
+        for(int i = 0; i <16; i ++)
         {
             // The bit was set
             if ((fieldMap & (1L << i)) != 0)
@@ -1716,6 +1733,11 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         {
             this.frontArm.setAnimation((ImageAnimation)changeData.get(14));
             this.backArm.setAnimation((ImageAnimation)changeData.get(14));
+        }
+        
+        if(changeData.get(15) != null)
+        {
+            this.MAX_JUMP_ENERGY = (float)changeData.get(15);
         }
         
 

@@ -47,6 +47,7 @@ public class ClientPlayerEntity extends PlayerEntity
         this.armorManager = player.getArmorManager();
         this.levelProgressionManager = player.getLevelProgressionManager();
         this.skillManager = player.getSkillManager();
+        this.MAX_JUMP_ENERGY = player.MAX_JUMP_ENERGY;
         
         //skills
         this.skill1 = player.skill1;
@@ -119,28 +120,6 @@ public class ClientPlayerEntity extends PlayerEntity
              this.body.setDamping(this.BASE_DAMPING);
          }
          
-         //hanlde dash
-//         if(this.dashing)
-//         {
-//             
-//             this.dashTicks++;
-//             if(dashTicks > 30)
-//             {
-//                 this.dashing = false;
-//                 this.dashTicks = 0;
-//                 this.getBody().setVelocity(new Vector2f(0f,0f));
-//                 this.getBody().setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value); 
-//                 this.getBody().setOverlapMask(Entity.OverlapMasks.PLAYER.value); 
-//             }
-//             else
-//             {   
-//                 this.getBody().setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value); 
-//                 this.getBody().setVelocity(new Vector2f(this.dashVector.x * 150, this.dashVector.y * 150));
-//             }
-//           
-//             
-//         }
-         
          //update skill manager
          skillManager.update();       
          
@@ -161,7 +140,7 @@ public class ClientPlayerEntity extends PlayerEntity
         
         //construct an arraylist of data that we got, nulls will go where we didnt get any data
         ArrayList changeData = new ArrayList();
-        for(int i = 0; i <15; i ++)
+        for(int i = 0; i <16; i ++)
         {
             // The bit was set
             if ((fieldMap & (1L << i)) != 0)
@@ -222,9 +201,10 @@ public class ClientPlayerEntity extends PlayerEntity
         if(changeData.get(6) != null)
            this.levelProgressionManager.reconcileRenderDataChanges(lastTime, futureTime, (SceneObjectRenderDataChanges)changeData.get(6));
         
-//        if(this.getCombatData().isDead())
-//            ;
-        
+        if(changeData.get(15) != null)
+        {
+            this.MAX_JUMP_ENERGY = (float)changeData.get(15);
+        }
         
         if(this.potionManager != null && changeData.get(13) != null)
             this.potionManager.reconcileRenderDataChanges(lastTime,futureTime,(SceneObjectRenderDataChanges)changeData.get(13));
