@@ -85,6 +85,22 @@ public class PotionManager
              potionEntity.setPosition(this.playerReference.getPosition().x, this.playerReference.getPosition().y + 150);
             potionEntity.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 61, 0, 1));
             this.playerReference.getOwningScene().add(potionEntity, Scene.Layer.MAIN);
+            
+            
+            //if they have the modifier
+            if(this.playerReference.getArmorManager().potionCooldownResetModifier.equipped == true)
+            {
+                this.playerReference.getSkillManager().getSkill(this.playerReference.getSkillAssignment(1)).setCooldownRemaining(0);
+                this.playerReference.getSkillManager().getSkill(this.playerReference.getSkillAssignment(2)).setCooldownRemaining(0);
+                if(this.playerReference.getSkillAssignment(3) != null )
+                {
+                    this.playerReference.getSkillManager().getSkill(this.playerReference.getSkillAssignment(3)).setCooldownRemaining(0);
+                }
+                if(this.playerReference.getSkillAssignment(4) != null)
+                {
+                    this.playerReference.getSkillManager().getSkill(this.playerReference.getSkillAssignment(4)).setCooldownRemaining(0);
+                }
+            }
         }
     }
     

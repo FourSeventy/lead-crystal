@@ -51,11 +51,17 @@ public class PlayerCrushingStrike extends PlayerSkill{
         SylverVector2f vectorToTarget = targetingData.vectorToTarget;
         float theta = targetingData.theta;
         
+        
+        Damage passthrough = new Damage(damage);
         //set damage
-        float damageAmout = 0;
+        int min = 15; 
+        int max = 17;
+        float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
         damage.getAmountObject().adjustBase(damageAmout);
         damage.setType(Damage.DamageType.PHYSICAL);    
         damage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, 10, 0.0f, 1f));
+        
+        
         
         
         //============
@@ -63,27 +69,28 @@ public class PlayerCrushingStrike extends PlayerSkill{
         //=============
         
         //calculate force for the bullet
-        float xforce = 2500*vectorToTarget.x;
-        float yforce = 2500*vectorToTarget.y;
+        float xforce = 1000*vectorToTarget.x;
+        float yforce = 1000*vectorToTarget.y;
  
-        Body body = new Body(new Box(40, 250),1);
+        Body body = new Body(new Box(40, 200),1);
         body.setRotatable(false);
         body.addExcludedBody(user.getBody());
         Image image = new Image("swipe.png"); 
-        image.setDimensions(100, 250);
+        image.setDimensions(100, 200);
         image.setColor(new Color(1,1,1f,1f));
        // image.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.COLOR, 50, new Color(1,1,1f,1f), new Color(1,1,1f,0f)));
-        image.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 300, 1, 1));
+        image.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 35, 1, 1));
         image.setAnchor(Anchorable.Anchor.CENTER);
+        image.setHorizontalFlip(true);
         image.setPositionAnchored(origin.x,origin.y);
         //this.user.getOwningScene().add(image,Layer.MAIN);
         
-        StrikeHitbox hitBox = new StrikeHitbox(new Damage(Damage.DamageType.NODAMAGE, 0),body,image,this.user,damage);
+        StrikeHitbox hitBox = new StrikeHitbox(damage,body,image,this.user,passthrough);
         hitBox.getBody().setBitmask(Entity.BitMasks.NO_COLLISION.value);
         hitBox.getBody().setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value);
         hitBox.getBody().setRotation((float)theta);
         hitBox.getImage().setAngle((float)(theta * (180f/Math.PI)));
-        hitBox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 300, 1, 1));
+        hitBox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 35, 1, 1));
         hitBox.setPosition(origin.x,origin.y);
         hitBox.getBody().addForce(new Vector2f(xforce,yforce));
         this.user.getOwningScene().add(hitBox,Layer.MAIN);  
@@ -118,10 +125,10 @@ public class PlayerCrushingStrike extends PlayerSkill{
                  float distance = other.distanceAbs(this.sourceEntity);
                  
                  //damage goes from 30 to 5 linearly as the distance goes from 70 to 600               
-                 float maxDamage = 30; //y1
-                 float minDamage = 5; //y2
+                 float maxDamage = 20; //y1
+                 float minDamage = 10; //y2
                  float closeDistance = 70; //x1
-                 float farDistance = 600; //x2
+                 float farDistance = 280; //x2
                  
                  //linear equation
                  float damage = ((minDamage - maxDamage)/(farDistance-closeDistance)) * (distance - closeDistance) + maxDamage;
@@ -130,10 +137,13 @@ public class PlayerCrushingStrike extends PlayerSkill{
                  damage = Math.max(damage, minDamage);
                  damage = Math.min(damage, maxDamage);
                  
-                 this.passthrough.getAmountObject().setBase(damage);
+                 this.passthrough.getAmountObject().setBase(damage/10);
+                 this.passthrough.setType(Damage.DamageType.BURN);
                  
+                 //build dot
+                 CombatEffect burn = new DotEffect(5 * 60, 30, this.passthrough);
                  //give damage to other
-                 ((CombatEntity)other).takeDamage(passthrough);
+                 ((CombatEntity)other).getCombatData().addCombatEffect("flameDot", burn);
 
              }
          }

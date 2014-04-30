@@ -66,7 +66,7 @@ public class PlayerDashAttack extends Skill{
         damage.setType(Damage.DamageType.PHYSICAL);    
         
         //add stun effect
-        damage.addCombatEffect(new StateEffect(StateEffect.StateEffectType.STUN, 60));
+        damage.addCombatEffect(new StateEffect(StateEffect.StateEffectType.SLOW, 3 * 60,.50f, true));
         
          //determine angle for the image
         float theta = (float)Math.acos(vectorToTarget.dot(new SylverVector2f(1,0)));

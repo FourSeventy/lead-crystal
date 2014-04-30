@@ -796,6 +796,12 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             }
         }
         
+        //modifier
+        if(this.getArmorManager().meleeAttackDamageModifier.equipped == true)
+        {
+            damage.getAmountObject().adjustPercentModifier(.5f);
+        }
+        
         //roll for crit
         double critRoll = Math.random();
         if(critRoll <= this.combatData.critChance.getTotalValue())

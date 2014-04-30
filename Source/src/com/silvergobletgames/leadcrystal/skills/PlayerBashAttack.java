@@ -52,8 +52,8 @@ public class PlayerBashAttack extends Skill{
         damage.setType(Damage.DamageType.PHYSICAL);    
         damage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, 10, 0.0f, 1f));
         
-        //add slow effect
-        damage.addCombatEffect(new StateEffect(StateEffect.StateEffectType.SLOW, 240,.5f,true));
+        //add stun effect
+        damage.addCombatEffect(new StateEffect(StateEffect.StateEffectType.STUN, (2 * 60) + 30,.5f,true));
         
         //Get target X and Y
         PlayerEntity player = (PlayerEntity) user;

@@ -41,14 +41,14 @@ public class CombatText extends Text
         this.amount = Math.abs(damage.getAmount());
         
         String damageString = Float.toString(this.amount);
-//        if(this.amount >= 1)
-//        {
-//            damageString = new DecimalFormat("#").format(this.amount); 
-//        }
-//        else
-//        {
-//            damageString = new DecimalFormat(".##").format(this.amount); 
-//        }
+        if(this.amount >= 1)
+        {
+            damageString = new DecimalFormat("#").format(this.amount); 
+        }
+        else
+        {
+            damageString = new DecimalFormat(".##").format(this.amount); 
+        }
         
         
         

@@ -44,7 +44,7 @@ public class PlayerLaserShot extends PlayerSkill{
     
     public PlayerLaserShot()
     {
-        super(SkillID.PlayerLaser,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,50,Integer.MAX_VALUE);
+        super(SkillID.PlayerLaser,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,45,Integer.MAX_VALUE);
         
         //set the skillID and the name
         this.icon = new Image("ChargeShotIcon.png");
