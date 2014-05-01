@@ -383,14 +383,17 @@ public abstract class CombatEntity extends Entity
             }
         }
         
-        //handle thorns damage      
-        float thornsAmount = incomingDamage.getAmount() * this.getCombatData().thornsDamage.getTotalValue();
-        if(thornsAmount > 0)
+        //handle thorns damage 
+        if(incomingDamage.getType() != DamageType.HEAL)
         {
-            Damage thornsDamage = new Damage(DamageType.PHYSICAL,thornsAmount,this);
-            if(incomingDamage.getSource() != null)
-            {              
-                incomingDamage.getSource().takeDamage(thornsDamage);
+            float thornsAmount = incomingDamage.getAmount() * this.getCombatData().thornsDamage.getTotalValue();
+            if(thornsAmount > 0)
+            {
+                Damage thornsDamage = new Damage(DamageType.PHYSICAL,thornsAmount,this);
+                if(incomingDamage.getSource() != null)
+                {              
+                    incomingDamage.getSource().takeDamage(thornsDamage);
+                }
             }
         }
         

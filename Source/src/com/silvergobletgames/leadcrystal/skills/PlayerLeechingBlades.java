@@ -40,7 +40,7 @@ public class PlayerLeechingBlades extends PlayerSkill{
     public PlayerLeechingBlades()
     {
         //super constructor 
-        super(SkillID.PlayerLeechingBlades,SkillType.DEFENSIVE, ExtendedImageAnimations.SPELLATTACK,1800,Integer.MAX_VALUE);
+        super(SkillID.PlayerLeechingBlades,SkillType.DEFENSIVE, ExtendedImageAnimations.SPELLATTACK,1800,50);
  
         //set the skillID and the name
         this.icon = new Image("blade.png") ;

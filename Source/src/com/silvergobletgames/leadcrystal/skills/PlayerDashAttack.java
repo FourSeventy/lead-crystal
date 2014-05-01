@@ -30,7 +30,7 @@ public class PlayerDashAttack extends Skill{
     public PlayerDashAttack()
     {
         //super constructor
-        super(SkillID.PlayerDash,SkillType.OFFENSIVE, ExtendedImageAnimations.MELEEATTACK,180, 200);
+        super(SkillID.PlayerDash,SkillType.OFFENSIVE, ExtendedImageAnimations.MELEEATTACK,180, 150);
 
         //set the skillID and the name
         this.icon = new Image("dashIcon.jpg");

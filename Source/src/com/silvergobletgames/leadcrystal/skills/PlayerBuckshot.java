@@ -40,7 +40,7 @@ public class PlayerBuckshot extends PlayerSkill{
     
     public PlayerBuckshot()
     {
-        super(SkillID.PlayerBuckshot,SkillType.OFFENSIVE, ExtendedImageAnimations.RANGEDATTACK,50,500);
+        super(SkillID.PlayerBuckshot,SkillType.OFFENSIVE, ExtendedImageAnimations.RANGEDATTACK,50,Integer.MAX_VALUE);
         
         //set the name description image and unlock cost
         this.skillName = "Buckshot";          

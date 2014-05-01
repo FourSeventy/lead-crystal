@@ -29,7 +29,7 @@ public class PlayerBashAttack extends Skill{
     
     public PlayerBashAttack()
     {
-        super(SkillID.PlayerBashAttack,SkillType.OFFENSIVE,ExtendedImageAnimations.MELEEATTACK,180,150);
+        super(SkillID.PlayerBashAttack,SkillType.OFFENSIVE,ExtendedImageAnimations.MELEEATTACK,180,100);
         
         //set the name description image and unlock cost
         this.icon = new Image("icetrap.png");

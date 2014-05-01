@@ -797,7 +797,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         }
         
         //modifier
-        if(this.getArmorManager().meleeAttackDamageModifier.equipped == true)
+        if(this.getArmorManager().meleeAttackDamageModifier.equipped == true && this.castingSkill.getRange() < 200)
         {
             damage.getAmountObject().adjustPercentModifier(.5f);
         }
@@ -1310,7 +1310,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             }
         } 
         //double jumping
-        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 && this.getCombatData().containsEffect("dJump"))  
+        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 && this.getArmorManager().doubleJumpModifier.equipped == true)  
         {
             if(this.doubleJumpEnergy == this.MAX_JUMP_ENERGY-20)
             {
@@ -1325,7 +1325,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             }
         }
         //jetpacking
-        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 &&this.jumpEnergy < this.MAX_JUMP_ENERGY && this.getCombatData().containsEffect("jetpack")) 
+        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 &&this.jumpEnergy < this.MAX_JUMP_ENERGY && this.getArmorManager().jetpackModifier.equipped == true) 
         {
                  //add jetpack emitters
                 if( this.doubleJumpEnergy == this.MAX_JUMP_ENERGY -20)
@@ -1350,7 +1350,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         }
         
         //teleport
-        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 &&this.jumpEnergy < this.MAX_JUMP_ENERGY && this.getCombatData().containsEffect("teleport")) 
+        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 &&this.jumpEnergy < this.MAX_JUMP_ENERGY && this.getArmorManager().teleportModifier.equipped == true) 
         {
             this.handleTeleport(x,y);
             this.doubleJumpAvailable = false;
