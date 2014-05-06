@@ -19,6 +19,10 @@ import java.awt.image.BufferedImage;
 public enum LeadCrystalTextType implements TextType{
     
     COMBAT,
+    HUD16,
+    HUD20,
+    HUD24,
+    HUD28,
     MESSAGE,
     CHAT,
     MENUBUTTONS;
@@ -37,6 +41,37 @@ public enum LeadCrystalTextType implements TextType{
         textRenderer.setUseVertexArrays(false);
         FontMetrics metrics = java2d.getFontMetrics(font);
         Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.COMBAT,textRenderer,metrics);
+        
+        //HUD16
+        font = new Font("Candara", Font.PLAIN, 16);
+        textRenderer = new TextRenderer(font, true, true,new SylverRenderDelegate(false,0));
+        textRenderer.setUseVertexArrays(false);
+        metrics = java2d.getFontMetrics(font);
+        Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.HUD16,textRenderer,metrics);
+        
+        
+        //HUD20
+        font = new Font("Candara", Font.PLAIN, 20);
+        textRenderer = new TextRenderer(font, true, true,new SylverRenderDelegate(false,0));
+        textRenderer.setUseVertexArrays(false);
+        metrics = java2d.getFontMetrics(font);
+        Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.HUD20,textRenderer,metrics);
+        
+        
+         //HUD24
+        font = new Font("Candara", Font.PLAIN, 24);
+        textRenderer = new TextRenderer(font, true, true,new SylverRenderDelegate(false,0));
+        textRenderer.setUseVertexArrays(false);
+        metrics = java2d.getFontMetrics(font);
+        Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.HUD24,textRenderer,metrics);
+        
+        //HUD28
+        font = new Font("IMPACT", Font.PLAIN, 28);
+        textRenderer = new TextRenderer(font, true, true,new SylverRenderDelegate(false,0));
+        textRenderer.setUseVertexArrays(false);
+        metrics = java2d.getFontMetrics(font);
+        Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.HUD28,textRenderer,metrics);
+        
         
         //CHAT
         font = new Font("Ebrima", Font.BOLD, 16);

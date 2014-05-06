@@ -58,7 +58,7 @@ public class Hud extends Window
 
     //health bar
     private Button healthFill;
-    private float healthFillSize = 500;
+    private float healthFillSize = 609;
     private Label healthMaxText;
     private Label healthCurrentText;
     private Button healthAreaTransparencyFeeler;
@@ -67,11 +67,13 @@ public class Hud extends Window
     private Button potionImage;
     private Label potionText;
     
+    private Button skillFrame;
     private Button skillButton1;  private Label skillHotkey1; private Label skillCooldown1; private SkillCooldownGraphic skillCooldownBlack1;
     private Button skillButton2;  private Label skillHotkey2; private Label skillCooldown2; private SkillCooldownGraphic skillCooldownBlack2;
     private Button skillButton3;  private Label skillHotkey3; private Label skillCooldown3; private SkillCooldownGraphic skillCooldownBlack3;
     private Button skillButton4;  private Label skillHotkey4; private Label skillCooldown4; private SkillCooldownGraphic skillCooldownBlack4;
     private Button questButton;
+    private Button escMenu;
     
     //radar stuffs
     private Button radarFrame;
@@ -274,7 +276,7 @@ public class Hud extends Window
         this.addComponent(painOverlay);
         
         //maxes the health and shield area go transparent if you mouse over it
-        healthAreaTransparencyFeeler = new Button("blank.png",0,790,520,120);
+        healthAreaTransparencyFeeler = new Button("blank.png",0,769,788 * .8f,164 * .8f);
         healthAreaTransparencyFeeler.addActionListener(new ActionListener(){       
             public void actionPerformed(ActionEvent e)
             {
@@ -300,38 +302,39 @@ public class Hud extends Window
         
         
         //Health     
-        this.healthFrame = new Button("healthbarFrame.png",15, 774,550, 100);
+        this.healthFrame = new Button("healthbarFrame.png",10, 761,788 * .8f, 164 * .8f);
         this.healthFrame.dontKillClick = true;
         this.addComponent(healthFrame);             
         
-        this.healthFill = new Button("healthFill.png",29, 819,healthFillSize,35);
+        this.healthFill = new Button("healthFill.png",21, 833,healthFillSize,30);
         healthFill.dontKillClick = true;
         this.addComponent(healthFill);               
 
-        
+       
         //health numbers
-        Text text = new Text(Integer.toString((int)playerReference.getCombatData().currentHealth) + "/"){{setScale(.7f);}}; 
-        this.healthCurrentText = new Label(text,230,828);
+        Text text = new Text(Integer.toString((int)playerReference.getCombatData().currentHealth) + "/",LeadCrystalTextType.HUD24);
+        this.healthCurrentText = new Label(text,290,837);
         this.addComponent(healthCurrentText); 
         
-        text = new Text(Integer.toString((int)playerReference.getCombatData().maxHealth.getTotalValue())){{setScale(.7f);}}; 
-        this.healthMaxText = new Label(text,230 + healthCurrentText.getText().getWidth(),828);
+        text = new Text(Integer.toString((int)playerReference.getCombatData().maxHealth.getTotalValue()),LeadCrystalTextType.HUD24);
+        this.healthMaxText = new Label(text,290 + healthCurrentText.getText().getWidth(),837);
         this.addComponent(healthMaxText);  
         
         
         //potion counter
-        this.potionImage = new Button("healthPot3.png", 200,765,50,50); 
+        this.potionImage = new Button("healthPot3.png", 240,765,50,50); 
         this.potionImage.dontKillClick = true;
         this.addComponent(potionImage);
         
-        Text te = new Text("0");
-        te.setScale(1.2f);
-        this.potionText = new Label(te, 270, 780);
+        Text te = new Text("0",LeadCrystalTextType.HUD28);
+        this.potionText = new Label(te, 310, 780);
         this.addComponent(potionText);
       
         
         //skill bar stuff
-        this.skillButton1 = new Button("skillbar.png",center - 120,5,60,60);
+        this.skillFrame = new Button("skillbar.png",center- (456 * .7f)/2,0,456 * .7f,111 * .7f);
+        this.addComponent(this.skillFrame);
+        this.skillButton1 = new Button("blank.png",center - 131,-1,66,67);
         this.addComponent(skillButton1);
         this.skillButton1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
@@ -366,7 +369,7 @@ public class Hud extends Window
                 }
             }        
         });              
-        this.skillButton2 = new Button("skillbar.png",center - 60,5,60,60);
+        this.skillButton2 = new Button("blank.png",center - 67,-1,66,67);
         this.addComponent(skillButton2);
         this.skillButton2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
@@ -402,7 +405,7 @@ public class Hud extends Window
                 }
             }        
         });
-        this.skillButton3 = new Button("skillbar.png",center - 0,5,60,60);
+        this.skillButton3 = new Button("blank.png",center -2,-1,66,67);
         this.addComponent(skillButton3);
         this.skillButton3.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
@@ -438,7 +441,7 @@ public class Hud extends Window
                 }
             }        
         });
-        this.skillButton4 = new Button("skillbar.png",center + 60,5,60,60);
+        this.skillButton4 = new Button("blank.png",center + 64,-1,66,67);
         this.addComponent(skillButton4);
         this.skillButton4.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
@@ -476,23 +479,19 @@ public class Hud extends Window
         });
         
         //skill hotkey text
-        Text t = new Text("Left");
-        t.setScale(.7f);
+        Text t = new Text("Left",LeadCrystalTextType.HUD16);
         this.skillHotkey1 = new Label(t,center - 115,10) ;      
         this.addComponent(skillHotkey1);
         
-        t = new Text("Right");
-        t.setScale(.7f);
+        t = new Text("Right",LeadCrystalTextType.HUD16);
         this.skillHotkey2 = new Label(t,center - 55,10) ;      
         this.addComponent(skillHotkey2);
         
-        t = new Text("Q");
-        t.setScale(.7f);
+        t = new Text("Q",LeadCrystalTextType.HUD16);
         this.skillHotkey3 = new Label(t,center + 5,10) ;      
         this.addComponent(skillHotkey3);
         
-        t = new Text("E");
-        t.setScale(.7f);
+        t = new Text("E",LeadCrystalTextType.HUD16);
         this.skillHotkey4 = new Label(t,center + 65,10) ;      
         this.addComponent(skillHotkey4);
         
@@ -549,13 +548,13 @@ public class Hud extends Window
         this.addComponent(creditIcon);
         
         //radar stuff       
-        this.radarFrame = new Button("radar.png",right - 210,700,240,200);
+        this.radarFrame = new Button("radar.png",right - 245,650,338 * .73f,342 * .73f);
         this.radarFrame.setHidden(false);
         radarFrame.dontKillClick = true;
         this.addComponent(radarFrame);
         
         //Menu Buttons      
-        this.questButton = new Button("questScreenButton.png",right - 230,775,30,43);
+        this.questButton = new Button("radar_button.png",right - 240,765,42 * .75f,61  * .75f);
         questButton.addActionListener(new ActionListener()  {           
             public void actionPerformed(ActionEvent e) 
             {
@@ -563,10 +562,41 @@ public class Hud extends Window
                 {
                
                   questMenu.toggle();
-                }                
+                }    
+                if(e.getActionCommand().equals("mouseEntered"))
+                {
+                    questButton.getImage().setBrightness(1.3f);
+                }
+                if(e.getActionCommand().equals("mouseExited"))
+                {
+                    questButton.getImage().setBrightness(1f);
+                }
             }      
         });      
         this.addComponent(questButton);  
+        
+        //Menu Buttons      
+        this.escMenu = new Button("radar_button.png",right - 240,710,42  * .75f,61  * .75f);
+        escMenu.addActionListener(new ActionListener()  {           
+            public void actionPerformed(ActionEvent e) 
+            {
+                if(e.getActionCommand().equals("mouseEntered"))
+                {
+                    escMenu.getImage().setBrightness(1.3f);
+                }
+                if(e.getActionCommand().equals("mouseExited"))
+                {
+                    escMenu.getImage().setBrightness(1f);
+                }
+               
+                if(e.getActionCommand().equals("clicked"))
+                {
+               
+                  escapeMenu.toggle();
+                }                
+            }      
+        });      
+        this.addComponent(escMenu);  
 
         //networking stats 
         pingText = new Label("0ms",right - 140, 70);     
@@ -631,12 +661,12 @@ public class Hud extends Window
         //adjust health  fill
         float ratio = (float)playerReference.getCombatData().currentHealth / (float)playerReference.getCombatData().maxHealth.getTotalValue();       
         healthFill.setWidth( healthFillSize * ratio); 
-        healthFill.getImage().setDimensions(healthFillSize * ratio, 35);
+        healthFill.getImage().setDimensions(healthFillSize * ratio, 30);
           
         //adjust health numbers
         this.healthCurrentText.getText().setText(Integer.toString((int)playerReference.getCombatData().currentHealth) + "/");
         this.healthMaxText.getText().setText(Integer.toString((int)playerReference.getCombatData().maxHealth.getTotalValue()));
-        this.healthMaxText.setWindowRelativePosition(230 + healthCurrentText.getText().getWidth(),828);
+        this.healthMaxText.setWindowRelativePosition(290 + healthCurrentText.getText().getWidth(),837);
         
         
         //potion counter
