@@ -43,7 +43,7 @@ public enum LeadCrystalTextType implements TextType{
         Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.COMBAT,textRenderer,metrics);
         
         //HUD16
-        font = new Font("Candara", Font.PLAIN, 16);
+        font = new Font("CALIBRI", Font.PLAIN, 16);
         textRenderer = new TextRenderer(font, true, true,new SylverRenderDelegate(false,0));
         textRenderer.setUseVertexArrays(false);
         metrics = java2d.getFontMetrics(font);
@@ -51,7 +51,7 @@ public enum LeadCrystalTextType implements TextType{
         
         
         //HUD20
-        font = new Font("Candara", Font.PLAIN, 20);
+        font = new Font("CALIBRI", Font.PLAIN, 20);
         textRenderer = new TextRenderer(font, true, true,new SylverRenderDelegate(false,0));
         textRenderer.setUseVertexArrays(false);
         metrics = java2d.getFontMetrics(font);
@@ -59,14 +59,14 @@ public enum LeadCrystalTextType implements TextType{
         
         
          //HUD24
-        font = new Font("Candara", Font.PLAIN, 24);
+        font = new Font("CALIBRI", Font.PLAIN, 24);
         textRenderer = new TextRenderer(font, true, true,new SylverRenderDelegate(false,0));
         textRenderer.setUseVertexArrays(false);
         metrics = java2d.getFontMetrics(font);
         Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.HUD24,textRenderer,metrics);
         
         //HUD28
-        font = new Font("IMPACT", Font.PLAIN, 28);
+        font = new Font("CALIBRI", Font.PLAIN, 28);
         textRenderer = new TextRenderer(font, true, true,new SylverRenderDelegate(false,0));
         textRenderer.setUseVertexArrays(false);
         metrics = java2d.getFontMetrics(font);
@@ -74,8 +74,8 @@ public enum LeadCrystalTextType implements TextType{
         
         
         //CHAT
-        font = new Font("Ebrima", Font.BOLD, 16);
-        textRenderer = new TextRenderer(font, true, true,new SylverRenderDelegate(true, .7f));
+        font = new Font("CALIBRI", Font.BOLD, 28);
+        textRenderer = new TextRenderer(font, true, true,new SylverRenderDelegate(false, 0));
         textRenderer.setUseVertexArrays(false);
         metrics = java2d.getFontMetrics(font);
         Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.CHAT,textRenderer,metrics);

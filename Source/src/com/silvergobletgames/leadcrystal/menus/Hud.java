@@ -82,7 +82,6 @@ public class Hud extends Window
     private ArrayList<Button> playerArrows = new ArrayList<>();
     
     //credit element
-    private Button creditFrame;
     private Label creditLabel;
     private Button creditIcon;
     
@@ -286,6 +285,8 @@ public class Hud extends Window
                     healthFill.getImage().setColor(new Color(1,1,1,.3f)); 
                     healthCurrentText.getText().setColor(new Color(1,1,1,.3f));
                     healthMaxText.getText().setColor(new Color(1,1,1,.3f));
+                    potionText.getText().setColor(new Color(1,1,1,.3f));
+                    potionImage.getImage().setColor(new Color(1,1,1,.3f));
                     
                 }
                 if(e.getActionCommand().equals("mouseExited"))
@@ -294,6 +295,8 @@ public class Hud extends Window
                     healthFill.getImage().setColor(new Color(1,1,1,1f)); 
                     healthCurrentText.getText().setColor(new Color(1,1,1,1f));
                     healthMaxText.getText().setColor(new Color(1,1,1,1f));
+                    potionText.getText().setColor(new Color(1,1,1,1f));
+                    potionImage.getImage().setColor(new Color(1,1,1,1f));
                 }
             }        
         });
@@ -313,21 +316,21 @@ public class Hud extends Window
        
         //health numbers
         Text text = new Text(Integer.toString((int)playerReference.getCombatData().currentHealth) + "/",LeadCrystalTextType.HUD24);
-        this.healthCurrentText = new Label(text,290,837);
+        this.healthCurrentText = new Label(text,290,839);
         this.addComponent(healthCurrentText); 
         
         text = new Text(Integer.toString((int)playerReference.getCombatData().maxHealth.getTotalValue()),LeadCrystalTextType.HUD24);
-        this.healthMaxText = new Label(text,290 + healthCurrentText.getText().getWidth(),837);
+        this.healthMaxText = new Label(text,290 + healthCurrentText.getText().getWidth(),839);
         this.addComponent(healthMaxText);  
         
         
         //potion counter
-        this.potionImage = new Button("healthPot3.png", 240,765,50,50); 
+        this.potionImage = new Button("healthPot3.png", 250,763,43,43); 
         this.potionImage.dontKillClick = true;
         this.addComponent(potionImage);
         
         Text te = new Text("0",LeadCrystalTextType.HUD28);
-        this.potionText = new Label(te, 310, 780);
+        this.potionText = new Label(te, 305, 778);
         this.addComponent(potionText);
       
         
@@ -479,20 +482,20 @@ public class Hud extends Window
         });
         
         //skill hotkey text
-        Text t = new Text("Left",LeadCrystalTextType.HUD16);
+        Text t = new Text("Left",LeadCrystalTextType.HUD20);
         this.skillHotkey1 = new Label(t,center - 115,10) ;      
         this.addComponent(skillHotkey1);
         
-        t = new Text("Right",LeadCrystalTextType.HUD16);
+        t = new Text("Right",LeadCrystalTextType.HUD20);
         this.skillHotkey2 = new Label(t,center - 55,10) ;      
         this.addComponent(skillHotkey2);
         
-        t = new Text("Q",LeadCrystalTextType.HUD16);
+        t = new Text("Q",LeadCrystalTextType.HUD20);
         this.skillHotkey3 = new Label(t,center + 5,10) ;      
         this.addComponent(skillHotkey3);
         
-        t = new Text("E",LeadCrystalTextType.HUD16);
-        this.skillHotkey4 = new Label(t,center + 65,10) ;      
+        t = new Text("E",LeadCrystalTextType.HUD20);
+        this.skillHotkey4 = new Label(t,center + 71,10) ;      
         this.addComponent(skillHotkey4);
         
         //skill cooldown black
@@ -537,21 +540,20 @@ public class Hud extends Window
         this.skillCooldown4 = new Label(t,center + 70, 20);
         this.addComponent(skillCooldown4);   
               
-        //credits hud element
-        this.creditFrame = new Button("skillbar.png", right -165,670,110,50);
-        this.addComponent(creditFrame);
-        t = new Text(Integer.toString(this.playerReference.getCurrencyManager().getBalence()));
-        t.setScale(1.1f);
-        this.creditLabel = new Label(t, right - 130, 680);
-        this.addComponent(creditLabel);
-        this.creditIcon = new Button("currency2.png", right - 160,680,25,25);
-        this.addComponent(creditIcon);
+        
         
         //radar stuff       
         this.radarFrame = new Button("radar.png",right - 245,650,338 * .73f,342 * .73f);
         this.radarFrame.setHidden(false);
         radarFrame.dontKillClick = true;
         this.addComponent(radarFrame);
+        
+        //credits hud element
+        t = new Text(Integer.toString(this.playerReference.getCurrencyManager().getBalence()),LeadCrystalTextType.HUD24);
+        this.creditLabel = new Label(t, right - 130, 660);
+        this.addComponent(creditLabel);
+        this.creditIcon = new Button("currency2.png", right - 160,660,25,25);
+        this.addComponent(creditIcon);
         
         //Menu Buttons      
         this.questButton = new Button("radar_button.png",right - 240,765,42 * .75f,61  * .75f);
@@ -666,7 +668,7 @@ public class Hud extends Window
         //adjust health numbers
         this.healthCurrentText.getText().setText(Integer.toString((int)playerReference.getCombatData().currentHealth) + "/");
         this.healthMaxText.getText().setText(Integer.toString((int)playerReference.getCombatData().maxHealth.getTotalValue()));
-        this.healthMaxText.setWindowRelativePosition(290 + healthCurrentText.getText().getWidth(),837);
+        this.healthMaxText.setWindowRelativePosition(290 + healthCurrentText.getText().getWidth(),839);
         
         
         //potion counter
