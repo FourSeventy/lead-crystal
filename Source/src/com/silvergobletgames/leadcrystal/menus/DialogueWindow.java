@@ -33,7 +33,7 @@ public class DialogueWindow extends Window {
     
     public DialogueWindow(float x, float y,String speakersName,  String dialogueText)
     {
-        super(new Image("dialogueBox.png"),x,y, 1000,210);
+        super(new Image("dialogueBox.png"),x,y, 768 * 1.2f ,173 * 1.2f);
         
         //set name
         Text t = new Text(speakersName);

@@ -58,7 +58,7 @@ public class Hud extends Window
 
     //health bar
     private Button healthFill;
-    private float healthFillSize = 609;
+    private float healthFillSize = 536;
     private Label healthMaxText;
     private Label healthCurrentText;
     private Button healthAreaTransparencyFeeler;
@@ -275,62 +275,62 @@ public class Hud extends Window
         this.addComponent(painOverlay);
         
         //maxes the health and shield area go transparent if you mouse over it
-        healthAreaTransparencyFeeler = new Button("blank.png",0,769,788 * .8f,164 * .8f);
-        healthAreaTransparencyFeeler.addActionListener(new ActionListener(){       
-            public void actionPerformed(ActionEvent e)
-            {
-                if(e.getActionCommand().equals("mouseEntered"))
-                {
-                    healthFrame.getImage().setColor(new Color(1,1,1,.3f)); 
-                    healthFill.getImage().setColor(new Color(1,1,1,.3f)); 
-                    healthCurrentText.getText().setColor(new Color(1,1,1,.3f));
-                    healthMaxText.getText().setColor(new Color(1,1,1,.3f));
-                    potionText.getText().setColor(new Color(1,1,1,.3f));
-                    potionImage.getImage().setColor(new Color(1,1,1,.3f));
-                    
-                }
-                if(e.getActionCommand().equals("mouseExited"))
-                {
-                    healthFrame.getImage().setColor(new Color(1,1,1,1f)); 
-                    healthFill.getImage().setColor(new Color(1,1,1,1f)); 
-                    healthCurrentText.getText().setColor(new Color(1,1,1,1f));
-                    healthMaxText.getText().setColor(new Color(1,1,1,1f));
-                    potionText.getText().setColor(new Color(1,1,1,1f));
-                    potionImage.getImage().setColor(new Color(1,1,1,1f));
-                }
-            }        
-        });
-        healthAreaTransparencyFeeler.dontKillClick = true;       
-        this.addComponent(healthAreaTransparencyFeeler); 
+//        healthAreaTransparencyFeeler = new Button("blank.png",0,769,788 * .73f,164 * .73f);
+//        healthAreaTransparencyFeeler.addActionListener(new ActionListener(){       
+//            public void actionPerformed(ActionEvent e)
+//            {
+//                if(e.getActionCommand().equals("mouseEntered"))
+//                {
+//                    healthFrame.getImage().setColor(new Color(1,1,1,.3f)); 
+//                    healthFill.getImage().setColor(new Color(1,1,1,.3f)); 
+//                    healthCurrentText.getText().setColor(new Color(1,1,1,.3f));
+//                    healthMaxText.getText().setColor(new Color(1,1,1,.3f));
+//                    potionText.getText().setColor(new Color(1,1,1,.3f));
+//                    potionImage.getImage().setColor(new Color(1,1,1,.3f));
+//                    
+//                }
+//                if(e.getActionCommand().equals("mouseExited"))
+//                {
+//                    healthFrame.getImage().setColor(new Color(1,1,1,1f)); 
+//                    healthFill.getImage().setColor(new Color(1,1,1,1f)); 
+//                    healthCurrentText.getText().setColor(new Color(1,1,1,1f));
+//                    healthMaxText.getText().setColor(new Color(1,1,1,1f));
+//                    potionText.getText().setColor(new Color(1,1,1,1f));
+//                    potionImage.getImage().setColor(new Color(1,1,1,1f));
+//                }
+//            }        
+//        });
+//        healthAreaTransparencyFeeler.dontKillClick = true;       
+//        this.addComponent(healthAreaTransparencyFeeler); 
         
         
         //Health     
-        this.healthFrame = new Button("healthbarFrame.png",10, 761,788 * .8f, 164 * .8f);
+        this.healthFrame = new Button("healthbarFrame.png",5, 756,788 * .70f, 164 * .70f);
         this.healthFrame.dontKillClick = true;
         this.addComponent(healthFrame);             
         
-        this.healthFill = new Button("healthFill.png",21, 833,healthFillSize,30);
+        this.healthFill = new Button("healthFill.png",13, 818,healthFillSize,28);
         healthFill.dontKillClick = true;
         this.addComponent(healthFill);               
 
        
         //health numbers
-        Text text = new Text(Integer.toString((int)playerReference.getCombatData().currentHealth) + "/",LeadCrystalTextType.HUD24);
-        this.healthCurrentText = new Label(text,290,839);
+        Text text = new Text(Integer.toString((int)playerReference.getCombatData().currentHealth) + "/",LeadCrystalTextType.HUD22);
+        this.healthCurrentText = new Label(text,248,825);
         this.addComponent(healthCurrentText); 
         
-        text = new Text(Integer.toString((int)playerReference.getCombatData().maxHealth.getTotalValue()),LeadCrystalTextType.HUD24);
-        this.healthMaxText = new Label(text,290 + healthCurrentText.getText().getWidth(),839);
+        text = new Text(Integer.toString((int)playerReference.getCombatData().maxHealth.getTotalValue()),LeadCrystalTextType.HUD22);
+        this.healthMaxText = new Label(text,248 + healthCurrentText.getText().getWidth(),825);
         this.addComponent(healthMaxText);  
         
         
         //potion counter
-        this.potionImage = new Button("healthPot3.png", 250,763,43,43); 
+        this.potionImage = new Button("healthPot3.png", 229,762,34,34); 
         this.potionImage.dontKillClick = true;
         this.addComponent(potionImage);
         
         Text te = new Text("0",LeadCrystalTextType.HUD28);
-        this.potionText = new Label(te, 305, 778);
+        this.potionText = new Label(te, 268, 771);
         this.addComponent(potionText);
       
         
@@ -543,20 +543,21 @@ public class Hud extends Window
         
         
         //radar stuff       
-        this.radarFrame = new Button("radar.png",right - 245,650,338 * .73f,342 * .73f);
+        this.radarFrame = new Button("radar.png",right - 233,648,340 * .69f,363 * .69f);
         this.radarFrame.setHidden(false);
         radarFrame.dontKillClick = true;
         this.addComponent(radarFrame);
         
         //credits hud element
-        t = new Text(Integer.toString(this.playerReference.getCurrencyManager().getBalence()),LeadCrystalTextType.HUD24);
-        this.creditLabel = new Label(t, right - 130, 660);
+        t = new Text(Integer.toString(this.playerReference.getCurrencyManager().getBalence()),LeadCrystalTextType.HUD22);
+        this.creditLabel = new Label(t, right - 114, 669);
         this.addComponent(creditLabel);
-        this.creditIcon = new Button("currency2.png", right - 160,660,25,25);
+        this.creditIcon = new Button("currency2.png", right - 133,667,17,17);
+        this.creditIcon.dontKillClick = true;
         this.addComponent(creditIcon);
         
         //Menu Buttons      
-        this.questButton = new Button("radar_button.png",right - 240,765,42 * .75f,61  * .75f);
+        this.questButton = new Button("radar_button.png",right - 224,770,42 * .70f,61  * .70f);
         questButton.addActionListener(new ActionListener()  {           
             public void actionPerformed(ActionEvent e) 
             {
@@ -567,28 +568,32 @@ public class Hud extends Window
                 }    
                 if(e.getActionCommand().equals("mouseEntered"))
                 {
-                    questButton.getImage().setBrightness(1.3f);
+                    questButton.getImage().setBrightness(1.5f);
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND)); 
                 }
                 if(e.getActionCommand().equals("mouseExited"))
                 {
                     questButton.getImage().setBrightness(1f);
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE)); 
                 }
             }      
         });      
         this.addComponent(questButton);  
         
         //Menu Buttons      
-        this.escMenu = new Button("radar_button.png",right - 240,710,42  * .75f,61  * .75f);
+        this.escMenu = new Button("radar_button.png",right - 224,723,42  * .70f,61  * .70f);
         escMenu.addActionListener(new ActionListener()  {           
             public void actionPerformed(ActionEvent e) 
             {
                 if(e.getActionCommand().equals("mouseEntered"))
                 {
-                    escMenu.getImage().setBrightness(1.3f);
+                    escMenu.getImage().setBrightness(1.5f);
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND)); 
                 }
                 if(e.getActionCommand().equals("mouseExited"))
                 {
                     escMenu.getImage().setBrightness(1f);
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE)); 
                 }
                
                 if(e.getActionCommand().equals("clicked"))
@@ -663,12 +668,12 @@ public class Hud extends Window
         //adjust health  fill
         float ratio = (float)playerReference.getCombatData().currentHealth / (float)playerReference.getCombatData().maxHealth.getTotalValue();       
         healthFill.setWidth( healthFillSize * ratio); 
-        healthFill.getImage().setDimensions(healthFillSize * ratio, 30);
+        healthFill.getImage().setDimensions(healthFillSize * ratio, 28);
           
         //adjust health numbers
         this.healthCurrentText.getText().setText(Integer.toString((int)playerReference.getCombatData().currentHealth) + "/");
         this.healthMaxText.getText().setText(Integer.toString((int)playerReference.getCombatData().maxHealth.getTotalValue()));
-        this.healthMaxText.setWindowRelativePosition(290 + healthCurrentText.getText().getWidth(),839);
+        this.healthMaxText.setWindowRelativePosition(248 + healthCurrentText.getText().getWidth(),825);
         
         
         //potion counter
