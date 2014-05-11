@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import com.jogamp.newt.event.KeyEvent;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.sylver.core.InputSnapshot;
 import com.silvergobletgames.sylver.graphics.Text.CoreTextType;
 import java.io.IOException;
@@ -80,19 +81,17 @@ public class ChatManager {
         pastMessages = new ArrayList();
         pastMessages.add("");
         
-        promptText = new Text("To All Players: ");
-        promptText.setTextType(CoreTextType.DEFAULT);
+        promptText = new Text("To All Players: ",LeadCrystalTextType.HUD20);
         promptText.setScale(.9f);
         promptText.setColor(new Color(PROMPT_COLOR));
         promptText.setPosition(BASE_X , BASE_Y+5);
         
-        outgoingMessage = new Text("");
-        outgoingMessage.setTextType(CoreTextType.DEFAULT);
+        outgoingMessage = new Text("",LeadCrystalTextType.HUD20);
         outgoingMessage.setScale(.9f);
         outgoingMessage.setColor(new Color(PROMPT_COLOR));
         outgoingMessage.setPosition(BASE_X + promptText.getWidth(), BASE_Y+5);
                 
-        bg = new Image("unitBar.png");
+        bg = new Image("black.png");
         bg.setPosition(BASE_X - 2, BASE_Y);
         bg.setDimensions(promptText.getWidth(), promptText.getHeight());
         bg.setColor(new Color(.8f,.8f,.8f,.5f));
@@ -165,79 +164,52 @@ public class ChatManager {
         if(input != null && this.chatPromptOpen)
         {
             String builder = "";
-
-            if (input.isKeyPressed(KeyEvent.VK_CONTROL))
+            
+            
+            paste = false;
+            if (input.isKeyReleased(KeyEvent.VK_UP))
             {
-                if (input.isKeyPressed(KeyEvent.VK_V) && !paste)
+                if (this.pastMsgIndex < pastMessages.size())
                 {
-                    String data = "";
-                    try 
-                    {
-                            data = (String)Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
-                    } 
-                    catch (UnsupportedFlavorException | IOException ex)
-                    {
-                        Logger.getLogger(ChatManager.class.getName()).log(Level.SEVERE, null, ex);
-                    } 
-                    this.outgoingMessage.setText(this.outgoingMessage.toString() + data);
-                    paste = true;
-
-
+                    pastMsgIndex = Math.min(pastMsgIndex + 1, pastMessages.size()-1);
+                    this.outgoingMessage.setText(pastMessages.get(pastMsgIndex));
                 }
-
             }
-            else
+
+            if (input.isKeyReleased(KeyEvent.VK_DOWN))
             {
-                paste = false;
-                if (input.isKeyReleased(KeyEvent.VK_UP))
+                if (this.pastMsgIndex > 0)
                 {
-                    if (this.pastMsgIndex < pastMessages.size())
-                    {
-                        pastMsgIndex = Math.min(pastMsgIndex + 1, pastMessages.size()-1);
-                        this.outgoingMessage.setText(pastMessages.get(pastMsgIndex));
-                    }
-
-
-
-                }
-
-                if (input.isKeyReleased(KeyEvent.VK_DOWN))
-                {
-                    if (this.pastMsgIndex > 0)
-                    {
-                        pastMsgIndex = Math.max(pastMsgIndex - 1 , 0);
-                        this.outgoingMessage.setText(pastMessages.get(pastMsgIndex));
-                    }                
-
-                }
-
-                if (input.isKeyReleased(KeyEvent.VK_ESCAPE))
-                {
-                    this.closePrompt();
-
-                }
-
-                for(Character chara: input.getTypedCharacters())
-                {
-                    char character = chara;
-
-                    if(character == '\b')
-                    {
-                        if(builder.length()> 0)
-                            builder = builder.substring(0,builder.length() -1);
-                        if(outgoingMessage.toString().length() > 0)
-                        outgoingMessage.setText(outgoingMessage.toString().substring(0,outgoingMessage.toString().length() -1));
-                    }
-                    else
-                    {
-                        if (character != '\r' && character != '\n')
-                            builder += character;
-                    }
-
-
-                }
-
+                    pastMsgIndex = Math.max(pastMsgIndex - 1 , 0);
+                    this.outgoingMessage.setText(pastMessages.get(pastMsgIndex));
+                }                
             }
+
+            if (input.isKeyReleased(KeyEvent.VK_ESCAPE))
+            {
+                this.closePrompt();
+                pastMsgIndex = 0;
+            }
+
+            for(Character chara: input.getTypedCharacters())
+            {
+                char character = chara;
+
+                if(character == '\b')
+                {
+                    if(builder.length()> 0)
+                        builder = builder.substring(0,builder.length() -1);
+                    if(outgoingMessage.toString().length() > 0)
+                    outgoingMessage.setText(outgoingMessage.toString().substring(0,outgoingMessage.toString().length() -1));
+                }
+                else
+                {
+                    if (character != '\r' && character != '\n')
+                        builder += character;
+                }
+            }
+
+            
 
             outgoingMessage.setText(outgoingMessage.toString() + builder);
             pastMessages.set(0, outgoingMessage.toString() + builder);
@@ -268,6 +240,7 @@ public class ChatManager {
     {
         chatPromptOpen = false;
         outgoingMessage.setText("");
+        pastMsgIndex = 0;
     }
     
     
@@ -282,6 +255,7 @@ public class ChatManager {
             this.pastMessages.set(0,"");
             if (this.pastMessages.size() > 20)
                 this.pastMessages.remove(20);
+            pastMsgIndex = 0;
             
             //send chat packet
             ClientChatPacket packet = new ClientChatPacket();
@@ -297,7 +271,7 @@ public class ChatManager {
     public void receiveMessage(String s)
     {
         ChatText text = new ChatText(s);
-        text.setTextType(CoreTextType.DEFAULT);
+        text.setTextType(LeadCrystalTextType.HUD20);
         text.setColor(new Color(CHAT_COLOR));
         messages.add(0, text);
         if (messages.size() > 10){
@@ -305,7 +279,7 @@ public class ChatManager {
         }
         for (int i=0; i<messages.size(); i++){
             Text tmpMsg = messages.get(i);
-            tmpMsg.setPosition(BASE_X, BASE_Y + HEIGHT_OFFSET + i * tmpMsg.getHeight());
+            tmpMsg.setPosition(BASE_X, BASE_Y + 5 + HEIGHT_OFFSET + i * tmpMsg.getHeight());
         }
         visibleFrames = 1000;
     }
@@ -319,7 +293,7 @@ public class ChatManager {
         public float lifetime;
         
         public ChatText(String s){
-            super(s);
+            super(s, LeadCrystalTextType.HUD20);
             lifetime = 500f;
         }        
         
