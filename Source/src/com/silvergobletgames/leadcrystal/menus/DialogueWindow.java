@@ -28,21 +28,35 @@ public class DialogueWindow extends Window {
     
     private ArrayList<Label> text = new ArrayList<>();
     
-    private boolean opening = false;;
+    private boolean opening = false;
     private float targetY;
     
     public DialogueWindow(float x, float y,String speakersName,  String dialogueText)
     {
         super(new Image("dialogueBox.png"),x,y, 768 * 1.2f ,173 * 1.2f);
         
+        
+        
+        //set image
+        Image characterImage; 
+        switch(speakersName)
+        {
+            case "Slash": characterImage = new Image("Slash.png"); break;
+            case "Dr. Tam": characterImage = new Image("DrTam.png"); break;
+            case "Old Man": characterImage = new Image("OldMan.png"); break;
+            case "Brice": characterImage = new Image("Brice.png"); break;
+            default: characterImage = new Image("blank.png");
+        }
+        
+        Button portrait = new Button(characterImage,25,37,142,142);
+        this.addComponent(portrait);
         //set name
-        Text t = new Text(speakersName);
-        t.setTextType(CoreTextType.DEFAULT);  
-        this.name = new Label(t,50,170);
+        Text t = new Text(speakersName,LeadCrystalTextType.HUD24);
+        this.name = new Label(t,90 - t.getWidth()/2,15);
         this.addComponent(this.name);
         
         //OK button
-        Button button = new Button(new Text("OK"), 800, 35);
+        Button button = new Button(new Text("OK",LeadCrystalTextType.HUD24), 843, 19);
         button.addActionListener(new ActionListener() {
 
                 public void actionPerformed(ActionEvent e) {
@@ -76,7 +90,7 @@ public class DialogueWindow extends Window {
         {
             line += part + " ";
             
-            if(line.length() > 95)
+            if(line.length() > 75)
             {
                int index = line.lastIndexOf(part);
                line = line.substring(0, index);
@@ -89,13 +103,13 @@ public class DialogueWindow extends Window {
         
         for(String s: list)
         {
-            text.add(new Label(s,0,0));
+            text.add(new Label(new Text(s,LeadCrystalTextType.HUD22),0,0));
         }
         
         //position the lines of text correctly
         for(int i = 0; i <text.size(); i++)
         {
-            text.get(i).setWindowRelativePosition( 20,  this.height - 75 - (i * text.get(i).getText().getHeight()) );
+            text.get(i).setWindowRelativePosition( 200,  this.height - 49 - (i * text.get(i).getText().getHeight()) );
             this.addComponent(text.get(i));
         }
         
@@ -121,7 +135,7 @@ public class DialogueWindow extends Window {
         {
             if(targetY < this.getPosition().y)
             {
-                this.setPosition(this.getPosition().x,this.getPosition().y - 7);
+                this.setPosition(this.getPosition().x,this.getPosition().y - 15);
             }
             else
                 opening = false;
