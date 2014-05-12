@@ -238,6 +238,46 @@ public class LevelProgressionManager
         //adding to map
         this.levelMap.put(8, cave3);
         
+        //cave 4
+        Level cave4 = new Level(); 
+        cave4.levelDataName = "cave4.lv";
+        cave4.levelName = "Cave 4";
+        //main objective
+        objective = new LevelObjective();
+        objective.objectiveName = "Do thing!";
+        objective.objectiveDescription = "Do thing!";
+        objective.skillPointAward = true;
+        objective.currencyAward = 50;
+        cave4.mainObjective = objective;
+        //side objective 1
+        objective = new LevelObjective();
+        objective.objectiveName = "Do something";
+        objective.objectiveDescription = "Do something.";
+        objective.currencyAward = 25;
+        cave4.sideObjective = objective;
+        //adding to map
+        this.levelMap.put(9, cave4);
+        
+        //cave 5
+        Level cave5 = new Level(); 
+        cave5.levelDataName = "cave5.lv";
+        cave5.levelName = "Cave 5";
+        //main objective
+        objective = new LevelObjective();
+        objective.objectiveName = "Do thing!";
+        objective.objectiveDescription = "Do thing!";
+        objective.skillPointAward = true;
+        objective.currencyAward = 50;
+        cave5.mainObjective = objective;
+        //side objective 1
+        objective = new LevelObjective();
+        objective.objectiveName = "Do something";
+        objective.objectiveDescription = "Do something.";
+        objective.currencyAward = 25;
+        cave5.sideObjective = objective;
+        //adding to map
+        this.levelMap.put(10, cave5);
+        
         
         
     }
