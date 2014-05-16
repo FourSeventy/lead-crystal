@@ -29,7 +29,7 @@ public class ArmorMenu extends Window{
     
 
     
-     //weapon
+    //weapon
     private Button meleeAttackDamageBonusButton;
     private Button potionCooldownResetButton;
     private Button criticalHitDamageButton;
@@ -163,6 +163,7 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
+        weaponDamageButton = b;
         this.weaponDamageLabel = new Label(new Text(Byte.toString(stat1.points) + "/" +Integer.toString(stat1.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
         this.addComponent(weaponDamageLabel); 
         
@@ -188,6 +189,7 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
+        weaponAttackSpeedButton = b;
         this.weaponAttackSpeedLabel = new Label(new Text(Byte.toString(stat2.points) + "/" +Integer.toString(stat2.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
         this.addComponent(weaponAttackSpeedLabel);
         
@@ -213,6 +215,7 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
+        critChanceButton = b;
         this.critChanceLabel = new Label(new Text(Byte.toString(stat3.points) + "/" +Integer.toString(stat3.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
         this.addComponent(critChanceLabel);
         
@@ -238,6 +241,7 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
+        meleeAttackDamageBonusButton = b;
         this.meleeAttackDamageBonusLabel = new Label(new Text(Byte.toString(stat4.points) + "/" +Integer.toString(stat4.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
         this.addComponent(meleeAttackDamageBonusLabel); 
         
@@ -263,6 +267,7 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
+        potionCooldownResetButton = b;
         this.potionCooldownResetLabel = new Label(new Text(Byte.toString(stat5.points) + "/" +Integer.toString(stat5.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
         this.addComponent(potionCooldownResetLabel); 
         
@@ -288,6 +293,7 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
+        this.criticalHitDamageButton = b;
         this.criticalHitDamageLabel = new Label(new Text(Byte.toString(stat6.points) + "/" +Integer.toString(stat6.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
         this.addComponent(criticalHitDamageLabel); 
         
@@ -323,6 +329,7 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
+        seeEnemyHealthButton =b;
         this.seeEnemyHealthLabel = new Label(new Text(Byte.toString(stat7.points) + "/" +Integer.toString(stat7.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
         this.addComponent(seeEnemyHealthLabel); 
         
@@ -348,6 +355,7 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
+        lifeLeechButton =b;
         this.lifeLeechLabel = new Label(new Text(Byte.toString(stat8.points) + "/" +Integer.toString(stat8.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
         this.addComponent(lifeLeechLabel);
         
@@ -373,6 +381,7 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
+        upgradeRadarButton = b;
         this.upgradeRadarLabel = new Label(new Text(Byte.toString(stat9.points) + "/" +Integer.toString(stat9.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
         this.addComponent(upgradeRadarLabel);
         
@@ -398,6 +407,7 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
+        doubleGoldFindButton = b;
         this.doubleGoldFindLabel = new Label(new Text(Byte.toString(stat10.points) + "/" +Integer.toString(stat10.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
         this.addComponent(doubleGoldFindLabel); 
         
@@ -423,6 +433,7 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
+        healingEffectivenessButton = b;
         this.healingEffectivenessLabel = new Label(new Text(Byte.toString(stat11.points) + "/" +Integer.toString(stat11.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
         this.addComponent(healingEffectivenessLabel); 
 
@@ -431,7 +442,7 @@ public class ArmorMenu extends Window{
         // Armor Upgrades
         //================
         
-        int armorBasePositionX = 800;
+        int armorBasePositionX = 150;
         int armorBasePositionY = 200;
                
         
@@ -457,6 +468,7 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
+        healthButton = b;
         this.healthLabel = new Label(new Text(Byte.toString(stat12.points) + "/" +Integer.toString(stat12.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
         this.addComponent(healthLabel); 
         
@@ -482,6 +494,7 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
+        numberOfPotionsButton = b;
         this.numberOfPotionsLabel = new Label(new Text(Byte.toString(stat13.points) + "/" +Integer.toString(stat13.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
         this.addComponent(numberOfPotionsLabel);
         
@@ -507,6 +520,7 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
+        reducedCriticalHitButton = b;
         this.reducedCriticalHitLabel = new Label(new Text(Byte.toString(stat14.points) + "/" +Integer.toString(stat14.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
         this.addComponent(reducedCriticalHitLabel);
         
@@ -532,6 +546,7 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
+        hardToKillButton = b;
         this.hardToKillLabel = new Label(new Text(Byte.toString(stat15.points) + "/" +Integer.toString(stat15.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
         this.addComponent(hardToKillLabel); 
         
@@ -557,6 +572,7 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
+        proximityDamageReductionButton = b;
         this.proximityDamageReductionLabel = new Label(new Text(Byte.toString(stat16.points) + "/" +Integer.toString(stat16.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
         this.addComponent(proximityDamageReductionLabel); 
         
@@ -582,6 +598,7 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
+        thornsDamageButton = b;
         this.thornsDamageLabel = new Label(new Text(Byte.toString(stat17.points) + "/" +Integer.toString(stat17.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
         this.addComponent(thornsDamageLabel); 
         
@@ -590,15 +607,7 @@ public class ArmorMenu extends Window{
         // Boot Upgrades
         //================
               
-                /*
-        
-         private Button doubleJumpButton;
-        private Button jetpackButton;
-        private Button ccReductionButton;
-        private Button moveSpeedButton;
-        */
-        
-        int bootsBasePositionX = 150;
+        int bootsBasePositionX = 800;
         int bootsBasePositionY = 200;
                
         
@@ -624,6 +633,7 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
+        doubleJumpButton = b;
         this.doubleJumpLabel = new Label(new Text(Byte.toString(stat18.points) + "/" +Integer.toString(stat18.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
         this.addComponent(doubleJumpLabel); 
         
@@ -649,6 +659,7 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
+        ccReductionButton = b;
         this.ccReductionLabel = new Label(new Text(Byte.toString(stat19.points) + "/" +Integer.toString(stat19.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
         this.addComponent(ccReductionLabel);
         
@@ -674,6 +685,7 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
+        jetpackButton = b;
         this.jetpackLabel = new Label(new Text(Byte.toString(stat20.points) + "/" +Integer.toString(stat20.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
         this.addComponent(jetpackLabel);
         
@@ -699,6 +711,7 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
+        moveSpeedButton = b;
         this.moveSpeedLabel = new Label(new Text(Byte.toString(stat21.points) + "/" +Integer.toString(stat21.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
         this.addComponent(moveSpeedLabel); 
 
@@ -709,6 +722,224 @@ public class ArmorMenu extends Window{
     public void update()
     {
         super.update();
+        
+        
+        //================================
+        // Check for Weapon Button Changes
+        //=================================
+
+     if(this.playerReference.getArmorManager().meleeAttackDamageBonus.unlocked == false)
+     {
+         if(!meleeAttackDamageBonusButton.getImage().hasOverlay("lock"))
+         {
+            meleeAttackDamageBonusButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         meleeAttackDamageBonusButton.setDisabled(true);
+         meleeAttackDamageBonusLabel.setHidden(true);
+     }
+     else
+     {
+         meleeAttackDamageBonusButton.getImage().removeAllOverlays();
+         meleeAttackDamageBonusButton.setDisabled(false);
+         meleeAttackDamageBonusLabel.setHidden(false);        
+         meleeAttackDamageBonusLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().meleeAttackDamageBonus.points) + "/" +Integer.toString(this.playerReference.getArmorManager().meleeAttackDamageBonus.maxPoints)); 
+        
+     }
+     
+     if(this.playerReference.getArmorManager().potionCooldownReset.unlocked == false)
+     {
+         if(!potionCooldownResetButton.getImage().hasOverlay("lock"))
+         {
+            potionCooldownResetButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         potionCooldownResetButton.setDisabled(true);
+         potionCooldownResetLabel.setHidden(true);
+     }
+     else
+     {
+         potionCooldownResetButton.getImage().removeAllOverlays();
+         potionCooldownResetButton.setDisabled(false);
+         potionCooldownResetLabel.setHidden(false);
+         potionCooldownResetLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().potionCooldownReset.points) + "/" +Integer.toString(this.playerReference.getArmorManager().potionCooldownReset.maxPoints)); 
+        
+     }
+     
+     
+     if(this.playerReference.getArmorManager().criticalHitDamage.unlocked == false)
+     {
+         if(!criticalHitDamageButton.getImage().hasOverlay("lock"))
+         {
+            criticalHitDamageButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         criticalHitDamageButton.setDisabled(true);
+         criticalHitDamageLabel.setHidden(true);
+     }
+     else
+     {
+         criticalHitDamageButton.getImage().removeAllOverlays();
+         criticalHitDamageButton.setDisabled(false);
+         criticalHitDamageLabel.setHidden(false);
+         criticalHitDamageLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().criticalHitDamage.points) + "/" +Integer.toString(this.playerReference.getArmorManager().criticalHitDamage.maxPoints)); 
+        
+     }
+     
+     if(this.playerReference.getArmorManager().weaponDamage.unlocked == false)
+     {
+         if(!weaponDamageButton.getImage().hasOverlay("lock"))
+         {
+            weaponDamageButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         weaponDamageButton.setDisabled(true);
+         weaponDamageLabel.setHidden(true);
+     }
+     else
+     {
+         weaponDamageButton.getImage().removeAllOverlays();
+         weaponDamageButton.setDisabled(false);
+         weaponDamageLabel.setHidden(false);
+         weaponDamageLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().weaponDamage.points) + "/" +Integer.toString(this.playerReference.getArmorManager().weaponDamage.maxPoints)); 
+        
+     }
+     
+     if(this.playerReference.getArmorManager().weaponAttackSpeed.unlocked == false)
+     {
+         if(!weaponAttackSpeedButton.getImage().hasOverlay("lock"))
+         {
+            weaponAttackSpeedButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         weaponAttackSpeedButton.setDisabled(true);
+         weaponAttackSpeedLabel.setHidden(true);
+     }
+     else
+     {
+         weaponAttackSpeedButton.getImage().removeAllOverlays();
+         weaponAttackSpeedButton.setDisabled(false);
+         weaponAttackSpeedLabel.setHidden(false);
+         weaponAttackSpeedLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().weaponAttackSpeed.points) + "/" +Integer.toString(this.playerReference.getArmorManager().weaponAttackSpeed.maxPoints)); 
+        
+     }
+     
+     if(this.playerReference.getArmorManager().critChance.unlocked == false)
+     {
+         if(!critChanceButton.getImage().hasOverlay("lock"))
+         {
+            critChanceButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         critChanceButton.setDisabled(true);
+         critChanceLabel.setHidden(true);
+     }
+     else
+     {
+         critChanceButton.getImage().removeAllOverlays();
+         critChanceButton.setDisabled(false);
+         critChanceLabel.setHidden(false);
+         critChanceLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().critChance.points) + "/" +Integer.toString(this.playerReference.getArmorManager().critChance.maxPoints)); 
+        
+     }
+     
+       //================================
+       // Check for Helm Button Changes
+       //=================================
+
+     /**
+      *     private Button seeEnemyHealthButton;
+    private Button doubleGoldFindButton;
+    private Button upgradeRadarButton;
+    private Button lifeLeechButton;
+    private Button healingEffectivenessButton;
+      */
+     if(this.playerReference.getArmorManager().seeEnemyHealth.unlocked == false)
+     {
+         if(!seeEnemyHealthButton.getImage().hasOverlay("lock"))
+         {
+            seeEnemyHealthButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         seeEnemyHealthButton.setDisabled(true);
+         seeEnemyHealthLabel.setHidden(true);
+     }
+     else 
+     {
+         seeEnemyHealthButton.getImage().removeAllOverlays();
+         seeEnemyHealthButton.setDisabled(false);
+         seeEnemyHealthLabel.setHidden(false);        
+         seeEnemyHealthLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().seeEnemyHealth.points) + "/" +Integer.toString(this.playerReference.getArmorManager().meleeAttackDamageBonus.maxPoints)); 
+        
+     }
+     
+     if(this.playerReference.getArmorManager().potionCooldownReset.unlocked == false)
+     {
+         if(!potionCooldownResetButton.getImage().hasOverlay("lock"))
+         {
+            potionCooldownResetButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         potionCooldownResetButton.setDisabled(true);
+         potionCooldownResetLabel.setHidden(true);
+     }
+     else
+     {
+         potionCooldownResetButton.getImage().removeAllOverlays();
+         potionCooldownResetButton.setDisabled(false);
+         potionCooldownResetLabel.setHidden(false);
+         potionCooldownResetLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().potionCooldownReset.points) + "/" +Integer.toString(this.playerReference.getArmorManager().potionCooldownReset.maxPoints)); 
+        
+     }
+     
+     
+     if(this.playerReference.getArmorManager().criticalHitDamage.unlocked == false)
+     {
+         if(!criticalHitDamageButton.getImage().hasOverlay("lock"))
+         {
+            criticalHitDamageButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         criticalHitDamageButton.setDisabled(true);
+         criticalHitDamageLabel.setHidden(true);
+     }
+     else
+     {
+         criticalHitDamageButton.getImage().removeAllOverlays();
+         criticalHitDamageButton.setDisabled(false);
+         criticalHitDamageLabel.setHidden(false);
+         criticalHitDamageLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().criticalHitDamage.points) + "/" +Integer.toString(this.playerReference.getArmorManager().criticalHitDamage.maxPoints)); 
+        
+     }
+     
+     if(this.playerReference.getArmorManager().weaponDamage.unlocked == false)
+     {
+         if(!weaponDamageButton.getImage().hasOverlay("lock"))
+         {
+            weaponDamageButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         weaponDamageButton.setDisabled(true);
+         weaponDamageLabel.setHidden(true);
+     }
+     else
+     {
+         weaponDamageButton.getImage().removeAllOverlays();
+         weaponDamageButton.setDisabled(false);
+         weaponDamageLabel.setHidden(false);
+         weaponDamageLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().weaponDamage.points) + "/" +Integer.toString(this.playerReference.getArmorManager().weaponDamage.maxPoints)); 
+        
+     }
+     
+     if(this.playerReference.getArmorManager().weaponAttackSpeed.unlocked == false)
+     {
+         if(!weaponAttackSpeedButton.getImage().hasOverlay("lock"))
+         {
+            weaponAttackSpeedButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         weaponAttackSpeedButton.setDisabled(true);
+         weaponAttackSpeedLabel.setHidden(true);
+     }
+     else
+     {
+         weaponAttackSpeedButton.getImage().removeAllOverlays();
+         weaponAttackSpeedButton.setDisabled(false);
+         weaponAttackSpeedLabel.setHidden(false);
+         weaponAttackSpeedLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().weaponAttackSpeed.points) + "/" +Integer.toString(this.playerReference.getArmorManager().weaponAttackSpeed.maxPoints)); 
+        
+     }
+     
+ 
          
     }
     

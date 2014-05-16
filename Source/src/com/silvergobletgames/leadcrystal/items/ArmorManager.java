@@ -65,81 +65,23 @@ public class ArmorManager {
     public ArmorManager()
     {
         
-        //===============
-        // Helm 
-        //===============
-          
-        this.seeEnemyHealth = new ArmorStat(ArmorStatID.SEE_HEALTH, new Image("enemyHealthModifier.jpg"), "See Enemy Health",200,1);
-        this.seeEnemyHealth.description = "Gives the ability to see enemy health bars.";
-        this.armorStats.put(this.seeEnemyHealth.id,this.seeEnemyHealth);
-       
-        this.doubleGoldFind = new ArmorStat(ArmorStatID.DOUBLE_GOLD, new Image("doubleGoldFindModifier.jpg"), "Double Gold Find",200,1);
-        this.doubleGoldFind.description = "Doubles the value of each gold you pick up.";
-        this.armorStats.put(this.doubleGoldFind.id,this.doubleGoldFind);
-       
-        this.upgradeRadar = new ArmorStat(ArmorStatID.IMPROVED_RADAR, new Image("seeSecondaryObjectiveModifier.jpg"), "Improved radar",200,1);
-        this.upgradeRadar.description = "Allows secondary objectives to show up on your radar.";
-        this.armorStats.put(this.upgradeRadar.id,this.upgradeRadar);  
- 
-        this.lifeLeech = new ArmorStat(ArmorStatID.LIFE_LEECH, new Image("lifeLeechStat.jpg"), "Life Leech", 50,5);
-        this.lifeLeech.description = "+5% life leech per point.";
-        this.lifeLeech.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().lifeLeech.adjustBase(.05f);}}); 
-        this.armorStats.put(this.lifeLeech.id,this.lifeLeech);
-        
-        this.numberOfPotions = new ArmorStat(ArmorStatID.NUMBER_POTIONS, new Image("armorStat.jpg"), "Number of Potions", 50,5);
-        this.numberOfPotions.description = "+1 additional potion per point.";
-        this.numberOfPotions.setAddPointAction(new ArmorAction(){ public void doAction(){playerReference.getPotionManager().increaseMaxPotions(1);}}); 
-        this.armorStats.put(this.numberOfPotions.id,this.numberOfPotions);
-        
-        this.healingEffectiveness = new ArmorStat(ArmorStatID.HEALING_EFFECTIVENESS, new Image("healingStat.jpg"), "Healing Effectiveness", 50,5);
-        this.healingEffectiveness.description = "+5% healing effectiveness per point.";
-        this.healingEffectiveness.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().healingModifier.adjustBase(.05f);}}); 
-        this.armorStats.put(this.healingEffectiveness.id,this.healingEffectiveness);
-       
-        
-        //================
-        // Body
-        //================
-        this.hardToKill = new ArmorStat(ArmorStatID.HARD_TO_KILL, new Image("ccStat.jpg"), "Hard To Kill",200,1);
-        this.hardToKill.description = "When below 33% health, DR is incresed +50%";
-        this.armorStats.put(this.hardToKill.id,this.hardToKill);
-        
-        this.reducedCriticalHit = new ArmorStat(ArmorStatID.REDUCED_CRIT, new Image("healthStat.jpg"), "Hardened Armor",200,1);
-        this.reducedCriticalHit.description ="Enemies can no longer critical hit you.";
-        this.armorStats.put(this.reducedCriticalHit.id,this.reducedCriticalHit);
-       
-        this.proximityDamageReduction = new ArmorStat(ArmorStatID.PROXIMITY_DAMAGE_REDUCTION, new Image("healingStat.jpg"), "Additional Thorns",200,1);
-        this.proximityDamageReduction.description = "Thorns damage is doubled.";
-        this.armorStats.put(this.proximityDamageReduction.id,this.proximityDamageReduction);
-
-        
-        this.health = new ArmorStat(ArmorStatID.HEALTH, new Image("healthStat.jpg"), "Health", 50,10);
-        this.health.description = "+10 health per point.";
-        this.health.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().maxHealth.adjustBase(10); 
-                                                   getPlayerReference().getCombatData().currentHealth+=10;
-                                                   }}); 
-        this.armorStats.put(this.health.id,this.health);
-
-        this.thornsDamage = new ArmorStat(ArmorStatID.THORNS_DAMAGE, new Image("lifeRegenStat.jpg"), "Thorns", 50,5);
-        this.thornsDamage.description = "+5% thorns damage per point.";
-        this.thornsDamage.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().thornsDamage.adjustBase(.05f);}}); 
-        this.armorStats.put(this.thornsDamage.id,this.thornsDamage);
-      
-        
-        //=================
+         //=================
         // Weapon
         //=================
 
         this.meleeAttackDamageBonus = new ArmorStat(ArmorStatID.MELEE_DAMAGE, new Image("meleeDamageModifier.jpg"), "Melee Damage Increase",200,1);
         this.meleeAttackDamageBonus.description = "Increases the damage of melee attacks by 50%";
+        this.meleeAttackDamageBonus.unlocked = false;
         this.armorStats.put(this.meleeAttackDamageBonus.id,this.meleeAttackDamageBonus);
        
         this.potionCooldownReset = new ArmorStat(ArmorStatID.POTION_COOLDOWN_RESET, new Image("healthStat.jpg"), "Potion Cooldown Reset",200,1);
         this.potionCooldownReset.description = "Using a potion will instantly reset all cooldowns.";
+        this.potionCooldownReset.unlocked = false;
         this.armorStats.put(this.potionCooldownReset.id,this.potionCooldownReset);
         
         this.criticalHitDamage = new ArmorStat(ArmorStatID.CRIT_DAMAGE, new Image("critDamageStat.jpg"), "Critical Hit Damage",50,5);
         this.criticalHitDamage.description = "Critical hit damaged increased by 100%.";
+        this.criticalHitDamage.unlocked = false;
         this.criticalHitDamage.setAddPointAction(new ArmorAction(){
            public void doAction()
            {
@@ -151,18 +93,97 @@ public class ArmorManager {
         
         this.weaponDamage = new ArmorStat(ArmorStatID.WEAPON_DAMAGE, new Image("damageStat.jpg"), "Damage", 50,5);
         this.weaponDamage.description = "+2% damage per point";
+        this.weaponDamage.unlocked = true;
         this.weaponDamage.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().baseDamage.adjustPercentModifier(.02f);}}); 
         this.armorStats.put(this.weaponDamage.id,this.weaponDamage);
         
         this.weaponAttackSpeed = new ArmorStat(ArmorStatID.WEAPON_ATTACK_SPEED, new Image("attackSpeedStat.jpg"), "Attack Speed", 50,5);
         this.weaponAttackSpeed.description = "+5% attack speed per point";
+        this.weaponAttackSpeed.unlocked = true;
         this.weaponAttackSpeed.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().cooldownModifier.adjustBase(-.05f);}}); 
         this.armorStats.put(this.weaponAttackSpeed.id,this.weaponAttackSpeed);
         
         this.critChance = new ArmorStat(ArmorStatID.CRIT_CHANCE, new Image("critChanceStat.jpg"), "Critical Hit Chance", 50,5);
         this.critChance.description = "+3% crit chance per point";
+        this.critChance.unlocked = true;
         this.critChance.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().critChance.adjustBase(.03f);}}); 
         this.armorStats.put(this.critChance.id,this.critChance);
+        
+        //===============
+        // Helm 
+        //===============
+          
+        this.seeEnemyHealth = new ArmorStat(ArmorStatID.SEE_HEALTH, new Image("enemyHealthModifier.jpg"), "See Enemy Health",200,1);
+        this.seeEnemyHealth.description = "Gives the ability to see enemy health bars.";
+        this.seeEnemyHealth.unlocked = true;
+        this.armorStats.put(this.seeEnemyHealth.id,this.seeEnemyHealth);
+       
+        this.doubleGoldFind = new ArmorStat(ArmorStatID.DOUBLE_GOLD, new Image("doubleGoldFindModifier.jpg"), "Double Gold Find",200,1);
+        this.doubleGoldFind.description = "Doubles the value of each gold you pick up.";
+        this.doubleGoldFind.unlocked= false;
+        this.armorStats.put(this.doubleGoldFind.id,this.doubleGoldFind);
+       
+        this.upgradeRadar = new ArmorStat(ArmorStatID.IMPROVED_RADAR, new Image("seeSecondaryObjectiveModifier.jpg"), "Improved radar",200,1);
+        this.upgradeRadar.description = "Allows secondary objectives to show up on your radar.";
+        this.upgradeRadar.unlocked = true;
+        this.armorStats.put(this.upgradeRadar.id,this.upgradeRadar);  
+ 
+        this.lifeLeech = new ArmorStat(ArmorStatID.LIFE_LEECH, new Image("lifeLeechStat.jpg"), "Life Leech", 50,5);
+        this.lifeLeech.description = "+5% life leech per point.";
+        this.lifeLeech.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().lifeLeech.adjustBase(.05f);}}); 
+        this.lifeLeech.unlocked = true;
+        this.armorStats.put(this.lifeLeech.id,this.lifeLeech);
+       
+        
+        this.healingEffectiveness = new ArmorStat(ArmorStatID.HEALING_EFFECTIVENESS, new Image("healingStat.jpg"), "Healing Effectiveness", 50,5);
+        this.healingEffectiveness.description = "+5% healing effectiveness per point.";
+        this.healingEffectiveness.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().healingModifier.adjustBase(.05f);}});
+        this.healingEffectiveness.unlocked= false;
+        this.armorStats.put(this.healingEffectiveness.id,this.healingEffectiveness);
+       
+        
+        //================
+        // Body
+        //================
+        this.hardToKill = new ArmorStat(ArmorStatID.HARD_TO_KILL, new Image("ccStat.jpg"), "Hard To Kill",200,1);
+        this.hardToKill.description = "When below 33% health, DR is incresed +50%";
+        this.hardToKill.unlocked = false;
+        this.armorStats.put(this.hardToKill.id,this.hardToKill);
+        
+        this.reducedCriticalHit = new ArmorStat(ArmorStatID.REDUCED_CRIT, new Image("healthStat.jpg"), "Hardened Armor",200,1);
+        this.reducedCriticalHit.description ="Enemies can no longer critical hit you.";
+        this.reducedCriticalHit.unlocked = true;
+        this.armorStats.put(this.reducedCriticalHit.id,this.reducedCriticalHit);
+       
+        this.proximityDamageReduction = new ArmorStat(ArmorStatID.PROXIMITY_DAMAGE_REDUCTION, new Image("healingStat.jpg"), "Additional Thorns",200,1);
+        this.proximityDamageReduction.description = "Thorns damage is doubled.";
+        this.proximityDamageReduction.unlocked = false;
+        this.armorStats.put(this.proximityDamageReduction.id,this.proximityDamageReduction);
+
+        
+        this.health = new ArmorStat(ArmorStatID.HEALTH, new Image("healthStat.jpg"), "Health", 50,10);
+        this.health.description = "+10 health per point.";
+        this.health.unlocked = true;
+        this.health.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().maxHealth.adjustBase(10); 
+                                                   getPlayerReference().getCombatData().currentHealth+=10;
+                                                   }}); 
+        this.armorStats.put(this.health.id,this.health);
+
+        this.thornsDamage = new ArmorStat(ArmorStatID.THORNS_DAMAGE, new Image("lifeRegenStat.jpg"), "Thorns", 50,5);
+        this.thornsDamage.description = "+5% thorns damage per point.";
+        this.thornsDamage.unlocked = false;
+        this.thornsDamage.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().thornsDamage.adjustBase(.05f);}}); 
+        this.armorStats.put(this.thornsDamage.id,this.thornsDamage); 
+        
+        this.numberOfPotions = new ArmorStat(ArmorStatID.NUMBER_POTIONS, new Image("armorStat.jpg"), "Number of Potions", 50,5);
+        this.numberOfPotions.description = "+1 additional potion per point.";
+        this.numberOfPotions.unlocked = true;
+        this.numberOfPotions.setAddPointAction(new ArmorAction(){ public void doAction(){playerReference.getPotionManager().increaseMaxPotions(1);}}); 
+        this.numberOfPotions.unlocked= false;
+        this.armorStats.put(this.numberOfPotions.id,this.numberOfPotions);
+      
+        
+       
         
         
         //================
@@ -170,18 +191,22 @@ public class ArmorManager {
         //================
         
         this.doubleJump = new ArmorStat(ArmorStatID.DOUBLE_JUMP, new Image("healthStat.jpg"), "Double Jump",200,1);
+        this.doubleJump.unlocked = true;
         this.armorStats.put(this.doubleJump.id,this.doubleJump);
        
         this.jetpack = new ArmorStat(ArmorStatID.JETPACK, new Image("healthStat.jpg"), "Jetpack",200,1);
+        this.jetpack.unlocked = false;
         this.armorStats.put(this.jetpack.id,this.jetpack);   
                       
         this.ccReduction = new ArmorStat(ArmorStat.ArmorStatID.CC_REDUCTION, new Image("CCStat.jpg"), "CC Reduction", 50,5);
         this.ccReduction.description = "+5% CC reduction per point.";
+        this.ccReduction.unlocked = true;
         this.ccReduction.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().ccResistance.adjustBase(.05f);}}); 
         this.armorStats.put(this.ccReduction.id,this.ccReduction);
         
         this.moveSpeed = new ArmorStat(ArmorStat.ArmorStatID.MOVE_SPEED, new Image("moveSpeedStat.jpg"), "Move Speed", 50,5);
         this.moveSpeed.description = "+5% move speed per point";
+        this.moveSpeed.unlocked = false;
         this.moveSpeed.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().xVelocity.adjustPercentModifier(.05f);}}); 
         this.armorStats.put(this.moveSpeed.id,this.moveSpeed);
         
@@ -243,7 +268,6 @@ public class ArmorManager {
         public static enum ArmorStatID
         {
             //helm
-//helm
             SEE_HEALTH,DOUBLE_GOLD, IMPROVED_RADAR,LIFE_LEECH,HEALING_EFFECTIVENESS,
             //body
             HARD_TO_KILL, REDUCED_CRIT, PROXIMITY_DAMAGE_REDUCTION,HEALTH,THORNS_DAMAGE, NUMBER_POTIONS,
@@ -346,7 +370,7 @@ public class ArmorManager {
             ArrayList rawData = new ArrayList();
             rawData.addAll(Arrays.asList(renderDataChanges.data));           
             ArrayList changeData = new ArrayList();
-            for(byte i = 0; i <1; i ++)
+            for(byte i = 0; i <2; i ++)
             {
                 // The bit was set
                 if ((fieldMap & (1L << i)) != 0)
