@@ -292,6 +292,415 @@ public class ArmorMenu extends Window{
         this.addComponent(criticalHitDamageLabel); 
         
         
+        
+        //================
+        // Helm Upgrades
+        //================
+        
+        int helmBasePositionX = 800;
+        int helmBasePositionY = 600;
+       
+        
+        final ArmorStat stat7 = this.playerReference.getArmorManager().seeEnemyHealth;
+        b = new Button(stat7.image.copy(), helmBasePositionX, helmBasePositionY, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat7.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat7.name,stat7.image,stat7.description, stat7.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        this.seeEnemyHealthLabel = new Label(new Text(Byte.toString(stat7.points) + "/" +Integer.toString(stat7.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.addComponent(seeEnemyHealthLabel); 
+        
+        final ArmorStat stat8 = this.playerReference.getArmorManager().lifeLeech;
+        b = new Button(stat8.image.copy(), helmBasePositionX + 100, helmBasePositionY, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat8.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat8.name,stat8.image,stat8.description, stat8.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        this.lifeLeechLabel = new Label(new Text(Byte.toString(stat8.points) + "/" +Integer.toString(stat8.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.addComponent(lifeLeechLabel);
+        
+        final ArmorStat stat9 = this.playerReference.getArmorManager().upgradeRadar;
+        b = new Button(stat9.image.copy(), helmBasePositionX + 200, helmBasePositionY, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat9.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat9.name,stat9.image,stat9.description, stat9.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        this.upgradeRadarLabel = new Label(new Text(Byte.toString(stat9.points) + "/" +Integer.toString(stat9.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.addComponent(upgradeRadarLabel);
+        
+        final ArmorStat stat10 = this.playerReference.getArmorManager().doubleGoldFind;
+        b = new Button(stat10.image.copy(), helmBasePositionX, helmBasePositionY - 100, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat10.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat10.name,stat10.image,stat10.description, stat10.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        this.doubleGoldFindLabel = new Label(new Text(Byte.toString(stat10.points) + "/" +Integer.toString(stat10.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.addComponent(doubleGoldFindLabel); 
+        
+        final ArmorStat stat11 = this.playerReference.getArmorManager().healingEffectiveness;
+        b = new Button(stat11.image.copy(), helmBasePositionX + 100, helmBasePositionY - 100, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat11.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat11.name,stat11.image,stat11.description, stat11.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        this.healingEffectivenessLabel = new Label(new Text(Byte.toString(stat11.points) + "/" +Integer.toString(stat11.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.addComponent(healingEffectivenessLabel); 
+
+        
+        //================
+        // Armor Upgrades
+        //================
+        
+        int armorBasePositionX = 800;
+        int armorBasePositionY = 200;
+               
+        
+        final ArmorStat stat12 = this.playerReference.getArmorManager().health;
+        b = new Button(stat12.image.copy(), armorBasePositionX, armorBasePositionY, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat12.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat12.name,stat12.image,stat12.description, stat12.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        this.healthLabel = new Label(new Text(Byte.toString(stat12.points) + "/" +Integer.toString(stat12.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.addComponent(healthLabel); 
+        
+        final ArmorStat stat13 = this.playerReference.getArmorManager().numberOfPotions;
+        b = new Button(stat13.image.copy(), armorBasePositionX + 100, armorBasePositionY, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat13.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat13.name,stat13.image,stat13.description, stat13.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        this.numberOfPotionsLabel = new Label(new Text(Byte.toString(stat13.points) + "/" +Integer.toString(stat13.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.addComponent(numberOfPotionsLabel);
+        
+        final ArmorStat stat14 = this.playerReference.getArmorManager().reducedCriticalHit;
+        b = new Button(stat14.image.copy(), armorBasePositionX + 200, armorBasePositionY, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat14.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat14.name,stat14.image,stat14.description, stat14.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        this.reducedCriticalHitLabel = new Label(new Text(Byte.toString(stat14.points) + "/" +Integer.toString(stat14.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.addComponent(reducedCriticalHitLabel);
+        
+        final ArmorStat stat15 = this.playerReference.getArmorManager().hardToKill;
+        b = new Button(stat15.image.copy(), armorBasePositionX, armorBasePositionY - 100, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat15.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat15.name,stat15.image,stat15.description, stat15.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        this.hardToKillLabel = new Label(new Text(Byte.toString(stat15.points) + "/" +Integer.toString(stat15.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.addComponent(hardToKillLabel); 
+        
+        final ArmorStat stat16 = this.playerReference.getArmorManager().proximityDamageReduction;
+        b = new Button(stat16.image.copy(), armorBasePositionX + 100, armorBasePositionY - 100, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat16.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat16.name,stat16.image,stat16.description, stat16.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        this.proximityDamageReductionLabel = new Label(new Text(Byte.toString(stat16.points) + "/" +Integer.toString(stat16.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.addComponent(proximityDamageReductionLabel); 
+        
+        final ArmorStat stat17 = this.playerReference.getArmorManager().thornsDamage;
+        b = new Button(stat17.image.copy(), armorBasePositionX + 200, armorBasePositionY - 100, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat17.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat17.name,stat17.image,stat17.description, stat17.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        this.thornsDamageLabel = new Label(new Text(Byte.toString(stat17.points) + "/" +Integer.toString(stat17.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.addComponent(thornsDamageLabel); 
+        
+        
+        //================
+        // Boot Upgrades
+        //================
+              
+                /*
+        
+         private Button doubleJumpButton;
+        private Button jetpackButton;
+        private Button ccReductionButton;
+        private Button moveSpeedButton;
+        */
+        
+        int bootsBasePositionX = 150;
+        int bootsBasePositionY = 200;
+               
+        
+        final ArmorStat stat18 = this.playerReference.getArmorManager().doubleJump;
+        b = new Button(stat18.image.copy(), bootsBasePositionX, bootsBasePositionY, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat18.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat18.name,stat18.image,stat18.description, stat18.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        this.doubleJumpLabel = new Label(new Text(Byte.toString(stat18.points) + "/" +Integer.toString(stat18.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.addComponent(doubleJumpLabel); 
+        
+        final ArmorStat stat19 = this.playerReference.getArmorManager().ccReduction;
+        b = new Button(stat19.image.copy(), bootsBasePositionX + 100, bootsBasePositionY, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat19.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat19.name,stat19.image,stat19.description, stat19.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        this.ccReductionLabel = new Label(new Text(Byte.toString(stat19.points) + "/" +Integer.toString(stat19.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.addComponent(ccReductionLabel);
+        
+        final ArmorStat stat20 = this.playerReference.getArmorManager().jetpack;
+        b = new Button(stat20.image.copy(), bootsBasePositionX + 200, bootsBasePositionY, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat20.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat20.name,stat20.image,stat20.description, stat20.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        this.jetpackLabel = new Label(new Text(Byte.toString(stat20.points) + "/" +Integer.toString(stat20.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.addComponent(jetpackLabel);
+        
+        final ArmorStat stat21 = this.playerReference.getArmorManager().moveSpeed;
+        b = new Button(stat21.image.copy(), bootsBasePositionX, bootsBasePositionY - 100, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat21.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat21.name,stat21.image,stat21.description, stat21.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        this.moveSpeedLabel = new Label(new Text(Byte.toString(stat21.points) + "/" +Integer.toString(stat21.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.addComponent(moveSpeedLabel); 
 
        
     }
