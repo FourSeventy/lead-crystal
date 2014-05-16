@@ -6,7 +6,7 @@ import com.silvergobletgames.leadcrystal.entities.EntityEffect;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect.EntityEffectType;
 import com.silvergobletgames.leadcrystal.entities.MobSpawner;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
-import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorModifier.ArmorModifierID;
+import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat.ArmorStatID;
 import com.silvergobletgames.leadcrystal.netcode.GobletServer;
 import com.silvergobletgames.leadcrystal.netcode.OpenInstructionalTipPacket.InstructionalTip;
 import com.silvergobletgames.leadcrystal.netcode.OpenMenuPacket.MenuID;
@@ -217,11 +217,11 @@ public class SceneScriptManager
             
             //send side objective complete packet
             short currencyReward =0;
-            ArmorModifierID id = null;
+            ArmorStatID id = null;
             if(sideObjectiveNewlyCompleted)
             {
                 currencyReward = (short)player.getLevelProgressionManager().levelMap.get(levelNumber).sideObjective.currencyAward;           
-                id = player.getLevelProgressionManager().levelMap.get(levelNumber).sideObjective.modifierReward;
+                id = player.getLevelProgressionManager().levelMap.get(levelNumber).sideObjective.statReward;
                 
             }
             
@@ -259,11 +259,11 @@ public class SceneScriptManager
             
             //calculate currency reward 
             short currencyAward = 0;
-            ArmorModifierID id = null;
+            ArmorStatID id = null;
             if(mainObjectiveNewleyCompleted)
             {
                 currencyAward = (short)player.getLevelProgressionManager().levelMap.get(levelNumber).mainObjective.currencyAward;
-               id = player.getLevelProgressionManager().levelMap.get(levelNumber).mainObjective.modifierReward;
+               id = player.getLevelProgressionManager().levelMap.get(levelNumber).mainObjective.statReward;
                 
            
             }

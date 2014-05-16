@@ -10,9 +10,8 @@ import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.items.ArmorManager;
-import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorModifier;
-import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorModifier.ArmorModifierID;
 import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat;
+import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat.ArmorStatID;
 import com.silvergobletgames.leadcrystal.items.Potion;
 import com.silvergobletgames.leadcrystal.items.PotionManager;
 import com.silvergobletgames.leadcrystal.netcode.*;
@@ -1097,7 +1096,7 @@ public class GameServerScene extends Scene
         }
     }
     
-    public void sendSideObjectiveCompletePacket(String client, short currencyReward, ArmorModifierID modifierId)
+    public void sendSideObjectiveCompletePacket(String client, short currencyReward, ArmorStatID modifierId)
     {
             //send out side objective complete packet
            SideObjectiveCompletePacket packet = new SideObjectiveCompletePacket();           
@@ -1106,7 +1105,7 @@ public class GameServerScene extends Scene
            this.sendPacket(packet,UUID.fromString(client));             
     }
     
-    public void sendMainObjectiveCompletePacket(String client, short currencyReward,ArmorModifierID modifierId)
+    public void sendMainObjectiveCompletePacket(String client, short currencyReward,ArmorStatID modifierId)
     {
            //send out side objective complete packet
            MainObjectiveCompletePacket packet = new MainObjectiveCompletePacket();           
@@ -1239,10 +1238,6 @@ public class GameServerScene extends Scene
         {
             handleBuyStatPacket((BuyStatPacket)packet);
         }
-        else if(packet instanceof EquipModifierPacket)
-        {
-            handleEquipModifierPacket((EquipModifierPacket)packet);
-        }
     }
     
     public void handleBuySkillPacket(BuySkillPacket packet)
@@ -1319,7 +1314,7 @@ public class GameServerScene extends Scene
         
         //subtract money from player
         boolean success = player.getCurrencyManager().getBalence()>=player.getArmorManager().armorStats.get(statPacket.statId).cost 
-                          && player.getArmorManager().armorStats.get(statPacket.statId).points < ArmorStat.MAX_POINTS;
+                          && player.getArmorManager().armorStats.get(statPacket.statId).points < player.getArmorManager().armorStats.get(statPacket.statId).maxPoints;
 
         //if the subtraction succeeded, give potion to player
         if(success)
@@ -1327,17 +1322,7 @@ public class GameServerScene extends Scene
             player.getCurrencyManager().subtractCurrency(player.getArmorManager().armorStats.get(statPacket.statId).cost);
             player.getArmorManager().armorStats.get(statPacket.statId).addPoint(1); 
         }   
-    }  
-    
-    public void handleEquipModifierPacket(EquipModifierPacket modifierPacket)
-    {
-        PlayerEntity player = this.clientsInScene.get(modifierPacket.getClientID()).player;
-        
-         player.getArmorManager().equipModifier(modifierPacket.modifierID);
-     
-    }
-    
-   
+    }     
     
     public void handleChooseLevelPacket(ChooseLevelPacket packet)
     {

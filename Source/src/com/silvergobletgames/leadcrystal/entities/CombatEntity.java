@@ -303,7 +303,7 @@ public abstract class CombatEntity extends Entity
         
         if(this instanceof PlayerEntity) // lol ehhh
         {
-            if(((PlayerEntity)this).getArmorManager().reducedCriticalHitModifier.equipped == true)
+            if(((PlayerEntity)this).getArmorManager().reducedCriticalHit.isMaxPoints())
             {
                 if(dmg.isCrit())
                 {

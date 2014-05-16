@@ -2,7 +2,7 @@ package com.silvergobletgames.leadcrystal.combat;
 
 import com.silvergobletgames.leadcrystal.cutscenes.CutsceneManager.Cutscenes;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
-import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorModifier.ArmorModifierID;
+import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat.ArmorStatID;
 import com.silvergobletgames.leadcrystal.items.Currency;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.sylver.netcode.RenderData;
@@ -127,7 +127,7 @@ public class LevelProgressionManager
         objective.objectiveName = "Giant Dabat";
         objective.objectiveDescription = "There is rumored to be a giant Dabat in this area. Destroy it.";
         objective.currencyAward = 25;
-        objective.modifierReward = ArmorModifierID.ENEMY_HEALTH;
+        objective.statReward = ArmorStatID.SEE_HEALTH;
         level3.sideObjective = objective;
         //adding to map
         this.levelMap.put(3, level3);
@@ -148,7 +148,7 @@ public class LevelProgressionManager
         objective.objectiveName = "Lost Weapons";
         objective.objectiveDescription = " Find the lost weapons cache.";
         objective.currencyAward = 25;
-        objective.modifierReward = ArmorModifierID.DR_BONUS;
+       // objective.statReward = ArmorStatID.;
         level4.sideObjective = objective;
         //adding to map
         this.levelMap.put(4, level4);
@@ -163,14 +163,14 @@ public class LevelProgressionManager
         objective.objectiveDescription = "We lost contact with a caravan carrying supplies to the town, go investigate";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
-        objective.modifierReward = ArmorModifierID.MELEE_ATTACK_DMG;
+        objective.statReward = ArmorStatID.MELEE_DAMAGE;
         level5.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
         objective.objectiveName = "Survivors";
         objective.objectiveDescription = "Search for any survivors of the caravan";
         objective.currencyAward = 25;
-        objective.modifierReward = ArmorModifierID.DOUBLE_JUMP;
+        objective.statReward = ArmorStatID.DOUBLE_GOLD;
         level5.sideObjective = objective;
         //adding to map
         this.levelMap.put(5, level5);
@@ -302,8 +302,8 @@ public class LevelProgressionManager
             playerReference.getCurrencyManager().addCurrency(level.mainObjective.currencyAward);
             
             //add armor modifier reward
-            if(level.mainObjective.modifierReward != null)
-                playerReference.getArmorManager().armorModifiers.get(level.mainObjective.modifierReward).unlocked = true;
+            if(level.mainObjective.statReward != null)
+                playerReference.getArmorManager().armorStats.get(level.mainObjective.statReward).unlocked = true;
         
         }
                 
@@ -327,8 +327,8 @@ public class LevelProgressionManager
             playerReference.getCurrencyManager().addCurrency(level.sideObjective.currencyAward);
             
             //add armor modifier reward
-            if(level.sideObjective.modifierReward != null)
-                playerReference.getArmorManager().armorModifiers.get(level.sideObjective.modifierReward).unlocked = true;
+            if(level.sideObjective.statReward != null)
+                playerReference.getArmorManager().armorStats.get(level.sideObjective.statReward).unlocked = true;
         }
                 
         //mark complete
@@ -391,7 +391,7 @@ public class LevelProgressionManager
         //objective rewards
         public boolean skillPointAward = false;
         public int currencyAward;
-        public ArmorModifierID modifierReward = null;
+        public ArmorStatID statReward = null;
         
     }
     

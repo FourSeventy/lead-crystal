@@ -17,7 +17,6 @@ import com.silvergobletgames.leadcrystal.entities.*;
 import com.silvergobletgames.leadcrystal.entities.ClientPlayerEntity;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.entities.HitBox;
-import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorModifier.ArmorModifierID;
 import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat.ArmorStatID;
 import com.silvergobletgames.leadcrystal.menus.Hud;
 import com.silvergobletgames.leadcrystal.netcode.*;
@@ -1359,16 +1358,6 @@ public final class GameClientScene extends Scene
         this.sendPacket(packet);
     }
     
-    public void sendEquipModifierPacket(ArmorModifierID modifierID)
-    {
-        //build the packet
-        EquipModifierPacket packet = new EquipModifierPacket();
-        packet.modifierID = modifierID;
-        
-        //send packet
-        this.sendPacket(packet);
-    }
-    
     public void sendBuySkillPacket(SkillID id)
     {
         //build the packet
@@ -1726,7 +1715,7 @@ public final class GameClientScene extends Scene
         if(packet.modifierID != null)
         {
             //modifier text
-            String modifierString = "Unlocked \"" + this.player.getArmorManager().armorModifiers.get(packet.modifierID).name +"\" Armor Modifier";
+            String modifierString = "Unlocked \"" + this.player.getArmorManager().armorStats.get(packet.modifierID).name +"\" Armor Upgrade";
             modifierText = new Text(modifierString,LeadCrystalTextType.MESSAGE);
             modifierText.setScale(.5f);
             modifierText.setPosition(center- modifierText.getWidth()/2 - 20, 550);
@@ -1816,7 +1805,7 @@ public final class GameClientScene extends Scene
         if(packet.modifierID != null)
         {
             //modifier text
-            String modifierString = "Unlocked \"" + this.player.getArmorManager().armorModifiers.get(packet.modifierID).name +"\" Armor Modifier";
+            String modifierString = "Unlocked \"" + this.player.getArmorManager().armorStats.get(packet.modifierID).name +"\" Armor Upgrade";
             modifierText = new Text(modifierString,LeadCrystalTextType.MESSAGE);
             modifierText.setScale(.5f);
             modifierText.setPosition(center- modifierText.getWidth()/2 - 20, 550);

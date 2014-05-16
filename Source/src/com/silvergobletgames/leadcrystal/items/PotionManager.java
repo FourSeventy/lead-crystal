@@ -88,7 +88,7 @@ public class PotionManager
             
             
             //if they have the modifier
-            if(this.playerReference.getArmorManager().potionCooldownResetModifier.equipped == true)
+            if(this.playerReference.getArmorManager().potionCooldownReset.isMaxPoints())
             {
                 this.playerReference.getSkillManager().getSkill(this.playerReference.getSkillAssignment(1)).setCooldownRemaining(0);
                 this.playerReference.getSkillManager().getSkill(this.playerReference.getSkillAssignment(2)).setCooldownRemaining(0);
