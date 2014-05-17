@@ -19,6 +19,7 @@ import java.awt.image.BufferedImage;
 public enum LeadCrystalTextType implements TextType{
     
     COMBAT,
+    COMBAT_CRIT,
     HUD16,
     HUD20,
     HUD22,
@@ -26,7 +27,10 @@ public enum LeadCrystalTextType implements TextType{
     HUD28,
     MESSAGE,
     CHAT,
-    MENUBUTTONS;
+    MENU40,
+    MENU46,
+    MENU54,
+    TITLE;
 
     
     
@@ -37,11 +41,19 @@ public enum LeadCrystalTextType implements TextType{
         Graphics2D java2d = ( Graphics2D)( bufferedImage.createGraphics());
         
          //COMBAT
-        Font font = new Font("IMPACT", Font.BOLD, 30);
+        Font font = new Font("IMPACT", Font.BOLD, 32);
         TextRenderer textRenderer = new TextRenderer(font, true, true,new SylverRenderDelegate());
         textRenderer.setUseVertexArrays(false);
         FontMetrics metrics = java2d.getFontMetrics(font);
         Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.COMBAT,textRenderer,metrics);
+        
+        //COMBAT
+        font = new Font("IMPACT", Font.BOLD, 40);
+        textRenderer = new TextRenderer(font, true, true,new SylverRenderDelegate());
+        textRenderer.setUseVertexArrays(false);
+        metrics = java2d.getFontMetrics(font);
+        Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.COMBAT_CRIT,textRenderer,metrics);
+        
         
         //HUD16
         font = new Font("CALIBRI", Font.PLAIN, 16);
@@ -94,13 +106,34 @@ public enum LeadCrystalTextType implements TextType{
         metrics = java2d.getFontMetrics(font);
         Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.MESSAGE,textRenderer,metrics);
 
-        //MENUBUTTONS
-        font = new Font("CALIBRI", Font.BOLD, 32);
+        //MENU40
+        font = new Font("CALIBRI", Font.BOLD, 40);
         textRenderer = new TextRenderer(font, true, true, new SylverRenderDelegate(true,1));
         textRenderer.setUseVertexArrays(false);
         metrics = java2d.getFontMetrics(font);
-        Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.MENUBUTTONS,textRenderer,metrics);
+        Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.MENU40,textRenderer,metrics);
 
+        //MENU46
+        font = new Font("CALIBRI", Font.BOLD, 46);
+        textRenderer = new TextRenderer(font, true, true, new SylverRenderDelegate(true,1));
+        textRenderer.setUseVertexArrays(false);
+        metrics = java2d.getFontMetrics(font);
+        Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.MENU46,textRenderer,metrics);
+
+        //MENU54
+        font = new Font("CALIBRI", Font.BOLD, 54);
+        textRenderer = new TextRenderer(font, true, true, new SylverRenderDelegate(true,1.5f));
+        textRenderer.setUseVertexArrays(false);
+        metrics = java2d.getFontMetrics(font);
+        Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.MENU54,textRenderer,metrics);
+
+        
+        //TITLE
+        font = new Font("CALIBRI", Font.BOLD, 95);
+        textRenderer = new TextRenderer(font, true, true, new SylverRenderDelegate(true,3f));
+        textRenderer.setUseVertexArrays(false);
+        metrics = java2d.getFontMetrics(font);
+        Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.TITLE,textRenderer,metrics);
     }
 
 }

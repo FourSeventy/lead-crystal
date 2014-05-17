@@ -57,15 +57,12 @@ public class MainMenuScene extends Scene
         final int right = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x;
         final int center = right/2;
 
-        Text leadCrystal = new Text("Lead Crystal");//,CoreTextType.MENU);      
-        leadCrystal.setScale(1.2f);
-        leadCrystal.setTextType(CoreTextType.MENU);
+        Text leadCrystal = new Text("Lead Crystal",LeadCrystalTextType.TITLE);
         leadCrystal.setPosition(center - leadCrystal.getWidth()/2, 700);       
         this.add(leadCrystal,Layer.MAIN);
         
         //single player
-        final Text singlePlayerText = new Text("Single Player",LeadCrystalTextType.MENUBUTTONS);
-        singlePlayerText.setScale(1.5f);
+        final Text singlePlayerText = new Text("Single Player",LeadCrystalTextType.MENU54);
         singlePlayerText.setPosition(center - singlePlayerText.getWidth()/2, 575);
         final Button singlePlayerButton = new Button(new Image("blank.png"), center - singlePlayerText.getWidth()/2, singlePlayerText.getPosition().y, singlePlayerText.getWidth(), singlePlayerText.getHeight());
         this.add(singlePlayerText,Layer.MAIN);
@@ -83,7 +80,7 @@ public class MainMenuScene extends Scene
                       if(singlePlayerText.hasTextEffect("small"))
                           singlePlayerText.removeTextEffect("small");
                       
-                       singlePlayerText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, singlePlayerText.getScale(), 2));
+                       singlePlayerText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, singlePlayerText.getScale(), 1.3));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -94,14 +91,13 @@ public class MainMenuScene extends Scene
                         if(singlePlayerText.hasTextEffect("big"))
                            singlePlayerText.removeTextEffect("big");
                         
-                        singlePlayerText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, singlePlayerText.getScale(), 1.5));
+                        singlePlayerText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, singlePlayerText.getScale(), 1));
                 }
             }
         });
         
         //multiplayer 
-        final Text multiPlayerText = new Text("Multiplayer",LeadCrystalTextType.MENUBUTTONS);
-        multiPlayerText.setScale(1.5f);
+        final Text multiPlayerText = new Text("Multiplayer",LeadCrystalTextType.MENU54);
         multiPlayerText.setPosition(center - multiPlayerText.getWidth()/2, 500);
         final Button multiPlayerButton = new Button(new Image("blank.png"), center - multiPlayerText.getWidth()/2, multiPlayerText.getPosition().y, multiPlayerText.getWidth(), multiPlayerText.getHeight());
         this.add(multiPlayerText,Layer.MAIN);
@@ -119,7 +115,7 @@ public class MainMenuScene extends Scene
                       if(multiPlayerText.hasTextEffect("small"))
                           multiPlayerText.removeTextEffect("small");
                       
-                       multiPlayerText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, multiPlayerText.getScale(), 2));
+                       multiPlayerText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, multiPlayerText.getScale(), 1.3));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -130,14 +126,13 @@ public class MainMenuScene extends Scene
                         if(multiPlayerText.hasTextEffect("big"))
                            multiPlayerText.removeTextEffect("big");
                         
-                        multiPlayerText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, multiPlayerText.getScale(), 1.5));
+                        multiPlayerText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, multiPlayerText.getScale(), 1));
                 }
             }
         });
         
         //options
-        final Text optionsText = new Text("Options",LeadCrystalTextType.MENUBUTTONS);
-        optionsText.setScale(1.5f);
+        final Text optionsText = new Text("Options",LeadCrystalTextType.MENU54);
         optionsText.setPosition(center - optionsText.getWidth()/2, 425);
         final Button optionsButton = new Button(new Image("blank.png"), center - optionsText.getWidth()/2, optionsText.getPosition().y, optionsText.getWidth(), optionsText.getHeight());
         this.add(optionsText,Layer.MAIN);
@@ -155,7 +150,7 @@ public class MainMenuScene extends Scene
                       if(optionsText.hasTextEffect("small"))
                           optionsText.removeTextEffect("small");
                       
-                       optionsText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, optionsText.getScale(), 2));
+                       optionsText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, optionsText.getScale(), 1.3));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -166,14 +161,13 @@ public class MainMenuScene extends Scene
                         if(optionsText.hasTextEffect("big"))
                            optionsText.removeTextEffect("big");
                         
-                        optionsText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, optionsText.getScale(), 1.5));
+                        optionsText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, optionsText.getScale(), 1));
                 }
             }
         });
         
         //level editor
-        final Text levelEditorText = new Text("Level Editor",LeadCrystalTextType.MENUBUTTONS);
-        levelEditorText.setScale(1.5f);
+        final Text levelEditorText = new Text("Level Editor",LeadCrystalTextType.MENU54);
         levelEditorText.setPosition(center - levelEditorText.getWidth()/2, 350);
         final Button levelEditorButton = new Button(new Image("blank.png"), center - levelEditorText.getWidth()/2, levelEditorText.getPosition().y, levelEditorText.getWidth(), levelEditorText.getHeight());
         this.add(levelEditorText,Layer.MAIN);
@@ -191,7 +185,7 @@ public class MainMenuScene extends Scene
                       if(levelEditorText.hasTextEffect("small"))
                           levelEditorText.removeTextEffect("small");
                       
-                       levelEditorText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, levelEditorText.getScale(), 2));
+                       levelEditorText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, levelEditorText.getScale(), 1.3));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -202,14 +196,13 @@ public class MainMenuScene extends Scene
                         if(levelEditorText.hasTextEffect("big"))
                            levelEditorText.removeTextEffect("big");
                         
-                        levelEditorText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, levelEditorText.getScale(), 1.5));
+                        levelEditorText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, levelEditorText.getScale(), 1));
                 }
             }
         });
         
         //exit
-        final Text exitText = new Text("Exit",LeadCrystalTextType.MENUBUTTONS);
-        exitText.setScale(1.5f);
+        final Text exitText = new Text("Exit",LeadCrystalTextType.MENU54);
         exitText.setPosition(center - exitText.getWidth()/2, 275);
         final Button exitButton = new Button(new Image("blank.png"), center - exitText.getWidth()/2, exitText.getPosition().y, exitText.getWidth(), exitText.getHeight());
         this.add(exitText,Layer.MAIN);
@@ -227,7 +220,7 @@ public class MainMenuScene extends Scene
                       if(exitText.hasTextEffect("small"))
                           exitText.removeTextEffect("small");
                       
-                       exitText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, exitText.getScale(), 2));
+                       exitText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, exitText.getScale(),1.3));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -238,7 +231,7 @@ public class MainMenuScene extends Scene
                         if(exitText.hasTextEffect("big"))
                            exitText.removeTextEffect("big");
                         
-                        exitText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, exitText.getScale(), 1.5));
+                        exitText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, exitText.getScale(), 1));
                 }
             }
         });

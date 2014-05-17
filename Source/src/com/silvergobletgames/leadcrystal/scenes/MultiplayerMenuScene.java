@@ -55,14 +55,12 @@ public class MultiplayerMenuScene extends Scene
         this.add(back,Layer.BACKGROUND);
         
         //multiplayer title
-        Text title = new Text("Multiplayer",Text.CoreTextType.MENU);      
-        title.setScale(1f);
+        Text title = new Text("Multiplayer",LeadCrystalTextType.TITLE);      
         title.setPosition(center - title.getWidth()/2, 730);       
         this.add(title,Layer.MAIN);
         
         //join
-        final Text joinText = new Text("Join",LeadCrystalTextType.MENUBUTTONS);
-        joinText.setScale(1.5f);
+        final Text joinText = new Text("Join",LeadCrystalTextType.MENU46);
         joinText.setPosition(center - joinText.getWidth()/2, 600);
         final Button joinButton = new Button(new Image("blank.png"), center - joinText.getWidth()/2, joinText.getPosition().y, joinText.getWidth(), joinText.getHeight());
         this.add(joinText,Layer.MAIN);
@@ -107,7 +105,7 @@ public class MultiplayerMenuScene extends Scene
                       if(joinText.hasTextEffect("small"))
                           joinText.removeTextEffect("small");
                       
-                       joinText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, joinText.getScale(), 1.8));
+                       joinText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, joinText.getScale(), 1.2));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -118,14 +116,13 @@ public class MultiplayerMenuScene extends Scene
                         if(joinText.hasTextEffect("big"))
                            joinText.removeTextEffect("big");
                         
-                        joinText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, joinText.getScale(), 1.5));
+                        joinText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, joinText.getScale(), 1));
                 }
             }
         });      
         
         //host
-        final Text hostText = new Text("Host",LeadCrystalTextType.MENUBUTTONS);
-        hostText.setScale(1.5f);
+        final Text hostText = new Text("Host",LeadCrystalTextType.MENU46);
         hostText.setPosition(center - hostText.getWidth()/2, 525);
         final Button hostButton = new Button(new Image("blank.png"), center - hostText.getWidth()/2, hostText.getPosition().y, hostText.getWidth(), hostText.getHeight());
         this.add(hostText,Layer.MAIN);
@@ -167,7 +164,7 @@ public class MultiplayerMenuScene extends Scene
                       if(hostText.hasTextEffect("small"))
                           hostText.removeTextEffect("small");
                       
-                       hostText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, hostText.getScale(), 1.8));
+                       hostText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, hostText.getScale(), 1.2));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -178,14 +175,13 @@ public class MultiplayerMenuScene extends Scene
                         if(hostText.hasTextEffect("big"))
                            hostText.removeTextEffect("big");
                         
-                        hostText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, hostText.getScale(), 1.5));
+                        hostText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, hostText.getScale(), 1));
                 }
             }
         });  
         
         //port
-        portLabel = new Text("Port:",LeadCrystalTextType.MENUBUTTONS);
-        portLabel.setScale(1.2f);
+        portLabel = new Text("Port:",LeadCrystalTextType.MENU46);
         portLabel.setPosition(center + 200, 550);
         this.add(portLabel, Layer.MAIN);
         portTextBox = new TextBox("50501", center + 320, 550);        
@@ -195,8 +191,7 @@ public class MultiplayerMenuScene extends Scene
         portTextBox.setHidden(true);
         
         //IP
-        ipLabel = new Text("IP:",LeadCrystalTextType.MENUBUTTONS);
-        ipLabel.setScale(1.2f);
+        ipLabel = new Text("IP:",LeadCrystalTextType.MENU46);
         ipLabel.setPosition(center + 200, 500);
         this.add(ipLabel, Layer.MAIN);
         ipTextBox = new TextBox("127.0.0.1", center + 275, 500);        
@@ -206,8 +201,7 @@ public class MultiplayerMenuScene extends Scene
         ipTextBox.setHidden(true);
         
         //start
-        startText = new Text("Start",LeadCrystalTextType.MENUBUTTONS);
-        startText.setScale(1.5f);
+        startText = new Text("Start",LeadCrystalTextType.MENU46);
         startText.setPosition(center +200 , 450);
         startButton = new Button(new Image("blank.png"), startText.getPosition().x, startText.getPosition().y, startText.getWidth(), startText.getHeight());
         this.add(startText,Layer.MAIN);
@@ -249,7 +243,7 @@ public class MultiplayerMenuScene extends Scene
                       if(startText.hasTextEffect("small"))
                           startText.removeTextEffect("small");
                       
-                       startText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, startText.getScale(), 1.8));
+                       startText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, startText.getScale(), 1.2));
                     
                    //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -260,7 +254,7 @@ public class MultiplayerMenuScene extends Scene
                         if(startText.hasTextEffect("big"))
                            startText.removeTextEffect("big");
                         
-                        startText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, startText.getScale(), 1.5));
+                        startText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, startText.getScale(), 1));
                 }
             }
         });  
@@ -269,8 +263,7 @@ public class MultiplayerMenuScene extends Scene
         startButton.setHidden(true);
 
         //back
-        final Text backText = new Text("Back",LeadCrystalTextType.MENUBUTTONS);
-        backText.setScale(1.5f);
+        final Text backText = new Text("Back",LeadCrystalTextType.MENU46);
         backText.setPosition(center - backText.getWidth()/2, 450);
         Button backButton = new Button(new Image("blank.png"), center - backText.getWidth()/2, backText.getPosition().y, backText.getWidth(), backText.getHeight());
         this.add(backText,Layer.MAIN);
@@ -301,7 +294,7 @@ public class MultiplayerMenuScene extends Scene
                       if(backText.hasTextEffect("small"))
                           backText.removeTextEffect("small");
                       
-                       backText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, backText.getScale(), 1.8));
+                       backText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, backText.getScale(), 1.2));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -312,7 +305,7 @@ public class MultiplayerMenuScene extends Scene
                         if(backText.hasTextEffect("big"))
                            backText.removeTextEffect("big");
                         
-                        backText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, backText.getScale(), 1.5));
+                        backText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, backText.getScale(), 1));
                 }
             }
         });      

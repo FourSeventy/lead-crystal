@@ -89,15 +89,13 @@ public class OptionsMenuScene extends Scene
         this.add(back,Layer.BACKGROUND);
         
         //options title
-        Text title = new Text("Options",CoreTextType.MENU);      
-        title.setScale(1.2f);
+        Text title = new Text("Options",LeadCrystalTextType.TITLE);      
         title.setPosition(center - title.getWidth()/2, 700);       
         this.add(title,Layer.MAIN);
         
         // fullscreen
-        final Text fullScreenText = new Text(Game.getInstance().getConfiguration().getEngineSettings().fullScreen?"Full Screen: ON":"Full Screen: OFF",LeadCrystalTextType.MENUBUTTONS);
-        fullScreenText.setScale(1.2f);
-        fullScreenText.setPosition(center - fullScreenText.getWidth()/2, 575);
+        final Text fullScreenText = new Text(Game.getInstance().getConfiguration().getEngineSettings().fullScreen?"Full Screen: ON":"Full Screen: OFF",LeadCrystalTextType.MENU46);
+        fullScreenText.setPosition(center - fullScreenText.getWidth()/2, 560);
         final Button fullScreenButton = new Button(new Image("blank.png"), center - fullScreenText.getWidth()/2, fullScreenText.getPosition().y, fullScreenText.getWidth(), fullScreenText.getHeight());
         this.add(fullScreenText,Layer.MAIN);
         this.add(fullScreenButton,Layer.MAIN);
@@ -120,7 +118,7 @@ public class OptionsMenuScene extends Scene
                       if(fullScreenText.hasTextEffect("small"))
                           fullScreenText.removeTextEffect("small");
                       
-                       fullScreenText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, fullScreenText.getScale(), 1.5));
+                       fullScreenText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, fullScreenText.getScale(), 1.2));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -131,15 +129,14 @@ public class OptionsMenuScene extends Scene
                         if(fullScreenText.hasTextEffect("big"))
                            fullScreenText.removeTextEffect("big");
                         
-                        fullScreenText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, fullScreenText.getScale(), 1.2));
+                        fullScreenText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, fullScreenText.getScale(), 1));
                 }
             }
         });
         
         //vsync
-        final Text vsyncText = new Text(Game.getInstance().getConfiguration().getEngineSettings().vSync?"VSync: ON":"VSync: OFF",LeadCrystalTextType.MENUBUTTONS);
-        vsyncText.setScale(1.2f);
-        vsyncText.setPosition(center - vsyncText.getWidth()/2, 525);
+        final Text vsyncText = new Text(Game.getInstance().getConfiguration().getEngineSettings().vSync?"VSync: ON":"VSync: OFF",LeadCrystalTextType.MENU46);
+        vsyncText.setPosition(center - vsyncText.getWidth()/2, 500);
         final Button vSyncButton = new Button(new Image("blank.png"), center - vsyncText.getWidth()/2, vsyncText.getPosition().y, vsyncText.getWidth(), vsyncText.getHeight());
         this.add(vsyncText,Layer.MAIN);
         this.add(vSyncButton,Layer.MAIN);
@@ -172,7 +169,7 @@ public class OptionsMenuScene extends Scene
                       if(vsyncText.hasTextEffect("small"))
                           vsyncText.removeTextEffect("small");
                       
-                       vsyncText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, vsyncText.getScale(), 1.5));
+                       vsyncText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, vsyncText.getScale(), 1.2));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -186,7 +183,7 @@ public class OptionsMenuScene extends Scene
                         if(vsyncText.hasTextEffect("big"))
                            vsyncText.removeTextEffect("big");
                         
-                        vsyncText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, vsyncText.getScale(), 1.2));
+                        vsyncText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, vsyncText.getScale(), 1));
                     }
                 }
             }
@@ -195,9 +192,8 @@ public class OptionsMenuScene extends Scene
         this.vSyncText = vsyncText;
         
         //bloom
-        final Text bloomText = new Text(Game.getInstance().getConfiguration().getEngineSettings().bloom?"Bloom Effects: ON":"Bloom Effects: OFF",LeadCrystalTextType.MENUBUTTONS);
-        bloomText.setScale(1.2f);
-        bloomText.setPosition(center - bloomText.getWidth()/2, 475);
+        final Text bloomText = new Text(Game.getInstance().getConfiguration().getEngineSettings().bloom?"Bloom Effects: ON":"Bloom Effects: OFF",LeadCrystalTextType.MENU46);
+        bloomText.setPosition(center - bloomText.getWidth()/2, 440);
         final Button bloomButton = new Button(new Image("blank.png"), center - bloomText.getWidth()/2, bloomText.getPosition().y, bloomText.getWidth(), bloomText.getHeight());
         this.add(bloomText,Layer.MAIN);
         this.add(bloomButton,Layer.MAIN);
@@ -223,7 +219,7 @@ public class OptionsMenuScene extends Scene
                       if(bloomText.hasTextEffect("small"))
                           bloomText.removeTextEffect("small");
                       
-                       bloomText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, bloomText.getScale(), 1.5));
+                       bloomText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, bloomText.getScale(), 1.2));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -234,15 +230,14 @@ public class OptionsMenuScene extends Scene
                         if(bloomText.hasTextEffect("big"))
                            bloomText.removeTextEffect("big");
                         
-                        bloomText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, bloomText.getScale(), 1.2));
+                        bloomText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, bloomText.getScale(), 1));
                 }
             }
         });
         
         //lighting
-        final Text lightingText = new Text(Game.getInstance().getConfiguration().getEngineSettings().lighting?"Lighting Effects: ON":"Lighting Effects: OFF",LeadCrystalTextType.MENUBUTTONS);
-        lightingText.setScale(1.2f);
-        lightingText.setPosition(center - lightingText.getWidth()/2, 425);
+        final Text lightingText = new Text(Game.getInstance().getConfiguration().getEngineSettings().lighting?"Lighting Effects: ON":"Lighting Effects: OFF",LeadCrystalTextType.MENU46);
+        lightingText.setPosition(center - lightingText.getWidth()/2, 380);
         final Button lightingButton = new Button(new Image("blank.png"), center - lightingText.getWidth()/2, lightingText.getPosition().y, lightingText.getWidth(), lightingText.getHeight());
         this.add(lightingText,Layer.MAIN);
         this.add(lightingButton,Layer.MAIN);
@@ -268,7 +263,7 @@ public class OptionsMenuScene extends Scene
                       if(lightingText.hasTextEffect("small"))
                           lightingText.removeTextEffect("small");
                       
-                       lightingText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, lightingText.getScale(), 1.5));
+                       lightingText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, lightingText.getScale(), 1.2));
                     
                    //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -279,107 +274,15 @@ public class OptionsMenuScene extends Scene
                         if(lightingText.hasTextEffect("big"))
                            lightingText.removeTextEffect("big");
                         
-                        lightingText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, lightingText.getScale(), 1.2));
+                        lightingText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, lightingText.getScale(), 1));
                 }
             }
         });
-        
-        //blur
-        final Text blurText = new Text(Game.getInstance().getConfiguration().getEngineSettings().gaussianBlur?"Blur Effects: ON":"Blur Effects: OFF",LeadCrystalTextType.MENUBUTTONS);
-        blurText.setScale(1.2f);
-        blurText.setPosition(center - blurText.getWidth()/2, 375);
-        final Button blurButton = new Button(new Image("blank.png"), center - blurText.getWidth()/2, blurText.getPosition().y, blurText.getWidth(), blurText.getHeight());
-        this.add(blurText,Layer.MAIN);
-        this.add(blurButton,Layer.MAIN);
-        blurButton.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                if (e.getActionCommand().equals("clicked")) 
-                {
-                    if(Game.getInstance().getConfiguration().getEngineSettings().gaussianBlur == false)
-                    {
-                        Game.getInstance().getConfiguration().getEngineSettings().gaussianBlur = true;
-                        blurText.setText("Blur Effects: ON");   
-                    }
-                    else
-                    {
-                        Game.getInstance().getConfiguration().getEngineSettings().gaussianBlur = false;
-                        blurText.setText("Blur Effects: Off");
-                    }
-                }
-                if (e.getActionCommand().equals("mouseEntered")) 
-                {
-                    
-                      if(blurText.hasTextEffect("small"))
-                          blurText.removeTextEffect("small");
-                      
-                       blurText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, blurText.getScale(), 1.5));
-                    
-                    //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
-                    add(sound);
-                }
-                if (e.getActionCommand().equals("mouseExited"))
-                {
-                        if(blurText.hasTextEffect("big"))
-                           blurText.removeTextEffect("big");
-                        
-                        blurText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, blurText.getScale(), 1.2));
-                }
-            }
-        });
-        
-        //particle density
-        final Text particleText = new Text("Particle Density:" + Game.getInstance().getConfiguration().getEngineSettings().particleDensity.name(),LeadCrystalTextType.MENUBUTTONS);
-        particleText.setScale(1.2f);
-        particleText.setPosition(center - particleText.getWidth()/2, 325);
-        final Button particleDensityButton =  new Button(new Image("blank.png"), center - particleText.getWidth()/2, particleText.getPosition().y, particleText.getWidth(), particleText.getHeight());
-        this.add(particleText,Layer.MAIN);
-        this.add(particleDensityButton,Layer.MAIN);
-        particleDensityButton.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                if (e.getActionCommand().equals("clicked")) 
-                {
-                    switch(Game.getInstance().getConfiguration().getEngineSettings().particleDensity)
-                    {
-                        case UBER: Game.getInstance().getConfiguration().getEngineSettings().particleDensity = ParticleDensity.OFF; break;
-                        case HIGH: Game.getInstance().getConfiguration().getEngineSettings().particleDensity = ParticleDensity.UBER; break;
-                        case MEDIUM: Game.getInstance().getConfiguration().getEngineSettings().particleDensity = ParticleDensity.HIGH; break;
-                        case LOW: Game.getInstance().getConfiguration().getEngineSettings().particleDensity = ParticleDensity.MEDIUM; break;
-                        case OFF: Game.getInstance().getConfiguration().getEngineSettings().particleDensity = ParticleDensity.LOW; break;
-                    }
-                    
-                    
-                    particleText.setText("Particle Density:" + Game.getInstance().getConfiguration().getEngineSettings().particleDensity.name());
-
-                }
-                if (e.getActionCommand().equals("mouseEntered")) 
-                {
-                    
-                      if(particleText.hasTextEffect("small"))
-                          particleText.removeTextEffect("small");
-                      
-                       particleText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, particleText.getScale(), 1.5));
-                    
-                    //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
-                    add(sound);
-                }
-                if (e.getActionCommand().equals("mouseExited"))
-                {
-                        if(particleText.hasTextEffect("big"))
-                           particleText.removeTextEffect("big");
-                        
-                        particleText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, particleText.getScale(), 1.2));
-                }
-            }
-        });
+               
         
         //resolution
-        final Text resolutionText = new Text("Resolution: " + this.monitorModes.get(newIndex).getSurfaceSize().getResolution() +"  (" + this.asFraction(this.monitorModes.get(newIndex).getSurfaceSize().getResolution().getWidth(),this.monitorModes.get(newIndex).getSurfaceSize().getResolution().getHeight()) + ") ",LeadCrystalTextType.MENUBUTTONS);
-        resolutionText.setScale(1.2f);
-        resolutionText.setPosition(center - resolutionText.getWidth()/2, 275);
+        final Text resolutionText = new Text("Resolution: " + this.monitorModes.get(newIndex).getSurfaceSize().getResolution() +"  (" + this.asFraction(this.monitorModes.get(newIndex).getSurfaceSize().getResolution().getWidth(),this.monitorModes.get(newIndex).getSurfaceSize().getResolution().getHeight()) + ") ",LeadCrystalTextType.MENU46);
+        resolutionText.setPosition(center - resolutionText.getWidth()/2, 320);
         final Button resolutionButton = new Button(new Image("blank.png"), center - resolutionText.getWidth()/2, resolutionText.getPosition().y, resolutionText.getWidth(), resolutionText.getHeight());
         this.add(resolutionText,Layer.MAIN);
         this.add(resolutionButton,Layer.MAIN);
@@ -401,7 +304,7 @@ public class OptionsMenuScene extends Scene
                       if(resolutionText.hasTextEffect("small"))
                           resolutionText.removeTextEffect("small");
                       
-                       resolutionText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, resolutionText.getScale(), 1.5));
+                       resolutionText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, resolutionText.getScale(), 1.2));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -412,15 +315,14 @@ public class OptionsMenuScene extends Scene
                         if(resolutionText.hasTextEffect("big"))
                            resolutionText.removeTextEffect("big");
                         
-                        resolutionText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, resolutionText.getScale(), 1.2));
+                        resolutionText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, resolutionText.getScale(), 1));
                 }
             }
         });
         
         //back
-        final Text backText = new Text("Back",LeadCrystalTextType.MENUBUTTONS);
-        backText.setScale(1.2f);
-        backText.setPosition(center - backText.getWidth()/2, 225);
+        final Text backText = new Text("Back",LeadCrystalTextType.MENU46);
+        backText.setPosition(center - backText.getWidth()/2, 260);
         final Button backButton = new Button(new Image("blank.png"), center - backText.getWidth()/2, backText.getPosition().y, backText.getWidth(), backText.getHeight());
         this.add(backText,Layer.MAIN);
         this.add(backButton,Layer.MAIN);
@@ -448,7 +350,7 @@ public class OptionsMenuScene extends Scene
                       if(backText.hasTextEffect("small"))
                           backText.removeTextEffect("small");
                       
-                       backText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, backText.getScale(), 1.5));
+                       backText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, backText.getScale(), 1.2));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -459,7 +361,7 @@ public class OptionsMenuScene extends Scene
                         if(backText.hasTextEffect("big"))
                            backText.removeTextEffect("big");
                         
-                        backText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, backText.getScale(), 1.2));
+                        backText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, backText.getScale(), 1));
                 }
             }
         });      
