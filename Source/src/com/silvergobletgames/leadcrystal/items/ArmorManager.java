@@ -69,8 +69,8 @@ public class ArmorManager {
         // Weapon
         //=================
 
-        this.meleeAttackDamageBonus = new ArmorStat(ArmorStatID.MELEE_DAMAGE, new Image("meleeDamageModifier.jpg"), "Melee Damage Increase",200,1);
-        this.meleeAttackDamageBonus.description = "Increases the damage of melee attacks by 50%";
+        this.meleeAttackDamageBonus = new ArmorStat(ArmorStatID.MELEE_DAMAGE, new Image("meleeDamageModifier.jpg"), "Melee Damage Increase",100,2);
+        this.meleeAttackDamageBonus.description = "+25% melee damage per point.";
         this.meleeAttackDamageBonus.unlocked = false;
         this.armorStats.put(this.meleeAttackDamageBonus.id,this.meleeAttackDamageBonus);
        
@@ -79,8 +79,8 @@ public class ArmorManager {
         this.potionCooldownReset.unlocked = false;
         this.armorStats.put(this.potionCooldownReset.id,this.potionCooldownReset);
         
-        this.criticalHitDamage = new ArmorStat(ArmorStatID.CRIT_DAMAGE, new Image("critDamageStat.jpg"), "Critical Hit Damage",50,5);
-        this.criticalHitDamage.description = "Critical hit damaged increased by 100%.";
+        this.criticalHitDamage = new ArmorStat(ArmorStatID.CRIT_DAMAGE, new Image("critDamageStat.jpg"), "Critical Hit Damage",100,2);
+        this.criticalHitDamage.description = "+50% critical hit damage.";
         this.criticalHitDamage.unlocked = false;
         this.criticalHitDamage.setAddPointAction(new ArmorAction(){
            public void doAction()
@@ -92,7 +92,7 @@ public class ArmorManager {
         
         
         this.weaponDamage = new ArmorStat(ArmorStatID.WEAPON_DAMAGE, new Image("damageStat.jpg"), "Damage", 50,5);
-        this.weaponDamage.description = "+2% damage per point";
+        this.weaponDamage.description = "+5% damage per point";
         this.weaponDamage.unlocked = true;
         this.weaponDamage.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().baseDamage.adjustPercentModifier(.02f);}}); 
         this.armorStats.put(this.weaponDamage.id,this.weaponDamage);
@@ -103,8 +103,8 @@ public class ArmorManager {
         this.weaponAttackSpeed.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().cooldownModifier.adjustBase(-.05f);}}); 
         this.armorStats.put(this.weaponAttackSpeed.id,this.weaponAttackSpeed);
         
-        this.critChance = new ArmorStat(ArmorStatID.CRIT_CHANCE, new Image("critChanceStat.jpg"), "Critical Hit Chance", 50,5);
-        this.critChance.description = "+3% crit chance per point";
+        this.critChance = new ArmorStat(ArmorStatID.CRIT_CHANCE, new Image("critChanceStat.jpg"), "Critical Hit Chance", 50,3);
+        this.critChance.description = "+10% crit chance per point";
         this.critChance.unlocked = true;
         this.critChance.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().critChance.adjustBase(.03f);}}); 
         this.armorStats.put(this.critChance.id,this.critChance);
@@ -124,19 +124,19 @@ public class ArmorManager {
         this.armorStats.put(this.doubleGoldFind.id,this.doubleGoldFind);
        
         this.upgradeRadar = new ArmorStat(ArmorStatID.IMPROVED_RADAR, new Image("seeSecondaryObjectiveModifier.jpg"), "Improved radar",200,1);
-        this.upgradeRadar.description = "Allows secondary objectives to show up on your radar.";
+        this.upgradeRadar.description = "Allows enemies to show up on your radar.";
         this.upgradeRadar.unlocked = true;
         this.armorStats.put(this.upgradeRadar.id,this.upgradeRadar);  
  
-        this.lifeLeech = new ArmorStat(ArmorStatID.LIFE_LEECH, new Image("lifeLeechStat.jpg"), "Life Leech", 50,5);
+        this.lifeLeech = new ArmorStat(ArmorStatID.LIFE_LEECH, new Image("lifeLeechStat.jpg"), "Life Leech", 50,75);
         this.lifeLeech.description = "+5% life leech per point.";
         this.lifeLeech.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().lifeLeech.adjustBase(.05f);}}); 
         this.lifeLeech.unlocked = true;
         this.armorStats.put(this.lifeLeech.id,this.lifeLeech);
        
         
-        this.healingEffectiveness = new ArmorStat(ArmorStatID.HEALING_EFFECTIVENESS, new Image("healingStat.jpg"), "Healing Effectiveness", 50,5);
-        this.healingEffectiveness.description = "+5% healing effectiveness per point.";
+        this.healingEffectiveness = new ArmorStat(ArmorStatID.HEALING_EFFECTIVENESS, new Image("healingStat.jpg"), "Healing Effectiveness", 50,3);
+        this.healingEffectiveness.description = "+10% healing effectiveness per point.";
         this.healingEffectiveness.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().healingModifier.adjustBase(.05f);}});
         this.healingEffectiveness.unlocked= false;
         this.armorStats.put(this.healingEffectiveness.id,this.healingEffectiveness);
@@ -155,8 +155,8 @@ public class ArmorManager {
         this.reducedCriticalHit.unlocked = true;
         this.armorStats.put(this.reducedCriticalHit.id,this.reducedCriticalHit);
        
-        this.proximityDamageReduction = new ArmorStat(ArmorStatID.PROXIMITY_DAMAGE_REDUCTION, new Image("healingStat.jpg"), "Additional Thorns",200,1);
-        this.proximityDamageReduction.description = "Thorns damage is doubled.";
+        this.proximityDamageReduction = new ArmorStat(ArmorStatID.PROXIMITY_DAMAGE_REDUCTION, new Image("healingStat.jpg"), "Proximity Shield",100,2);
+        this.proximityDamageReduction.description = "+15% damage reduction when at close range.";
         this.proximityDamageReduction.unlocked = false;
         this.armorStats.put(this.proximityDamageReduction.id,this.proximityDamageReduction);
 
@@ -169,8 +169,8 @@ public class ArmorManager {
                                                    }}); 
         this.armorStats.put(this.health.id,this.health);
 
-        this.thornsDamage = new ArmorStat(ArmorStatID.THORNS_DAMAGE, new Image("lifeRegenStat.jpg"), "Thorns", 50,5);
-        this.thornsDamage.description = "+5% thorns damage per point.";
+        this.thornsDamage = new ArmorStat(ArmorStatID.THORNS_DAMAGE, new Image("lifeRegenStat.jpg"), "Thorns", 50,3);
+        this.thornsDamage.description = "+10% thorns damage per point.";
         this.thornsDamage.unlocked = false;
         this.thornsDamage.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().thornsDamage.adjustBase(.05f);}}); 
         this.armorStats.put(this.thornsDamage.id,this.thornsDamage); 
@@ -198,8 +198,8 @@ public class ArmorManager {
         this.jetpack.unlocked = false;
         this.armorStats.put(this.jetpack.id,this.jetpack);   
                       
-        this.ccReduction = new ArmorStat(ArmorStat.ArmorStatID.CC_REDUCTION, new Image("CCStat.jpg"), "CC Reduction", 50,5);
-        this.ccReduction.description = "+5% CC reduction per point.";
+        this.ccReduction = new ArmorStat(ArmorStat.ArmorStatID.CC_REDUCTION, new Image("CCStat.jpg"), "CC Reduction", 50,3);
+        this.ccReduction.description = "+20% CC reduction per point.";
         this.ccReduction.unlocked = true;
         this.ccReduction.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().ccResistance.adjustBase(.05f);}}); 
         this.armorStats.put(this.ccReduction.id,this.ccReduction);
