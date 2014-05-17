@@ -127,7 +127,7 @@ public class LevelProgressionManager
         objective.objectiveName = "Giant Dabat";
         objective.objectiveDescription = "There is rumored to be a giant Dabat in this area. Destroy it.";
         objective.currencyAward = 25;
-        objective.statReward = ArmorStatID.SEE_HEALTH;
+        objective.statReward = ArmorStatID.MELEE_DAMAGE;
         level3.sideObjective = objective;
         //adding to map
         this.levelMap.put(3, level3);
@@ -148,7 +148,7 @@ public class LevelProgressionManager
         objective.objectiveName = "Lost Weapons";
         objective.objectiveDescription = " Find the lost weapons cache.";
         objective.currencyAward = 25;
-       // objective.statReward = ArmorStatID.;
+        objective.statReward = ArmorStatID.IMPROVED_RADAR;
         level4.sideObjective = objective;
         //adding to map
         this.levelMap.put(4, level4);
@@ -163,14 +163,13 @@ public class LevelProgressionManager
         objective.objectiveDescription = "We lost contact with a caravan carrying supplies to the town, go investigate";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
-        objective.statReward = ArmorStatID.MELEE_DAMAGE;
+        objective.statReward = ArmorStatID.HARD_TO_KILL;
         level5.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
         objective.objectiveName = "Survivors";
         objective.objectiveDescription = "Search for any survivors of the caravan";
         objective.currencyAward = 25;
-        objective.statReward = ArmorStatID.DOUBLE_GOLD;
         level5.sideObjective = objective;
         //adding to map
         this.levelMap.put(5, level5);

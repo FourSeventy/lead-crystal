@@ -70,7 +70,26 @@ public class ArmorManager {
         // Weapon
         //=================
 
-        this.meleeAttackDamageBonus = new ArmorStat(ArmorStatID.MELEE_DAMAGE, new Image("meleeDamageModifier.jpg"), "Bayonette Attachment",100,2);
+        this.weaponDamage = new ArmorStat(ArmorStatID.WEAPON_DAMAGE, new Image("damageStat.jpg"), "Damage", 50,5);
+        this.weaponDamage.description = "+5% damage per point";
+        this.weaponDamage.unlocked = true;
+        this.weaponDamage.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().baseDamage.adjustPercentModifier(.02f);}}); 
+        this.armorStats.put(this.weaponDamage.id,this.weaponDamage);
+        
+        this.weaponAttackSpeed = new ArmorStat(ArmorStatID.WEAPON_ATTACK_SPEED, new Image("attackSpeedStat.jpg"), "Attack Speed", 50,5);
+        this.weaponAttackSpeed.description = "+5% attack speed per point";
+        this.weaponAttackSpeed.unlocked = true;
+        this.weaponAttackSpeed.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().cooldownModifier.adjustBase(-.05f);}}); 
+        this.armorStats.put(this.weaponAttackSpeed.id,this.weaponAttackSpeed);
+        
+        this.critChance = new ArmorStat(ArmorStatID.CRIT_CHANCE, new Image("critChanceStat.jpg"), "Critical Hit Chance", 50,3);
+        this.critChance.description = "+10% crit chance per point";
+        this.critChance.unlocked = true;
+        this.critChance.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().critChance.adjustBase(.1f);}}); 
+        this.armorStats.put(this.critChance.id,this.critChance);
+        
+        
+        this.meleeAttackDamageBonus = new ArmorStat(ArmorStatID.MELEE_DAMAGE, new Image("meleeDamageModifier.jpg"), "Bayonet Attachment",100,2);
         this.meleeAttackDamageBonus.description = "+25% melee damage per point.";
         this.meleeAttackDamageBonus.unlocked = false;
         this.armorStats.put(this.meleeAttackDamageBonus.id,this.meleeAttackDamageBonus);
@@ -91,23 +110,6 @@ public class ArmorManager {
         });
         this.armorStats.put(this.criticalHitDamage.id,this.criticalHitDamage);
               
-        this.weaponDamage = new ArmorStat(ArmorStatID.WEAPON_DAMAGE, new Image("damageStat.jpg"), "Damage", 50,5);
-        this.weaponDamage.description = "+5% damage per point";
-        this.weaponDamage.unlocked = true;
-        this.weaponDamage.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().baseDamage.adjustPercentModifier(.02f);}}); 
-        this.armorStats.put(this.weaponDamage.id,this.weaponDamage);
-        
-        this.weaponAttackSpeed = new ArmorStat(ArmorStatID.WEAPON_ATTACK_SPEED, new Image("attackSpeedStat.jpg"), "Attack Speed", 50,5);
-        this.weaponAttackSpeed.description = "+5% attack speed per point";
-        this.weaponAttackSpeed.unlocked = true;
-        this.weaponAttackSpeed.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().cooldownModifier.adjustBase(-.05f);}}); 
-        this.armorStats.put(this.weaponAttackSpeed.id,this.weaponAttackSpeed);
-        
-        this.critChance = new ArmorStat(ArmorStatID.CRIT_CHANCE, new Image("critChanceStat.jpg"), "Critical Hit Chance", 50,3);
-        this.critChance.description = "+10% crit chance per point";
-        this.critChance.unlocked = true;
-        this.critChance.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().critChance.adjustBase(.1f);}}); 
-        this.armorStats.put(this.critChance.id,this.critChance);
         
         //===============
         // Helm 
