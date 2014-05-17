@@ -747,9 +747,18 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     @Override
     public void takeDamage(Damage dmg)
     {
+        //handle proximityDamageReduction 
+       if(dmg.getSource() != null && dmg.getSource().distanceAbs(this) < 250)
+       {
+           int points = this.armorManager.proximityDamageReduction.points;
+           
+           dmg.getAmountObject().adjustPercentModifier(-.15f * points); 
+           
+       }
+       
        super.takeDamage(dmg);
        
-       //handle damageReductionBonusModifier 
+       //handle hardToKill upgrade
        if(this.armorManager.hardToKill.isMaxPoints() == true)
        {           
            if(this.combatData.getPercentHealth() <= .33f)
@@ -766,6 +775,8 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                this.combatData.removeCombatEffect("DRModifier"); 
            }
        }
+       
+       
     }
     
     @Override
@@ -796,10 +807,11 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             }
         }
         
-        //modifier
-        if(this.getArmorManager().meleeAttackDamageBonus.isMaxPoints() == true && this.castingSkill.getRange() < 200)
+        // meleeAttackDamageBonus modifier
+        if(this.castingSkill.getRange() < 200)
         {
-            damage.getAmountObject().adjustPercentModifier(.5f);
+            int points = this.getArmorManager().meleeAttackDamageBonus.points;
+            damage.getAmountObject().adjustPercentModifier(.5f * points);
         }
         
         //roll for crit

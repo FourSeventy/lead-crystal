@@ -48,19 +48,19 @@ public class EnemySpitterGooShot extends Skill
         Image img = new Image("plantSpit.png");
         img.setDimensions(20, 20);
         img.setColor(new Color(1f,1.6f,1f,1f));
-        GooHitBox goo1 = new GooHitBox(damage, body, img, user);
+        GooHitBox goo1 = new GooHitBox(new Damage(damage), body, img, user);
         
         body = new Body(new Box(20,20), 10);
         img = new Image("plantSpit.png");
         img.setDimensions(20, 20);
         img.setColor(new Color(1f,1.6f,1f,1f));
-        GooHitBox goo2 = new GooHitBox(damage, body, img, user);
+        GooHitBox goo2 = new GooHitBox(new Damage(damage), body, img, user);
         
         body = new Body(new Box(20,20), 10);
         img = new Image("plantSpit.png");
         img.setDimensions(20, 20);
         img.setColor(new Color(1f,1.6f,1f,1f));
-        GooHitBox goo3 = new GooHitBox(damage, body, img, user);
+        GooHitBox goo3 = new GooHitBox(new Damage(damage), body, img, user);
         
         
         

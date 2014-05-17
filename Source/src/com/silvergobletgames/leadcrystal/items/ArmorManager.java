@@ -8,6 +8,7 @@ import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.netcode.RenderData;
 import com.silvergobletgames.sylver.netcode.SaveData;
 import com.silvergobletgames.sylver.netcode.SceneObjectRenderDataChanges;
+import com.silvergobletgames.sylver.util.SerializableEntry;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,12 +70,12 @@ public class ArmorManager {
         // Weapon
         //=================
 
-        this.meleeAttackDamageBonus = new ArmorStat(ArmorStatID.MELEE_DAMAGE, new Image("meleeDamageModifier.jpg"), "Melee Damage Increase",100,2);
+        this.meleeAttackDamageBonus = new ArmorStat(ArmorStatID.MELEE_DAMAGE, new Image("meleeDamageModifier.jpg"), "Bayonette Attachment",100,2);
         this.meleeAttackDamageBonus.description = "+25% melee damage per point.";
         this.meleeAttackDamageBonus.unlocked = false;
         this.armorStats.put(this.meleeAttackDamageBonus.id,this.meleeAttackDamageBonus);
        
-        this.potionCooldownReset = new ArmorStat(ArmorStatID.POTION_COOLDOWN_RESET, new Image("healthStat.jpg"), "Potion Cooldown Reset",200,1);
+        this.potionCooldownReset = new ArmorStat(ArmorStatID.POTION_COOLDOWN_RESET, new Image("healthStat.jpg"), "Steroid Potions",200,1);
         this.potionCooldownReset.description = "Using a potion will instantly reset all cooldowns.";
         this.potionCooldownReset.unlocked = false;
         this.armorStats.put(this.potionCooldownReset.id,this.potionCooldownReset);
@@ -85,12 +86,11 @@ public class ArmorManager {
         this.criticalHitDamage.setAddPointAction(new ArmorAction(){
            public void doAction()
            {
-               getPlayerReference().getCombatData().critModifier.adjustBase(1f); 
+               getPlayerReference().getCombatData().critModifier.adjustBase(.5f); 
            }
         });
         this.armorStats.put(this.criticalHitDamage.id,this.criticalHitDamage);
-        
-        
+              
         this.weaponDamage = new ArmorStat(ArmorStatID.WEAPON_DAMAGE, new Image("damageStat.jpg"), "Damage", 50,5);
         this.weaponDamage.description = "+5% damage per point";
         this.weaponDamage.unlocked = true;
@@ -106,7 +106,7 @@ public class ArmorManager {
         this.critChance = new ArmorStat(ArmorStatID.CRIT_CHANCE, new Image("critChanceStat.jpg"), "Critical Hit Chance", 50,3);
         this.critChance.description = "+10% crit chance per point";
         this.critChance.unlocked = true;
-        this.critChance.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().critChance.adjustBase(.03f);}}); 
+        this.critChance.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().critChance.adjustBase(.1f);}}); 
         this.armorStats.put(this.critChance.id,this.critChance);
         
         //===============
@@ -128,16 +128,15 @@ public class ArmorManager {
         this.upgradeRadar.unlocked = true;
         this.armorStats.put(this.upgradeRadar.id,this.upgradeRadar);  
  
-        this.lifeLeech = new ArmorStat(ArmorStatID.LIFE_LEECH, new Image("lifeLeechStat.jpg"), "Life Leech", 50,75);
+        this.lifeLeech = new ArmorStat(ArmorStatID.LIFE_LEECH, new Image("lifeLeechStat.jpg"), "Life Leech", 50,5);
         this.lifeLeech.description = "+5% life leech per point.";
         this.lifeLeech.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().lifeLeech.adjustBase(.05f);}}); 
         this.lifeLeech.unlocked = true;
-        this.armorStats.put(this.lifeLeech.id,this.lifeLeech);
-       
+        this.armorStats.put(this.lifeLeech.id,this.lifeLeech);      
         
         this.healingEffectiveness = new ArmorStat(ArmorStatID.HEALING_EFFECTIVENESS, new Image("healingStat.jpg"), "Healing Effectiveness", 50,3);
-        this.healingEffectiveness.description = "+10% healing effectiveness per point.";
-        this.healingEffectiveness.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().healingModifier.adjustBase(.05f);}});
+        this.healingEffectiveness.description = "+15% healing effectiveness per point.";
+        this.healingEffectiveness.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().healingModifier.adjustBase(.15f);}});
         this.healingEffectiveness.unlocked= false;
         this.armorStats.put(this.healingEffectiveness.id,this.healingEffectiveness);
        
@@ -172,14 +171,13 @@ public class ArmorManager {
         this.thornsDamage = new ArmorStat(ArmorStatID.THORNS_DAMAGE, new Image("lifeRegenStat.jpg"), "Thorns", 50,3);
         this.thornsDamage.description = "+10% thorns damage per point.";
         this.thornsDamage.unlocked = false;
-        this.thornsDamage.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().thornsDamage.adjustBase(.05f);}}); 
+        this.thornsDamage.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().thornsDamage.adjustBase(.1f);}}); 
         this.armorStats.put(this.thornsDamage.id,this.thornsDamage); 
         
         this.numberOfPotions = new ArmorStat(ArmorStatID.NUMBER_POTIONS, new Image("armorStat.jpg"), "Number of Potions", 50,5);
         this.numberOfPotions.description = "+1 additional potion per point.";
         this.numberOfPotions.unlocked = true;
         this.numberOfPotions.setAddPointAction(new ArmorAction(){ public void doAction(){playerReference.getPotionManager().increaseMaxPotions(1);}}); 
-        this.numberOfPotions.unlocked= false;
         this.armorStats.put(this.numberOfPotions.id,this.numberOfPotions);
       
         
@@ -229,7 +227,10 @@ public class ArmorManager {
             
             for( int i = 0; i < stat.points; i++)
             {
-                stat.addPointAction.doAction();
+                if(stat.addPointAction != null)
+                {
+                   stat.addPointAction.doAction();
+                }
             }
         }
         
@@ -309,7 +310,10 @@ public class ArmorManager {
         {
             for( int i = 0; i < points; i++)
             {
-                this.addPointAction.doAction();
+                if(this.addPointAction != null)
+                {
+                   this.addPointAction.doAction();
+                }
             }
             
             this.points += points;
@@ -591,7 +595,7 @@ public class ArmorManager {
        //save all stat data
        for(Entry<ArmorStatID,ArmorStat> entry: this.armorStats.entrySet())
        {          
-            saveData.dataMap.put(entry.getKey().name(), entry.getValue().points);
+            saveData.dataMap.put(entry.getKey().name(), new SerializableEntry(entry.getValue().unlocked,entry.getValue().points));
        }
       
         return saveData;
@@ -609,9 +613,12 @@ public class ArmorManager {
        
        //go through all stats setting points
        for(Entry<ArmorStatID,ArmorStat> entry: armorManager.armorStats.entrySet())
-       {          
-           byte points = (byte)saveData.dataMap.get(((ArmorStatID)entry.getKey()).name()); 
+       {       
+           SerializableEntry savedEntry = (SerializableEntry)saveData.dataMap.get(((ArmorStatID)entry.getKey()).name()); 
+           byte points = (byte)savedEntry.getValue();
+           boolean unlocked = (boolean)savedEntry.getKey();
            entry.getValue().points = points;
+           entry.getValue().unlocked = unlocked;
 
        }     
           

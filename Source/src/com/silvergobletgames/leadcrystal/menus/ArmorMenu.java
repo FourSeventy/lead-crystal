@@ -320,7 +320,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat7.name,stat7.image,stat7.description, stat7.cost);
+                   openTooltip(400,450,stat7.name,stat7.image,stat7.description, stat7.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -346,7 +346,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat8.name,stat8.image,stat8.description, stat8.cost);
+                   openTooltip(400,450,stat8.name,stat8.image,stat8.description, stat8.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -372,7 +372,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat9.name,stat9.image,stat9.description, stat9.cost);
+                   openTooltip(400,450,stat9.name,stat9.image,stat9.description, stat9.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -398,7 +398,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat10.name,stat10.image,stat10.description, stat10.cost);
+                   openTooltip(400,450,stat10.name,stat10.image,stat10.description, stat10.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -739,6 +739,7 @@ public class ArmorMenu extends Window{
      }
      else
      {
+                  
          meleeAttackDamageBonusButton.getImage().removeAllOverlays();
          meleeAttackDamageBonusButton.setDisabled(false);
          meleeAttackDamageBonusLabel.setHidden(false);        
@@ -855,7 +856,7 @@ public class ArmorMenu extends Window{
          seeEnemyHealthButton.getImage().removeAllOverlays();
          seeEnemyHealthButton.setDisabled(false);
          seeEnemyHealthLabel.setHidden(false);        
-         seeEnemyHealthLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().seeEnemyHealth.points) + "/" +Integer.toString(this.playerReference.getArmorManager().meleeAttackDamageBonus.maxPoints)); 
+         seeEnemyHealthLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().seeEnemyHealth.points) + "/" +Integer.toString(this.playerReference.getArmorManager().seeEnemyHealth.maxPoints)); 
         
      }
      

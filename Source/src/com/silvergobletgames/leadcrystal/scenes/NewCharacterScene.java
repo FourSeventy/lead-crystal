@@ -27,6 +27,7 @@ import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.core.SaveGame;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
+import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat;
 import com.silvergobletgames.sylver.audio.AudioRenderer;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.*;
@@ -236,6 +237,12 @@ public class NewCharacterScene extends Scene
                         player.getLevelProgressionManager().completeMainObjective(7); 
                         player.getLevelProgressionManager().completeMainObjective(8); 
                         player.getSkillManager().setSkillPoints(20);
+                        
+                         for(ArmorStat stat: player.getArmorManager().armorStats.values())
+                        {
+                            stat.unlocked = true;
+                        }
+
                     }
 
                     SaveGame save = new SaveGame();

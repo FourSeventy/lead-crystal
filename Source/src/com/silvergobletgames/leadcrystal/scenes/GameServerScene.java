@@ -495,6 +495,10 @@ public class GameServerScene extends Scene
                     //test
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_M))
                     {
+                        for(ArmorStat stat: player.getArmorManager().armorStats.values())
+                        {
+                            stat.unlocked = true;
+                        }
                     }
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_N))
                     {
