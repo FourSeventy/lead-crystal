@@ -35,7 +35,7 @@ public class PlayerDashAttack extends Skill{
         //set the skillID and the name
         this.icon = new Image("dashIcon.jpg");
         this.skillName = "Dash Attack";
-        this.skillDescription = "Dashes forward passing through enemies mini-stunning and doing damage to them.";
+        this.skillDescription = "Dashes forward passing through enemies doing damage and slowing them.";
         this.unlockCost = 1;
     }
     

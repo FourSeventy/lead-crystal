@@ -34,7 +34,7 @@ public class PlayerBashAttack extends Skill{
         //set the name description image and unlock cost
         this.icon = new Image("icetrap.png");
         this.skillName = "Bash Attack";      
-        this.skillDescription = "An Aoe strike with short range that bashes enemies backwards and slows them.";
+        this.skillDescription = "A melee strike with short range that bashes enemies backwards and stuns them.";
         
 
     }
