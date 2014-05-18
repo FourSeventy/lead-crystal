@@ -11,12 +11,20 @@ import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.NPC5Animation
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.NPC6AnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.NPC7AnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.PlantAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.SandmanAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.Scout1AnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.Scout2AnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.Scout3AnimationPack;
+import com.silvergobletgames.leadcrystal.entities.NonPlayerEntity;
+import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity;
+import com.silvergobletgames.leadcrystal.scenes.MapEditorScene;
+import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.Image;
+import com.silvergobletgames.sylver.graphics.Text;
+import com.silvergobletgames.sylver.graphics.Text.CoreTextType;
+import com.silvergobletgames.sylver.graphics.Text.TextType;
 import com.silvergobletgames.sylver.netcode.SceneObjectDeserializer;
 import com.silvergobletgames.sylver.netcode.SceneObjectSaveData;
 import com.silvergobletgames.sylver.windowsystem.*;
@@ -26,18 +34,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.lang.reflect.Method;
-import java.util.AbstractMap.SimpleEntry;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
-import com.silvergobletgames.leadcrystal.entities.NonPlayerEntity;
-import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity;
-import com.silvergobletgames.leadcrystal.scenes.MapEditorScene;
-import com.silvergobletgames.sylver.core.Game;
-import com.silvergobletgames.sylver.graphics.Text;
-import com.silvergobletgames.sylver.graphics.Text.CoreTextType;
-import com.silvergobletgames.sylver.graphics.Text.TextType;
 import java.net.URI;
 import java.net.URL;
 import java.nio.file.FileVisitResult;
@@ -47,6 +43,11 @@ import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -107,6 +108,8 @@ public class TilePalette extends Menu {
     private HashMap<String,ArrayList<NonPlayerEntity>> npeGroupMap = new HashMap<>();
     private ArrayList<NonPlayerEntity> townEnemies = new ArrayList<>();
     private ArrayList<NonPlayerEntity> desertEnemies = new ArrayList<>();
+    private ArrayList<NonPlayerEntity> caveEnemies = new ArrayList<>();
+    private ArrayList<NonPlayerEntity> ruinsEnemies = new ArrayList<>();
     
     /**
      * 
@@ -135,6 +138,7 @@ public class TilePalette extends Menu {
         characters.add(new Image(new FlierAnimationPack()));
         characters.add(new Image(new MoleAnimationPack()));
         characters.add(new Image(new JumperAnimationPack()));
+        characters.add(new Image(new SandmanAnimationPack()));
         
         //animated images
         animatedTerrain.add(new Image(new CommonCrateAnimationPack()));
@@ -252,6 +256,8 @@ public class TilePalette extends Menu {
         //build npe group mapping
         npeGroupMap.put("town", townEnemies);
         npeGroupMap.put("desert", desertEnemies);
+        npeGroupMap.put("cave", caveEnemies);
+        npeGroupMap.put("ruins", ruinsEnemies);
         
         
         
@@ -320,7 +326,7 @@ public class TilePalette extends Menu {
         
         
         //build radio set for npes
-        final RadioSet<String> ra3 = new RadioSet<>(10, 600);
+        final RadioSet<String> ra3 = new RadioSet<>(10, 550);
         iter = this.npeGroupMap.keySet().iterator();
         while(iter.hasNext())
         {

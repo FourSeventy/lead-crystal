@@ -930,6 +930,125 @@ public class AnimationPackClasses {
         }
     }
     
+    public static class SandmanAnimationPack extends AnimationPack
+    {
+        public SandmanAnimationPack()
+        {
+             //Idle
+            ArrayList<Texture> idle = new ArrayList();
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_idle0.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_idle1.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_idle2.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_idle3.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_idle4.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_idle5.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_idle6.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_idle7.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_idle8.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_idle9.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_idle10.png"));
+            this.animationSet.put(CoreAnimations.IDLE, idle);
+            
+            //walk
+            idle = new ArrayList();
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_walking0.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_walking1.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_walking2.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_walking3.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_walking4.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_walking5.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_walking6.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_walking7.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_walking8.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_walking9.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_walking10.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_walking11.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_walking12.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_walking13.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_walking14.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_walking15.png"));
+            this.animationSet.put(ExtendedImageAnimations.RUNNING, idle);
+            
+            //Spawn
+            ArrayList<Texture> spawn = new ArrayList();        
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_spawn12.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_spawn11.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_spawn10.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_spawn9.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_spawn8.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_spawn7.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_spawn6.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_spawn5.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_spawn4.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_spawn3.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_spawn2.png"));
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_spawn1.png"));
+                 spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_spawn0.png"));
+            this.animationSet.put(ExtendedImageAnimations.SPAWN, spawn);
+
+            //melee attack
+            ArrayList<Texture> melee = new ArrayList();
+                melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_melee0.png"));
+                melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_melee1.png"));
+                melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_melee2.png"));
+                melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_melee3.png"));
+                melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_melee4.png"));
+                melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_melee5.png"));
+                melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_melee6.png"));
+                melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_melee7.png"));
+                melee.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_melee8.png"));
+            this.animationSet.put(ExtendedImageAnimations.MELEEATTACK, melee);
+            
+            //ranged attack
+            ArrayList<Texture> ranged = new ArrayList();
+                ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_ranged0.png"));
+                ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_ranged1.png"));
+                ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_ranged2.png"));
+                ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_ranged3.png"));
+                ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_ranged4.png"));
+                ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_ranged5.png"));
+                ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_ranged6.png"));
+                ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_ranged7.png"));
+                ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_ranged8.png"));
+            this.animationSet.put(ExtendedImageAnimations.RANGEDATTACK, ranged);
+            
+            //death
+            ArrayList<Texture> dying = new ArrayList();
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_head.png"));                
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_rightarm.png"));
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_leftarm.png"));               
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_righthand.png"));
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_torso.png"));
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_rightfoot.png"));
+            this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
+            
+            
+            //=====================
+            // Build Delay Map
+            //=====================        
+            this.timingMap.put(ExtendedImageAnimations.MELEEATTACK, 15);
+            this.timingMap.put(ExtendedImageAnimations.RANGEDATTACK, 15);
+
+            //========================
+            // Build Skill Offset Map
+            //========================
+            this.positionOffsetMap.put(ExtendedImageAnimations.MELEEATTACK, new SylverVector2f(100,0));
+            this.positionOffsetMap.put(ExtendedImageAnimations.RANGEDATTACK, new SylverVector2f(120,0));
+            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0011_1101_1010_0111_0111_0111_0000_0000),
+                                                                                        Float.intBitsToFloat(0b0111_1010_1000_0101_0111_0000_0000_0000)));
+                  
+            
+            //================
+            // Build FPT Map
+            //================
+            this.fptMap.put(ExtendedImageAnimations.RUNNING, 5);
+            this.fptMap.put(ExtendedImageAnimations.SPAWN, 3);
+            this.fptMap.put(ExtendedImageAnimations.MELEEATTACK, 5);
+            this.fptMap.put(ExtendedImageAnimations.RANGEDATTACK, 5);
+            this.fptMap.put(CoreAnimations.IDLE, 7);
+        }
+    }
+    
     
     //==============
     // Bash Brown 

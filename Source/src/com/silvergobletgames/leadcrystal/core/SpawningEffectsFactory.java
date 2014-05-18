@@ -4,6 +4,7 @@ import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.FlierAnimatio
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.JumperAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.MoleAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.PlantAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.SandmanAnimationPack;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.GreenGooEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SandSpawnEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SandSpurtEmitter;
@@ -23,7 +24,7 @@ public class SpawningEffectsFactory
         
         ArrayList<SimpleEntry<SceneObject,SylverVector2f>> effects = new ArrayList();
         
-        if(pack instanceof PlantAnimationPack ||  pack instanceof MoleAnimationPack)
+        if(pack instanceof PlantAnimationPack ||  pack instanceof MoleAnimationPack || pack instanceof SandmanAnimationPack)
         {
             
             effects.add(new SimpleEntry(new SandSpawnEmitter(),new SylverVector2f(0,-.70f)));
