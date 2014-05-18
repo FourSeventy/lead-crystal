@@ -17,7 +17,7 @@ import com.silvergobletgames.leadcrystal.entities.EntityEffect.EntityEffectType;
 import com.silvergobletgames.leadcrystal.entities.EntityTooltip.EntityTooltipField;
 import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity.WorldObjectType;
 import com.silvergobletgames.leadcrystal.items.ArmorManager;
-import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorModifier.ArmorModifierID;
+import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat.ArmorStatID;
 import com.silvergobletgames.leadcrystal.items.Potion;
 import com.silvergobletgames.leadcrystal.netcode.JoinResponse.ReasonCode;
 import com.silvergobletgames.leadcrystal.netcode.OpenInstructionalTipPacket.InstructionalTip;
@@ -56,9 +56,7 @@ public class SerializationRegistrator
     {
         Kryo kryo = k;
         
-        kryo.register(ArmorModifierID.class);
-        kryo.register(EquipModifierPacket.class);
-        kryo.register(ArmorManager.ArmorStat.ArmorStatID.class);
+        kryo.register(ArmorStatID.class);
         kryo.register(BuyStatPacket.class);
         kryo.register(MainObjectiveCompletePacket.class);
         kryo.register(SkillCooldownPacket.class);

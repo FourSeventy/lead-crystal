@@ -1,8 +1,8 @@
 package com.silvergobletgames.leadcrystal.menus;
 
+import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.items.ArmorManager;
-import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorModifier;
 import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat;
 import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
 import com.silvergobletgames.leadcrystal.skills.Skill;
@@ -27,7 +27,65 @@ public class ArmorMenu extends Window{
  
     PlayerEntity playerReference;
     
-    private TabPane tabPane;
+
+    
+    //weapon
+    private Button meleeAttackDamageBonusButton;
+    private Button potionCooldownResetButton;
+    private Button criticalHitDamageButton;
+    private Button weaponDamageButton;
+    private Button weaponAttackSpeedButton;
+    private Button critChanceButton;
+    
+    private Label meleeAttackDamageBonusLabel;
+    private Label potionCooldownResetLabel;
+    private Label criticalHitDamageLabel;
+    private Label weaponDamageLabel;
+    private Label weaponAttackSpeedLabel;
+    private Label critChanceLabel;
+    
+
+    //helm upgrades
+    private Button seeEnemyHealthButton;
+    private Button doubleGoldFindButton;
+    private Button upgradeRadarButton;
+    private Button lifeLeechButton;
+    private Button healingEffectivenessButton;
+    
+    private Label seeEnemyHealthLabel;
+    private Label doubleGoldFindLabel;
+    private Label upgradeRadarLabel;
+    private Label lifeLeechLabel;
+    private Label healingEffectivenessLabel;
+    
+    //body
+    private Button hardToKillButton;
+    private Button reducedCriticalHitButton;
+    private Button proximityDamageReductionButton;
+    private Button healthButton;
+    private Button numberOfPotionsButton;
+    private Button thornsDamageButton;
+    
+    private Label hardToKillLabel;
+    private Label reducedCriticalHitLabel;
+    private Label proximityDamageReductionLabel;
+    private Label healthLabel;
+    private Label numberOfPotionsLabel;
+    private Label thornsDamageLabel;
+       
+
+    //boots
+    private Button doubleJumpButton;
+    private Button jetpackButton;
+    private Button ccReductionButton;
+    private Button moveSpeedButton;
+    
+    private Label doubleJumpLabel;
+    private Label jetpackLabel;
+    private Label ccReductionLabel;
+    private Label moveSpeedLabel;
+    
+        
     
     //item hovered tooltip
     private Button skillTooltipBackground;
@@ -36,74 +94,6 @@ public class ArmorMenu extends Window{
     private TextBlock skillTooltipTextBlock;
     private Label infoTextBox;
     private Label tooltipCost;
-    
-    //==============
-    // stat labels
-    //==============
-    
-    private Text lifeLeechText;
-    private Text numberOfPotionsText;
-    private Text healingEffectivenessStatText;
-    
-    private Text bodyHealthStatText;
-    private Text bodyDamageReductionStatText;
-    private Text thornsStatText;
-
-    private Text weaponDamageStatText;
-    private Text weaponAttackSpeedStatText;
-    private Text critChanceStatText;
-    
-    private Text ccReductionStatText;
-    private Text moveSpeedStatText;
-    private Text jumpHeightStatText;
-    
-    
-    //================
-    // Detail Section
-    //================
-    
-
-    private Text lifeLeechDetailText;
-    private Text lifeRegenDetailText;
-    private Text healingEffectivenessDetailText;
-    private Text helmModifierDetailText;
-    
-    private Text bodyHealthDetailText;
-    private Text bodyDamageReductionDetailText;
-    private Text bodyThornsDamageDetailText;
-    private Text bodyModifierDetailText;
-    
-    private Text weaponDamageDetailText;
-    private Text weaponAttackSpeedDetailText;
-    private Text critChanceDetailText;
-    private Text weaponModifierDetailText;
-     
-    private Text ccReductionDetailText;
-    private Text moveSpeedDetailText;
-    private Text jumpHeightDetailText;
-    private Text bootsModifierDetailText;
-    
-    
-    //==============
-    // Modifier
-    //==============
-    private Button seeEnemyHealthModifier;
-    private Button doubleGoldFindModifier;
-    private Button upgradedRadarModifier;
-    
-    private Button toughToKillModifier;
-    private Button noCritsModifier;
-    private Button increasedThornsModifier; 
-    
-    private Button meleeAttackDamageModifier;
-    private Button potionResetModifier;
-    private Button criticalHitDamageModifier;
-
-    private Button doubleJumpModifier;
-    private Button jetpackModifier;
-    private Button teleportModifier;
-    
-    
   
     
     
@@ -114,81 +104,123 @@ public class ArmorMenu extends Window{
         
         this.playerReference = player;
         
-        this.tabPane = new TabPane(50,75,1100,700);
-        this.tabPane.addTab("Helm");
-        this.tabPane.addTab("Body");
-        this.tabPane.addTab("Weapon");
-        this.tabPane.addTab("Boots");
-        this.addComponent(tabPane);
+        
+        //========================
+        // Basic Labels and Image
+        //========================
+        
+        //body image
+        Image bodyImg = new Image("bash_black.png");
+        bodyImg.setScale(1.5f);
+        Button bodyImage = new Button(bodyImg, 250, 250, bodyImg.getWidth() * 1.5f, bodyImg.getHeight() * 1.5f);
+        this.addComponent(bodyImage);
+        
+        //Weapon Label
+        Text weaponText = new Text("Weapon Upgrades",LeadCrystalTextType.HUD28);
+        Label weaponLabel = new Label(weaponText, 150, 700);
+        this.addComponent(weaponLabel);
+        //Helm Label
+        Text helmText = new Text("Helm Upgrades",LeadCrystalTextType.HUD28);
+        Label helmLabel = new Label(helmText, 800, 700);
+        this.addComponent(helmLabel);
+        //body Label
+        Text bodyText = new Text("Body Upgrades",LeadCrystalTextType.HUD28);
+        Label bodyLabel = new Label(bodyText, 150, 300);
+        this.addComponent(bodyLabel);
+        //boots Label
+        Text bootsText = new Text("Boots Upgrades",LeadCrystalTextType.HUD28);
+        Label bootsLabel = new Label(bootsText, 800, 300);
+        this.addComponent(bootsLabel);
         
         
-        int statBaseX = 600;
-        int statBaseY = 150;
-        
-        int modifierBaseX = 200;
-        int modifierBaseY = 150;
-        
-        //======================
-        // Helm Stat Components
-        //======================
-        this.tabPane.addComponent(new Button(new Text("Upgrades:"), statBaseX, statBaseY + 120), 0);
-        
-        final ArmorStat stat7 = this.playerReference.getArmorManager().lifeLeech;
-        Button b = new Button(stat7.image.copy(), statBaseX, statBaseY, 100, 100);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   //buy stat
-                   //buy stat
-                   ((GameClientScene)owningScene).sendBuyStatPacket(stat7.id);
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(700,450,stat7.name,stat7.image,stat7.description, stat7.cost);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.tabPane.addComponent(b, 0);
-        this.lifeLeechText = new Text(Byte.toString(stat7.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.lifeLeechText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.lifeLeechText,statBaseX+25,statBaseY), 0);
-        
-        final ArmorStat stat8 = this.playerReference.getArmorManager().numberOfPotionsStat;
-        b = new Button(stat8.image.copy(), statBaseX+125, statBaseY, 100, 100);
-        b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   //buy stat
-                   ((GameClientScene)owningScene).sendBuyStatPacket(stat8.id);
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(700,450,stat8.name,stat8.image,stat8.description, stat8.cost);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.tabPane.addComponent(b, 0);
-        this.numberOfPotionsText= new Text(Byte.toString(stat8.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.numberOfPotionsText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.numberOfPotionsText,statBaseX+150,statBaseY ), 0);
+        //=================
+        // Weapon Upgrades
+        //=================
 
+        int weaponBasePositionX = 150;
+        int weaponBasePositionY = 600;
         
-        final ArmorStat stat4 = this.playerReference.getArmorManager().healingEffectivenessStat;
-        b = new Button(stat4.image.copy(), statBaseX, statBaseY -125, 100, 100);
+        
+        final ArmorStat stat1 = this.playerReference.getArmorManager().weaponDamage;
+        Button b = new Button(stat1.image.copy(), weaponBasePositionX, weaponBasePositionY, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat1.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat1.name,stat1.image,stat1.description, stat1.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        weaponDamageButton = b;
+        this.weaponDamageLabel = new Label(new Text(Byte.toString(stat1.points) + "/" +Integer.toString(stat1.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.addComponent(weaponDamageLabel); 
+        
+        final ArmorStat stat2 = this.playerReference.getArmorManager().weaponAttackSpeed;
+        b = new Button(stat2.image.copy(), weaponBasePositionX + 100, weaponBasePositionY, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat2.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat2.name,stat2.image,stat2.description, stat2.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        weaponAttackSpeedButton = b;
+        this.weaponAttackSpeedLabel = new Label(new Text(Byte.toString(stat2.points) + "/" +Integer.toString(stat2.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.addComponent(weaponAttackSpeedLabel);
+        
+        final ArmorStat stat3 = this.playerReference.getArmorManager().critChance;
+        b = new Button(stat3.image.copy(), weaponBasePositionX + 200, weaponBasePositionY, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat3.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat3.name,stat3.image,stat3.description, stat3.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        critChanceButton = b;
+        this.critChanceLabel = new Label(new Text(Byte.toString(stat3.points) + "/" +Integer.toString(stat3.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.addComponent(critChanceLabel);
+        
+        final ArmorStat stat4 = this.playerReference.getArmorManager().meleeAttackDamageBonus;
+        b = new Button(stat4.image.copy(), weaponBasePositionX, weaponBasePositionY - 100, 75, 75);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -208,163 +240,13 @@ public class ArmorMenu extends Window{
                }
            }
        });
-        this.tabPane.addComponent(b, 0);
-        this.healingEffectivenessStatText= new Text(Byte.toString(stat4.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.healingEffectivenessStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.healingEffectivenessStatText,statBaseX+25,statBaseY-125), 0);
+        this.addComponent(b);
+        meleeAttackDamageBonusButton = b;
+        this.meleeAttackDamageBonusLabel = new Label(new Text(Byte.toString(stat4.points) + "/" +Integer.toString(stat4.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.addComponent(meleeAttackDamageBonusLabel); 
         
-        //=========================
-        // Helm Modifier Components
-        //=========================
-        
-        this.tabPane.addComponent(new Button(new Text("Modifiers:"), modifierBaseX, modifierBaseY+120), 0);
-        
-        final ArmorModifier modifier = this.playerReference.getArmorManager().seeEnemyHealthModifier;      
-        this.seeEnemyHealthModifier = new Button(modifier.image.copy(),modifierBaseX,modifierBaseY,100,100);
-        this.seeEnemyHealthModifier.addActionListener(new ActionListener(){     
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                 //do stuff
-                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier.id);
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(400,450,modifier.name,modifier.image,modifier.description, null);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.tabPane.addComponent(this.seeEnemyHealthModifier,0);
-        
-        final ArmorModifier modifier2 = this.playerReference.getArmorManager().doubleGoldFindModifier;
-        this.doubleGoldFindModifier = new Button(modifier2.image.copy(),modifierBaseX+125,modifierBaseY,100,100);
-        this.doubleGoldFindModifier.addActionListener(new ActionListener(){     
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                 //do stuff
-                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier2.id);
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(400,450,modifier2.name,modifier2.image,modifier2.description, null);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.tabPane.addComponent(this.doubleGoldFindModifier,0);
-        
-        final ArmorModifier modifier4 = this.playerReference.getArmorManager().upgradedRadarModifier;
-        this.upgradedRadarModifier = new Button(modifier4.image.copy(),modifierBaseX+125,modifierBaseY-125,100,100);
-        this.upgradedRadarModifier.addActionListener(new ActionListener(){     
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                 //do stuff
-                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier4.id);
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(400,450,modifier4.name,modifier4.image,modifier4.description, null);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.tabPane.addComponent(this.upgradedRadarModifier,0);
-        
-        
-        //=========================
-        //Body Modifier Components
-        //=========================
-        
-        this.tabPane.addComponent(new Button(new Text("Modifiers:"), modifierBaseX, modifierBaseY+125), 1);
-        
-        final ArmorModifier modifier6 = this.playerReference.getArmorManager().damageReductionBonusModifier;
-        this.toughToKillModifier = new Button(modifier6.image.copy(),modifierBaseX+125,modifierBaseY,100,100);
-        this.toughToKillModifier.addActionListener(new ActionListener(){     
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                 //do stuff
-                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier6.id);
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(400,450,modifier6.name,modifier6.image,modifier6.description, null);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.tabPane.addComponent(this.toughToKillModifier,1);
-        
-        final ArmorModifier modifier7 = this.playerReference.getArmorManager().reducedCriticalHitModifier;
-        this.noCritsModifier = new Button(modifier7.image.copy(),modifierBaseX,modifierBaseY-125,100,100);
-        this.noCritsModifier.addActionListener(new ActionListener(){     
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                 //do stuff
-                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier7.id);
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(400,450,modifier7.name,modifier7.image,modifier7.description, null);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.tabPane.addComponent(this.noCritsModifier,1);
-        
-       final ArmorModifier modifier8 = this.playerReference.getArmorManager().bonusThornsDamageModifier;
-        this.increasedThornsModifier = new Button(modifier8.image.copy(),modifierBaseX+125,modifierBaseY-125,100,100);
-        this.increasedThornsModifier.addActionListener(new ActionListener(){     
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                 //do stuff
-                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier8.id);
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(400,450,modifier8.name,modifier8.image,modifier8.description, null);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.tabPane.addComponent(this.increasedThornsModifier,1);
-        
-        //======================
-        // Body Stat Components
-        //======================
-        this.tabPane.addComponent(new Button(new Text("Upgrades:"), statBaseX, statBaseY + 120), 1);
-        
-        final ArmorStat stat5 = this.playerReference.getArmorManager().healthStat;
-        b = new Button(stat5.image.copy(), statBaseX, statBaseY, 100, 100);
+        final ArmorStat stat5 = this.playerReference.getArmorManager().potionCooldownReset;
+        b = new Button(stat5.image.copy(), weaponBasePositionX + 100, weaponBasePositionY - 100, 75, 75);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -384,13 +266,13 @@ public class ArmorMenu extends Window{
                }
            }
        });
-        this.tabPane.addComponent(b, 1);
-        this.bodyHealthStatText = new Text(Byte.toString(stat5.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.bodyHealthStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.bodyHealthStatText,statBaseX+25,statBaseY), 1);
+        this.addComponent(b);
+        potionCooldownResetButton = b;
+        this.potionCooldownResetLabel = new Label(new Text(Byte.toString(stat5.points) + "/" +Integer.toString(stat5.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.addComponent(potionCooldownResetLabel); 
         
-        final ArmorStat stat6 = this.playerReference.getArmorManager().damageReductionStat;
-        b = new Button(stat6.image.copy(), statBaseX+125, statBaseY, 100, 100);
+        final ArmorStat stat6 = this.playerReference.getArmorManager().criticalHitDamage;
+        b = new Button(stat6.image.copy(), weaponBasePositionX + 200, weaponBasePositionY - 100, 75, 75);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -408,15 +290,25 @@ public class ArmorMenu extends Window{
                {
                    closeTooltip();
                }
-           } 
+           }
        });
-        this.tabPane.addComponent(b, 1);
-        this.bodyDamageReductionStatText = new Text(Byte.toString(stat6.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.bodyDamageReductionStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.bodyDamageReductionStatText,statBaseX+150,statBaseY), 1);
+        this.addComponent(b);
+        this.criticalHitDamageButton = b;
+        this.criticalHitDamageLabel = new Label(new Text(Byte.toString(stat6.points) + "/" +Integer.toString(stat6.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.addComponent(criticalHitDamageLabel); 
         
-        final ArmorStat stat99 = this.playerReference.getArmorManager().thornsDamage;
-        b = new Button(stat99.image.copy(), statBaseX, statBaseY-125, 100, 100);
+        
+        
+        //================
+        // Helm Upgrades
+        //================
+        
+        int helmBasePositionX = 800;
+        int helmBasePositionY = 600;
+       
+        
+        final ArmorStat stat7 = this.playerReference.getArmorManager().seeEnemyHealth;
+        b = new Button(stat7.image.copy(), helmBasePositionX, helmBasePositionY, 75, 75);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -424,44 +316,11 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameClientScene)owningScene).sendBuyStatPacket(stat99.id);
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat7.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat99.name,stat99.image,stat99.description, stat99.cost);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           } 
-       });
-        this.tabPane.addComponent(b, 1);
-        this.thornsStatText = new Text(Byte.toString(stat99.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.thornsStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.thornsStatText,statBaseX+25,statBaseY-125), 1);
-        
-
-        
-        //============================
-        // Weapon Modifier Components
-        //============================
-        
-        this.tabPane.addComponent(new Button(new Text("Modifiers:"), modifierBaseX, modifierBaseY+125), 2);
-        
-       final ArmorModifier modifier10 = this.playerReference.getArmorManager().meleeAttackDamageModifier;
-        this.meleeAttackDamageModifier = new Button(modifier10.image.copy(),modifierBaseX+125,modifierBaseY,100,100);
-        this.meleeAttackDamageModifier.addActionListener(new ActionListener(){     
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                 //do stuff
-                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier10.id);
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(400,450,modifier10.name,modifier10.image,modifier10.description, null);
+                   openTooltip(400,450,stat7.name,stat7.image,stat7.description, stat7.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -469,21 +328,25 @@ public class ArmorMenu extends Window{
                }
            }
        });
-        this.tabPane.addComponent(this.meleeAttackDamageModifier,2);
+        this.addComponent(b);
+        seeEnemyHealthButton =b;
+        this.seeEnemyHealthLabel = new Label(new Text(Byte.toString(stat7.points) + "/" +Integer.toString(stat7.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.addComponent(seeEnemyHealthLabel); 
         
-       final ArmorModifier modifier11 = this.playerReference.getArmorManager().potionCooldownResetModifier;
-        this.potionResetModifier = new Button(modifier11.image.copy(),modifierBaseX,modifierBaseY-125,100,100);
-        this.potionResetModifier.addActionListener(new ActionListener(){     
+        final ArmorStat stat8 = this.playerReference.getArmorManager().lifeLeech;
+        b = new Button(stat8.image.copy(), helmBasePositionX + 100, helmBasePositionY, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
            public void actionPerformed(ActionEvent e)
            {
                if(e.getActionCommand().equals("clicked"))
                {
-                 //do stuff
-                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier11.id);
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat8.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(400,450,modifier11.name,modifier11.image,modifier11.description, null);
+                   openTooltip(400,450,stat8.name,stat8.image,stat8.description, stat8.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -491,37 +354,13 @@ public class ArmorMenu extends Window{
                }
            }
        });
-        this.tabPane.addComponent(this.potionResetModifier,2);
+        this.addComponent(b);
+        lifeLeechButton =b;
+        this.lifeLeechLabel = new Label(new Text(Byte.toString(stat8.points) + "/" +Integer.toString(stat8.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.addComponent(lifeLeechLabel);
         
-       final ArmorModifier modifier12 = this.playerReference.getArmorManager().criticalHitDamageModifier;
-        this.criticalHitDamageModifier = new Button(modifier12.image.copy(),modifierBaseX+125,modifierBaseY-125,100,100);
-        this.criticalHitDamageModifier.addActionListener(new ActionListener(){     
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                 //do stuff
-                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier12.id);
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(400,450,modifier12.name,modifier12.image,modifier12.description, null);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.tabPane.addComponent(this.criticalHitDamageModifier,2);
-        
-        //========================
-        // Weapon Stat Components
-        //========================
-        this.tabPane.addComponent(new Button(new Text("Upgrades:"), statBaseX, statBaseY + 120), 2);
-        
-        final ArmorStat stat9 = this.playerReference.getArmorManager().weaponDamageStat;
-        b = new Button(stat9.image.copy(), statBaseX, statBaseY, 100, 100);
+        final ArmorStat stat9 = this.playerReference.getArmorManager().upgradeRadar;
+        b = new Button(stat9.image.copy(), helmBasePositionX + 200, helmBasePositionY, 75, 75);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -533,7 +372,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat9.name,stat9.image,stat9.description, stat9.cost);
+                   openTooltip(400,450,stat9.name,stat9.image,stat9.description, stat9.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -541,13 +380,13 @@ public class ArmorMenu extends Window{
                }
            }
        });
-        this.tabPane.addComponent(b, 2);
-        this.weaponDamageStatText = new Text(Byte.toString(stat9.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.weaponDamageStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.weaponDamageStatText,statBaseX +25,statBaseY), 2);
+        this.addComponent(b);
+        upgradeRadarButton = b;
+        this.upgradeRadarLabel = new Label(new Text(Byte.toString(stat9.points) + "/" +Integer.toString(stat9.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.addComponent(upgradeRadarLabel);
         
-        final ArmorStat stat10 = this.playerReference.getArmorManager().weaponAttackSpeedStat;
-        b = new Button(stat10.image.copy(), statBaseX+125, statBaseY, 100, 100);
+        final ArmorStat stat10 = this.playerReference.getArmorManager().doubleGoldFind;
+        b = new Button(stat10.image.copy(), helmBasePositionX, helmBasePositionY - 100, 75, 75);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -559,28 +398,27 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat10.name,stat10.image,stat10.description, stat10.cost);
+                   openTooltip(400,450,stat10.name,stat10.image,stat10.description, stat10.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
                    closeTooltip();
                }
-           } 
+           }
        });
-        this.tabPane.addComponent(b, 2);
-        this.weaponAttackSpeedStatText = new Text(Byte.toString(stat10.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.weaponAttackSpeedStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.weaponAttackSpeedStatText,statBaseX +150,statBaseY), 2);
+        this.addComponent(b);
+        doubleGoldFindButton = b;
+        this.doubleGoldFindLabel = new Label(new Text(Byte.toString(stat10.points) + "/" +Integer.toString(stat10.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.addComponent(doubleGoldFindLabel); 
         
-       final ArmorStat stat11 = this.playerReference.getArmorManager().critChanceStat;
-        b = new Button(stat11.image.copy(), statBaseX, statBaseY-125, 100, 100);
+        final ArmorStat stat11 = this.playerReference.getArmorManager().healingEffectiveness;
+        b = new Button(stat11.image.copy(), helmBasePositionX + 100, helmBasePositionY - 100, 75, 75);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
            {
                if(e.getActionCommand().equals("clicked"))
                {
-                   //buy stat
                    //buy stat
                    ((GameClientScene)owningScene).sendBuyStatPacket(stat11.id);
                }
@@ -594,91 +432,22 @@ public class ArmorMenu extends Window{
                }
            }
        });
-        this.tabPane.addComponent(b, 2);
-        this.critChanceStatText = new Text(Byte.toString(stat11.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.critChanceStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.critChanceStatText,statBaseX +25,statBaseY-125), 2);
+        this.addComponent(b);
+        healingEffectivenessButton = b;
+        this.healingEffectivenessLabel = new Label(new Text(Byte.toString(stat11.points) + "/" +Integer.toString(stat11.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.addComponent(healingEffectivenessLabel); 
+
         
+        //================
+        // Armor Upgrades
+        //================
         
-        //==================
-        // Boots Modifiers
-        //==================
+        int armorBasePositionX = 150;
+        int armorBasePositionY = 200;
+               
         
-        this.tabPane.addComponent(new Button(new Text("Modifiers:"), modifierBaseX, modifierBaseY+125), 3);
-        
-       final ArmorModifier modifier14 = this.playerReference.getArmorManager().doubleJumpModifier;
-        this.doubleJumpModifier = new Button(modifier14.image.copy(),modifierBaseX+125,modifierBaseY,100,100);
-        this.doubleJumpModifier.addActionListener(new ActionListener(){     
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                 //do stuff
-                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier14.id);
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(400,450,modifier14.name,modifier14.image,modifier14.description, null);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.tabPane.addComponent(this.doubleJumpModifier,3);
-        
-       final ArmorModifier modifier15 = this.playerReference.getArmorManager().jetpackModifier;
-        this.jetpackModifier = new Button(modifier15.image.copy(),modifierBaseX,modifierBaseY-125,100,100);
-        this.jetpackModifier.addActionListener(new ActionListener(){     
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                 //do stuff
-                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier15.id);
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(400,450,modifier15.name,modifier15.image,modifier15.description, null);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.tabPane.addComponent(this.jetpackModifier,3);
-        
-       final ArmorModifier modifier16 = this.playerReference.getArmorManager().teleportModifier;
-        this.teleportModifier = new Button(modifier16.image.copy(),modifierBaseX+125,modifierBaseY-125,100,100);
-        this.teleportModifier.addActionListener(new ActionListener(){     
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                 //do stuff
-                   ((GameClientScene)owningScene).sendEquipModifierPacket(modifier16.id);
-               }
-               if(e.getActionCommand().equals("mouseEntered"))
-               {
-                   openTooltip(400,450,modifier16.name,modifier16.image,modifier16.description, null);
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
-           }
-       });
-        this.tabPane.addComponent(this.teleportModifier,3);
-        
-        //========================
-        // Boots Stats Components
-        //========================
-        this.tabPane.addComponent(new Button(new Text("Upgrades:"), statBaseX, statBaseY + 120), 3);
-        
-        final ArmorStat stat3 = this.playerReference.getArmorManager().ccReductionStat;
-        b = new Button(stat3.image.copy(), statBaseX, statBaseY, 100, 100);
+        final ArmorStat stat12 = this.playerReference.getArmorManager().health;
+        b = new Button(stat12.image.copy(), armorBasePositionX, armorBasePositionY, 75, 75);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -686,12 +455,11 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   //buy stat
-                   ((GameClientScene)owningScene).sendBuyStatPacket(stat3.id);
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat12.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat3.name,stat3.image,stat3.description, stat3.cost);
+                   openTooltip(700,450,stat12.name,stat12.image,stat12.description, stat12.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -699,13 +467,13 @@ public class ArmorMenu extends Window{
                }
            }
        });
-        this.tabPane.addComponent(b,3);
-        this.ccReductionStatText = new Text(Byte.toString(stat3.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.ccReductionStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.ccReductionStatText,statBaseX+25,statBaseY ), 3);
+        this.addComponent(b);
+        healthButton = b;
+        this.healthLabel = new Label(new Text(Byte.toString(stat12.points) + "/" +Integer.toString(stat12.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.addComponent(healthLabel); 
         
-      final  ArmorStat stat15 = this.playerReference.getArmorManager().moveSpeedStat;
-        b = new Button(stat15.image.copy(), statBaseX+125, statBaseY, 100, 100);
+        final ArmorStat stat13 = this.playerReference.getArmorManager().numberOfPotions;
+        b = new Button(stat13.image.copy(), armorBasePositionX + 100, armorBasePositionY, 75, 75);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -713,6 +481,57 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat13.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat13.name,stat13.image,stat13.description, stat13.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        numberOfPotionsButton = b;
+        this.numberOfPotionsLabel = new Label(new Text(Byte.toString(stat13.points) + "/" +Integer.toString(stat13.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.addComponent(numberOfPotionsLabel);
+        
+        final ArmorStat stat14 = this.playerReference.getArmorManager().reducedCriticalHit;
+        b = new Button(stat14.image.copy(), armorBasePositionX + 200, armorBasePositionY, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat14.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat14.name,stat14.image,stat14.description, stat14.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        reducedCriticalHitButton = b;
+        this.reducedCriticalHitLabel = new Label(new Text(Byte.toString(stat14.points) + "/" +Integer.toString(stat14.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.addComponent(reducedCriticalHitLabel);
+        
+        final ArmorStat stat15 = this.playerReference.getArmorManager().hardToKill;
+        b = new Button(stat15.image.copy(), armorBasePositionX, armorBasePositionY - 100, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
                    //buy stat
                    ((GameClientScene)owningScene).sendBuyStatPacket(stat15.id);
                }
@@ -726,13 +545,13 @@ public class ArmorMenu extends Window{
                }
            }
        });
-        this.tabPane.addComponent(b, 3);
-        this.moveSpeedStatText = new Text(Byte.toString(stat15.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.moveSpeedStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.moveSpeedStatText,statBaseX +150,statBaseY), 3);
+        this.addComponent(b);
+        hardToKillButton = b;
+        this.hardToKillLabel = new Label(new Text(Byte.toString(stat15.points) + "/" +Integer.toString(stat15.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.addComponent(hardToKillLabel); 
         
-       final ArmorStat stat16 = this.playerReference.getArmorManager().jumpHeightStat;
-        b = new Button(stat16.image.copy(), statBaseX, statBaseY-125, 100, 100);
+        final ArmorStat stat16 = this.playerReference.getArmorManager().proximityDamageReduction;
+        b = new Button(stat16.image.copy(), armorBasePositionX + 100, armorBasePositionY - 100, 75, 75);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -752,53 +571,151 @@ public class ArmorMenu extends Window{
                }
            }
        });
-        this.tabPane.addComponent(b, 3);
-        this.jumpHeightStatText= new Text(Byte.toString(stat16.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS)); 
-        this.jumpHeightStatText.setScale(1.2f);
-        this.tabPane.addComponent(new Label(this.jumpHeightStatText,statBaseX +25,statBaseY-125), 3);
+        this.addComponent(b);
+        proximityDamageReductionButton = b;
+        this.proximityDamageReductionLabel = new Label(new Text(Byte.toString(stat16.points) + "/" +Integer.toString(stat16.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.addComponent(proximityDamageReductionLabel); 
+        
+        final ArmorStat stat17 = this.playerReference.getArmorManager().thornsDamage;
+        b = new Button(stat17.image.copy(), armorBasePositionX + 200, armorBasePositionY - 100, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat17.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat17.name,stat17.image,stat17.description, stat17.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        thornsDamageButton = b;
+        this.thornsDamageLabel = new Label(new Text(Byte.toString(stat17.points) + "/" +Integer.toString(stat17.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.addComponent(thornsDamageLabel); 
         
         
-        //==================
-        // Detail Text
-        //===================
+        //================
+        // Boot Upgrades
+        //================
+              
+        int bootsBasePositionX = 800;
+        int bootsBasePositionY = 200;
+               
         
+        final ArmorStat stat18 = this.playerReference.getArmorManager().doubleJump;
+        b = new Button(stat18.image.copy(), bootsBasePositionX, bootsBasePositionY, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat18.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat18.name,stat18.image,stat18.description, stat18.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        doubleJumpButton = b;
+        this.doubleJumpLabel = new Label(new Text(Byte.toString(stat18.points) + "/" +Integer.toString(stat18.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.addComponent(doubleJumpLabel); 
+        
+        final ArmorStat stat19 = this.playerReference.getArmorManager().ccReduction;
+        b = new Button(stat19.image.copy(), bootsBasePositionX + 100, bootsBasePositionY, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat19.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat19.name,stat19.image,stat19.description, stat19.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        ccReductionButton = b;
+        this.ccReductionLabel = new Label(new Text(Byte.toString(stat19.points) + "/" +Integer.toString(stat19.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.addComponent(ccReductionLabel);
+        
+        final ArmorStat stat20 = this.playerReference.getArmorManager().jetpack;
+        b = new Button(stat20.image.copy(), bootsBasePositionX + 200, bootsBasePositionY, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat20.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat20.name,stat20.image,stat20.description, stat20.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        jetpackButton = b;
+        this.jetpackLabel = new Label(new Text(Byte.toString(stat20.points) + "/" +Integer.toString(stat20.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.addComponent(jetpackLabel);
+        
+        final ArmorStat stat21 = this.playerReference.getArmorManager().moveSpeed;
+        b = new Button(stat21.image.copy(), bootsBasePositionX, bootsBasePositionY - 100, 75, 75);
+        b.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   //buy stat
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat21.id);
+               }
+               if(e.getActionCommand().equals("mouseEntered"))
+               {
+                   openTooltip(700,450,stat21.name,stat21.image,stat21.description, stat21.cost);
+               }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   closeTooltip();
+               }
+           }
+       });
+        this.addComponent(b);
+        moveSpeedButton = b;
+        this.moveSpeedLabel = new Label(new Text(Byte.toString(stat21.points) + "/" +Integer.toString(stat21.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.addComponent(moveSpeedLabel); 
 
-       this.lifeLeechDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.lifeLeechDetailText,400,400),0);
-       this.lifeRegenDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.lifeRegenDetailText,400,375),0);
-       this.healingEffectivenessDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.healingEffectivenessDetailText,400,350),0);    
-       this.helmModifierDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.helmModifierDetailText,400,325),0);
        
-       this.bodyHealthDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.bodyHealthDetailText,400,400),1);
-       this.bodyDamageReductionDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.bodyDamageReductionDetailText,400,375),1);  
-       this.bodyThornsDamageDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.bodyThornsDamageDetailText,400,350),1);
-       this.bodyModifierDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.bodyModifierDetailText,400,325),1);
-       
-       this.weaponDamageDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.weaponDamageDetailText,400,400),2);
-       this.weaponAttackSpeedDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.weaponAttackSpeedDetailText,400,375),2);
-       this.critChanceDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.critChanceDetailText,400,350),2);
-       this.weaponModifierDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.weaponModifierDetailText,400,325),2);
-       
-       this.ccReductionDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.ccReductionDetailText,400,400),3);
-       this.moveSpeedDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.moveSpeedDetailText,400,375),3);
-       this.jumpHeightDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.jumpHeightDetailText,400,350),3);
-       this.bootsModifierDetailText = new Text("");
-       this.tabPane.addComponent(new Label(this.bootsModifierDetailText,400,325),3);
- 
     }
     
     @Override
@@ -806,323 +723,407 @@ public class ArmorMenu extends Window{
     {
         super.update();
         
-        //update helm stat points
-        this.lifeLeechText.setText(Byte.toString(this.playerReference.getArmorManager().lifeLeech.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
-        this.numberOfPotionsText.setText(Byte.toString(this.playerReference.getArmorManager().numberOfPotionsStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
-        this.healingEffectivenessStatText.setText(Byte.toString(this.playerReference.getArmorManager().healingEffectivenessStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
-
-        //update body stat points
-        this.bodyHealthStatText.setText(Byte.toString(this.playerReference.getArmorManager().healthStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
-        this.bodyDamageReductionStatText.setText(Byte.toString(this.playerReference.getArmorManager().damageReductionStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
-        this.thornsStatText.setText(Byte.toString(this.playerReference.getArmorManager().thornsDamage.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
-      
-        //weapon
-        this.weaponDamageStatText.setText(Byte.toString(this.playerReference.getArmorManager().weaponDamageStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
-        this.weaponAttackSpeedStatText.setText(Byte.toString(this.playerReference.getArmorManager().weaponAttackSpeedStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
-        this.critChanceStatText.setText(Byte.toString(this.playerReference.getArmorManager().critChanceStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
-
-        //boots
-        this.ccReductionStatText.setText(Byte.toString(this.playerReference.getArmorManager().ccReductionStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));      
-        this.moveSpeedStatText.setText(Byte.toString(this.playerReference.getArmorManager().moveSpeedStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));
-        this.jumpHeightStatText.setText(Byte.toString(this.playerReference.getArmorManager().jumpHeightStat.points) + "/" +Integer.toString(ArmorManager.ArmorStat.MAX_POINTS));    
-
         
-        
-        //=============
-        // Detail Text
-        //=============
-        
-      //helm
-     this.lifeLeechDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().lifeLeech.points * 5) + "% life leech.");
-      this.lifeRegenDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().numberOfPotionsStat.points* 1) + " potions.");
-      this.healingEffectivenessDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().healingEffectivenessStat.points* 5) + "% bonus to healing.");
+        //================================
+        // Check for Weapon Button Changes
+        //=================================
 
-      //body
-      this.bodyThornsDamageDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().thornsDamage.points * 5 )  + "% thorns damage.");
-      this.bodyHealthDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().healthStat.points * 10)  + " health.");
-      this.bodyDamageReductionDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().damageReductionStat.points * 2) + "% damage reduction.");
-      
-      //weapon
-      this.weaponDamageDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().weaponDamageStat.points * 2)  + "% damage.");
-      this.weaponAttackSpeedDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().weaponAttackSpeedStat.points * 5) + "% attack speed.");
-      this.critChanceDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().critChanceStat.points * 3) + "% critical hit chance.");
+     if(this.playerReference.getArmorManager().meleeAttackDamageBonus.unlocked == false)
+     {
+         if(!meleeAttackDamageBonusButton.getImage().hasOverlay("lock"))
+         {
+            meleeAttackDamageBonusButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         meleeAttackDamageBonusButton.setDisabled(true);
+         meleeAttackDamageBonusLabel.setHidden(true);
+     }
+     else
+     {
+                  
+         meleeAttackDamageBonusButton.getImage().removeAllOverlays();
+         meleeAttackDamageBonusButton.setDisabled(false);
+         meleeAttackDamageBonusLabel.setHidden(false);        
+         meleeAttackDamageBonusLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().meleeAttackDamageBonus.points) + "/" +Integer.toString(this.playerReference.getArmorManager().meleeAttackDamageBonus.maxPoints)); 
+        
+     }
      
-      //boots
-      this.ccReductionDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().ccReductionStat.points * 5) + "% CC reduction.");
-      this.moveSpeedDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().moveSpeedStat.points * 5) + "% movement speed.");
-      this.jumpHeightDetailText.setText("+" + Integer.toString(this.playerReference.getArmorManager().jumpHeightStat.points* 2) + "m jump height.");
-
-      
-      //====================
-      // Show/Hide Modifiers
-      //=====================
-            
-         if(this.playerReference.getArmorManager().seeEnemyHealthModifier.unlocked == false)
+     if(this.playerReference.getArmorManager().potionCooldownReset.unlocked == false)
+     {
+         if(!potionCooldownResetButton.getImage().hasOverlay("lock"))
          {
-             this.seeEnemyHealthModifier.setDisabled(true);
-             this.seeEnemyHealthModifier.setHidden(true);
+            potionCooldownResetButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
          }
-         else
-         {
-             this.seeEnemyHealthModifier.setDisabled(false);
-             this.seeEnemyHealthModifier.setHidden(false);
-             
-         } 
-         if(this.playerReference.getArmorManager().doubleGoldFindModifier.unlocked== false)
-         {
-             this.doubleGoldFindModifier.setDisabled(true);
-             this.doubleGoldFindModifier.setHidden(true);
-         }
-         else
-         {
-             this.doubleGoldFindModifier.setDisabled(false);
-             this.doubleGoldFindModifier.setHidden(false);
-             
-         }
-        if(this.playerReference.getArmorManager().upgradedRadarModifier.unlocked== false)
-         {
-             this.upgradedRadarModifier.setDisabled(true);
-             this.upgradedRadarModifier.setHidden(true);
-         }
-         else
-         {
-             this.upgradedRadarModifier.setDisabled(false);
-             this.upgradedRadarModifier.setHidden(false);
-            
-         }
-
+         potionCooldownResetButton.setDisabled(true);
+         potionCooldownResetLabel.setHidden(true);
+     }
+     else
+     {
+         potionCooldownResetButton.getImage().removeAllOverlays();
+         potionCooldownResetButton.setDisabled(false);
+         potionCooldownResetLabel.setHidden(false);
+         potionCooldownResetLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().potionCooldownReset.points) + "/" +Integer.toString(this.playerReference.getArmorManager().potionCooldownReset.maxPoints)); 
         
+     }
+     
+     
+     if(this.playerReference.getArmorManager().criticalHitDamage.unlocked == false)
+     {
+         if(!criticalHitDamageButton.getImage().hasOverlay("lock"))
+         {
+            criticalHitDamageButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         criticalHitDamageButton.setDisabled(true);
+         criticalHitDamageLabel.setHidden(true);
+     }
+     else
+     {
+         criticalHitDamageButton.getImage().removeAllOverlays();
+         criticalHitDamageButton.setDisabled(false);
+         criticalHitDamageLabel.setHidden(false);
+         criticalHitDamageLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().criticalHitDamage.points) + "/" +Integer.toString(this.playerReference.getArmorManager().criticalHitDamage.maxPoints)); 
         
-
-         if(this.playerReference.getArmorManager().damageReductionBonusModifier.unlocked== false)
+     }
+     
+     if(this.playerReference.getArmorManager().weaponDamage.unlocked == false)
+     {
+         if(!weaponDamageButton.getImage().hasOverlay("lock"))
          {
-             this.toughToKillModifier.setDisabled(true);
-             this.toughToKillModifier.setHidden(true);
+            weaponDamageButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
          }
-         else
-         {
-             this.toughToKillModifier.setDisabled(false);
-             this.toughToKillModifier.setHidden(false);
-             
-         }
-         if(this.playerReference.getArmorManager().reducedCriticalHitModifier.unlocked== false)
-         {
-             this.noCritsModifier.setDisabled(true);
-             this.noCritsModifier.setHidden(true);
-         }
-         else
-         {
-             this.noCritsModifier.setDisabled(false);
-             this.noCritsModifier.setHidden(false);
-             
-         }
-        if(this.playerReference.getArmorManager().bonusThornsDamageModifier.unlocked== false)
-         {
-             this.increasedThornsModifier.setDisabled(true);
-             this.increasedThornsModifier.setHidden(true);
-         }
-         else
-         {
-             this.increasedThornsModifier.setDisabled(false);
-             this.increasedThornsModifier.setHidden(false);
-             
-         }
-
+         weaponDamageButton.setDisabled(true);
+         weaponDamageLabel.setHidden(true);
+     }
+     else
+     {
+         weaponDamageButton.getImage().removeAllOverlays();
+         weaponDamageButton.setDisabled(false);
+         weaponDamageLabel.setHidden(false);
+         weaponDamageLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().weaponDamage.points) + "/" +Integer.toString(this.playerReference.getArmorManager().weaponDamage.maxPoints)); 
         
+     }
+     
+     if(this.playerReference.getArmorManager().weaponAttackSpeed.unlocked == false)
+     {
+         if(!weaponAttackSpeedButton.getImage().hasOverlay("lock"))
+         {
+            weaponAttackSpeedButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         weaponAttackSpeedButton.setDisabled(true);
+         weaponAttackSpeedLabel.setHidden(true);
+     }
+     else
+     {
+         weaponAttackSpeedButton.getImage().removeAllOverlays();
+         weaponAttackSpeedButton.setDisabled(false);
+         weaponAttackSpeedLabel.setHidden(false);
+         weaponAttackSpeedLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().weaponAttackSpeed.points) + "/" +Integer.toString(this.playerReference.getArmorManager().weaponAttackSpeed.maxPoints)); 
         
+     }
+     
+     if(this.playerReference.getArmorManager().critChance.unlocked == false)
+     {
+         if(!critChanceButton.getImage().hasOverlay("lock"))
+         {
+            critChanceButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         critChanceButton.setDisabled(true);
+         critChanceLabel.setHidden(true);
+     }
+     else
+     {
+         critChanceButton.getImage().removeAllOverlays();
+         critChanceButton.setDisabled(false);
+         critChanceLabel.setHidden(false);
+         critChanceLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().critChance.points) + "/" +Integer.toString(this.playerReference.getArmorManager().critChance.maxPoints)); 
         
-        if(this.playerReference.getArmorManager().meleeAttackDamageModifier.unlocked== false)
-         {
-             this.meleeAttackDamageModifier.setDisabled(true);
-             this.meleeAttackDamageModifier.setHidden(true);
-         }
-         else
-         {
-             this.meleeAttackDamageModifier.setDisabled(false);
-             this.meleeAttackDamageModifier.setHidden(false);
-            
-         }
-        if(this.playerReference.getArmorManager().potionCooldownResetModifier.unlocked== false)
-         {
-             this.potionResetModifier.setDisabled(true);
-             this.potionResetModifier.setHidden(true);
-         }
-         else
-         {
-             this.potionResetModifier.setDisabled(false);
-             this.potionResetModifier.setHidden(false);
-             
-         }
-         if(this.playerReference.getArmorManager().criticalHitDamageModifier.unlocked== false)
-         {
-             this.criticalHitDamageModifier.setDisabled(true);
-             this.criticalHitDamageModifier.setHidden(true);
-         }
-         else
-         {
-             this.criticalHitDamageModifier.setDisabled(false);
-             this.criticalHitDamageModifier.setHidden(false);
-             
-         }
+     }
+     
+       //================================
+       // Check for Helm Button Changes
+       //=================================
 
+     if(this.playerReference.getArmorManager().seeEnemyHealth.unlocked == false)
+     {
+         if(!seeEnemyHealthButton.getImage().hasOverlay("lock"))
+         {
+            seeEnemyHealthButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         seeEnemyHealthButton.setDisabled(true);
+         seeEnemyHealthLabel.setHidden(true);
+     }
+     else 
+     {
+         seeEnemyHealthButton.getImage().removeAllOverlays();
+         seeEnemyHealthButton.setDisabled(false);
+         seeEnemyHealthLabel.setHidden(false);        
+         seeEnemyHealthLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().seeEnemyHealth.points) + "/" +Integer.toString(this.playerReference.getArmorManager().seeEnemyHealth.maxPoints)); 
+        
+     }
+     
+     if(this.playerReference.getArmorManager().doubleGoldFind.unlocked == false)
+     {
+         if(!doubleGoldFindButton.getImage().hasOverlay("lock"))
+         {
+            doubleGoldFindButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         doubleGoldFindButton.setDisabled(true);
+         doubleGoldFindLabel.setHidden(true);
+     }
+     else
+     {
+         doubleGoldFindButton.getImage().removeAllOverlays();
+         doubleGoldFindButton.setDisabled(false);
+         doubleGoldFindLabel.setHidden(false);
+         doubleGoldFindLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().doubleGoldFind.points) + "/" +Integer.toString(this.playerReference.getArmorManager().doubleGoldFind.maxPoints)); 
+        
+     }
+     
+     
+     if(this.playerReference.getArmorManager().upgradeRadar.unlocked == false)
+     {
+         if(!upgradeRadarButton.getImage().hasOverlay("lock"))
+         {
+            upgradeRadarButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         upgradeRadarButton.setDisabled(true);
+         upgradeRadarLabel.setHidden(true);
+     }
+     else
+     {
+         upgradeRadarButton.getImage().removeAllOverlays();
+         upgradeRadarButton.setDisabled(false);
+         upgradeRadarLabel.setHidden(false);
+         upgradeRadarLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().upgradeRadar.points) + "/" +Integer.toString(this.playerReference.getArmorManager().upgradeRadar.maxPoints)); 
+        
+     }
+     
+     if(this.playerReference.getArmorManager().lifeLeech.unlocked == false)
+     {
+         if(!lifeLeechButton.getImage().hasOverlay("lock"))
+         {
+            lifeLeechButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         lifeLeechButton.setDisabled(true);
+         lifeLeechLabel.setHidden(true);
+     }
+     else
+     {
+         lifeLeechButton.getImage().removeAllOverlays();
+         lifeLeechButton.setDisabled(false);
+         lifeLeechLabel.setHidden(false);
+         lifeLeechLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().lifeLeech.points) + "/" +Integer.toString(this.playerReference.getArmorManager().lifeLeech.maxPoints)); 
+        
+     }
+     
+     if(this.playerReference.getArmorManager().healingEffectiveness.unlocked == false)
+     {
+         if(!healingEffectivenessButton.getImage().hasOverlay("lock"))
+         {
+            healingEffectivenessButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         healingEffectivenessButton.setDisabled(true);
+         healingEffectivenessLabel.setHidden(true);
+     }
+     else
+     {
+         healingEffectivenessButton.getImage().removeAllOverlays();
+         healingEffectivenessButton.setDisabled(false);
+         healingEffectivenessLabel.setHidden(false);
+         healingEffectivenessLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().healingEffectiveness.points) + "/" +Integer.toString(this.playerReference.getArmorManager().healingEffectiveness.maxPoints)); 
+        
+     }
+     
+        //================================
+       // Check for Body Button Changes
+       //=================================
 
+     if(this.playerReference.getArmorManager().hardToKill.unlocked == false)
+     {
+         if(!hardToKillButton.getImage().hasOverlay("lock"))
+         {
+            hardToKillButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         hardToKillButton.setDisabled(true);
+         hardToKillLabel.setHidden(true);
+     }
+     else
+     {
+         hardToKillButton.getImage().removeAllOverlays();
+         hardToKillButton.setDisabled(false);
+         hardToKillLabel.setHidden(false);        
+         hardToKillLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().hardToKill.points) + "/" +Integer.toString(this.playerReference.getArmorManager().hardToKill.maxPoints)); 
+        
+     }
+     
+     if(this.playerReference.getArmorManager().reducedCriticalHit.unlocked == false)
+     {       
+         if(!reducedCriticalHitButton.getImage().hasOverlay("lock"))
+         {
+            reducedCriticalHitButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         reducedCriticalHitButton.setDisabled(true);
+         reducedCriticalHitLabel.setHidden(true);
+     }
+     else
+     {
+         reducedCriticalHitButton.getImage().removeAllOverlays();
+         reducedCriticalHitButton.setDisabled(false);
+         reducedCriticalHitLabel.setHidden(false);
+         reducedCriticalHitLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().reducedCriticalHit.points) + "/" +Integer.toString(this.playerReference.getArmorManager().reducedCriticalHit.maxPoints)); 
+        
+     }
+     
+     
+     if(this.playerReference.getArmorManager().proximityDamageReduction.unlocked == false)
+     {
+         if(!proximityDamageReductionButton.getImage().hasOverlay("lock"))
+         {
+            proximityDamageReductionButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         proximityDamageReductionButton.setDisabled(true);
+         proximityDamageReductionLabel.setHidden(true);
+     }
+     else
+     {
+         proximityDamageReductionButton.getImage().removeAllOverlays();
+         proximityDamageReductionButton.setDisabled(false);
+         proximityDamageReductionLabel.setHidden(false);
+         proximityDamageReductionLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().proximityDamageReduction.points) + "/" +Integer.toString(this.playerReference.getArmorManager().proximityDamageReduction.maxPoints)); 
+        
+     }
+     
+     if(this.playerReference.getArmorManager().health.unlocked == false)
+     {
+         if(!healthButton.getImage().hasOverlay("lock"))
+         {
+            healthButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         healthButton.setDisabled(true);
+         healthLabel.setHidden(true);
+     }
+     else
+     {
+         healthButton.getImage().removeAllOverlays();
+         healthButton.setDisabled(false);
+         healthLabel.setHidden(false);
+         healthLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().health.points) + "/" +Integer.toString(this.playerReference.getArmorManager().health.maxPoints)); 
+        
+     }
+     
+     if(this.playerReference.getArmorManager().numberOfPotions.unlocked == false)
+     {
+         if(!numberOfPotionsButton.getImage().hasOverlay("lock"))
+         {
+            numberOfPotionsButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         numberOfPotionsButton.setDisabled(true);
+         numberOfPotionsLabel.setHidden(true);
+     }
+     else
+     {
+         numberOfPotionsButton.getImage().removeAllOverlays();
+         numberOfPotionsButton.setDisabled(false);
+         numberOfPotionsLabel.setHidden(false);
+         numberOfPotionsLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().numberOfPotions.points) + "/" +Integer.toString(this.playerReference.getArmorManager().numberOfPotions.maxPoints)); 
+        
+     }
+     
+     if(this.playerReference.getArmorManager().thornsDamage.unlocked == false)
+     {
+         if(!thornsDamageButton.getImage().hasOverlay("lock"))
+         {
+            thornsDamageButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         thornsDamageButton.setDisabled(true);
+         thornsDamageLabel.setHidden(true);
+     }
+     else
+     {
+         thornsDamageButton.getImage().removeAllOverlays();
+         thornsDamageButton.setDisabled(false);
+         thornsDamageLabel.setHidden(false);
+         thornsDamageLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().thornsDamage.points) + "/" +Integer.toString(this.playerReference.getArmorManager().thornsDamage.maxPoints)); 
+        
+     }
+ 
+       //================================
+       // Check for Boots Button Changes
+       //=================================
+
+     if(this.playerReference.getArmorManager().doubleJump.unlocked == false)
+     {
+         if(!doubleJumpButton.getImage().hasOverlay("lock"))
+         {
+            doubleJumpButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         doubleJumpButton.setDisabled(true);
+         doubleJumpLabel.setHidden(true);
+     }
+     else 
+     {
+         doubleJumpButton.getImage().removeAllOverlays();
+         doubleJumpButton.setDisabled(false);
+         doubleJumpLabel.setHidden(false);        
+         doubleJumpLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().doubleJump.points) + "/" +Integer.toString(this.playerReference.getArmorManager().doubleJump.maxPoints)); 
+        
+     }
+     
+     if(this.playerReference.getArmorManager().jetpack.unlocked == false)
+     {
+         if(!jetpackButton.getImage().hasOverlay("lock"))
+         {
+            jetpackButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         jetpackButton.setDisabled(true);
+         jetpackLabel.setHidden(true);
+     }
+     else
+     {
+         jetpackButton.getImage().removeAllOverlays();
+         jetpackButton.setDisabled(false);
+         jetpackLabel.setHidden(false);
+         jetpackLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().jetpack.points) + "/" +Integer.toString(this.playerReference.getArmorManager().jetpack.maxPoints)); 
+        
+     }
+     
+     
+     if(this.playerReference.getArmorManager().ccReduction.unlocked == false)
+     {
+         if(!ccReductionButton.getImage().hasOverlay("lock"))
+         {
+            ccReductionButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         ccReductionButton.setDisabled(true);
+         ccReductionLabel.setHidden(true);
+     }
+     else
+     {
+         ccReductionButton.getImage().removeAllOverlays();
+         ccReductionButton.setDisabled(false);
+         ccReductionLabel.setHidden(false);
+         ccReductionLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().ccReduction.points) + "/" +Integer.toString(this.playerReference.getArmorManager().ccReduction.maxPoints)); 
+        
+     }
+     
+     if(this.playerReference.getArmorManager().moveSpeed.unlocked == false)
+     {
+         if(!moveSpeedButton.getImage().hasOverlay("lock"))
+         {
+            moveSpeedButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+         }
+         moveSpeedButton.setDisabled(true);
+         moveSpeedLabel.setHidden(true);
+     }
+     else
+     {
+         moveSpeedButton.getImage().removeAllOverlays();
+         moveSpeedButton.setDisabled(false);
+         moveSpeedLabel.setHidden(false);
+         moveSpeedLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().moveSpeed.points) + "/" +Integer.toString(this.playerReference.getArmorManager().moveSpeed.maxPoints)); 
+        
+     }
+     
          
-         if(this.playerReference.getArmorManager().doubleJumpModifier.unlocked== false)
-         {
-             this.doubleJumpModifier.setDisabled(true);
-             this.doubleJumpModifier.setHidden(true);
-         }
-         else
-         {
-             this.doubleJumpModifier.setDisabled(false);
-             this.doubleJumpModifier.setHidden(false);
-             
-         }
-         if(this.playerReference.getArmorManager().jetpackModifier.unlocked== false)
-         {
-             this.jetpackModifier.setDisabled(true);
-             this.jetpackModifier.setHidden(true);
-         }
-         else
-         {
-             this.jetpackModifier.setDisabled(false);
-             this.jetpackModifier.setHidden(false);
-             
-         }
-         if(this.playerReference.getArmorManager().teleportModifier.unlocked== false)
-         {
-             this.teleportModifier.setDisabled(true);
-             this.teleportModifier.setHidden(true);
-         }
-         else
-         {
-             this.teleportModifier.setDisabled(false);
-             this.teleportModifier.setHidden(false);
-             
-         }
-         
-          
-         //toggle equipped highlight
-         if(this.playerReference.getArmorManager().seeEnemyHealthModifier.equipped == true)
-         {
-             this.seeEnemyHealthModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
-             this.helmModifierDetailText.setText("Equipped Modifier: See Enemy Health");
-         }
-         else
-         {
-             this.seeEnemyHealthModifier.getImage().removeAllOverlays();
-         }
-        
-    
-         if(this.playerReference.getArmorManager().doubleGoldFindModifier.equipped== true)
-         {
-             this.doubleGoldFindModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
-             this.helmModifierDetailText.setText("Equipped Modifier: Double Gold Find");
-         }
-         else
-         {
-             this.doubleGoldFindModifier.getImage().removeAllOverlays();
-         }
-        if(this.playerReference.getArmorManager().upgradedRadarModifier.equipped== true)
-         {
-             this.upgradedRadarModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
-              this.helmModifierDetailText.setText("Equipped Modifier: Upgraded Radar");
-         }
-         else
-         {
-             this.upgradedRadarModifier.getImage().removeAllOverlays();
-         }
-        
-        
-        
-        if(this.playerReference.getArmorManager().damageReductionBonusModifier.equipped== true)
-         {
-             this.toughToKillModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
-             this.bodyModifierDetailText.setText("Equipped Modifier: Tough To kill");
-         }
-         else
-         {
-             this.toughToKillModifier.getImage().removeAllOverlays();
-         }
-         if(this.playerReference.getArmorManager().reducedCriticalHitModifier.equipped== true)
-         {
-             this.noCritsModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
-             this.bodyModifierDetailText.setText("Equipped Modifier: Hardened Armor");
-         }
-         else
-         {
-             this.noCritsModifier.getImage().removeAllOverlays();
-         }
-         if(this.playerReference.getArmorManager().bonusThornsDamageModifier.equipped== true)
-         {
-             this.increasedThornsModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
-             this.bodyModifierDetailText.setText("Equipped Modifier: Increased Thorns Damage");
-         }
-         else
-         {
-             this.increasedThornsModifier.getImage().removeAllOverlays();
-         }
-
-
-        if(this.playerReference.getArmorManager().meleeAttackDamageModifier.equipped== true)
-         {
-             this.meleeAttackDamageModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
-              this.weaponModifierDetailText.setText("Equipped Modifier: Melee Damage Increase");
-         }
-         else
-         {
-             this.meleeAttackDamageModifier.getImage().removeAllOverlays();
-         }
-        if(this.playerReference.getArmorManager().potionCooldownResetModifier.equipped== true)
-         {
-             this.potionResetModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
-             this.weaponModifierDetailText.setText("Equipped Modifier: Potion Cooldown Reset");
-         }
-         else
-         {
-             this.potionResetModifier.getImage().removeAllOverlays();
-         }
-         if(this.playerReference.getArmorManager().criticalHitDamageModifier.equipped== true)
-         {
-             this.criticalHitDamageModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png")));
-             this.weaponModifierDetailText.setText("Equipped Modifier: Critical Hit Damagee");
-         }
-         else
-         {
-             this.criticalHitDamageModifier.getImage().removeAllOverlays();
-         }
-
-
-         if(this.playerReference.getArmorManager().doubleJumpModifier.equipped== true)
-         {
-             this.doubleJumpModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
-             this.bootsModifierDetailText.setText("Equipped Modifier: Double Jump");
-         }
-         else
-         {
-             this.doubleJumpModifier.getImage().removeAllOverlays();
-         }
-         if(this.playerReference.getArmorManager().jetpackModifier.equipped== true)
-         {
-             this.jetpackModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png")));
-             this.bootsModifierDetailText.setText("Equipped Modifier: Jetpack");
-         }
-         else
-         {
-             this.jetpackModifier.getImage().removeAllOverlays();
-         }
-         if(this.playerReference.getArmorManager().teleportModifier.equipped== true)
-         {
-             this.teleportModifier.getImage().addOverlay("equipped",new Overlay(new Image("painOverlay1.png"))); 
-             this.bootsModifierDetailText.setText("Equipped Modifier: Teleport");
-         }
-         else
-         {
-             this.teleportModifier.getImage().removeAllOverlays();
-         }
-        
-        
-    
     }
     
     

@@ -414,7 +414,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         {
             int currencyAmount = ((Currency)other).getAmount();
             
-            if(this.getArmorManager().doubleGoldFindModifier.equipped == true)
+            if(this.getArmorManager().doubleGoldFind.isMaxPoints() == true)
             {
                 currencyAmount *= 2;
             }
@@ -747,10 +747,19 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     @Override
     public void takeDamage(Damage dmg)
     {
+        //handle proximityDamageReduction 
+       if(dmg.getSource() != null && dmg.getSource().distanceAbs(this) < 250)
+       {
+           int points = this.armorManager.proximityDamageReduction.points;
+           
+           dmg.getAmountObject().adjustPercentModifier(-.15f * points); 
+           
+       }
+       
        super.takeDamage(dmg);
        
-       //handle damageReductionBonusModifier 
-       if(this.armorManager.damageReductionBonusModifier.equipped == true)
+       //handle hardToKill upgrade
+       if(this.armorManager.hardToKill.isMaxPoints() == true)
        {           
            if(this.combatData.getPercentHealth() <= .33f)
            {
@@ -766,6 +775,8 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                this.combatData.removeCombatEffect("DRModifier"); 
            }
        }
+       
+       
     }
     
     @Override
@@ -796,10 +807,11 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             }
         }
         
-        //modifier
-        if(this.getArmorManager().meleeAttackDamageModifier.equipped == true && this.castingSkill.getRange() < 200)
+        // meleeAttackDamageBonus modifier
+        if(this.castingSkill.getRange() < 200)
         {
-            damage.getAmountObject().adjustPercentModifier(.5f);
+            int points = this.getArmorManager().meleeAttackDamageBonus.points;
+            damage.getAmountObject().adjustPercentModifier(.5f * points);
         }
         
         //roll for crit
@@ -1310,7 +1322,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             }
         } 
         //double jumping
-        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 && this.getArmorManager().doubleJumpModifier.equipped == true)  
+        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 && this.getArmorManager().doubleJump.isMaxPoints() == true)  
         {
             if(this.doubleJumpEnergy == this.MAX_JUMP_ENERGY-20)
             {
@@ -1325,7 +1337,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             }
         }
         //jetpacking
-        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 &&this.jumpEnergy < this.MAX_JUMP_ENERGY && this.getArmorManager().jetpackModifier.equipped == true) 
+        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 &&this.jumpEnergy < this.MAX_JUMP_ENERGY && this.getArmorManager().jetpack.isMaxPoints() == true) 
         {
                  //add jetpack emitters
                 if( this.doubleJumpEnergy == this.MAX_JUMP_ENERGY -20)
@@ -1348,13 +1360,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                 
                 
         }
-        
-        //teleport
-        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 &&this.jumpEnergy < this.MAX_JUMP_ENERGY && this.getArmorManager().teleportModifier.equipped == true) 
-        {
-            this.handleTeleport(x,y);
-            this.doubleJumpAvailable = false;
-        }
+       
         
         //set jump released flag
         this.jumpReleased = false;
@@ -1362,93 +1368,6 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         //set correct animation for this frame
         this.setCorrectAnimation();
         
-    }
-    
-    public void handleTeleport(float x, float y)
-    {
-         //======================
-        // Get Vector To Target
-        //======================
-        
-        //Get target X and Y
-        float targetX = x;
-        float targetY = y;
-        //Get user X and Y
-        float userX = this.getPosition().x;
-        float userY = this.getPosition().y;
-        
-        //get vector to target
-        Vector2f vectorToTarget = new Vector2f(targetX - userX, targetY - userY);
-        vectorToTarget.normalise();
-        
-        //===============================
-        // Determine Rail Beam End Point
-        //===============================
-        
-        SylverVector2f endPoint = new SylverVector2f((vectorToTarget.x * 2000) + userX , (vectorToTarget.y * 2000) + userY);
-        ArrayList<SylverVector2f> potentialEnds = new ArrayList();
-        //collision body
-        //make line from self to target
-        Vector2f h = new Vector2f(vectorToTarget );
-        h.scale(2000);
-        Line line = new Line(new Vector2f(0, 0),h);
- 
-        Body lineBody = new StaticBody(line);
-        lineBody.setPosition(userX, userY);
-        lineBody.setBitmask(Entity.BitMasks.COLLIDE_WORLD.value);
-        lineBody.setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value);        
-        
-        //get list terrain
-        ArrayList<SceneObject> terrain = this.getOwningScene().getSceneObjectManager().get(ExtendedSceneObjectGroups.TERRAIN);
-
-        //collide everything
-        for(SceneObject object: terrain)
-        {
-            WorldObjectEntity blocker = (WorldObjectEntity)object;
-
-            Contact[] contacts = new Contact[10];
-            for (int i=0;i<10;i++) {
-                    contacts[i] = new Contact();
-            }
-            int numContacts = Collide.collide(contacts,blocker.getBody() , lineBody, 1);
-
-            if(numContacts > 0)
-            {
-                for(int i = 0; i < numContacts; i++)
-                    potentialEnds.add( new SylverVector2f(contacts[i].getPosition().getX(),contacts[i].getPosition().getY()));
-            }
-            
-        }  
-        
-        
-        //find closest end and make that the endPoint
-        for(SylverVector2f end: potentialEnds)
-        { 
-//            //debug
-//            Image hh = new Image("black.png");
-//            hh.setDimensions(10, 10);
-//            hh.setPosition(end.getX(), end.getY());
-//            user.getOwningScene().add(hh, Layer.MAIN);
-                               
-            if(end.distance(this.getPosition())< endPoint.distance(this.getPosition()))
-                endPoint = end;
-        }
-        
-        //mouse
-        SylverVector2f mouse = new SylverVector2f(x,y);       
-        if(mouse.distance(this.getPosition()) < endPoint.distance(this.getPosition()))
-            endPoint = mouse;
-        
-        //if endpoint is not mouse move it back a little
-        if(endPoint != mouse)
-        {
-            SylverVector2f backVector = new SylverVector2f(this.getPosition().x - endPoint.x, this.getPosition().y - endPoint.y);
-            backVector.normalise();
-            backVector.scale(100);
-            endPoint.add(backVector);
-        }
-        
-        this.setPosition(endPoint.x, endPoint.y);
     }
     
     public void handleDash(SylverVector2f dashVector)

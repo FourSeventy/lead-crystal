@@ -295,7 +295,7 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
             image.draw(gl);
         
         //draws entityTooltip
-        if(entityTooltip != null && this.getOwningScene() instanceof GameClientScene && ((GameClientScene)this.getOwningScene()).player.getArmorManager().seeEnemyHealthModifier.equipped)
+        if(entityTooltip != null && this.getOwningScene() instanceof GameClientScene && ((GameClientScene)this.getOwningScene()).player.getArmorManager().seeEnemyHealth.isMaxPoints())
             entityTooltip.draw(gl); 
         
         

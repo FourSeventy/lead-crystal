@@ -27,7 +27,7 @@ import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.core.SaveGame;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
-import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorModifier;
+import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat;
 import com.silvergobletgames.sylver.audio.AudioRenderer;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.*;
@@ -106,16 +106,14 @@ public class NewCharacterScene extends Scene
         this.add(back,Layer.BACKGROUND);
         
         //options title
-        Text title = new Text("New Character",CoreTextType.MENU);      
-        title.setScale(1.2f);
+        Text title = new Text("New Character",LeadCrystalTextType.TITLE);      
         title.setPosition(center - title.getWidth()/2, 700);       
         this.add(title,Layer.MAIN);
         
         setImages();
         
         //name label
-        Text nameLabel = new Text("Name:",LeadCrystalTextType.MENUBUTTONS);
-        nameLabel.setScale(1.2f);
+        Text nameLabel = new Text("Name:",LeadCrystalTextType.MENU46);
         nameLabel.setPosition(center - 200, 475);
         this.add(nameLabel, Layer.MAIN);
         
@@ -124,8 +122,7 @@ public class NewCharacterScene extends Scene
         this.add(nameTextBox,Layer.MAIN);
         
         // head
-        headText = new Text("Head: " + (this.currentHeadSelection + 1),LeadCrystalTextType.MENUBUTTONS);
-        headText.setScale(1.2f);
+        headText = new Text("Head: " + (this.currentHeadSelection + 1),LeadCrystalTextType.MENU46);
         headText.setPosition(center - headText.getWidth()/2, 425);
         final Button headButton = new Button(new Image("blank.png"), center - headText.getWidth()/2, headText.getPosition().y, headText.getWidth(), headText.getHeight());
         this.add(headText,Layer.MAIN);
@@ -147,7 +144,7 @@ public class NewCharacterScene extends Scene
                       if(headText.hasTextEffect("small"))
                           headText.removeTextEffect("small");
                       
-                       headText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, headText.getScale(), 1.5));
+                       headText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, headText.getScale(), 1.3));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -158,14 +155,13 @@ public class NewCharacterScene extends Scene
                         if(headText.hasTextEffect("big"))
                            headText.removeTextEffect("big");
                         
-                        headText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, headText.getScale(), 1.2));
+                        headText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, headText.getScale(), 1));
                 }
             }
         });
         
         //body
-        bodyText = new Text("Body: " + (this.currentBodySelection + 1),LeadCrystalTextType.MENUBUTTONS);
-        bodyText.setScale(1.2f);
+        bodyText = new Text("Body: " + (this.currentBodySelection + 1),LeadCrystalTextType.MENU46);
         bodyText.setPosition(center - bodyText.getWidth()/2, 375);
         final Button bodyButton = new Button(new Image("blank.png"), center - bodyText.getWidth()/2, bodyText.getPosition().y, bodyText.getWidth(), bodyText.getHeight());
         this.add(bodyText,Layer.MAIN);
@@ -187,7 +183,7 @@ public class NewCharacterScene extends Scene
                       if(bodyText.hasTextEffect("small"))
                           bodyText.removeTextEffect("small");
                       
-                       bodyText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, bodyText.getScale(), 1.5));
+                       bodyText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, bodyText.getScale(), 1.3));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -198,15 +194,14 @@ public class NewCharacterScene extends Scene
                         if(bodyText.hasTextEffect("big"))
                            bodyText.removeTextEffect("big");
                         
-                        bodyText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, bodyText.getScale(), 1.2));
+                        bodyText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, bodyText.getScale(), 1));
                 }
             }
         });
     
         
         //ok
-        final Text okText = new Text("OK",LeadCrystalTextType.MENUBUTTONS);
-        okText.setScale(1.2f);
+        final Text okText = new Text("OK",LeadCrystalTextType.MENU46);
         okText.setPosition(center - okText.getWidth()/2, 275);
         final Button okButton = new Button(new Image("blank.png"), center - okText.getWidth()/2, okText.getPosition().y, okText.getWidth(), okText.getHeight());
         this.add(okText,Layer.MAIN);
@@ -238,10 +233,11 @@ public class NewCharacterScene extends Scene
                         player.getLevelProgressionManager().completeMainObjective(8); 
                         player.getSkillManager().setSkillPoints(20);
                         
-                        for(ArmorModifier mod: player.getArmorManager().armorModifiers.values())
+                         for(ArmorStat stat: player.getArmorManager().armorStats.values())
                         {
-                            mod.unlocked = true;
+                            stat.unlocked = true;
                         }
+
                     }
 
                     SaveGame save = new SaveGame();
@@ -261,7 +257,7 @@ public class NewCharacterScene extends Scene
                       if(okText.hasTextEffect("small"))
                           okText.removeTextEffect("small");
                       
-                       okText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, okText.getScale(), 1.5));
+                       okText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, okText.getScale(), 1.3));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -272,14 +268,13 @@ public class NewCharacterScene extends Scene
                         if(okText.hasTextEffect("big"))
                            okText.removeTextEffect("big");
                         
-                        okText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, okText.getScale(), 1.2));
+                        okText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, okText.getScale(), 1));
                 }
             }
         });
         
         //back
-        final Text backText = new Text("Back",LeadCrystalTextType.MENUBUTTONS);
-        backText.setScale(1.2f);
+        final Text backText = new Text("Back",LeadCrystalTextType.MENU46);
         backText.setPosition(center - backText.getWidth()/2, 225);
         final Button backButton = new Button(new Image("blank.png"), center - backText.getWidth()/2, backText.getPosition().y, backText.getWidth(), backText.getHeight());
         this.add(backText,Layer.MAIN);
@@ -302,7 +297,7 @@ public class NewCharacterScene extends Scene
                       if(backText.hasTextEffect("small"))
                           backText.removeTextEffect("small");
                       
-                       backText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, backText.getScale(), 1.5));
+                       backText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, backText.getScale(), 1.3));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -313,7 +308,7 @@ public class NewCharacterScene extends Scene
                         if(backText.hasTextEffect("big"))
                            backText.removeTextEffect("big");
                         
-                        backText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, backText.getScale(), 1.2));
+                        backText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, backText.getScale(), 1));
                 }
             }
         });      
