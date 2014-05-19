@@ -1027,13 +1027,13 @@ public class AnimationPackClasses {
             // Build Delay Map
             //=====================        
             this.timingMap.put(ExtendedImageAnimations.MELEEATTACK, 15);
-            this.timingMap.put(ExtendedImageAnimations.RANGEDATTACK, 15);
+            this.timingMap.put(ExtendedImageAnimations.RANGEDATTACK, 10);
 
             //========================
             // Build Skill Offset Map
             //========================
             this.positionOffsetMap.put(ExtendedImageAnimations.MELEEATTACK, new SylverVector2f(100,0));
-            this.positionOffsetMap.put(ExtendedImageAnimations.RANGEDATTACK, new SylverVector2f(90,5));
+            this.positionOffsetMap.put(ExtendedImageAnimations.RANGEDATTACK, new SylverVector2f(90,40));
             this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0111_1101_1011_0111_0111_1101_0000_0000),
                                                                                         Float.intBitsToFloat(0b0111_1110_1000_0001_0111_0000_0000_0000)));
                   
