@@ -873,7 +873,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     
     private static ROVector2f[] getBodyVertices()
     {
-        ROVector2f[] vertices = new ROVector2f[12];
+        ROVector2f[] vertices = new ROVector2f[17];
                 
         vertices[0] = new Vector2f(15,55);
         vertices[1] = new Vector2f(0,65);
@@ -881,7 +881,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         //points on circle radius 25
         int ehh = 3;
-        for(double t = Math.PI; t <= 2* Math.PI + Math.PI/10; t+= Math.PI/8)
+        for(double t = Math.PI; t <= 2* Math.PI + Math.PI/10; t+= Math.PI/12)
         {
           double x = 25*Math.cos(t) + 0;
           double y = 25*Math.sin(t) - 55;           
