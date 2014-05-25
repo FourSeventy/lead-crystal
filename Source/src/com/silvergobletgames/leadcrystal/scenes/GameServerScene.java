@@ -380,7 +380,7 @@ public class GameServerScene extends Scene
                             {
                                 clientData.hoveredEntityID = entity.getID();
                                 //if the entity is in range of the player
-                                if (Point.distance(player.getPosition().x, player.getPosition().y, entity.getPosition().x, entity.getPosition().y) < 400)             
+                                if (Point.distance(player.getPosition().x, player.getPosition().y, entity.getPosition().x, entity.getPosition().y) < 250)             
                                     clientData.hoveredEntityInRange = true;             
                                 else              
                                     clientData.hoveredEntityInRange = false;

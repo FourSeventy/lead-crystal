@@ -263,6 +263,20 @@ public class Hud extends Window
         
         //escape menu
         this.escapeMenu = new EscapeMenu(center-200,350); 
+        escapeMenu.addActionListener(new ActionListener(){
+         public void actionPerformed(ActionEvent e)
+            {
+                if(e.getActionCommand().equals("mouseEntered"))
+                {
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND)); 
+                }
+                else if(e.getActionCommand().equals("mouseExited"))
+                {
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE)); 
+                }
+            }
+        
+        });
         escapeMenu.setOwningScene(scene);
         this.escapeMenu.close();  
         menuList.add(escapeMenu);
