@@ -262,9 +262,9 @@ public class Hud extends Window
         menuList.add(questMenu);
         
         //escape menu
-        this.escapeMenu = new EscapeMenu(center-200,250);
-        this.escapeMenu.close();
+        this.escapeMenu = new EscapeMenu(center-200,350); 
         escapeMenu.setOwningScene(scene);
+        this.escapeMenu.close();  
         menuList.add(escapeMenu);
         
         //pain overlay     
@@ -273,37 +273,7 @@ public class Hud extends Window
         this.painOverlay.getImage().setAlphaBrightness(0);
         this.painOverlay.getImage().setAlphaCulling(false);
         this.addComponent(painOverlay);
-        
-        //maxes the health and shield area go transparent if you mouse over it
-//        healthAreaTransparencyFeeler = new Button("blank.png",0,769,788 * .73f,164 * .73f);
-//        healthAreaTransparencyFeeler.addActionListener(new ActionListener(){       
-//            public void actionPerformed(ActionEvent e)
-//            {
-//                if(e.getActionCommand().equals("mouseEntered"))
-//                {
-//                    healthFrame.getImage().setColor(new Color(1,1,1,.3f)); 
-//                    healthFill.getImage().setColor(new Color(1,1,1,.3f)); 
-//                    healthCurrentText.getText().setColor(new Color(1,1,1,.3f));
-//                    healthMaxText.getText().setColor(new Color(1,1,1,.3f));
-//                    potionText.getText().setColor(new Color(1,1,1,.3f));
-//                    potionImage.getImage().setColor(new Color(1,1,1,.3f));
-//                    
-//                }
-//                if(e.getActionCommand().equals("mouseExited"))
-//                {
-//                    healthFrame.getImage().setColor(new Color(1,1,1,1f)); 
-//                    healthFill.getImage().setColor(new Color(1,1,1,1f)); 
-//                    healthCurrentText.getText().setColor(new Color(1,1,1,1f));
-//                    healthMaxText.getText().setColor(new Color(1,1,1,1f));
-//                    potionText.getText().setColor(new Color(1,1,1,1f));
-//                    potionImage.getImage().setColor(new Color(1,1,1,1f));
-//                }
-//            }        
-//        });
-//        healthAreaTransparencyFeeler.dontKillClick = true;       
-//        this.addComponent(healthAreaTransparencyFeeler); 
-        
-        
+
         //Health     
         this.healthFrame = new Button("healthbarFrame.png",5, 756,788 * .70f, 164 * .70f);
         this.healthFrame.dontKillClick = true;

@@ -25,6 +25,7 @@ public enum LeadCrystalTextType implements TextType{
     HUD22,
     HUD24,
     HUD28,
+    HUD34,
     MESSAGE,
     CHAT,
     MENU40,
@@ -90,6 +91,13 @@ public enum LeadCrystalTextType implements TextType{
         textRenderer.setUseVertexArrays(false);
         metrics = java2d.getFontMetrics(font);
         Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.HUD28,textRenderer,metrics);
+        
+        //HUD34
+        font = new Font("CALIBRI", Font.PLAIN, 36);
+        textRenderer = new TextRenderer(font, true, true,new SylverRenderDelegate(false,0));
+        textRenderer.setUseVertexArrays(false);
+        metrics = java2d.getFontMetrics(font);
+        Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.HUD34,textRenderer,metrics);
         
         
         //CHAT

@@ -35,7 +35,7 @@ public class QuestMenu extends Window{
     public QuestMenu(float x, float y,PlayerEntity player)
     {
        //super constructor call, setting the background sprite and initial position
-       super(new Image("questMenu.png"),x,y,500,900);
+       super(new Image("tallFrame.png"),x,y,500,900);
        
        this.playerReference = player;
        

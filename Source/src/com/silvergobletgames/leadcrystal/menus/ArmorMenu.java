@@ -100,7 +100,7 @@ public class ArmorMenu extends Window{
     
     public ArmorMenu( PlayerEntity player, float x, float y)
     {
-        super(new Image("armorMenu.png"),x,y,1200,900);
+        super(new Image("bigFrame.png"),x,y,1200,900);
         
         this.playerReference = player;
         
