@@ -203,14 +203,14 @@ public class LevelProgressionManager
         cave2.levelName = "Cave 2";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Kill giant motoccos";
+        objective.objectiveName = "Kill giant Motoccos";
         objective.objectiveDescription = "Kill all 6 giant motoccos in the cave.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         cave2.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Clear Caves";
+        objective.objectiveName = "Kill Jumpers";
         objective.objectiveDescription = "Kill 10 jumpers";
         objective.currencyAward = 25;
         cave2.sideObjective = objective;
