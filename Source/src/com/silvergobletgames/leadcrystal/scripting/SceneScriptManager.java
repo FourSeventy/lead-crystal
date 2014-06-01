@@ -7,6 +7,7 @@ import com.silvergobletgames.leadcrystal.entities.EntityEffect.EntityEffectType;
 import com.silvergobletgames.leadcrystal.entities.MobSpawner;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat.ArmorStatID;
+import com.silvergobletgames.leadcrystal.items.LootSpewer;
 import com.silvergobletgames.leadcrystal.netcode.GobletServer;
 import com.silvergobletgames.leadcrystal.netcode.OpenInstructionalTipPacket.InstructionalTip;
 import com.silvergobletgames.leadcrystal.netcode.OpenMenuPacket.MenuID;
@@ -422,6 +423,16 @@ public class SceneScriptManager
         //trigger the script
         if(scriptObject != null)
             scriptObject.runScript(null); 
+    }
+    
+    public void addLootSpewer(float spewTime,float x, float y)
+    {
+        System.err.println("here");
+        //add spewer to the world
+        LootSpewer spew = new LootSpewer((int)spewTime);
+        spew.setPosition(x, y);
+        this.owningScene.add(spew, Scene.Layer.MAIN);
+        System.err.println("here1");
     }
     
     

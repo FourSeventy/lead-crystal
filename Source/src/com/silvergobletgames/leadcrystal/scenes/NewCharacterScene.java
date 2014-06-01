@@ -239,6 +239,24 @@ public class NewCharacterScene extends Scene
                         }
 
                     }
+                    if(player.getName().equals("cavetest"))
+                    {
+                        
+                        player.getCurrencyManager().addCurrency(5000); 
+                        player.getLevelProgressionManager().completeMainObjective(0); 
+                        player.getLevelProgressionManager().completeMainObjective(1); 
+                        player.getLevelProgressionManager().completeMainObjective(2); 
+                        player.getLevelProgressionManager().completeMainObjective(3); 
+                        player.getLevelProgressionManager().completeMainObjective(4); 
+                        player.getLevelProgressionManager().completeMainObjective(5); 
+                        player.getSkillManager().setSkillPoints(20);
+                        
+                         for(ArmorStat stat: player.getArmorManager().armorStats.values())
+                        {
+                            stat.unlocked = true;
+                        }
+
+                    }
 
                     SaveGame save = new SaveGame();
                     save.setPlayer(player);
