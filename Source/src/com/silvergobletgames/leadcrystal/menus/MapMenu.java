@@ -265,10 +265,18 @@ public class MapMenu extends Window{
     @Override
     public void open()
     {
-        super.open();
+
+        this.buildLevelButtons();
+        for(Button button: this.levelButtons)
+        {
+            //set button relative position
+           button.setWindowRelativePosition(button.getWindowRelativePosition().x - this.panOffset.x * 2, button.getWindowRelativePosition().y - this.panOffset.y * 2);
+
+        }
         
-        if(panOffset.x == 0 && panOffset.y == 0)
-            this.buildLevelButtons();
+        super.open();
+
+        
     }
     
     /**

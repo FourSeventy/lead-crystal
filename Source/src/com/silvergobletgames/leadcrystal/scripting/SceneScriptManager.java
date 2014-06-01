@@ -427,12 +427,10 @@ public class SceneScriptManager
     
     public void addLootSpewer(float spewTime,float x, float y)
     {
-        System.err.println("here");
         //add spewer to the world
         LootSpewer spew = new LootSpewer((int)spewTime);
         spew.setPosition(x, y);
         this.owningScene.add(spew, Scene.Layer.MAIN);
-        System.err.println("here1");
     }
     
     
