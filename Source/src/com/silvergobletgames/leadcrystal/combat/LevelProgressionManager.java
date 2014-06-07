@@ -204,7 +204,7 @@ public class LevelProgressionManager
         //main objective
         objective = new LevelObjective();
         objective.objectiveName = "Kill giant Motoccos";
-        objective.objectiveDescription = "Kill all 6 giant motoccos in the cave.";
+        objective.objectiveDescription = "Kill all 5 giant motoccos in the cave.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         cave2.mainObjective = objective;
@@ -220,18 +220,18 @@ public class LevelProgressionManager
         //cave 3
         Level cave3 = new Level(); 
         cave3.levelDataName = "cave3.lv";
-        cave3.levelName = "Cave 3";
+        cave3.levelName = "Sewage Pipe";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Do thing!";
-        objective.objectiveDescription = "Do thing!";
+        objective.objectiveName = "Close off leaking sewage pipe";
+        objective.objectiveDescription = "Find and close off leaking sewage pipe";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         cave3.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Do something";
-        objective.objectiveDescription = "Do something.";
+        objective.objectiveName = "Missing artifact";
+        objective.objectiveDescription = "Find the missing artifact";
         objective.currencyAward = 25;
         cave3.sideObjective = objective;
         //adding to map
@@ -240,18 +240,18 @@ public class LevelProgressionManager
         //cave 4
         Level cave4 = new Level(); 
         cave4.levelDataName = "cave4.lv";
-        cave4.levelName = "Cave 4";
+        cave4.levelName = "Investigate ruins";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Do thing!";
-        objective.objectiveDescription = "Do thing!";
+        objective.objectiveName = "Investigate Ruins";
+        objective.objectiveDescription = "Investigate the underground ruins";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         cave4.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Do something";
-        objective.objectiveDescription = "Do something.";
+        objective.objectiveName = "Kill Mucker";
+        objective.objectiveDescription = "Kill the giant Mucker lurking in the ruins.";
         objective.currencyAward = 25;
         cave4.sideObjective = objective;
         //adding to map
@@ -260,11 +260,11 @@ public class LevelProgressionManager
         //cave 5
         Level cave5 = new Level(); 
         cave5.levelDataName = "cave5.lv";
-        cave5.levelName = "Cave 5";
+        cave5.levelName = "Destroy Source";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Do thing!";
-        objective.objectiveDescription = "Do thing!";
+        objective.objectiveName = "Destroy Source of Creatures";
+        objective.objectiveDescription = "Head into the temple and destroy the source of the creatures.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         cave5.mainObjective = objective;

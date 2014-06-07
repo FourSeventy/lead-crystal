@@ -840,7 +840,7 @@ public class MapMenu extends Window{
                      if(!button8.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png")) 
                      {
                         button8.getImage().getOverlay("img").getImage().setScale(1.2f);
-                        repaintLevelDetails(8);
+                        repaintLevelDetails(9);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
@@ -893,7 +893,7 @@ public class MapMenu extends Window{
                      if(!button9.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png")) 
                      {
                         button9.getImage().getOverlay("img").getImage().setScale(1.2f);
-                        repaintLevelDetails(8);
+                        repaintLevelDetails(10);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
