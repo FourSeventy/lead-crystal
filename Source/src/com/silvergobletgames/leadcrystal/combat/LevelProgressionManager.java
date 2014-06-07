@@ -163,13 +163,13 @@ public class LevelProgressionManager
         objective.objectiveDescription = "We lost contact with a caravan carrying supplies to the town, go investigate";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
-        objective.statReward = ArmorStatID.HARD_TO_KILL;
         level5.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
         objective.objectiveName = "Survivors";
         objective.objectiveDescription = "Search for any survivors of the caravan";
         objective.currencyAward = 25;
+        objective.statReward = ArmorStatID.HARD_TO_KILL;
         level5.sideObjective = objective;
         //adding to map
         this.levelMap.put(5, level5);
@@ -193,6 +193,7 @@ public class LevelProgressionManager
         objective.objectiveName = "Lost Treasure";
         objective.objectiveDescription = "Find lost treasure chest.";
         objective.currencyAward = 25;
+        objective.statReward = ArmorStatID.CC_REDUCTION;
         cave1.sideObjective = objective;
         //adding to map
         this.levelMap.put(6, cave1);
@@ -213,6 +214,7 @@ public class LevelProgressionManager
         objective.objectiveName = "Kill Jumpers";
         objective.objectiveDescription = "Kill 10 jumpers";
         objective.currencyAward = 25;
+        objective.statReward = ArmorStatID.POTION_COOLDOWN_RESET;
         cave2.sideObjective = objective;
         //adding to map
         this.levelMap.put(7, cave2);
@@ -233,6 +235,7 @@ public class LevelProgressionManager
         objective.objectiveName = "Missing artifact";
         objective.objectiveDescription = "Find the missing artifact";
         objective.currencyAward = 25;
+        objective.statReward = ArmorStatID.DOUBLE_GOLD;
         cave3.sideObjective = objective;
         //adding to map
         this.levelMap.put(8, cave3);
@@ -253,6 +256,7 @@ public class LevelProgressionManager
         objective.objectiveName = "Kill Mucker";
         objective.objectiveDescription = "Kill the giant Mucker lurking in the ruins.";
         objective.currencyAward = 25;
+        objective.statReward = ArmorStatID.PROXIMITY_DAMAGE_REDUCTION;
         cave4.sideObjective = objective;
         //adding to map
         this.levelMap.put(9, cave4);
@@ -273,6 +277,7 @@ public class LevelProgressionManager
         objective.objectiveName = "Do something";
         objective.objectiveDescription = "Do something.";
         objective.currencyAward = 25;
+        objective.statReward = ArmorStatID.MOVE_SPEED;
         cave5.sideObjective = objective;
         //adding to map
         this.levelMap.put(10, cave5);
