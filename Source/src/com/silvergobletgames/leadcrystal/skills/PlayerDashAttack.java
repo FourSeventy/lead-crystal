@@ -33,7 +33,7 @@ public class PlayerDashAttack extends Skill{
         super(SkillID.PlayerDash,SkillType.OFFENSIVE, ExtendedImageAnimations.MELEEATTACK,180, 150);
 
         //set the skillID and the name
-        this.icon = new Image("dashIcon.jpg");
+        this.icon = new Image("dashIcon.png");
         this.skillName = "Dash Attack";
         this.skillDescription = "Dashes forward passing through enemies doing damage and slowing them.";
         this.unlockCost = 1;

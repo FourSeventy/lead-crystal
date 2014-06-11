@@ -46,7 +46,7 @@ public class PlayerBuckshot extends PlayerSkill{
         this.skillName = "Buckshot";          
         this.skillDescription = "Shoots a blast of buckshot that does high damage but has low range.";
         this.unlockCost = 1;
-        this.icon = new Image("buckshotIcon.jpg");
+        this.icon = new Image("buckshotIcon.png");
 
     }
     

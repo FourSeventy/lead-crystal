@@ -44,7 +44,7 @@ public class PlayerBoomerang extends PlayerSkill
         super(SkillID.PlayerBoomerang,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK,270,Integer.MAX_VALUE);
         
         //set the skillID and the name
-        this.icon = new Image("blade_boomerang.png");
+        this.icon = new Image("boomerangIcon.png");
         this.skillName = "Boomerang Throw";
         this.skillDescription = "A boomerang attack that leeches life from all enemies struck, catch the boomerang on the way back to reset the cooldown.";
         this.unlockCost = 1;

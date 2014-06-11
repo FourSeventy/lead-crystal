@@ -33,7 +33,7 @@ public class PlayerCrushingStrike extends PlayerSkill{
         super(SkillID.PlayerCrushingStrike,SkillType.OFFENSIVE,ExtendedImageAnimations.MELEEATTACK,6 * 60,150);
         
         //set the name description image and unlock cost
-        this.icon = new Image("computer.png");
+        this.icon = new Image("flameStrikeIcon.png");
         this.skillName = "Crushing Strike";      
         this.skillDescription = "An aoe melee attack that does more damage to closer enemies.";
         this.unlockCost =1;

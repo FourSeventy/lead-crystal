@@ -42,7 +42,7 @@ public class PlayerWard extends PlayerSkill{
         super(SkillID.PlayerWard,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK, 1800, Integer.MAX_VALUE);
         
         //set the skillID and the name
-        this.icon = new Image("icetrapIcon.jpg");
+        this.icon = new Image("iceWardIcon.png");
         this.skillName = "Ice Ward";
         this.skillDescription = "Places a ward on the ground damaging and slowing all enemies in its radius.";
         

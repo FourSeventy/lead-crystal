@@ -50,7 +50,7 @@ public class PlayerRicochet extends PlayerSkill{
         super(SkillID.PlayerRicochet,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,50,Integer.MAX_VALUE);
         
         //set the skillID and the name
-        this.icon = new Image("blade.png");
+        this.icon = new Image("ricochetBladeIcon.png");
         this.skillName = "Ricochet Blade";
         this.skillDescription = "Shoots a deadly blade that bounces off walls and pierces enemies.";
         this.unlockCost = 1;

@@ -52,7 +52,7 @@ public class PlayerBarrelRoll extends PlayerSkill{
         super(SkillID.PlayerBarrelRoll,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK,600,Integer.MAX_VALUE);
         
         //set the skillID and the name
-        this.icon = new Image("barrel.png");
+        this.icon = new Image("barrelRollIcon.png");
         this.skillName = "Barrel Roll";
         this.skillDescription = "Rolls an explosive barrel that explodes into high damaging shrapnal and leaves damaging fire on the ground.";
         this.unlockCost = 2;

@@ -32,7 +32,7 @@ public class PlayerBashAttack extends Skill{
         super(SkillID.PlayerBashAttack,SkillType.OFFENSIVE,ExtendedImageAnimations.MELEEATTACK,180,100);
         
         //set the name description image and unlock cost
-        this.icon = new Image("icetrap.png");
+        this.icon = new Image("bashIcon.png");
         this.skillName = "Bash Attack";      
         this.skillDescription = "A melee strike with short range that bashes enemies backwards and stuns them.";
         

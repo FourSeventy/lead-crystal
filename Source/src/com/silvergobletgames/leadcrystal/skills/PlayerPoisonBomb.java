@@ -49,7 +49,7 @@ public class PlayerPoisonBomb extends PlayerSkill{
         super(SkillID.PlayerPoisonBomb,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,25 * 60,Integer.MAX_VALUE);
         
         //set the skillID and the name
-        this.icon = new Image("soulLeech.jpg");
+        this.icon = new Image("poisonBombIcon.png");
         this.skillName = "Poison Bomb";
         this.skillDescription = "A poison bomb that trails poisonous gas that slows and damages.";
         this.unlockCost = 1;

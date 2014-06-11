@@ -47,7 +47,7 @@ public class PlayerLaserShot extends PlayerSkill{
         super(SkillID.PlayerLaser,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,45,Integer.MAX_VALUE);
         
         //set the skillID and the name
-        this.icon = new Image("ChargeShotIcon.png");
+        this.icon = new Image("laserIcon.png");
         this.skillName = "Laser Shot";
         this.skillDescription = "Fast and accurate laser shot with medium damage.";
 

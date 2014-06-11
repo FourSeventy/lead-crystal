@@ -43,7 +43,7 @@ public class PlayerLeechingBlades extends PlayerSkill{
         super(SkillID.PlayerLeechingBlades,SkillType.DEFENSIVE, ExtendedImageAnimations.SPELLATTACK,1800,50);
  
         //set the skillID and the name
-        this.icon = new Image("blade.png") ;
+        this.icon = new Image("leechBladeIcon.png") ;
         this.skillName = "Leeching Blades";
         this.skillDescription = "Launches blades that spin around you doing damage and leeching health from enemies.";
         this.unlockCost = 1;

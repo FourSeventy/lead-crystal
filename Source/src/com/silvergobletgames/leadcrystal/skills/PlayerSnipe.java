@@ -52,7 +52,7 @@ public class PlayerSnipe extends PlayerSkill
         super(SkillID.PlayerSnipe,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,300, Integer.MAX_VALUE);
 
         //set the skillID and the name
-        this.icon = new Image("snipeIcon.jpg");
+        this.icon = new Image("snipeIcon.png");
         this.skillName = "Snipe";
         
         this.skillDescription = "Shoots a long range powerful beam of energy that always causes a critical hit.";

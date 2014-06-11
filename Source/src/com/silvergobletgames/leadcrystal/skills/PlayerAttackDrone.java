@@ -47,7 +47,7 @@ public class PlayerAttackDrone extends Skill
         //set the name description image and unlock cost
         this.skillName = "Attack Drone";
         this.skillDescription = "Spawns a droid that flies around with you shooting at enemies.";
-        this.icon = new Image("implant.png");      
+        this.icon = new Image("attackDroidIcon.png");      
         this.unlockCost = 2;
         
     }

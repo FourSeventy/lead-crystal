@@ -46,7 +46,7 @@ public class PlayerRocket extends PlayerSkill
         super(SkillID.PlayerRocket,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,50,Integer.MAX_VALUE);
 
         //set the skillID and the name
-        this.icon = new Image("rocket.png");
+        this.icon = new Image("rocketIcon.png");
         this.skillName = "Rocket Launcher";
         this.skillDescription = "Shoots a rocket that explodes and does AOE damage.";
         

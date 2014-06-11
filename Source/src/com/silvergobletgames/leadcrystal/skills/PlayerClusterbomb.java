@@ -42,7 +42,7 @@ public class PlayerClusterbomb extends PlayerSkill
         //super constructor
         super(SkillID.PlayerClusterbomb,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK,420, Integer.MAX_VALUE);
         //set the skillID and the name
-        this.icon = new Image("flashbangIcon.jpg");
+        this.icon = new Image("clusterBombIcon.png");
         this.skillName = "Cluster Bomb";
         this.skillDescription = "Throws a cluster of bombs that stun enemies in a medium radius."; 
         this.unlockCost = 1;
