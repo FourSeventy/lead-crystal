@@ -158,7 +158,7 @@ public class Hud extends Window
         //==============
         
         //initialize potions menu
-        potionsMenu = new PotionsMenu(2,100);
+        potionsMenu = new PotionsMenu(playerReference,right-550,0);
         potionsMenu.addActionListener(new ActionListener(){     
             public void actionPerformed(ActionEvent e)
             {
