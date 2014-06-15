@@ -79,7 +79,7 @@ public class Hud extends Window
     private Button radarFrame;
     private ArrayList<Button> primaryObjectiveArrows = new ArrayList<>();
     private ArrayList<Button> secondaryObjectiveArrows = new ArrayList<>();
-    private ArrayList<Button> playerArrows = new ArrayList<>();
+    private ArrayList<Button> enemies = new ArrayList<>();
     
     //credit element
     private Label creditLabel;
@@ -316,6 +316,11 @@ public class Hud extends Window
         Text te = new Text("0",LeadCrystalTextType.HUD28);
         this.potionText = new Label(te, 268, 771);
         this.addComponent(potionText);
+        
+        //skill hotkey text
+//        Text potionHotkey = new Text("F",LeadCrystalTextType.HUD20);
+//        Label potionHotkeyLabel = new Label(potionHotkey,210,771) ;      
+//        this.addComponent(potionHotkeyLabel);
       
         
         //skill bar stuff
@@ -757,8 +762,8 @@ public class Hud extends Window
         if(this.playerReference.getOwningScene() != null)
         {
             //position and radius of radar
-            float radarRadius = this.radarFrame.getWidth()/2 - 40;
-            SylverVector2f centerOfRadar = new SylverVector2f(this.radarFrame.getPosition().x + radarRadius , this.radarFrame.getPosition().y + radarRadius );
+            float radarRadius = this.radarFrame.getWidth()/2 - 45;
+            SylverVector2f centerOfRadar = new SylverVector2f(this.radarFrame.getPosition().x + radarRadius + 40 , this.radarFrame.getPosition().y + radarRadius + 45 );
            
             //remove all old arrows
             for(Button b :this.primaryObjectiveArrows)
@@ -769,9 +774,9 @@ public class Hud extends Window
                 this.removeComponent(b);
             this.secondaryObjectiveArrows.clear();
             
-            for(Button b :this.playerArrows)
+            for(Button b :this.enemies)
                 this.removeComponent(b);
-            this.playerArrows.clear();
+            this.enemies.clear();
             
             //get primary objectives and build their arrows
             ArrayList<SceneObject> primaryObjectiveEntities = this.playerReference.getOwningScene().getSceneObjectManager().get(ExtendedSceneObjectGroups.PRIMARYOBJECTIVE);
@@ -780,33 +785,48 @@ public class Hud extends Window
                 Entity primaryObjectiveEnt = (Entity)primaryObjectiveSO;
                 
                 SylverVector2f vectorToObjective = this.playerReference.distanceVector(primaryObjectiveEnt);
+                float vectorLength = Math.abs(vectorToObjective.length());
                 vectorToObjective.normalise();
                 
-                SylverVector2f arrowPosition =new SylverVector2f(centerOfRadar.x + vectorToObjective.x * radarRadius, centerOfRadar.y + vectorToObjective.y * radarRadius);
-                Button button = new Button(new Image("primaryArrow.png"), arrowPosition.x, arrowPosition.y, 40, 40);
-                this.addComponent(button);
-                this.primaryObjectiveArrows.add(button);
-                
-                
-                //set image angle
-                float angle = (float)Math.toDegrees(Math.acos(vectorToObjective.dot(new SylverVector2f(-1,0))));
-                if(vectorToObjective.y > 0)
-                    angle = -angle;
-                
-                button.getImage().setAngle(angle + 90);
+                if(vectorLength > 2000)
+                {
+                    SylverVector2f arrowPosition =new SylverVector2f(centerOfRadar.x + vectorToObjective.x * radarRadius, centerOfRadar.y + vectorToObjective.y * radarRadius);
+                    Button button = new Button(new Image("primaryArrow.png"), arrowPosition.x, arrowPosition.y, 40, 40);
+                    this.addComponent(button);
+                    this.primaryObjectiveArrows.add(button);
+
+
+                    //set image angle
+                    float angle = (float)Math.toDegrees(Math.acos(vectorToObjective.dot(new SylverVector2f(-1,0))));
+                    if(vectorToObjective.y > 0)
+                        angle = -angle;
+
+                    button.getImage().setAngle(angle + 90);
+                }
+                else
+                {
+                    //render a dot                              
+                    SylverVector2f arrowPosition =new SylverVector2f(centerOfRadar.x + vectorToObjective.x * (radarRadius * (vectorLength /2000)), centerOfRadar.y + vectorToObjective.y * (radarRadius * (vectorLength /2000)));
+                    Button button = new Button(new Image("primaryArrow.png"), arrowPosition.x, arrowPosition.y, 30, 30);
+                    this.addComponent(button);
+                    this.secondaryObjectiveArrows.add(button);
+                }
             }
             
             //get secondary objectives and build their arrows
-            if(playerReference.getCombatData().containsEffect("showSecondary"))
+            ArrayList<SceneObject> secondaryObjectiveEntities = this.playerReference.getOwningScene().getSceneObjectManager().get(ExtendedSceneObjectGroups.SECONDARYOBJECTIVE);
+            for(SceneObject secondaryObjectiveSO: secondaryObjectiveEntities)
             {
-                ArrayList<SceneObject> secondaryObjectiveEntities = this.playerReference.getOwningScene().getSceneObjectManager().get(ExtendedSceneObjectGroups.SECONDARYOBJECTIVE);
-                for(SceneObject secondaryObjectiveSO: secondaryObjectiveEntities)
+                Entity secondaryObjectiveEnt = (Entity)secondaryObjectiveSO;
+
+                SylverVector2f vectorToObjective = this.playerReference.distanceVector(secondaryObjectiveEnt);
+                float vectorLength = Math.abs(vectorToObjective.length());
+                vectorToObjective.normalise();
+                
+                //if we are far away, render an arrow
+                if(vectorLength>2000)
                 {
-                    Entity secondaryObjectiveEnt = (Entity)secondaryObjectiveSO;
-
-                    SylverVector2f vectorToObjective = this.playerReference.distanceVector(secondaryObjectiveEnt);
-                    vectorToObjective.normalise();
-
+                   
                     SylverVector2f arrowPosition =new SylverVector2f(centerOfRadar.x + vectorToObjective.x * radarRadius, centerOfRadar.y + vectorToObjective.y * radarRadius);
                     Button button = new Button(new Image("newSecondaryArrow.png"), arrowPosition.x, arrowPosition.y, 30, 30);
                     this.addComponent(button);
@@ -820,39 +840,43 @@ public class Hud extends Window
 
                     button.getImage().setAngle(angle + 90);
                 }
+                else
+                {
+                    //render a dot                              
+                    SylverVector2f arrowPosition =new SylverVector2f(centerOfRadar.x + vectorToObjective.x * (radarRadius * (vectorLength /2000)), centerOfRadar.y + vectorToObjective.y * (radarRadius * (vectorLength /2000)));
+                    Button button = new Button(new Image("newSecondaryArrow.png"), arrowPosition.x, arrowPosition.y, 30, 30);
+                    this.addComponent(button);
+                    this.secondaryObjectiveArrows.add(button);
+                }
             }
             
-            //get players and build their arrows
-            ArrayList<SceneObject> playerObjects = this.playerReference.getOwningScene().getSceneObjectManager().get(ExtendedSceneObjectGroups.PLAYER);
-            for(SceneObject playerSO: playerObjects)
+             //get enemies and build their arrows
+            if(this.playerReference.getArmorManager().upgradeRadar.points == this.playerReference.getArmorManager().upgradeRadar.maxPoints)
             {
-                if(playerSO == this.playerReference)
-                    continue;
-                
-                Entity playerEnt = (Entity)playerSO;
-                
-                //calculate vectorto player
-                float dx = this.playerReference.getImage().getPosition().getX() - playerEnt.getImage().getPosition().getX();
-                float dy = this.playerReference.getImage().getPosition().getY() - playerEnt.getImage().getPosition().getY();
-        
-                SylverVector2f vectorToPlayer = new SylverVector2f(dx,dy);
-                vectorToPlayer.normalise();
-                
-                SylverVector2f arrowPosition =new SylverVector2f(centerOfRadar.x + vectorToPlayer.x * radarRadius, centerOfRadar.y + vectorToPlayer.y * radarRadius);
-                Button button = new Button(new Image("playerArrow.png"), arrowPosition.x, arrowPosition.y, 30, 30);
-                this.addComponent(button);
-                this.secondaryObjectiveArrows.add(button);
-                
-                
-                //set image angle
-                float angle = (float)Math.toDegrees(Math.acos(vectorToPlayer.dot(new SylverVector2f(-1,0))));
-                if(vectorToPlayer.y > 0)
-                    angle = -angle;
-                
-                button.getImage().setAngle(angle - 90);
+                ArrayList<SceneObject> enemySceneObjects = this.playerReference.getOwningScene().getSceneObjectManager().get(ExtendedSceneObjectGroups.FIGHTER);
+                for(SceneObject secondaryObjectiveSO: enemySceneObjects)
+                {
+                    Entity secondaryObjectiveEnt = (Entity)secondaryObjectiveSO;
+
+                    SylverVector2f vectorToObjective = this.playerReference.distanceVector(secondaryObjectiveEnt);
+                    float vectorLength = Math.abs(vectorToObjective.length());
+                    vectorToObjective.normalise();
+
+                    //if we are far away, render an arrow
+                    if(vectorLength<2000)
+                    {
+                        //render a dot                              
+                        SylverVector2f arrowPosition =new SylverVector2f(centerOfRadar.x + vectorToObjective.x * (radarRadius * (vectorLength /2000)), centerOfRadar.y + vectorToObjective.y * (radarRadius * (vectorLength /2000)));
+                        Button button = new Button(new Image("circleSelected.png"), arrowPosition.x, arrowPosition.y, 30, 30);
+                        button.getImage().setColor(new Color(Color.red));
+                        this.addComponent(button);
+                        this.secondaryObjectiveArrows.add(button);
+                    }
+                }
             }
-       
-        }
+        }   
+
+
         
         //credit counter
         this.creditLabel.getText().setText(Integer.toString(this.playerReference.getCurrencyManager().getBalence()));
