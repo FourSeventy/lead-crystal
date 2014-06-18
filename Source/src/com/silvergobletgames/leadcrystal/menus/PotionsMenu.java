@@ -1,10 +1,12 @@
 package com.silvergobletgames.leadcrystal.menus;
 
+import com.silvergobletgames.leadcrystal.core.CursorFactory;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.items.Potion;
 import com.silvergobletgames.leadcrystal.items.PotionManager;
 import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
+import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.Text;
 import com.silvergobletgames.sylver.windowsystem.Button;
@@ -28,15 +30,52 @@ public class PotionsMenu extends Window{
         
         this.playerReference = playerReference;
         
+        //text
+        Text menuText = new Text("Potions",LeadCrystalTextType.HUD24);
+        Label menuTextLabel = new Label(menuText,275 - menuText.getWidth()/2,840);
+        this.addComponent(menuTextLabel);
+        
+        //close
+        final Image closeImage = new Image("closeButton.png");
+        Button closeButton = new Button(closeImage,504,867,closeImage.getWidth()+1,closeImage.getHeight());
+        closeButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                if (e.getActionCommand().equals("mouseEntered")) {
+
+                  closeImage.setBrightness(1.5f);
+                  Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.HAND)); 
+                }
+                if (e.getActionCommand().equals("mouseExited")) {
+
+                    closeImage.setBrightness(1f);
+                }
+                if(e.getActionCommand().equals("clicked"))
+                {
+                    close();
+                }
+            }
+       });
+        this.addComponent(closeButton);
+        
+        //section1
+        final Image section = new Image("section1.png");
+        Button sectionButton = new Button(section,275 - section.getWidth()/2,300,section.getWidth(),section.getHeight());
+        this.addComponent(sectionButton);
+        
+        //section2
+        final Image section2 = new Image("section2.png");
+        Button sectionButton2 = new Button(section2,330,50,section2.getWidth(),section2.getHeight()+6);
+        this.addComponent(sectionButton2);
         
         //gold
         Text playerGoldDesc = new Text("Your Gold:",LeadCrystalTextType.HUD24);
-        Label playerGoldDescLabel = new Label(playerGoldDesc,285,800);
+        Label playerGoldDescLabel = new Label(playerGoldDesc,226,57);
         this.addComponent(playerGoldDescLabel);
         Text playerGold = new Text(Integer.toString(0),LeadCrystalTextType.HUD24);
-        playerGoldLabel = new Label(playerGold,410,800);
+        playerGoldLabel = new Label(playerGold,390,57);
         this.addComponent(playerGoldLabel);
-        Button b1 = new Button(new Image("currency2.png"),480,800,20,20);
+        Button b1 = new Button(new Image("currency2.png"),460,55,20,20);
         this.addComponent(b1);
         
        //potion
