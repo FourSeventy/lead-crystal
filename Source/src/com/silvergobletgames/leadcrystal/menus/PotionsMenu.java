@@ -58,9 +58,34 @@ public class PotionsMenu extends Window{
        });
         this.addComponent(closeButton);
         
+         //potion
+       final Potion potion = new Potion();
+       potion.getImage().removeAllImageEffects();
+       final Image potionImage = potion.getImage();
+       
         //section1
         final Image section = new Image("section1.png");
         Button sectionButton = new Button(section,275 - section.getWidth()/2,300,section.getWidth(),section.getHeight());
+        sectionButton.addActionListener(new ActionListener(){
+       
+           public void actionPerformed(ActionEvent e)
+           {
+               if (e.getActionCommand().equals("mouseEntered")) 
+               {
+                   section.setBrightness(1.8f);
+                   potionImage.setBrightness(1.8f);
+               }
+               if (e.getActionCommand().equals("mouseExited")) 
+               {
+                   section.setBrightness(1f);
+                   potionImage.setBrightness(1f);
+               }
+               if(e.getActionCommand().equals("clicked"))
+               {
+                   ((GameClientScene)owningScene).sendBuyPotionPacket(); 
+               }
+           }
+       });
         this.addComponent(sectionButton);
         
         //section2
@@ -78,19 +103,9 @@ public class PotionsMenu extends Window{
         Button b1 = new Button(new Image("currency2.png"),460,55,20,20);
         this.addComponent(b1);
         
-       //potion
-       final Potion potion = new Potion();
+      
        Button b = new Button(potion.getImage(),200,450,potion.getImage().getWidth() * 2,potion.getImage().getHeight() * 2);
-       b.addActionListener(new ActionListener(){
-       
-           public void actionPerformed(ActionEvent e)
-           {
-               if(e.getActionCommand().equals("clicked"))
-               {
-                   ((GameClientScene)owningScene).sendBuyPotionPacket(); 
-               }
-           }
-       });
+       b.dontKillClick = true;
        this.addComponent(b);
        Text potionText = new Text("Healing Potion",LeadCrystalTextType.HUD34);
        Label label = new Label(potionText,275 - potionText.getWidth()/2,400);
