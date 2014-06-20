@@ -1,11 +1,14 @@
 package com.silvergobletgames.leadcrystal.menus;
 
+import com.silvergobletgames.leadcrystal.core.CursorFactory;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.items.ArmorManager;
 import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat;
 import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
 import com.silvergobletgames.leadcrystal.skills.Skill;
+import com.silvergobletgames.sylver.core.Game;
+import com.silvergobletgames.sylver.core.InputSnapshot;
 import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.Overlay;
@@ -104,6 +107,34 @@ public class ArmorMenu extends Window{
         
         this.playerReference = player;
         
+        //text
+        Text menuText = new Text("Armor Upgrades",LeadCrystalTextType.HUD34);
+        Label menuTextLabel = new Label(menuText,600 - menuText.getWidth()/2,830);
+        this.addComponent(menuTextLabel);
+        
+        //close
+        final Image closeImage = new Image("closeButton.png");
+        Button closeButton = new Button(closeImage,1154,867,closeImage.getWidth()+1,closeImage.getHeight());
+        closeButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                if (e.getActionCommand().equals("mouseEntered")) {
+
+                  closeImage.setBrightness(1.5f);
+                  Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.HAND)); 
+                }
+                if (e.getActionCommand().equals("mouseExited")) {
+
+                    closeImage.setBrightness(1f);
+                }
+                if(e.getActionCommand().equals("clicked"))
+                {
+                    close();
+                }
+            }
+       });
+        this.addComponent(closeButton);
+        
         
         //========================
         // Basic Labels and Image
@@ -112,24 +143,24 @@ public class ArmorMenu extends Window{
         //body image
         Image bodyImg = new Image("bash_black.png");
         bodyImg.setScale(1.5f);
-        Button bodyImage = new Button(bodyImg, 250, 250, bodyImg.getWidth() * 1.5f, bodyImg.getHeight() * 1.5f);
+        Button bodyImage = new Button(bodyImg, 210, 250, bodyImg.getWidth() * 1.5f, bodyImg.getHeight() * 1.5f);
         this.addComponent(bodyImage);
         
         //Weapon Label
         Text weaponText = new Text("Weapon Upgrades",LeadCrystalTextType.HUD28);
-        Label weaponLabel = new Label(weaponText, 150, 700);
+        Label weaponLabel = new Label(weaponText, 275 - weaponText.getWidth()/2, 700);
         this.addComponent(weaponLabel);
         //Helm Label
         Text helmText = new Text("Helm Upgrades",LeadCrystalTextType.HUD28);
-        Label helmLabel = new Label(helmText, 800, 700);
+        Label helmLabel = new Label(helmText, 930 -helmText.getWidth()/2, 700);
         this.addComponent(helmLabel);
         //body Label
         Text bodyText = new Text("Body Upgrades",LeadCrystalTextType.HUD28);
-        Label bodyLabel = new Label(bodyText, 150, 300);
+        Label bodyLabel = new Label(bodyText, 275 -bodyText.getWidth()/2, 300);
         this.addComponent(bodyLabel);
         //boots Label
         Text bootsText = new Text("Boots Upgrades",LeadCrystalTextType.HUD28);
-        Label bootsLabel = new Label(bootsText, 800, 300);
+        Label bootsLabel = new Label(bootsText, 930 - helmText.getWidth()/2, 300);
         this.addComponent(bootsLabel);
         
         
@@ -137,7 +168,7 @@ public class ArmorMenu extends Window{
         // Weapon Upgrades
         //=================
 
-        int weaponBasePositionX = 150;
+        int weaponBasePositionX = 133;
         int weaponBasePositionY = 600;
         
         
@@ -303,7 +334,7 @@ public class ArmorMenu extends Window{
         // Helm Upgrades
         //================
         
-        int helmBasePositionX = 800;
+        int helmBasePositionX = 792;
         int helmBasePositionY = 600;
        
         
@@ -442,7 +473,7 @@ public class ArmorMenu extends Window{
         // Armor Upgrades
         //================
         
-        int armorBasePositionX = 150;
+        int armorBasePositionX = 133;
         int armorBasePositionY = 200;
                
         
@@ -607,7 +638,7 @@ public class ArmorMenu extends Window{
         // Boot Upgrades
         //================
               
-        int bootsBasePositionX = 800;
+        int bootsBasePositionX = 792;
         int bootsBasePositionY = 200;
                
         
@@ -722,6 +753,9 @@ public class ArmorMenu extends Window{
     public void update()
     {
         super.update();
+        
+        
+        InputSnapshot input = Game.getInstance().getInputHandler().getInputSnapshot();
         
         
         //================================
