@@ -1,6 +1,8 @@
 
 package com.silvergobletgames.leadcrystal.menus;
 
+import com.silvergobletgames.leadcrystal.core.CursorFactory;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.skills.PlayerBuckshot;
 import com.silvergobletgames.leadcrystal.skills.PlayerDashAttack;
 import com.silvergobletgames.leadcrystal.skills.PlayerSnipe;
@@ -88,20 +90,27 @@ public class SkillMenu extends Window {
     public SkillMenu(float x, float y,PlayerEntity player)
     {
        //super constructor call, setting the background sprite and initial position
-       super(new Image("SkillScreen.png"),x,y,550,800);
+       super(new Image("bigFrame.png"),x,y,1200,900);
        
-        //close button
-        Button closeButton = new Button("deleteButton.png",500,750,50,50);
+        //text
+        Text menuText = new Text("Skill Menu",LeadCrystalTextType.HUD34);
+        Label menuTextLabel = new Label(menuText,600 - menuText.getWidth()/2,830);
+        this.addComponent(menuTextLabel);
+        
+        //close
+        final Image closeImage = new Image("closeButton.png");
+        Button closeButton = new Button(closeImage,1154,867,closeImage.getWidth()+1,closeImage.getHeight());
         closeButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
 
-                  
+                  closeImage.setBrightness(1.5f);
+                  Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.HAND)); 
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
 
-                    
+                    closeImage.setBrightness(1f);
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
@@ -153,10 +162,11 @@ public class SkillMenu extends Window {
        //=========================
        
        //================== Primary ========================//
-        
+        int primaryOffsetX = 100;
+        int primaryOffsetY = 575;
        //laser shot
        final Skill skill = this.skillSlots[0][0];
-       Button b = new Button(skill.getIcon(),100,575,60,70);
+       Button b = new Button(skill.getIcon(),primaryOffsetX,primaryOffsetY,100,100);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -190,7 +200,7 @@ public class SkillMenu extends Window {
        
        //buckshot
        final Skill skill5 = this.skillSlots[0][1];
-       b = new Button(skill5.getIcon(),200,575,60,70);
+       b = new Button(skill5.getIcon(),primaryOffsetX + 100,primaryOffsetY,100,100);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -224,7 +234,7 @@ public class SkillMenu extends Window {
        
        //ricochet
        final Skill skill7 = this.skillSlots[0][2];
-       b = new Button(skill7.getIcon(),300,575,60,70);
+       b = new Button(skill7.getIcon(),primaryOffsetX + 200,primaryOffsetY,100,100);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -258,7 +268,7 @@ public class SkillMenu extends Window {
        
        //rocket launcher
        final Skill blade = this.skillSlots[0][3];
-       b = new Button(blade.getIcon(),400,575,60,70);
+       b = new Button(blade.getIcon(),primaryOffsetX + 300,primaryOffsetY,100,100);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -291,9 +301,11 @@ public class SkillMenu extends Window {
        this.addComponent(b);
        
        // =================== Secondary ========================//
+        int secondaryOffsetX = 100;
+        int secondaryOffsetY = 393;
        //bash
        final Skill skill1 = this.skillSlots[1][0];
-       b = new Button(skill1.getIcon(),102,393,60,70);
+       b = new Button(skill1.getIcon(),secondaryOffsetX,secondaryOffsetY,100,100);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -327,7 +339,7 @@ public class SkillMenu extends Window {
        
        //dash
        final Skill skill3 = this.skillSlots[1][1];
-       b = new Button(skill3.getIcon(),202,393,60,70);
+       b = new Button(skill3.getIcon(),secondaryOffsetX + 100,secondaryOffsetY,100,100);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -361,7 +373,7 @@ public class SkillMenu extends Window {
        
        //boomerang
        final Skill freezeSkill = this.skillSlots[1][2];
-       b = new Button(freezeSkill.getIcon(),302,393,60,70);
+       b = new Button(freezeSkill.getIcon(),secondaryOffsetX + 200,secondaryOffsetY,100,100);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -395,7 +407,7 @@ public class SkillMenu extends Window {
        
        //snipe
        final Skill snipeSkill = this.skillSlots[1][3];
-       b = new Button(snipeSkill.getIcon(),402,393,60,70);
+       b = new Button(snipeSkill.getIcon(),secondaryOffsetX + 300,secondaryOffsetY,100,100);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -429,9 +441,11 @@ public class SkillMenu extends Window {
        
        //=================== Power ==========================//
        
+       int powerOffsetX = 700;
+       int powerOffsetY = 575;
        //stomp attack
        final Skill skill6 = this.skillSlots[2][0];
-       b = new Button(skill6.getIcon(),100,220,60,70);
+       b = new Button(skill6.getIcon(),powerOffsetX,powerOffsetY,100,100);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -466,7 +480,7 @@ public class SkillMenu extends Window {
        
        //dash attack
        final Skill flashbangSkill =  this.skillSlots[2][1];
-       b = new Button(flashbangSkill.getIcon(),200,220,60,70);
+       b = new Button(flashbangSkill.getIcon(),powerOffsetX + 100,powerOffsetY,100,100);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -501,7 +515,7 @@ public class SkillMenu extends Window {
        
        //stimpack
        final Skill stimSkill = this.skillSlots[2][2];
-       b = new Button(stimSkill.getIcon(),300,220,60,70);
+       b = new Button(stimSkill.getIcon(),powerOffsetX + 200,powerOffsetY,100,100);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -536,7 +550,7 @@ public class SkillMenu extends Window {
        
        //life leech
        final Skill gravitySkill = this.skillSlots[2][3];
-       b = new Button(gravitySkill.getIcon(),400,220,60,70);
+       b = new Button(gravitySkill.getIcon(),powerOffsetX + 300,powerOffsetY,100,100);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -571,9 +585,11 @@ public class SkillMenu extends Window {
        
        //=================== Tech =========================
        
+       int techOffsetX = 700;
+       int techOffsetY = 373;
        //attack drone
        final Skill skill2 = this.skillSlots[3][0];
-       b = new Button(skill2.getIcon(),100,53,60,70);
+       b = new Button(skill2.getIcon(),techOffsetX,techOffsetY,100,100);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -607,7 +623,7 @@ public class SkillMenu extends Window {
        
        //damage ward
        final Skill skill4 = this.skillSlots[3][1];
-       b = new Button(skill4.getIcon(),200,53,60,70);
+       b = new Button(skill4.getIcon(),techOffsetX + 100,techOffsetY,100,100);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -641,7 +657,7 @@ public class SkillMenu extends Window {
        
        //defensive shield
        final Skill playerGuardSkill = this.skillSlots[3][2];
-       b = new Button(playerGuardSkill.getIcon(),300,53,60,70);
+       b = new Button(playerGuardSkill.getIcon(),techOffsetX + 200,techOffsetY,100,100);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -675,7 +691,7 @@ public class SkillMenu extends Window {
        
        //flashbang
        final Skill playerFlashbangSkill = this.skillSlots[3][3];
-       b = new Button(playerFlashbangSkill.getIcon(),400,53,60,70);
+       b = new Button(playerFlashbangSkill.getIcon(),techOffsetX + 300,techOffsetY,100,100);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -714,7 +730,7 @@ public class SkillMenu extends Window {
         // primary1
         Image i = new Image("black.png");
         i.setColor(new Color(1,1,1,.8f));
-        b = new Button(i,100,575,60,70);  
+        b = new Button(i,primaryOffsetX,primaryOffsetY,80,80);  
         b.dontKillClick = true;
         this.addComponent(b);
         primary1LockedComponents.add(b);
@@ -729,7 +745,7 @@ public class SkillMenu extends Window {
         // primary2
         i = new Image("black.png");
         i.setColor(new Color(1,1,1,.8f));
-        b = new Button(i,200,575,60,70);  
+        b = new Button(i,primaryOffsetX + 100,primaryOffsetY,80,80);  
         b.dontKillClick = true;
         this.addComponent(b);
         primary2LockedComponents.add(b);
@@ -744,7 +760,7 @@ public class SkillMenu extends Window {
         // parimary3
         i = new Image("black.png");
         i.setColor(new Color(1,1,1,.8f));
-        b = new Button(i,300,575,60,70);  
+        b = new Button(i,primaryOffsetX + 200,primaryOffsetY,80,80);  
         b.dontKillClick = true;
         this.addComponent(b);
         primary3LockedComponents.add(b);
@@ -759,7 +775,7 @@ public class SkillMenu extends Window {
         // primary4
         i = new Image("black.png");
         i.setColor(new Color(1,1,1,.8f));
-        b = new Button(i,400,575,60,70);  
+        b = new Button(i,primaryOffsetX + 300,primaryOffsetY,80,80);  
         b.dontKillClick = true;
         this.addComponent(b);
         primary4LockedComponents.add(b);

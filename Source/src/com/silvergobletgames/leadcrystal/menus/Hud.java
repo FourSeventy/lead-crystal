@@ -199,7 +199,7 @@ public class Hud extends Window
         menuList.add(armorMenu);
         
         //initializing the skill menu
-        skillMenu = new SkillMenu(right - 560,100,playerReference);
+        skillMenu = new SkillMenu(center-600,0,playerReference);
         skillMenu.addActionListener(new ActionListener(){
          public void actionPerformed(ActionEvent e)
             {
