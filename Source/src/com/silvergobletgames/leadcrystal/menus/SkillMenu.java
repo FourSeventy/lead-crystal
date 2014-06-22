@@ -161,12 +161,29 @@ public class SkillMenu extends Window {
        // Building skill buttons
        //=========================
        
+       //Weapon Label
+        Text weaponText = new Text("Primary Skills",LeadCrystalTextType.HUD28);
+        Label weaponLabel = new Label(weaponText, 275 - weaponText.getWidth()/2, 700);
+        this.addComponent(weaponLabel);
+        //Helm Label
+        Text helmText = new Text("Power Skills",LeadCrystalTextType.HUD28);
+        Label helmLabel = new Label(helmText, 930 -helmText.getWidth()/2, 700);
+        this.addComponent(helmLabel);
+        //body Label
+        Text bodyText = new Text("Secondary Skills",LeadCrystalTextType.HUD28);
+        Label bodyLabel = new Label(bodyText, 275 -bodyText.getWidth()/2, 300);
+        this.addComponent(bodyLabel);
+        //boots Label
+        Text bootsText = new Text("Tech Skills",LeadCrystalTextType.HUD28);
+        Label bootsLabel = new Label(bootsText, 930 - helmText.getWidth()/2, 300);
+        this.addComponent(bootsLabel);
+       
        //================== Primary ========================//
         int primaryOffsetX = 100;
-        int primaryOffsetY = 575;
+        int primaryOffsetY = 500;
        //laser shot
        final Skill skill = this.skillSlots[0][0];
-       Button b = new Button(skill.getIcon(),primaryOffsetX,primaryOffsetY,100,100);
+       Button b = new Button(skill.getIcon(),primaryOffsetX,primaryOffsetY,95,95);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -200,7 +217,7 @@ public class SkillMenu extends Window {
        
        //buckshot
        final Skill skill5 = this.skillSlots[0][1];
-       b = new Button(skill5.getIcon(),primaryOffsetX + 100,primaryOffsetY,100,100);
+       b = new Button(skill5.getIcon(),primaryOffsetX + 110,primaryOffsetY,95,95);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -234,7 +251,7 @@ public class SkillMenu extends Window {
        
        //ricochet
        final Skill skill7 = this.skillSlots[0][2];
-       b = new Button(skill7.getIcon(),primaryOffsetX + 200,primaryOffsetY,100,100);
+       b = new Button(skill7.getIcon(),primaryOffsetX + 220,primaryOffsetY,95,95);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -268,7 +285,7 @@ public class SkillMenu extends Window {
        
        //rocket launcher
        final Skill blade = this.skillSlots[0][3];
-       b = new Button(blade.getIcon(),primaryOffsetX + 300,primaryOffsetY,100,100);
+       b = new Button(blade.getIcon(),primaryOffsetX + 330,primaryOffsetY,95,95);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -302,10 +319,10 @@ public class SkillMenu extends Window {
        
        // =================== Secondary ========================//
         int secondaryOffsetX = 100;
-        int secondaryOffsetY = 393;
+        int secondaryOffsetY = 200;
        //bash
        final Skill skill1 = this.skillSlots[1][0];
-       b = new Button(skill1.getIcon(),secondaryOffsetX,secondaryOffsetY,100,100);
+       b = new Button(skill1.getIcon(),secondaryOffsetX,secondaryOffsetY,95,95);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -339,7 +356,7 @@ public class SkillMenu extends Window {
        
        //dash
        final Skill skill3 = this.skillSlots[1][1];
-       b = new Button(skill3.getIcon(),secondaryOffsetX + 100,secondaryOffsetY,100,100);
+       b = new Button(skill3.getIcon(),secondaryOffsetX + 110,secondaryOffsetY,95,95);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -373,7 +390,7 @@ public class SkillMenu extends Window {
        
        //boomerang
        final Skill freezeSkill = this.skillSlots[1][2];
-       b = new Button(freezeSkill.getIcon(),secondaryOffsetX + 200,secondaryOffsetY,100,100);
+       b = new Button(freezeSkill.getIcon(),secondaryOffsetX + 220,secondaryOffsetY,95,95);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -407,7 +424,7 @@ public class SkillMenu extends Window {
        
        //snipe
        final Skill snipeSkill = this.skillSlots[1][3];
-       b = new Button(snipeSkill.getIcon(),secondaryOffsetX + 300,secondaryOffsetY,100,100);
+       b = new Button(snipeSkill.getIcon(),secondaryOffsetX + 330,secondaryOffsetY,95,95);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -442,10 +459,10 @@ public class SkillMenu extends Window {
        //=================== Power ==========================//
        
        int powerOffsetX = 700;
-       int powerOffsetY = 575;
+       int powerOffsetY = 500;
        //stomp attack
        final Skill skill6 = this.skillSlots[2][0];
-       b = new Button(skill6.getIcon(),powerOffsetX,powerOffsetY,100,100);
+       b = new Button(skill6.getIcon(),powerOffsetX,powerOffsetY,95,95);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -480,7 +497,7 @@ public class SkillMenu extends Window {
        
        //dash attack
        final Skill flashbangSkill =  this.skillSlots[2][1];
-       b = new Button(flashbangSkill.getIcon(),powerOffsetX + 100,powerOffsetY,100,100);
+       b = new Button(flashbangSkill.getIcon(),powerOffsetX + 110,powerOffsetY,95,95);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -515,7 +532,7 @@ public class SkillMenu extends Window {
        
        //stimpack
        final Skill stimSkill = this.skillSlots[2][2];
-       b = new Button(stimSkill.getIcon(),powerOffsetX + 200,powerOffsetY,100,100);
+       b = new Button(stimSkill.getIcon(),powerOffsetX + 220,powerOffsetY,95,95);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -550,7 +567,7 @@ public class SkillMenu extends Window {
        
        //life leech
        final Skill gravitySkill = this.skillSlots[2][3];
-       b = new Button(gravitySkill.getIcon(),powerOffsetX + 300,powerOffsetY,100,100);
+       b = new Button(gravitySkill.getIcon(),powerOffsetX + 330,powerOffsetY,95,95);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -586,10 +603,10 @@ public class SkillMenu extends Window {
        //=================== Tech =========================
        
        int techOffsetX = 700;
-       int techOffsetY = 373;
+       int techOffsetY = 200;
        //attack drone
        final Skill skill2 = this.skillSlots[3][0];
-       b = new Button(skill2.getIcon(),techOffsetX,techOffsetY,100,100);
+       b = new Button(skill2.getIcon(),techOffsetX,techOffsetY,95,95);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -623,7 +640,7 @@ public class SkillMenu extends Window {
        
        //damage ward
        final Skill skill4 = this.skillSlots[3][1];
-       b = new Button(skill4.getIcon(),techOffsetX + 100,techOffsetY,100,100);
+       b = new Button(skill4.getIcon(),techOffsetX + 110,techOffsetY,95,95);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -657,7 +674,7 @@ public class SkillMenu extends Window {
        
        //defensive shield
        final Skill playerGuardSkill = this.skillSlots[3][2];
-       b = new Button(playerGuardSkill.getIcon(),techOffsetX + 200,techOffsetY,100,100);
+       b = new Button(playerGuardSkill.getIcon(),techOffsetX + 220,techOffsetY,95,95);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -691,7 +708,7 @@ public class SkillMenu extends Window {
        
        //flashbang
        final Skill playerFlashbangSkill = this.skillSlots[3][3];
-       b = new Button(playerFlashbangSkill.getIcon(),techOffsetX + 300,techOffsetY,100,100);
+       b = new Button(playerFlashbangSkill.getIcon(),techOffsetX + 330,techOffsetY,95,95);
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -728,245 +745,245 @@ public class SkillMenu extends Window {
        //=========================
        
         // primary1
-        Image i = new Image("black.png");
-        i.setColor(new Color(1,1,1,.8f));
-        b = new Button(i,primaryOffsetX,primaryOffsetY,80,80);  
+        Image i = new Image("dashIcon.png");
+        i.setColor(new Color(0,0,0,.8f));
+        b = new Button(i,primaryOffsetX ,primaryOffsetY,95,95);  
         b.dontKillClick = true;
         this.addComponent(b);
         primary1LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),110,575,20,20);
+        b = new Button(new Image("skillPoint.png"),primaryOffsetX + 28,primaryOffsetY+8,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         primary1LockedComponents.add(b);
-        Label l = new Label(Integer.toString(this.skillSlots[0][0].getUnlockCost()),135,555);
+        Label l = new Label(Integer.toString(this.skillSlots[0][0].getUnlockCost()),primaryOffsetX + 8,primaryOffsetY+8);
         this.addComponent(l);
         primary1LockedComponents.add(l);
         
         // primary2
-        i = new Image("black.png");
-        i.setColor(new Color(1,1,1,.8f));
-        b = new Button(i,primaryOffsetX + 100,primaryOffsetY,80,80);  
+        i = new Image("dashIcon.png");
+        i.setColor(new Color(0,0,0,.8f));
+        b = new Button(i,primaryOffsetX + 110 ,primaryOffsetY ,95,95);  
         b.dontKillClick = true;
         this.addComponent(b);
         primary2LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),210,575,20,20);
+        b = new Button(new Image("skillPoint.png"),primaryOffsetX + 138,primaryOffsetY+8,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         primary2LockedComponents.add(b);
-        l = new Label(Integer.toString(this.skillSlots[0][1].getUnlockCost()),235,575);
+        l = new Label(Integer.toString(this.skillSlots[0][1].getUnlockCost()),primaryOffsetX + 118,primaryOffsetY+8);
         this.addComponent(l);
         primary2LockedComponents.add(l);
         
         // parimary3
-        i = new Image("black.png");
-        i.setColor(new Color(1,1,1,.8f));
-        b = new Button(i,primaryOffsetX + 200,primaryOffsetY,80,80);  
+        i = new Image("dashIcon.png");
+        i.setColor(new Color(0,0,0,.8f));
+        b = new Button(i,primaryOffsetX + 220,primaryOffsetY,95,95);  
         b.dontKillClick = true;
         this.addComponent(b);
         primary3LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),310,575,20,20);
+        b = new Button(new Image("skillPoint.png"),primaryOffsetX + 248,primaryOffsetY+8,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         primary3LockedComponents.add(b);
-        l = new Label(Integer.toString(this.skillSlots[0][2].getUnlockCost()),335,575);
+        l = new Label(Integer.toString(this.skillSlots[0][2].getUnlockCost()),primaryOffsetX + 228,primaryOffsetY+8);
         this.addComponent(l);
         primary3LockedComponents.add(l);
         
         // primary4
-        i = new Image("black.png");
-        i.setColor(new Color(1,1,1,.8f));
-        b = new Button(i,primaryOffsetX + 300,primaryOffsetY,80,80);  
+        i = new Image("dashIcon.png");
+        i.setColor(new Color(0,0,0,.8f));
+        b = new Button(i,primaryOffsetX + 330,primaryOffsetY,95,95);  
         b.dontKillClick = true;
         this.addComponent(b);
         primary4LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),410,575,20,20);
+        b = new Button(new Image("skillPoint.png"),primaryOffsetX + 358,primaryOffsetY+8,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         primary4LockedComponents.add(b);
-        l = new Label(Integer.toString(this.skillSlots[0][3].getUnlockCost()),435,575);
+        l = new Label(Integer.toString(this.skillSlots[0][3].getUnlockCost()),primaryOffsetX + 338,primaryOffsetY +8);
         this.addComponent(l);
         primary4LockedComponents.add(l);
         
         
         // secondary1
-        i = new Image("black.png");
-        i.setColor(new Color(1,1,1,.8f));
-        b = new Button(i,100,393,60,70);  
+        i = new Image("dashIcon.png");
+        i.setColor(new Color(0,0,0,.8f));
+        b = new Button(i,secondaryOffsetX ,secondaryOffsetY,95,95);  
         b.dontKillClick = true;
         this.addComponent(b);
         secondary1LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),110,393,20,20);
+        b = new Button(new Image("skillPoint.png"),secondaryOffsetX + 28,secondaryOffsetY+8,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         secondary1LockedComponents.add(b);
-         l = new Label(Integer.toString(this.skillSlots[1][0].getUnlockCost()),135,393);
+        l = new Label(Integer.toString(this.skillSlots[1][0].getUnlockCost()),secondaryOffsetX + 8,secondaryOffsetY+8);
         this.addComponent(l);
         secondary1LockedComponents.add(l);
         
         // secondary2
-        i = new Image("black.png");
-        i.setColor(new Color(1,1,1,.8f));
-        b = new Button(i,200,393,60,70);  
+        i = new Image("dashIcon.png");
+        i.setColor(new Color(0,0,0,.8f));
+        b = new Button(i,secondaryOffsetX + 110 ,secondaryOffsetY ,95,95);  
         b.dontKillClick = true;
         this.addComponent(b);
         secondary2LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),210,393,20,20);
+        b = new Button(new Image("skillPoint.png"),secondaryOffsetX + 138,secondaryOffsetY+8,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         secondary2LockedComponents.add(b);
-         l = new Label(Integer.toString(this.skillSlots[1][1].getUnlockCost()),235,393);
+        l = new Label(Integer.toString(this.skillSlots[1][1].getUnlockCost()),secondaryOffsetX + 118,secondaryOffsetY+8);
         this.addComponent(l);
         secondary2LockedComponents.add(l);
         
         // secondary3
-        i = new Image("black.png");
-        i.setColor(new Color(1,1,1,.8f));
-        b = new Button(i,300,393,60,70);  
+        i = new Image("dashIcon.png");
+        i.setColor(new Color(0,0,0,.8f));
+        b = new Button(i,secondaryOffsetX + 220,secondaryOffsetY,95,95);  
         b.dontKillClick = true;
         this.addComponent(b);
         secondary3LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),310,393,20,20);
+        b = new Button(new Image("skillPoint.png"),secondaryOffsetX + 248,secondaryOffsetY+8,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         secondary3LockedComponents.add(b);
-         l = new Label(Integer.toString(this.skillSlots[1][2].getUnlockCost()),335,393);
+        l = new Label(Integer.toString(this.skillSlots[1][2].getUnlockCost()),secondaryOffsetX + 228,secondaryOffsetY+8);
         this.addComponent(l);
         secondary3LockedComponents.add(l);
         
         // secondary4
-        i = new Image("black.png");
-        i.setColor(new Color(1,1,1,.8f));
-        b = new Button(i,400,393,60,70);  
+        i = new Image("dashIcon.png");
+        i.setColor(new Color(0,0,0,.8f));
+        b = new Button(i,secondaryOffsetX + 330,secondaryOffsetY,95,95);  
         b.dontKillClick = true;
         this.addComponent(b);
         secondary4LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),410,393,20,20);
+        b = new Button(new Image("skillPoint.png"),secondaryOffsetX + 358,secondaryOffsetY+8,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         secondary4LockedComponents.add(b);
-         l = new Label(Integer.toString(this.skillSlots[1][3].getUnlockCost()),435,393);
+        l = new Label(Integer.toString(this.skillSlots[1][3].getUnlockCost()),secondaryOffsetX + 338,secondaryOffsetY +8);
         this.addComponent(l);
         secondary4LockedComponents.add(l);
         
         
         // power1
-        i = new Image("black.png");
-        i.setColor(new Color(1,1,1,.8f));
-        b = new Button(i,100,220,60,70);  
+        i = new Image("dashIcon.png");
+        i.setColor(new Color(0,0,0,.8f));
+        b = new Button(i,powerOffsetX ,powerOffsetY,95,95);  
         b.dontKillClick = true;
         this.addComponent(b);
         power1LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),110,220,20,20);
+        b = new Button(new Image("skillPoint.png"),powerOffsetX + 28,powerOffsetY+8,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         power1LockedComponents.add(b);
-         l = new Label(Integer.toString(this.skillSlots[2][0].getUnlockCost()),135,220);
+        l = new Label(Integer.toString(this.skillSlots[2][0].getUnlockCost()),powerOffsetX + 8,powerOffsetY+8);
         this.addComponent(l);
         power1LockedComponents.add(l);
         
         // power2
-        i = new Image("black.png");
-        i.setColor(new Color(1,1,1,.8f));
-        b = new Button(i,200,220,60,70);  
+        i = new Image("dashIcon.png");
+        i.setColor(new Color(0,0,0,.8f));
+        b = new Button(i,powerOffsetX + 110 ,powerOffsetY ,95,95);  
         b.dontKillClick = true;
         this.addComponent(b);
         power2LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),210,220,20,20);
+        b = new Button(new Image("skillPoint.png"),powerOffsetX + 138,powerOffsetY+8,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         power2LockedComponents.add(b);
-         l = new Label(Integer.toString(this.skillSlots[2][1].getUnlockCost()),235,220);
+        l = new Label(Integer.toString(this.skillSlots[2][1].getUnlockCost()),powerOffsetX + 118,powerOffsetY+8);
         this.addComponent(l);
         power2LockedComponents.add(l);
         
-        // power3
-        i = new Image("black.png");
-        i.setColor(new Color(1,1,1,.8f));
-        b = new Button(i,300,220,60,70);  
+        // parimary3
+        i = new Image("dashIcon.png");
+        i.setColor(new Color(0,0,0,.8f));
+        b = new Button(i,powerOffsetX + 220,powerOffsetY,95,95);  
         b.dontKillClick = true;
         this.addComponent(b);
         power3LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),310,220,20,20);
+        b = new Button(new Image("skillPoint.png"),powerOffsetX + 248,powerOffsetY+8,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         power3LockedComponents.add(b);
-         l = new Label(Integer.toString(this.skillSlots[2][2].getUnlockCost()),335,220);
+        l = new Label(Integer.toString(this.skillSlots[2][2].getUnlockCost()),powerOffsetX + 228,powerOffsetY+8);
         this.addComponent(l);
         power3LockedComponents.add(l);
         
-        // tech4
-        i = new Image("black.png");
-        i.setColor(new Color(1,1,1,.8f));
-        b = new Button(i,400,220,60,70);  
+        // power4
+        i = new Image("dashIcon.png");
+        i.setColor(new Color(0,0,0,.8f));
+        b = new Button(i,powerOffsetX + 330,powerOffsetY,95,95);  
         b.dontKillClick = true;
         this.addComponent(b);
         power4LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),410,220,20,20);
+        b = new Button(new Image("skillPoint.png"),powerOffsetX + 358,powerOffsetY+8,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         power4LockedComponents.add(b);
-         l = new Label(Integer.toString(this.skillSlots[2][3].getUnlockCost()),435,220);
+        l = new Label(Integer.toString(this.skillSlots[2][3].getUnlockCost()),powerOffsetX + 338,powerOffsetY +8);
         this.addComponent(l);
         power4LockedComponents.add(l);
         
         
         // tech1
-        i = new Image("black.png");
-        i.setColor(new Color(1,1,1,.8f));
-        b = new Button(i,100,53,60,70);  
+        i = new Image("dashIcon.png");
+        i.setColor(new Color(0,0,0,.8f));
+        b = new Button(i,techOffsetX ,techOffsetY,95,95);  
         b.dontKillClick = true;
         this.addComponent(b);
         tech1LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),110,53,20,20);
+        b = new Button(new Image("skillPoint.png"),techOffsetX + 28,techOffsetY+8,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         tech1LockedComponents.add(b);
-         l = new Label(Integer.toString(this.skillSlots[3][0].getUnlockCost()),135,53);
+        l = new Label(Integer.toString(this.skillSlots[3][0].getUnlockCost()),techOffsetX + 8,techOffsetY+8);
         this.addComponent(l);
         tech1LockedComponents.add(l);
         
         // tech2
-        i = new Image("black.png");
-        i.setColor(new Color(1,1,1,.8f));
-        b = new Button(i,200,53,60,70);  
+        i = new Image("dashIcon.png");
+        i.setColor(new Color(0,0,0,.8f));
+        b = new Button(i,techOffsetX + 110 ,techOffsetY ,95,95);  
         b.dontKillClick = true;
         this.addComponent(b);
         tech2LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),210,53,20,20);
+        b = new Button(new Image("skillPoint.png"),techOffsetX + 138,techOffsetY+8,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         tech2LockedComponents.add(b);
-         l = new Label(Integer.toString(this.skillSlots[3][1].getUnlockCost()),235,53);
+        l = new Label(Integer.toString(this.skillSlots[3][1].getUnlockCost()),techOffsetX + 118,techOffsetY+8);
         this.addComponent(l);
         tech2LockedComponents.add(l);
         
-        // tech3
-        i = new Image("black.png");
-        i.setColor(new Color(1,1,1,.8f));
-        b = new Button(i,300,53,60,70);  
+        // parimary3
+        i = new Image("dashIcon.png");
+        i.setColor(new Color(0,0,0,.8f));
+        b = new Button(i,techOffsetX + 220,techOffsetY,95,95);  
         b.dontKillClick = true;
         this.addComponent(b);
         tech3LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),310,53,20,20);
+        b = new Button(new Image("skillPoint.png"),techOffsetX + 248,techOffsetY+8,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         tech3LockedComponents.add(b);
-         l = new Label(Integer.toString(this.skillSlots[3][2].getUnlockCost()),335,53);
+        l = new Label(Integer.toString(this.skillSlots[3][2].getUnlockCost()),techOffsetX + 228,techOffsetY+8);
         this.addComponent(l);
         tech3LockedComponents.add(l);
         
         // tech4
-        i = new Image("black.png");
-        i.setColor(new Color(1,1,1,.8f));
-        b = new Button(i,400,53,60,70);  
+        i = new Image("dashIcon.png");
+        i.setColor(new Color(0,0,0,.8f));
+        b = new Button(i,techOffsetX + 330,techOffsetY,95,95);  
         b.dontKillClick = true;
         this.addComponent(b);
         tech4LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),410,53,20,20);
+        b = new Button(new Image("skillPoint.png"),techOffsetX + 358,techOffsetY+8,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         tech4LockedComponents.add(b);
-         l = new Label(Integer.toString(this.skillSlots[3][3].getUnlockCost()),435,53);
+        l = new Label(Integer.toString(this.skillSlots[3][3].getUnlockCost()),techOffsetX + 338,techOffsetY +8);
         this.addComponent(l);
         tech4LockedComponents.add(l);
              

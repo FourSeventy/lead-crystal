@@ -326,7 +326,7 @@ public class Hud extends Window
         //skill bar stuff
         this.skillFrame = new Button("skillbar.png",center- (456 * .7f)/2,0,456 * .7f,111 * .7f);
         this.addComponent(this.skillFrame);
-        this.skillButton1 = new Button("blank.png",center - 139,-8,80,80);
+        this.skillButton1 = new Button("blank.png",center - 136,-4,73,73);
         this.addComponent(skillButton1);
         this.skillButton1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
@@ -361,7 +361,7 @@ public class Hud extends Window
                 }
             }        
         });              
-        this.skillButton2 = new Button("blank.png",center - 75,-8,80,80);
+        this.skillButton2 = new Button("blank.png",center - 71,-4,73,73);
         this.addComponent(skillButton2);
         this.skillButton2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
@@ -397,7 +397,7 @@ public class Hud extends Window
                 }
             }        
         });
-        this.skillButton3 = new Button("blank.png",center -10,-8,80,80);
+        this.skillButton3 = new Button("blank.png",center -7,-4,73,73);
         this.addComponent(skillButton3);
         this.skillButton3.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
@@ -433,7 +433,7 @@ public class Hud extends Window
                 }
             }        
         });
-        this.skillButton4 = new Button("blank.png",center + 56,-8,80,80);
+        this.skillButton4 = new Button("blank.png",center + 59,-4,73,73);
         this.addComponent(skillButton4);
         this.skillButton4.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
@@ -488,24 +488,16 @@ public class Hud extends Window
         this.addComponent(skillHotkey4);
         
         //skill cooldown black
-        Image black = new Image("black.png");
-        black.setColor(new Color(1,1,1,.8f));
-        this.skillCooldownBlack1  = new SkillCooldownGraphic( this.skillButton1.getPosition().x  + this.skillButton1.getWidth()/2 +2, this.skillButton1.getPosition().y  + this.skillButton1.getHeight()/2 +2, this.skillButton1.getWidth() -27, this.skillButton1.getHeight() -23);
-        this.addComponent(skillCooldownBlack1);
-        
-        black = new Image("black.png");
-        black.setColor(new Color(1,1,1,.8f));
-        this.skillCooldownBlack2  = new SkillCooldownGraphic( this.skillButton2.getPosition().x + this.skillButton2.getWidth()/2 +2, this.skillButton2.getPosition().y  + this.skillButton2.getHeight()/2 +2, this.skillButton2.getWidth() -27, this.skillButton2.getHeight() -23);
+        this.skillCooldownBlack1  = new SkillCooldownGraphic( this.skillButton1.getPosition().x  + this.skillButton1.getWidth()/2 +2, this.skillButton1.getPosition().y  + this.skillButton1.getHeight()/2 +2, 55 , 56 );
+        this.addComponent(skillCooldownBlack1);      
+
+        this.skillCooldownBlack2  = new SkillCooldownGraphic( this.skillButton2.getPosition().x + this.skillButton2.getWidth()/2 +2, this.skillButton2.getPosition().y  + this.skillButton2.getHeight()/2 +2, 55 , 56 );
         this.addComponent(skillCooldownBlack2);
         
-        black = new Image("black.png");
-        black.setColor(new Color(1,1,1,.8f));
-        this.skillCooldownBlack3  = new SkillCooldownGraphic( this.skillButton3.getPosition().x  + this.skillButton3.getWidth()/2 +2, this.skillButton3.getPosition().y  + this.skillButton3.getHeight()/2 +2, this.skillButton3.getWidth() -27, this.skillButton3.getHeight() -23);
+        this.skillCooldownBlack3  = new SkillCooldownGraphic( this.skillButton3.getPosition().x  + this.skillButton3.getWidth()/2 +2, this.skillButton3.getPosition().y  + this.skillButton3.getHeight()/2 +2, 55 , 56 );
         this.addComponent(skillCooldownBlack3);
-        
-        black = new Image("black.png");
-        black.setColor(new Color(1,1,1,.8f));
-        this.skillCooldownBlack4  = new SkillCooldownGraphic( this.skillButton4.getPosition().x  + this.skillButton4.getWidth()/2 +2, this.skillButton4.getPosition().y  + this.skillButton4.getHeight()/2 +2, this.skillButton4.getWidth() -27, this.skillButton4.getHeight() -23);
+
+        this.skillCooldownBlack4  = new SkillCooldownGraphic( this.skillButton4.getPosition().x  + this.skillButton4.getWidth()/2 +2, this.skillButton4.getPosition().y  + this.skillButton4.getHeight()/2 +2, 55 , 56 );
         this.addComponent(skillCooldownBlack4);
         
         //skill cooldown text
@@ -1171,6 +1163,7 @@ public class Hud extends Window
         
         public SkillCooldownGraphic(float xPos, float yPos, float width, float height)
         {
+                    
             super(new Image("blank.png"),xPos,yPos,width,height);
         }
         
