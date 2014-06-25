@@ -123,10 +123,24 @@ public class SkillMenu extends Window {
        //get new player referene
        playerReference =player;
         
+        //section2
+        final Image section2 = new Image("section2.png");
+        Button sectionButton2 = new Button(section2,1000,800,section2.getWidth(),section2.getHeight()+6);
+        this.addComponent(sectionButton2);
+        
+        //gold
+        Text playerGoldDesc = new Text("Skill Points:",LeadCrystalTextType.HUD24);
+        Label playerGoldDescLabel = new Label(playerGoldDesc,875,810);
+        this.addComponent(playerGoldDescLabel);
+        
        //skill points
        String points = Integer.toString(player.getSkillManager().getSkillPoints());
-       this.skillPoints = new Label(points,165,745);
+       this.skillPoints = new Label(points,1110,810);
        this.addComponent(this.skillPoints);
+       
+       Button butt = new Button(new Image("skillPoint.png"),1140,806,20,20);
+       butt.dontKillClick = true;
+       this.addComponent(butt);
        
        //==========================
        // Assigning Skills to Slots
@@ -163,24 +177,24 @@ public class SkillMenu extends Window {
        
        //Weapon Label
         Text weaponText = new Text("Primary Skills",LeadCrystalTextType.HUD28);
-        Label weaponLabel = new Label(weaponText, 275 - weaponText.getWidth()/2, 700);
+        Label weaponLabel = new Label(weaponText, 310 - weaponText.getWidth()/2, 690);
         this.addComponent(weaponLabel);
         //Helm Label
         Text helmText = new Text("Power Skills",LeadCrystalTextType.HUD28);
-        Label helmLabel = new Label(helmText, 930 -helmText.getWidth()/2, 700);
+        Label helmLabel = new Label(helmText, 910 -helmText.getWidth()/2, 690);
         this.addComponent(helmLabel);
         //body Label
         Text bodyText = new Text("Secondary Skills",LeadCrystalTextType.HUD28);
-        Label bodyLabel = new Label(bodyText, 275 -bodyText.getWidth()/2, 300);
+        Label bodyLabel = new Label(bodyText, 310 -bodyText.getWidth()/2, 390);
         this.addComponent(bodyLabel);
         //boots Label
         Text bootsText = new Text("Tech Skills",LeadCrystalTextType.HUD28);
-        Label bootsLabel = new Label(bootsText, 930 - helmText.getWidth()/2, 300);
+        Label bootsLabel = new Label(bootsText, 910 - helmText.getWidth()/2, 390);
         this.addComponent(bootsLabel);
        
        //================== Primary ========================//
-        int primaryOffsetX = 100;
-        int primaryOffsetY = 500;
+       final int primaryOffsetX = 100;
+       final int primaryOffsetY = 550;
        //laser shot
        final Skill skill = this.skillSlots[0][0];
        Button b = new Button(skill.getIcon(),primaryOffsetX,primaryOffsetY,95,95);
@@ -205,7 +219,7 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(skill,-50,275);
+                   openTooltip(skill,primaryOffsetX + 100 + 15,primaryOffsetY +30 );
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -239,7 +253,7 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(skill5,50,275);
+                   openTooltip(skill5,primaryOffsetX + 210 + 15,primaryOffsetY +30 );
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -273,7 +287,7 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(skill7,150,275);
+                   openTooltip(skill7,primaryOffsetX + 320 + 15,primaryOffsetY +30 );
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -307,7 +321,7 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(blade,170,275);
+                   openTooltip(blade,primaryOffsetX + 430 + 15,primaryOffsetY +30 );
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -318,8 +332,8 @@ public class SkillMenu extends Window {
        this.addComponent(b);
        
        // =================== Secondary ========================//
-        int secondaryOffsetX = 100;
-        int secondaryOffsetY = 200;
+       final int secondaryOffsetX = 100;
+       final int secondaryOffsetY = 250;
        //bash
        final Skill skill1 = this.skillSlots[1][0];
        b = new Button(skill1.getIcon(),secondaryOffsetX,secondaryOffsetY,95,95);
@@ -344,7 +358,7 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(skill1,-50,90);
+                   openTooltip(skill1,secondaryOffsetX + 100 + 15,secondaryOffsetY +30 );
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -378,7 +392,7 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(skill3,50,90);
+                   openTooltip(skill3,secondaryOffsetX + 210 + 15,secondaryOffsetY +30 );
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -412,7 +426,7 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(freezeSkill,150,90);
+                   openTooltip(freezeSkill,secondaryOffsetX + 320 + 15,secondaryOffsetY +30 );
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -446,7 +460,7 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(snipeSkill,150,90);
+                   openTooltip(snipeSkill,secondaryOffsetX + 430 + 15,secondaryOffsetY +30 );
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -458,8 +472,8 @@ public class SkillMenu extends Window {
        
        //=================== Power ==========================//
        
-       int powerOffsetX = 700;
-       int powerOffsetY = 500;
+       final int powerOffsetX = 700;
+       final int powerOffsetY = 550;
        //stomp attack
        final Skill skill6 = this.skillSlots[2][0];
        b = new Button(skill6.getIcon(),powerOffsetX,powerOffsetY,95,95);
@@ -484,7 +498,7 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(skill6,-50,300);
+                   openTooltip(skill6,powerOffsetX - 425 ,powerOffsetY + 30);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -519,7 +533,7 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(flashbangSkill,50,300);
+                   openTooltip(flashbangSkill,powerOffsetX - 315 ,powerOffsetY + 30);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -554,7 +568,7 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(stimSkill,150,300);
+                   openTooltip(stimSkill,powerOffsetX - 205 ,powerOffsetY + 30);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -589,7 +603,7 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(gravitySkill,150,300);
+                   openTooltip(gravitySkill,powerOffsetX - 95 ,powerOffsetY + 30);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -602,8 +616,8 @@ public class SkillMenu extends Window {
        
        //=================== Tech =========================
        
-       int techOffsetX = 700;
-       int techOffsetY = 200;
+       final int techOffsetX = 700;
+       final int techOffsetY = 250;
        //attack drone
        final Skill skill2 = this.skillSlots[3][0];
        b = new Button(skill2.getIcon(),techOffsetX,techOffsetY,95,95);
@@ -628,7 +642,7 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(skill2,-50,140);
+                   openTooltip(skill2,techOffsetX - 425 ,techOffsetY + 30);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -662,7 +676,7 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(skill4,50,140);
+                   openTooltip(skill4,techOffsetX - 315 ,techOffsetY + 30);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -696,7 +710,7 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(playerGuardSkill,150,140);
+                   openTooltip(playerGuardSkill,techOffsetX - 205 ,techOffsetY + 30);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -730,7 +744,7 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(playerFlashbangSkill,150,140);
+                   openTooltip(playerFlashbangSkill,techOffsetX - 95 ,techOffsetY + 30);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {

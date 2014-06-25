@@ -168,8 +168,8 @@ public class ArmorMenu extends Window{
         // Weapon Upgrades
         //=================
 
-        int weaponBasePositionX = 133;
-        int weaponBasePositionY = 600;
+        final int weaponBasePositionX = 133;
+        final int weaponBasePositionY = 600;
         
         
         final ArmorStat stat1 = this.playerReference.getArmorManager().weaponDamage;
@@ -185,7 +185,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat1.name,stat1.image,stat1.description, stat1.cost);
+                   openTooltip(weaponBasePositionX +95,weaponBasePositionY ,stat1.name,stat1.image,stat1.description, stat1.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -211,7 +211,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat2.name,stat2.image,stat2.description, stat2.cost);
+                   openTooltip(weaponBasePositionX +195,weaponBasePositionY,stat2.name,stat2.image,stat2.description, stat2.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -237,7 +237,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat3.name,stat3.image,stat3.description, stat3.cost);
+                   openTooltip(weaponBasePositionX +295,weaponBasePositionY,stat3.name,stat3.image,stat3.description, stat3.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -263,7 +263,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat4.name,stat4.image,stat4.description, stat4.cost);
+                   openTooltip(weaponBasePositionX +95,weaponBasePositionY - 100,stat4.name,stat4.image,stat4.description, stat4.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -289,7 +289,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat5.name,stat5.image,stat5.description, stat5.cost);
+                   openTooltip(weaponBasePositionX +195,weaponBasePositionY - 100,stat5.name,stat5.image,stat5.description, stat5.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -315,7 +315,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat6.name,stat6.image,stat6.description, stat6.cost);
+                   openTooltip(weaponBasePositionX +295,weaponBasePositionY -100,stat6.name,stat6.image,stat6.description, stat6.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -334,8 +334,8 @@ public class ArmorMenu extends Window{
         // Helm Upgrades
         //================
         
-        int helmBasePositionX = 792;
-        int helmBasePositionY = 600;
+        final int helmBasePositionX = 792;
+        final int helmBasePositionY = 600;
        
         
         final ArmorStat stat7 = this.playerReference.getArmorManager().seeEnemyHealth;
@@ -351,7 +351,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(400,450,stat7.name,stat7.image,stat7.description, stat7.cost);
+                   openTooltip(helmBasePositionX -425,helmBasePositionY ,stat7.name,stat7.image,stat7.description, stat7.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -377,7 +377,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(400,450,stat8.name,stat8.image,stat8.description, stat8.cost);
+                   openTooltip(helmBasePositionX -325,helmBasePositionY,stat8.name,stat8.image,stat8.description, stat8.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -403,7 +403,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(400,450,stat9.name,stat9.image,stat9.description, stat9.cost);
+                   openTooltip(helmBasePositionX -225,helmBasePositionY,stat9.name,stat9.image,stat9.description, stat9.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -429,7 +429,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(400,450,stat10.name,stat10.image,stat10.description, stat10.cost);
+                   openTooltip(helmBasePositionX -425,helmBasePositionY-100,stat10.name,stat10.image,stat10.description, stat10.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -455,7 +455,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat11.name,stat11.image,stat11.description, stat11.cost);
+                   openTooltip(helmBasePositionX -325,helmBasePositionY-100,stat11.name,stat11.image,stat11.description, stat11.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -473,8 +473,8 @@ public class ArmorMenu extends Window{
         // Armor Upgrades
         //================
         
-        int armorBasePositionX = 133;
-        int armorBasePositionY = 200;
+        final int armorBasePositionX = 133;
+        final int armorBasePositionY = 200;
                
         
         final ArmorStat stat12 = this.playerReference.getArmorManager().health;
@@ -490,7 +490,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat12.name,stat12.image,stat12.description, stat12.cost);
+                   openTooltip(armorBasePositionX +95,armorBasePositionY,stat12.name,stat12.image,stat12.description, stat12.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -516,7 +516,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat13.name,stat13.image,stat13.description, stat13.cost);
+                   openTooltip(armorBasePositionX +195,armorBasePositionY,stat13.name,stat13.image,stat13.description, stat13.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -542,7 +542,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat14.name,stat14.image,stat14.description, stat14.cost);
+                   openTooltip(armorBasePositionX +295,armorBasePositionY,stat14.name,stat14.image,stat14.description, stat14.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -568,7 +568,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat15.name,stat15.image,stat15.description, stat15.cost);
+                   openTooltip(armorBasePositionX +95,armorBasePositionY-100,stat15.name,stat15.image,stat15.description, stat15.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -594,7 +594,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat16.name,stat16.image,stat16.description, stat16.cost);
+                   openTooltip(armorBasePositionX +195,armorBasePositionY-100,stat16.name,stat16.image,stat16.description, stat16.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -620,7 +620,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat17.name,stat17.image,stat17.description, stat17.cost);
+                   openTooltip(armorBasePositionX +295,armorBasePositionY-100,stat17.name,stat17.image,stat17.description, stat17.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -638,8 +638,8 @@ public class ArmorMenu extends Window{
         // Boot Upgrades
         //================
               
-        int bootsBasePositionX = 792;
-        int bootsBasePositionY = 200;
+        final int bootsBasePositionX = 792;
+        final int bootsBasePositionY = 200;
                
         
         final ArmorStat stat18 = this.playerReference.getArmorManager().doubleJump;
@@ -655,7 +655,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat18.name,stat18.image,stat18.description, stat18.cost);
+                   openTooltip(bootsBasePositionX -425,bootsBasePositionY ,stat18.name,stat18.image,stat18.description, stat18.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -681,7 +681,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat19.name,stat19.image,stat19.description, stat19.cost);
+                   openTooltip(bootsBasePositionX -325,bootsBasePositionY ,stat19.name,stat19.image,stat19.description, stat19.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -707,7 +707,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat20.name,stat20.image,stat20.description, stat20.cost);
+                   openTooltip(bootsBasePositionX -225,bootsBasePositionY ,stat20.name,stat20.image,stat20.description, stat20.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -733,7 +733,7 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(700,450,stat21.name,stat21.image,stat21.description, stat21.cost);
+                   openTooltip(bootsBasePositionX -425,bootsBasePositionY -100,stat21.name,stat21.image,stat21.description, stat21.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {

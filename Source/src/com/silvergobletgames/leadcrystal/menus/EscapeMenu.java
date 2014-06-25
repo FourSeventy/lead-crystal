@@ -1,5 +1,6 @@
 package com.silvergobletgames.leadcrystal.menus;
 
+import com.silvergobletgames.leadcrystal.core.CursorFactory;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
 import com.silvergobletgames.leadcrystal.scenes.MainMenuScene;
@@ -22,20 +23,43 @@ import java.util.ArrayList;
  */
 public class EscapeMenu extends Window
 {
+    private final Text optionsText;
     private final Text returnToGameText;
     private final Text quitText;
     
     public EscapeMenu(float x, float y)
     {
-        super(new Image("smallFrame.png"), x, y, 400, 300);
+        super(new Image("smallFrame.png"), x, y, 400, 400);
         
-       
-        //single player
+         //close
+        final Image closeImage = new Image("closeButton.png");
+        Button closeButton = new Button(closeImage,357,366,closeImage.getWidth()+1,closeImage.getHeight());
+        closeButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                if (e.getActionCommand().equals("mouseEntered")) {
+
+                  closeImage.setBrightness(1.5f);
+                  Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.HAND)); 
+                }
+                if (e.getActionCommand().equals("mouseExited")) {
+
+                    closeImage.setBrightness(1f);
+                }
+                if(e.getActionCommand().equals("clicked"))
+                {
+                    close();
+                }
+            }
+       });
+        this.addComponent(closeButton);
+        
+        //return to game
         this.returnToGameText = new Text("Return to Game",LeadCrystalTextType.HUD34);
-        returnToGameText.setPosition(x +200 - returnToGameText.getWidth()/2, y + 185 );
-        final Label returnToGameLabel = new Label(this.returnToGameText, 200 -returnToGameText.getWidth()/2, 185,true);
+        returnToGameText.setPosition(x +200 - returnToGameText.getWidth()/2, y + 285 );
+        final Label returnToGameLabel = new Label(this.returnToGameText, 200 -returnToGameText.getWidth()/2, 285,true);
         this.addComponent(returnToGameLabel);
-        final Button singlePlayerButton = new Button(new Image("blank.png"), 200 - returnToGameText.getWidth()/2, 185, returnToGameText.getWidth(), returnToGameText.getHeight());    
+        final Button singlePlayerButton = new Button(new Image("blank.png"), 200 - returnToGameText.getWidth()/2, 285, returnToGameText.getWidth(), returnToGameText.getHeight());    
         this.addComponent(singlePlayerButton);
         singlePlayerButton.addActionListener(new ActionListener() {
 
@@ -66,7 +90,43 @@ public class EscapeMenu extends Window
             }
         });
         
-         //single player  
+        //options
+        this.optionsText = new Text("Options",LeadCrystalTextType.HUD34);
+        optionsText.setPosition(x +200 - optionsText.getWidth()/2, y + 185 );
+        final Label optionsLabel = new Label(this.optionsText, 200 -optionsText.getWidth()/2, 185,true);
+        this.addComponent(optionsLabel);
+        final Button optionsButton = new Button(new Image("blank.png"), 200 - optionsText.getWidth()/2, 185, optionsText.getWidth(), optionsText.getHeight());    
+        this.addComponent(optionsButton);
+        optionsButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                if (e.getActionCommand().equals("clicked")) 
+                {
+                   
+                }
+                if (e.getActionCommand().equals("mouseEntered")) 
+                {
+                    
+                      if(optionsText.hasTextEffect("small"))
+                          optionsText.removeTextEffect("small");
+                      
+                       optionsText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, optionsText.getScale(), 1.2));
+                    
+                    //play sound
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
+                    getOwningScene().add(sound);
+                }
+                if (e.getActionCommand().equals("mouseExited"))
+                {
+                        if(optionsText.hasTextEffect("big"))
+                           optionsText.removeTextEffect("big");
+                        
+                        optionsText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, optionsText.getScale(), 1));
+                }
+            }
+        });
+        
+         //save and quit
         this.quitText = new Text("Save and Quit",LeadCrystalTextType.HUD34);
         quitText.setPosition(x +200 - quitText.getWidth()/2,y+ 85);
         final Label quitLabel = new Label(this.quitText, 200 -quitText.getWidth()/2, 85,true);

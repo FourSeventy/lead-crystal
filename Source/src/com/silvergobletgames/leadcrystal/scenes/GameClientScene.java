@@ -685,36 +685,37 @@ public final class GameClientScene extends Scene
 
 
             //open esc menu
-            if (inputSnapshot.isKeyReleased(KeyEvent.VK_ESCAPE))
-            {
-                if (this.mapEditorPath == null) 
-                    hud.escapeMenu.toggle();
+            if(inputSnapshot.isKeyReleased(KeyEvent.VK_ESCAPE))
+            {        
+                if(hud.armorMenu.isOpen() || hud.mapMenu.isOpen() || hud.potionsMenu.isOpen() || hud.questMenu.isOpen() || hud.skillMenu.isOpen())
+                {
+                    hud.armorMenu.close();
+                    hud.mapMenu.close();
+                    hud.potionsMenu.close();
+                    hud.questMenu.close();
+                    hud.skillMenu.close();
+                }
                 else
                 {
-                    this.sendDisconnectRequest();                       
-                    ArrayList args = new ArrayList();
-                    args.add(mapEditorPath);
-                    args.add(this.activeSaveGame);
-                    Game.getInstance().unloadScene(GameClientScene.class);
-                    Game.getInstance().changeScene(MapEditorScene.class,args);  
+                    hud.escapeMenu.toggle();
                 }
             }
 
             //quest menu
-            if (inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_L))
+            if(inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_L))
             {
                 hud.questMenu.toggle();
             }
 
             //use hotbar skills 
-            if (inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_Q))
+            if(inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_Q))
             {
                 if (this.player.getSkillAssignment(3)  != null && player.getSkillManager().getSkill(this.player.getSkillAssignment(3)).isUsable())
                 {
                     player.useActionBarSkill(this.player.getSkillAssignment(3));
                 }
             }
-            if (inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_E))
+            if(inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_E))
             {
                 if (this.player.getSkillAssignment(4) != null && player.getSkillManager().getSkill(this.player.getSkillAssignment(4)).isUsable())
                 {
