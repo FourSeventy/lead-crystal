@@ -8,8 +8,11 @@ import com.silvergobletgames.sylver.windowsystem.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import com.silvergobletgames.leadcrystal.combat.LevelProgressionManager.Level;
+import com.silvergobletgames.leadcrystal.core.CursorFactory;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
+import com.silvergobletgames.sylver.core.Game;
 
 /**
  *
@@ -35,21 +38,29 @@ public class QuestMenu extends Window{
     public QuestMenu(float x, float y,PlayerEntity player)
     {
        //super constructor call, setting the background sprite and initial position
-       super(new Image("tallFrame.png"),x,y,500,900);
+       super(new Image("tallFrame.png"),x,y,550,900);
        
        this.playerReference = player;
        
-       Button closeButton = new Button("deleteButton.png",500,850,50,50);
-       closeButton.addActionListener(new ActionListener(){
+         //text
+        Text menuText = new Text("Objectives",LeadCrystalTextType.HUD24);
+        Label menuTextLabel = new Label(menuText,275 - menuText.getWidth()/2,840);
+        this.addComponent(menuTextLabel);
+        
+        //close
+        final Image closeImage = new Image("closeButton.png");
+        Button closeButton = new Button(closeImage,504,867,closeImage.getWidth()+1,closeImage.getHeight());
+        closeButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
 
-                  
+                  closeImage.setBrightness(1.5f);
+                  Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.HAND)); 
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
 
-                    
+                    closeImage.setBrightness(1f);
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
@@ -57,11 +68,8 @@ public class QuestMenu extends Window{
                 }
             }
        });
-       this.addComponent(closeButton);
-                    
+        this.addComponent(closeButton);
   
-       
-
     }
     
     
@@ -89,10 +97,10 @@ public class QuestMenu extends Window{
         if(currentLevel != null)
         {
             //level name
-            this.levelName = new Label(currentLevel.levelName, 50, 800);
-            levelName.getText().setScale(1.4f);
-            levelName.getText().setColor(new Color(Color.white));
-            this.addComponent(levelName);
+//            this.levelName = new Label(currentLevel.levelName, 50, 800);
+//            levelName.getText().setScale(1.4f);
+//            levelName.getText().setColor(new Color(Color.white));
+//            this.addComponent(levelName);
        
             //main objective
             this.mainObjectiveHeader = new Label("Main Objective: ",50,700);

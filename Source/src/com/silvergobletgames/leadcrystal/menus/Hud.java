@@ -241,7 +241,7 @@ public class Hud extends Window
         menuList.add(mapMenu);
         
         //quest menu
-        questMenu = new QuestMenu(10,0,playerReference);
+        questMenu = new QuestMenu(1,0,playerReference);
         questMenu.addActionListener(new ActionListener(){
          public void actionPerformed(ActionEvent e)
             {
