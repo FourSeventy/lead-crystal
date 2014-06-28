@@ -1476,6 +1476,10 @@ public final class GameClientScene extends Scene
         {
             handleSetSideQuestStatusPacket((setSideQuestStatusPacket)object);
         }
+        else if(object instanceof SetMainQuestStatusPacket)
+        {
+            handleSetMainQuestStatusPacket((SetMainQuestStatusPacket)object);
+        }
         else if(object instanceof CursorChangePacket)
         {
             handleCursorChangePacket((CursorChangePacket)object);
@@ -1683,6 +1687,14 @@ public final class GameClientScene extends Scene
     {
         //set the status
         this.hud.questMenu.setSideObjectiveStatus(packet.text);
+        
+       
+    }
+    
+    private void handleSetMainQuestStatusPacket(SetMainQuestStatusPacket packet)
+    {
+        //set the status
+        this.hud.questMenu.setMainObjectiveStatus(packet.text);
         
        
     }

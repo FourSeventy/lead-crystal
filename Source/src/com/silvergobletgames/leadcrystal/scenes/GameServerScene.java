@@ -1100,6 +1100,16 @@ public class GameServerScene extends Scene
         }
     }
     
+    public void sendSetMainQuestStatus(String text)
+    {
+        for(UUID clientID:this.clientsInScene.keySet())
+        {
+            SetMainQuestStatusPacket packet = new SetMainQuestStatusPacket();
+            packet.text = text;
+            this.sendPacket(packet, clientID);
+        }
+    }
+    
     public void sendSideObjectiveCompletePacket(String client, short currencyReward, ArmorStatID modifierId)
     {
             //send out side objective complete packet

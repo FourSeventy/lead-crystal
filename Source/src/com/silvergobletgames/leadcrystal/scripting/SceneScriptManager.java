@@ -281,6 +281,10 @@ public class SceneScriptManager
        
     }
     
+    public void setMainObjectiveStatusText(String text){
+        
+    }
+    
     public void completeLevel()
     {
        this.completeLevel("checkpoint1");

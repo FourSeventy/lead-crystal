@@ -63,7 +63,7 @@ public class LevelProgressionManager
         level0.mainObjective = objective;
         //side objective 
         objective = new LevelObjective();
-        objective.objectiveName = "None";
+        objective.objectiveName = "null";
         objective.objectiveDescription = "";
         objective.currencyAward = 0;
         level0.sideObjective = objective;
@@ -104,7 +104,7 @@ public class LevelProgressionManager
         level2.mainObjective = objective;
         //side objective 
         objective = new LevelObjective();
-        objective.objectiveName = "Find mysterious artifact.";
+        objective.objectiveName = "Find Mysterious Artifact";
         objective.objectiveDescription = "Keep your eyes open for any mysterious artifacts you may find out in the desert.";
         objective.currencyAward = 25;
         level2.sideObjective = objective;
@@ -204,7 +204,7 @@ public class LevelProgressionManager
         cave2.levelName = "Cave 2";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Kill giant Motoccos";
+        objective.objectiveName = "Kill Giant Motoccos";
         objective.objectiveDescription = "Kill all 5 giant motoccos in the cave.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
@@ -340,7 +340,7 @@ public class LevelProgressionManager
     }
 
     
-    public int getLevelNumberFromDataName(String levelDataName)
+    public int getLevelNumberFromDataName(String levelDataName) throws Exception
     {
         for(Entry<Integer,Level> entry: this.levelMap.entrySet())
         {
@@ -350,7 +350,8 @@ public class LevelProgressionManager
             if(level.levelDataName.equals(levelDataName))
                 return levelNumber;
         }
-        return 0;
+        
+        throw new Exception("Level Not Found");
     }
     
       

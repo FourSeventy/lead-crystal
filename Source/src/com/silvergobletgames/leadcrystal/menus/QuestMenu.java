@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import com.silvergobletgames.leadcrystal.combat.LevelProgressionManager.Level;
 import com.silvergobletgames.leadcrystal.core.CursorFactory;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
@@ -26,8 +27,13 @@ public class QuestMenu extends Window{
     //level detail fields
     private Label levelName; 
     private Label mainObjectiveHeader; private Label mainObjectiveCompleted;
+    private Label mainObjectiveTitle;
+    private Label mainObjectiveStatus; private String mainObjectiveStatusText = "";
     private TextBlock mainObjectiveDescription;
-    private Label sideObjective1Header; private Label sideObjective1Completed; private Label sideObjectiveStatus; private String statusText = "";
+    
+    private Label sideObjectiveTitle;
+    private Label sideObjectiveHeader; private Label sideObjectiveCompleted; 
+    private Label sideObjectiveStatus; private String sideObjectiveStatusText = "";
     private TextBlock sideObjective1Description;
     
     
@@ -79,113 +85,149 @@ public class QuestMenu extends Window{
     //===============
     
     /**
-     * Repaints the level details that display in the bottom right corner of the map screen. A 0 clears the fields.
-     * @param levelNumber 
+     * Repains level details based on current level
      */
-    public void repaintLevelDetails(Level currentLevel)
+    public void repaintLevelDetails()           
     {
+        //get current level 
+        String playerLevelName = ((GameClientScene)this.owningScene).activeLevelData.filename; 
+        Level currentLevel= null;
+        try
+        {
+            int levelNumber= this.playerReference.getLevelProgressionManager().getLevelNumberFromDataName(playerLevelName);
+            currentLevel = this.playerReference.getLevelProgressionManager().levelMap.get(levelNumber);
+        }
+        catch(Exception e)
+        {
+            //expected if level is town
+        }    
+        
         //clear old stuff
         this.removeComponent(levelName);
         this.removeComponent(mainObjectiveDescription);
         this.removeComponent(mainObjectiveHeader);
         this.removeComponent(mainObjectiveCompleted);
         this.removeComponent(sideObjective1Description);
-        this.removeComponent(sideObjective1Header);
-        this.removeComponent(sideObjective1Completed);
+        this.removeComponent(sideObjectiveHeader);
+        this.removeComponent(sideObjectiveCompleted);
         this.removeComponent(sideObjectiveStatus); 
+        this.removeComponent(mainObjectiveTitle);
+        this.removeComponent(sideObjectiveTitle);
         
-        if(currentLevel != null)
+        if(currentLevel == null)
         {
-            //level name
-//            this.levelName = new Label(currentLevel.levelName, 50, 800);
-//            levelName.getText().setScale(1.4f);
-//            levelName.getText().setColor(new Color(Color.white));
-//            this.addComponent(levelName);
-       
-            //main objective
-            this.mainObjectiveHeader = new Label("Main Objective: ",50,700);
-            this.mainObjectiveHeader.getText().setColor(new Color(Color.red));
-            this.addComponent(mainObjectiveHeader);      
-            if(currentLevel.mainObjective.complete)
-            {
-                this.mainObjectiveCompleted = new Label("Complete", 250,700);
-                this.mainObjectiveCompleted.getText().setColor(new Color(Color.green));
-                this.addComponent(mainObjectiveCompleted);
-            }    
-            this.mainObjectiveDescription = new TextBlock(50, 675, 420, new Text(currentLevel.mainObjective.objectiveDescription));
-            this.addComponent(mainObjectiveDescription);
+            return;
+        }
+           
+        //================
+        //main objective  
+        //=================
 
-            //side objective 1
-            if(currentLevel.sideObjective != null)
-            {          
-                //header
-                this.sideObjective1Header = new Label("Side Objective: ",50,675 - mainObjectiveDescription.getHeight() - 50);
-                this.sideObjective1Header.getText().setColor(new Color(Color.red));
-                this.addComponent(sideObjective1Header);
-                
-                //complete
-                if(currentLevel.sideObjective.complete || this.statusText.equals("complete"))
-                {
-                    this.sideObjective1Completed = new Label("Complete", 250,675 - mainObjectiveDescription.getHeight() - 50);
-                    this.sideObjective1Completed.getText().setColor(new Color(Color.green)); 
-                    this.addComponent(sideObjective1Completed);
-                }
-                
-                //status
-                if(!statusText.equals("complete"))
-                {
-                    this.sideObjectiveStatus = new Label(statusText, 250,675 - mainObjectiveDescription.getHeight() - 50);
-                    this.sideObjectiveStatus.getText().setColor(new Color(Color.red)); 
-                    this.addComponent(sideObjectiveStatus);
-                }
-                else
-                {
-                    this.removeComponent(sideObjectiveStatus); 
-                }
-                
-                //description
-                sideObjective1Description = new TextBlock(50, 675 - mainObjectiveDescription.getHeight() - 50 - 25, 420, new Text(currentLevel.sideObjective.objectiveDescription));
-                this.addComponent(sideObjective1Description);
-            }
-            
+        //header
+        Text tex = new Text("Main Objective:",LeadCrystalTextType.HUD28);
+        this.mainObjectiveHeader = new Label(tex,50,700);
+        this.mainObjectiveHeader.getText().setColor(new Color(200,100,8));
+        this.addComponent(mainObjectiveHeader);     
+
+        //complete
+        if(currentLevel.mainObjective.complete)
+        {
+            tex = new Text("Complete",LeadCrystalTextType.HUD28);
+            this.mainObjectiveCompleted = new Label(tex, 250,700);
+            this.mainObjectiveCompleted.getText().setColor(new Color(Color.green));
+            this.addComponent(mainObjectiveCompleted);
+        }    
+        
+        //status
+        if(!mainObjectiveStatusText.equals("complete"))
+        {
+            tex =new Text(mainObjectiveStatusText,LeadCrystalTextType.HUD24);
+            this.mainObjectiveStatus = new Label(tex, 250,700);
+            this.mainObjectiveStatus.getText().setColor(new Color(Color.red)); 
+            this.addComponent(mainObjectiveStatus);
         }
         else
         {
-            
+            this.removeComponent(mainObjectiveStatus); 
         }
-        
+
+        //title and description
+        tex = new Text(currentLevel.mainObjective.objectiveName + "-",LeadCrystalTextType.HUD28);
+        this.mainObjectiveTitle = new Label(tex,75,660);
+        this.addComponent(mainObjectiveTitle);
+        this.mainObjectiveDescription = new TextBlock(75, 630, 450, new Text(currentLevel.mainObjective.objectiveDescription,LeadCrystalTextType.HUD24));
+        this.addComponent(mainObjectiveDescription);
+
+
+        //==============
+        //side objective
+        //===============
+        if(currentLevel.sideObjective != null && !currentLevel.sideObjective.objectiveName.equals("null"))
+        {          
+            //header
+            tex =new Text("Side Objective:",LeadCrystalTextType.HUD28);
+            this.sideObjectiveHeader = new Label(tex,50,600 - mainObjectiveDescription.getHeight() - 50);
+            this.sideObjectiveHeader.getText().setColor(new Color(200,100,8));
+            this.addComponent(sideObjectiveHeader);
+
+            //complete
+            if(currentLevel.sideObjective.complete || this.sideObjectiveStatusText.equals("complete"))
+            {
+                tex =new Text("Complete",LeadCrystalTextType.HUD28);
+                this.sideObjectiveCompleted = new Label(tex, 250,600 - mainObjectiveDescription.getHeight() - 50);
+                this.sideObjectiveCompleted.getText().setColor(new Color(Color.green)); 
+                this.addComponent(sideObjectiveCompleted);
+            }
+
+            //status
+            if(!sideObjectiveStatusText.equals("complete"))
+            {
+                tex =new Text(sideObjectiveStatusText,LeadCrystalTextType.HUD24);
+                this.sideObjectiveStatus = new Label(tex, 250,600 - mainObjectiveDescription.getHeight() - 50);
+                this.sideObjectiveStatus.getText().setColor(new Color(Color.red)); 
+                this.addComponent(sideObjectiveStatus);
+            }
+            else
+            {
+                this.removeComponent(sideObjectiveStatus); 
+            }
+
+            tex = new Text(currentLevel.sideObjective.objectiveName + "-",LeadCrystalTextType.HUD28);
+            this.sideObjectiveTitle = new Label(tex,75,600 - mainObjectiveDescription.getHeight() - 50 -40);
+            this.addComponent(sideObjectiveTitle);
+            //description
+            sideObjective1Description = new TextBlock(75, 600 - mainObjectiveDescription.getHeight() - 50 - 70, 450, new Text(currentLevel.sideObjective.objectiveDescription,LeadCrystalTextType.HUD24));
+            this.addComponent(sideObjective1Description);
+        }
+
     }
+    
+     
     public void setSideObjectiveStatus(String string)
     {
-        this.statusText = string;
+        this.sideObjectiveStatusText = string;
         
         //repaint
-        String playerLevelName = ((GameClientScene)this.owningScene).activeLevelData.filename;
-        int levelNumber = this.playerReference.getLevelProgressionManager().getLevelNumberFromDataName(playerLevelName);
-        Level currentLevel = this.playerReference.getLevelProgressionManager().levelMap.get(levelNumber);      
-        this.repaintLevelDetails(currentLevel); 
+        this.repaintLevelDetails(); 
     }
+    
+    public void setMainObjectiveStatus(String string)
+    {
+        this.mainObjectiveStatusText = string;
+        
+        //repaint
+        this.repaintLevelDetails(); 
+    }
+    
     
     @Override
     public void open()
     {
         super.open();
         
-       //=================
-       // Level Details
-       //================
-        
-        
-        
-        //build new stuff
-        String playerLevelName = ((GameClientScene)this.owningScene).activeLevelData.filename;
-        int levelNumber = this.playerReference.getLevelProgressionManager().getLevelNumberFromDataName(playerLevelName);
-        Level currentLevel = this.playerReference.getLevelProgressionManager().levelMap.get(levelNumber);
-       
-        this.repaintLevelDetails(currentLevel); 
-       
-       
-       
+       //repaint
+        this.repaintLevelDetails(); 
+      
     }
     
 }
