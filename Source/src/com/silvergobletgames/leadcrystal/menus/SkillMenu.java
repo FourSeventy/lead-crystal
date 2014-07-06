@@ -217,6 +217,17 @@ public class SkillMenu extends Window {
                        ((GameClientScene)owningScene).sendBuySkillPacket(skill.getSkillID());
                    }
                }
+               if(e.getActionCommand().equals("mouseDown"))
+               {
+                  if(primaryLock[0] == false && hand == null)
+                   {
+                        hand = skill.getIcon();
+                        hand.setAnchor(Anchorable.Anchor.CENTER);
+                        hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
+                        hand.setDimensions(40, 40);
+                        handSkillID = skill.getSkillID();
+                   } 
+               }
                if(e.getActionCommand().equals("mouseEntered"))
                {
                    openTooltip(skill,primaryOffsetX + 100 + 15,primaryOffsetY +30 );
@@ -249,6 +260,17 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(skill5.getSkillID());
+                   }
+               }
+               if(e.getActionCommand().equals("mouseDown"))
+               {
+                   if(primaryLock[1] == false && hand == null)
+                   {
+                        hand = skill5.getIcon();
+                        hand.setAnchor(Anchorable.Anchor.CENTER);
+                        hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
+                        hand.setDimensions(40, 40);
+                        handSkillID = skill5.getSkillID();
                    }
                }
                if(e.getActionCommand().equals("mouseEntered"))
@@ -285,6 +307,17 @@ public class SkillMenu extends Window {
                        ((GameClientScene)owningScene).sendBuySkillPacket(skill7.getSkillID());
                    }
                }
+               if(e.getActionCommand().equals("mouseDown"))
+               {
+                   if(primaryLock[2] == false && hand == null)
+                   {
+                        hand = skill7.getIcon();
+                        hand.setAnchor(Anchorable.Anchor.CENTER);
+                        hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
+                        hand.setDimensions(40, 40);
+                        handSkillID = skill7.getSkillID();
+                   }
+               }
                if(e.getActionCommand().equals("mouseEntered"))
                {
                    openTooltip(skill7,primaryOffsetX + 320 + 15,primaryOffsetY +30 );
@@ -317,6 +350,17 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(blade.getSkillID());
+                   }
+               }
+               if(e.getActionCommand().equals("mouseDown"))
+               {
+                   if(primaryLock[3] == false && hand == null)
+                   {
+                        hand = blade.getIcon();
+                        hand.setAnchor(Anchorable.Anchor.CENTER);
+                        hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
+                        hand.setDimensions(40, 40);
+                        handSkillID = blade.getSkillID();
                    }
                }
                if(e.getActionCommand().equals("mouseEntered"))
@@ -356,6 +400,17 @@ public class SkillMenu extends Window {
                        ((GameClientScene)owningScene).sendBuySkillPacket(skill1.getSkillID());
                    }
                }
+               if(e.getActionCommand().equals("mouseDown"))
+               {
+                   if(secondaryLock[0] == false && hand == null)
+                   {
+                        hand = skill1.getIcon();
+                        hand.setAnchor(Anchorable.Anchor.CENTER);
+                        hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
+                        hand.setDimensions(40, 40);
+                        handSkillID = skill1.getSkillID();
+                   }
+               }
                if(e.getActionCommand().equals("mouseEntered"))
                {
                    openTooltip(skill1,secondaryOffsetX + 100 + 15,secondaryOffsetY +30 );
@@ -388,6 +443,17 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(skill3.getSkillID());
+                   }
+               }
+               if(e.getActionCommand().equals("mouseDown"))
+               {
+                   if(secondaryLock[1] == false && hand == null)
+                   {
+                        hand = skill3.getIcon();
+                        hand.setAnchor(Anchorable.Anchor.CENTER);
+                        hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
+                        hand.setDimensions(40, 40);
+                        handSkillID = skill3.getSkillID();
                    }
                }
                if(e.getActionCommand().equals("mouseEntered"))
@@ -424,6 +490,17 @@ public class SkillMenu extends Window {
                        ((GameClientScene)owningScene).sendBuySkillPacket(freezeSkill.getSkillID());
                    }
                }
+               if(e.getActionCommand().equals("mouseDown"))
+               {
+                   if(secondaryLock[2] == false && hand == null)
+                   {
+                        hand = freezeSkill.getIcon();
+                        hand.setAnchor(Anchorable.Anchor.CENTER);
+                        hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
+                        hand.setDimensions(40, 40);
+                        handSkillID = freezeSkill.getSkillID();
+                   }
+               }
                if(e.getActionCommand().equals("mouseEntered"))
                {
                    openTooltip(freezeSkill,secondaryOffsetX + 320 + 15,secondaryOffsetY +30 );
@@ -456,6 +533,17 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(snipeSkill.getSkillID());
+                   }
+               }             
+               if(e.getActionCommand().equals("mouseDown"))
+               {
+                   if(secondaryLock[3] == false && hand == null)
+                   {
+                        hand = snipeSkill.getIcon();
+                        hand.setAnchor(Anchorable.Anchor.CENTER);
+                        hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
+                        hand.setDimensions(40, 40);
+                        handSkillID = snipeSkill.getSkillID();
                    }
                }
                if(e.getActionCommand().equals("mouseEntered"))
@@ -496,6 +584,17 @@ public class SkillMenu extends Window {
                        ((GameClientScene)owningScene).sendBuySkillPacket(skill6.getSkillID());
                    }
                }
+               if(e.getActionCommand().equals("mouseDown"))
+               {
+                   if(powerLock[0] == false && hand == null)
+                   {
+                        hand = skill6.getIcon();
+                        hand.setAnchor(Anchorable.Anchor.CENTER);
+                        hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
+                        hand.setDimensions(40, 40);
+                        handSkillID = skill6.getSkillID();
+                   }
+               }
                if(e.getActionCommand().equals("mouseEntered"))
                {
                    openTooltip(skill6,powerOffsetX - 425 ,powerOffsetY + 30);
@@ -529,6 +628,17 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(flashbangSkill.getSkillID());
+                   }
+               }
+               if(e.getActionCommand().equals("mouseDown"))
+               {
+                   if(powerLock[1] == false && hand == null)
+                   {
+                        hand = flashbangSkill.getIcon();
+                        hand.setAnchor(Anchorable.Anchor.CENTER);
+                        hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
+                        hand.setDimensions(40, 40);
+                        handSkillID = flashbangSkill.getSkillID();
                    }
                }
                if(e.getActionCommand().equals("mouseEntered"))
@@ -566,6 +676,17 @@ public class SkillMenu extends Window {
                        ((GameClientScene)owningScene).sendBuySkillPacket(stimSkill.getSkillID());
                    }
                }
+               if(e.getActionCommand().equals("mouseDown"))
+               {
+                   if(powerLock[2] == false && hand == null)
+                   {
+                        hand = stimSkill.getIcon();
+                        hand.setAnchor(Anchorable.Anchor.CENTER);
+                        hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
+                        hand.setDimensions(40, 40);
+                        handSkillID = stimSkill.getSkillID();
+                   }
+               }
                if(e.getActionCommand().equals("mouseEntered"))
                {
                    openTooltip(stimSkill,powerOffsetX - 205 ,powerOffsetY + 30);
@@ -600,6 +721,17 @@ public class SkillMenu extends Window {
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(gravitySkill.getSkillID());
                    }
+               }
+               if(e.getActionCommand().equals("mouseDown"))
+               {
+                  if(powerLock[3] == false && hand == null)
+                   {
+                        hand = gravitySkill.getIcon();
+                        hand.setAnchor(Anchorable.Anchor.CENTER);
+                        hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
+                        hand.setDimensions(40, 40);
+                        handSkillID = gravitySkill.getSkillID();
+                   } 
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -640,6 +772,17 @@ public class SkillMenu extends Window {
                        ((GameClientScene)owningScene).sendBuySkillPacket(skill2.getSkillID());
                    }
                }
+               if(e.getActionCommand().equals("mouseDown"))
+               {
+                   if(techLock[0] == false && hand == null)
+                   {         
+                        hand = skill2.getIcon();
+                        hand.setAnchor(Anchorable.Anchor.CENTER);
+                        hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
+                        hand.setDimensions(40, 40);
+                        handSkillID = skill2.getSkillID();
+                   }
+               }
                if(e.getActionCommand().equals("mouseEntered"))
                {
                    openTooltip(skill2,techOffsetX - 425 ,techOffsetY + 30);
@@ -672,6 +815,17 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(skill4.getSkillID());
+                   }
+               }
+               if(e.getActionCommand().equals("mouseDown"))
+               {
+                   if(techLock[1] == false &&  hand == null)
+                   {
+                        hand = skill4.getIcon();
+                        hand.setAnchor(Anchorable.Anchor.CENTER);
+                        hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
+                        hand.setDimensions(40, 40);
+                        handSkillID = skill4.getSkillID();
                    }
                }
                if(e.getActionCommand().equals("mouseEntered"))
@@ -708,6 +862,17 @@ public class SkillMenu extends Window {
                        ((GameClientScene)owningScene).sendBuySkillPacket(playerGuardSkill.getSkillID());
                    }
                }
+               if(e.getActionCommand().equals("mouseDown"))
+               {
+                   if(techLock[2] == false && hand == null)
+                   {
+                        hand = playerGuardSkill.getIcon();
+                        hand.setAnchor(Anchorable.Anchor.CENTER);
+                        hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
+                        hand.setDimensions(40, 40);
+                        handSkillID = playerGuardSkill.getSkillID();
+                   }
+               }
                if(e.getActionCommand().equals("mouseEntered"))
                {
                    openTooltip(playerGuardSkill,techOffsetX - 205 ,techOffsetY + 30);
@@ -741,6 +906,17 @@ public class SkillMenu extends Window {
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(playerFlashbangSkill.getSkillID());
                    }
+               }
+               if(e.getActionCommand().equals("mouseDown"))
+               {
+                  if(techLock[3] == false && hand == null)
+                   {
+                        hand = playerFlashbangSkill.getIcon();
+                        hand.setAnchor(Anchorable.Anchor.CENTER);
+                        hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
+                        hand.setDimensions(40, 40);
+                        handSkillID = playerFlashbangSkill.getSkillID();
+                   } 
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -1184,7 +1360,7 @@ public class SkillMenu extends Window {
         
         if (hand != null)
         {
-            hand.setDimensions(40, 40);
+            hand.setDimensions(54, 54);
             hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
         }
 
