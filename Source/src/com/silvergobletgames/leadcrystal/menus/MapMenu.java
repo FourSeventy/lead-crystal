@@ -11,6 +11,8 @@ import com.silvergobletgames.sylver.windowsystem.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import com.silvergobletgames.leadcrystal.combat.LevelProgressionManager.Level;
+import com.silvergobletgames.leadcrystal.core.CursorFactory;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
 import com.silvergobletgames.sylver.core.Game;
@@ -31,17 +33,23 @@ public class MapMenu extends Window{
     //level detail fields
     private Label levelName; 
     private Label mainObjectiveHeader; private Label mainObjectiveCompleted;
+    private Label mainObjectiveName;
     private TextBlock mainObjectiveDescription;
     private Label sideObjectiveHeader; private Label sideObjectiveCompleted;
+    private Label sideObjectiveName;
     private TextBlock sideObjectiveDescription;
+    private Button levelDetailBackground;
     
     //map background fields
     private SylverVector2f panOffset = new SylverVector2f(0,0);
     private Image mapBackground = new Image("mapBig.jpg");
-    private Image mapOutline = new Image("mapScreenBack.png");
+    private Image mapOutline = new Image("mapFrame.png"); //bigFrame.png
+    private SylverVector2f mapDimensions = new SylverVector2f(1165,850);
     
     //level button list
     private ArrayList<Button> levelButtons = new ArrayList();
+    
+    private Button closeButton;
     
     
     //==============
@@ -50,7 +58,7 @@ public class MapMenu extends Window{
     public MapMenu(float x, float y,GameClientScene scene)
     {
        //super constructor call, setting the background sprite and initial position
-       super(new Image("mapScreenBack.png"),x,y,1200,900);
+       super(new Image("mapFrame.png"),x,y,1200,900);
        
        this.sceneReference = scene;
                    
@@ -60,24 +68,42 @@ public class MapMenu extends Window{
        //================
        
        this.levelName = new Label("", 850, 500);
-       levelName.getText().setScale(1.4f);
-       levelName.getText().setColor(new Color(Color.black));
        
-       this.mainObjectiveHeader = new Label("Main Objective: ",800,450);
-       this.mainObjectiveHeader.getText().setColor(new Color(Color.red));
-       this.mainObjectiveCompleted = new Label("Complete", 975,450);
+       //main objective header
+       Text objectiveText = new Text("Main Objective:",LeadCrystalTextType.HUD24);
+       this.mainObjectiveHeader = new Label(objectiveText,760,450);
+       this.mainObjectiveHeader.getText().setColor(new Color(200,100,8));
+       
+       //main objective completed
+       Text completedText = new Text("Complete",LeadCrystalTextType.HUD24);
+       this.mainObjectiveCompleted = new Label(completedText, 935,450);
        this.mainObjectiveCompleted.getText().setColor(new Color(Color.green));
+       
+       //main objective name
+       Text mainObjectiveNameText = new Text("",LeadCrystalTextType.HUD24);
+       this.mainObjectiveName = new Label(mainObjectiveNameText, 790,420);
      
-       this.mainObjectiveDescription = new TextBlock(800, 410, 375, new Text(""));
+       //main objective description
+       this.mainObjectiveDescription = new TextBlock(790, 370, 375, new Text("",LeadCrystalTextType.HUD16));
 
        
-       this.sideObjectiveHeader = new Label("Side Objective: ",800,230);
-       this.sideObjectiveHeader.getText().setColor(new Color(Color.red));
-       this.sideObjectiveCompleted = new Label("Complete", 975,230);
+       //side objective header
+       Text sideObjectiveText = new Text("Side Objective:",LeadCrystalTextType.HUD24);
+       this.sideObjectiveHeader = new Label(sideObjectiveText,760,230);
+       this.sideObjectiveHeader.getText().setColor(new Color(200,100,8));
+       
+       //side objective complete
+       completedText = new Text("Complete",LeadCrystalTextType.HUD24);
+       this.sideObjectiveCompleted = new Label(completedText, 935,230);
        this.sideObjectiveCompleted.getText().setColor(new Color(Color.green));
-
        
-       sideObjectiveDescription = new TextBlock(800, 200, 375, new Text(""));
+       //side objective name
+       Text sideObjectiveNameText = new Text("",LeadCrystalTextType.HUD24);
+       this.sideObjectiveName = new Label(sideObjectiveNameText, 790,200);
+       
+
+       //side objective description
+       sideObjectiveDescription = new TextBlock(790, 150, 375, new Text("",LeadCrystalTextType.HUD16));
 
     }
     
@@ -105,15 +131,15 @@ public class MapMenu extends Window{
                     if(this.panOffset.y < this.mapBackground.getHeight()/2)
                     {
                         this.panOffset.y = this.panOffset.y + 2;
-                        newOffset.y = newOffset.y + 2;
+                        newOffset.y = newOffset.y + 1.889f;
                     }
                 }
                 if(Game.getInstance().getInputHandler().getInputSnapshot().isKeyPressed(KeyEvent.VK_DOWN))
                 {
                     if(this.panOffset.y > 0)
                     {
-                    this.panOffset.y = this.panOffset.y - 2;
-                    newOffset.y = newOffset.y - 2;
+                        this.panOffset.y = this.panOffset.y - 2;
+                        newOffset.y = newOffset.y - 1.889f;
                     }
                 }
                 if(Game.getInstance().getInputHandler().getInputSnapshot().isKeyPressed(KeyEvent.VK_LEFT))
@@ -121,7 +147,7 @@ public class MapMenu extends Window{
                     if(this.panOffset.x > 0)
                     {
                         this.panOffset.x = this.panOffset.x - 2;
-                        newOffset.x = newOffset.x -2 ;
+                        newOffset.x = newOffset.x - 1.94f ;
                     }
                 }
                 if(Game.getInstance().getInputHandler().getInputSnapshot().isKeyPressed(KeyEvent.VK_RIGHT))
@@ -129,7 +155,7 @@ public class MapMenu extends Window{
                     if(this.panOffset.x < this.mapBackground.getWidth()/2)
                     {
                         this.panOffset.x = this.panOffset.x + 2;
-                        newOffset.x = newOffset.x + 2;
+                        newOffset.x = newOffset.x + 1.94f;
                     }
                 }
 
@@ -144,8 +170,8 @@ public class MapMenu extends Window{
                     button.setWindowRelativePosition(button.getWindowRelativePosition().x - newOffset.x * 2, button.getWindowRelativePosition().y - newOffset.y * 2);
 
                     //hide button if it is out of the screen
-                    if(button.getWindowRelativePosition().x < 0 || button.getWindowRelativePosition().x > this.getWidth()
-                    ||button.getWindowRelativePosition().y < 0 || button.getWindowRelativePosition().y > this.getHeight())
+                    if(button.getWindowRelativePosition().x < 10 || button.getWindowRelativePosition().x > this.getWidth()-60
+                    ||button.getWindowRelativePosition().y < 10 || button.getWindowRelativePosition().y > this.getHeight())
                     {
                         button.setDisabled(true);
                         button.setHidden(true);
@@ -196,19 +222,19 @@ public class MapMenu extends Window{
             {
                 //bottom left
                 gl.glTexCoord2d(textureLeft, textureBottom);
-                gl.glVertex2f(this.getPosition().x , this.getPosition().y ); 
+                gl.glVertex2f(this.getPosition().x + 15 , this.getPosition().y + 15 ); 
 
                 //bottom right
                 gl.glTexCoord2d(textureRight, textureBottom);
-                gl.glVertex2f(this.getPosition().x + 1200, this.getPosition().y );  
+                gl.glVertex2f(this.getPosition().x + this.mapDimensions.x + 15, this.getPosition().y + 15 );  
 
                 //top right
                 gl.glTexCoord2d(textureRight, textureTop);
-                gl.glVertex2f(this.getPosition().x + 1200, this.getPosition().y + 900);  
+                gl.glVertex2f(this.getPosition().x + this.mapDimensions.x + 15, this.getPosition().y + this.mapDimensions.y + 15);  
 
                 //top left    
                 gl.glTexCoord2d(textureLeft, textureTop);
-                gl.glVertex2f(this.getPosition().x , this.getPosition().y + 900);         
+                gl.glVertex2f(this.getPosition().x + 15 , this.getPosition().y + this.mapDimensions.y + 15);         
             }
             gl.glEnd(); 
             
@@ -256,7 +282,7 @@ public class MapMenu extends Window{
             }
             gl.glEnd(); 
             
-            
+            this.closeButton.draw(gl);
             
              
         }
@@ -288,26 +314,49 @@ public class MapMenu extends Window{
         if(levelNumber != -1)
         {
             Level newLevel = ((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber);
+            
+            //detail black
+            this.levelDetailBackground = new Button(new Image("section1.png"), 725, 25, 450, 550);
+            levelDetailBackground.dontKillClick=true;
+            this.addComponent(levelDetailBackground);
+            
             //level name
             this.removeComponent(levelName);
-            this.levelName.getText().setText(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber).levelName);
+            Text newText = new Text(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber).levelName,LeadCrystalTextType.HUD34);
+            this.levelName = new Label(newText, 945 - newText.getWidth()/2, 500);
             this.addComponent(levelName);
             
             //main objective description
             this.addComponent(mainObjectiveHeader);
             if(newLevel.mainObjective.complete)
+            {
                 this.addComponent(mainObjectiveCompleted);
-                      
+            }
+             
+            //main objective name
+            this.removeComponent(mainObjectiveName);
+            this.mainObjectiveName.getText().setText(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber).mainObjective.objectiveName + "-");
+            this.addComponent(mainObjectiveName);
+            
             this.removeComponent(mainObjectiveDescription);
-            mainObjectiveDescription = new TextBlock(800, 410, 375, new Text(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber).mainObjective.objectiveDescription));
+            mainObjectiveDescription = new TextBlock(790, 390, 375, new Text(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber).mainObjective.objectiveDescription,LeadCrystalTextType.HUD22));
             this.addComponent(mainObjectiveDescription);
             
             //side objective description
             this.addComponent(sideObjectiveHeader);
             if(newLevel.sideObjective.complete)
+            {
                 this.addComponent(sideObjectiveCompleted);
+            }
+            
+            //side objective name
+            this.removeComponent(sideObjectiveName);
+            this.sideObjectiveName.getText().setText(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber).sideObjective.objectiveName + "-");
+            this.addComponent(sideObjectiveName);
+            
+            
             this.removeComponent(sideObjectiveDescription);
-            sideObjectiveDescription = new TextBlock(800, 200, 375, new Text(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber).sideObjective.objectiveDescription));
+            sideObjectiveDescription = new TextBlock(790, 170, 375, new Text(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber).sideObjective.objectiveDescription,LeadCrystalTextType.HUD22));
             this.addComponent(sideObjectiveDescription);
             
         }
@@ -320,6 +369,9 @@ public class MapMenu extends Window{
             this.removeComponent(sideObjectiveDescription);
             this.removeComponent(sideObjectiveHeader);
             this.removeComponent(sideObjectiveCompleted);
+            this.removeComponent(levelDetailBackground);
+            this.removeComponent(sideObjectiveName);
+            this.removeComponent(mainObjectiveName);
         }
         
     }
@@ -331,18 +383,20 @@ public class MapMenu extends Window{
         this.levelButtons.clear();
         this.removeAllComponents();
         
-        //close button
-       Button closeButton = new Button("deleteButton.png",1100,800,50,50);
-       closeButton.addActionListener(new ActionListener(){
+        //close
+        final Image closeImage = new Image("closeButton.png");
+        this.closeButton = new Button(closeImage,1154,867,closeImage.getWidth()+1,closeImage.getHeight());
+        this.closeButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
 
-                  
+                  closeImage.setBrightness(1.5f);
+                  Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.HAND)); 
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
 
-                    
+                    closeImage.setBrightness(1f);
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
@@ -350,7 +404,11 @@ public class MapMenu extends Window{
                 }
             }
        });
-       this.addComponent(closeButton);
+        this.addComponent(this.closeButton);
+        
+        //==================
+        // Movement Buttons
+        //==================
        
        //===============
        // Level Buttons

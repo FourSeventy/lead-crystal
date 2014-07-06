@@ -90,7 +90,7 @@ public class SkillMenu extends Window {
     public SkillMenu(float x, float y,PlayerEntity player)
     {
        //super constructor call, setting the background sprite and initial position
-       super(new Image("bigFrame.png"),x,y,1200,900);
+       super(new Image("skillFrame.png"),x,y,1200,900);
        
         //text
         Text menuText = new Text("Skill Menu",LeadCrystalTextType.HUD34);
@@ -128,7 +128,7 @@ public class SkillMenu extends Window {
         Button sectionButton2 = new Button(section2,1000,800,section2.getWidth(),section2.getHeight()+6);
         this.addComponent(sectionButton2);
         
-        //gold
+        //skill points
         Text playerGoldDesc = new Text("Skill Points:",LeadCrystalTextType.HUD24);
         Label playerGoldDescLabel = new Label(playerGoldDesc,875,810);
         this.addComponent(playerGoldDescLabel);
