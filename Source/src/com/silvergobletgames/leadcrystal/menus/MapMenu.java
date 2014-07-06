@@ -42,14 +42,19 @@ public class MapMenu extends Window{
     
     //map background fields
     private SylverVector2f panOffset = new SylverVector2f(0,0);
+    private Float closePanX = null;
     private Image mapBackground = new Image("mapBig.jpg");
-    private Image mapOutline = new Image("mapFrame.png"); //bigFrame.png
+    private Image mapOutline = new Image("mapFrame.png"); 
     private SylverVector2f mapDimensions = new SylverVector2f(1165,850);
     
     //level button list
     private ArrayList<Button> levelButtons = new ArrayList();
     
     private Button closeButton;
+    
+    //movement buttons
+    private Button rightMovementButton;
+    private Button leftMovementButton;
     
     
     //==============
@@ -112,6 +117,78 @@ public class MapMenu extends Window{
     //===============
     // Class Methods
     //===============
+    
+    private void panMapRight()
+    {
+        SylverVector2f newOffset = new SylverVector2f();
+        
+        if(this.panOffset.x < this.mapBackground.getWidth()/2)
+        {
+            this.panOffset.x = this.panOffset.x + 2;
+            newOffset.x = newOffset.x + 1.94f;
+        }
+        
+         //=================================
+        // Update Button Relative Positions
+        //=================================
+
+        for(Button button: this.levelButtons)
+        {
+            //set button relative position
+            button.setWindowRelativePosition(button.getWindowRelativePosition().x - newOffset.x * 2, button.getWindowRelativePosition().y - newOffset.y * 2);
+
+            //hide button if it is out of the screen
+            if(button.getWindowRelativePosition().x < 10 || button.getWindowRelativePosition().x > this.getWidth()-60
+            ||button.getWindowRelativePosition().y < 10 || button.getWindowRelativePosition().y > this.getHeight())
+            {
+                button.setDisabled(true);
+                button.setHidden(true);
+            }
+            else
+            {
+                button.setDisabled(false);
+                button.setHidden(false);
+            }
+
+        }
+    }
+    
+    private void panMapLeft()
+    {
+        SylverVector2f newOffset = new SylverVector2f();
+        
+        if(this.panOffset.x > 0)
+        {
+            this.panOffset.x = this.panOffset.x - 2;
+            newOffset.x = newOffset.x - 1.94f ;
+        }
+        
+         //=================================
+        // Update Button Relative Positions
+        //=================================
+
+        for(Button button: this.levelButtons)
+        {
+            //set button relative position
+            button.setWindowRelativePosition(button.getWindowRelativePosition().x - newOffset.x * 2, button.getWindowRelativePosition().y - newOffset.y * 2);
+
+            //hide button if it is out of the screen
+            if(button.getWindowRelativePosition().x < 10 || button.getWindowRelativePosition().x > this.getWidth()-60
+            ||button.getWindowRelativePosition().y < 10 || button.getWindowRelativePosition().y > this.getHeight())
+            {
+                button.setDisabled(true);
+                button.setHidden(true);
+            }
+            else
+            {
+                button.setDisabled(false);
+                button.setHidden(false);
+            }
+
+        }
+    }
+    
+    
     public void update()
     {
         
@@ -126,62 +203,13 @@ public class MapMenu extends Window{
                 //===============
                 SylverVector2f newOffset = new SylverVector2f();
 
-                if(Game.getInstance().getInputHandler().getInputSnapshot().isKeyPressed(KeyEvent.VK_UP))
-                {
-                    if(this.panOffset.y < this.mapBackground.getHeight()/2)
-                    {
-                        this.panOffset.y = this.panOffset.y + 2;
-                        newOffset.y = newOffset.y + 1.889f;
-                    }
-                }
-                if(Game.getInstance().getInputHandler().getInputSnapshot().isKeyPressed(KeyEvent.VK_DOWN))
-                {
-                    if(this.panOffset.y > 0)
-                    {
-                        this.panOffset.y = this.panOffset.y - 2;
-                        newOffset.y = newOffset.y - 1.889f;
-                    }
-                }
                 if(Game.getInstance().getInputHandler().getInputSnapshot().isKeyPressed(KeyEvent.VK_LEFT))
                 {
-                    if(this.panOffset.x > 0)
-                    {
-                        this.panOffset.x = this.panOffset.x - 2;
-                        newOffset.x = newOffset.x - 1.94f ;
-                    }
+                    this.panMapLeft();
                 }
                 if(Game.getInstance().getInputHandler().getInputSnapshot().isKeyPressed(KeyEvent.VK_RIGHT))
                 {
-                    if(this.panOffset.x < this.mapBackground.getWidth()/2)
-                    {
-                        this.panOffset.x = this.panOffset.x + 2;
-                        newOffset.x = newOffset.x + 1.94f;
-                    }
-                }
-
-
-                //=================================
-                // Update Button Relative Positions
-                //=================================
-
-                for(Button button: this.levelButtons)
-                {
-                    //set button relative position
-                    button.setWindowRelativePosition(button.getWindowRelativePosition().x - newOffset.x * 2, button.getWindowRelativePosition().y - newOffset.y * 2);
-
-                    //hide button if it is out of the screen
-                    if(button.getWindowRelativePosition().x < 10 || button.getWindowRelativePosition().x > this.getWidth()-60
-                    ||button.getWindowRelativePosition().y < 10 || button.getWindowRelativePosition().y > this.getHeight())
-                    {
-                        button.setDisabled(true);
-                        button.setHidden(true);
-                    }
-                    else
-                    {
-                        button.setDisabled(false);
-                        button.setHidden(false);
-                    }
-
+                    this.panMapRight();
                 }
 
                 super.update();
@@ -292,12 +320,30 @@ public class MapMenu extends Window{
     public void open()
     {
 
+        if(this.closePanX != null)
+        {
+            this.panOffset.x = closePanX;
+            closePanX = null;
+        }
+        
         this.buildLevelButtons();
         for(Button button: this.levelButtons)
         {
             //set button relative position
            button.setWindowRelativePosition(button.getWindowRelativePosition().x - this.panOffset.x * 2, button.getWindowRelativePosition().y - this.panOffset.y * 2);
 
+            //hide button if it is out of the screen
+            if(button.getWindowRelativePosition().x < 10 || button.getWindowRelativePosition().x > this.getWidth()-60
+            ||button.getWindowRelativePosition().y < 10 || button.getWindowRelativePosition().y > this.getHeight())
+            {
+                button.setDisabled(true);
+                button.setHidden(true);
+            }
+            else
+            {
+                button.setDisabled(false);
+                button.setHidden(false);
+            }
         }
         
         super.open();
@@ -406,9 +452,7 @@ public class MapMenu extends Window{
        });
         this.addComponent(this.closeButton);
         
-        //==================
-        // Movement Buttons
-        //==================
+
        
        //===============
        // Level Buttons
@@ -694,9 +738,12 @@ public class MapMenu extends Window{
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
-                {
+                {                       
                      if(!button4.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     {
                         ((GameClientScene)owningScene).sendChooseLevelPacket(5);
+                        closePanX = new Float(150);
+                     }
                 }
             }
        });
@@ -970,6 +1017,69 @@ public class MapMenu extends Window{
        });
        this.levelButtons.add(button9);
        this.addComponent(button9);
+       
+       
+       
+       
+       
+        //==================
+        // Movement Buttons
+        //==================
+        
+        rightMovementButton = new Button(new Image("rightarrow.png"), 1025, 700, 100, 100);
+        rightMovementButton.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (e.getActionCommand().equals("mouseEntered"))
+                {
+                    rightMovementButton.getImage().setBrightness(1.5f);
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.HAND)); 
+                
+                }
+                if (e.getActionCommand().equals("mouseExited")) 
+                {
+                    rightMovementButton.getImage().setBrightness(1f);
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND)); 
+                
+                }
+                if(e.getActionCommand().equals("mouseDown"))
+                {
+                    panMapRight();
+                }
+            }
+        
+        });
+        this.addComponent(rightMovementButton);
+        
+        leftMovementButton = new Button(new Image("rightarrow.png"), 900, 700, 100, 100);
+        leftMovementButton.getImage().setAngle(180);
+        leftMovementButton.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (e.getActionCommand().equals("mouseEntered"))
+                {
+                    leftMovementButton.getImage().setBrightness(1.5f);
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.HAND)); 
+                
+                }
+                if (e.getActionCommand().equals("mouseExited")) 
+                {
+                    leftMovementButton.getImage().setBrightness(1f);
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND)); 
+                }
+                if(e.getActionCommand().equals("mouseDown"))
+                {
+                    panMapLeft();
+
+                }
+            }
+        
+        });
+        this.addComponent(leftMovementButton);
        
     }
     
