@@ -30,7 +30,7 @@ public class ArmorMenu extends Window{
  
     PlayerEntity playerReference;
     
-
+    private Label playerGoldLabel;
     
     //weapon
     private Button meleeAttackDamageBonusButton;
@@ -134,6 +134,21 @@ public class ArmorMenu extends Window{
             }
        });
         this.addComponent(closeButton);
+        
+        //section2
+        final Image section2 = new Image("section2.png");
+        Button sectionButton2 = new Button(section2,1000,800,section2.getWidth(),section2.getHeight()+6);
+        this.addComponent(sectionButton2);
+        
+        //gold
+        Text playerGoldDesc = new Text("Your Gold:",LeadCrystalTextType.HUD24);
+        Label playerGoldDescLabel = new Label(playerGoldDesc,875,810);
+        this.addComponent(playerGoldDescLabel);
+        Text playerGold = new Text(Integer.toString(0),LeadCrystalTextType.HUD24);
+        playerGoldLabel = new Label(playerGold,1090,810);
+        this.addComponent(playerGoldLabel);
+        Button b1 = new Button(new Image("currency2.png"),1140,806,20,20);
+        this.addComponent(b1);
         
         
         //========================
@@ -754,6 +769,8 @@ public class ArmorMenu extends Window{
     {
         super.update();
         
+        //update gold
+        this.playerGoldLabel.getText().setText(Integer.toString(this.playerReference.getCurrencyManager().getBalence()));
         
         InputSnapshot input = Game.getInstance().getInputHandler().getInputSnapshot();
         
@@ -762,401 +779,401 @@ public class ArmorMenu extends Window{
         // Check for Weapon Button Changes
         //=================================
 
-     if(this.playerReference.getArmorManager().meleeAttackDamageBonus.unlocked == false)
-     {
-         if(!meleeAttackDamageBonusButton.getImage().hasOverlay("lock"))
-         {
-            meleeAttackDamageBonusButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
-         }
-         meleeAttackDamageBonusButton.setDisabled(true);
-         meleeAttackDamageBonusLabel.setHidden(true);
-     }
-     else
-     {
-                  
-         meleeAttackDamageBonusButton.getImage().removeAllOverlays();
-         meleeAttackDamageBonusButton.setDisabled(false);
-         meleeAttackDamageBonusLabel.setHidden(false);        
-         meleeAttackDamageBonusLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().meleeAttackDamageBonus.points) + "/" +Integer.toString(this.playerReference.getArmorManager().meleeAttackDamageBonus.maxPoints)); 
-        
-     }
-     
-     if(this.playerReference.getArmorManager().potionCooldownReset.unlocked == false)
-     {
-         if(!potionCooldownResetButton.getImage().hasOverlay("lock"))
-         {
-            potionCooldownResetButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
-         }
-         potionCooldownResetButton.setDisabled(true);
-         potionCooldownResetLabel.setHidden(true);
-     }
-     else
-     {
-         potionCooldownResetButton.getImage().removeAllOverlays();
-         potionCooldownResetButton.setDisabled(false);
-         potionCooldownResetLabel.setHidden(false);
-         potionCooldownResetLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().potionCooldownReset.points) + "/" +Integer.toString(this.playerReference.getArmorManager().potionCooldownReset.maxPoints)); 
-        
-     }
-     
-     
-     if(this.playerReference.getArmorManager().criticalHitDamage.unlocked == false)
-     {
-         if(!criticalHitDamageButton.getImage().hasOverlay("lock"))
-         {
-            criticalHitDamageButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
-         }
-         criticalHitDamageButton.setDisabled(true);
-         criticalHitDamageLabel.setHidden(true);
-     }
-     else
-     {
-         criticalHitDamageButton.getImage().removeAllOverlays();
-         criticalHitDamageButton.setDisabled(false);
-         criticalHitDamageLabel.setHidden(false);
-         criticalHitDamageLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().criticalHitDamage.points) + "/" +Integer.toString(this.playerReference.getArmorManager().criticalHitDamage.maxPoints)); 
-        
-     }
-     
-     if(this.playerReference.getArmorManager().weaponDamage.unlocked == false)
-     {
-         if(!weaponDamageButton.getImage().hasOverlay("lock"))
-         {
-            weaponDamageButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
-         }
-         weaponDamageButton.setDisabled(true);
-         weaponDamageLabel.setHidden(true);
-     }
-     else
-     {
-         weaponDamageButton.getImage().removeAllOverlays();
-         weaponDamageButton.setDisabled(false);
-         weaponDamageLabel.setHidden(false);
-         weaponDamageLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().weaponDamage.points) + "/" +Integer.toString(this.playerReference.getArmorManager().weaponDamage.maxPoints)); 
-        
-     }
-     
-     if(this.playerReference.getArmorManager().weaponAttackSpeed.unlocked == false)
-     {
-         if(!weaponAttackSpeedButton.getImage().hasOverlay("lock"))
-         {
-            weaponAttackSpeedButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
-         }
-         weaponAttackSpeedButton.setDisabled(true);
-         weaponAttackSpeedLabel.setHidden(true);
-     }
-     else
-     {
-         weaponAttackSpeedButton.getImage().removeAllOverlays();
-         weaponAttackSpeedButton.setDisabled(false);
-         weaponAttackSpeedLabel.setHidden(false);
-         weaponAttackSpeedLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().weaponAttackSpeed.points) + "/" +Integer.toString(this.playerReference.getArmorManager().weaponAttackSpeed.maxPoints)); 
-        
-     }
-     
-     if(this.playerReference.getArmorManager().critChance.unlocked == false)
-     {
-         if(!critChanceButton.getImage().hasOverlay("lock"))
-         {
-            critChanceButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
-         }
-         critChanceButton.setDisabled(true);
-         critChanceLabel.setHidden(true);
-     }
-     else
-     {
-         critChanceButton.getImage().removeAllOverlays();
-         critChanceButton.setDisabled(false);
-         critChanceLabel.setHidden(false);
-         critChanceLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().critChance.points) + "/" +Integer.toString(this.playerReference.getArmorManager().critChance.maxPoints)); 
-        
-     }
-     
-       //================================
-       // Check for Helm Button Changes
-       //=================================
+        if(this.playerReference.getArmorManager().meleeAttackDamageBonus.unlocked == false)
+        {
+            if(!meleeAttackDamageBonusButton.getImage().hasOverlay("lock"))
+            {
+               meleeAttackDamageBonusButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+            }
+            meleeAttackDamageBonusButton.setDisabled(true);
+            meleeAttackDamageBonusLabel.setHidden(true);
+        }
+        else
+        {
 
-     if(this.playerReference.getArmorManager().seeEnemyHealth.unlocked == false)
-     {
-         if(!seeEnemyHealthButton.getImage().hasOverlay("lock"))
-         {
-            seeEnemyHealthButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
-         }
-         seeEnemyHealthButton.setDisabled(true);
-         seeEnemyHealthLabel.setHidden(true);
-     }
-     else 
-     {
-         seeEnemyHealthButton.getImage().removeAllOverlays();
-         seeEnemyHealthButton.setDisabled(false);
-         seeEnemyHealthLabel.setHidden(false);        
-         seeEnemyHealthLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().seeEnemyHealth.points) + "/" +Integer.toString(this.playerReference.getArmorManager().seeEnemyHealth.maxPoints)); 
-        
-     }
-     
-     if(this.playerReference.getArmorManager().doubleGoldFind.unlocked == false)
-     {
-         if(!doubleGoldFindButton.getImage().hasOverlay("lock"))
-         {
-            doubleGoldFindButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
-         }
-         doubleGoldFindButton.setDisabled(true);
-         doubleGoldFindLabel.setHidden(true);
-     }
-     else
-     {
-         doubleGoldFindButton.getImage().removeAllOverlays();
-         doubleGoldFindButton.setDisabled(false);
-         doubleGoldFindLabel.setHidden(false);
-         doubleGoldFindLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().doubleGoldFind.points) + "/" +Integer.toString(this.playerReference.getArmorManager().doubleGoldFind.maxPoints)); 
-        
-     }
-     
-     
-     if(this.playerReference.getArmorManager().upgradeRadar.unlocked == false)
-     {
-         if(!upgradeRadarButton.getImage().hasOverlay("lock"))
-         {
-            upgradeRadarButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
-         }
-         upgradeRadarButton.setDisabled(true);
-         upgradeRadarLabel.setHidden(true);
-     }
-     else
-     {
-         upgradeRadarButton.getImage().removeAllOverlays();
-         upgradeRadarButton.setDisabled(false);
-         upgradeRadarLabel.setHidden(false);
-         upgradeRadarLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().upgradeRadar.points) + "/" +Integer.toString(this.playerReference.getArmorManager().upgradeRadar.maxPoints)); 
-        
-     }
-     
-     if(this.playerReference.getArmorManager().lifeLeech.unlocked == false)
-     {
-         if(!lifeLeechButton.getImage().hasOverlay("lock"))
-         {
-            lifeLeechButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
-         }
-         lifeLeechButton.setDisabled(true);
-         lifeLeechLabel.setHidden(true);
-     }
-     else
-     {
-         lifeLeechButton.getImage().removeAllOverlays();
-         lifeLeechButton.setDisabled(false);
-         lifeLeechLabel.setHidden(false);
-         lifeLeechLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().lifeLeech.points) + "/" +Integer.toString(this.playerReference.getArmorManager().lifeLeech.maxPoints)); 
-        
-     }
-     
-     if(this.playerReference.getArmorManager().healingEffectiveness.unlocked == false)
-     {
-         if(!healingEffectivenessButton.getImage().hasOverlay("lock"))
-         {
-            healingEffectivenessButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
-         }
-         healingEffectivenessButton.setDisabled(true);
-         healingEffectivenessLabel.setHidden(true);
-     }
-     else
-     {
-         healingEffectivenessButton.getImage().removeAllOverlays();
-         healingEffectivenessButton.setDisabled(false);
-         healingEffectivenessLabel.setHidden(false);
-         healingEffectivenessLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().healingEffectiveness.points) + "/" +Integer.toString(this.playerReference.getArmorManager().healingEffectiveness.maxPoints)); 
-        
-     }
-     
-        //================================
-       // Check for Body Button Changes
-       //=================================
+            meleeAttackDamageBonusButton.getImage().removeAllOverlays();
+            meleeAttackDamageBonusButton.setDisabled(false);
+            meleeAttackDamageBonusLabel.setHidden(false);        
+            meleeAttackDamageBonusLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().meleeAttackDamageBonus.points) + "/" +Integer.toString(this.playerReference.getArmorManager().meleeAttackDamageBonus.maxPoints)); 
 
-     if(this.playerReference.getArmorManager().hardToKill.unlocked == false)
-     {
-         if(!hardToKillButton.getImage().hasOverlay("lock"))
-         {
-            hardToKillButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
-         }
-         hardToKillButton.setDisabled(true);
-         hardToKillLabel.setHidden(true);
-     }
-     else
-     {
-         hardToKillButton.getImage().removeAllOverlays();
-         hardToKillButton.setDisabled(false);
-         hardToKillLabel.setHidden(false);        
-         hardToKillLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().hardToKill.points) + "/" +Integer.toString(this.playerReference.getArmorManager().hardToKill.maxPoints)); 
-        
-     }
-     
-     if(this.playerReference.getArmorManager().reducedCriticalHit.unlocked == false)
-     {       
-         if(!reducedCriticalHitButton.getImage().hasOverlay("lock"))
-         {
-            reducedCriticalHitButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
-         }
-         reducedCriticalHitButton.setDisabled(true);
-         reducedCriticalHitLabel.setHidden(true);
-     }
-     else
-     {
-         reducedCriticalHitButton.getImage().removeAllOverlays();
-         reducedCriticalHitButton.setDisabled(false);
-         reducedCriticalHitLabel.setHidden(false);
-         reducedCriticalHitLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().reducedCriticalHit.points) + "/" +Integer.toString(this.playerReference.getArmorManager().reducedCriticalHit.maxPoints)); 
-        
-     }
-     
-     
-     if(this.playerReference.getArmorManager().proximityDamageReduction.unlocked == false)
-     {
-         if(!proximityDamageReductionButton.getImage().hasOverlay("lock"))
-         {
-            proximityDamageReductionButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
-         }
-         proximityDamageReductionButton.setDisabled(true);
-         proximityDamageReductionLabel.setHidden(true);
-     }
-     else
-     {
-         proximityDamageReductionButton.getImage().removeAllOverlays();
-         proximityDamageReductionButton.setDisabled(false);
-         proximityDamageReductionLabel.setHidden(false);
-         proximityDamageReductionLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().proximityDamageReduction.points) + "/" +Integer.toString(this.playerReference.getArmorManager().proximityDamageReduction.maxPoints)); 
-        
-     }
-     
-     if(this.playerReference.getArmorManager().health.unlocked == false)
-     {
-         if(!healthButton.getImage().hasOverlay("lock"))
-         {
-            healthButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
-         }
-         healthButton.setDisabled(true);
-         healthLabel.setHidden(true);
-     }
-     else
-     {
-         healthButton.getImage().removeAllOverlays();
-         healthButton.setDisabled(false);
-         healthLabel.setHidden(false);
-         healthLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().health.points) + "/" +Integer.toString(this.playerReference.getArmorManager().health.maxPoints)); 
-        
-     }
-     
-     if(this.playerReference.getArmorManager().numberOfPotions.unlocked == false)
-     {
-         if(!numberOfPotionsButton.getImage().hasOverlay("lock"))
-         {
-            numberOfPotionsButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
-         }
-         numberOfPotionsButton.setDisabled(true);
-         numberOfPotionsLabel.setHidden(true);
-     }
-     else
-     {
-         numberOfPotionsButton.getImage().removeAllOverlays();
-         numberOfPotionsButton.setDisabled(false);
-         numberOfPotionsLabel.setHidden(false);
-         numberOfPotionsLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().numberOfPotions.points) + "/" +Integer.toString(this.playerReference.getArmorManager().numberOfPotions.maxPoints)); 
-        
-     }
-     
-     if(this.playerReference.getArmorManager().thornsDamage.unlocked == false)
-     {
-         if(!thornsDamageButton.getImage().hasOverlay("lock"))
-         {
-            thornsDamageButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
-         }
-         thornsDamageButton.setDisabled(true);
-         thornsDamageLabel.setHidden(true);
-     }
-     else
-     {
-         thornsDamageButton.getImage().removeAllOverlays();
-         thornsDamageButton.setDisabled(false);
-         thornsDamageLabel.setHidden(false);
-         thornsDamageLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().thornsDamage.points) + "/" +Integer.toString(this.playerReference.getArmorManager().thornsDamage.maxPoints)); 
-        
-     }
- 
-       //================================
-       // Check for Boots Button Changes
-       //=================================
+        }
 
-     if(this.playerReference.getArmorManager().doubleJump.unlocked == false)
-     {
-         if(!doubleJumpButton.getImage().hasOverlay("lock"))
-         {
-            doubleJumpButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
-         }
-         doubleJumpButton.setDisabled(true);
-         doubleJumpLabel.setHidden(true);
-     }
-     else 
-     {
-         doubleJumpButton.getImage().removeAllOverlays();
-         doubleJumpButton.setDisabled(false);
-         doubleJumpLabel.setHidden(false);        
-         doubleJumpLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().doubleJump.points) + "/" +Integer.toString(this.playerReference.getArmorManager().doubleJump.maxPoints)); 
-        
-     }
-     
-     if(this.playerReference.getArmorManager().jetpack.unlocked == false)
-     {
-         if(!jetpackButton.getImage().hasOverlay("lock"))
-         {
-            jetpackButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
-         }
-         jetpackButton.setDisabled(true);
-         jetpackLabel.setHidden(true);
-     }
-     else
-     {
-         jetpackButton.getImage().removeAllOverlays();
-         jetpackButton.setDisabled(false);
-         jetpackLabel.setHidden(false);
-         jetpackLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().jetpack.points) + "/" +Integer.toString(this.playerReference.getArmorManager().jetpack.maxPoints)); 
-        
-     }
-     
-     
-     if(this.playerReference.getArmorManager().ccReduction.unlocked == false)
-     {
-         if(!ccReductionButton.getImage().hasOverlay("lock"))
-         {
-            ccReductionButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
-         }
-         ccReductionButton.setDisabled(true);
-         ccReductionLabel.setHidden(true);
-     }
-     else
-     {
-         ccReductionButton.getImage().removeAllOverlays();
-         ccReductionButton.setDisabled(false);
-         ccReductionLabel.setHidden(false);
-         ccReductionLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().ccReduction.points) + "/" +Integer.toString(this.playerReference.getArmorManager().ccReduction.maxPoints)); 
-        
-     }
-     
-     if(this.playerReference.getArmorManager().moveSpeed.unlocked == false)
-     {
-         if(!moveSpeedButton.getImage().hasOverlay("lock"))
-         {
-            moveSpeedButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
-         }
-         moveSpeedButton.setDisabled(true);
-         moveSpeedLabel.setHidden(true);
-     }
-     else
-     {
-         moveSpeedButton.getImage().removeAllOverlays();
-         moveSpeedButton.setDisabled(false);
-         moveSpeedLabel.setHidden(false);
-         moveSpeedLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().moveSpeed.points) + "/" +Integer.toString(this.playerReference.getArmorManager().moveSpeed.maxPoints)); 
-        
-     }
-     
+        if(this.playerReference.getArmorManager().potionCooldownReset.unlocked == false)
+        {
+            if(!potionCooldownResetButton.getImage().hasOverlay("lock"))
+            {
+               potionCooldownResetButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+            }
+            potionCooldownResetButton.setDisabled(true);
+            potionCooldownResetLabel.setHidden(true);
+        }
+        else
+        {
+            potionCooldownResetButton.getImage().removeAllOverlays();
+            potionCooldownResetButton.setDisabled(false);
+            potionCooldownResetLabel.setHidden(false);
+            potionCooldownResetLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().potionCooldownReset.points) + "/" +Integer.toString(this.playerReference.getArmorManager().potionCooldownReset.maxPoints)); 
+
+        }
+
+
+        if(this.playerReference.getArmorManager().criticalHitDamage.unlocked == false)
+        {
+            if(!criticalHitDamageButton.getImage().hasOverlay("lock"))
+            {
+               criticalHitDamageButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+            }
+            criticalHitDamageButton.setDisabled(true);
+            criticalHitDamageLabel.setHidden(true);
+        }
+        else
+        {
+            criticalHitDamageButton.getImage().removeAllOverlays();
+            criticalHitDamageButton.setDisabled(false);
+            criticalHitDamageLabel.setHidden(false);
+            criticalHitDamageLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().criticalHitDamage.points) + "/" +Integer.toString(this.playerReference.getArmorManager().criticalHitDamage.maxPoints)); 
+
+        }
+
+        if(this.playerReference.getArmorManager().weaponDamage.unlocked == false)
+        {
+            if(!weaponDamageButton.getImage().hasOverlay("lock"))
+            {
+               weaponDamageButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+            }
+            weaponDamageButton.setDisabled(true);
+            weaponDamageLabel.setHidden(true);
+        }
+        else
+        {
+            weaponDamageButton.getImage().removeAllOverlays();
+            weaponDamageButton.setDisabled(false);
+            weaponDamageLabel.setHidden(false);
+            weaponDamageLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().weaponDamage.points) + "/" +Integer.toString(this.playerReference.getArmorManager().weaponDamage.maxPoints)); 
+
+        }
+
+        if(this.playerReference.getArmorManager().weaponAttackSpeed.unlocked == false)
+        {
+            if(!weaponAttackSpeedButton.getImage().hasOverlay("lock"))
+            {
+               weaponAttackSpeedButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+            }
+            weaponAttackSpeedButton.setDisabled(true);
+            weaponAttackSpeedLabel.setHidden(true);
+        }
+        else
+        {
+            weaponAttackSpeedButton.getImage().removeAllOverlays();
+            weaponAttackSpeedButton.setDisabled(false);
+            weaponAttackSpeedLabel.setHidden(false);
+            weaponAttackSpeedLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().weaponAttackSpeed.points) + "/" +Integer.toString(this.playerReference.getArmorManager().weaponAttackSpeed.maxPoints)); 
+
+        }
+
+        if(this.playerReference.getArmorManager().critChance.unlocked == false)
+        {
+            if(!critChanceButton.getImage().hasOverlay("lock"))
+            {
+               critChanceButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+            }
+            critChanceButton.setDisabled(true);
+            critChanceLabel.setHidden(true);
+        }
+        else
+        {
+            critChanceButton.getImage().removeAllOverlays();
+            critChanceButton.setDisabled(false);
+            critChanceLabel.setHidden(false);
+            critChanceLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().critChance.points) + "/" +Integer.toString(this.playerReference.getArmorManager().critChance.maxPoints)); 
+
+        }
+
+          //================================
+          // Check for Helm Button Changes
+          //=================================
+
+        if(this.playerReference.getArmorManager().seeEnemyHealth.unlocked == false)
+        {
+            if(!seeEnemyHealthButton.getImage().hasOverlay("lock"))
+            {
+               seeEnemyHealthButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+            }
+            seeEnemyHealthButton.setDisabled(true);
+            seeEnemyHealthLabel.setHidden(true);
+        }
+        else 
+        {
+            seeEnemyHealthButton.getImage().removeAllOverlays();
+            seeEnemyHealthButton.setDisabled(false);
+            seeEnemyHealthLabel.setHidden(false);        
+            seeEnemyHealthLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().seeEnemyHealth.points) + "/" +Integer.toString(this.playerReference.getArmorManager().seeEnemyHealth.maxPoints)); 
+
+        }
+
+        if(this.playerReference.getArmorManager().doubleGoldFind.unlocked == false)
+        {
+            if(!doubleGoldFindButton.getImage().hasOverlay("lock"))
+            {
+               doubleGoldFindButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+            }
+            doubleGoldFindButton.setDisabled(true);
+            doubleGoldFindLabel.setHidden(true);
+        }
+        else
+        {
+            doubleGoldFindButton.getImage().removeAllOverlays();
+            doubleGoldFindButton.setDisabled(false);
+            doubleGoldFindLabel.setHidden(false);
+            doubleGoldFindLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().doubleGoldFind.points) + "/" +Integer.toString(this.playerReference.getArmorManager().doubleGoldFind.maxPoints)); 
+
+        }
+
+
+        if(this.playerReference.getArmorManager().upgradeRadar.unlocked == false)
+        {
+            if(!upgradeRadarButton.getImage().hasOverlay("lock"))
+            {
+               upgradeRadarButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+            }
+            upgradeRadarButton.setDisabled(true);
+            upgradeRadarLabel.setHidden(true);
+        }
+        else
+        {
+            upgradeRadarButton.getImage().removeAllOverlays();
+            upgradeRadarButton.setDisabled(false);
+            upgradeRadarLabel.setHidden(false);
+            upgradeRadarLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().upgradeRadar.points) + "/" +Integer.toString(this.playerReference.getArmorManager().upgradeRadar.maxPoints)); 
+
+        }
+
+        if(this.playerReference.getArmorManager().lifeLeech.unlocked == false)
+        {
+            if(!lifeLeechButton.getImage().hasOverlay("lock"))
+            {
+               lifeLeechButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+            }
+            lifeLeechButton.setDisabled(true);
+            lifeLeechLabel.setHidden(true);
+        }
+        else
+        {
+            lifeLeechButton.getImage().removeAllOverlays();
+            lifeLeechButton.setDisabled(false);
+            lifeLeechLabel.setHidden(false);
+            lifeLeechLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().lifeLeech.points) + "/" +Integer.toString(this.playerReference.getArmorManager().lifeLeech.maxPoints)); 
+
+        }
+
+        if(this.playerReference.getArmorManager().healingEffectiveness.unlocked == false)
+        {
+            if(!healingEffectivenessButton.getImage().hasOverlay("lock"))
+            {
+               healingEffectivenessButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+            }
+            healingEffectivenessButton.setDisabled(true);
+            healingEffectivenessLabel.setHidden(true);
+        }
+        else
+        {
+            healingEffectivenessButton.getImage().removeAllOverlays();
+            healingEffectivenessButton.setDisabled(false);
+            healingEffectivenessLabel.setHidden(false);
+            healingEffectivenessLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().healingEffectiveness.points) + "/" +Integer.toString(this.playerReference.getArmorManager().healingEffectiveness.maxPoints)); 
+
+        }
+
+           //================================
+          // Check for Body Button Changes
+          //=================================
+
+        if(this.playerReference.getArmorManager().hardToKill.unlocked == false)
+        {
+            if(!hardToKillButton.getImage().hasOverlay("lock"))
+            {
+               hardToKillButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+            }
+            hardToKillButton.setDisabled(true);
+            hardToKillLabel.setHidden(true);
+        }
+        else
+        {
+            hardToKillButton.getImage().removeAllOverlays();
+            hardToKillButton.setDisabled(false);
+            hardToKillLabel.setHidden(false);        
+            hardToKillLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().hardToKill.points) + "/" +Integer.toString(this.playerReference.getArmorManager().hardToKill.maxPoints)); 
+
+        }
+
+        if(this.playerReference.getArmorManager().reducedCriticalHit.unlocked == false)
+        {       
+            if(!reducedCriticalHitButton.getImage().hasOverlay("lock"))
+            {
+               reducedCriticalHitButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+            }
+            reducedCriticalHitButton.setDisabled(true);
+            reducedCriticalHitLabel.setHidden(true);
+        }
+        else
+        {
+            reducedCriticalHitButton.getImage().removeAllOverlays();
+            reducedCriticalHitButton.setDisabled(false);
+            reducedCriticalHitLabel.setHidden(false);
+            reducedCriticalHitLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().reducedCriticalHit.points) + "/" +Integer.toString(this.playerReference.getArmorManager().reducedCriticalHit.maxPoints)); 
+
+        }
+
+
+        if(this.playerReference.getArmorManager().proximityDamageReduction.unlocked == false)
+        {
+            if(!proximityDamageReductionButton.getImage().hasOverlay("lock"))
+            {
+               proximityDamageReductionButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+            }
+            proximityDamageReductionButton.setDisabled(true);
+            proximityDamageReductionLabel.setHidden(true);
+        }
+        else
+        {
+            proximityDamageReductionButton.getImage().removeAllOverlays();
+            proximityDamageReductionButton.setDisabled(false);
+            proximityDamageReductionLabel.setHidden(false);
+            proximityDamageReductionLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().proximityDamageReduction.points) + "/" +Integer.toString(this.playerReference.getArmorManager().proximityDamageReduction.maxPoints)); 
+
+        }
+
+        if(this.playerReference.getArmorManager().health.unlocked == false)
+        {
+            if(!healthButton.getImage().hasOverlay("lock"))
+            {
+               healthButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+            }
+            healthButton.setDisabled(true);
+            healthLabel.setHidden(true);
+        }
+        else
+        {
+            healthButton.getImage().removeAllOverlays();
+            healthButton.setDisabled(false);
+            healthLabel.setHidden(false);
+            healthLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().health.points) + "/" +Integer.toString(this.playerReference.getArmorManager().health.maxPoints)); 
+
+        }
+
+        if(this.playerReference.getArmorManager().numberOfPotions.unlocked == false)
+        {
+            if(!numberOfPotionsButton.getImage().hasOverlay("lock"))
+            {
+               numberOfPotionsButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+            }
+            numberOfPotionsButton.setDisabled(true);
+            numberOfPotionsLabel.setHidden(true);
+        }
+        else
+        {
+            numberOfPotionsButton.getImage().removeAllOverlays();
+            numberOfPotionsButton.setDisabled(false);
+            numberOfPotionsLabel.setHidden(false);
+            numberOfPotionsLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().numberOfPotions.points) + "/" +Integer.toString(this.playerReference.getArmorManager().numberOfPotions.maxPoints)); 
+
+        }
+
+        if(this.playerReference.getArmorManager().thornsDamage.unlocked == false)
+        {
+            if(!thornsDamageButton.getImage().hasOverlay("lock"))
+            {
+               thornsDamageButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+            }
+            thornsDamageButton.setDisabled(true);
+            thornsDamageLabel.setHidden(true);
+        }
+        else
+        {
+            thornsDamageButton.getImage().removeAllOverlays();
+            thornsDamageButton.setDisabled(false);
+            thornsDamageLabel.setHidden(false);
+            thornsDamageLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().thornsDamage.points) + "/" +Integer.toString(this.playerReference.getArmorManager().thornsDamage.maxPoints)); 
+
+        }
+
+          //================================
+          // Check for Boots Button Changes
+          //=================================
+
+        if(this.playerReference.getArmorManager().doubleJump.unlocked == false)
+        {
+            if(!doubleJumpButton.getImage().hasOverlay("lock"))
+            {
+               doubleJumpButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+            }
+            doubleJumpButton.setDisabled(true);
+            doubleJumpLabel.setHidden(true);
+        }
+        else 
+        {
+            doubleJumpButton.getImage().removeAllOverlays();
+            doubleJumpButton.setDisabled(false);
+            doubleJumpLabel.setHidden(false);        
+            doubleJumpLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().doubleJump.points) + "/" +Integer.toString(this.playerReference.getArmorManager().doubleJump.maxPoints)); 
+
+        }
+
+        if(this.playerReference.getArmorManager().jetpack.unlocked == false)
+        {
+            if(!jetpackButton.getImage().hasOverlay("lock"))
+            {
+               jetpackButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+            }
+            jetpackButton.setDisabled(true);
+            jetpackLabel.setHidden(true);
+        }
+        else
+        {
+            jetpackButton.getImage().removeAllOverlays();
+            jetpackButton.setDisabled(false);
+            jetpackLabel.setHidden(false);
+            jetpackLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().jetpack.points) + "/" +Integer.toString(this.playerReference.getArmorManager().jetpack.maxPoints)); 
+
+        }
+
+
+        if(this.playerReference.getArmorManager().ccReduction.unlocked == false)
+        {
+            if(!ccReductionButton.getImage().hasOverlay("lock"))
+            {
+               ccReductionButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+            }
+            ccReductionButton.setDisabled(true);
+            ccReductionLabel.setHidden(true);
+        }
+        else
+        {
+            ccReductionButton.getImage().removeAllOverlays();
+            ccReductionButton.setDisabled(false);
+            ccReductionLabel.setHidden(false);
+            ccReductionLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().ccReduction.points) + "/" +Integer.toString(this.playerReference.getArmorManager().ccReduction.maxPoints)); 
+
+        }
+
+        if(this.playerReference.getArmorManager().moveSpeed.unlocked == false)
+        {
+            if(!moveSpeedButton.getImage().hasOverlay("lock"))
+            {
+               moveSpeedButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+            }
+            moveSpeedButton.setDisabled(true);
+            moveSpeedLabel.setHidden(true);
+        }
+        else
+        {
+            moveSpeedButton.getImage().removeAllOverlays();
+            moveSpeedButton.setDisabled(false);
+            moveSpeedLabel.setHidden(false);
+            moveSpeedLabel.getText().setText(Byte.toString(this.playerReference.getArmorManager().moveSpeed.points) + "/" +Integer.toString(this.playerReference.getArmorManager().moveSpeed.maxPoints)); 
+
+        }
+
          
     }
     
