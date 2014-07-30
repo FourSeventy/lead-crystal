@@ -687,13 +687,14 @@ public final class GameClientScene extends Scene
             //open esc menu
             if(inputSnapshot.isKeyReleased(KeyEvent.VK_ESCAPE))
             {        
-                if(hud.armorMenu.isOpen() || hud.mapMenu.isOpen() || hud.potionsMenu.isOpen() || hud.questMenu.isOpen() || hud.skillMenu.isOpen())
+                if(hud.armorMenu.isOpen() || hud.mapMenu.isOpen() || hud.potionsMenu.isOpen() || hud.questMenu.isOpen() || hud.skillMenu.isOpen() || hud.optionsMenu.isOpen())
                 {
                     hud.armorMenu.close();
                     hud.mapMenu.close();
                     hud.potionsMenu.close();
                     hud.questMenu.close();
                     hud.skillMenu.close();
+                    hud.optionsMenu.close();
                 }
                 else
                 {

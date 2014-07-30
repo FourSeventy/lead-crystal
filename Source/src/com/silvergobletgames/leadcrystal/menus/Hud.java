@@ -117,6 +117,7 @@ public class Hud extends Window
     public ArmorMenu armorMenu;
     public MapMenu mapMenu;
     public QuestMenu questMenu;
+    public OptionsMenu optionsMenu;
     
     //Chat manager
     public ChatManager chatManager;  
@@ -262,7 +263,7 @@ public class Hud extends Window
         menuList.add(questMenu);
         
         //escape menu
-        this.escapeMenu = new EscapeMenu(center-200,350); 
+        this.escapeMenu = new EscapeMenu(center-200,350,this); 
         escapeMenu.addActionListener(new ActionListener(){
          public void actionPerformed(ActionEvent e)
             {
@@ -280,6 +281,26 @@ public class Hud extends Window
         escapeMenu.setOwningScene(scene);
         this.escapeMenu.close();  
         menuList.add(escapeMenu);
+        
+        //options menu
+        this.optionsMenu = new OptionsMenu(center-275,150); 
+        optionsMenu.addActionListener(new ActionListener(){
+         public void actionPerformed(ActionEvent e)
+            {
+                if(e.getActionCommand().equals("mouseEntered"))
+                {
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND)); 
+                }
+                else if(e.getActionCommand().equals("mouseExited"))
+                {
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE)); 
+                }
+            }
+        
+        });
+        optionsMenu.setOwningScene(scene);
+        this.optionsMenu.close();  
+        menuList.add(optionsMenu);
         
         //pain overlay     
         this.painOverlay = new Button(new Image("painOverlay1.png"), 0, 0, Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x, Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().y);

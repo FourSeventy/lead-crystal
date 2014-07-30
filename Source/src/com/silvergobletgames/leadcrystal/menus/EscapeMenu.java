@@ -27,9 +27,11 @@ public class EscapeMenu extends Window
     private final Text returnToGameText;
     private final Text quitText;
     
-    public EscapeMenu(float x, float y)
+    
+    public EscapeMenu(float x, float y, final Hud hudReference)
     {
         super(new Image("smallFrame.png"), x, y, 400, 400);
+        
         
          //close
         final Image closeImage = new Image("closeButton.png");
@@ -102,7 +104,8 @@ public class EscapeMenu extends Window
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("clicked")) 
                 {
-                   
+                   close();
+                   hudReference.optionsMenu.open();
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
                 {
