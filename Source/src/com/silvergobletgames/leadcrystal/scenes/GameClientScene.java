@@ -120,7 +120,7 @@ public final class GameClientScene extends Scene
             return size() > MAX_ENTRIES;
             }};
     //image animation list
-    private CopyOnWriteArrayList <Image> imageUpdateList = new CopyOnWriteArrayList();
+    private CopyOnWriteArrayList<Image> imageUpdateList = new CopyOnWriteArrayList();
     //host data used for host specific
     public LevelProgressionManager hostLevelProgression;
     //ping stuff
@@ -1718,7 +1718,7 @@ public final class GameClientScene extends Scene
         currencyText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 240, 0, 0));
              
         //currency image
-        Image currencyImage = new Image("currency2.png");
+        Image currencyImage = new Image("goldCoin.png");
         currencyImage.setScale(1f);
         currencyImage.setPosition(center- currencyText.getWidth()/2 + 75, 600);
         currencyImage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 240, 0, 0));
@@ -1803,7 +1803,7 @@ public final class GameClientScene extends Scene
         currencyText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 240, 0, 0));
              
         //currency image
-        Image currencyImage = new Image("currency2.png");
+        Image currencyImage = new Image("goldCoin.png");
         currencyImage.setScale(1f);
         currencyImage.setPosition(center- currencyText.getWidth()/2 + 75, 600);
         currencyImage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 240, 0, 0));

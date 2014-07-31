@@ -48,6 +48,8 @@ public class Hud extends Window
     private final GameClientScene sceneReference;   
     private final PlayerEntity playerReference;
     
+    private MessageManager messageManager;
+    
     //dialogue
     private DialogueWindow activeDialogue;
     
@@ -554,7 +556,7 @@ public class Hud extends Window
         t = new Text(Integer.toString(this.playerReference.getCurrencyManager().getBalence()),LeadCrystalTextType.HUD22);
         this.creditLabel = new Label(t, right - 114, 669);
         this.addComponent(creditLabel);
-        this.creditIcon = new Button("currency2.png", right - 133,667,17,17);
+        this.creditIcon = new Button("goldCoin.png", right - 133,667,17,17);
         this.creditIcon.dontKillClick = true;
         this.addComponent(creditIcon);
         

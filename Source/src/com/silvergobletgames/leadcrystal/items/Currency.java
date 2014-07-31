@@ -10,6 +10,7 @@ import java.util.Arrays;
 import com.silvergobletgames.leadcrystal.entities.ItemEntity;
 import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectClasses;
 import com.silvergobletgames.leadcrystal.entities.EntityTooltip;
+import net.phys2d.raw.shapes.Box;
 
 /**
  *
@@ -26,11 +27,17 @@ public final class Currency extends ItemEntity
     
     protected Currency(int amount)
     {
-        super(new Image("currency2.png"));
+        super(new Image("goldCoin.png"));
        
         
         //set amount
         this.amount = amount;
+        
+        //adjust image
+        this.image.setDimensions(32, 32);
+        //adjust body
+        this.body.set(new Box(27,27),3f); 
+        this.body.setRestitution(.5f);
         
     }
     

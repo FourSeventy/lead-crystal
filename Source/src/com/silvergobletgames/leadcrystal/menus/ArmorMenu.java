@@ -147,7 +147,7 @@ public class ArmorMenu extends Window{
         Text playerGold = new Text(Integer.toString(0),LeadCrystalTextType.HUD24);
         playerGoldLabel = new Label(playerGold,1090,810);
         this.addComponent(playerGoldLabel);
-        Button b1 = new Button(new Image("currency2.png"),1140,806,20,20);
+        Button b1 = new Button(new Image("goldCoin.png"),1140,806,20,20);
         this.addComponent(b1);
         
         

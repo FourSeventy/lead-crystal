@@ -424,11 +424,11 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
 
             //add currency text
             Text currencyText = new Text("+" + Integer.toString(currencyAmount), LeadCrystalTextType.COMBAT);
-            currencyText.setColor(new Color(Color.blue));
+            currencyText.setColor(new Color(240,194,12));
             currencyText.setPosition(other.getPosition().x + SylverRandom.random.nextInt(10), other.getPosition().y + 100);
             currencyText.addTextEffect(new TextEffect(TextEffect.TextEffectType.YTRANSLATE, 120, other.getPosition().y, other.getPosition().y + 250));
             currencyText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 120, 0, 0));
-            TextEffect fadeEffect = new TextEffect(TextEffect.TextEffectType.COLOR, 30, new Color(Color.blue,1), new Color(Color.blue,0));
+            TextEffect fadeEffect = new TextEffect(TextEffect.TextEffectType.COLOR, 30, new Color(new Color(240,194,12),1), new Color(new Color(240,194,12),0));
             fadeEffect.setDelay(90);
             currencyText.addTextEffect(fadeEffect);
             this.getOwningScene().add(currencyText, Scene.Layer.MAIN);
