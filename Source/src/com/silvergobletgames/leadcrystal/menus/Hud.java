@@ -136,15 +136,13 @@ public class Hud extends Window
     private Button useLadder;
     private Button jumpThrough;
     private Button rightClickInteract;
-    
-    
-    
-    
-
-    
+      
     public Hud(GameClientScene scene)
     {
         super(new Image("blank.png"),0,0,1440,900);
+        
+        //message manager
+        this.messageManager =  new MessageManager(this);
         
         //scene reference
         this.sceneReference = scene;
@@ -665,6 +663,8 @@ public class Hud extends Window
     {
         super.update();
                
+        this.messageManager.update();
+        
         //position variables 
         float center = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x/2;
         float right = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x;
@@ -1071,9 +1071,15 @@ public class Hud extends Window
         
     }
     
+    public MessageManager getMessageManager()
+    {
+        return this.messageManager;
+    }
+    
     /**
-     * Set the active dialogue window
-     * @param w 
+     * 
+     * @param speaker
+     * @param text 
      */
     public void openDialogue(String speaker, String text) 
     {
