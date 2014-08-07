@@ -244,6 +244,38 @@ public class ArmorManager {
         return this.playerReference;  
     }
 
+    public ArmorStat armorStatLookup(ArmorStatID id)
+    {
+        switch(id)
+        {
+           case SEE_HEALTH: return this.seeEnemyHealth;
+           case DOUBLE_GOLD: return this.doubleGoldFind;
+           case IMPROVED_RADAR: return this.upgradeRadar;
+           case LIFE_LEECH: return this.lifeLeech;
+           case HEALING_EFFECTIVENESS: return this.healingEffectiveness;
+
+           case HARD_TO_KILL: return this.hardToKill;
+           case REDUCED_CRIT: return this.reducedCriticalHit;
+           case PROXIMITY_DAMAGE_REDUCTION: return this.proximityDamageReduction;
+           case HEALTH: return this.health;
+           case THORNS_DAMAGE: return this.thornsDamage;
+           case NUMBER_POTIONS: return this.numberOfPotions;
+       
+           case MELEE_DAMAGE: return this.meleeAttackDamageBonus;
+           case POTION_COOLDOWN_RESET: return this.potionCooldownReset;
+           case CRIT_DAMAGE: return this.criticalHitDamage;
+           case WEAPON_DAMAGE: return this.weaponDamage;
+           case WEAPON_ATTACK_SPEED: return this.weaponAttackSpeed;
+           case CRIT_CHANCE: return this.critChance;
+       
+           case DOUBLE_JUMP: return this.doubleJump;
+           case JETPACK: return this.jetpack;
+           case CC_REDUCTION: return this.ccReduction;
+           case MOVE_SPEED: return this.moveSpeed;
+               
+           default: return null;
+        }
+    }
   
         
     //=====================

@@ -26,7 +26,10 @@ public enum LeadCrystalTextType implements TextType{
     HUD24,
     HUD28,
     HUD34,
-    MESSAGE,
+    MESSAGE38,
+    MESSAGE42,
+    MESSAGE48,
+    MESSAGE54,
     CHAT,
     MENU40,
     MENU46,
@@ -107,12 +110,33 @@ public enum LeadCrystalTextType implements TextType{
         metrics = java2d.getFontMetrics(font);
         Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.CHAT,textRenderer,metrics);
         
-        //MESSAGE
-        font = new Font("CALIBRI", Font.BOLD, 48);
+        //MESSAGE38
+        font = new Font("IMPACT", Font.PLAIN, 38);
         textRenderer = new TextRenderer(font, true, true,new SylverRenderDelegate());
         textRenderer.setUseVertexArrays(false);
         metrics = java2d.getFontMetrics(font);
-        Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.MESSAGE,textRenderer,metrics);
+        Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.MESSAGE38,textRenderer,metrics);
+        
+        //MESSAGE42
+        font = new Font("IMPACT", Font.PLAIN, 42);
+        textRenderer = new TextRenderer(font, true, true,new SylverRenderDelegate());
+        textRenderer.setUseVertexArrays(false);
+        metrics = java2d.getFontMetrics(font);
+        Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.MESSAGE42,textRenderer,metrics);
+        
+        //MESSAGE48
+        font = new Font("IMPACT", Font.PLAIN, 48);
+        textRenderer = new TextRenderer(font, true, true,new SylverRenderDelegate());
+        textRenderer.setUseVertexArrays(false);
+        metrics = java2d.getFontMetrics(font);
+        Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.MESSAGE48,textRenderer,metrics);
+        
+        //MESSAGE54
+        font = new Font("IMPACT", Font.PLAIN, 54);
+        textRenderer = new TextRenderer(font, true, true,new SylverRenderDelegate());
+        textRenderer.setUseVertexArrays(false);
+        metrics = java2d.getFontMetrics(font);
+        Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.MESSAGE54,textRenderer,metrics);
 
         //MENU40
         font = new Font("CALIBRI", Font.BOLD, 40);

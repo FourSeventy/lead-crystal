@@ -1690,49 +1690,84 @@ public final class GameClientScene extends Scene
         //set the status
         this.hud.questMenu.setSideObjectiveStatus(packet.text);
         
-       //TODO send quest status to the screen through message manager
+        // if status isnt "complete", send quest status to the screen through message manager
+        if(!packet.text.equals("complete"))
+        {
+            ArrayList<String> message = new ArrayList<>();
+            message.add(packet.text);
+            this.hud.getMessageManager().queueMessage(MessageType.SIDE_OBJECTIVE_STATUS,message );
+        }
     }
     
     private void handleSetMainQuestStatusPacket(SetMainQuestStatusPacket packet)
     {
         //set the status
         this.hud.questMenu.setMainObjectiveStatus(packet.text);
-        
-       //TODO send quest status to the screen through message manager
+                
+        // if status isnt "complete", send quest status to the screen through message manager
+        if(!packet.text.equals("complete"))
+        {
+            ArrayList<String> message = new ArrayList<>();
+            message.add(packet.text);
+            this.hud.getMessageManager().queueMessage(MessageType.MAIN_OBJECTIVE_STATUS,message );
+        }
     }
     
     private void handleSideObjectiveCompletePacket(SideObjectiveCompletePacket packet)
     {
-         ArrayList<String> objectiveDetails = new ArrayList<>();
+        //queue objective complete message
+        ArrayList<String> objectiveDetails = new ArrayList<>();
+        objectiveDetails.add("Side Objective Complete!");
+        this.hud.getMessageManager().queueMessage(MessageType.OBJECTIVE_COMPLETE, objectiveDetails);
         
-        //currency award amount
-        objectiveDetails.add(Integer.toString(packet.currencyReward));
-       
+        //queue objective reward message
+        if(packet.currencyReward != 0)
+        {
+            ArrayList<String> rewardDetails = new ArrayList<>();
+            rewardDetails.add(Integer.toString(packet.currencyReward));
+            rewardDetails.add("1"); //skill points
+            this.hud.getMessageManager().queueMessage(MessageType.OBJECTIVE_REWARD, rewardDetails);
+        }
+             
+        //queue modifier unlock message
         if(packet.modifierID != null)
         {
-            //modifier text
-            String modifierString = "Unlocked \"" + this.player.getArmorManager().armorStats.get(packet.modifierID).name +"\" Armor Upgrade";
-            objectiveDetails.add(modifierString);
+            ArrayList<String> modifierDetails = new ArrayList<>();
+            String modifierString =this.player.getArmorManager().armorStats.get(packet.modifierID).name;
+            modifierDetails.add(modifierString);
+            String modifierImage = this.player.getArmorManager().armorStatLookup(packet.modifierID).image.getTextureReference();
+            modifierDetails.add(modifierImage);
+            this.hud.getMessageManager().queueMessage(MessageType.MODIFIER_UNLOCKED, modifierDetails);
         }
-        
-        this.hud.getMessageManager().queueMessage(MessageType.OBJECTIVE_COMPLETE, objectiveDetails);
+            
     }
     
     private void handleMainObjectiveCompletePacket(MainObjectiveCompletePacket packet)
     {
+        //queue objective complete message
         ArrayList<String> objectiveDetails = new ArrayList<>();
+        objectiveDetails.add("Main Objective Complete!");
+        this.hud.getMessageManager().queueMessage(MessageType.OBJECTIVE_COMPLETE, objectiveDetails);
         
-        //currency award amount
-        objectiveDetails.add(Integer.toString(packet.currencyReward));
-       
+        //queue objective reward message
+        if(packet.currencyReward != 0)
+        {
+            ArrayList<String> rewardDetails = new ArrayList<>();
+            rewardDetails.add(Integer.toString(packet.currencyReward));
+            rewardDetails.add("1"); //skill points
+            this.hud.getMessageManager().queueMessage(MessageType.OBJECTIVE_REWARD, rewardDetails);
+        }
+             
+        //queue modifier unlock message
         if(packet.modifierID != null)
         {
-            //modifier text
-            String modifierString = "Unlocked \"" + this.player.getArmorManager().armorStats.get(packet.modifierID).name +"\" Armor Upgrade";
-            objectiveDetails.add(modifierString);
+            ArrayList<String> modifierDetails = new ArrayList<>();
+            String modifierString = this.player.getArmorManager().armorStats.get(packet.modifierID).name;
+            modifierDetails.add(modifierString);
+            String modifierImage = this.player.getArmorManager().armorStatLookup(packet.modifierID).image.getTextureReference();
+            modifierDetails.add(modifierImage);
+            this.hud.getMessageManager().queueMessage(MessageType.MODIFIER_UNLOCKED, modifierDetails);
         }
-        
-        this.hud.getMessageManager().queueMessage(MessageType.OBJECTIVE_COMPLETE, objectiveDetails);
               
     }
     

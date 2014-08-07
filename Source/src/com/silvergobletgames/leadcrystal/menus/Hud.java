@@ -919,7 +919,7 @@ public class Hud extends Window
                 
                 
                 
-                final Text ehh = new Text("Respawn In Town",LeadCrystalTextType.MESSAGE);
+                final Text ehh = new Text("Respawn In Town",LeadCrystalTextType.MESSAGE54);
                 ehh.setPosition(center - 200, 500);
                 this.youHaveDiedText = ehh;
                 this.owningScene.add(ehh, Layer.HUD);
