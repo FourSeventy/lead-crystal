@@ -1,4 +1,3 @@
-
 package com.silvergobletgames.leadcrystal.core;
 
 import com.jogamp.opengl.util.awt.TextRenderer;
@@ -8,9 +7,15 @@ import com.silvergobletgames.sylver.graphics.OpenGLGameWindow.SylverRenderDelega
 import com.silvergobletgames.sylver.graphics.Text;
 import com.silvergobletgames.sylver.graphics.Text.TextType;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -44,6 +49,24 @@ public enum LeadCrystalTextType implements TextType{
         BufferedImage bufferedImage = new BufferedImage ( 2 ,2 ,BufferedImage.TYPE_4BYTE_ABGR_PRE );
         Graphics2D java2d = ( Graphics2D)( bufferedImage.createGraphics());
         
+        //load our custom font
+        Font customFont;
+        try 
+        {
+//            File rootDirectory = new File("Graphics/fonts/Aller_Rg.ttf");
+//            URI textureFolderURI = rootDirectory.toURI().resolve("Graphics/");
+             customFont = Font.createFont(Font.TRUETYPE_FONT, new File("Graphics/fonts/Aller_Bd.ttf"));
+             
+        } 
+        catch (IOException|FontFormatException e) 
+        {
+            Logger.getLogger(LeadCrystalTextType.class.getName()).log(Level.SEVERE,  "Error loading font", e);
+            
+            //load backup font
+            customFont = new Font("CALIBRI", Font.PLAIN, 1);
+         
+        }
+
          //COMBAT
         Font font = new Font("IMPACT", Font.BOLD, 32);
         TextRenderer textRenderer = new TextRenderer(font, true, true,new SylverRenderDelegate());
@@ -139,21 +162,24 @@ public enum LeadCrystalTextType implements TextType{
         Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.MESSAGE54,textRenderer,metrics);
 
         //MENU40
-        font = new Font("CALIBRI", Font.BOLD, 40);
+        //font = new Font("CALIBRI", Font.BOLD, 40);
+        font = customFont.deriveFont(40f); //aller font
         textRenderer = new TextRenderer(font, true, true, new SylverRenderDelegate(true,1));
         textRenderer.setUseVertexArrays(false);
         metrics = java2d.getFontMetrics(font);
         Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.MENU40,textRenderer,metrics);
 
         //MENU46
-        font = new Font("CALIBRI", Font.BOLD, 46);
-        textRenderer = new TextRenderer(font, true, true, new SylverRenderDelegate(true,1));
+        //font = new Font("CALIBRI", Font.BOLD, 46);
+        font = customFont.deriveFont(46f); //aller font
+        textRenderer = new TextRenderer(font, true, true, new SylverRenderDelegate(true,1.28f));
         textRenderer.setUseVertexArrays(false);
         metrics = java2d.getFontMetrics(font);
         Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.MENU46,textRenderer,metrics);
 
         //MENU54
-        font = new Font("CALIBRI", Font.BOLD, 54);
+        //font = new Font("CALIBRI", Font.BOLD, 54);
+        font = customFont.deriveFont(54f); //aller font
         textRenderer = new TextRenderer(font, true, true, new SylverRenderDelegate(true,1.5f));
         textRenderer.setUseVertexArrays(false);
         metrics = java2d.getFontMetrics(font);
