@@ -95,7 +95,7 @@ public class MessageManager
         completeText.setColor(new Color(1f,1f,1f));
         completeText.setScale(.9f);
         float center = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x/2;
-        completeText.setPosition(center- completeText.getWidth()/2, 650);
+        completeText.setPosition(center- completeText.getWidth()/2, 700);
         completeText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 240, 0, 0));
         
         //add fade effect
@@ -121,7 +121,7 @@ public class MessageManager
         completeText.setColor(new Color(1f,1f,1f));
         completeText.setScale(.9f);
         float center = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x/2;
-        completeText.setPosition(center- completeText.getWidth()/2, 650);
+        completeText.setPosition(center- completeText.getWidth()/2, 700);
         completeText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 240, 0, 0));
         
         //add fade effect
@@ -150,7 +150,7 @@ public class MessageManager
         completeText.setColor(new Color(Color.green));
         completeText.setScale(1.3f);
         float center = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x/2;
-        completeText.setPosition(center- completeText.getWidth()/2, 650);
+        completeText.setPosition(center- completeText.getWidth()/2, 700);
         completeText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 270, 0, 0));
             
         //add fade effect
@@ -180,19 +180,19 @@ public class MessageManager
         //reward text
         Text rewardText = new Text("Modifier Unlocked:",LeadCrystalTextType.MESSAGE54);
         rewardText.setColor(new Color(240,194,12)); 
-        rewardText.setPosition(center- rewardText.getWidth()/2, 650);
+        rewardText.setPosition(center- rewardText.getWidth()/2, 700);
         rewardText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 270, 0, 0));
         
         //modifier text
         Text modifierText = new Text(modifierString,LeadCrystalTextType.MESSAGE42);
-        modifierText.setPosition(center- modifierText.getWidth()/2, 579);
+        modifierText.setPosition(center- modifierText.getWidth()/2, 629);
         modifierText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 270, 0, 0));
         
         
         //modifier image
         Image modifierImage = new Image(modifierImageString);
         modifierImage.setScale(.8f);
-        modifierImage.setPosition(center - 40, 500);
+        modifierImage.setPosition(center - 40, 600);
         modifierImage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 270, 0, 0));
         
         //fade effect
@@ -201,12 +201,12 @@ public class MessageManager
         modifierText.addTextEffect(fade); 
         
         ImageEffect imageFade2 = new ImageEffect(ImageEffect.ImageEffectType.ALPHABRIGHTNESS,30, 1, 0);
-        imageFade2.setDelay(240);
+        imageFade2.setDelay(250);
         modifierImage.addImageEffect(imageFade2);
         
         //add to scene
         this.hudReference.getOwningScene().add(rewardText, Scene.Layer.HUD);
-        this.hudReference.getOwningScene().add(modifierText, Scene.Layer.HUD);
+       // this.hudReference.getOwningScene().add(modifierText, Scene.Layer.HUD);
         this.hudReference.getOwningScene().add(modifierImage, Scene.Layer.HUD);
         
         
@@ -223,29 +223,30 @@ public class MessageManager
         //reward text
         Text rewardText = new Text("Objective Reward:",LeadCrystalTextType.MESSAGE54);
         rewardText.setColor(new Color(240,194,12)); 
-        rewardText.setPosition(center- rewardText.getWidth()/2, 650);
+        rewardText.setPosition(center- rewardText.getWidth()/2, 700);
         rewardText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 270, 0, 0));
         
         //currency text
         Text currencyText = new Text(currencyString,LeadCrystalTextType.MESSAGE42);
-        currencyText.setPosition(center- currencyText.getWidth() - 20, 579);
+        currencyText.setPosition(center- currencyText.getWidth() - 20, 629);
         currencyText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 270, 0, 0));
         
         //currency image
         Image currencyImage = new Image("goldCoin.png");
         currencyImage.setScale(.5f);
-        currencyImage.setPosition(center- currencyText.getWidth() - 70, 575);
+        currencyImage.setPosition(center- currencyText.getWidth() - 70, 625);
         currencyImage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 270, 0, 0));
         
         
         //skill text
         Text skillText = new Text(skillReward,LeadCrystalTextType.MESSAGE42);
-        skillText.setPosition(center+ 65, 579);
+        skillText.setPosition(center+ 65, 629);
         skillText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 270, 0, 0));
         
         //skill image
         Image skillImage = new Image("skillPoint.png");
-        skillImage.setPosition(center + 20, 580);
+        skillImage.setScale(1.3f);
+        skillImage.setPosition(center + 20, 630);
         skillImage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 270, 0, 0));
         
         //fade effect
