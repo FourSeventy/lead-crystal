@@ -75,8 +75,8 @@ public class NewCharacterScene extends Scene
         // Build Image Lists
         //===================
         
-        this.headList.add("bash-head0.png");
         this.headList.add("bash-head1.png");
+        this.headList.add("bash-head0.png");
         this.headList.add("bash-head2.png");
         this.headList.add("bash-head3.png");
         this.headList.add("bash-head4.png");
@@ -106,25 +106,30 @@ public class NewCharacterScene extends Scene
         this.add(back,Layer.BACKGROUND);
         
         //options title
-        Text title = new Text("New Character",LeadCrystalTextType.MENU60);      
-        title.setPosition(center - title.getWidth()/2, 700);       
+        Text title = new Text("New Character",LeadCrystalTextType.MENU60);
+        title.setPosition(center - title.getWidth()/2, 740);       
         this.add(title,Layer.MAIN);
         
         setImages();
         
         //name label
         Text nameLabel = new Text("Name:",LeadCrystalTextType.MENU46);
-        nameLabel.setPosition(center - 200, 475);
+        nameLabel.setPosition(center + 30, 560);
         this.add(nameLabel, Layer.MAIN);
         
         //name textbox
-        nameTextBox = new TextBox("Player1", center, 475);        
+        nameTextBox = new TextBox(new Text("Player1",LeadCrystalTextType.MENU40), center + 180, 550);  
+        nameTextBox.setHideBackground(true);
+        nameTextBox.setCursorScale(1.85f);
+        nameTextBox.setAlphaNumericRestriction(true);
+        nameTextBox.setMaxCharacters(20);
+        nameTextBox.setDimensions(400, 50);
         this.add(nameTextBox,Layer.MAIN);
         
         // head
         headText = new Text("Head: " + (this.currentHeadSelection + 1),LeadCrystalTextType.MENU46);
-        headText.setPosition(center - headText.getWidth()/2, 425);
-        final Button headButton = new Button(new Image("blank.png"), center - headText.getWidth()/2, headText.getPosition().y, headText.getWidth(), headText.getHeight());
+        headText.setPosition(center + 30, 505);
+        final Button headButton = new Button(new Image("blank.png"), headText.getPosition().x, headText.getPosition().y, headText.getWidth(), headText.getHeight());
         this.add(headText,Layer.MAIN);
         this.add(headButton,Layer.MAIN);
         headButton.addActionListener(new ActionListener() {
@@ -144,7 +149,7 @@ public class NewCharacterScene extends Scene
                       if(headText.hasTextEffect("small"))
                           headText.removeTextEffect("small");
                       
-                       headText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, headText.getScale(), 1.3));
+                       headText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, headText.getScale(), 1.2));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -162,8 +167,8 @@ public class NewCharacterScene extends Scene
         
         //body
         bodyText = new Text("Body: " + (this.currentBodySelection + 1),LeadCrystalTextType.MENU46);
-        bodyText.setPosition(center - bodyText.getWidth()/2, 375);
-        final Button bodyButton = new Button(new Image("blank.png"), center - bodyText.getWidth()/2, bodyText.getPosition().y, bodyText.getWidth(), bodyText.getHeight());
+        bodyText.setPosition(center + 30, 450);
+        final Button bodyButton = new Button(new Image("blank.png"), bodyText.getPosition().x, bodyText.getPosition().y, bodyText.getWidth(), bodyText.getHeight());
         this.add(bodyText,Layer.MAIN);
         this.add(bodyButton,Layer.MAIN);
         bodyButton.addActionListener(new ActionListener() {
@@ -183,7 +188,7 @@ public class NewCharacterScene extends Scene
                       if(bodyText.hasTextEffect("small"))
                           bodyText.removeTextEffect("small");
                       
-                       bodyText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, bodyText.getScale(), 1.3));
+                       bodyText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, bodyText.getScale(), 1.2));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -201,9 +206,9 @@ public class NewCharacterScene extends Scene
     
         
         //ok
-        final Text okText = new Text("OK",LeadCrystalTextType.MENU46);
-        okText.setPosition(center - okText.getWidth()/2, 275);
-        final Button okButton = new Button(new Image("blank.png"), center - okText.getWidth()/2, okText.getPosition().y, okText.getWidth(), okText.getHeight());
+        final Text okText = new Text("OK",LeadCrystalTextType.MENU50);
+        okText.setPosition(center  - okText.getWidth()/2, 325);
+        final Button okButton = new Button(new Image("blank.png"), okText.getPosition().x, okText.getPosition().y, okText.getWidth(), okText.getHeight());
         this.add(okText,Layer.MAIN);
         this.add(okButton,Layer.MAIN);
         okButton.addActionListener(new ActionListener() {
@@ -275,7 +280,7 @@ public class NewCharacterScene extends Scene
                       if(okText.hasTextEffect("small"))
                           okText.removeTextEffect("small");
                       
-                       okText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, okText.getScale(), 1.3));
+                       okText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, okText.getScale(), 1.2));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -292,9 +297,9 @@ public class NewCharacterScene extends Scene
         });
         
         //back
-        final Text backText = new Text("Back",LeadCrystalTextType.MENU46);
-        backText.setPosition(center - backText.getWidth()/2, 225);
-        final Button backButton = new Button(new Image("blank.png"), center - backText.getWidth()/2, backText.getPosition().y, backText.getWidth(), backText.getHeight());
+        final Text backText = new Text("Back",LeadCrystalTextType.MENU50);
+        backText.setPosition(center - backText.getWidth()/2, 267);
+        final Button backButton = new Button(new Image("blank.png"), okText.getPosition().x, backText.getPosition().y, backText.getWidth(), backText.getHeight());
         this.add(backText,Layer.MAIN);
         this.add(backButton,Layer.MAIN);
         backButton.addActionListener(new ActionListener() {
@@ -315,7 +320,7 @@ public class NewCharacterScene extends Scene
                       if(backText.hasTextEffect("small"))
                           backText.removeTextEffect("small");
                       
-                       backText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, backText.getScale(), 1.3));
+                       backText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, backText.getScale(), 1.2));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -375,22 +380,23 @@ public class NewCharacterScene extends Scene
     {
         final int right = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x;
         final int center = right/2;
-            
+       
         //body image
         if(bodyImage != null)
            this.remove(bodyImage);
         bodyImage = new Image(this.bodyList.get(this.currentBodySelection));
-        bodyImage.setPosition(center - bodyImage.getWidth()/2, 500);
+        bodyImage.setScale(1.45f);
+        bodyImage.setPosition(center - 377, 363);
         this.add(bodyImage, Layer.MAIN);
         
         //head image
         if(headImage != null)
            this.remove(headImage);
         headImage = new Image(this.headList.get(this.currentHeadSelection));
-        headImage.setPosition(center - headImage.getWidth()/2 + 2, 655);
+        headImage.setScale(1.45f);
+        headImage.setPosition(center - 130, 585);
         this.add(headImage, Layer.MAIN);
-        
-    
+
     }
     
     

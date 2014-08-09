@@ -38,8 +38,10 @@ public enum LeadCrystalTextType implements TextType{
     CHAT,
     MENU23,
     MENU36,
+    MENU30,
     MENU40,
     MENU46,
+    MENU50,
     MENU54,
     MENU60;
 
@@ -172,6 +174,14 @@ public enum LeadCrystalTextType implements TextType{
         metrics = java2d.getFontMetrics(font);
         Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.MENU23,textRenderer,metrics);
 
+        //MENU30
+        //font = new Font("CALIBRI", Font.BOLD, 40);
+        font = customFont.deriveFont(30f); //aller font
+        textRenderer = new TextRenderer(font, true, true, new SylverRenderDelegate(true,.6f));
+        textRenderer.setUseVertexArrays(false);
+        metrics = java2d.getFontMetrics(font);
+        Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.MENU30,textRenderer,metrics);
+
         
         //MENU36
         //font = new Font("CALIBRI", Font.BOLD, 40);
@@ -198,6 +208,15 @@ public enum LeadCrystalTextType implements TextType{
         metrics = java2d.getFontMetrics(font);
         Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.MENU46,textRenderer,metrics);
 
+        //MENU50
+        //font = new Font("CALIBRI", Font.BOLD, 46);
+        font = customFont.deriveFont(50f); //aller font
+        textRenderer = new TextRenderer(font, true, true, new SylverRenderDelegate(true,1.32f));
+        textRenderer.setUseVertexArrays(false);
+        metrics = java2d.getFontMetrics(font);
+        Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.MENU50,textRenderer,metrics);
+
+        
         //MENU54
         //font = new Font("CALIBRI", Font.BOLD, 54);
         font = customFont.deriveFont(54f); //aller font
