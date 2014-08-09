@@ -106,7 +106,7 @@ public class NewCharacterScene extends Scene
         this.add(back,Layer.BACKGROUND);
         
         //options title
-        Text title = new Text("New Character",LeadCrystalTextType.TITLE);      
+        Text title = new Text("New Character",LeadCrystalTextType.MENU60);      
         title.setPosition(center - title.getWidth()/2, 700);       
         this.add(title,Layer.MAIN);
         

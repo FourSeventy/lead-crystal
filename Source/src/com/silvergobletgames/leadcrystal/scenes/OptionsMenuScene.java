@@ -89,7 +89,7 @@ public class OptionsMenuScene extends Scene
         this.add(back,Layer.BACKGROUND);
         
         //options title
-        Text title = new Text("Options",LeadCrystalTextType.TITLE);      
+        Text title = new Text("Options",LeadCrystalTextType.MENU60);      
         title.setPosition(center - title.getWidth()/2, 700);       
         this.add(title,Layer.MAIN);
         

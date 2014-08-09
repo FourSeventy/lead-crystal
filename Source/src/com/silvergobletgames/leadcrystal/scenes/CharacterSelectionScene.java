@@ -28,8 +28,8 @@ public class CharacterSelectionScene extends Scene
 {
     
     //list of save games we find
-    private HashMap<String, SaveGame> saveGames = new HashMap();
-    private HashMap<String, Button> saveGameButtonMap = new HashMap();
+    private HashMap<String, SaveGame> saveGames = new HashMap<>();
+    private HashMap<String, ArrayList<SceneObject>> saveGameButtonMap = new HashMap<>();
     
     
     //selected save
@@ -56,20 +56,20 @@ public class CharacterSelectionScene extends Scene
         this.add(back,Layer.BACKGROUND);
         
         //options title
-        Text title = new Text("Select Character",LeadCrystalTextType.TITLE);      
-        title.setPosition(center - title.getWidth()/2, 730);       
+        Text title = new Text("Select Character",LeadCrystalTextType.MENU60);      
+        title.setPosition(center - title.getWidth()/2, 740);       
         this.add(title,Layer.MAIN);
         
         //selection box
-        Image selectionBox = new Image("menuSquare.png");
-        selectionBox.setDimensions(selectionBox.getHeight(), selectionBox.getWidth() + 200);
+        Image selectionBox = new Image("tallFrameMenu.png");
+        selectionBox.setDimensions(selectionBox.getWidth() + 25, selectionBox.getHeight() + 150); 
         selectionBox.setAnchor(Anchorable.Anchor.TOPLEFT);
-        selectionBox.setPositionAnchored(center - selectionBox.getWidth()/2, 680);
+        selectionBox.setPositionAnchored(center - selectionBox.getWidth()/2 - 70, 680);
         this.add(selectionBox,Layer.MAIN);
 
         //select
         final Text selectText = new Text("Select",LeadCrystalTextType.MENU46);
-        selectText.setPosition(center + 300, 650); 
+        selectText.setPosition(center + 280 - 70, 645); 
         final Button selectButton = new Button(new Image("blank.png"), selectText.getPosition().x, selectText.getPosition().y, selectText.getWidth(), selectText.getHeight());
         this.add(selectText,Layer.MAIN);
         this.add(selectButton,Layer.MAIN);
@@ -85,7 +85,7 @@ public class CharacterSelectionScene extends Scene
                       if(selectText.hasTextEffect("small"))
                           selectText.removeTextEffect("small");
                       
-                       selectText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, selectText.getScale(), 1.3));
+                       selectText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, selectText.getScale(), 1.2));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -101,43 +101,9 @@ public class CharacterSelectionScene extends Scene
             }
         });
         
-        //delete
-        final Text deleteText = new Text("Delete",LeadCrystalTextType.MENU46);
-        deleteText.setPosition(center + 300, 600);
-        final Button deleteButton = new Button(new Image("blank.png"), deleteText.getPosition().x, deleteText.getPosition().y, deleteText.getWidth(), deleteText.getHeight());
-        this.add(deleteText,Layer.MAIN);
-        this.add(deleteButton,Layer.MAIN);
-        deleteButton.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                if (e.getActionCommand().equals("clicked")) {
-                    deleteButton_click();
-                }
-                if (e.getActionCommand().equals("mouseEntered")) 
-                {
-                    
-                      if(deleteText.hasTextEffect("small"))
-                          deleteText.removeTextEffect("small");
-                      
-                       deleteText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, deleteText.getScale(), 1.3));
-                    
-                    //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
-                    add(sound);
-                }
-                if (e.getActionCommand().equals("mouseExited"))
-                {
-                        if(deleteText.hasTextEffect("big"))
-                           deleteText.removeTextEffect("big");
-                        
-                        deleteText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, deleteText.getScale(), 1));
-                }
-            }
-        });
-        
         //new character
         final Text newCharacterText = new Text("New Character",LeadCrystalTextType.MENU46);
-        newCharacterText.setPosition(center + 300, 550);
+        newCharacterText.setPosition(center + 280 - 70, 590);
         final Button newCharacterButton = new Button(new Image("blank.png"), newCharacterText.getPosition().x, newCharacterText.getPosition().y, newCharacterText.getWidth(), newCharacterText.getHeight());
         this.add(newCharacterText,Layer.MAIN);
         this.add(newCharacterButton,Layer.MAIN);
@@ -153,7 +119,7 @@ public class CharacterSelectionScene extends Scene
                       if(newCharacterText.hasTextEffect("small"))
                           newCharacterText.removeTextEffect("small");
                       
-                       newCharacterText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, newCharacterText.getScale(), 1.3));
+                       newCharacterText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, newCharacterText.getScale(), 1.2));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -169,9 +135,45 @@ public class CharacterSelectionScene extends Scene
             }
         });  
         
+        
+        //delete
+        final Text deleteText = new Text("Delete",LeadCrystalTextType.MENU46);
+        deleteText.setPosition(center + 280 - 70, 535);
+        final Button deleteButton = new Button(new Image("blank.png"), deleteText.getPosition().x, deleteText.getPosition().y, deleteText.getWidth(), deleteText.getHeight());
+        this.add(deleteText,Layer.MAIN);
+        this.add(deleteButton,Layer.MAIN);
+        deleteButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                if (e.getActionCommand().equals("clicked")) {
+                    deleteButton_click();
+                }
+                if (e.getActionCommand().equals("mouseEntered")) 
+                {
+                    
+                      if(deleteText.hasTextEffect("small"))
+                          deleteText.removeTextEffect("small");
+                      
+                       deleteText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, deleteText.getScale(), 1.2));
+                    
+                    //play sound
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
+                    add(sound);
+                }
+                if (e.getActionCommand().equals("mouseExited"))
+                {
+                        if(deleteText.hasTextEffect("big"))
+                           deleteText.removeTextEffect("big");
+                        
+                        deleteText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, deleteText.getScale(), 1));
+                }
+            }
+        });
+        
+              
         //back
         final Text backText = new Text("Back",LeadCrystalTextType.MENU46);
-        backText.setPosition(center + 300, 500); 
+        backText.setPosition(center + 280 - 70, 480); 
         final Button backButton = new Button(new Image("blank.png"), backText.getPosition().x, backText.getPosition().y, backText.getWidth(), backText.getHeight());      
         this.add(backText,Layer.MAIN);
         this.add(backButton,Layer.MAIN);
@@ -187,7 +189,7 @@ public class CharacterSelectionScene extends Scene
                       if(backText.hasTextEffect("small"))
                           backText.removeTextEffect("small");
                       
-                       backText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, backText.getScale(), 1.3));
+                       backText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, backText.getScale(), 1.2));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -255,9 +257,13 @@ public class CharacterSelectionScene extends Scene
         // Clear out old buttons
         //=========================
         
-        for(Button bu: this.saveGameButtonMap.values())
+        for(ArrayList<SceneObject> saveObjectList: this.saveGameButtonMap.values())
         {
-            this.remove(bu);
+            
+            for(SceneObject objects: saveObjectList)
+            {
+                this.remove(objects);
+            }
         }
         this.saveGameButtonMap.clear();
         this.saveGames.clear();
@@ -274,7 +280,7 @@ public class CharacterSelectionScene extends Scene
         File folder = new File(path);
         File[] listOfFiles = folder.listFiles();
 
-        for (int i = 0; i < listOfFiles.length; i++) 
+        for(int i = 0; i < listOfFiles.length; i++) 
         {
             fileName = listOfFiles[i].getName().toLowerCase();
             if (listOfFiles[i].isFile() && fileName.endsWith(".save")) 
@@ -288,7 +294,7 @@ public class CharacterSelectionScene extends Scene
                 catch(Exception e)
                 {
                     System.err.println("Load Saved Game Fail: "); e.printStackTrace(System.err);}                
-            }            
+                }            
         }
         
         //===================
@@ -297,17 +303,38 @@ public class CharacterSelectionScene extends Scene
         int number = 0;
         for(String key: this.saveGames.keySet())
         {
-            Text saveGameText = new Text(key);
-            saveGameText.setScale(1.3f);
-            final Button savegameButton = new Button(saveGameText, center - 250, 650 - 50 * number);
+            //if they have more than 10 characters they wont see them all
+            if(number>10)
+            {
+                break;
+            }
+            
+            ArrayList<SceneObject> saveGameObjects =  new ArrayList<>();
+            
+            Text saveGameText = new Text(key.substring(0, key.length()-5),LeadCrystalTextType.MENU36);
+            final Button savegameButton = new Button(saveGameText, center - 225 - 70, 630 - 55 * number);           
             this.add(savegameButton,Layer.MAIN);
-            this.saveGameButtonMap.put(saveGameText.toString(), savegameButton);
+            saveGameObjects.add(savegameButton);
+            
+            Image coinIcon = new Image("goldCoin.png");
+            coinIcon.setScale(.30f);
+            coinIcon.setPosition(center + 200 - 70, 627 - 55 * number);
+            this.add(coinIcon,Layer.MAIN);
+            saveGameObjects.add(coinIcon);
+            
+            Text goldText = new Text(Integer.toString(this.saveGames.get(key).getPlayer().getCurrencyManager().getBalence()), LeadCrystalTextType.MENU23);
+            goldText.setPosition(center + 200 - goldText.getWidth() - 7 - 70, 630 - 55 * number);
+            this.add(goldText,Layer.MAIN);
+            saveGameObjects.add(goldText);
+            
+            this.saveGameButtonMap.put(saveGameText.toString(), saveGameObjects);
+            
             savegameButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e)
                 {
                     if (e.getActionCommand().equals("clicked")) 
                     {
-                        selectedSave = savegameButton.getText().toString();
+                        selectedSave = savegameButton.getText().toString() + ".save";
                         selectionArrow.setPosition(savegameButton.getPosition().x - 150, savegameButton.getPosition().y - selectionArrow.getHeight()/2);
                         selectionArrow.setAlphaBrightness(1);
                         Float[] points = {1.0f,1.3f,1.0f};

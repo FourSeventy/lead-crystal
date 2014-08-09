@@ -54,7 +54,7 @@ public class MainMenuScene extends Scene
         final int right = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x;
         final int center = right/2;
 
-        Text leadCrystal = new Text("Lead Crystal",LeadCrystalTextType.TITLE);
+        Text leadCrystal = new Text("Lead Crystal",LeadCrystalTextType.MENU60);
         leadCrystal.setPosition(center - leadCrystal.getWidth()/2, 700);       
         this.add(leadCrystal,Layer.MAIN);
         
@@ -77,7 +77,7 @@ public class MainMenuScene extends Scene
                       if(singlePlayerText.hasTextEffect("small"))
                           singlePlayerText.removeTextEffect("small");
                       
-                       singlePlayerText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, singlePlayerText.getScale(), 1.3));
+                       singlePlayerText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, singlePlayerText.getScale(), 1.20f));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -88,7 +88,7 @@ public class MainMenuScene extends Scene
                         if(singlePlayerText.hasTextEffect("big"))
                            singlePlayerText.removeTextEffect("big");
                         
-                        singlePlayerText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, singlePlayerText.getScale(), 1));
+                        singlePlayerText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, singlePlayerText.getScale(), 1f));
                 }
             }
         });
@@ -112,7 +112,7 @@ public class MainMenuScene extends Scene
                       if(multiPlayerText.hasTextEffect("small"))
                           multiPlayerText.removeTextEffect("small");
                       
-                       multiPlayerText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, multiPlayerText.getScale(), 1.3));
+                       multiPlayerText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, multiPlayerText.getScale(), 1.2));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -147,7 +147,7 @@ public class MainMenuScene extends Scene
                       if(optionsText.hasTextEffect("small"))
                           optionsText.removeTextEffect("small");
                       
-                       optionsText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, optionsText.getScale(), 1.3));
+                       optionsText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, optionsText.getScale(), 1.2));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -182,7 +182,7 @@ public class MainMenuScene extends Scene
                       if(levelEditorText.hasTextEffect("small"))
                           levelEditorText.removeTextEffect("small");
                       
-                       levelEditorText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, levelEditorText.getScale(), 1.3));
+                       levelEditorText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, levelEditorText.getScale(), 1.2));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
@@ -217,7 +217,7 @@ public class MainMenuScene extends Scene
                       if(exitText.hasTextEffect("small"))
                           exitText.removeTextEffect("small");
                       
-                       exitText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, exitText.getScale(),1.3));
+                       exitText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, exitText.getScale(),1.2));
                     
                     //play sound
                     Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);

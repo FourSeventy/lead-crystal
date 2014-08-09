@@ -55,7 +55,7 @@ public class MultiplayerMenuScene extends Scene
         this.add(back,Layer.BACKGROUND);
         
         //multiplayer title
-        Text title = new Text("Multiplayer",LeadCrystalTextType.TITLE);      
+        Text title = new Text("Multiplayer",LeadCrystalTextType.MENU60);      
         title.setPosition(center - title.getWidth()/2, 730);       
         this.add(title,Layer.MAIN);
         
