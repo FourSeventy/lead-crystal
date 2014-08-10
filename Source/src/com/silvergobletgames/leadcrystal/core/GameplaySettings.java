@@ -50,16 +50,17 @@ public class GameplaySettings{
     public boolean viewportFeelers = false;
     public boolean drawPlayerServerTime = false;
     public boolean networkDebugging = false;
-    public boolean packetSizeDebugging  = false;
-    public boolean drawNetworkingStats = true;
+    public boolean packetSizeDebugging  = false;    
     public boolean debugEnemies = false;
     
     
     //===================
     // Gameplay Settings
     //=================== 
-    public boolean showSpawnLocations = false;
     public boolean showCooldownTimers = false;
+    public boolean drawNetworkingStats = true;
+    public int tcpPort = 50501;
+    public int udpPort = 50511;
     
     
      //===============
@@ -81,10 +82,13 @@ public class GameplaySettings{
             iniSaver.setProperty("debug_viewportFeelers", Boolean.toString(this.viewportFeelers));
             iniSaver.setProperty("debug_drawPlayerServerTime", Boolean.toString(this.drawPlayerServerTime));
             iniSaver.setProperty("debug_networkDebugging", Boolean.toString(this.networkDebugging));
-            iniSaver.setProperty("debug_packetSizeDebugging", Boolean.toString(this.packetSizeDebugging));
-            iniSaver.setProperty("debug_drawNetworkingStats", Boolean.toString(this.drawNetworkingStats));
+            iniSaver.setProperty("debug_packetSizeDebugging", Boolean.toString(this.packetSizeDebugging));          
             iniSaver.setProperty("debug_debugEnemies",Boolean.toString(this.debugEnemies));
+            
             iniSaver.setProperty("showCooldownTimers",Boolean.toString(this.showCooldownTimers));
+            iniSaver.setProperty("drawNetworkingStats", Boolean.toString(this.drawNetworkingStats));
+            iniSaver.setProperty("tcpPort",Integer.toString(this.tcpPort));
+            iniSaver.setProperty("udpPort",Integer.toString(this.udpPort));
 
             //open output stream
             OutputStream out = Files.newOutputStream(Paths.get(filePath));
@@ -120,10 +124,13 @@ public class GameplaySettings{
             this.viewportFeelers = Boolean.parseBoolean(iniLoader.getProperty("debug_viewportFeelers"));
             this.drawPlayerServerTime = Boolean.parseBoolean(iniLoader.getProperty("debug_drawPlayerServerTime"));
             this.networkDebugging = Boolean.parseBoolean(iniLoader.getProperty("debug_networkDebugging"));
-            this.packetSizeDebugging = Boolean.parseBoolean(iniLoader.getProperty("debug_packetSizeDebugging"));
-            this.drawNetworkingStats = Boolean.parseBoolean(iniLoader.getProperty("debug_drawNetworkingStats"));
+            this.packetSizeDebugging = Boolean.parseBoolean(iniLoader.getProperty("debug_packetSizeDebugging"));           
             this.debugEnemies = Boolean.parseBoolean(iniLoader.getProperty("debug_debugEnemies"));
+            
             this.showCooldownTimers = Boolean.parseBoolean(iniLoader.getProperty("showCooldownTimers"));
+            this.drawNetworkingStats = Boolean.parseBoolean(iniLoader.getProperty("drawNetworkingStats"));
+            this.tcpPort = Integer.parseInt(iniLoader.getProperty("tcpPort")); 
+            this.udpPort = Integer.parseInt(iniLoader.getProperty("udpPort")); 
 
         }
         catch(IOException e)

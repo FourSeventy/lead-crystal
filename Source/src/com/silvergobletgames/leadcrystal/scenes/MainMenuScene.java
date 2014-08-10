@@ -2,11 +2,21 @@ package com.silvergobletgames.leadcrystal.scenes;
 
 import com.silvergobletgames.leadcrystal.core.CursorFactory;
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
+import com.silvergobletgames.leadcrystal.core.GameplaySettings;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
+import com.silvergobletgames.leadcrystal.core.SaveGame;
+import com.silvergobletgames.leadcrystal.menus.ErrorMenu;
+import com.silvergobletgames.leadcrystal.netcode.ConnectionException;
+import com.silvergobletgames.leadcrystal.netcode.GobletServer;
+import com.silvergobletgames.leadcrystal.netcode.GobletServer.ServerConfiguration;
+import com.silvergobletgames.sylver.audio.AudioRenderer;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.*;
+import com.silvergobletgames.sylver.graphics.*;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.OpenGLGameWindow;
 import com.silvergobletgames.sylver.graphics.Text;
+import com.silvergobletgames.sylver.graphics.Text.CoreTextType;
 import com.silvergobletgames.sylver.graphics.TextureLoader;
 import com.silvergobletgames.sylver.windowsystem.Button;
 import com.silvergobletgames.sylver.windowsystem.Label;
@@ -18,16 +28,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import javax.media.opengl.GL3bc;
 import javax.media.opengl.glu.GLU;
-import com.silvergobletgames.leadcrystal.netcode.ConnectionException;
-import com.silvergobletgames.leadcrystal.netcode.GobletServer;
-
-import com.silvergobletgames.leadcrystal.core.SaveGame;
-import com.silvergobletgames.leadcrystal.menus.ErrorMenu;
-import com.silvergobletgames.leadcrystal.netcode.GobletServer.ServerConfiguration;
-import com.silvergobletgames.sylver.audio.AudioRenderer;
-import com.silvergobletgames.sylver.audio.Sound;
-import com.silvergobletgames.sylver.graphics.*;
-import com.silvergobletgames.sylver.graphics.Text.CoreTextType;
 
 /**
  *
@@ -332,6 +332,9 @@ public class MainMenuScene extends Scene
 
                 //start a server
                 ServerConfiguration config = new ServerConfiguration();
+                config.singlePlayer = true;
+                config.tcpPort = GameplaySettings.getInstance().tcpPort; 
+                config.udpPort = GameplaySettings.getInstance().udpPort;
                 Game.getInstance().addRunnable("Goblet Server", new GobletServer(config));
 
                 //load game client scene
@@ -340,7 +343,7 @@ public class MainMenuScene extends Scene
                 //connect to server
                 try
                 {
-                    ((GameClientScene)Game.getInstance().getScene(GameClientScene.class)).connectToServer( "127.0.0.1", 50501);                   
+                    ((GameClientScene)Game.getInstance().getScene(GameClientScene.class)).connectToServer( "127.0.0.1", config.tcpPort,config.udpPort);                   
                 }
                 catch(ConnectionException e){System.err.println("Couldnt connect: " + e.reason); return;}
 
@@ -389,7 +392,7 @@ public class MainMenuScene extends Scene
                 //connect to server
                 try
                 {
-                   ((GameClientScene)Game.getInstance().getScene(GameClientScene.class)).connectToServer( "127.0.0.1", config.port);                   
+                   ((GameClientScene)Game.getInstance().getScene(GameClientScene.class)).connectToServer( "127.0.0.1", config.tcpPort,config.udpPort);                   
                 }
                 catch(ConnectionException e){System.err.println("Couldnt connect: " + e.reason); return;}
 
@@ -414,7 +417,7 @@ public class MainMenuScene extends Scene
         thread.start();
     }
     
-    public static void joinMultiPlayerGame(final SaveGame saveGame,final String ip, final int port)
+    public static void joinMultiPlayerGame(final SaveGame saveGame,final String ip, final int tcpPort, final int udpPort)
     {
         Game.getInstance().loadScene(new LoadingScene());
         Game.getInstance().changeScene(LoadingScene.class, null);
@@ -434,7 +437,7 @@ public class MainMenuScene extends Scene
                 //connect to server
                 try
                 {
-                   ((GameClientScene)Game.getInstance().getScene(GameClientScene.class)).connectToServer(ip, port);                   
+                   ((GameClientScene)Game.getInstance().getScene(GameClientScene.class)).connectToServer(ip, tcpPort,udpPort);                   
                 }
                 catch(ConnectionException e)
                 {

@@ -90,12 +90,12 @@ public class OptionsMenuScene extends Scene
         
         //options title
         Text title = new Text("Options",LeadCrystalTextType.MENU60);      
-        title.setPosition(center - title.getWidth()/2, 700);       
+        title.setPosition(center - title.getWidth()/2, 740);       
         this.add(title,Layer.MAIN);
         
         // fullscreen
         final Text fullScreenText = new Text(Game.getInstance().getConfiguration().getEngineSettings().fullScreen?"Full Screen: ON":"Full Screen: OFF",LeadCrystalTextType.MENU46);
-        fullScreenText.setPosition(center - fullScreenText.getWidth()/2, 560);
+        fullScreenText.setPosition(center - fullScreenText.getWidth()/2, 580);
         final Button fullScreenButton = new Button(new Image("blank.png"), center - fullScreenText.getWidth()/2, fullScreenText.getPosition().y, fullScreenText.getWidth(), fullScreenText.getHeight());
         this.add(fullScreenText,Layer.MAIN);
         this.add(fullScreenButton,Layer.MAIN);
@@ -136,7 +136,7 @@ public class OptionsMenuScene extends Scene
         
         //vsync
         final Text vsyncText = new Text(Game.getInstance().getConfiguration().getEngineSettings().vSync?"VSync: ON":"VSync: OFF",LeadCrystalTextType.MENU46);
-        vsyncText.setPosition(center - vsyncText.getWidth()/2, 500);
+        vsyncText.setPosition(center - vsyncText.getWidth()/2, 515);
         final Button vSyncButton = new Button(new Image("blank.png"), center - vsyncText.getWidth()/2, vsyncText.getPosition().y, vsyncText.getWidth(), vsyncText.getHeight());
         this.add(vsyncText,Layer.MAIN);
         this.add(vSyncButton,Layer.MAIN);
@@ -193,7 +193,7 @@ public class OptionsMenuScene extends Scene
         
         //bloom
         final Text bloomText = new Text(Game.getInstance().getConfiguration().getEngineSettings().bloom?"Bloom Effects: ON":"Bloom Effects: OFF",LeadCrystalTextType.MENU46);
-        bloomText.setPosition(center - bloomText.getWidth()/2, 440);
+        bloomText.setPosition(center - bloomText.getWidth()/2, 450);
         final Button bloomButton = new Button(new Image("blank.png"), center - bloomText.getWidth()/2, bloomText.getPosition().y, bloomText.getWidth(), bloomText.getHeight());
         this.add(bloomText,Layer.MAIN);
         this.add(bloomButton,Layer.MAIN);
@@ -237,7 +237,7 @@ public class OptionsMenuScene extends Scene
         
         //lighting
         final Text lightingText = new Text(Game.getInstance().getConfiguration().getEngineSettings().lighting?"Lighting Effects: ON":"Lighting Effects: OFF",LeadCrystalTextType.MENU46);
-        lightingText.setPosition(center - lightingText.getWidth()/2, 380);
+        lightingText.setPosition(center - lightingText.getWidth()/2, 385);
         final Button lightingButton = new Button(new Image("blank.png"), center - lightingText.getWidth()/2, lightingText.getPosition().y, lightingText.getWidth(), lightingText.getHeight());
         this.add(lightingText,Layer.MAIN);
         this.add(lightingButton,Layer.MAIN);
@@ -322,7 +322,7 @@ public class OptionsMenuScene extends Scene
         
         //back
         final Text backText = new Text("Back",LeadCrystalTextType.MENU46);
-        backText.setPosition(center - backText.getWidth()/2, 260);
+        backText.setPosition(center - backText.getWidth()/2, 255);
         final Button backButton = new Button(new Image("blank.png"), center - backText.getWidth()/2, backText.getPosition().y, backText.getWidth(), backText.getHeight());
         this.add(backText,Layer.MAIN);
         this.add(backButton,Layer.MAIN);

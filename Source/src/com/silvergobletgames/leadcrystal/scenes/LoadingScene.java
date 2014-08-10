@@ -35,16 +35,13 @@ public class LoadingScene extends Scene{
         int center = right/2;
         
         //loading text
-        loading = new Text("Loading");
-        loading.setScale(.7f);
-        loading.setTextType(CoreTextType.MENU);
+        loading = new Text("Loading",CoreTextType.MENU);
         Label leadCrystalButton = new Label(loading, center - loading.getWidth()/2, 600);
         this.add(leadCrystalButton,Layer.MAIN);
         
         //progress text
-        currentProgress = new Text("");
-        currentProgress.setScale(.75f);
-        Label progressLabel = new Label(currentProgress, center - loading.getWidth()/2, 550);
+        currentProgress = new Text("",CoreTextType.DEFAULT);
+        Label progressLabel = new Label(currentProgress, center - loading.getWidth()/2 + 5, 555);
         this.add(progressLabel,Layer.MAIN);
     }
     

@@ -5,6 +5,7 @@ import com.silvergobletgames.sylver.graphics.Color;
 import com.esotericsoftware.kryonet.Client;
 import com.silvergobletgames.leadcrystal.core.CursorFactory;
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
+import com.silvergobletgames.leadcrystal.core.GameplaySettings;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.sylver.core.*;
 import com.silvergobletgames.sylver.graphics.*;
@@ -33,8 +34,7 @@ public class MultiplayerMenuScene extends Scene
     private String actionArg;
     
     //connection info
-    private final Text portLabel, ipLabel, startText;
-    private TextBox portTextBox;
+    private final Text ipLabel, startText;
     private TextBox ipTextBox;
     private Button startButton;
     
@@ -73,10 +73,7 @@ public class MultiplayerMenuScene extends Scene
                     //==================
                     // Hide Everything
                     //==================
-                    
-                    portLabel.setColor(new Color(1,1,1,0));
-                    portTextBox.setDisabled(true);
-                    portTextBox.setHidden(true);
+                   
                     ipLabel.setColor(new Color(1,1,1,0));
                     ipTextBox.setDisabled(true);
                     ipTextBox.setHidden(true);
@@ -87,9 +84,7 @@ public class MultiplayerMenuScene extends Scene
                     //======================
                     // Unhide proper things
                     //======================
-                    portLabel.setColor(new Color(1,1,1,1));
-                    portTextBox.setDisabled(false);
-                    portTextBox.setHidden(false);
+   
                     ipLabel.setColor(new Color(1,1,1,1));
                     ipTextBox.setDisabled(false);
                     ipTextBox.setHidden(false);
@@ -132,31 +127,18 @@ public class MultiplayerMenuScene extends Scene
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("clicked")) 
                 {
-                    //==================
-                    // Hide Everything
-                    //==================
-                    
-                    portLabel.setColor(new Color(1,1,1,0));
-                    portTextBox.setDisabled(true);
-                    portTextBox.setHidden(true);
-                    ipLabel.setColor(new Color(1,1,1,0));
-                    ipTextBox.setDisabled(true);
-                    ipTextBox.setHidden(true);
-                    startText.setColor(new Color(1,1,1,0));
-                    startButton.setDisabled(true);
-                    startButton.setHidden(true);
-                    
-                    //======================
-                    // Unhide proper things
-                    //======================
-                    portLabel.setColor(new Color(1,1,1,1));
-                    portTextBox.setDisabled(false);
-                    portTextBox.setHidden(false);
-                    startText.setColor(new Color(1,1,1,1));
-                    startButton.setDisabled(false);
-                    startButton.setHidden(false);
-                                    
-                    
+                    //do host logic
+                    ServerConfiguration config = new ServerConfiguration();
+                    config.tcpPort = GameplaySettings.getInstance().tcpPort; 
+                    config.udpPort = GameplaySettings.getInstance().udpPort;
+                    config.singlePlayer = false;
+                    config.privateGame = false;
+                    //stop music
+                    Sound sound = Sound.newBGM("");
+                    add(sound);
+
+                    MainMenuScene.hostMultiPlayerGame(saveGame,config);
+                                                     
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
                 {
@@ -180,15 +162,6 @@ public class MultiplayerMenuScene extends Scene
             }
         });  
         
-        //port
-        portLabel = new Text("Port:",LeadCrystalTextType.MENU46);
-        portLabel.setPosition(center + 200, 550);
-        this.add(portLabel, Layer.MAIN);
-        portTextBox = new TextBox("50501", center + 320, 550);        
-        this.add(portTextBox,Layer.MAIN);
-        portLabel.setColor(new Color(1,1,1,0));
-        portTextBox.setDisabled(true);
-        portTextBox.setHidden(true);
         
         //IP
         ipLabel = new Text("IP:",LeadCrystalTextType.MENU46);
@@ -215,25 +188,19 @@ public class MultiplayerMenuScene extends Scene
                     //if we are doing a host
                     if(ipTextBox.isDisabled())
                     {
-                        ServerConfiguration config = new ServerConfiguration();
-                        config.port = Integer.parseInt(portTextBox.getText());
-                        config.singlePlayer = false;
-                        config.privateGame = false;
-                        //stop music
-                        Sound sound = Sound.newBGM("");
-                        add(sound);
-         
-                        MainMenuScene.hostMultiPlayerGame(saveGame,config);
+                        
                     }
                     else //we are doing a join
                     {
                         String ip = ipTextBox.getText();
-                        int port = Integer.parseInt(portTextBox.getText());
+
                         //stop music
                         Sound sound = Sound.newBGM("");
                         add(sound);
-         
-                        MainMenuScene.joinMultiPlayerGame(saveGame, ip, port);
+                        
+                        int tcpPort = GameplaySettings.getInstance().tcpPort; 
+                        int udpPort = GameplaySettings.getInstance().udpPort;
+                        MainMenuScene.joinMultiPlayerGame(saveGame, ip, tcpPort,udpPort);
                     }
                     
                 }

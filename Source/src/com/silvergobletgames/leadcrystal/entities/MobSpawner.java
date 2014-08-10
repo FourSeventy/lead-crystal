@@ -214,10 +214,6 @@ public class MobSpawner extends Entity implements SavableSceneObject
             gl.glColor3f(1,1,1);                     
             
         }
-        else if( GameplaySettings.getInstance().showSpawnLocations)
-        {
-            super.draw(gl);
-        }
         
     }
     

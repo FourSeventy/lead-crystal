@@ -118,7 +118,7 @@ public class Main
         
         
         
-        //thread to load our textures, sounds, and levels
+        //thread to load our textures, sounds, fonts, and levels
         Thread thread = new Thread()
         {
             @Override

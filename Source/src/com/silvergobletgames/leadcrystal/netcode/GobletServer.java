@@ -87,7 +87,7 @@ public class GobletServer implements Runnable
         try
         {
             //TODO handle bind exception better
-            server.bind(this.serverConfiguration.port, this.serverConfiguration.port+10);
+            server.bind(this.serverConfiguration.tcpPort, this.serverConfiguration.udpPort);
         }
         catch (IOException e)
         {
@@ -585,7 +585,8 @@ public class GobletServer implements Runnable
     {
         public String name = "";
         public int maxPlayers = 4;
-        public int port = 50501;
+        public int tcpPort = 50501;
+        public int udpPort = 50511;
         public boolean singlePlayer = true;
         public boolean privateGame = false;
         public String password;

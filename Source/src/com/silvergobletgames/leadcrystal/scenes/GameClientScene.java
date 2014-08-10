@@ -905,7 +905,7 @@ public final class GameClientScene extends Scene
      * @param port port to connect to
      * @throws ConnectionException Throws a connection exception error if it couldnt connect
      */
-    public void connectToServer(String ip, int port) throws ConnectionException
+    public void connectToServer(String ip, int tcpPort, int udpPort) throws ConnectionException
     { 
         //loading screen text
         ((LoadingScene)Game.getInstance().getScene(LoadingScene.class)).setCurrentProgressText("Connecting To Server");
@@ -917,15 +917,15 @@ public final class GameClientScene extends Scene
         
         //set variable
         hud.serverIpText.getText().setText("IP: " +ip);
-        hud.serverPortText.getText().setText("Port: " + Integer.toString(port));
+        hud.serverPortText.getText().setText("TCP: " + Integer.toString(tcpPort) + ", UDP: " + Integer.toString(udpPort));
         
         //register classes for serialization
         SerializationRegistrator.registerSerialization(kryo);
         
         //connect to server
         try
-        {   //TODO handle connection errors better
-            client.connect(10000, ip, port, port + 10);
+        {   
+            client.connect(10000, ip, tcpPort, udpPort);
         }
         catch(IOException e)
         {

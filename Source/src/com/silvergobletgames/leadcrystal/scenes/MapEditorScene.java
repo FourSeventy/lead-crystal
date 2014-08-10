@@ -1361,6 +1361,8 @@ public class MapEditorScene extends Scene {
 
                 //start a server
                 GobletServer.ServerConfiguration config = new GobletServer.ServerConfiguration();
+                config.tcpPort = GameplaySettings.getInstance().tcpPort; 
+                config.udpPort = GameplaySettings.getInstance().udpPort;
                 Game.getInstance().addRunnable("Goblet Server", new GobletServer(config));
 
                 //load game client scene
@@ -1369,7 +1371,8 @@ public class MapEditorScene extends Scene {
                 //connect to server
                 try
                 {
-                    ((GameClientScene)Game.getInstance().getScene(GameClientScene.class)).connectToServer( "127.0.0.1", 50501);                   
+                    
+                    ((GameClientScene)Game.getInstance().getScene(GameClientScene.class)).connectToServer( "127.0.0.1", config.tcpPort,config.udpPort);                   
                 }
                 catch(ConnectionException e){System.err.println("Couldnt connect: " + e.reason); return;}
 

@@ -608,11 +608,11 @@ public class Hud extends Window
         this.addComponent(escMenu);  
 
         //networking stats 
-        pingText = new Label("0ms",right - 140, 70);     
-        packetLossText= new Label("0% pl",right - 140,50);        
-        serverIpText = new Label("1.1.1.1",right - 140, 30);       
-        serverPortText = new Label("1234",right - 140, 10);     
-        fpsText = new Label("9000",right - 140, 90);
+        pingText = new Label(new Text("0ms",LeadCrystalTextType.HUD20),right - 140, 70);     
+        packetLossText= new Label(new Text("0% pl",LeadCrystalTextType.HUD20),right - 140,50);        
+        serverIpText = new Label(new Text("1.1.1.1",LeadCrystalTextType.HUD20),right - 140, 30);       
+        serverPortText = new Label(new Text("1234",LeadCrystalTextType.HUD20),right - 200, 10);     
+        fpsText = new Label(new Text("9000",LeadCrystalTextType.HUD20),right - 140, 90);
         
         //initializing chat manager
         this.chatManager = new ChatManager(scene);
