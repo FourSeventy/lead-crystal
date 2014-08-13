@@ -30,9 +30,14 @@ public class PotionsMenu extends Window{
         
         this.playerReference = playerReference;
         
+        //name plaque
+//        final Image namePlaque = new Image("text_holder.png");
+//        Button nameButton = new Button(namePlaque,275 -(200/2),815,200,namePlaque.getHeight());
+//        this.addComponent(nameButton);
+        
         //text
-        Text menuText = new Text("Potions",LeadCrystalTextType.HUD24);
-        Label menuTextLabel = new Label(menuText,275 - menuText.getWidth()/2,840);
+        Text menuText = new Text("Health Potions",LeadCrystalTextType.HUD34);
+        Label menuTextLabel = new Label(menuText,275 - menuText.getWidth()/2,820);
         this.addComponent(menuTextLabel);
         
         //close
@@ -58,13 +63,13 @@ public class PotionsMenu extends Window{
        });
         this.addComponent(closeButton);
         
-         //potion
-       final Potion potion = new Potion();
-       potion.getImage().removeAllImageEffects();
-       final Image potionImage = potion.getImage();
+        //potion
+        final Potion potion = new Potion();
+        potion.getImage().removeAllImageEffects();
+        final Image potionImage = potion.getImage();
        
-        //section1
-        final Image section = new Image("section1.png");
+        //potion button
+        final Image section = new Image("big_potion_button.png");
         Button sectionButton = new Button(section,275 - section.getWidth()/2,300,section.getWidth(),section.getHeight());
         sectionButton.addActionListener(new ActionListener(){
        
@@ -72,8 +77,7 @@ public class PotionsMenu extends Window{
            {
                if (e.getActionCommand().equals("mouseEntered")) 
                {
-                   section.setBrightness(1.8f);
-                   potionImage.setBrightness(1.8f);
+                   section.setBrightness(1.65f);
                }
                if (e.getActionCommand().equals("mouseExited")) 
                {
@@ -87,11 +91,24 @@ public class PotionsMenu extends Window{
            }
        });
         this.addComponent(sectionButton);
+                
+        //Cost:
+        Text buyText = new Text("Cost:",LeadCrystalTextType.HUD34);
+        Label buyLabel = new Label(buyText,200,340);
+        this.addComponent(buyLabel);
         
-        //section2
-        final Image section2 = new Image("section2.png");
-        Button sectionButton2 = new Button(section2,330,50,section2.getWidth(),section2.getHeight()+6);
-        this.addComponent(sectionButton2);
+        //price     
+        Text potionPrice =new Text(Integer.toString(PotionManager.POTION_PRICE),LeadCrystalTextType.HUD30);
+        Label label = new Label(potionPrice,290,340);
+        this.addComponent(label);
+        Button b = new Button(new Image("goldCoin.png"),326,336,26,26);
+        this.addComponent(b);
+     
+        
+        //gold holder
+        Image goldHolderImage = new Image("text_holder.png");
+        Button goldHolder = new Button(goldHolderImage,340,50,150,30);
+        this.addComponent(goldHolder);
         
         //gold
         Text playerGoldDesc = new Text("Your Gold:",LeadCrystalTextType.HUD24);
@@ -102,20 +119,6 @@ public class PotionsMenu extends Window{
         this.addComponent(playerGoldLabel);
         Button b1 = new Button(new Image("goldCoin.png"),460,55,20,20);
         this.addComponent(b1);
-        
-      
-       Button b = new Button(potion.getImage(),200,450,potion.getImage().getWidth() * 2,potion.getImage().getHeight() * 2);
-       b.dontKillClick = true;
-       this.addComponent(b);
-       Text potionText = new Text("Healing Potion",LeadCrystalTextType.HUD34);
-       Label label = new Label(potionText,275 - potionText.getWidth()/2,400);
-       this.addComponent(label);
-       //price
-       b = new Button(new Image("goldCoin.png"),230,350,30,30);
-       this.addComponent(b);
-       Text potionPrice =new Text(Integer.toString(PotionManager.POTION_PRICE),LeadCrystalTextType.HUD28);
-       label = new Label(potionPrice,260,350);
-       this.addComponent(label);
        
       
     }
@@ -126,5 +129,6 @@ public class PotionsMenu extends Window{
         super.update();
         
         this.playerGoldLabel.getText().setText(Integer.toString(this.playerReference.getCurrencyManager().getBalence()));
+        this.playerGoldLabel.setWindowRelativePosition(455 -this.playerGoldLabel.getText().getWidth(), 57); //390,57);
     }
 }

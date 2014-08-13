@@ -559,7 +559,7 @@ public class Hud extends Window
         this.addComponent(creditIcon);
         
         //Menu Buttons      
-        this.questButton = new Button("radar_button.png",right - 224,770,42 * .70f,61  * .70f);
+        this.questButton = new Button("radar_button_menu.png",right - 224,770,42 * .70f,61  * .70f);
         questButton.addActionListener(new ActionListener()  {           
             public void actionPerformed(ActionEvent e) 
             {
@@ -583,7 +583,7 @@ public class Hud extends Window
         this.addComponent(questButton);  
         
         //Menu Buttons      
-        this.escMenu = new Button("radar_button.png",right - 224,723,42  * .70f,61  * .70f);
+        this.escMenu = new Button("radar_button_power.png",right - 224,723,42  * .70f,61  * .70f);
         escMenu.addActionListener(new ActionListener()  {           
             public void actionPerformed(ActionEvent e) 
             {
@@ -777,8 +777,8 @@ public class Hud extends Window
         if(this.playerReference.getOwningScene() != null)
         {
             //position and radius of radar
-            float radarRadius = this.radarFrame.getWidth()/2 - 45;
-            SylverVector2f centerOfRadar = new SylverVector2f(this.radarFrame.getPosition().x + radarRadius + 40 , this.radarFrame.getPosition().y + radarRadius + 45 );
+            float radarRadius = this.radarFrame.getWidth()/2 - 40;
+            SylverVector2f centerOfRadar = new SylverVector2f(this.radarFrame.getPosition().x + 132 , this.radarFrame.getPosition().y + 140 );
            
             //remove all old arrows
             for(Button b :this.primaryObjectiveArrows)
@@ -802,11 +802,12 @@ public class Hud extends Window
                 SylverVector2f vectorToObjective = this.playerReference.distanceVector(primaryObjectiveEnt);
                 float vectorLength = Math.abs(vectorToObjective.length());
                 vectorToObjective.normalise();
+
                 
                 if(vectorLength > 2000)
                 {
-                    SylverVector2f arrowPosition =new SylverVector2f(centerOfRadar.x + vectorToObjective.x * radarRadius, centerOfRadar.y + vectorToObjective.y * radarRadius);
-                    Button button = new Button(new Image("primaryArrow.png"), arrowPosition.x, arrowPosition.y, 40, 40);
+                    SylverVector2f arrowPosition =new SylverVector2f(centerOfRadar.x + vectorToObjective.x * radarRadius * .95f, centerOfRadar.y + vectorToObjective.y * radarRadius* .95f);
+                    Button button = new Button(new Image("gold_arrow.png"), arrowPosition.x-20, arrowPosition.y-20, 40, 40);
                     this.addComponent(button);
                     this.primaryObjectiveArrows.add(button);
 
@@ -822,7 +823,7 @@ public class Hud extends Window
                 {
                     //render a dot                              
                     SylverVector2f arrowPosition =new SylverVector2f(centerOfRadar.x + vectorToObjective.x * (radarRadius * (vectorLength /2000)), centerOfRadar.y + vectorToObjective.y * (radarRadius * (vectorLength /2000)));
-                    Button button = new Button(new Image("primaryArrow.png"), arrowPosition.x, arrowPosition.y, 30, 30);
+                    Button button = new Button(new Image("gold_pip.png"), arrowPosition.x-20, arrowPosition.y-20, 40, 40);
                     this.addComponent(button);
                     this.secondaryObjectiveArrows.add(button);
                 }
@@ -843,7 +844,7 @@ public class Hud extends Window
                 {
                    
                     SylverVector2f arrowPosition =new SylverVector2f(centerOfRadar.x + vectorToObjective.x * radarRadius, centerOfRadar.y + vectorToObjective.y * radarRadius);
-                    Button button = new Button(new Image("newSecondaryArrow.png"), arrowPosition.x, arrowPosition.y, 30, 30);
+                    Button button = new Button(new Image("silver_arrow.png"), arrowPosition.x-15, arrowPosition.y-15, 30, 30);
                     this.addComponent(button);
                     this.secondaryObjectiveArrows.add(button);
 
@@ -859,7 +860,7 @@ public class Hud extends Window
                 {
                     //render a dot                              
                     SylverVector2f arrowPosition =new SylverVector2f(centerOfRadar.x + vectorToObjective.x * (radarRadius * (vectorLength /2000)), centerOfRadar.y + vectorToObjective.y * (radarRadius * (vectorLength /2000)));
-                    Button button = new Button(new Image("newSecondaryArrow.png"), arrowPosition.x, arrowPosition.y, 30, 30);
+                    Button button = new Button(new Image("silver_pip.png"), arrowPosition.x-15, arrowPosition.y-15, 30, 30);
                     this.addComponent(button);
                     this.secondaryObjectiveArrows.add(button);
                 }

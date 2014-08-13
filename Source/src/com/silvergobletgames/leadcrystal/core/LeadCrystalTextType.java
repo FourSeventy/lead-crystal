@@ -30,6 +30,7 @@ public enum LeadCrystalTextType implements TextType{
     HUD22,
     HUD24,
     HUD28,
+    HUD30,
     HUD34,
     MESSAGE38,
     MESSAGE42,
@@ -121,6 +122,13 @@ public enum LeadCrystalTextType implements TextType{
         textRenderer.setUseVertexArrays(false);
         metrics = java2d.getFontMetrics(font);
         Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.HUD28,textRenderer,metrics);
+        
+        //HUD30
+        font = new Font("CALIBRI", Font.PLAIN, 30);
+        textRenderer = new TextRenderer(font, true, true,new SylverRenderDelegate(false,0));
+        textRenderer.setUseVertexArrays(false);
+        metrics = java2d.getFontMetrics(font);
+        Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.HUD30,textRenderer,metrics);
         
         //HUD34
         font = new Font("CALIBRI", Font.PLAIN, 36);
