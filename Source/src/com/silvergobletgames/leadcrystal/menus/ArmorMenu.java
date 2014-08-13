@@ -135,19 +135,19 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(closeButton);
         
-        //section2
-        final Image section2 = new Image("section2.png");
-        Button sectionButton2 = new Button(section2,1000,800,section2.getWidth(),section2.getHeight()+6);
-        this.addComponent(sectionButton2);
+        //gold holder
+        Image goldHolderImage = new Image("text_holder.png");
+        Button goldHolder = new Button(goldHolderImage,1000,803,150,30);
+        this.addComponent(goldHolder);
         
         //gold
         Text playerGoldDesc = new Text("Your Gold:",LeadCrystalTextType.HUD24);
-        Label playerGoldDescLabel = new Label(playerGoldDesc,875,810);
+        Label playerGoldDescLabel = new Label(playerGoldDesc,886,810);
         this.addComponent(playerGoldDescLabel);
         Text playerGold = new Text(Integer.toString(0),LeadCrystalTextType.HUD24);
-        playerGoldLabel = new Label(playerGold,1090,810);
+        playerGoldLabel = new Label(playerGold,1070,810);
         this.addComponent(playerGoldLabel);
-        Button b1 = new Button(new Image("goldCoin.png"),1140,806,20,20);
+        Button b1 = new Button(new Image("goldCoin.png"),1120,808,20,20);
         this.addComponent(b1);
         
         
@@ -210,7 +210,7 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         weaponDamageButton = b;
-        this.weaponDamageLabel = new Label(new Text(Byte.toString(stat1.points) + "/" +Integer.toString(stat1.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.weaponDamageLabel = new Label(new Text(Byte.toString(stat1.points) + "/" +Integer.toString(stat1.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 26,b.getWindowRelativePosition().y+8); 
         this.addComponent(weaponDamageLabel); 
         
         final ArmorStat stat2 = this.playerReference.getArmorManager().weaponAttackSpeed;
@@ -236,7 +236,7 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         weaponAttackSpeedButton = b;
-        this.weaponAttackSpeedLabel = new Label(new Text(Byte.toString(stat2.points) + "/" +Integer.toString(stat2.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.weaponAttackSpeedLabel = new Label(new Text(Byte.toString(stat2.points) + "/" +Integer.toString(stat2.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 24,b.getWindowRelativePosition().y+8); 
         this.addComponent(weaponAttackSpeedLabel);
         
         final ArmorStat stat3 = this.playerReference.getArmorManager().critChance;
@@ -262,7 +262,7 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         critChanceButton = b;
-        this.critChanceLabel = new Label(new Text(Byte.toString(stat3.points) + "/" +Integer.toString(stat3.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.critChanceLabel = new Label(new Text(Byte.toString(stat3.points) + "/" +Integer.toString(stat3.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 24,b.getWindowRelativePosition().y+8); 
         this.addComponent(critChanceLabel);
         
         final ArmorStat stat4 = this.playerReference.getArmorManager().meleeAttackDamageBonus;
@@ -288,7 +288,7 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         meleeAttackDamageBonusButton = b;
-        this.meleeAttackDamageBonusLabel = new Label(new Text(Byte.toString(stat4.points) + "/" +Integer.toString(stat4.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.meleeAttackDamageBonusLabel = new Label(new Text(Byte.toString(stat4.points) + "/" +Integer.toString(stat4.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 24,b.getWindowRelativePosition().y+8 ); 
         this.addComponent(meleeAttackDamageBonusLabel); 
         
         final ArmorStat stat5 = this.playerReference.getArmorManager().potionCooldownReset;
@@ -314,7 +314,7 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         potionCooldownResetButton = b;
-        this.potionCooldownResetLabel = new Label(new Text(Byte.toString(stat5.points) + "/" +Integer.toString(stat5.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.potionCooldownResetLabel = new Label(new Text(Byte.toString(stat5.points) + "/" +Integer.toString(stat5.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 24,b.getWindowRelativePosition().y+8 ); 
         this.addComponent(potionCooldownResetLabel); 
         
         final ArmorStat stat6 = this.playerReference.getArmorManager().criticalHitDamage;
@@ -340,7 +340,7 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         this.criticalHitDamageButton = b;
-        this.criticalHitDamageLabel = new Label(new Text(Byte.toString(stat6.points) + "/" +Integer.toString(stat6.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.criticalHitDamageLabel = new Label(new Text(Byte.toString(stat6.points) + "/" +Integer.toString(stat6.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 24,b.getWindowRelativePosition().y+8 ); 
         this.addComponent(criticalHitDamageLabel); 
         
         
@@ -783,7 +783,7 @@ public class ArmorMenu extends Window{
         {
             if(!meleeAttackDamageBonusButton.getImage().hasOverlay("lock"))
             {
-               meleeAttackDamageBonusButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+               meleeAttackDamageBonusButton.getImage().addOverlay("lock",new Overlay(new Image("armor_lock.png")));
             }
             meleeAttackDamageBonusButton.setDisabled(true);
             meleeAttackDamageBonusLabel.setHidden(true);
@@ -802,7 +802,7 @@ public class ArmorMenu extends Window{
         {
             if(!potionCooldownResetButton.getImage().hasOverlay("lock"))
             {
-               potionCooldownResetButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+               potionCooldownResetButton.getImage().addOverlay("lock",new Overlay(new Image("armor_lock.png")));
             }
             potionCooldownResetButton.setDisabled(true);
             potionCooldownResetLabel.setHidden(true);
@@ -821,7 +821,7 @@ public class ArmorMenu extends Window{
         {
             if(!criticalHitDamageButton.getImage().hasOverlay("lock"))
             {
-               criticalHitDamageButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+               criticalHitDamageButton.getImage().addOverlay("lock",new Overlay(new Image("armor_lock.png")));
             }
             criticalHitDamageButton.setDisabled(true);
             criticalHitDamageLabel.setHidden(true);
@@ -839,7 +839,7 @@ public class ArmorMenu extends Window{
         {
             if(!weaponDamageButton.getImage().hasOverlay("lock"))
             {
-               weaponDamageButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+               weaponDamageButton.getImage().addOverlay("lock",new Overlay(new Image("armor_lock.png")));
             }
             weaponDamageButton.setDisabled(true);
             weaponDamageLabel.setHidden(true);
@@ -857,7 +857,7 @@ public class ArmorMenu extends Window{
         {
             if(!weaponAttackSpeedButton.getImage().hasOverlay("lock"))
             {
-               weaponAttackSpeedButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+               weaponAttackSpeedButton.getImage().addOverlay("lock",new Overlay(new Image("armor_lock.png")));
             }
             weaponAttackSpeedButton.setDisabled(true);
             weaponAttackSpeedLabel.setHidden(true);
@@ -875,7 +875,7 @@ public class ArmorMenu extends Window{
         {
             if(!critChanceButton.getImage().hasOverlay("lock"))
             {
-               critChanceButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+               critChanceButton.getImage().addOverlay("lock",new Overlay(new Image("armor_lock.png")));
             }
             critChanceButton.setDisabled(true);
             critChanceLabel.setHidden(true);
@@ -897,7 +897,7 @@ public class ArmorMenu extends Window{
         {
             if(!seeEnemyHealthButton.getImage().hasOverlay("lock"))
             {
-               seeEnemyHealthButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+               seeEnemyHealthButton.getImage().addOverlay("lock",new Overlay(new Image("armor_lock.png")));
             }
             seeEnemyHealthButton.setDisabled(true);
             seeEnemyHealthLabel.setHidden(true);
@@ -915,7 +915,7 @@ public class ArmorMenu extends Window{
         {
             if(!doubleGoldFindButton.getImage().hasOverlay("lock"))
             {
-               doubleGoldFindButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+               doubleGoldFindButton.getImage().addOverlay("lock",new Overlay(new Image("armor_lock.png")));
             }
             doubleGoldFindButton.setDisabled(true);
             doubleGoldFindLabel.setHidden(true);
@@ -934,7 +934,7 @@ public class ArmorMenu extends Window{
         {
             if(!upgradeRadarButton.getImage().hasOverlay("lock"))
             {
-               upgradeRadarButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+               upgradeRadarButton.getImage().addOverlay("lock",new Overlay(new Image("armor_lock.png")));
             }
             upgradeRadarButton.setDisabled(true);
             upgradeRadarLabel.setHidden(true);
@@ -952,7 +952,7 @@ public class ArmorMenu extends Window{
         {
             if(!lifeLeechButton.getImage().hasOverlay("lock"))
             {
-               lifeLeechButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+               lifeLeechButton.getImage().addOverlay("lock",new Overlay(new Image("armor_lock.png")));
             }
             lifeLeechButton.setDisabled(true);
             lifeLeechLabel.setHidden(true);
@@ -970,7 +970,7 @@ public class ArmorMenu extends Window{
         {
             if(!healingEffectivenessButton.getImage().hasOverlay("lock"))
             {
-               healingEffectivenessButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+               healingEffectivenessButton.getImage().addOverlay("lock",new Overlay(new Image("armor_lock.png")));
             }
             healingEffectivenessButton.setDisabled(true);
             healingEffectivenessLabel.setHidden(true);
@@ -992,7 +992,7 @@ public class ArmorMenu extends Window{
         {
             if(!hardToKillButton.getImage().hasOverlay("lock"))
             {
-               hardToKillButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+               hardToKillButton.getImage().addOverlay("lock",new Overlay(new Image("armor_lock.png")));
             }
             hardToKillButton.setDisabled(true);
             hardToKillLabel.setHidden(true);
@@ -1010,7 +1010,7 @@ public class ArmorMenu extends Window{
         {       
             if(!reducedCriticalHitButton.getImage().hasOverlay("lock"))
             {
-               reducedCriticalHitButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+               reducedCriticalHitButton.getImage().addOverlay("lock",new Overlay(new Image("armor_lock.png")));
             }
             reducedCriticalHitButton.setDisabled(true);
             reducedCriticalHitLabel.setHidden(true);
@@ -1029,7 +1029,7 @@ public class ArmorMenu extends Window{
         {
             if(!proximityDamageReductionButton.getImage().hasOverlay("lock"))
             {
-               proximityDamageReductionButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+               proximityDamageReductionButton.getImage().addOverlay("lock",new Overlay(new Image("armor_lock.png")));
             }
             proximityDamageReductionButton.setDisabled(true);
             proximityDamageReductionLabel.setHidden(true);
@@ -1047,7 +1047,7 @@ public class ArmorMenu extends Window{
         {
             if(!healthButton.getImage().hasOverlay("lock"))
             {
-               healthButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+               healthButton.getImage().addOverlay("lock",new Overlay(new Image("armor_lock.png")));
             }
             healthButton.setDisabled(true);
             healthLabel.setHidden(true);
@@ -1065,7 +1065,7 @@ public class ArmorMenu extends Window{
         {
             if(!numberOfPotionsButton.getImage().hasOverlay("lock"))
             {
-               numberOfPotionsButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+               numberOfPotionsButton.getImage().addOverlay("lock",new Overlay(new Image("armor_lock.png")));
             }
             numberOfPotionsButton.setDisabled(true);
             numberOfPotionsLabel.setHidden(true);
@@ -1083,7 +1083,7 @@ public class ArmorMenu extends Window{
         {
             if(!thornsDamageButton.getImage().hasOverlay("lock"))
             {
-               thornsDamageButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+               thornsDamageButton.getImage().addOverlay("lock",new Overlay(new Image("armor_lock.png")));
             }
             thornsDamageButton.setDisabled(true);
             thornsDamageLabel.setHidden(true);
@@ -1105,7 +1105,7 @@ public class ArmorMenu extends Window{
         {
             if(!doubleJumpButton.getImage().hasOverlay("lock"))
             {
-               doubleJumpButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+               doubleJumpButton.getImage().addOverlay("lock",new Overlay(new Image("armor_lock.png")));
             }
             doubleJumpButton.setDisabled(true);
             doubleJumpLabel.setHidden(true);
@@ -1123,7 +1123,7 @@ public class ArmorMenu extends Window{
         {
             if(!jetpackButton.getImage().hasOverlay("lock"))
             {
-               jetpackButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+               jetpackButton.getImage().addOverlay("lock",new Overlay(new Image("armor_lock.png")));
             }
             jetpackButton.setDisabled(true);
             jetpackLabel.setHidden(true);
@@ -1142,7 +1142,7 @@ public class ArmorMenu extends Window{
         {
             if(!ccReductionButton.getImage().hasOverlay("lock"))
             {
-               ccReductionButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+               ccReductionButton.getImage().addOverlay("lock",new Overlay(new Image("armor_lock.png")));
             }
             ccReductionButton.setDisabled(true);
             ccReductionLabel.setHidden(true);
@@ -1160,7 +1160,7 @@ public class ArmorMenu extends Window{
         {
             if(!moveSpeedButton.getImage().hasOverlay("lock"))
             {
-               moveSpeedButton.getImage().addOverlay("lock",new Overlay(new Image("mapLock.png")));
+               moveSpeedButton.getImage().addOverlay("lock",new Overlay(new Image("armor_lock.png")));
             }
             moveSpeedButton.setDisabled(true);
             moveSpeedLabel.setHidden(true);

@@ -30,11 +30,6 @@ public class PotionsMenu extends Window{
         
         this.playerReference = playerReference;
         
-        //name plaque
-//        final Image namePlaque = new Image("text_holder.png");
-//        Button nameButton = new Button(namePlaque,275 -(200/2),815,200,namePlaque.getHeight());
-//        this.addComponent(nameButton);
-        
         //text
         Text menuText = new Text("Health Potions",LeadCrystalTextType.HUD34);
         Label menuTextLabel = new Label(menuText,275 - menuText.getWidth()/2,820);
