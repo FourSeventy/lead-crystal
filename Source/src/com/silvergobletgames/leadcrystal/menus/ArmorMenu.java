@@ -109,7 +109,7 @@ public class ArmorMenu extends Window{
         
         //text
         Text menuText = new Text("Armor Upgrades",LeadCrystalTextType.HUD34);
-        Label menuTextLabel = new Label(menuText,600 - menuText.getWidth()/2,830);
+        Label menuTextLabel = new Label(menuText,600 - menuText.getWidth()/2,825);
         this.addComponent(menuTextLabel);
         
         //close
@@ -163,19 +163,19 @@ public class ArmorMenu extends Window{
         
         //Weapon Label
         Text weaponText = new Text("Weapon Upgrades",LeadCrystalTextType.HUD28);
-        Label weaponLabel = new Label(weaponText, 275 - weaponText.getWidth()/2, 700);
+        Label weaponLabel = new Label(weaponText, 275 - weaponText.getWidth()/2, 705);
         this.addComponent(weaponLabel);
         //Helm Label
         Text helmText = new Text("Helm Upgrades",LeadCrystalTextType.HUD28);
-        Label helmLabel = new Label(helmText, 930 -helmText.getWidth()/2, 700);
+        Label helmLabel = new Label(helmText, 930 -helmText.getWidth()/2, 705);
         this.addComponent(helmLabel);
         //body Label
         Text bodyText = new Text("Body Upgrades",LeadCrystalTextType.HUD28);
-        Label bodyLabel = new Label(bodyText, 275 -bodyText.getWidth()/2, 300);
+        Label bodyLabel = new Label(bodyText, 275 -bodyText.getWidth()/2, 305);
         this.addComponent(bodyLabel);
         //boots Label
         Text bootsText = new Text("Boots Upgrades",LeadCrystalTextType.HUD28);
-        Label bootsLabel = new Label(bootsText, 930 - helmText.getWidth()/2, 300);
+        Label bootsLabel = new Label(bootsText, 930 - helmText.getWidth()/2, 305);
         this.addComponent(bootsLabel);
         
         
@@ -183,12 +183,12 @@ public class ArmorMenu extends Window{
         // Weapon Upgrades
         //=================
 
-        final int weaponBasePositionX = 133;
+        final int weaponBasePositionX = 128;
         final int weaponBasePositionY = 600;
         
         
         final ArmorStat stat1 = this.playerReference.getArmorManager().weaponDamage;
-        Button b = new Button(stat1.image.copy(), weaponBasePositionX, weaponBasePositionY, 75, 75);
+        Button b = new Button(stat1.image.copy(), weaponBasePositionX, weaponBasePositionY, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -210,11 +210,12 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         weaponDamageButton = b;
-        this.weaponDamageLabel = new Label(new Text(Byte.toString(stat1.points) + "/" +Integer.toString(stat1.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 26,b.getWindowRelativePosition().y+8); 
+        this.weaponDamageLabel = new Label(new Text(Byte.toString(stat1.points) + "/" +Integer.toString(stat1.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y+8); 
         this.addComponent(weaponDamageLabel); 
+
         
         final ArmorStat stat2 = this.playerReference.getArmorManager().weaponAttackSpeed;
-        b = new Button(stat2.image.copy(), weaponBasePositionX + 100, weaponBasePositionY, 75, 75);
+        b = new Button(stat2.image.copy(), weaponBasePositionX + 110, weaponBasePositionY, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -236,11 +237,11 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         weaponAttackSpeedButton = b;
-        this.weaponAttackSpeedLabel = new Label(new Text(Byte.toString(stat2.points) + "/" +Integer.toString(stat2.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 24,b.getWindowRelativePosition().y+8); 
+        this.weaponAttackSpeedLabel = new Label(new Text(Byte.toString(stat2.points) + "/" +Integer.toString(stat2.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y+8); 
         this.addComponent(weaponAttackSpeedLabel);
         
         final ArmorStat stat3 = this.playerReference.getArmorManager().critChance;
-        b = new Button(stat3.image.copy(), weaponBasePositionX + 200, weaponBasePositionY, 75, 75);
+        b = new Button(stat3.image.copy(), weaponBasePositionX + 220, weaponBasePositionY, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -262,11 +263,11 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         critChanceButton = b;
-        this.critChanceLabel = new Label(new Text(Byte.toString(stat3.points) + "/" +Integer.toString(stat3.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 24,b.getWindowRelativePosition().y+8); 
+        this.critChanceLabel = new Label(new Text(Byte.toString(stat3.points) + "/" +Integer.toString(stat3.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y+8); 
         this.addComponent(critChanceLabel);
         
         final ArmorStat stat4 = this.playerReference.getArmorManager().meleeAttackDamageBonus;
-        b = new Button(stat4.image.copy(), weaponBasePositionX, weaponBasePositionY - 100, 75, 75);
+        b = new Button(stat4.image.copy(), weaponBasePositionX, weaponBasePositionY - 110, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -288,11 +289,11 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         meleeAttackDamageBonusButton = b;
-        this.meleeAttackDamageBonusLabel = new Label(new Text(Byte.toString(stat4.points) + "/" +Integer.toString(stat4.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 24,b.getWindowRelativePosition().y+8 ); 
+        this.meleeAttackDamageBonusLabel = new Label(new Text(Byte.toString(stat4.points) + "/" +Integer.toString(stat4.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y+8 ); 
         this.addComponent(meleeAttackDamageBonusLabel); 
         
         final ArmorStat stat5 = this.playerReference.getArmorManager().potionCooldownReset;
-        b = new Button(stat5.image.copy(), weaponBasePositionX + 100, weaponBasePositionY - 100, 75, 75);
+        b = new Button(stat5.image.copy(), weaponBasePositionX + 110, weaponBasePositionY - 110, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -314,11 +315,11 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         potionCooldownResetButton = b;
-        this.potionCooldownResetLabel = new Label(new Text(Byte.toString(stat5.points) + "/" +Integer.toString(stat5.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 24,b.getWindowRelativePosition().y+8 ); 
+        this.potionCooldownResetLabel = new Label(new Text(Byte.toString(stat5.points) + "/" +Integer.toString(stat5.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y+8 ); 
         this.addComponent(potionCooldownResetLabel); 
         
         final ArmorStat stat6 = this.playerReference.getArmorManager().criticalHitDamage;
-        b = new Button(stat6.image.copy(), weaponBasePositionX + 200, weaponBasePositionY - 100, 75, 75);
+        b = new Button(stat6.image.copy(), weaponBasePositionX + 220, weaponBasePositionY - 110, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -340,7 +341,7 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         this.criticalHitDamageButton = b;
-        this.criticalHitDamageLabel = new Label(new Text(Byte.toString(stat6.points) + "/" +Integer.toString(stat6.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 24,b.getWindowRelativePosition().y+8 ); 
+        this.criticalHitDamageLabel = new Label(new Text(Byte.toString(stat6.points) + "/" +Integer.toString(stat6.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y+8 ); 
         this.addComponent(criticalHitDamageLabel); 
         
         
@@ -349,12 +350,12 @@ public class ArmorMenu extends Window{
         // Helm Upgrades
         //================
         
-        final int helmBasePositionX = 792;
+        final int helmBasePositionX = 787;
         final int helmBasePositionY = 600;
        
         
         final ArmorStat stat7 = this.playerReference.getArmorManager().seeEnemyHealth;
-        b = new Button(stat7.image.copy(), helmBasePositionX, helmBasePositionY, 75, 75);
+        b = new Button(stat7.image.copy(), helmBasePositionX, helmBasePositionY, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -376,11 +377,11 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         seeEnemyHealthButton =b;
-        this.seeEnemyHealthLabel = new Label(new Text(Byte.toString(stat7.points) + "/" +Integer.toString(stat7.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.seeEnemyHealthLabel = new Label(new Text(Byte.toString(stat7.points) + "/" +Integer.toString(stat7.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y + 8); 
         this.addComponent(seeEnemyHealthLabel); 
         
         final ArmorStat stat8 = this.playerReference.getArmorManager().lifeLeech;
-        b = new Button(stat8.image.copy(), helmBasePositionX + 100, helmBasePositionY, 75, 75);
+        b = new Button(stat8.image.copy(), helmBasePositionX + 110, helmBasePositionY, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -402,11 +403,11 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         lifeLeechButton =b;
-        this.lifeLeechLabel = new Label(new Text(Byte.toString(stat8.points) + "/" +Integer.toString(stat8.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.lifeLeechLabel = new Label(new Text(Byte.toString(stat8.points) + "/" +Integer.toString(stat8.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y + 8); 
         this.addComponent(lifeLeechLabel);
         
         final ArmorStat stat9 = this.playerReference.getArmorManager().upgradeRadar;
-        b = new Button(stat9.image.copy(), helmBasePositionX + 200, helmBasePositionY, 75, 75);
+        b = new Button(stat9.image.copy(), helmBasePositionX + 220, helmBasePositionY, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -428,11 +429,11 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         upgradeRadarButton = b;
-        this.upgradeRadarLabel = new Label(new Text(Byte.toString(stat9.points) + "/" +Integer.toString(stat9.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.upgradeRadarLabel = new Label(new Text(Byte.toString(stat9.points) + "/" +Integer.toString(stat9.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y+ 8); 
         this.addComponent(upgradeRadarLabel);
         
         final ArmorStat stat10 = this.playerReference.getArmorManager().doubleGoldFind;
-        b = new Button(stat10.image.copy(), helmBasePositionX, helmBasePositionY - 100, 75, 75);
+        b = new Button(stat10.image.copy(), helmBasePositionX, helmBasePositionY - 110, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -454,11 +455,11 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         doubleGoldFindButton = b;
-        this.doubleGoldFindLabel = new Label(new Text(Byte.toString(stat10.points) + "/" +Integer.toString(stat10.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.doubleGoldFindLabel = new Label(new Text(Byte.toString(stat10.points) + "/" +Integer.toString(stat10.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y + 8); 
         this.addComponent(doubleGoldFindLabel); 
         
         final ArmorStat stat11 = this.playerReference.getArmorManager().healingEffectiveness;
-        b = new Button(stat11.image.copy(), helmBasePositionX + 100, helmBasePositionY - 100, 75, 75);
+        b = new Button(stat11.image.copy(), helmBasePositionX + 110, helmBasePositionY - 110, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -480,7 +481,7 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         healingEffectivenessButton = b;
-        this.healingEffectivenessLabel = new Label(new Text(Byte.toString(stat11.points) + "/" +Integer.toString(stat11.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.healingEffectivenessLabel = new Label(new Text(Byte.toString(stat11.points) + "/" +Integer.toString(stat11.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y + 8); 
         this.addComponent(healingEffectivenessLabel); 
 
         
@@ -488,12 +489,12 @@ public class ArmorMenu extends Window{
         // Armor Upgrades
         //================
         
-        final int armorBasePositionX = 133;
+        final int armorBasePositionX = 128;
         final int armorBasePositionY = 200;
                
         
         final ArmorStat stat12 = this.playerReference.getArmorManager().health;
-        b = new Button(stat12.image.copy(), armorBasePositionX, armorBasePositionY, 75, 75);
+        b = new Button(stat12.image.copy(), armorBasePositionX, armorBasePositionY, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -515,11 +516,11 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         healthButton = b;
-        this.healthLabel = new Label(new Text(Byte.toString(stat12.points) + "/" +Integer.toString(stat12.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.healthLabel = new Label(new Text(Byte.toString(stat12.points) + "/" +Integer.toString(stat12.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 24,b.getWindowRelativePosition().y + 8); 
         this.addComponent(healthLabel); 
         
         final ArmorStat stat13 = this.playerReference.getArmorManager().numberOfPotions;
-        b = new Button(stat13.image.copy(), armorBasePositionX + 100, armorBasePositionY, 75, 75);
+        b = new Button(stat13.image.copy(), armorBasePositionX + 110, armorBasePositionY, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -541,11 +542,11 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         numberOfPotionsButton = b;
-        this.numberOfPotionsLabel = new Label(new Text(Byte.toString(stat13.points) + "/" +Integer.toString(stat13.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.numberOfPotionsLabel = new Label(new Text(Byte.toString(stat13.points) + "/" +Integer.toString(stat13.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y + 8); 
         this.addComponent(numberOfPotionsLabel);
         
         final ArmorStat stat14 = this.playerReference.getArmorManager().reducedCriticalHit;
-        b = new Button(stat14.image.copy(), armorBasePositionX + 200, armorBasePositionY, 75, 75);
+        b = new Button(stat14.image.copy(), armorBasePositionX + 220, armorBasePositionY, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -567,11 +568,11 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         reducedCriticalHitButton = b;
-        this.reducedCriticalHitLabel = new Label(new Text(Byte.toString(stat14.points) + "/" +Integer.toString(stat14.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.reducedCriticalHitLabel = new Label(new Text(Byte.toString(stat14.points) + "/" +Integer.toString(stat14.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y + 8); 
         this.addComponent(reducedCriticalHitLabel);
         
         final ArmorStat stat15 = this.playerReference.getArmorManager().hardToKill;
-        b = new Button(stat15.image.copy(), armorBasePositionX, armorBasePositionY - 100, 75, 75);
+        b = new Button(stat15.image.copy(), armorBasePositionX, armorBasePositionY - 110, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -593,11 +594,11 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         hardToKillButton = b;
-        this.hardToKillLabel = new Label(new Text(Byte.toString(stat15.points) + "/" +Integer.toString(stat15.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.hardToKillLabel = new Label(new Text(Byte.toString(stat15.points) + "/" +Integer.toString(stat15.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y + 8 ); 
         this.addComponent(hardToKillLabel); 
         
         final ArmorStat stat16 = this.playerReference.getArmorManager().proximityDamageReduction;
-        b = new Button(stat16.image.copy(), armorBasePositionX + 100, armorBasePositionY - 100, 75, 75);
+        b = new Button(stat16.image.copy(), armorBasePositionX + 110, armorBasePositionY - 110, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -619,11 +620,11 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         proximityDamageReductionButton = b;
-        this.proximityDamageReductionLabel = new Label(new Text(Byte.toString(stat16.points) + "/" +Integer.toString(stat16.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.proximityDamageReductionLabel = new Label(new Text(Byte.toString(stat16.points) + "/" +Integer.toString(stat16.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y + 8 ); 
         this.addComponent(proximityDamageReductionLabel); 
         
         final ArmorStat stat17 = this.playerReference.getArmorManager().thornsDamage;
-        b = new Button(stat17.image.copy(), armorBasePositionX + 200, armorBasePositionY - 100, 75, 75);
+        b = new Button(stat17.image.copy(), armorBasePositionX + 220, armorBasePositionY - 110, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -645,7 +646,7 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         thornsDamageButton = b;
-        this.thornsDamageLabel = new Label(new Text(Byte.toString(stat17.points) + "/" +Integer.toString(stat17.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.thornsDamageLabel = new Label(new Text(Byte.toString(stat17.points) + "/" +Integer.toString(stat17.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y + 8); 
         this.addComponent(thornsDamageLabel); 
         
         
@@ -653,12 +654,12 @@ public class ArmorMenu extends Window{
         // Boot Upgrades
         //================
               
-        final int bootsBasePositionX = 792;
+        final int bootsBasePositionX = 787;
         final int bootsBasePositionY = 200;
                
         
         final ArmorStat stat18 = this.playerReference.getArmorManager().doubleJump;
-        b = new Button(stat18.image.copy(), bootsBasePositionX, bootsBasePositionY, 75, 75);
+        b = new Button(stat18.image.copy(), bootsBasePositionX, bootsBasePositionY, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -680,11 +681,11 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         doubleJumpButton = b;
-        this.doubleJumpLabel = new Label(new Text(Byte.toString(stat18.points) + "/" +Integer.toString(stat18.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.doubleJumpLabel = new Label(new Text(Byte.toString(stat18.points) + "/" +Integer.toString(stat18.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y+ 8); 
         this.addComponent(doubleJumpLabel); 
         
         final ArmorStat stat19 = this.playerReference.getArmorManager().ccReduction;
-        b = new Button(stat19.image.copy(), bootsBasePositionX + 100, bootsBasePositionY, 75, 75);
+        b = new Button(stat19.image.copy(), bootsBasePositionX + 110, bootsBasePositionY, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -706,11 +707,11 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         ccReductionButton = b;
-        this.ccReductionLabel = new Label(new Text(Byte.toString(stat19.points) + "/" +Integer.toString(stat19.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.ccReductionLabel = new Label(new Text(Byte.toString(stat19.points) + "/" +Integer.toString(stat19.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y+ 8); 
         this.addComponent(ccReductionLabel);
         
         final ArmorStat stat20 = this.playerReference.getArmorManager().jetpack;
-        b = new Button(stat20.image.copy(), bootsBasePositionX + 200, bootsBasePositionY, 75, 75);
+        b = new Button(stat20.image.copy(), bootsBasePositionX + 220, bootsBasePositionY, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -732,11 +733,11 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         jetpackButton = b;
-        this.jetpackLabel = new Label(new Text(Byte.toString(stat20.points) + "/" +Integer.toString(stat20.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y); 
+        this.jetpackLabel = new Label(new Text(Byte.toString(stat20.points) + "/" +Integer.toString(stat20.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y+ 8); 
         this.addComponent(jetpackLabel);
         
         final ArmorStat stat21 = this.playerReference.getArmorManager().moveSpeed;
-        b = new Button(stat21.image.copy(), bootsBasePositionX, bootsBasePositionY - 100, 75, 75);
+        b = new Button(stat21.image.copy(), bootsBasePositionX, bootsBasePositionY - 110, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -758,7 +759,7 @@ public class ArmorMenu extends Window{
        });
         this.addComponent(b);
         moveSpeedButton = b;
-        this.moveSpeedLabel = new Label(new Text(Byte.toString(stat21.points) + "/" +Integer.toString(stat21.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y ); 
+        this.moveSpeedLabel = new Label(new Text(Byte.toString(stat21.points) + "/" +Integer.toString(stat21.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y + 8 ); 
         this.addComponent(moveSpeedLabel); 
 
        
@@ -1194,7 +1195,7 @@ public class ArmorMenu extends Window{
         //===============
         
         //background
-        skillTooltipBackground = new Button(new Image("tooltip.jpg"), x, y, 400, 300);
+        skillTooltipBackground = new Button(new Image("tooltip.png"), x, y, 400, 300);
         this.addComponent(skillTooltipBackground);
         
         //name

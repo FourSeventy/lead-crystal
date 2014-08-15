@@ -178,7 +178,7 @@ public class MessageManager
         String modifierImageString = messageText.get(1);
                    
         //reward text
-        Text rewardText = new Text("Modifier Unlocked:",LeadCrystalTextType.MESSAGE54);
+        Text rewardText = new Text("Upgrade Unlocked:",LeadCrystalTextType.MESSAGE54);
         rewardText.setColor(new Color(240,194,12)); 
         rewardText.setPosition(center- rewardText.getWidth()/2, 700);
         rewardText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 270, 0, 0));
