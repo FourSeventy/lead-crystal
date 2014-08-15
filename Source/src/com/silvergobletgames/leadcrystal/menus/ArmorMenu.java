@@ -97,7 +97,7 @@ public class ArmorMenu extends Window{
     private TextBlock skillTooltipTextBlock;
     private Label infoTextBox;
     private Label tooltipCost;
-  
+    private Button tooltipGold;
     
     
     
@@ -1189,36 +1189,41 @@ public class ArmorMenu extends Window{
         this.removeComponent(skillTooltipTextBlock);
         this.removeComponent(this.infoTextBox);
         this.removeComponent(this.tooltipCost);
+        this.removeComponent(this.tooltipGold);
         
         //===============
         //build tooltip
         //===============
         
+        Image i = new Image("tooltip.png");
+        i.setColor(new Color(.6f,.6f,.6f)); 
         //background
-        skillTooltipBackground = new Button(new Image("tooltip.png"), x, y, 400, 300);
+        skillTooltipBackground = new Button(i, x, y, 400, 300);
         this.addComponent(skillTooltipBackground);
         
         //name
-        Text text = new Text(name);
-        text.setScale(1.3f);
+        Text text = new Text(name,LeadCrystalTextType.HUD34);
         skillTooltipName = new Label(text, x + 200 - text.getWidth()/2, y + 250);
         this.addComponent(skillTooltipName);
         
         //icon
-        skillTooltipIcon = new Button(image.copy(),x + 25, y + 160,50,50);
+        skillTooltipIcon = new Button(image.copy(),x + 25, y + 140,75,75);
         this.addComponent(skillTooltipIcon);
         
         //description
-        text = new Text(description);
-        skillTooltipTextBlock = new TextBlock(x + 85, y + 190, 300, text);
+        text = new Text(description,LeadCrystalTextType.HUD24);
+        skillTooltipTextBlock = new TextBlock(x + 110, y + 190, 280, text);
         this.addComponent(skillTooltipTextBlock);    
         
         //cost
         if(cost != null)
         {
-            text = new Text("Cost: " + cost.toString());
-            tooltipCost = new Label(text, x + 200 - text.getWidth()/2, y + 50);
+            text = new Text("Cost: " + cost.toString(),LeadCrystalTextType.HUD24);
+            tooltipCost = new Label(text, x + 195 - text.getWidth()/2, y + 40);
             this.addComponent(tooltipCost);
+            
+            tooltipGold = new Button(new Image("goldCoin.png"),x + 195 + text.getWidth()/2 + 5,y + 38,20,20);
+            this.addComponent(tooltipGold);
         }
         
     }
@@ -1232,5 +1237,6 @@ public class ArmorMenu extends Window{
         this.removeComponent(skillTooltipTextBlock);
         this.removeComponent(infoTextBox);
         this.removeComponent(this.tooltipCost);
+        this.removeComponent(this.tooltipGold);
     }
 }
