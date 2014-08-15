@@ -1195,9 +1195,9 @@ public class ArmorMenu extends Window{
         //build tooltip
         //===============
         
+        //background
         Image i = new Image("tooltip.png");
         i.setColor(new Color(.6f,.6f,.6f)); 
-        //background
         skillTooltipBackground = new Button(i, x, y, 400, 300);
         this.addComponent(skillTooltipBackground);
         

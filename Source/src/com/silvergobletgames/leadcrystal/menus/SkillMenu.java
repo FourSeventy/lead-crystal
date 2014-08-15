@@ -124,21 +124,21 @@ public class SkillMenu extends Window {
        playerReference =player;
         
         //section2
-        final Image section2 = new Image("section2.png");
-        Button sectionButton2 = new Button(section2,1000,800,section2.getWidth(),section2.getHeight()+6);
+        final Image section2 = new Image("text_holder.png");
+        Button sectionButton2 = new Button(section2,1000,800,150,30);
         this.addComponent(sectionButton2);
         
         //skill points
         Text playerGoldDesc = new Text("Skill Points:",LeadCrystalTextType.HUD24);
-        Label playerGoldDescLabel = new Label(playerGoldDesc,875,810);
+        Label playerGoldDescLabel = new Label(playerGoldDesc,879,809);
         this.addComponent(playerGoldDescLabel);
         
        //skill points
        String points = Integer.toString(player.getSkillManager().getSkillPoints());
-       this.skillPoints = new Label(points,1110,810);
+       this.skillPoints = new Label(new Text(points,LeadCrystalTextType.HUD24),1095,806);
        this.addComponent(this.skillPoints);
        
-       Button butt = new Button(new Image("skillPoint.png"),1140,806,20,20);
+       Button butt = new Button(new Image("skillPoint.png"),1125,805,20,20);
        butt.dontKillClick = true;
        this.addComponent(butt);
        
@@ -941,7 +941,7 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         primary1LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),primaryOffsetX + 28,primaryOffsetY+8,20,20);
+        b = new Button(new Image("skillPoint.png"),primaryOffsetX + 27,primaryOffsetY+7,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         primary1LockedComponents.add(b);
@@ -956,7 +956,7 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         primary2LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),primaryOffsetX + 138,primaryOffsetY+8,20,20);
+        b = new Button(new Image("skillPoint.png"),primaryOffsetX + 137,primaryOffsetY+7,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         primary2LockedComponents.add(b);
@@ -971,7 +971,7 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         primary3LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),primaryOffsetX + 248,primaryOffsetY+8,20,20);
+        b = new Button(new Image("skillPoint.png"),primaryOffsetX + 247,primaryOffsetY+7,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         primary3LockedComponents.add(b);
@@ -986,7 +986,7 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         primary4LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),primaryOffsetX + 358,primaryOffsetY+8,20,20);
+        b = new Button(new Image("skillPoint.png"),primaryOffsetX + 357,primaryOffsetY+7,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         primary4LockedComponents.add(b);
@@ -1002,7 +1002,7 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         secondary1LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),secondaryOffsetX + 28,secondaryOffsetY+8,20,20);
+        b = new Button(new Image("skillPoint.png"),secondaryOffsetX + 27,secondaryOffsetY+7,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         secondary1LockedComponents.add(b);
@@ -1017,7 +1017,7 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         secondary2LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),secondaryOffsetX + 138,secondaryOffsetY+8,20,20);
+        b = new Button(new Image("skillPoint.png"),secondaryOffsetX + 137,secondaryOffsetY+7,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         secondary2LockedComponents.add(b);
@@ -1032,7 +1032,7 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         secondary3LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),secondaryOffsetX + 248,secondaryOffsetY+8,20,20);
+        b = new Button(new Image("skillPoint.png"),secondaryOffsetX + 247,secondaryOffsetY+7,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         secondary3LockedComponents.add(b);
@@ -1047,7 +1047,7 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         secondary4LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),secondaryOffsetX + 358,secondaryOffsetY+8,20,20);
+        b = new Button(new Image("skillPoint.png"),secondaryOffsetX + 357,secondaryOffsetY+7,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         secondary4LockedComponents.add(b);
@@ -1063,7 +1063,7 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         power1LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),powerOffsetX + 28,powerOffsetY+8,20,20);
+        b = new Button(new Image("skillPoint.png"),powerOffsetX + 27,powerOffsetY+7,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         power1LockedComponents.add(b);
@@ -1078,7 +1078,7 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         power2LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),powerOffsetX + 138,powerOffsetY+8,20,20);
+        b = new Button(new Image("skillPoint.png"),powerOffsetX + 137,powerOffsetY+7,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         power2LockedComponents.add(b);
@@ -1093,7 +1093,7 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         power3LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),powerOffsetX + 248,powerOffsetY+8,20,20);
+        b = new Button(new Image("skillPoint.png"),powerOffsetX + 247,powerOffsetY+7,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         power3LockedComponents.add(b);
@@ -1108,7 +1108,7 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         power4LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),powerOffsetX + 358,powerOffsetY+8,20,20);
+        b = new Button(new Image("skillPoint.png"),powerOffsetX + 357,powerOffsetY+7,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         power4LockedComponents.add(b);
@@ -1124,7 +1124,7 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         tech1LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),techOffsetX + 28,techOffsetY+8,20,20);
+        b = new Button(new Image("skillPoint.png"),techOffsetX + 27,techOffsetY+7,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         tech1LockedComponents.add(b);
@@ -1139,7 +1139,7 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         tech2LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),techOffsetX + 138,techOffsetY+8,20,20);
+        b = new Button(new Image("skillPoint.png"),techOffsetX + 137,techOffsetY+7,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         tech2LockedComponents.add(b);
@@ -1154,7 +1154,7 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         tech3LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),techOffsetX + 248,techOffsetY+8,20,20);
+        b = new Button(new Image("skillPoint.png"),techOffsetX + 247,techOffsetY+7,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         tech3LockedComponents.add(b);
@@ -1169,7 +1169,7 @@ public class SkillMenu extends Window {
         b.dontKillClick = true;
         this.addComponent(b);
         tech4LockedComponents.add(b);
-        b = new Button(new Image("skillPoint.png"),techOffsetX + 358,techOffsetY+8,20,20);
+        b = new Button(new Image("skillPoint.png"),techOffsetX + 357,techOffsetY+7,20,20);
         b.dontKillClick = true;
         this.addComponent(b);
         tech4LockedComponents.add(b);
@@ -1388,22 +1388,23 @@ public class SkillMenu extends Window {
         //===============
         
         //background
-        skillTooltipBackground = new Button(new Image("tooltip.jpg"), x, y, 400, 300);
+        Image i = new Image("tooltip.png");
+        i.setColor(new Color(.6f,.6f,.6f)); 
+        skillTooltipBackground = new Button(i, x, y, 400, 300);
         this.addComponent(skillTooltipBackground);
         
         //name
-        Text text = new Text(skill.getSkillName());
-        text.setScale(1.3f);
+        Text text = new Text(skill.getSkillName(),LeadCrystalTextType.HUD34);
         skillTooltipName = new Label(text, x + 200 - text.getWidth()/2, y + 250);
         this.addComponent(skillTooltipName);
         
         //icon
-        skillTooltipIcon = new Button(skill.getIcon().copy(),x + 25, y + 160,50,50);
+        skillTooltipIcon = new Button(skill.getIcon().copy(),x + 25, y + 140,75,75);
         this.addComponent(skillTooltipIcon);
         
         //description
         text = new Text(skill.getSkillDescription());
-        skillTooltipTextBlock = new TextBlock(x + 85, y + 190, 300, text);
+        skillTooltipTextBlock = new TextBlock(x + 110, y + 190, 280, text);
         this.addComponent(skillTooltipTextBlock);
         
         
