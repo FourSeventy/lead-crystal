@@ -459,14 +459,15 @@ public class MapMenu extends Window{
        //===============
        
        //================== desert 0 ======================
-       final Button button0 = new Button(new Image("blank.png"),175,225,50,50);
+       final Button button0 = new Button(new Image("blank.png"),175,225,75,75);
        
-       Overlay correctOverlay0 = new Overlay(new Image("arrow.png"));
-       correctOverlay0.getImage().setDimensions(50, 50);
+       Overlay correctOverlay0 = new Overlay(new Image("map_questionmark.png"));
+       correctOverlay0.getImage().setDimensions(75, 75);
        correctOverlay0.useRelativeSize = false;    
        if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(0).mainObjective.complete)
        {
-           correctOverlay0.getImage().setColor(new Color(Color.green));
+           correctOverlay0.getImage().setTextureReference("map_checkmark.png"); 
+           correctOverlay0.getImage().setDimensions(75, 75);
        }
        else
        {
@@ -499,14 +500,14 @@ public class MapMenu extends Window{
        
        //================== desert 1========================
        
-       final Button button = new Button(new Image("blank.png"),175,425,50,50);
+       final Button button = new Button(new Image("blank.png"),175,425,75,75);
        
-       Overlay correctOverlay = new Overlay(new Image("arrow.png"));
-       correctOverlay.getImage().setDimensions(50, 50);
+       Overlay correctOverlay = new Overlay(new Image("map_questionmark.png"));
+       correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;    
        if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(1).mainObjective.complete)
        {
-           correctOverlay.getImage().setColor(new Color(Color.green));
+           correctOverlay = new Overlay(new Image("map_checkmark.png")); 
        }
        else
        {
@@ -538,20 +539,19 @@ public class MapMenu extends Window{
        this.addComponent(button);
        
        //================== desert 2========================
-       final Button button1 = new Button("blank.png",375,425,50,50);
+       final Button button1 = new Button("blank.png",375,425,75,75);
        
-       correctOverlay = new Overlay(new Image("mapLock.png"));
+       correctOverlay = new Overlay(new Image("map_lock.png"));
        
        //if this map is complete
        if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(2).mainObjective.complete)
        {
-           correctOverlay = new Overlay(new Image("arrow.png"));
-           correctOverlay.getImage().setColor(new Color(Color.green));
+           correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(1).mainObjective.complete)
        {
-           correctOverlay = new Overlay(new Image("arrow.png"));
+           correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.5,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
@@ -559,7 +559,7 @@ public class MapMenu extends Window{
            button1.getImage().addImageEffect(effect);
        }
        
-       correctOverlay.getImage().setDimensions(50, 50);
+       correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;    
        button1.getImage().addOverlay("img",correctOverlay);
        button1.addActionListener(new ActionListener(){
@@ -567,7 +567,7 @@ public class MapMenu extends Window{
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
                     
-                     if(!button1.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button1.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button1.getImage().getOverlay("img").getImage().setScale(1.2f);
                         repaintLevelDetails(2);
@@ -575,7 +575,7 @@ public class MapMenu extends Window{
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
                     
-                     if(!button1.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button1.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button1.getImage().getOverlay("img").getImage().setScale(1.0f);
                         repaintLevelDetails(-1);
@@ -583,7 +583,7 @@ public class MapMenu extends Window{
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button1.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button1.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                             ((GameClientScene)owningScene).sendChooseLevelPacket(2);
                      }
@@ -594,19 +594,18 @@ public class MapMenu extends Window{
        this.addComponent(button1);
        
        //================== desert 3========================
-       final Button button2 = new Button("blank.png",575,425,50,50);
+       final Button button2 = new Button("blank.png",575,425,75,75);
        
-       correctOverlay = new Overlay(new Image("mapLock.png"));  
+       correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
        if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(3).mainObjective.complete)
        {
-           correctOverlay = new Overlay(new Image("arrow.png"));
-           correctOverlay.getImage().setColor(new Color(Color.green));
+           correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(2).mainObjective.complete)
        {
-           correctOverlay = new Overlay(new Image("arrow.png"));
+           correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.5,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
@@ -614,21 +613,21 @@ public class MapMenu extends Window{
            button2.getImage().addImageEffect(effect);
        }
        
-       correctOverlay.getImage().setDimensions(50, 50);
+       correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
        button2.getImage().addOverlay("img",correctOverlay);
        button2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
-                     if(!button2.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button2.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button2.getImage().getOverlay("img").getImage().setScale(1.2f);
                         repaintLevelDetails(3);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button2.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button2.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button2.getImage().getOverlay("img").getImage().setScale(1.0f);
                         repaintLevelDetails(-1);
@@ -636,7 +635,7 @@ public class MapMenu extends Window{
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button2.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button2.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                         ((GameClientScene)owningScene).sendChooseLevelPacket(3);
                 }
             }
@@ -645,19 +644,18 @@ public class MapMenu extends Window{
        this.addComponent(button2);
        
        //================== desert 4========================
-       final Button button3 = new Button("blank.png",500,700,50,50);
+       final Button button3 = new Button("blank.png",500,700,75,75);
        
-       correctOverlay = new Overlay(new Image("mapLock.png"));  
+       correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
        if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(4).mainObjective.complete)
        {
-           correctOverlay = new Overlay(new Image("arrow.png"));
-           correctOverlay.getImage().setColor(new Color(Color.green));
+           correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(2).mainObjective.complete)
        {
-           correctOverlay = new Overlay(new Image("arrow.png"));
+           correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.5,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
@@ -665,7 +663,7 @@ public class MapMenu extends Window{
            button3.getImage().addImageEffect(effect);
        }
        
-       correctOverlay.getImage().setDimensions(50, 50);
+       correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
        button3.getImage().addOverlay("img",correctOverlay);
        button3.addActionListener(new ActionListener(){
@@ -673,14 +671,14 @@ public class MapMenu extends Window{
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
                     
-                     if(!button3.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button3.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button3.getImage().getOverlay("img").getImage().setScale(1.2f);
                         repaintLevelDetails(4);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button3.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button3.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button3.getImage().getOverlay("img").getImage().setScale(1.0f);
                         repaintLevelDetails(-1);
@@ -688,7 +686,7 @@ public class MapMenu extends Window{
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button3.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button3.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                         ((GameClientScene)owningScene).sendChooseLevelPacket(4);
                 }
             }
@@ -697,19 +695,18 @@ public class MapMenu extends Window{
        this.addComponent(button3);
        
         //================== desert 5========================
-       final Button button4 = new Button("blank.png",965,425,50,50);
+       final Button button4 = new Button("blank.png",965,425,75,75);
        
-       correctOverlay = new Overlay(new Image("mapLock.png"));  
+       correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
        if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(5).mainObjective.complete)
        {
-           correctOverlay = new Overlay(new Image("arrow.png"));
-           correctOverlay.getImage().setColor(new Color(Color.green));
+           correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(3).mainObjective.complete)
        {
-           correctOverlay = new Overlay(new Image("arrow.png"));
+           correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.5,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
@@ -717,21 +714,21 @@ public class MapMenu extends Window{
            button4.getImage().addImageEffect(effect);
        }
        
-       correctOverlay.getImage().setDimensions(50, 50);
+       correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
        button4.getImage().addOverlay("img",correctOverlay);
        button4.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
-                     if(!button4.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button4.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button4.getImage().getOverlay("img").getImage().setScale(1.2f);
                         repaintLevelDetails(5);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button4.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button4.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button4.getImage().getOverlay("img").getImage().setScale(1.0f);
                         repaintLevelDetails(-1);
@@ -739,7 +736,7 @@ public class MapMenu extends Window{
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {                       
-                     if(!button4.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button4.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         ((GameClientScene)owningScene).sendChooseLevelPacket(5);
                         closePanX = new Float(150);
@@ -754,19 +751,18 @@ public class MapMenu extends Window{
        
        //================== cave 1 ========================
   
-        final Button button5 = new Button("blank.png",1400,425,50,50);
+        final Button button5 = new Button("blank.png",1400,425,75,75);
         
-        correctOverlay = new Overlay(new Image("mapLock.png"));  
+        correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
        if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(6).mainObjective.complete)
        {
-           correctOverlay = new Overlay(new Image("arrow.png"));
-           correctOverlay.getImage().setColor(new Color(Color.green));
+           correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(5).mainObjective.complete)
        {
-           correctOverlay = new Overlay(new Image("arrow.png"));
+           correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.5,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
@@ -775,21 +771,21 @@ public class MapMenu extends Window{
        }
        
        
-       correctOverlay.getImage().setDimensions(50, 50);
+       correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
        button5.getImage().addOverlay("img",correctOverlay);
        button5.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
-                     if(!button5.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png")) 
+                     if(!button5.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
                      {
                         button5.getImage().getOverlay("img").getImage().setScale(1.2f);
                         repaintLevelDetails(6);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button5.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button5.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button5.getImage().getOverlay("img").getImage().setScale(1.0f);
                         repaintLevelDetails(-1);
@@ -797,7 +793,7 @@ public class MapMenu extends Window{
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button5.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button5.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                         ((GameClientScene)owningScene).sendChooseLevelPacket(6);
                 }
             }
@@ -808,19 +804,18 @@ public class MapMenu extends Window{
        
        //================== cave 2========================
   
-        final Button button6 = new Button("blank.png",1600,625,50,50);
+        final Button button6 = new Button("blank.png",1600,625,75,75);
         
-        correctOverlay = new Overlay(new Image("mapLock.png"));  
+        correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
        if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(7).mainObjective.complete)
        {
-           correctOverlay = new Overlay(new Image("arrow.png"));
-           correctOverlay.getImage().setColor(new Color(Color.green));
+           correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(6).mainObjective.complete)
        {
-           correctOverlay = new Overlay(new Image("arrow.png"));
+           correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.5,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
@@ -829,21 +824,21 @@ public class MapMenu extends Window{
        }
        
        
-       correctOverlay.getImage().setDimensions(50, 50);
+       correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
        button6.getImage().addOverlay("img",correctOverlay);
        button6.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
-                     if(!button6.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png")) 
+                     if(!button6.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
                      {
                         button6.getImage().getOverlay("img").getImage().setScale(1.2f);
                         repaintLevelDetails(7);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button6.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button6.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button6.getImage().getOverlay("img").getImage().setScale(1.0f);
                         repaintLevelDetails(-1);
@@ -851,7 +846,7 @@ public class MapMenu extends Window{
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button6.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button6.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                         ((GameClientScene)owningScene).sendChooseLevelPacket(7);
                 }
             }
@@ -861,19 +856,18 @@ public class MapMenu extends Window{
        
        //================== cave 3========================
   
-        final Button button7 = new Button("blank.png",1600,325,50,50);
+        final Button button7 = new Button("blank.png",1600,325,75,75);
         
-        correctOverlay = new Overlay(new Image("mapLock.png"));  
+        correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
        if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(8).mainObjective.complete)
        {
-           correctOverlay = new Overlay(new Image("arrow.png"));
-           correctOverlay.getImage().setColor(new Color(Color.green));
+           correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(6).mainObjective.complete)
        {
-           correctOverlay = new Overlay(new Image("arrow.png"));
+           correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.5,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
@@ -882,21 +876,21 @@ public class MapMenu extends Window{
        }
        
        
-       correctOverlay.getImage().setDimensions(50, 50);
+       correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
        button7.getImage().addOverlay("img",correctOverlay);
        button7.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
-                     if(!button7.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png")) 
+                     if(!button7.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
                      {
                         button7.getImage().getOverlay("img").getImage().setScale(1.2f);
                         repaintLevelDetails(8);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button7.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button7.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button7.getImage().getOverlay("img").getImage().setScale(1.0f);
                         repaintLevelDetails(-1);
@@ -904,7 +898,7 @@ public class MapMenu extends Window{
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button7.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button7.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                         ((GameClientScene)owningScene).sendChooseLevelPacket(8);
                 }
             }
@@ -914,19 +908,18 @@ public class MapMenu extends Window{
        
        //================== cave 4========================
   
-        final Button button8 = new Button("blank.png",1750,325,50,50);
+        final Button button8 = new Button("blank.png",1750,325,75,75);
         
-        correctOverlay = new Overlay(new Image("mapLock.png"));  
+        correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
        if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(9).mainObjective.complete)
        {
-           correctOverlay = new Overlay(new Image("arrow.png"));
-           correctOverlay.getImage().setColor(new Color(Color.green));
+           correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(7).mainObjective.complete || ((GameClientScene)owningScene).hostLevelProgression.levelMap.get(8).mainObjective.complete)
        {
-           correctOverlay = new Overlay(new Image("arrow.png"));
+           correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.5,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
@@ -935,21 +928,21 @@ public class MapMenu extends Window{
        }
        
        
-       correctOverlay.getImage().setDimensions(50, 50);
+       correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
        button8.getImage().addOverlay("img",correctOverlay);
        button8.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
-                     if(!button8.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png")) 
+                     if(!button8.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
                      {
                         button8.getImage().getOverlay("img").getImage().setScale(1.2f);
                         repaintLevelDetails(9);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button8.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button8.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button8.getImage().getOverlay("img").getImage().setScale(1.0f);
                         repaintLevelDetails(-1);
@@ -957,7 +950,7 @@ public class MapMenu extends Window{
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button8.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button8.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                         ((GameClientScene)owningScene).sendChooseLevelPacket(9);
                 }
             }
@@ -967,19 +960,18 @@ public class MapMenu extends Window{
        
        //================== cave 5========================
   
-        final Button button9 = new Button("blank.png",1950,325,50,50);
+        final Button button9 = new Button("blank.png",1950,325,75,75);
         
-        correctOverlay = new Overlay(new Image("mapLock.png"));  
+        correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
        if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(10).mainObjective.complete)
        {
-           correctOverlay = new Overlay(new Image("arrow.png"));
-           correctOverlay.getImage().setColor(new Color(Color.green));
+           correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(9).mainObjective.complete)
        {
-           correctOverlay = new Overlay(new Image("arrow.png"));
+           correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.5,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
@@ -988,21 +980,21 @@ public class MapMenu extends Window{
        }
        
        
-       correctOverlay.getImage().setDimensions(50, 50);
+       correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
        button9.getImage().addOverlay("img",correctOverlay);
        button9.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
-                     if(!button9.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png")) 
+                     if(!button9.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
                      {
                         button9.getImage().getOverlay("img").getImage().setScale(1.2f);
                         repaintLevelDetails(10);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button9.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button9.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button9.getImage().getOverlay("img").getImage().setScale(1.0f);
                         repaintLevelDetails(-1);
@@ -1010,7 +1002,7 @@ public class MapMenu extends Window{
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button9.getImage().getOverlay("img").getImage().getTextureReference().equals("mapLock.png"))
+                     if(!button9.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                         ((GameClientScene)owningScene).sendChooseLevelPacket(10);
                 }
             }
@@ -1026,7 +1018,9 @@ public class MapMenu extends Window{
         // Movement Buttons
         //==================
         
-        rightMovementButton = new Button(new Image("rightarrow.png"), 1025, 700, 100, 100);
+        Image i = new Image("map_arrow.png");
+        i.setHorizontalFlip(true);
+        rightMovementButton = new Button(i, 1025, 700, 100, 100);
         rightMovementButton.addActionListener(new ActionListener(){
 
             @Override
@@ -1053,8 +1047,8 @@ public class MapMenu extends Window{
         });
         this.addComponent(rightMovementButton);
         
-        leftMovementButton = new Button(new Image("rightarrow.png"), 900, 700, 100, 100);
-        leftMovementButton.getImage().setAngle(180);
+        
+        leftMovementButton = new Button(new Image("map_arrow.png"), 900, 700, 100, 100);
         leftMovementButton.addActionListener(new ActionListener(){
 
             @Override

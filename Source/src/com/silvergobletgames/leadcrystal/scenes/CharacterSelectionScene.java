@@ -206,8 +206,8 @@ public class CharacterSelectionScene extends Scene
         });
      
         //selection arrow
-        this.selectionArrow = new Image("arrow.png");
-        this.selectionArrow.setAngle(90);
+        this.selectionArrow = new Image("map_arrow.png");
+        this.selectionArrow.setHorizontalFlip(true);
         this.selectionArrow.setAlphaBrightness(0);
         this.add(selectionArrow,Layer.MAIN);
         
@@ -335,7 +335,7 @@ public class CharacterSelectionScene extends Scene
                     if (e.getActionCommand().equals("clicked")) 
                     {
                         selectedSave = savegameButton.getText().toString() + ".save";
-                        selectionArrow.setPosition(savegameButton.getPosition().x - 150, savegameButton.getPosition().y - selectionArrow.getHeight()/2);
+                        selectionArrow.setPosition(savegameButton.getPosition().x - 125, savegameButton.getPosition().y - selectionArrow.getHeight()/2);
                         selectionArrow.setAlphaBrightness(1);
                         Float[] points = {1.0f,1.3f,1.0f};
                         int[] durations = {10,10};
@@ -345,7 +345,7 @@ public class CharacterSelectionScene extends Scene
                     {
                         if(selectedSave == null)
                         {
-                            selectionArrow.setPosition(savegameButton.getPosition().x - 150, savegameButton.getPosition().y - selectionArrow.getHeight()/2);
+                            selectionArrow.setPosition(savegameButton.getPosition().x - 125, savegameButton.getPosition().y - selectionArrow.getHeight()/2);
                             selectionArrow.setAlphaBrightness(1);
                         }
                         //play sound
