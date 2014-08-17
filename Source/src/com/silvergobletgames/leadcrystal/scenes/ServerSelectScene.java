@@ -24,15 +24,27 @@ import com.silvergobletgames.sylver.windowsystem.Button;
 import com.silvergobletgames.sylver.windowsystem.TextBox;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.media.nativewindow.util.Dimension;
 import javax.media.opengl.GL3bc;
 import javax.media.opengl.glu.GLU;
 
 public class ServerSelectScene extends Scene
 {
-   
+    private RecentServerList recentServerList;
     private SaveGame saveGame;
     private TextBox ipTextBox;
     
@@ -42,6 +54,27 @@ public class ServerSelectScene extends Scene
     
     public ServerSelectScene()
     {
+        
+        //load server list
+        File file = new File("");
+        String path =file.getAbsolutePath();
+        try(FileInputStream f = new FileInputStream(path +"\\System\\recentServerCache");
+            ObjectInputStream ois = new ObjectInputStream(f);)
+        {
+            
+            this.recentServerList = (RecentServerList)ois.readObject();
+            //close file
+            ois.close();
+            f.close();
+        }
+        catch(Exception e)
+        {
+            //log error to console
+           Logger logger =Logger.getLogger(ServerSelectScene.class.getName());
+           logger.log(Level.SEVERE, "RecentServerCache load failed ", e); 
+           
+           this.recentServerList = new RecentServerList();
+        }
              
         //================
         // Builds Buttons
@@ -67,16 +100,16 @@ public class ServerSelectScene extends Scene
         this.add(enterIp,Layer.MAIN);
         
         //ip holder graphic
-        Image textBoxHolder = new Image("tutorial_tooltip.png");
-        textBoxHolder.setDimensions(260, 65);
-        textBoxHolder.setPosition(center - 130, 585);
-        this.add(textBoxHolder,Layer.MAIN);
+//        Image textBoxHolder = new Image("tutorial_tooltip.png");
+//        textBoxHolder.setDimensions(290, 65);
+//        textBoxHolder.setPosition(center - 130, 585);
+//        this.add(textBoxHolder,Layer.MAIN);
         
         //ip text box
-        ipTextBox = new TextBox(new Text("127.0.0.1",LeadCrystalTextType.MENU40), center -100 , 595);  
+        ipTextBox = new TextBox(new Text("127.0.0.1",LeadCrystalTextType.MENU40), center -143 , 595);  
         ipTextBox.setHideBackground(true);
         ipTextBox.setCursorScale(1.85f);
-        ipTextBox.setMaxCharacters(16);
+        ipTextBox.setMaxCharacters(15);
         ipTextBox.setDimensions(250, 50);
         this.add(ipTextBox,Layer.MAIN);
         
@@ -100,6 +133,7 @@ public class ServerSelectScene extends Scene
 
                     int tcpPort = GameplaySettings.getInstance().tcpPort; 
                     int udpPort = GameplaySettings.getInstance().udpPort;
+                    recentServerList.recentServers.add(ip);
                     MainMenuScene.joinMultiPlayerGame(saveGame, ip, tcpPort,udpPort);
                     
                 }
@@ -135,6 +169,8 @@ public class ServerSelectScene extends Scene
         recentServerHolder.setDimensions(650, 300);
         recentServerHolder.setPosition(center - recentServerHolder.getWidth()/2, 150);
         this.add(recentServerHolder,Layer.MAIN);
+        
+        this.populateSaveList();
         
         //back
         final Text backText = new Text("Back",LeadCrystalTextType.MENU46);
@@ -208,8 +244,104 @@ public class ServerSelectScene extends Scene
     }
    
     public void sceneExited()
-    {
+    {     
+         //save recent server list
+         //get path of the LeadCrystal install folder
+        File file = new File("");
+        String path =file.getAbsolutePath();
+       
+        //get the file input stream of our save file
+        try( FileOutputStream f = new FileOutputStream(path +"\\System\\recentServerCache");
+             ObjectOutputStream oos = new ObjectOutputStream(f);)
+        {   
+           oos.writeObject(this.recentServerList);
+           oos.close();
+           f.close();
+        }
+        catch (IOException e) 
+        {
+           //log error to console
+           Logger logger =Logger.getLogger(ServerSelectScene.class.getName());
+           logger.log(Level.SEVERE, "RecentServerCache save failed ", e); 
+        }
         Game.getInstance().unloadScene(ServerSelectScene.class);
     }
     
+    
+    
+    //=========================
+    // Recent Server List
+    //=========================
+    
+    public static class RecentServerList implements Serializable
+    {
+        public LinkedHashSet<String> recentServers = new LinkedHashSet<>();
+    }
+    
+    private void populateSaveList()
+    {
+        //center and right
+        final int right = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x;
+        final int center = right/2;
+        
+        //=========================
+        // Bulid the Buttons
+        //=========================
+        
+       //gross reverse order
+        ArrayList<String> reversedServerList = new ArrayList<>();
+        for(String server: this.recentServerList.recentServers)
+        {
+            reversedServerList.add(server);
+        }
+        Collections.reverse(reversedServerList);
+        
+        int number = 0;
+        for(String recentServer: reversedServerList)
+        {
+            //if they have more than 10 characters they wont see them all
+            if(number>5)
+            {
+                break;
+            }
+            
+            final Text serverText = new Text(recentServer,LeadCrystalTextType.MENU30);
+            serverText.setPosition(center - 225 - 70, 400 - 55 * number);
+            final Button serverButton = new Button(new Image("blank.png"), center - 225 - 70, 400 - 55 * number, serverText.getWidth(), serverText.getHeight());
+            this.add(serverText,Layer.MAIN);
+            this.add(serverButton,Layer.MAIN);
+            serverButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                if (e.getActionCommand().equals("clicked")) 
+                {
+     
+                    ipTextBox.getTextObj().setText(serverText.toString()); 
+                }
+                if (e.getActionCommand().equals("mouseEntered")) 
+                {
+                    
+                      if(serverText.hasTextEffect("small"))
+                          serverText.removeTextEffect("small");
+                      
+                       serverText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, serverText.getScale(), 1.1));
+                    
+                    //play sound
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
+                    add(sound);
+                }
+                if (e.getActionCommand().equals("mouseExited"))
+                {
+                        if(serverText.hasTextEffect("big"))
+                           serverText.removeTextEffect("big");
+                        
+                        serverText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, serverText.getScale(), 1));
+                }
+            }
+        }); 
+
+            number++;
+        }
+
+    }
 }
