@@ -32,11 +32,7 @@ public class MultiplayerMenuScene extends Scene
     //save game
     private SaveGame saveGame;
     private String actionArg;
-    
-    //connection info
-    private final Text ipLabel, startText;
-    private TextBox ipTextBox;
-    private Button startButton;
+   
     
     //==============
     // Constructor
@@ -70,28 +66,14 @@ public class MultiplayerMenuScene extends Scene
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("clicked")) 
                 {
-                    //==================
-                    // Hide Everything
-                    //==================
-                   
-                    ipLabel.setColor(new Color(1,1,1,0));
-                    ipTextBox.setDisabled(true);
-                    ipTextBox.setHidden(true);
-                    startText.setColor(new Color(1,1,1,0));
-                    startButton.setDisabled(true);
-                    startButton.setHidden(true);
-                    
-                    //======================
-                    // Unhide proper things
-                    //======================
-   
-                    ipLabel.setColor(new Color(1,1,1,1));
-                    ipTextBox.setDisabled(false);
-                    ipTextBox.setHidden(false);
-                    startText.setColor(new Color(1,1,1,1));
-                    startButton.setDisabled(false);
-                    startButton.setHidden(false);
-                             
+
+                    //build args to send to the character selection screen
+                    ArrayList args = new ArrayList();
+                    args.add(saveGame);
+
+                    //load and switch scenes
+                    Game.getInstance().loadScene( new ServerSelectScene());
+                    Game.getInstance().changeScene(ServerSelectScene.class,args);   
                     
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
@@ -163,72 +145,8 @@ public class MultiplayerMenuScene extends Scene
         });  
         
         
-        //IP
-        ipLabel = new Text("IP:",LeadCrystalTextType.MENU46);
-        ipLabel.setPosition(center + 200, 500);
-        this.add(ipLabel, Layer.MAIN);
-        ipTextBox = new TextBox("127.0.0.1", center + 275, 500);        
-        this.add(ipTextBox,Layer.MAIN);
-        ipLabel.setColor(new Color(1,1,1,0));
-        ipTextBox.setDisabled(true);
-        ipTextBox.setHidden(true);
-        
-        //start
-        startText = new Text("Start",LeadCrystalTextType.MENU46);
-        startText.setPosition(center +200 , 450);
-        startButton = new Button(new Image("blank.png"), startText.getPosition().x, startText.getPosition().y, startText.getWidth(), startText.getHeight());
-        this.add(startText,Layer.MAIN);
-        this.add(startButton,Layer.MAIN);
-        startButton.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                if (e.getActionCommand().equals("clicked")) 
-                {                                    
-                    
-                    //if we are doing a host
-                    if(ipTextBox.isDisabled())
-                    {
-                        
-                    }
-                    else //we are doing a join
-                    {
-                        String ip = ipTextBox.getText();
-
-                        //stop music
-                        Sound sound = Sound.newBGM("");
-                        add(sound);
-                        
-                        int tcpPort = GameplaySettings.getInstance().tcpPort; 
-                        int udpPort = GameplaySettings.getInstance().udpPort;
-                        MainMenuScene.joinMultiPlayerGame(saveGame, ip, tcpPort,udpPort);
-                    }
-                    
-                }
-                if (e.getActionCommand().equals("mouseEntered")) 
-                {
-                    
-                      if(startText.hasTextEffect("small"))
-                          startText.removeTextEffect("small");
-                      
-                       startText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, startText.getScale(), 1.2));
-                    
-                   //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
-                    add(sound);
-                }
-                if (e.getActionCommand().equals("mouseExited"))
-                {
-                        if(startText.hasTextEffect("big"))
-                           startText.removeTextEffect("big");
-                        
-                        startText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, startText.getScale(), 1));
-                }
-            }
-        });  
-        startText.setColor(new Color(1,1,1,0));
-        startButton.setDisabled(true);
-        startButton.setHidden(true);
-
+       
+       
         //back
         final Text backText = new Text("Back",LeadCrystalTextType.MENU46);
         backText.setPosition(center - backText.getWidth()/2, 450);
