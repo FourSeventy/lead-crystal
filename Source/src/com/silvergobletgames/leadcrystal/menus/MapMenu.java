@@ -148,6 +148,22 @@ public class MapMenu extends Window{
             {
                 button.setDisabled(false);
                 button.setHidden(false);
+                
+               //set alpha based on distance 
+                button.getImage().getOverlay("img").getImage().setColor(new Color(1,1,1,1));  
+                
+                if(button.getWindowRelativePosition().x <100)
+                {
+                    float alpha = (float)button.getWindowRelativePosition().x/(float)100;
+                    button.getImage().getOverlay("img").getImage().setColor(new Color(1,1,1,alpha));
+                }
+                if(button.getWindowRelativePosition().x > (this.getWidth() -175))  // x=1040 y=1   x=1140 y =0
+                {
+                    
+                    float alpha =  (-1/(float)100) * button.getWindowRelativePosition().x  +(57/(float)5);
+                    button.getImage().getOverlay("img").getImage().setColor(new Color(1,1,1,alpha));
+                }
+                
             }
 
         }
@@ -183,6 +199,21 @@ public class MapMenu extends Window{
             {
                 button.setDisabled(false);
                 button.setHidden(false);
+                
+                //set alpha based on distance 
+                button.getImage().getOverlay("img").getImage().setColor(new Color(1,1,1,1));  
+                
+                if(button.getWindowRelativePosition().x <100)
+                {
+                    float alpha = (float)button.getWindowRelativePosition().x/(float)100;
+                    button.getImage().getOverlay("img").getImage().setColor(new Color(1,1,1,alpha));
+                }
+                if(button.getWindowRelativePosition().x > (this.getWidth() -175))
+                {
+                    float alpha =  (-1/(float)100) * button.getWindowRelativePosition().x  +(57/(float)5);
+                    button.getImage().getOverlay("img").getImage().setColor(new Color(1,1,1,alpha));
+                }
+
             }
 
         }
