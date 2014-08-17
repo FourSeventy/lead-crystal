@@ -465,7 +465,7 @@ public class GameServerScene extends Scene
                     }
 
                     //toggle flashlight
-                    if (inputSnapshot.isKeyReleased(KeyEvent.VK_P))
+                    if (inputSnapshot.isKeyReleased(KeyEvent.VK_R))
                     {
                         player.toggleFlashlight();
                     }
@@ -495,10 +495,7 @@ public class GameServerScene extends Scene
                     //test
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_M))
                     {
-                        for(ArmorStat stat: player.getArmorManager().armorStats.values())
-                        {
-                            stat.unlocked = true;
-                        }
+                        
                     }
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_N))
                     {

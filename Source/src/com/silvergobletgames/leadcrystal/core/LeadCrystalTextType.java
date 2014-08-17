@@ -36,6 +36,7 @@ public enum LeadCrystalTextType implements TextType{
     MESSAGE42,
     MESSAGE48,
     MESSAGE54,
+    MESSAGE90,
     CHAT,
     MENU23,
     MENU36,
@@ -173,6 +174,12 @@ public enum LeadCrystalTextType implements TextType{
         metrics = java2d.getFontMetrics(font);
         Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.MESSAGE54,textRenderer,metrics);
 
+        //MESSAGE60
+        font = new Font("IMPACT", Font.PLAIN, 90);
+        textRenderer = new TextRenderer(font, true, true,new SylverRenderDelegate(true, 1));
+        textRenderer.setUseVertexArrays(false);
+        metrics = java2d.getFontMetrics(font);
+        Game.getInstance().getGraphicsWindow().registerTextRenderer(LeadCrystalTextType.MESSAGE90,textRenderer,metrics);
         
         //MENU23
         //font = new Font("CALIBRI", Font.BOLD, 40);

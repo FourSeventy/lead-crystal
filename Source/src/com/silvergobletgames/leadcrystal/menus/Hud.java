@@ -93,7 +93,7 @@ public class Hud extends Window
     //you have died text and button
     private Label youHaveDied;
     private Button youDiedButton;
-    private Text youHaveDiedText;
+    private Label youHaveDiedLabel;
     
     
     //==================
@@ -906,9 +906,8 @@ public class Hud extends Window
         {
             if(youHaveDied == null)
             {
-                Text dead= new Text("You Have Died", CoreTextType.MENU);
-                dead.setScale(1f);
-                this.youHaveDied = new Label(dead, center - dead.getWidth()/2, 600);
+                Text dead= new Text("You Have Died", LeadCrystalTextType.MESSAGE90);
+                this.youHaveDied = new Label(dead, center - dead.getWidth()/2, 675);
                 youHaveDied.getText().setColor(new Color(1,1,1,0)); 
                 
                 Color[] points2 = {new Color(1,1,1,0),new Color(1,1,1,0),new Color(1,1,1,1)};
@@ -917,43 +916,40 @@ public class Hud extends Window
                 youHaveDied.getText().addTextEffect(fadeEffect);
                 
                 this.addComponent(youHaveDied);
-                
-                
-                
-                final Text ehh = new Text("Respawn In Town",LeadCrystalTextType.MESSAGE54);
-                ehh.setPosition(center - 200, 500);
-                this.youHaveDiedText = ehh;
-                this.owningScene.add(ehh, Layer.HUD);
-                this.youDiedButton = new Button(new Image("blank.png"), center - ehh.getWidth()/2, ehh.getPosition().y, ehh.getWidth(), ehh.getHeight());
+             
+                //button
+                Image i = new Image("tutorial_tooltip.png");
+                this.youDiedButton = new Button(i, center - 180, 555 , 360, 75);
                 youDiedButton.addActionListener(new ActionListener() {
 
-            public void actionPerformed(ActionEvent e) {
-                if (e.getActionCommand().equals("clicked")) 
-                {
-                    ((GameClientScene)owningScene).sendRespawnRequestPacket();
-                }
-                if (e.getActionCommand().equals("mouseEntered")) 
-                {
-                    
-                      if(ehh.hasTextEffect("small"))
-                          ehh.removeTextEffect("small");
-                      
-                       ehh.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, ehh.getScale(), 1.3));
-                    
-                    //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
-                    owningScene.add(sound);
-                }
-                if (e.getActionCommand().equals("mouseExited"))
-                {
-                        if(ehh.hasTextEffect("big"))
-                           ehh.removeTextEffect("big");
-                        
-                        ehh.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, ehh.getScale(), 1));
-                }
-            }
-        });
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getActionCommand().equals("clicked")) 
+                        {
+                            ((GameClientScene)owningScene).sendRespawnRequestPacket();
+                        }
+                        if (e.getActionCommand().equals("mouseEntered")) 
+                        {
+                            youDiedButton.getImage().setBrightness(1.5f);
+                            Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND));
+                            //play sound 
+                            Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
+                            owningScene.add(sound);
+                        }
+                        if (e.getActionCommand().equals("mouseExited"))
+                        {
+                            Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE));
+                            
+                              youDiedButton.getImage().setBrightness(1f);
+                        }
+                    }
+                });
+                this.addComponent(youDiedButton);
                 
+                //text
+                final Text ehh = new Text("Revive In Town",LeadCrystalTextType.MESSAGE42);
+                Label l = new Label(ehh,center - ehh.getWidth()/2, 575);
+                this.youHaveDiedLabel = l;
+                this.addComponent(l);
                 
                 
                 ehh.setColor(new Color(1,1,1,0)); 
@@ -963,7 +959,7 @@ public class Hud extends Window
                 
                 ehh.addTextEffect(fadeEffect2);
                 
-                this.addComponent(youDiedButton);
+                
                 
             }
         }
@@ -973,7 +969,7 @@ public class Hud extends Window
             {
                 this.removeComponent(youHaveDied);
                 this.removeComponent(youDiedButton);
-                this.owningScene.remove(youHaveDiedText); 
+                this.owningScene.remove(youHaveDiedLabel); 
                 
                 youHaveDied = null;
                 youDiedButton = null;
