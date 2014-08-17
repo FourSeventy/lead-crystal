@@ -522,24 +522,20 @@ public class Hud extends Window
         this.addComponent(skillCooldownBlack4);
         
         //skill cooldown text
-        t = new Text("0");
-        t.setScale(1.3f);
-        this.skillCooldown1 = new Label(t,center - 105, 20);
+        t = new Text("0",LeadCrystalTextType.HUD22);
+        this.skillCooldown1 = new Label(t,center - 104, 28);
         this.addComponent(skillCooldown1);
         
-        t = new Text("0");
-        t.setScale(1.3f);
-        this.skillCooldown2 = new Label(t,center - 45, 20);
+        t = new Text("0",LeadCrystalTextType.HUD22);
+        this.skillCooldown2 = new Label(t,center - 39, 28);
         this.addComponent(skillCooldown2);
         
-        t = new Text("0");
-        t.setScale(1.3f);
-        this.skillCooldown3 = new Label(t,center + 10, 20);
+        t = new Text("0",LeadCrystalTextType.HUD22);
+        this.skillCooldown3 = new Label(t,center + 25, 28);
         this.addComponent(skillCooldown3);
         
-        t = new Text("0");
-        t.setScale(1.3f);
-        this.skillCooldown4 = new Label(t,center + 70, 20);
+        t = new Text("0",LeadCrystalTextType.HUD22);
+        this.skillCooldown4 = new Label(t,center + 92, 28);
         this.addComponent(skillCooldown4);   
               
         

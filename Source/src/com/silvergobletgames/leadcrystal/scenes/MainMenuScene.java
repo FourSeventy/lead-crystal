@@ -163,40 +163,43 @@ public class MainMenuScene extends Scene
             }
         });
         
-        //level editor
-        final Text levelEditorText = new Text("Level Editor",LeadCrystalTextType.MENU54);
-        levelEditorText.setPosition(center - levelEditorText.getWidth()/2, 350);
-        final Button levelEditorButton = new Button(new Image("blank.png"), center - levelEditorText.getWidth()/2, levelEditorText.getPosition().y, levelEditorText.getWidth(), levelEditorText.getHeight());
-        this.add(levelEditorText,Layer.MAIN);
-        this.add(levelEditorButton,Layer.MAIN);
-        levelEditorButton.addActionListener(new ActionListener() {
+        if(GameplaySettings.getInstance().levelEditor == true)
+        {
+             //level editor
+            final Text levelEditorText = new Text("Level Editor",LeadCrystalTextType.MENU54);
+            levelEditorText.setPosition(center - levelEditorText.getWidth()/2, 350);
+            final Button levelEditorButton = new Button(new Image("blank.png"), center - levelEditorText.getWidth()/2, levelEditorText.getPosition().y, levelEditorText.getWidth(), levelEditorText.getHeight());
+            this.add(levelEditorText,Layer.MAIN);
+            this.add(levelEditorButton,Layer.MAIN);
+            levelEditorButton.addActionListener(new ActionListener() {
 
-            public void actionPerformed(ActionEvent e) {
-                if (e.getActionCommand().equals("clicked")) 
-                {
-                    levelEditorButton_click();
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getActionCommand().equals("clicked")) 
+                    {
+                        levelEditorButton_click();
+                    }
+                    if (e.getActionCommand().equals("mouseEntered")) 
+                    {
+
+                          if(levelEditorText.hasTextEffect("small"))
+                              levelEditorText.removeTextEffect("small");
+
+                           levelEditorText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, levelEditorText.getScale(), 1.2));
+
+                        //play sound
+                        Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
+                        add(sound);
+                    }
+                    if (e.getActionCommand().equals("mouseExited"))
+                    {
+                            if(levelEditorText.hasTextEffect("big"))
+                               levelEditorText.removeTextEffect("big");
+
+                            levelEditorText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, levelEditorText.getScale(), 1));
+                    }
                 }
-                if (e.getActionCommand().equals("mouseEntered")) 
-                {
-                    
-                      if(levelEditorText.hasTextEffect("small"))
-                          levelEditorText.removeTextEffect("small");
-                      
-                       levelEditorText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, levelEditorText.getScale(), 1.2));
-                    
-                    //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
-                    add(sound);
-                }
-                if (e.getActionCommand().equals("mouseExited"))
-                {
-                        if(levelEditorText.hasTextEffect("big"))
-                           levelEditorText.removeTextEffect("big");
-                        
-                        levelEditorText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, levelEditorText.getScale(), 1));
-                }
-            }
-        });
+            });
+        }
         
         //exit
         final Text exitText = new Text("Exit",LeadCrystalTextType.MENU54);
