@@ -63,6 +63,7 @@ public class NewCharacterScene extends Scene
     //we have to pass this back to char select screen
     private String actionArg;
     
+ 
     
     //================
     //Constructors
@@ -268,10 +269,27 @@ public class NewCharacterScene extends Scene
                     save.save(player.getName() + ".save");
                     
                     //change scene
-                    Game.getInstance().loadScene(new CharacterSelectionScene());
-                    ArrayList<String> args = new ArrayList();
-                    args.add(actionArg);
-                    Game.getInstance().changeScene(CharacterSelectionScene.class,args);                    
+                    //if we are in multiplayer mode, go to the multiplayer menu and pass it your character
+                    if(actionArg.equals("Multiplayer"))
+                    {
+                        Game.getInstance().loadScene(new MultiplayerMenuScene());
+
+                        ArrayList args = new ArrayList();
+                        args.add(save);
+                        args.add(actionArg);
+                        Game.getInstance().changeScene(MultiplayerMenuScene.class,args);
+                    }
+                    //else if we are in single player mode, start up a game
+                    else if(actionArg.equals("Singleplayer"))
+                    {          
+                        //stop music
+                        Sound sound = Sound.newBGM("");
+                        add(sound);
+
+                        //start a single player game
+                        MainMenuScene.startSinglePlayerGame(save);
+
+                    }                 
                   
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
