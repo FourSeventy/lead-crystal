@@ -128,14 +128,14 @@ public class Hud extends Window
     //================
     // Help  Tooltips
     //================
-    private Button jumpTip;
-    private Button leftClick;
-    private Button rightClick;
-    private Button sprint;
-    private Button usePotion;
-    private Button useLadder;
-    private Button jumpThrough;
-    private Button rightClickInteract;
+    private ArrayList<SceneObject> jumpTip = new ArrayList<>();
+    private ArrayList<SceneObject> leftClick = new ArrayList<>();
+    private ArrayList<SceneObject> rightClick = new ArrayList<>();
+    private ArrayList<SceneObject> sprint = new ArrayList<>();
+    private ArrayList<SceneObject> usePotion = new ArrayList<>();
+    private ArrayList<SceneObject> useLadder = new ArrayList<>();
+    private ArrayList<SceneObject> jumpThrough = new ArrayList<>();
+    private ArrayList<SceneObject> rightClickInteract = new ArrayList<>();
       
     public Hud(GameClientScene scene)
     {
@@ -614,38 +614,70 @@ public class Hud extends Window
         this.chatManager = new ChatManager(scene);
         this.chatManager.receiveMessage("[Message] Welcome to the game!");
         
-        this.leftClick= new Button(new Image("leftClick.png"), center - 300, 600, 600 , 150);
-        this.leftClick.setHidden(true);
-        this.leftClick.dontKillClick = true;
-        this.addComponent(leftClick); 
-        this.rightClick = new Button(new Image("rightClick.png"), center - 300, 600, 600, 150);
-        this.rightClick.setHidden(true);
-        this.rightClick.dontKillClick = true;
-        this.addComponent(rightClick);
-        this.usePotion = new Button(new Image("usePotion.png"), center - 300, 600, 600, 150);
-        this.usePotion.setHidden(true);
-        this.usePotion.dontKillClick = true;
-        this.addComponent(usePotion);
-        this.jumpTip = new Button(new Image("jumpTip.png"), center - 300, 600, 600, 150);
-        this.jumpTip.setHidden(true);
-        this.jumpTip.dontKillClick = true;
-        this.addComponent(jumpTip);
-        this.useLadder= new Button(new Image("useLadders.png"), center - 300, 600, 600 , 150);
-        this.useLadder.setHidden(true);
-        this.useLadder.dontKillClick = true;
-        this.addComponent(useLadder); 
-        this.jumpThrough= new Button(new Image("jumpThrough.png"), center - 300, 600, 600 , 150);
-        this.jumpThrough.setHidden(true);
-        this.jumpThrough.dontKillClick = true;
-        this.addComponent(jumpThrough); 
-        this.sprint= new Button(new Image("sprint.png"), center - 300, 600, 600 , 150);
-        this.sprint.setHidden(true);
-        this.sprint.dontKillClick = true;
-        this.addComponent(sprint); 
-        this.rightClickInteract= new Button(new Image("rightClickInteract.png"), center - 300, 600, 600 , 150);
-        this.rightClickInteract.setHidden(true);
-        this.rightClickInteract.dontKillClick = true;
-        this.addComponent(rightClickInteract); 
+        
+        //=============
+        // Tooltips
+        //=============
+        
+        Button b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 100);
+        b.dontKillClick = true;
+        this.leftClick.add(b);   
+        Text tt = new Text("Press (image) to Primary Attack",LeadCrystalTextType.HUD43);
+        tt.setPosition( center - tt.getWidth()/2, 637);
+        this.leftClick.add(tt);
+               
+        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 100);
+        b.dontKillClick = true;
+        this.rightClick.add(b);
+        tt = new Text("Press (image) to Secondary Attack",LeadCrystalTextType.HUD43);
+        tt.setPosition( center - tt.getWidth()/2, 637);
+        this.rightClick.add(tt);
+        
+
+        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 100);
+        b.dontKillClick = true;
+        this.usePotion.add(b);
+        tt = new Text("Press (F) to use Potion",LeadCrystalTextType.HUD43);
+        tt.setPosition( center - tt.getWidth()/2, 637);
+        this.usePotion.add(tt);
+
+        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 100);
+        b.dontKillClick = true;
+        this.jumpTip.add(b);
+        tt = new Text("Press (space) to Jump",LeadCrystalTextType.HUD43);
+        tt.setPosition( center - tt.getWidth()/2, 637);
+        this.jumpTip.add(tt);
+        
+   
+        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 100);
+        b.dontKillClick = true;
+        this.useLadder.add(b);
+        tt = new Text("Press (W) to climb ladders",LeadCrystalTextType.HUD43);
+        tt.setPosition( center - tt.getWidth()/2, 637);
+        this.useLadder.add(tt);
+
+        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 100);
+        b.dontKillClick = true;
+        this.jumpThrough.add(b);
+        tt = new Text("You can jump through some terrain",LeadCrystalTextType.HUD43);
+        tt.setPosition( center - tt.getWidth()/2, 637);
+        this.jumpThrough.add(tt);
+ 
+        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 100);
+        b.dontKillClick = true;
+        this.sprint.add(b);
+        tt = new Text("Hold (shift) to Sprint",LeadCrystalTextType.HUD43);
+        tt.setPosition( center - tt.getWidth()/2, 637);
+        this.sprint.add(tt);
+        
+
+        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 100);
+        b.dontKillClick = true;
+        this.rightClickInteract.add(b);
+        tt = new Text("Press (image) to Interact",LeadCrystalTextType.HUD43);
+        tt.setPosition( center - tt.getWidth()/2, 637);
+        this.rightClickInteract.add(tt);
+
         
         
         //set up skills
@@ -1148,14 +1180,14 @@ public class Hud extends Window
     { 
         switch(tip)
         {
-            case PrimarySkill: this.leftClick.setHidden(false); break;
-            case SecondarySkill: this.rightClick.setHidden(false); break;
-            case UsePotion: this.usePotion.setHidden(false); break;
-            case Jump: this.jumpTip.setHidden(false); break;
-            case Ladder: this.useLadder.setHidden(false); break;
-            case Jumpthrough: this.jumpThrough.setHidden(false); break;
-            case Sprint: this.sprint.setHidden(false); break;
-            case RightClick: this.rightClickInteract.setHidden(false); break;
+            case PrimarySkill: for(SceneObject obj :this.leftClick){this.owningScene.add(obj, Layer.HUD);} break;
+            case SecondarySkill: for(SceneObject obj :this.rightClick){this.owningScene.add(obj, Layer.HUD);} break;
+            case UsePotion: for(SceneObject obj :this.usePotion){this.owningScene.add(obj, Layer.HUD);} break;
+            case Jump: for(SceneObject obj :this.jumpTip){this.owningScene.add(obj, Layer.HUD);} break;
+            case Ladder: for(SceneObject obj :this.useLadder){this.owningScene.add(obj, Layer.HUD);} break;
+            case Jumpthrough: for(SceneObject obj :this.jumpThrough){this.owningScene.add(obj, Layer.HUD);} break;
+            case Sprint: for(SceneObject obj :this.sprint){this.owningScene.add(obj, Layer.HUD);} break;
+            case RightClick: for(SceneObject obj :this.rightClickInteract){this.owningScene.add(obj, Layer.HUD);} break;
         }
     }
     
@@ -1163,14 +1195,14 @@ public class Hud extends Window
     {
         switch(tip)
         {
-            case PrimarySkill: this.leftClick.setHidden(true); break;
-            case SecondarySkill: this.rightClick.setHidden(true); break;
-            case UsePotion: this.usePotion.setHidden(true); break;
-            case Jump: this.jumpTip.setHidden(true); break;
-            case Ladder: this.useLadder.setHidden(true); break;
-            case Jumpthrough: this.jumpThrough.setHidden(true); break;
-            case Sprint: this.sprint.setHidden(true); break;
-            case RightClick: this.rightClickInteract.setHidden(true); break;
+            case PrimarySkill:for(SceneObject obj :this.leftClick){this.owningScene.remove(obj);} break;
+            case SecondarySkill: for(SceneObject obj :this.rightClick){this.owningScene.remove(obj);} break;
+            case UsePotion: for(SceneObject obj :this.usePotion){this.owningScene.remove(obj);} break;
+            case Jump: for(SceneObject obj :this.jumpTip){this.owningScene.remove(obj);} break;
+            case Ladder: for(SceneObject obj :this.useLadder){this.owningScene.remove(obj);} break;
+            case Jumpthrough: for(SceneObject obj :this.jumpThrough){this.owningScene.remove(obj);} break;
+            case Sprint: for(SceneObject obj :this.sprint){this.owningScene.remove(obj);} break;
+            case RightClick: for(SceneObject obj :this.rightClickInteract){this.owningScene.remove(obj);} break;
         }
     }
     
