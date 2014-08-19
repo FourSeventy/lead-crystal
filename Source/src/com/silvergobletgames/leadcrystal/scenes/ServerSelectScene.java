@@ -1,24 +1,14 @@
 package com.silvergobletgames.leadcrystal.scenes;
 
-import com.jogamp.newt.MonitorDevice;
-import com.jogamp.newt.MonitorMode;
-import com.jogamp.newt.Screen;
-import com.jogamp.newt.event.KeyEvent;
-import com.jogamp.newt.util.MonitorModeUtil;
 import com.silvergobletgames.leadcrystal.core.CursorFactory;
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
 import com.silvergobletgames.leadcrystal.core.GameplaySettings;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.core.SaveGame;
-import com.silvergobletgames.sylver.audio.AudioRenderer;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.*;
-import com.silvergobletgames.sylver.core.EngineSettings.ParticleDensity;
-import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.Image;
-import com.silvergobletgames.sylver.graphics.OpenGLGameWindow;
 import com.silvergobletgames.sylver.graphics.Text;
-import com.silvergobletgames.sylver.graphics.Text.CoreTextType;
 import com.silvergobletgames.sylver.graphics.TextEffect;
 import com.silvergobletgames.sylver.windowsystem.Button;
 import com.silvergobletgames.sylver.windowsystem.TextBox;
@@ -33,14 +23,9 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.media.nativewindow.util.Dimension;
-import javax.media.opengl.GL3bc;
-import javax.media.opengl.glu.GLU;
 
 public class ServerSelectScene extends Scene
 {

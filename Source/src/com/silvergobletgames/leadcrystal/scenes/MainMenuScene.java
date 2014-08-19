@@ -397,7 +397,24 @@ public class MainMenuScene extends Scene
                 {
                    ((GameClientScene)Game.getInstance().getScene(GameClientScene.class)).connectToServer( "127.0.0.1", config.tcpPort,config.udpPort);                   
                 }
-                catch(ConnectionException e){System.err.println("Couldnt connect: " + e.reason); return;}
+                catch(ConnectionException e)
+                {
+                    
+                    final int right = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x;
+                    final int center = right/2;
+        
+                    Game.getInstance().loadScene(new ServerSelectScene());
+                    ArrayList args = new ArrayList();
+                    args.add(saveGame);
+                    Game.getInstance().changeScene(ServerSelectScene.class, args); 
+                    Game.getInstance().unloadScene(GameClientScene.class); 
+                    Game.getInstance().unloadScene(LoadingScene.class);
+                    String additional = "";
+                    if(e.exception != null)
+                        additional = e.exception.getMessage();
+                    Game.getInstance().getScene(ServerSelectScene.class).add(new ErrorMenu(e.reason.toString() + ": " + additional, center-200,450-150), Layer.MAIN); 
+                    return;
+                }
 
                 try{
                 Thread.sleep(200);
@@ -447,16 +464,16 @@ public class MainMenuScene extends Scene
                     final int right = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x;
                     final int center = right/2;
         
-                    Game.getInstance().loadScene(new MultiplayerMenuScene());
+                    Game.getInstance().loadScene(new ServerSelectScene());
                     ArrayList args = new ArrayList();
                     args.add(saveGame);
-                    Game.getInstance().changeScene(MultiplayerMenuScene.class, args); 
+                    Game.getInstance().changeScene(ServerSelectScene.class, args); 
                     Game.getInstance().unloadScene(GameClientScene.class); 
                     Game.getInstance().unloadScene(LoadingScene.class);
                     String additional = "";
                     if(e.exception != null)
                         additional = e.exception.getMessage();
-                    Game.getInstance().getScene(MultiplayerMenuScene.class).add(new ErrorMenu(e.reason.toString() + ": " + additional, center-300,450-200), Layer.MAIN); 
+                    Game.getInstance().getScene(ServerSelectScene.class).add(new ErrorMenu(e.reason.toString() + ": " + additional, center-200,450-150), Layer.MAIN); 
                     return;
                 }
 
