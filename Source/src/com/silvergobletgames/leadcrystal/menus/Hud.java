@@ -633,7 +633,6 @@ public class Hud extends Window
         tt.setPosition( center - tt.getWidth()/2, 637);
         this.rightClick.add(tt);
         
-
         b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 100);
         b.dontKillClick = true;
         this.usePotion.add(b);
