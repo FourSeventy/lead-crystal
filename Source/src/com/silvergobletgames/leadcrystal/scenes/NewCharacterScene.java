@@ -237,6 +237,7 @@ public class NewCharacterScene extends Scene
                         player.getLevelProgressionManager().completeMainObjective(6); 
                         player.getLevelProgressionManager().completeMainObjective(7); 
                         player.getLevelProgressionManager().completeMainObjective(8); 
+                        player.getLevelProgressionManager().completeMainObjective(9);
                         player.getSkillManager().setSkillPoints(20);
                         
                          for(ArmorStat stat: player.getArmorManager().armorStats.values())

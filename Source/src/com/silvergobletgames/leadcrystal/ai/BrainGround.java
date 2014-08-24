@@ -38,6 +38,7 @@ public abstract class BrainGround extends Brain
     
     
     protected long moveCheckTimer = 0;
+    private final static int MOVE_CHECK_RESOLUTION = 15;
     
     
     //====================
@@ -46,7 +47,7 @@ public abstract class BrainGround extends Brain
     
     /**
      * Moves towards the given point. Will use edge detection if specified.
-     * @param point Point to move towards.
+     * @param destinationPoint Point to move towards.
      * @param edgeDetection Specifies if the method will use edge detection or not
      */
     public void moveTowardsPoint(SylverVector2f destinationPoint, boolean edgeDetection)
@@ -95,7 +96,7 @@ public abstract class BrainGround extends Brain
         }
 
         //if we have edge detection check for ground  
-        if(edgeDetection && this.moveCheckTimer % 10 == 0)
+        if(edgeDetection && this.moveCheckTimer % BrainGround.MOVE_CHECK_RESOLUTION == 0)
         {
             if( this.checkForGround() == true)
                 self.move(new SylverVector2f(directionToMove.x,0));
@@ -148,7 +149,7 @@ public abstract class BrainGround extends Brain
         if( this.currentWanderGoal == 0 || //dont have a goal
             Math.abs(self.getPosition().x - wanderPoint.x) > self.getWanderDistance()|| //are greater than max wander, and our current goal isnt moving us in the right direction
             Math.abs(self.getPosition().x - (wanderPoint.x + this.currentWanderGoal)) < 2|| //reached wander goal           
-            (edgeDetection == true && this.moveCheckTimer %10 == 0 &&!(groundCheck = this.checkForGround())  ) // we hit an edge
+            (edgeDetection == true && this.moveCheckTimer %BrainGround.MOVE_CHECK_RESOLUTION == 0 &&!(groundCheck = this.checkForGround())  ) // we hit an edge
           )
         { 
            //============ Roll a new goal ======================
@@ -215,8 +216,8 @@ public abstract class BrainGround extends Brain
         //decide if we need to turn around or not
         if(             
             (Math.abs(self.getPosition().x - patrolPoint.x) > self.getWanderDistance()) && ((self.getFacingDirection().value > 0 && self.getPosition().x > self.placedLocation.x) || (self.getFacingDirection().value < 0 && self.getPosition().x < self.placedLocation.x))|| //are greater than max wander, and our current goal isnt moving us in the right direction                      
-            (edgeDetection == true && this.moveCheckTimer %10 == 0 && this.checkForGround() == false )||// we hit an edge
-             (this.moveCheckTimer %10 == 0 &&this.checkForWall() == true) //we hit a wall
+            (edgeDetection == true && this.moveCheckTimer %BrainGround.MOVE_CHECK_RESOLUTION == 0 && this.checkForGround() == false )||// we hit an edge
+             (this.moveCheckTimer %BrainGround.MOVE_CHECK_RESOLUTION == 0 &&this.checkForWall() == true) //we hit a wall
           )
         {
             //turn around
@@ -264,7 +265,7 @@ public abstract class BrainGround extends Brain
         if( this.currentPatternGoal == 0 || //dont have a goal
             Math.abs(self.getPosition().x - holdingPoint.x) > self.getWanderDistance()/2|| //are greater than max wander, and our current goal isnt moving us in the right direction
             Math.abs(self.getPosition().x - (holdingPoint.x + this.currentPatternGoal)) < 2|| //reached wander goal           
-            (this.moveCheckTimer %10 == 0 && !(groundCheck = this.checkForGround())) // we hit an edge
+            (this.moveCheckTimer %BrainGround.MOVE_CHECK_RESOLUTION == 0 && !(groundCheck = this.checkForGround())) // we hit an edge
           )
         {
            //============ Roll a new goal ======================             
