@@ -465,7 +465,7 @@ public class GameServerScene extends Scene
                     }
 
                     //toggle flashlight
-                    if (inputSnapshot.isKeyReleased(KeyEvent.VK_R))
+                    if (inputSnapshot.isKeyReleased(KeyEvent.VK_T))
                     {
                         player.toggleFlashlight();
                     }

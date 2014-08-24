@@ -669,7 +669,7 @@ public final class GameClientScene extends Scene
             }
 
             //toggle flashlight
-            if (inputSnapshot.isKeyReleased(KeyEvent.VK_P) == true)
+            if (inputSnapshot.isKeyReleased(KeyEvent.VK_T) == true)
             {
                 player.toggleFlashlight();
             }

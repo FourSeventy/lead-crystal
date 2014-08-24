@@ -255,14 +255,6 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         //Update the superclass
         super.update();
 
-        //position flashlight
-        this.light.setPosition((int) this.body.getPosition().getX() + 20, (int) this.body.getPosition().getY());
-        //angle flashlight
-        if(this.owningScene instanceof GameServerScene && ((GameServerScene)owningScene).clientsInScene.get(UUID.fromString(this.ID)).currentInputPacket != null)
-        {
-            ClientInputPacket input = ((GameServerScene)owningScene).clientsInScene.get(UUID.fromString(this.ID)).currentInputPacket;
-            this.light.faceTowardsPoint(new Point(input.mouseLocationX,input.mouseLocationY));
-        }
         
         //check if in air
         if(this.body.getTouching().size() == 0)         
@@ -356,6 +348,16 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         vectorToTarget.scale(this.getFrontArm().getWidth()* .5f) ;
         vectorToTarget.add(new Vector2f(userX,userY)); 
         this.skillReleasePoint = new SylverVector2f(vectorToTarget.x,vectorToTarget.y);
+        
+        //position flashlight
+        this.light.setPosition((int) this.skillReleasePoint.x, this.skillReleasePoint.y + 10);
+        //face flashlight towards mouse
+        float angle = this.frontArm.getAngle();
+        if(frontArm.isFlippedHorizontal()) 
+        {
+            angle+= 180;
+        }
+        this.light.setDirection(angle); 
         
         //update body parts
         this.frontArm.update();
