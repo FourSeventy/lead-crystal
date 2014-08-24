@@ -39,7 +39,7 @@ public class PlayerGravityShield extends PlayerSkill{
  
         //set the skillID and the name
         this.icon = new Image("gravityShieldIcon.png") ;
-        this.skillName = "Guard";
+        this.skillName = "Gravity Shield";
         this.skillDescription = "Creates a defensive shield around the player mitigating melee damage and deflecting ranged attacks. ";
         this.unlockCost = 1;
     }

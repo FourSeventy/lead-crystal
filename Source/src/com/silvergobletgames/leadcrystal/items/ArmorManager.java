@@ -89,7 +89,7 @@ public class ArmorManager {
         this.armorStats.put(this.critChance.id,this.critChance);
         
         
-        this.meleeAttackDamageBonus = new ArmorStat(ArmorStatID.MELEE_DAMAGE, new Image("meleeDamageIcon.png"), "Bayonet Attachment",100,2);
+        this.meleeAttackDamageBonus = new ArmorStat(ArmorStatID.MELEE_DAMAGE, new Image("meleeDamageIcon.png"), "Brass Knuckles",100,2);
         this.meleeAttackDamageBonus.description = "+25% melee damage per point.";
         this.meleeAttackDamageBonus.unlocked = false;
         this.armorStats.put(this.meleeAttackDamageBonus.id,this.meleeAttackDamageBonus);
@@ -115,7 +115,7 @@ public class ArmorManager {
         // Helm 
         //===============
           
-        this.seeEnemyHealth = new ArmorStat(ArmorStatID.SEE_HEALTH, new Image("seeEnemyHealthIcon.png"), "See Enemy Health",200,1);
+        this.seeEnemyHealth = new ArmorStat(ArmorStatID.SEE_HEALTH, new Image("seeEnemyHealthIcon.png"), "Retinal Implant",200,1);
         this.seeEnemyHealth.description = "Gives the ability to see enemy health bars.";
         this.seeEnemyHealth.unlocked = true;
         this.armorStats.put(this.seeEnemyHealth.id,this.seeEnemyHealth);

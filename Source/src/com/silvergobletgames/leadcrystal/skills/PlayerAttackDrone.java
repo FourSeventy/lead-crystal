@@ -45,7 +45,7 @@ public class PlayerAttackDrone extends Skill
         super(SkillID.PlayerAttackDrone,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK,1800,Integer.MAX_VALUE);
 
         //set the name description image and unlock cost
-        this.skillName = "Attack Drone";
+        this.skillName = "Attack Droid";
         this.skillDescription = "Spawns a droid that flies around with you shooting at enemies.";
         this.icon = new Image("attackDroidIcon.png");      
         this.unlockCost = 2;
