@@ -910,7 +910,7 @@ public class Hud extends Window
                     {
                         //render a dot                              
                         SylverVector2f arrowPosition =new SylverVector2f(centerOfRadar.x + vectorToObjective.x * (radarRadius * (vectorLength /2000)), centerOfRadar.y + vectorToObjective.y * (radarRadius * (vectorLength /2000)));
-                        Button button = new Button(new Image("circleSelected.png"), arrowPosition.x, arrowPosition.y, 30, 30);
+                        Button button = new Button(new Image("silver_pip.png"), arrowPosition.x, arrowPosition.y, 30, 30);
                         button.getImage().setColor(new Color(Color.red));
                         this.addComponent(button);
                         this.secondaryObjectiveArrows.add(button);
