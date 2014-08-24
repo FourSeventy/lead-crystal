@@ -316,7 +316,7 @@ public abstract class BrainGround extends Brain
         feelerBody.setBitmask(Entity.BitMasks.COLLIDE_WORLD.value);
         
         //position feeler       
-        float xPosition = self.getPosition().x +  self.getFacingDirection().value *(self.getWidth()/2 + 20);
+        float xPosition = self.getPosition().x +  self.getFacingDirection().value *(self.getWidth()/2 + 25);
         float yPosition = self.getPosition().y - self.getHeight()/2 ;       
         feelerBody.setPosition(xPosition, yPosition);
         
@@ -370,7 +370,7 @@ public abstract class BrainGround extends Brain
         feelerBody.setBitmask(Entity.BitMasks.COLLIDE_WORLD.value);
         
         //position feeler       
-        float xPosition = self.getPosition().x +  self.getFacingDirection().value *(self.getWidth()/2 + 10);
+        float xPosition = self.getPosition().x +  self.getFacingDirection().value *(self.getWidth()/2 + 15);
         float yPosition = self.getPosition().y + self.getHeight()/2 + 20;       
         feelerBody.setPosition(xPosition, yPosition);
         

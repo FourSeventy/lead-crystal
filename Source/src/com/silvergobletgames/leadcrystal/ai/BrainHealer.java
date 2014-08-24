@@ -223,17 +223,20 @@ public class BrainHealer extends BrainGround
         }
         
         //check los
-        if(fuzzyLogicTimer %60 == 0) //check once per second
+        if(fuzzyLogicTimer %30 == 0) //check once per second
         {
             if(this.checkLOS(self.getTarget()) == false)
+            {
                 this.lostLOSCounter++;       
-            if(this.lostLOSCounter > 30)
+            }
+            if(this.lostLOSCounter >=2)
             {
                 this.getStateMachine().changeState(StateID.LOSTTARGET);
                 this.lostLOSCounter = 0;
                 return;
             }
         }
+        
         
         //if we are ranged, and its been a while since we attacked, declare lost target
         if(this.selectedSkill != null && this.selectedSkill.getRange() > 150 && this.timeSinceAttack > 300)
