@@ -101,7 +101,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     protected float doubleJumpEnergy = MAX_JUMP_ENERGY - 20;
     
     //movement variables    
-    protected final Vector2f BASE_PLAYER_VELOCITY = new Vector2f(50,100);
+    protected final Vector2f BASE_PLAYER_VELOCITY = new Vector2f(55,100);
     protected final float BASE_DAMPING = .1f; 
     protected final float BASE_FRICTION = .8f; 
     private boolean sprinting = false;
