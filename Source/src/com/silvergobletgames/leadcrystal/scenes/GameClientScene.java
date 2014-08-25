@@ -193,10 +193,12 @@ public final class GameClientScene extends Scene
         this.clientID = UUID.randomUUID();
         
         //set modified viewport for this scene
-        this.setViewport(new EnhancedViewport()); 
+        EnhancedViewport view = new EnhancedViewport();
+        view.setPanSpeed(11); 
+        this.setViewport(view); 
         
         //build physics world
-        physicsWorld = new World(new Vector2f(0.0f, -45.0f),2, new QuadSpaceStrategy(20, 5));
+        physicsWorld = new World(new Vector2f(0.0f, -55.0f),2, new QuadSpaceStrategy(20, 5));
         physicsWorld.addListener(collisionHandler);
         physicsWorld.enableRestingBodyDetection(1f, 1f, 1f);
         

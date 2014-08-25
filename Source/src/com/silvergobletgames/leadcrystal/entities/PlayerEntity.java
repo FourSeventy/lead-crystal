@@ -92,7 +92,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     
     //jumping variables
     protected int inAirTimer = 0;
-    protected float MAX_JUMP_ENERGY = 125;
+    protected float MAX_JUMP_ENERGY = 100;
     protected float jumpEnergy = MAX_JUMP_ENERGY;
     protected boolean jumpReleased = true;
     protected boolean waitingToResetEnergy = false;
@@ -101,9 +101,9 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     protected float doubleJumpEnergy = MAX_JUMP_ENERGY - 20;
     
     //movement variables    
-    protected final Vector2f BASE_PLAYER_VELOCITY = new Vector2f(55,100);
+    protected final Vector2f BASE_PLAYER_VELOCITY = new Vector2f(55,120);
     protected final float BASE_DAMPING = .1f; 
-    protected final float BASE_FRICTION = .8f; 
+    protected final float BASE_FRICTION = 1.35f; 
     private boolean sprinting = false;
     public boolean dashing = false;
     protected SylverVector2f dashVector;
@@ -1324,44 +1324,44 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             }
         } 
         //double jumping
-        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 && this.getArmorManager().doubleJump.isMaxPoints() == true)  
-        {
-            if(this.doubleJumpEnergy == this.MAX_JUMP_ENERGY-20)
-            {
-                //add the jump force
-                this.doubleJumpEnergy -= 20; //20 /100
-                this.getBody().addSoftForce(new Vector2f(0, 15_000));
-            }
-            else
-            {
-                this.doubleJumpEnergy -= 6; //6 /100
-                this.getBody().addSoftForce(new Vector2f(0, 4_500));
-            }
-        }
-        //jetpacking
-        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 &&this.jumpEnergy < this.MAX_JUMP_ENERGY && this.getArmorManager().jetpack.isMaxPoints() == true) 
-        {
-                 //add jetpack emitters
-                if( this.doubleJumpEnergy == this.MAX_JUMP_ENERGY -20)
-                {
-                    AbstractParticleEmitter emitter = new SmokeEmitter();
-                    emitter.setAngle(270);
-                    emitter.setParticlesPerFrame(3);
-                    emitter.setDuration(-1);
-                    this.addEmitter(emitter);
-                    
-                    AbstractParticleEmitter explosionEmitter = new LeadCrystalParticleEmitters.RocketExplosionEmitter();
-                    explosionEmitter.setAngle(270);
-                    explosionEmitter.setParticlesPerFrame(1);
-                    explosionEmitter.setDuration(-1);
-                    this.addEmitter(explosionEmitter);
-                }
-                
-                this.doubleJumpEnergy -= 1f; 
-                this.getBody().addSoftForce(new Vector2f(0, 550));
-                
-                
-        }
+//        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 && this.getArmorManager().doubleJump.isMaxPoints() == true)  
+//        {
+//            if(this.doubleJumpEnergy == this.MAX_JUMP_ENERGY-20)
+//            {
+//                //add the jump force
+//                this.doubleJumpEnergy -= 20; //20 /100
+//                this.getBody().addSoftForce(new Vector2f(0, 15_000));
+//            }
+//            else
+//            {
+//                this.doubleJumpEnergy -= 6; //6 /100
+//                this.getBody().addSoftForce(new Vector2f(0, 4_500));
+//            }
+//        }
+//        //jetpacking
+//        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 &&this.jumpEnergy < this.MAX_JUMP_ENERGY && this.getArmorManager().jetpack.isMaxPoints() == true) 
+//        {
+//                 //add jetpack emitters
+//                if( this.doubleJumpEnergy == this.MAX_JUMP_ENERGY -20)
+//                {
+//                    AbstractParticleEmitter emitter = new SmokeEmitter();
+//                    emitter.setAngle(270);
+//                    emitter.setParticlesPerFrame(3);
+//                    emitter.setDuration(-1);
+//                    this.addEmitter(emitter);
+//                    
+//                    AbstractParticleEmitter explosionEmitter = new LeadCrystalParticleEmitters.RocketExplosionEmitter();
+//                    explosionEmitter.setAngle(270);
+//                    explosionEmitter.setParticlesPerFrame(1);
+//                    explosionEmitter.setDuration(-1);
+//                    this.addEmitter(explosionEmitter);
+//                }
+//                
+//                this.doubleJumpEnergy -= 1f; 
+//                this.getBody().addSoftForce(new Vector2f(0, 550));
+//                
+//                
+//        }
        
         
         //set jump released flag
@@ -1370,36 +1370,6 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         //set correct animation for this frame
         this.setCorrectAnimation();
         
-    }
-    
-    public void handleDash(SylverVector2f dashVector)
-    {
-       //handle dash
-         if(this.dashing)
-         {
-              
-             this.dashTicks++;
-             if(dashTicks > 30)
-             {
-                 this.dashing = false;
-                 this.dashTicks = 0;
-                 this.getBody().setVelocity(new Vector2f(0f,0f));
-                 this.getBody().setOverlapMask(Entity.OverlapMasks.PLAYER.value); 
-                 
-             }
-             else
-             {   
-                 this.getBody().setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value); 
-                 this.getBody().setVelocity(new Vector2f(this.dashVector.x * 150, this.dashVector.y * 150));
-             }
-           
-             
-         }
-         else
-         {       
-            this.dashVector = dashVector;
-            this.dashing = true;
-         }
     }
     
     public void handleJumpReleased()
@@ -1433,6 +1403,38 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         
     }
+    
+    public void handleDash(SylverVector2f dashVector)
+    {
+       //handle dash
+         if(this.dashing)
+         {
+              
+             this.dashTicks++;
+             if(dashTicks > 30)
+             {
+                 this.dashing = false;
+                 this.dashTicks = 0;
+                 this.getBody().setVelocity(new Vector2f(0f,0f));
+                 this.getBody().setOverlapMask(Entity.OverlapMasks.PLAYER.value); 
+                 
+             }
+             else
+             {   
+                 this.getBody().setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value); 
+                 this.getBody().setVelocity(new Vector2f(this.dashVector.x * 150, this.dashVector.y * 150));
+             }
+           
+             
+         }
+         else
+         {       
+            this.dashVector = dashVector;
+            this.dashing = true;
+         }
+    }
+    
+    
     
     public void move(SylverVector2f vector)
     {
