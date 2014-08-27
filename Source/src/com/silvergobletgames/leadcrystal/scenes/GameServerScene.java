@@ -434,7 +434,7 @@ public class GameServerScene extends Scene
                     //jump
                     if (inputSnapshot.isKeyPressed(KeyEvent.VK_SPACE) == true)
                     {
-                        player.handleJumping(clientData.currentInputPacket.mouseLocationX,clientData.currentInputPacket.mouseLocationY);
+                        player.handleJumping();
                     }
 
                     //jump released

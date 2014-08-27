@@ -318,7 +318,7 @@ public class ClientPlayerEntity extends PlayerEntity
         //jump
         if(snapshot.isKeyPressed(KeyEvent.VK_SPACE) == true)
         {
-            this.handleJumping(input.mouseLocationX,input.mouseLocationY);
+            this.handleJumping();
         }
 
         //jump released

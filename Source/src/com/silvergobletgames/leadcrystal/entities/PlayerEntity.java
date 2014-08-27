@@ -101,7 +101,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     protected float doubleJumpEnergy = MAX_JUMP_ENERGY - 20;
     
     //movement variables    
-    protected final Vector2f BASE_PLAYER_VELOCITY = new Vector2f(55,120);
+    protected final Vector2f BASE_PLAYER_VELOCITY = new Vector2f(55,125);
     protected final float BASE_DAMPING = .1f; 
     protected final float BASE_FRICTION = 1.35f; 
     private boolean sprinting = false;
@@ -1295,7 +1295,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         }
     }
     
-    public void handleJumping(float x, float y)
+    public void handleJumping()
     {
                    
         //if we can move and have jump energy
@@ -1320,7 +1320,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             else //add the normal amount of jump force
             {
                 this.jumpEnergy -= 6; //6 /100
-                this.getBody().addSoftForce(new Vector2f(0, 50_000));
+                this.getBody().addSoftForce(new Vector2f(0, 1_000));
             }
         } 
         //double jumping
@@ -1376,9 +1376,13 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     {
         //double jump
         if(this.doubleJumpEnergy == this.MAX_JUMP_ENERGY -20)
+        {
             this.doubleJumpAvailable = true;
+        }
         else
+        {
             this.doubleJumpAvailable = false;
+        }
         
         for(AbstractParticleEmitter e :this.getEmitters())
         {

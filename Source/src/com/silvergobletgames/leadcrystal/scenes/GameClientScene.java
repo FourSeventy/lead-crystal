@@ -649,7 +649,7 @@ public final class GameClientScene extends Scene
             //jump
             if (inputSnapshot.isKeyPressed(KeyEvent.VK_SPACE) == true)
             {
-                player.handleJumping(this.worldMouseLocation.x,this.worldMouseLocation.y);
+                player.handleJumping();
             }
 
             //jump released
