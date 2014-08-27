@@ -290,6 +290,25 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
              this.body.setDamping(this.BASE_DAMPING);
          }
          
+         //if not on ladder and dont think on ground, and velocity = 0 reset ground (fixes hovering edge case thing)
+         if(!this.onLadder && !this.feetOnTheGround && this.getBody().getVelocity().getX() ==0 && this.getBody().getVelocity().getY() == 0)
+         {
+             //set flags
+                this.feetOnTheGround = true;
+                this.inAirTimer = 0;
+                
+                //reset jump energy
+                if(this.jumpReleased == true)              
+                    this.jumpEnergy = MAX_JUMP_ENERGY;                                 
+                else
+                    this.waitingToResetEnergy = true;
+                
+                //double jump things
+                this.doubleJumpEnergy = MAX_JUMP_ENERGY - 20;
+                this.doubleJumpAvailable = false;
+             
+         }
+         
          
          
         //===============================
@@ -470,7 +489,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         {                                
             
             //if we landed on the top of a worldObjectEntity
-            if(-event.getNormal().getY() > .75)
+            if(-event.getNormal().getY() > .35)
             {
                 //play sound
                 if(this.jumpEnergy != MAX_JUMP_ENERGY)
@@ -1457,12 +1476,20 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
 
             //add force to the body
             vector.normalise();
+            
             float horizontalForce = 2_300;
             if(!this.feetOnTheGround)
             {
                 horizontalForce *= this.AIR_DAMPENING;
+            }       
+            float verticalForce = 0;
+            if(this.onLadder)
+            { 
+                horizontalForce = 700;
+                verticalForce = 833;
             }
-            this.body.addSoftForce(new Vector2f(horizontalForce *vector.x,(this.onLadder?833:0)* vector.y));
+            
+            this.body.addSoftForce(new Vector2f(horizontalForce *vector.x, verticalForce* vector.y));
             
             
         }

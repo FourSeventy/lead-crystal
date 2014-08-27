@@ -115,6 +115,25 @@ public class ClientPlayerEntity extends PlayerEntity
              this.body.setDamping(this.BASE_DAMPING);
          }
          
+         //if not on ladder and dont think on ground, and velocity = 0 reset ground (fixes hovering edge case thing)
+         if(!this.onLadder && !this.feetOnTheGround && this.getBody().getVelocity().getX() ==0 && this.getBody().getVelocity().getY() == 0)
+         {
+             //set flags
+                this.feetOnTheGround = true;
+                this.inAirTimer = 0;
+                
+                //reset jump energy
+                if(this.jumpReleased == true)              
+                    this.jumpEnergy = MAX_JUMP_ENERGY;                                 
+                else
+                    this.waitingToResetEnergy = true;
+                
+                //double jump things
+                this.doubleJumpEnergy = MAX_JUMP_ENERGY - 20;
+                this.doubleJumpAvailable = false;
+             
+         }
+         
          //===============================
         // Calculate Skill Release Point
         //===============================
