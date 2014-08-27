@@ -101,9 +101,10 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     protected float doubleJumpEnergy = MAX_JUMP_ENERGY - 20;
     
     //movement variables    
-    protected final Vector2f BASE_PLAYER_VELOCITY = new Vector2f(55,125);
+    protected final Vector2f BASE_PLAYER_VELOCITY = new Vector2f(55,128);
     protected final float BASE_DAMPING = .1f; 
-    protected final float BASE_FRICTION = 1.35f; 
+    protected final float BASE_FRICTION = 1.45f; 
+    protected final float AIR_DAMPENING = .5f;
     private boolean sprinting = false;
     public boolean dashing = false;
     protected SylverVector2f dashVector;
@@ -115,6 +116,8 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     public boolean onLadder = false;
     public boolean respawnWhenEnterTown = false;
     private RespawnGravestone respawnGravestone;
+    
+    
     
   
     
@@ -129,7 +132,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     public PlayerEntity(Image bodyImage, Image head, Image backArm, Image frontArm)
     {
         //Call the superconstructor with appropriate data
-        super(bodyImage, new Body(new Polygon(PlayerEntity.getBodyVertices()), 10));        
+        super(bodyImage, new Body(new Polygon(PlayerEntity.getBodyVertices()), 6));        
         
         
         //front arm
@@ -890,7 +893,6 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
           vertices[ehh] = new Vector2f((float)x,(float)y);                   
           ehh++;
         }
-      
         return vertices;
     }
     
@@ -1455,7 +1457,12 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
 
             //add force to the body
             vector.normalise();
-            this.body.addSoftForce(new Vector2f(3000 * vector.x,(this.onLadder?833:0)* vector.y));
+            float horizontalForce = 2_300;
+            if(!this.feetOnTheGround)
+            {
+                horizontalForce *= this.AIR_DAMPENING;
+            }
+            this.body.addSoftForce(new Vector2f(horizontalForce *vector.x,(this.onLadder?833:0)* vector.y));
             
             
         }
