@@ -33,6 +33,7 @@ import com.silvergobletgames.leadcrystal.skills.SkillManager;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.InputSnapshot;
 import com.silvergobletgames.sylver.core.Scene;
+import com.silvergobletgames.sylver.core.Scene.Layer;
 import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.graphics.*;
 import com.silvergobletgames.sylver.graphics.AnimationPack.CoreAnimations;
@@ -92,13 +93,15 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     
     //jumping variables
     protected int inAirTimer = 0;
-    protected float MAX_JUMP_ENERGY = 100;
+    protected final float MAX_JUMP_ENERGY = 100;
     protected float jumpEnergy = MAX_JUMP_ENERGY;
     protected boolean jumpReleased = true;
     protected boolean waitingToResetEnergy = false;
     //double jump
-    protected boolean doubleJumpAvailable = false;
-    protected float doubleJumpEnergy = MAX_JUMP_ENERGY - 20;
+    protected boolean doubleJumpAvailable = true;
+    protected boolean doubleJumpTimingRight = false;
+    protected final int DOUBLE_JUMP_TIMING_WINDOW = 46;
+
     
     //movement variables    
     protected final Vector2f BASE_PLAYER_VELOCITY = new Vector2f(55,128);
@@ -291,21 +294,9 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
          }
          
          //if not on ladder and dont think on ground, and velocity = 0 reset ground (fixes hovering edge case thing)
-         if(!this.onLadder && !this.feetOnTheGround && this.getBody().getVelocity().getX() ==0 && this.getBody().getVelocity().getY() == 0)
+         if(!this.onLadder && !this.feetOnTheGround && this.getBody().getVelocity().getX() ==0 && this.getBody().getVelocity().getY() == 0 && this.inAirTimer > 200)
          {
-             //set flags
-                this.feetOnTheGround = true;
-                this.inAirTimer = 0;
-                
-                //reset jump energy
-                if(this.jumpReleased == true)              
-                    this.jumpEnergy = MAX_JUMP_ENERGY;                                 
-                else
-                    this.waitingToResetEnergy = true;
-                
-                //double jump things
-                this.doubleJumpEnergy = MAX_JUMP_ENERGY - 20;
-                this.doubleJumpAvailable = false;
+                this.refreshJumpVariables();
              
          }
          
@@ -501,19 +492,8 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                     }
                 }
                 
-                //set flags
-                this.feetOnTheGround = true;
-                this.inAirTimer = 0;
-                
-                //reset jump energy
-                if(this.jumpReleased == true)              
-                    this.jumpEnergy = MAX_JUMP_ENERGY;                                 
-                else
-                    this.waitingToResetEnergy = true;
-                
-                //double jump things
-                this.doubleJumpEnergy = MAX_JUMP_ENERGY - 20;
-                this.doubleJumpAvailable = false;
+                //refresh jump variables
+               this.refreshJumpVariables();
             }
             
             //if we collided with a ladder
@@ -529,21 +509,10 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         if (other instanceof NonPlayerEntity) 
         {   
             //if we landed on the top of an enemy
-            if(-event.getNormal().getY() > .75)
+            if(-event.getNormal().getY() > .35)
             {
-                //set flags
-                this.feetOnTheGround = true;
-                this.inAirTimer = 0;
-                
-                //reset jump energy
-                if(this.jumpReleased == true)
-                    this.jumpEnergy = MAX_JUMP_ENERGY;
-                else
-                    this.waitingToResetEnergy = true;
-                
-                //double jump things
-                this.doubleJumpEnergy = MAX_JUMP_ENERGY-20;
-                this.doubleJumpAvailable = false;
+               //refresh jump variables
+               this.refreshJumpVariables();
             }
             
         }
@@ -886,13 +855,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     public float getMaxJumpEnergy()
     {
         return this.MAX_JUMP_ENERGY;
-    }
-    
-    public void setMaxJumpEnergy(float maxEnergy)
-    {
-        this.MAX_JUMP_ENERGY = maxEnergy;
-    }
-    
+    } 
   
     
     private static ROVector2f[] getBodyVertices()
@@ -1345,20 +1308,31 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             }
         } 
         //double jumping
-//        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 && this.getArmorManager().doubleJump.isMaxPoints() == true)  
-//        {
-//            if(this.doubleJumpEnergy == this.MAX_JUMP_ENERGY-20)
-//            {
-//                //add the jump force
-//                this.doubleJumpEnergy -= 20; //20 /100
-//                this.getBody().addSoftForce(new Vector2f(0, 15_000));
-//            }
-//            else
-//            {
-//                this.doubleJumpEnergy -= 6; //6 /100
-//                this.getBody().addSoftForce(new Vector2f(0, 4_500));
-//            }
-//        }
+        if(this.getArmorManager().doubleJump.isMaxPoints() && combatData.canMove() && doubleJumpAvailable && doubleJumpTimingRight && this.inAirTimer < this.DOUBLE_JUMP_TIMING_WINDOW)  
+        {         
+            //add the jump force
+            this.getBody().addSoftForce(new Vector2f(0, 20_000));  
+            this.doubleJumpAvailable = false;
+            this.doubleJumpTimingRight = false;
+            
+            //add effects and sounds
+            if(this.getOwningScene() instanceof GameClientScene)
+            {
+                Sound jumpSound = Sound.locationSound("buffered/jump.ogg", this.getPosition().x, this.getPosition().y, false, .4f);               
+                this.getOwningScene().add(jumpSound);
+            }
+            AbstractParticleEmitter emitter = new SmokeEmitter();
+            emitter.setAngle(270);
+            emitter.setParticlesPerFrame(10);
+            emitter.setDuration(5);
+            emitter.setPosition(this.getPosition().x, this.getPosition().y - 50); 
+            this.getOwningScene().add(emitter,Layer.MAIN);
+            
+            
+            
+        }
+        
+        
 //        //jetpacking
 //        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 &&this.jumpEnergy < this.MAX_JUMP_ENERGY && this.getArmorManager().jetpack.isMaxPoints() == true) 
 //        {
@@ -1395,16 +1369,13 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     
     public void handleJumpReleased()
     {
-        //double jump
-        if(this.doubleJumpEnergy == this.MAX_JUMP_ENERGY -20)
+
+        if(this.jumpEnergy <= 80 && this.inAirTimer < this.DOUBLE_JUMP_TIMING_WINDOW)
         {
-            this.doubleJumpAvailable = true;
-        }
-        else
-        {
-            this.doubleJumpAvailable = false;
+            this.doubleJumpTimingRight = true;
         }
         
+        //remove jetpack emitters
         for(AbstractParticleEmitter e :this.getEmitters())
         {
             if(e instanceof SmokeEmitter || e instanceof RocketExplosionEmitter)
@@ -1416,7 +1387,6 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         //set jump released flag
         this.jumpReleased = true;
         this.jumpEnergy = 0;
-        
         
         
         //if we are on the ground but our jump energy isnt back reset jump energy
@@ -1507,6 +1477,27 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     } 
     
     
+    protected void refreshJumpVariables()
+    {
+         //set flags
+        this.feetOnTheGround = true;
+        this.inAirTimer = 0;
+
+        //reset jump energy
+        if(this.jumpReleased == true)
+        {
+            this.jumpEnergy = MAX_JUMP_ENERGY;
+        }
+        else
+        {
+            this.waitingToResetEnergy = true;
+        }
+
+        //double jump things
+        this.doubleJumpAvailable = true;
+        this.doubleJumpTimingRight = false;
+    }
+    
     
     //====================
     // RenderData Methods
@@ -1531,7 +1522,6 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         renderData.data.add(12,this.getName());
         renderData.data.add(13,this.potionManager.dumpRenderData());
         renderData.data.add(14,this.frontArm.getAnimation());
-        renderData.data.add(15,this.MAX_JUMP_ENERGY);
             
         
         return renderData;
@@ -1662,11 +1652,6 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             changeMap += 1L << 14;
         }
         
-        if(!oldData.data.get(15).equals( newData.data.get(15)))
-        {
-            changeList.add(newData.data.get(15));
-            changeMap += 1L << 15;
-        }
         
         changes.fields = changeMap;
         changes.data = changeList.toArray();
@@ -1733,10 +1718,10 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             this.backArm.setAnimation((ImageAnimation)changeData.get(14));
         }
         
-        if(changeData.get(15) != null)
-        {
-            this.MAX_JUMP_ENERGY = (float)changeData.get(15);
-        }
+//        if(changeData.get(15) != null)
+//        {
+//            this.MAX_JUMP_ENERGY = (float)changeData.get(15);
+//        }
         
 
     }

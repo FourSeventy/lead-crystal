@@ -47,7 +47,6 @@ public class ClientPlayerEntity extends PlayerEntity
         this.armorManager = player.getArmorManager();
         this.levelProgressionManager = player.getLevelProgressionManager();
         this.skillManager = player.getSkillManager();
-        this.MAX_JUMP_ENERGY = player.MAX_JUMP_ENERGY;
         
         //skills
         this.skill1 = player.skill1;
@@ -116,22 +115,9 @@ public class ClientPlayerEntity extends PlayerEntity
          }
          
          //if not on ladder and dont think on ground, and velocity = 0 reset ground (fixes hovering edge case thing)
-         if(!this.onLadder && !this.feetOnTheGround && this.getBody().getVelocity().getX() ==0 && this.getBody().getVelocity().getY() == 0)
-         {
-             //set flags
-                this.feetOnTheGround = true;
-                this.inAirTimer = 0;
-                
-                //reset jump energy
-                if(this.jumpReleased == true)              
-                    this.jumpEnergy = MAX_JUMP_ENERGY;                                 
-                else
-                    this.waitingToResetEnergy = true;
-                
-                //double jump things
-                this.doubleJumpEnergy = MAX_JUMP_ENERGY - 20;
-                this.doubleJumpAvailable = false;
-             
+         if(!this.onLadder && !this.feetOnTheGround && this.getBody().getVelocity().getX() ==0 && this.getBody().getVelocity().getY() == 0&& this.inAirTimer > 200)
+         {           
+             this.refreshJumpVariables();            
          }
          
          //===============================
@@ -285,10 +271,6 @@ public class ClientPlayerEntity extends PlayerEntity
         if(changeData.get(6) != null)
            this.levelProgressionManager.reconcileRenderDataChanges(lastTime, futureTime, (SceneObjectRenderDataChanges)changeData.get(6));
         
-        if(changeData.get(15) != null)
-        {
-            this.MAX_JUMP_ENERGY = (float)changeData.get(15);
-        }
         
         if(this.potionManager != null && changeData.get(13) != null)
             this.potionManager.reconcileRenderDataChanges(lastTime,futureTime,(SceneObjectRenderDataChanges)changeData.get(13));
