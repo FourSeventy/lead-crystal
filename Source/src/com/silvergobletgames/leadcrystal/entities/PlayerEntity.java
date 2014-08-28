@@ -101,6 +101,10 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     protected boolean doubleJumpAvailable = true;
     protected boolean doubleJumpTimingRight = false;
     protected final int DOUBLE_JUMP_TIMING_WINDOW = 46;
+    //jetpack stuff
+    protected boolean jetpackReady = true;  
+    protected final int MAX_JETPACK_JUICE = 80;
+    protected int jetpackJuice = MAX_JETPACK_JUICE;
 
     
     //movement variables    
@@ -1333,30 +1337,39 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         }
         
         
-//        //jetpacking
-//        if(combatData.canMove() && doubleJumpAvailable && doubleJumpEnergy >0 &&this.jumpEnergy < this.MAX_JUMP_ENERGY && this.getArmorManager().jetpack.isMaxPoints() == true) 
-//        {
-//                 //add jetpack emitters
-//                if( this.doubleJumpEnergy == this.MAX_JUMP_ENERGY -20)
-//                {
-//                    AbstractParticleEmitter emitter = new SmokeEmitter();
-//                    emitter.setAngle(270);
-//                    emitter.setParticlesPerFrame(3);
-//                    emitter.setDuration(-1);
-//                    this.addEmitter(emitter);
-//                    
-//                    AbstractParticleEmitter explosionEmitter = new LeadCrystalParticleEmitters.RocketExplosionEmitter();
-//                    explosionEmitter.setAngle(270);
-//                    explosionEmitter.setParticlesPerFrame(1);
-//                    explosionEmitter.setDuration(-1);
-//                    this.addEmitter(explosionEmitter);
-//                }
-//                
-//                this.doubleJumpEnergy -= 1f; 
-//                this.getBody().addSoftForce(new Vector2f(0, 550));
-//                
-//                
-//        }
+        //jetpacking
+        if(this.getArmorManager().jetpack.isMaxPoints() && this.jetpackReady && combatData.canMove() ) 
+        {
+                //add jetpack emitters
+                if(this.jetpackJuice == this.MAX_JETPACK_JUICE)
+                {
+                    AbstractParticleEmitter emitter = new SmokeEmitter();
+                    emitter.setAngle(270);
+                    emitter.setParticlesPerFrame(3);
+                    emitter.setDuration(-1);
+                    this.addEmitter(emitter);
+                    
+                    AbstractParticleEmitter explosionEmitter = new LeadCrystalParticleEmitters.RocketExplosionEmitter();
+                    explosionEmitter.setAngle(270);
+                    explosionEmitter.setParticlesPerFrame(1);
+                    explosionEmitter.setDuration(-1);
+                    this.addEmitter(explosionEmitter);
+                }
+                
+                if(this.jetpackJuice > 0)
+                {
+                    this.jetpackJuice -= 1;
+                    this.getBody().setGravityEffected(false);
+                    this.getBody().setVelocity(new Vector2f(this.getBody().getVelocity().getX(),0)); 
+                    //this.getBody().addSoftForce(new Vector2f(0, 350));
+                }
+                else
+                {
+                    this.getBody().setGravityEffected(true);
+                }
+                
+                
+        }
        
         
         //set jump released flag
@@ -1370,10 +1383,18 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     public void handleJumpReleased()
     {
 
+        //allow for double jump
         if(this.jumpEnergy <= 80 && this.inAirTimer < this.DOUBLE_JUMP_TIMING_WINDOW)
         {
             this.doubleJumpTimingRight = true;
         }
+        
+        //allow for jetpack given there is no doouble jump
+        if(!this.getArmorManager().doubleJump.isMaxPoints() && this.jumpEnergy <= 80 && this.inAirTimer < this.DOUBLE_JUMP_TIMING_WINDOW)
+        {
+            this.jetpackReady = true;
+        }
+        
         
         //remove jetpack emitters
         for(AbstractParticleEmitter e :this.getEmitters())
@@ -1496,6 +1517,10 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         //double jump things
         this.doubleJumpAvailable = true;
         this.doubleJumpTimingRight = false;
+        
+        //jetpack
+        this.jetpackJuice = this.MAX_JETPACK_JUICE;
+        this.jetpackReady = false;
     }
     
     
