@@ -60,6 +60,29 @@ public class LeadCrystalParticleEmitters
             return new Particle(pos, velocity, acceleration, color, .8f, 1f/ttl, ttl);
         }      
     }
+   
+    public static class JetpackEmitter extends ImageParticleEmitter
+    {
+        public JetpackEmitter()
+        {
+            super(new Image("explosionParticle.png"));
+            this.setParticlesPerFrame(2); 
+            this.setRelativePositioning(false);
+        }
+        
+        public AbstractParticleEmitter.Particle buildParticle()
+        {
+            Random rand = SylverRandom.random;
+            SylverVector2f pos = new SylverVector2f(this.getPosition().x+(rand.nextFloat() - .5f)*50 , this.getPosition().y - 100+(rand.nextFloat() - .5f)*30);
+            float magnitude =  rand.nextFloat()/3 + .3f;
+            float randomedAngle = getAngle() + (rand.nextFloat() - .5f) * 720;
+            SylverVector2f velocity =new SylverVector2f(magnitude *(float)Math.cos(randomedAngle * Math.PI/180) , magnitude *(float)Math.sin(randomedAngle * Math.PI/180));
+            SylverVector2f acceleration = new SylverVector2f(0,0);
+            Color color = new Color(.8f,.8f,.8f,.75f);
+            float ttl = 80 + (int)(Math.random()*20);
+            return new AbstractParticleEmitter.Particle(pos, velocity, acceleration, color, .6f, .5f/ttl, (int)ttl);
+        }      
+    }
     
     public static class RocketExplosionEmitter extends ImageParticleEmitter
     {

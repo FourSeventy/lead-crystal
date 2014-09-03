@@ -11,6 +11,7 @@ import com.silvergobletgames.leadcrystal.core.*;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBlackFrontArmAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownBackArmAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownFrontArmAnimationPack;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.JetpackEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.RocketExplosionEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SandSpurtEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SmokeEmitter;
@@ -101,11 +102,11 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     protected boolean doubleJumpAvailable = true;
     protected boolean doubleJumpTimingRight = false;
     protected final int DOUBLE_JUMP_TIMING_WINDOW = 60;
-    protected final int DOUBLE_JUMP_TIME_SINCE_RELEASING_WINDOW = 45;
+    protected final int DOUBLE_JUMP_TIME_SINCE_RELEASING_WINDOW = 40;
     protected int timeSinceReleasing = 0;
     //jetpack stuff
     protected boolean jetpackReady = false;  
-    protected final int MAX_JETPACK_JUICE = 80;
+    protected final int MAX_JETPACK_JUICE = 60;
     protected int jetpackJuice = MAX_JETPACK_JUICE;
 
     
@@ -388,6 +389,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         //set correct animation for this frame
         this.setCorrectAnimation();
+        
                 
     }   
     
@@ -1341,48 +1343,47 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         }
         
         
-        //jetpacking
-        if(this.getArmorManager().jetpack.isMaxPoints() && this.jetpackReady && combatData.canMove() ) 
+        //jetpacking       
+        if(this.getArmorManager().jetpack.isMaxPoints() && this.jetpackReady && combatData.canMove()  ) 
         {
+            //we must be in the double jump timing window to start jetpacking
+            if(this.jetpackJuice != this.MAX_JETPACK_JUICE ||  this.timeSinceReleasing < this.DOUBLE_JUMP_TIME_SINCE_RELEASING_WINDOW && ((this.getArmorManager().doubleJump.isMaxPoints() && this.inAirTimer < this.DOUBLE_JUMP_TIMING_WINDOW + 20)||(!this.getArmorManager().doubleJump.isMaxPoints() && this.inAirTimer < this.DOUBLE_JUMP_TIMING_WINDOW )))
+            {
+                        
                 //add jetpack emitters
                 if(this.jetpackJuice == this.MAX_JETPACK_JUICE)
                 {
-                    AbstractParticleEmitter emitter = new SmokeEmitter();
-                    emitter.setAngle(270);
-                    emitter.setParticlesPerFrame(3);
-                    emitter.setDuration(-1);
-                    this.addEmitter(emitter);
-                    
-                    AbstractParticleEmitter explosionEmitter = new LeadCrystalParticleEmitters.RocketExplosionEmitter();
+                    AbstractParticleEmitter explosionEmitter = new LeadCrystalParticleEmitters.JetpackEmitter();
                     explosionEmitter.setAngle(270);
                     explosionEmitter.setParticlesPerFrame(1);
                     explosionEmitter.setDuration(-1);
                     this.addEmitter(explosionEmitter);
                 }
-                
+
+                //set gravity
                 if(this.jetpackJuice > 0)
                 {
                     this.jetpackJuice -= 1;
                     this.getBody().setGravityEffected(false);
                     this.getBody().setVelocity(new Vector2f(this.getBody().getVelocity().getX(),0)); 
-                    
+
                 }
                 else
                 {
                     //turn gravity back on for player
                     this.getBody().setGravityEffected(true);
-                    
+
                     //remove jetpack emitters
                     for(AbstractParticleEmitter e :this.getEmitters())
                     {
-                        if(e instanceof SmokeEmitter || e instanceof RocketExplosionEmitter)
+                        if(e instanceof SmokeEmitter || e instanceof JetpackEmitter)
                         {
                             e.stopEmittingThenRemove();
                         }
                     }
                 }
-                
-                
+            }
+                               
         }
        
         
@@ -1403,6 +1404,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         //set jump released flag and reset jump energy
         this.jumpReleased = true;
+        this.jetpackReady = false;
         this.jumpEnergy = 0;
         this.timeSinceReleasing = 0;
                
@@ -1422,8 +1424,10 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         }
         
         //allow for jetpack given there is no double jump
-        if(!this.getArmorManager().doubleJump.isMaxPoints() && jumpEnergyAtRelease <= 80 && this.inAirTimer < this.DOUBLE_JUMP_TIMING_WINDOW)
+        if( this.jetpackJuice == this.MAX_JETPACK_JUICE && jumpEnergyAtRelease <= 80 && (!this.getArmorManager().doubleJump.isMaxPoints() || doubleJumpAvailable == false))
         {
+            if((this.getArmorManager().doubleJump.isMaxPoints() && this.inAirTimer < this.DOUBLE_JUMP_TIMING_WINDOW + 20)
+             ||(!this.getArmorManager().doubleJump.isMaxPoints() && this.inAirTimer < this.DOUBLE_JUMP_TIMING_WINDOW ))
             this.jetpackReady = true;
         }
         
@@ -1431,7 +1435,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         //remove jetpack emitters
         for(AbstractParticleEmitter e :this.getEmitters())
         {
-            if(e instanceof SmokeEmitter || e instanceof RocketExplosionEmitter)
+            if(e instanceof SmokeEmitter || e instanceof JetpackEmitter)
             {
                 e.stopEmittingThenRemove();
             }
