@@ -123,6 +123,17 @@ public class ClientPlayerEntity extends PlayerEntity
              this.refreshJumpVariables();            
          }
          
+         //turn off friction while in air to avoid sticking to walls
+         if(this.inAirTimer > 10)
+         {
+             this.body.setFriction(.1f);
+         }
+         else
+         {
+             this.body.setFriction(this.BASE_FRICTION);
+         }
+         
+         
          //===============================
         // Calculate Skill Release Point
         //===============================

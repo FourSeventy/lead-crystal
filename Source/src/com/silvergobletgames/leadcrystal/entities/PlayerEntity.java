@@ -310,6 +310,16 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
              
          }
          
+         //turn off friction while in air to avoid sticking to walls
+         if(this.inAirTimer > 10)
+         {
+             this.body.setFriction(.1f);
+         }
+         else
+         {
+             this.body.setFriction(this.BASE_FRICTION);
+         }
+         
          
          
         //===============================
