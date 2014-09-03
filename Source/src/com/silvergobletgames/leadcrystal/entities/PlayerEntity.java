@@ -102,7 +102,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     protected boolean doubleJumpTimingRight = false;
     protected final int DOUBLE_JUMP_TIMING_WINDOW = 46;
     //jetpack stuff
-    protected boolean jetpackReady = true;  
+    protected boolean jetpackReady = false;  
     protected final int MAX_JETPACK_JUICE = 80;
     protected int jetpackJuice = MAX_JETPACK_JUICE;
 
@@ -383,6 +383,8 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         //set correct animation for this frame
         this.setCorrectAnimation();
+        
+        System.err.println(this.jumpEnergy);
                 
     }   
     
@@ -1286,7 +1288,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     public void handleJumping()
     {
                    
-        //if we can move and have jump energy
+        //regular jumping logic
         if(combatData.canMove() && this.jumpEnergy > 0  ) 
         {
 
@@ -1311,6 +1313,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                 this.getBody().addSoftForce(new Vector2f(0, 1_000));
             }
         } 
+        
         //double jumping
         if(this.getArmorManager().doubleJump.isMaxPoints() && combatData.canMove() && doubleJumpAvailable && doubleJumpTimingRight && this.inAirTimer < this.DOUBLE_JUMP_TIMING_WINDOW)  
         {         
@@ -1331,9 +1334,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             emitter.setDuration(5);
             emitter.setPosition(this.getPosition().x, this.getPosition().y - 50); 
             this.getOwningScene().add(emitter,Layer.MAIN);
-            
-            
-            
+                      
         }
         
         
@@ -1361,11 +1362,21 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                     this.jetpackJuice -= 1;
                     this.getBody().setGravityEffected(false);
                     this.getBody().setVelocity(new Vector2f(this.getBody().getVelocity().getX(),0)); 
-                    //this.getBody().addSoftForce(new Vector2f(0, 350));
+                    
                 }
                 else
                 {
+                    //turn gravity back on for player
                     this.getBody().setGravityEffected(true);
+                    
+                    //remove jetpack emitters
+                    for(AbstractParticleEmitter e :this.getEmitters())
+                    {
+                        if(e instanceof SmokeEmitter || e instanceof RocketExplosionEmitter)
+                        {
+                            e.stopEmittingThenRemove();
+                        }
+                    }
                 }
                 
                 
@@ -1382,15 +1393,29 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     
     public void handleJumpReleased()
     {
+        
+        //save the released jump energy into local var
+        float jumpEnergyAtRelease = this.jumpEnergy;
+        
+        //set jump released flag and reset jump energy
+        this.jumpReleased = true;
+        this.jumpEnergy = 0;
+               
+        //if we are on the ground but our jump energy isnt back reset jump energy
+        if(this.waitingToResetEnergy)
+        {
+            this.jumpEnergy = this.MAX_JUMP_ENERGY;
+            this.waitingToResetEnergy = false;
+        }
 
         //allow for double jump
-        if(this.jumpEnergy <= 80 && this.inAirTimer < this.DOUBLE_JUMP_TIMING_WINDOW)
+        if(jumpEnergyAtRelease <= 80 && this.inAirTimer < this.DOUBLE_JUMP_TIMING_WINDOW)
         {
             this.doubleJumpTimingRight = true;
         }
         
-        //allow for jetpack given there is no doouble jump
-        if(!this.getArmorManager().doubleJump.isMaxPoints() && this.jumpEnergy <= 80 && this.inAirTimer < this.DOUBLE_JUMP_TIMING_WINDOW)
+        //allow for jetpack given there is no double jump
+        if(!this.getArmorManager().doubleJump.isMaxPoints() && jumpEnergyAtRelease <= 80 && this.inAirTimer < this.DOUBLE_JUMP_TIMING_WINDOW)
         {
             this.jetpackReady = true;
         }
@@ -1405,17 +1430,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             }
         }
         
-        //set jump released flag
-        this.jumpReleased = true;
-        this.jumpEnergy = 0;
         
-        
-        //if we are on the ground but our jump energy isnt back reset jump energy
-        if(this.waitingToResetEnergy)
-        {
-            this.jumpEnergy = this.MAX_JUMP_ENERGY;
-            this.waitingToResetEnergy = false;
-        }
         
         
     }
