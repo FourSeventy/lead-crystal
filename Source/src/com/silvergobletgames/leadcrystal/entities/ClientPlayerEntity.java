@@ -98,6 +98,9 @@ public class ClientPlayerEntity extends PlayerEntity
          //clear jump energy if we are in air for too long
         if(this.inAirTimer > 15 && this.jumpEnergy == this.MAX_JUMP_ENERGY)
             this.jumpEnergy = 0;
+        
+        //update time since releasing jump
+        this.timeSinceReleasing++;
                
          
          //update ladder settings         

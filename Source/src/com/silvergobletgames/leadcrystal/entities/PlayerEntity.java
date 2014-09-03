@@ -100,7 +100,9 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     //double jump
     protected boolean doubleJumpAvailable = true;
     protected boolean doubleJumpTimingRight = false;
-    protected final int DOUBLE_JUMP_TIMING_WINDOW = 46;
+    protected final int DOUBLE_JUMP_TIMING_WINDOW = 60;
+    protected final int DOUBLE_JUMP_TIME_SINCE_RELEASING_WINDOW = 45;
+    protected int timeSinceReleasing = 0;
     //jetpack stuff
     protected boolean jetpackReady = false;  
     protected final int MAX_JETPACK_JUICE = 80;
@@ -278,6 +280,9 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         //clear jump energy if we are in air for too long
         if(this.inAirTimer > 15 && this.jumpEnergy == this.MAX_JUMP_ENERGY)
             this.jumpEnergy = 0;
+        
+        //update time since releasing jump
+        this.timeSinceReleasing++;
            
     
          //entity tooltip
@@ -383,8 +388,6 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         //set correct animation for this frame
         this.setCorrectAnimation();
-        
-        System.err.println(this.jumpEnergy);
                 
     }   
     
@@ -1286,8 +1289,8 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     }
     
     public void handleJumping()
-    {
-                   
+    {               
+        
         //regular jumping logic
         if(combatData.canMove() && this.jumpEnergy > 0  ) 
         {
@@ -1315,7 +1318,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         } 
         
         //double jumping
-        if(this.getArmorManager().doubleJump.isMaxPoints() && combatData.canMove() && doubleJumpAvailable && doubleJumpTimingRight && this.inAirTimer < this.DOUBLE_JUMP_TIMING_WINDOW)  
+        if(this.getArmorManager().doubleJump.isMaxPoints() && combatData.canMove() && doubleJumpAvailable && doubleJumpTimingRight && this.inAirTimer < this.DOUBLE_JUMP_TIMING_WINDOW && this.timeSinceReleasing < this.DOUBLE_JUMP_TIME_SINCE_RELEASING_WINDOW)  
         {         
             //add the jump force
             this.getBody().addSoftForce(new Vector2f(0, 20_000));  
@@ -1396,17 +1399,21 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         //save the released jump energy into local var
         float jumpEnergyAtRelease = this.jumpEnergy;
+       
         
         //set jump released flag and reset jump energy
         this.jumpReleased = true;
         this.jumpEnergy = 0;
+        this.timeSinceReleasing = 0;
                
         //if we are on the ground but our jump energy isnt back reset jump energy
         if(this.waitingToResetEnergy)
         {
+            jumpEnergyAtRelease = 100; 
             this.jumpEnergy = this.MAX_JUMP_ENERGY;
             this.waitingToResetEnergy = false;
         }
+
 
         //allow for double jump
         if(jumpEnergyAtRelease <= 80 && this.inAirTimer < this.DOUBLE_JUMP_TIMING_WINDOW)
