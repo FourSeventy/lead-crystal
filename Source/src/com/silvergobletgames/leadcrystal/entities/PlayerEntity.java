@@ -170,6 +170,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         body.setOverlapMask(OverlapMasks.PLAYER.value);
         body.setRestitution(0);
         body.setRotatable(false);
+        body.setMutableFriction(true);
         
         
         //create potion manager
@@ -310,12 +311,13 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
              
          }
          
+         
          //turn off friction while in air to avoid sticking to walls
-         if(this.inAirTimer > 10)
+         if(this.body.getFriction() != .1f &&  this.inAirTimer > 10)
          {
              this.body.setFriction(.1f);
          }
-         else
+         else if(this.body.getFriction() != this.BASE_FRICTION && this.feetOnTheGround)
          {
              this.body.setFriction(this.BASE_FRICTION);
          }
