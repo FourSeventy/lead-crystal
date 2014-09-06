@@ -495,7 +495,7 @@ public class GameServerScene extends Scene
                     //test
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_M))
                     {
-                        
+                        player.getCombatData().currentHealth = 0;
                     }
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_N))
                     {

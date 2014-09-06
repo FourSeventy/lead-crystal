@@ -92,8 +92,8 @@ public class Hud extends Window
     
     //you have died text and button
     private Label youHaveDied;
-    private Button youDiedButton;
-    private Label youHaveDiedLabel;
+    private Button reviveButton;
+    private Label reviveText;
     
     
     //==================
@@ -619,62 +619,62 @@ public class Hud extends Window
         // Tooltips
         //=============
         
-        Button b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 100);
+        Button b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
         this.leftClick.add(b);   
-        Text tt = new Text("Press (image) to Primary Attack",LeadCrystalTextType.HUD43);
-        tt.setPosition( center - tt.getWidth()/2, 637);
+        Text tt = new Text("Press (image) to Primary Attack",LeadCrystalTextType.HUD40);
+        tt.setPosition( center - tt.getWidth()/2, 647);
         this.leftClick.add(tt);
                
-        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 100);
+        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
         this.rightClick.add(b);
-        tt = new Text("Press (image) to Secondary Attack",LeadCrystalTextType.HUD43);
-        tt.setPosition( center - tt.getWidth()/2, 637);
+        tt = new Text("Press (image) to Secondary Attack",LeadCrystalTextType.HUD40);
+        tt.setPosition( center - tt.getWidth()/2, 647);
         this.rightClick.add(tt);
         
-        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 100);
+        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
         this.usePotion.add(b);
-        tt = new Text("Press (F) to use Potion",LeadCrystalTextType.HUD43);
-        tt.setPosition( center - tt.getWidth()/2, 637);
+        tt = new Text("Press (F) to use Potion",LeadCrystalTextType.HUD40);
+        tt.setPosition( center - tt.getWidth()/2, 647);
         this.usePotion.add(tt);
 
-        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 100);
+        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
         this.jumpTip.add(b);
-        tt = new Text("Press (space) to Jump",LeadCrystalTextType.HUD43);
-        tt.setPosition( center - tt.getWidth()/2, 637);
+        tt = new Text("Press (space) to Jump",LeadCrystalTextType.HUD40);
+        tt.setPosition( center - tt.getWidth()/2, 647);
         this.jumpTip.add(tt);
         
    
-        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 100);
+        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
         this.useLadder.add(b);
-        tt = new Text("Press (W) to climb ladders",LeadCrystalTextType.HUD43);
-        tt.setPosition( center - tt.getWidth()/2, 637);
+        tt = new Text("Press (W) to climb ladders",LeadCrystalTextType.HUD40);
+        tt.setPosition( center - tt.getWidth()/2, 647);
         this.useLadder.add(tt);
 
-        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 100);
+        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
         this.jumpThrough.add(b);
-        tt = new Text("You can jump through some terrain",LeadCrystalTextType.HUD43);
-        tt.setPosition( center - tt.getWidth()/2, 637);
+        tt = new Text("You can jump through some terrain",LeadCrystalTextType.HUD40);
+        tt.setPosition( center - tt.getWidth()/2, 647);
         this.jumpThrough.add(tt);
  
-        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 100);
+        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
         this.sprint.add(b);
-        tt = new Text("Hold (shift) to Sprint",LeadCrystalTextType.HUD43);
-        tt.setPosition( center - tt.getWidth()/2, 637);
+        tt = new Text("Hold (shift) to Sprint",LeadCrystalTextType.HUD40);
+        tt.setPosition( center - tt.getWidth()/2, 647);
         this.sprint.add(tt);
         
 
-        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 100);
+        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
         this.rightClickInteract.add(b);
-        tt = new Text("Press (image) to Interact",LeadCrystalTextType.HUD43);
-        tt.setPosition( center - tt.getWidth()/2, 637);
+        tt = new Text("Press (image) to Interact",LeadCrystalTextType.HUD40);
+        tt.setPosition( center - tt.getWidth()/2, 647);
         this.rightClickInteract.add(tt);
 
         
@@ -944,10 +944,14 @@ public class Hud extends Window
                 
                 this.addComponent(youHaveDied);
              
-                //button
-                Image i = new Image("tutorial_tooltip.png");
-                this.youDiedButton = new Button(i, center - 180, 555 , 360, 75);
-                youDiedButton.addActionListener(new ActionListener() {
+                //revive in town text
+                final Text reiveInTownText = new Text("Revive In Town",LeadCrystalTextType.MESSAGE42);
+                reiveInTownText.setPosition(center - reiveInTownText.getWidth()/2, 575);
+                this.reviveText = new Label(reiveInTownText, 200 -reiveInTownText.getWidth()/2, 285,true);
+                this.addComponent(reviveText);
+                this.reviveButton = new Button(new Image("blank.png"), center - 180, 555, reiveInTownText.getWidth(), reiveInTownText.getHeight());    
+                this.addComponent(reviveButton);
+                reviveButton.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e) {
                         if (e.getActionCommand().equals("clicked")) 
@@ -956,35 +960,38 @@ public class Hud extends Window
                         }
                         if (e.getActionCommand().equals("mouseEntered")) 
                         {
-                            youDiedButton.getImage().setBrightness(1.5f);
                             Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND));
-                            //play sound 
+//                            
+
+                              if(reiveInTownText.hasTextEffect("small"))
+                                  reiveInTownText.removeTextEffect("small");
+
+                               reiveInTownText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, reiveInTownText.getScale(), 1.2));
+
+                            //play sound
                             Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
-                            owningScene.add(sound);
+                            getOwningScene().add(sound);
                         }
                         if (e.getActionCommand().equals("mouseExited"))
                         {
                             Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE));
+//                             
                             
-                              youDiedButton.getImage().setBrightness(1f);
+                                if(reiveInTownText.hasTextEffect("big"))
+                                   reiveInTownText.removeTextEffect("big");
+
+                                reiveInTownText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, reiveInTownText.getScale(), 1));
                         }
                     }
                 });
-                this.addComponent(youDiedButton);
                 
-                //text
-                final Text ehh = new Text("Revive In Town",LeadCrystalTextType.MESSAGE42);
-                Label l = new Label(ehh,center - ehh.getWidth()/2, 575);
-                this.youHaveDiedLabel = l;
-                this.addComponent(l);
-                
-                
-                ehh.setColor(new Color(1,1,1,0)); 
+              
+                reiveInTownText.setColor(new Color(1,1,1,0)); 
                 Color[] points3 = {new Color(1,1,1,0),new Color(1,1,1,0),new Color(1,1,1,1)};
                 int[] durations3 = {150,60};
                 MultiTextEffect fadeEffect2 = new MultiTextEffect(TextEffect.TextEffectType.COLOR, points3,durations3);   
                 
-                ehh.addTextEffect(fadeEffect2);
+                reiveInTownText.addTextEffect(fadeEffect2);
                 
                 
                 
@@ -995,11 +1002,11 @@ public class Hud extends Window
             if(youHaveDied != null)
             {
                 this.removeComponent(youHaveDied);
-                this.removeComponent(youDiedButton);
-                this.owningScene.remove(youHaveDiedLabel); 
+                this.removeComponent(reviveButton);
+                this.removeComponent(reviveText); 
                 
                 youHaveDied = null;
-                youDiedButton = null;
+                reviveButton = null;
             }
         }
         
