@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="5.1.11" transformSequenceNumber="4">
-  <directoryPresets config="X:/Lead Crystal/Assets" />
+  <directoryPresets config="X:/Lead Crystal/Assets/Sounds" />
   <application name="Lead Crystal" distributionSourceDir="" applicationId="0938-5269-1317-3306" mediaDir="X:/Lead Crystal/Distributions/${compiler:sys.version}" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="LeadCrystal" publisher="Silver Goblet Games" publisherWeb="http://www.silvergobletgames.com" version="0.7.20" allPathsRelative="false" backupOnSave="false" autoSave="false" convertDotsToUnderscores="false" macSignature="????" installerName="" javaMinVersion="1.7" javaMaxVersion="1.7" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
@@ -59,7 +59,7 @@
       <dirEntry mountPoint="123" file="X:/Lead Crystal/Assets/Build Graphics/Graphics" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="Graphics" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
-      <dirEntry mountPoint="124" file="X:/Lead Crystal/Assets/Sounds" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="Sounds" excludeSuffixes="" dirMode="755" overrideDirMode="false">
+      <dirEntry mountPoint="124" file="X:/Lead Crystal/Assets/Sounds/build sounds" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="build sounds" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
       <fileEntry mountPoint="183" file="X:/Lead Crystal/Assets/Configurations/dev/engineSettings.ini" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
