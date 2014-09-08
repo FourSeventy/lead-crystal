@@ -470,6 +470,10 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             fadeEffect.setDelay(90);
             currencyText.addTextEffect(fadeEffect);
             this.getOwningScene().add(currencyText, Scene.Layer.MAIN);
+            
+            //add sound
+            Sound goldSound = Sound.locationSound("buffered/jump.ogg", this.getPosition().x, this.getPosition().y, false, .6f,2f);               
+            this.getOwningScene().add(goldSound);
 
 
             //remove the item from the world
@@ -502,6 +506,10 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                 this.potionManager.addPotion(1);
                 this.potionManager.usePotion();
             }
+            
+            //sound
+            Sound sound = Sound.locationSound("buffered/blip.ogg", this.getPosition().x, this.getPosition().y, false); 
+            this.getOwningScene().add(sound);
             
             //remove the item from the world
             other.removeFromOwningScene();

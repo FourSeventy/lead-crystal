@@ -22,6 +22,7 @@ import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
 import com.silvergobletgames.leadcrystal.skills.*;
 import com.silvergobletgames.leadcrystal.skills.Skill.SkillID;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.Text;
@@ -1368,10 +1369,17 @@ public class SkillMenu extends Window {
     
     public void close()
     {
+         if(this.owningScene != null && this.isOpen)
+        {
+            Sound closeSound = Sound.ambientSound("buffered/menuClose.ogg", false);
+            this.owningScene.add(closeSound);
+        }
+         
         super.close();
         
         this.hand = null;
         this.handSkillID = null;
+       
     }
     
     
@@ -1417,6 +1425,20 @@ public class SkillMenu extends Window {
         this.removeComponent(skillTooltipName);
         this.removeComponent(skillTooltipIcon);
         this.removeComponent(skillTooltipTextBlock);
+    }
+    
+    
+    @Override
+    public void open()
+    {
+        if(this.owningScene != null && !this.isOpen)
+        {
+            Sound openSound = Sound.ambientSound("buffered/menuOpen.ogg", false);
+            this.owningScene.add(openSound);
+        }
+        
+        super.open();      
+        
     }
 
 }

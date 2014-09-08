@@ -3,21 +3,22 @@ package com.silvergobletgames.leadcrystal.menus;
 import com.jogamp.newt.event.KeyEvent;
 import com.jogamp.opengl.util.texture.Texture;
 import com.jogamp.opengl.util.texture.TextureCoords;
+import com.silvergobletgames.leadcrystal.combat.LevelProgressionManager.Level;
+import com.silvergobletgames.leadcrystal.core.CursorFactory;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
+import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
+import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
+import com.silvergobletgames.sylver.audio.Sound;
+import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.graphics.*;
+import com.silvergobletgames.sylver.util.SylverVector2f;
+import com.silvergobletgames.sylver.windowsystem.*;
 import com.silvergobletgames.sylver.windowsystem.Button;
 import com.silvergobletgames.sylver.windowsystem.Label;
 import com.silvergobletgames.sylver.windowsystem.TextBlock;
 import com.silvergobletgames.sylver.windowsystem.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import com.silvergobletgames.leadcrystal.combat.LevelProgressionManager.Level;
-import com.silvergobletgames.leadcrystal.core.CursorFactory;
-import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
-import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
-import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
-import com.silvergobletgames.sylver.core.Game;
-import com.silvergobletgames.sylver.util.SylverVector2f;
-import com.silvergobletgames.sylver.windowsystem.*;
 import java.util.ArrayList;
 import javax.media.opengl.GL2;
 
@@ -377,9 +378,14 @@ public class MapMenu extends Window{
             }
         }
         
-        super.open();
-
+        if(this.owningScene != null && !this.isOpen)
+        {
+            Sound openSound = Sound.ambientSound("buffered/menuOpen.ogg", false);
+            this.owningScene.add(openSound);
+        }
         
+        super.open();
+       
     }
     
     /**
@@ -1107,5 +1113,19 @@ public class MapMenu extends Window{
         this.addComponent(leftMovementButton);
        
     }
+    
+        @Override
+    public void close()
+    {
+        if(this.owningScene != null && this.isOpen)
+        {
+            Sound closeSound = Sound.ambientSound("buffered/menuClose.ogg", false);
+            this.owningScene.add(closeSound);
+        }
+        
+        super.close();
+        
+    }
+
     
 }

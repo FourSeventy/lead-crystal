@@ -13,6 +13,7 @@ import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Game;
 
 /**
@@ -220,14 +221,34 @@ public class QuestMenu extends Window{
     }
     
     
+     @Override
+    public void close()
+    {
+        
+        if(this.owningScene != null && this.isOpen)
+        {
+            Sound closeSound = Sound.ambientSound("buffered/menuClose.ogg", false);
+            this.owningScene.add(closeSound);
+        }
+        
+        super.close();
+               
+    }
+    
     @Override
     public void open()
     {
-        super.open();
         
-       //repaint
-        this.repaintLevelDetails(); 
-      
+        if(this.owningScene != null && !this.isOpen)
+        {
+            Sound openSound = Sound.ambientSound("buffered/menuOpen.ogg", false);
+            this.owningScene.add(openSound);
+        }
+        
+        super.open();      
+        
+        //repaint
+        this.repaintLevelDetails();
     }
     
 }

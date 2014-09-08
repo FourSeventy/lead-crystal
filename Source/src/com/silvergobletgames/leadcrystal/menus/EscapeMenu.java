@@ -171,4 +171,30 @@ public class EscapeMenu extends Window
         
         
     }
+    
+    @Override
+    public void close()
+    {
+        if(this.owningScene != null && this.isOpen)
+        {
+            Sound closeSound = Sound.ambientSound("buffered/menuClose.ogg", false);
+            this.owningScene.add(closeSound);
+        }
+        
+        super.close();
+      
+    }
+    
+    @Override
+    public void open()
+    {
+        if(this.owningScene != null && !this.isOpen)
+        {
+            Sound openSound = Sound.ambientSound("buffered/menuOpen.ogg", false);
+            this.owningScene.add(openSound);
+        }
+        
+        super.open();
+               
+    }
 }

@@ -277,9 +277,9 @@ public class Hud extends Window
                 }
             }
         
-        });
-        escapeMenu.setOwningScene(scene);
+        });      
         this.escapeMenu.close();  
+        escapeMenu.setOwningScene(scene);
         menuList.add(escapeMenu);
         
         //options menu
@@ -297,9 +297,9 @@ public class Hud extends Window
                 }
             }
         
-        });
-        optionsMenu.setOwningScene(scene);
+        });       
         this.optionsMenu.close();  
+        optionsMenu.setOwningScene(scene);
         menuList.add(optionsMenu);
         
         //pain overlay     
