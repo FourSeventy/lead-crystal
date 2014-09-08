@@ -508,7 +508,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             }
             
             //sound
-            Sound sound = Sound.locationSound("buffered/blip.ogg", this.getPosition().x, this.getPosition().y, false); 
+            Sound sound = Sound.locationSound("buffered/blip.ogg", this.getPosition().x, this.getPosition().y, false,.8f);  
             this.getOwningScene().add(sound);
             
             //remove the item from the world
