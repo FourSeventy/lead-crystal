@@ -1,13 +1,14 @@
 package com.silvergobletgames.leadcrystal.core;
 
+import com.silvergobletgames.leadcrystal.scenes.BrandingScene;
 import com.silvergobletgames.leadcrystal.scenes.LoadingScene;
-import com.silvergobletgames.sylver.core.Game;
-import com.silvergobletgames.sylver.core.GameConfiguration;
-import java.io.IOException;
 import com.silvergobletgames.leadcrystal.scenes.MainMenuScene;
 import com.silvergobletgames.sylver.core.EngineSettings;
+import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.core.Game.SystemExitAction;
+import com.silvergobletgames.sylver.core.GameConfiguration;
 import java.io.File;
+import java.io.IOException;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.net.URI;
 import java.util.ArrayList;
@@ -112,12 +113,14 @@ public class Main
             catch(Exception ex){ System.err.println("couldnt save settings");}
         }
         
-        //changes us into the loading scene
+        //change us into the branding scene
+        Game.getInstance().loadScene(new BrandingScene());
+        Game.getInstance().changeScene(BrandingScene.class, null);
+        
+        //load the loading scene (will be switched into once the branding is done)
         Game.getInstance().loadScene(new LoadingScene());
-        Game.getInstance().changeScene(LoadingScene.class, null);
         
-        
-        
+                
         //thread to load our textures, sounds, fonts, and levels
         Thread thread = new Thread()
         {
