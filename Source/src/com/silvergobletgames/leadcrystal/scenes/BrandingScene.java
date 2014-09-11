@@ -52,7 +52,7 @@ public class BrandingScene extends Scene{
         img.setPosition(center - img.getWidth()/2, 180); 
         img.setColor(new Color(1f,1f,1f,0f));
              
-        int[] durations = {120, 150, 30};
+        int[] durations = {120, 150, 60};
         Object[] points = {new Color(1f,1f,1f,0f),new Color(1f,1f,1f,1f), new Color(1f,1f,1f,1f),new Color(1f,1f,1f,0f)};       
         MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.COLOR, points, durations);
         img.addImageEffect(effect);
@@ -67,7 +67,7 @@ public class BrandingScene extends Scene{
         img2.setPosition(center - (img2.getWidth() * .9f)/2, 75); 
         img2.setColor(new Color(1f,1f,1f,0f));
              
-        int[] durations2 = {120, 150, 30};
+        int[] durations2 = {120, 150, 60};
         Object[] points2 = {new Color(1f,1f,1f,0f),new Color(1f,1f,1f,1f), new Color(1f,1f,1f,1f),new Color(1f,1f,1f,0f)};       
         MultiImageEffect effect2 = new MultiImageEffect(ImageEffect.ImageEffectType.COLOR, points2, durations2);
         img2.addImageEffect(effect2);
@@ -89,7 +89,7 @@ public class BrandingScene extends Scene{
         this.timer++;
         
         
-        if(this.timer > 320) // 5 ish seconds
+        if(this.timer > 350) // 5 ish seconds
         {
             //switch to loading scene
             Game.getInstance().changeScene(LoadingScene.class, null);
