@@ -25,7 +25,7 @@ public class PotionsMenu extends Window{
     private PlayerEntity playerReference;
     private Label playerGoldLabel;
  
-    public PotionsMenu( PlayerEntity playerReference,float x, float y)
+    public PotionsMenu( final PlayerEntity playerReference,float x, float y)
     {
         super(new Image("tallFrame.png"),x,y,550,900);
         
@@ -83,6 +83,23 @@ public class PotionsMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    ((GameClientScene)owningScene).sendBuyPotionPacket(); 
+
+                   //check if the buy will succeed or fail
+                   int currency = PotionsMenu.this.playerReference.getCurrencyManager().getBalence();
+                   int currentPots = PotionsMenu.this.playerReference.getPotionManager().getNumberOfPotions();
+                   int maxPots = PotionsMenu.this.playerReference.getPotionManager().getMaxPotions();
+                   if(currency >= PotionManager.POTION_PRICE && currentPots < maxPots)
+                   {
+                       //play success noise
+                       Sound goldSound = Sound.ambientSound("buffered/coins.ogg",false);               
+                       PotionsMenu.this.getOwningScene().add(goldSound);
+                       
+                   }
+                   else
+                   {
+                       //play error noise
+                       //show error message
+                   }
                }
            }
        });
