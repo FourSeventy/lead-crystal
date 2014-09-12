@@ -97,7 +97,9 @@ public class PotionsMenu extends Window{
                    }
                    else
                    {
-                       //play error noise
+                       //play error sound
+                        Sound errorSound = Sound.ambientSound("buffered/error.ogg",false);               
+                        PotionsMenu.this.getOwningScene().add(errorSound);
                        //show error message
                    }
                }

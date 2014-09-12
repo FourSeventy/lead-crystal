@@ -1237,6 +1237,9 @@ public class ArmorMenu extends Window{
         if(!stat.unlocked || stat.isMaxPoints())
         {
             //play error sound
+            Sound errorSound = Sound.ambientSound("buffered/error.ogg",false);               
+            ArmorMenu.this.getOwningScene().add(errorSound);
+            
             //show error message
             return;
         }
@@ -1245,6 +1248,9 @@ public class ArmorMenu extends Window{
         if(currentGold < stat.cost)
         {
             //play error sound
+            Sound errorSound = Sound.ambientSound("buffered/error.ogg",false);               
+            ArmorMenu.this.getOwningScene().add(errorSound);
+            
             //show error message
             
             return;
