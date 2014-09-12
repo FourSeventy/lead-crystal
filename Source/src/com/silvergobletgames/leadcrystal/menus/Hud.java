@@ -375,6 +375,10 @@ public class Hud extends Window
                     
                     //tell the server we changed our skill
                     gs.sendSkillPacket();
+                    
+                    //add sound
+                    Sound goldSound = Sound.locationSound("buffered/jumpReversed.ogg", Hud.this.playerReference.getPosition().x, Hud.this.playerReference.getPosition().y, false, .6f,2f);               
+                    Hud.this.getOwningScene().add(goldSound);
                 }
                 //if we clicked it when playing the game
                 else if(e.getActionCommand().equals("clicked") && !skillMenu.isOpen())
@@ -411,6 +415,10 @@ public class Hud extends Window
                     
                     //tell the server we changed our skill
                     gs.sendSkillPacket();
+                    
+                    //add sound
+                    Sound goldSound = Sound.locationSound("buffered/jumpReversed.ogg", Hud.this.playerReference.getPosition().x, Hud.this.playerReference.getPosition().y, false, .6f,2f);               
+                    Hud.this.getOwningScene().add(goldSound);
                 }
                 //if we clicked it when playing the game
                 else if(e.getActionCommand().equals("clicked") && !skillMenu.isOpen())
@@ -447,6 +455,10 @@ public class Hud extends Window
                     
                     //tell the server we changed our skill
                     gs.sendSkillPacket();
+                    
+                    //add sound
+                    Sound goldSound = Sound.locationSound("buffered/jumpReversed.ogg", Hud.this.playerReference.getPosition().x, Hud.this.playerReference.getPosition().y, false, .6f,2f);               
+                    Hud.this.getOwningScene().add(goldSound);
                 }
                 //if we clicked it when playing the game
                 else if(e.getActionCommand().equals("clicked") && !skillMenu.isOpen())
@@ -483,6 +495,10 @@ public class Hud extends Window
                     
                     //tell the server we changed our skill
                     gs.sendSkillPacket();
+                    
+                    //add sound
+                    Sound goldSound = Sound.locationSound("buffered/jumpReversed.ogg", Hud.this.playerReference.getPosition().x, Hud.this.playerReference.getPosition().y, false, .6f,2f);               
+                    Hud.this.getOwningScene().add(goldSound);
                 }
                 //if we clicked it when playing the game
                 else if(e.getActionCommand().equals("clicked") && !skillMenu.isOpen())

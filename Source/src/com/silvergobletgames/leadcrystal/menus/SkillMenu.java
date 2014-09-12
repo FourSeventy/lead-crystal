@@ -212,6 +212,9 @@ public class SkillMenu extends Window {
                         hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
                         hand.setDimensions(40, 40);
                         handSkillID = skill.getSkillID();
+                        
+                        //add sound
+                        playSkillPickSound();
                    }
                    else //buy the skill
                    {
@@ -219,14 +222,14 @@ public class SkillMenu extends Window {
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
-               {
-                  if(primaryLock[0] == false && hand == null)
+               {    
+                   if(primaryLock[0] == false && hand == null)
                    {
                         hand = skill.getIcon();
                         hand.setAnchor(Anchorable.Anchor.CENTER);
                         hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
                         hand.setDimensions(40, 40);
-                        handSkillID = skill.getSkillID();
+                        handSkillID = skill.getSkillID();                       
                    } 
                }
                if(e.getActionCommand().equals("mouseEntered"))
@@ -257,6 +260,8 @@ public class SkillMenu extends Window {
                         hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
                         hand.setDimensions(40, 40);
                         handSkillID = skill5.getSkillID();
+                        
+                        playSkillPickSound();
                    }
                    else //buy the skill
                    {
@@ -302,6 +307,8 @@ public class SkillMenu extends Window {
                         hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
                         hand.setDimensions(40, 40);
                         handSkillID = skill7.getSkillID();
+                        
+                        playSkillPickSound();
                    }
                    else //buy the skill
                    {
@@ -347,6 +354,8 @@ public class SkillMenu extends Window {
                         hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
                         hand.setDimensions(40, 40);
                         handSkillID = blade.getSkillID();
+                        
+                        playSkillPickSound();
                    }
                    else //buy the skill
                    {
@@ -395,6 +404,8 @@ public class SkillMenu extends Window {
                         hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
                         hand.setDimensions(40, 40);
                         handSkillID = skill1.getSkillID();
+                        
+                        playSkillPickSound();
                    }
                    else //buy the skill
                    {
@@ -440,6 +451,8 @@ public class SkillMenu extends Window {
                         hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
                         hand.setDimensions(40, 40);
                         handSkillID = skill3.getSkillID();
+                        
+                        playSkillPickSound();
                    }
                    else //buy the skill
                    {
@@ -485,6 +498,8 @@ public class SkillMenu extends Window {
                         hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
                         hand.setDimensions(40, 40);
                         handSkillID = freezeSkill.getSkillID();
+                        
+                        playSkillPickSound();
                    }
                    else //buy the skill
                    {
@@ -530,6 +545,8 @@ public class SkillMenu extends Window {
                         hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
                         hand.setDimensions(40, 40);
                         handSkillID = snipeSkill.getSkillID();
+                        
+                        playSkillPickSound();
                    }
                    else //buy the skill
                    {
@@ -579,6 +596,8 @@ public class SkillMenu extends Window {
                         hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
                         hand.setDimensions(40, 40);
                         handSkillID = skill6.getSkillID();
+                        
+                        playSkillPickSound();
                    }
                    else //buy the skill
                    {
@@ -625,6 +644,8 @@ public class SkillMenu extends Window {
                         hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
                         hand.setDimensions(40, 40);
                         handSkillID = flashbangSkill.getSkillID();
+                        
+                        playSkillPickSound();
                    }
                    else //buy the skill
                    {
@@ -671,6 +692,8 @@ public class SkillMenu extends Window {
                         hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
                         hand.setDimensions(40, 40);
                         handSkillID = stimSkill.getSkillID();
+                        
+                        playSkillPickSound();
                    }
                    else //buy the skill
                    {
@@ -717,6 +740,8 @@ public class SkillMenu extends Window {
                         hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
                         hand.setDimensions(40, 40);
                         handSkillID = gravitySkill.getSkillID();
+                        
+                        playSkillPickSound();
                    }
                    else //buy the skill
                    {
@@ -767,6 +792,8 @@ public class SkillMenu extends Window {
                         hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
                         hand.setDimensions(40, 40);
                         handSkillID = skill2.getSkillID();
+                        
+                        playSkillPickSound();
                    }
                    else //buy the skill
                    {
@@ -812,6 +839,8 @@ public class SkillMenu extends Window {
                         hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
                         hand.setDimensions(40, 40);
                         handSkillID = skill4.getSkillID();
+                        
+                        playSkillPickSound();
                    }
                    else //buy the skill
                    {
@@ -857,6 +886,8 @@ public class SkillMenu extends Window {
                         hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
                         hand.setDimensions(40, 40);
                         handSkillID = playerGuardSkill.getSkillID();
+                        
+                        playSkillPickSound();
                    }
                    else //buy the skill
                    {
@@ -902,6 +933,8 @@ public class SkillMenu extends Window {
                         hand.setPositionAnchored(Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x, Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y);
                         hand.setDimensions(40, 40);
                         handSkillID = playerFlashbangSkill.getSkillID();
+                        
+                        playSkillPickSound();
                    }
                    else //buy the skill
                    {
@@ -1425,6 +1458,13 @@ public class SkillMenu extends Window {
         this.removeComponent(skillTooltipName);
         this.removeComponent(skillTooltipIcon);
         this.removeComponent(skillTooltipTextBlock);
+    }
+    
+    private void playSkillPickSound()
+    {
+        //add sound
+        Sound goldSound = Sound.locationSound("buffered/jump.ogg", SkillMenu.this.playerReference.getPosition().x, SkillMenu.this.playerReference.getPosition().y, false, .6f,2f);               
+        SkillMenu.this.getOwningScene().add(goldSound);
     }
     
     
