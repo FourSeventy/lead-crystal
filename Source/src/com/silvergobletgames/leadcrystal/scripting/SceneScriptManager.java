@@ -373,6 +373,19 @@ public class SceneScriptManager
         this.owningScene.add(soundData);
     }
     
+    public void playSoundAtPosition(float x, float y, String soundRef)
+    {
+        Sound soundData = Sound.locationSound(soundRef, x, y, false);
+        this.owningScene.add(soundData);
+    }
+    
+    public void playPickUpSound(float x, float y)
+    {
+        //add sound
+        Sound goldSound = Sound.locationSound("buffered/jump.ogg", x, y, false, .6f,2f);               
+        this.owningScene.add(goldSound);
+    }
+    
     public void changeBGM(String soundRef)
     {
         Sound sound =Sound.changeBGM(soundRef, 400, 400);   
