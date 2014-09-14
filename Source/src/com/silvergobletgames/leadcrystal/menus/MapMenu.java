@@ -520,6 +520,7 @@ public class MapMenu extends Window{
             {
                 if (e.getActionCommand().equals("mouseEntered")) {            
                    button0.getImage().getOverlay("img").getImage().setScale(1.2f); 
+                   playLevelHoverSound();
                    repaintLevelDetails(0);
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
@@ -545,6 +546,7 @@ public class MapMenu extends Window{
        if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(1).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_checkmark.png")); 
+           correctOverlay.getImage().setDimensions(75, 75);
        }
        else
        {
@@ -560,6 +562,7 @@ public class MapMenu extends Window{
             {
                 if (e.getActionCommand().equals("mouseEntered")) {            
                    button.getImage().getOverlay("img").getImage().setScale(1.2f); 
+                   playLevelHoverSound();
                    repaintLevelDetails(1);
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
@@ -607,6 +610,7 @@ public class MapMenu extends Window{
                      if(!button1.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button1.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        playLevelHoverSound();
                         repaintLevelDetails(2);
                      }
                 }
@@ -660,6 +664,7 @@ public class MapMenu extends Window{
                      if(!button2.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button2.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        playLevelHoverSound();
                         repaintLevelDetails(3);
                      }
                 }
@@ -711,6 +716,7 @@ public class MapMenu extends Window{
                      if(!button3.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button3.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        playLevelHoverSound();
                         repaintLevelDetails(4);
                      }
                 }
@@ -761,6 +767,7 @@ public class MapMenu extends Window{
                      if(!button4.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button4.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        playLevelHoverSound();
                         repaintLevelDetails(5);
                      }
                 }
@@ -818,6 +825,7 @@ public class MapMenu extends Window{
                      if(!button5.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
                      {
                         button5.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        playLevelHoverSound();
                         repaintLevelDetails(6);
                      }
                 }
@@ -871,6 +879,7 @@ public class MapMenu extends Window{
                      if(!button6.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
                      {
                         button6.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        playLevelHoverSound();
                         repaintLevelDetails(7);
                      }
                 }
@@ -923,6 +932,7 @@ public class MapMenu extends Window{
                      if(!button7.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
                      {
                         button7.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        playLevelHoverSound();
                         repaintLevelDetails(8);
                      }
                 }
@@ -975,6 +985,7 @@ public class MapMenu extends Window{
                      if(!button8.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
                      {
                         button8.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        playLevelHoverSound();
                         repaintLevelDetails(9);
                      }
                 }
@@ -1027,6 +1038,7 @@ public class MapMenu extends Window{
                      if(!button9.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
                      {
                         button9.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        playLevelHoverSound();
                         repaintLevelDetails(10);
                      }
                 }
@@ -1125,6 +1137,13 @@ public class MapMenu extends Window{
         
         super.close();
         
+    }
+    
+    private void playLevelHoverSound()
+    {
+        //add sound
+        Sound goldSound = Sound.ambientSound("buffered/buttonBoop.ogg", false);
+        MapMenu.this.getOwningScene().add(goldSound);
     }
 
     
