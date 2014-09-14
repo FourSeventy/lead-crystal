@@ -219,6 +219,7 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(skill.getSkillID());
+                       playSkillUnlockSound();
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -266,6 +267,7 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(skill5.getSkillID());
+                       playSkillUnlockSound();
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -313,6 +315,7 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(skill7.getSkillID());
+                       playSkillUnlockSound();
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -360,6 +363,7 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(blade.getSkillID());
+                       playSkillUnlockSound();
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -410,6 +414,7 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(skill1.getSkillID());
+                       playSkillUnlockSound();
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -457,6 +462,7 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(skill3.getSkillID());
+                       playSkillUnlockSound();
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -504,6 +510,7 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(freezeSkill.getSkillID());
+                       playSkillUnlockSound();
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -551,6 +558,7 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(snipeSkill.getSkillID());
+                       playSkillUnlockSound();
                    }
                }             
                if(e.getActionCommand().equals("mouseDown"))
@@ -602,6 +610,7 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(skill6.getSkillID());
+                       playSkillUnlockSound();
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -650,6 +659,7 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(flashbangSkill.getSkillID());
+                       playSkillUnlockSound();
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -698,6 +708,7 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(stimSkill.getSkillID());
+                       playSkillUnlockSound();
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -746,6 +757,7 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(gravitySkill.getSkillID());
+                       playSkillUnlockSound();
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -798,6 +810,7 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(skill2.getSkillID());
+                       playSkillUnlockSound();
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -845,6 +858,7 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(skill4.getSkillID());
+                       playSkillUnlockSound();
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -892,6 +906,7 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(playerGuardSkill.getSkillID());
+                       playSkillUnlockSound();
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -939,6 +954,7 @@ public class SkillMenu extends Window {
                    else //buy the skill
                    {
                        ((GameClientScene)owningScene).sendBuySkillPacket(playerFlashbangSkill.getSkillID());
+                       playSkillUnlockSound();
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -1465,6 +1481,13 @@ public class SkillMenu extends Window {
         //add sound
         Sound goldSound = Sound.locationSound("buffered/jump.ogg", SkillMenu.this.playerReference.getPosition().x, SkillMenu.this.playerReference.getPosition().y, false, .6f,2f);               
         SkillMenu.this.getOwningScene().add(goldSound);
+    }
+    
+    private void playSkillUnlockSound()
+    {
+        //play sound
+        Sound sound = Sound.ambientSound("buffered/collect.ogg",true);  
+        this.owningScene.add(sound);
     }
     
     

@@ -228,6 +228,10 @@ public class SceneScriptManager
             
             owningScene.sendSideObjectiveCompletePacket(player.getID(), currencyReward,id);
             
+            
+            //play sound
+            Sound sound = Sound.ambientSound("buffered/complete.ogg",true);  
+            this.owningScene.add(sound);
            
         
         }
@@ -275,7 +279,9 @@ public class SceneScriptManager
             //complete main objective
             player.getLevelProgressionManager().completeMainObjective(levelNumber);          
             
-              
+            //play sound
+            Sound sound = Sound.ambientSound("buffered/complete.ogg",true);  
+            this.owningScene.add(sound);
          
         }
        

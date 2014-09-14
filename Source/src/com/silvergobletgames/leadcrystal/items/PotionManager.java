@@ -5,6 +5,7 @@ import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.ImageEffect;
@@ -100,6 +101,15 @@ public class PotionManager
                 {
                     this.playerReference.getSkillManager().getSkill(this.playerReference.getSkillAssignment(4)).setCooldownRemaining(0);
                 }
+            }
+            
+            
+            //play sound
+            if(this.playerReference != null && this.playerReference.getOwningScene() != null)
+            {
+                //sound
+                Sound sound = Sound.locationSound("buffered/usePotion.ogg", this.playerReference.getPosition().x, this.playerReference.getPosition().y, false,.8f);  
+                this.playerReference.getOwningScene().add(sound);
             }
         }
     }
