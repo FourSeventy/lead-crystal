@@ -1,23 +1,40 @@
 package com.silvergobletgames.leadcrystal.scenes;
 
 import com.jogamp.newt.event.KeyEvent;
-import com.silvergobletgames.leadcrystal.core.EnhancedViewport;
-import com.silvergobletgames.leadcrystal.menus.LayerWindow;
-import com.silvergobletgames.leadcrystal.menus.PropertiesWindow;
-import com.silvergobletgames.leadcrystal.menus.TilePalette;
-import com.silvergobletgames.leadcrystal.menus.LevelPropertiesWindow;
-import com.silvergobletgames.leadcrystal.menus.ScriptWindow;
-import com.silvergobletgames.leadcrystal.menus.FileMenu;
-import com.silvergobletgames.leadcrystal.core.LevelData;
-import com.silvergobletgames.leadcrystal.core.SaveGame;
+import com.silvergobletgames.leadcrystal.combat.SoundPack;
+import com.silvergobletgames.leadcrystal.combat.SoundPackFactory;
 import com.silvergobletgames.leadcrystal.core.*;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.FlierAnimationPack;
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
+import com.silvergobletgames.leadcrystal.core.EnhancedViewport;
+import com.silvergobletgames.leadcrystal.core.LevelData;
+import com.silvergobletgames.leadcrystal.core.SaveGame;
+import com.silvergobletgames.leadcrystal.entities.Entity;
+import com.silvergobletgames.leadcrystal.entities.MobSpawner;
+import com.silvergobletgames.leadcrystal.entities.NonPlayerEntity;
+import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
+import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity;
+import com.silvergobletgames.leadcrystal.items.DropGenerator;
+import com.silvergobletgames.leadcrystal.items.DropGenerator.DropQuality;
+import com.silvergobletgames.leadcrystal.menus.*;
+import com.silvergobletgames.leadcrystal.menus.FileMenu;
+import com.silvergobletgames.leadcrystal.menus.LayerWindow;
+import com.silvergobletgames.leadcrystal.menus.LevelPropertiesWindow;
+import com.silvergobletgames.leadcrystal.menus.PropertiesWindow;
+import com.silvergobletgames.leadcrystal.menus.ScriptWindow;
+import com.silvergobletgames.leadcrystal.menus.TilePalette;
+import com.silvergobletgames.leadcrystal.netcode.ConnectionException;
+import com.silvergobletgames.leadcrystal.netcode.GobletServer;
+import com.silvergobletgames.sylver.audio.AudioRenderer;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.*;
 import com.silvergobletgames.sylver.graphics.*;
+import com.silvergobletgames.sylver.graphics.Color;
+import com.silvergobletgames.sylver.graphics.Text.CoreTextType;
 import com.silvergobletgames.sylver.netcode.SavableSceneObject;
 import com.silvergobletgames.sylver.netcode.SceneObjectDeserializer;
 import com.silvergobletgames.sylver.netcode.SceneObjectSaveData;
+import com.silvergobletgames.sylver.util.SylverVector2f;
 import com.silvergobletgames.sylver.windowsystem.*;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -26,29 +43,14 @@ import java.io.File;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.UUID;
+import javax.media.opengl.GL2;
 import javax.media.opengl.GL3bc;
 import javax.media.opengl.glu.gl2.GLUgl2;
 import net.phys2d.math.Vector2f;
+import net.phys2d.raw.StaticBody;
 import net.phys2d.raw.shapes.Box;
 import net.phys2d.raw.shapes.Polygon;
 import net.phys2d.raw.shapes.Shape;
-import com.silvergobletgames.leadcrystal.entities.Entity;
-import com.silvergobletgames.leadcrystal.entities.MobSpawner;
-import com.silvergobletgames.leadcrystal.entities.NonPlayerEntity;
-import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity;
-import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
-import com.silvergobletgames.leadcrystal.items.DropGenerator;
-import com.silvergobletgames.leadcrystal.items.DropGenerator.DropQuality;
-import com.silvergobletgames.leadcrystal.menus.*;
-import com.silvergobletgames.leadcrystal.netcode.ConnectionException;
-import com.silvergobletgames.leadcrystal.netcode.GobletServer;
-import com.silvergobletgames.sylver.audio.AudioRenderer;
-import com.silvergobletgames.sylver.audio.Sound;
-import com.silvergobletgames.sylver.graphics.Color;
-import com.silvergobletgames.sylver.graphics.Text.CoreTextType;
-import com.silvergobletgames.sylver.util.SylverVector2f;
-import javax.media.opengl.GL2;
-import net.phys2d.raw.StaticBody;
 
 /**
  *
@@ -888,27 +890,30 @@ public class MapEditorScene extends Scene {
             
             if (inputSnapshot.isKeyReleasedCtrlModifier(KeyEvent.VK_M))
             {
+                             
+               
                 
-              
+                //for boxes
+                for(SceneObject so: this.getSceneObjectManager().get(Layer.MAIN))
+                {
+                    if(so instanceof NonPlayerEntity)
+                    {
+                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.CommonCrateAnimationPack)
+                        {
+                            ((NonPlayerEntity)so).setSoundPack(SoundPackFactory.getInstance().getSoundPack(SoundPack.SoundPackID.Crate)); 
+                        }
+                    }
+                    else if(so instanceof MobSpawner)
+                    {
+                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.CommonCrateAnimationPack)
+                        {
+                            ((MobSpawner)so).mobToSpawn.setSoundPack(SoundPackFactory.getInstance().getSoundPack(SoundPack.SoundPackID.Crate));
+                        }                           
+                    }
+                }
                 
-//                for(SceneObject so: this.getSceneObjectManager().get(Layer.MAIN))
-//                {
-//                    if(so instanceof NonPlayerEntity)
-//                    {
-//                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof FlierAnimationPack)
-//                        {
-//                            ((NonPlayerEntity)so).getCombatData().baseDamage.setBase(10);
-//                        }
-//                    }
-//                    else if(so instanceof MobSpawner)
-//                    {
-//                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof FlierAnimationPack)
-//                        {
-//                            ((MobSpawner)so).mobToSpawn.getCombatData().baseDamage.setBase(10);
-//                        }
-//                            
-//                    }
-//                }
+                
+                
             }
             
             
