@@ -2,27 +2,28 @@ package com.silvergobletgames.leadcrystal.entities;
 
 import com.silvergobletgames.leadcrystal.ai.AIState;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
+import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectClasses;
+import com.silvergobletgames.leadcrystal.core.GameplaySettings;
+import com.silvergobletgames.leadcrystal.core.SpawningEffectsFactory;
+import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.MapEditorScene;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene.Layer;
+import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.graphics.Anchorable;
 import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.netcode.SavableSceneObject;
 import com.silvergobletgames.sylver.netcode.SaveData;
 import com.silvergobletgames.sylver.netcode.SceneObjectSaveData;
+import com.silvergobletgames.sylver.util.SylverVector2f;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.media.opengl.GL2;
 import javax.media.opengl.GL3bc;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
-import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectClasses;
-import com.silvergobletgames.leadcrystal.core.GameplaySettings;
-import com.silvergobletgames.leadcrystal.core.SpawningEffectsFactory;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
-import com.silvergobletgames.leadcrystal.scenes.MapEditorScene;
-import com.silvergobletgames.sylver.core.SceneObject;
-import com.silvergobletgames.sylver.util.SylverVector2f;
-import java.util.AbstractMap.SimpleEntry;
-import javax.media.opengl.GL2;
 
 /**
  *
@@ -150,6 +151,13 @@ public class MobSpawner extends Entity implements SavableSceneObject
        
             this.owningScene.add(object, Layer.ATTACHED_FG);
         
+        }
+        
+        //add sound
+        Sound sound = SpawningEffectsFactory.getSpawnSound(mobToSpawn.getImage().getAnimationPack(), spawnX, spawnX); 
+        if(sound != null)
+        {
+           this.owningScene.add(sound);
         }
         
     }

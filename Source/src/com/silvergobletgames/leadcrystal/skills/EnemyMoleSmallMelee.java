@@ -17,6 +17,7 @@ import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect;
 import com.silvergobletgames.leadcrystal.entities.HitBox;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 
 
@@ -55,6 +56,10 @@ public class EnemyMoleSmallMelee extends Skill{
         hitBox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 25, 1, 1));
         hitBox.setPosition(origin.x,origin.y);
         this.user.getOwningScene().add(hitBox,Layer.MAIN);        
+        
+        //add sound
+        Sound attackSound = Sound.locationSound("buffered/claw1.ogg", origin.x, origin.y, false);               
+        user.getOwningScene().add(attackSound);
     }
     
 

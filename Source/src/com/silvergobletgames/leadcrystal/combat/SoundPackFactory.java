@@ -47,6 +47,15 @@ public class SoundPackFactory
         pack = new SoundPack(soundMap,SoundPackID.Mammal);
         packMap.put(SoundPackID.Mammal,pack);
         
+        //big mammal pack
+        soundMap = new HashMap<>();
+        soundList = new ArrayList();
+        soundList.add("buffered/muckerDeath1.ogg");
+        soundList.add("buffered/muckerDeath2.ogg");
+        soundMap.put(SoundPackType.DEATH, soundList);
+        pack = new SoundPack(soundMap,SoundPackID.BigMammal);
+        packMap.put(SoundPackID.BigMammal,pack);
+        
         //build crate pack
         soundMap = new HashMap<>();
         soundList = new ArrayList();
@@ -63,6 +72,14 @@ public class SoundPackFactory
         soundMap.put(SoundPackType.DEATH, soundList);
         pack = new SoundPack(soundMap,SoundPackID.Bug);
         packMap.put(SoundPackID.Bug,pack);
+        
+        //build small bug pack
+        soundMap = new HashMap<>();
+        soundList = new ArrayList();
+        soundList.add("buffered/bugDeath3.ogg");
+        soundMap.put(SoundPackType.DEATH, soundList);
+        pack = new SoundPack(soundMap,SoundPackID.SmallBug);
+        packMap.put(SoundPackID.SmallBug,pack);
         
         
     }

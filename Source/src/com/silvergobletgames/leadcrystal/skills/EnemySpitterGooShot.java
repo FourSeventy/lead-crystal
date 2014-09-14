@@ -19,6 +19,7 @@ import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.GreenGooEmitter;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 
 /**
@@ -119,7 +120,9 @@ public class EnemySpitterGooShot extends Skill
         user.getOwningScene().add(goo2,Layer.MAIN);       
         user.getOwningScene().add(goo3,Layer.MAIN);
         
-        //play sound
+        //add sound
+        Sound attackSound = Sound.locationSound("buffered/spit1.ogg", origin.x, origin.y, false);               
+        user.getOwningScene().add(attackSound);
         
         
 
@@ -152,6 +155,11 @@ public class EnemySpitterGooShot extends Skill
              //remove if we hit a world object
              if(other instanceof WorldObjectEntity || other instanceof CombatEntity)
              {
+                 //add sound
+                float pitch = (float)(1.9f - (Math.random() * .4f));
+                Sound attackSound = Sound.locationSound("buffered/spit1.ogg", this.getPosition().x, this.getPosition().y, false,.8f,pitch);               
+                this.getOwningScene().add(attackSound);
+                
                 this.getBody().setVelocity(new Vector2f(0,0));
                 this.removeFromOwningScene();
              }

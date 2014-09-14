@@ -8,6 +8,7 @@ import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.SandmanAnimat
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.GreenGooEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SandSpawnEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SandSpurtEmitter;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.graphics.AnimationPack;
 import com.silvergobletgames.sylver.util.SylverVector2f;
@@ -38,5 +39,16 @@ public class SpawningEffectsFactory
             effects.add(new SimpleEntry(new SandSpawnEmitter(),new SylverVector2f(0,-.70f)));
         }
         return effects;
+    }
+    
+    public static Sound getSpawnSound(AnimationPack pack,float x, float y)
+    {
+        if(pack instanceof PlantAnimationPack ||  pack instanceof MoleAnimationPack || pack instanceof SandmanAnimationPack)
+        {
+            
+            return Sound.locationSound("buffered/spawn1.ogg", x, y, false,1.5f); 
+        }
+        
+        else return null;
     }
 }

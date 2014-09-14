@@ -21,6 +21,7 @@ import com.silvergobletgames.leadcrystal.combat.Damage.DamageType;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.GreenGooEmitter;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 import net.phys2d.math.ROVector2f;
@@ -80,7 +81,9 @@ public class EnemyFlierGooBomb extends Skill
         user.getOwningScene().add(goo,Layer.MAIN);       
 
         
-        //play sound
+        //add sound
+        Sound attackSound = Sound.locationSound("buffered/spit1.ogg", origin.x, origin.y, false);               
+        user.getOwningScene().add(attackSound);
         
         
 
@@ -208,7 +211,10 @@ public class EnemyFlierGooBomb extends Skill
                 this.getOwningScene().add(goo3,Layer.MAIN); 
                 
                 
-                
+                //add sound
+                float pitch = (float)(1.9f - (Math.random() * .4f));
+                Sound attackSound = Sound.locationSound("buffered/spit1.ogg", this.getPosition().x, this.getPosition().y, false,.8f,pitch);               
+                this.getOwningScene().add(attackSound);
               
                  
                  //remove fromt world
@@ -217,11 +223,17 @@ public class EnemyFlierGooBomb extends Skill
              }
              else if(other instanceof CombatEntity)
              {
+                 //add sound
+                float pitch = (float)(1.9f - (Math.random() * .4f));
+                Sound attackSound = Sound.locationSound("buffered/spit1.ogg", this.getPosition().x, this.getPosition().y, false,.8f,pitch);               
+                this.getOwningScene().add(attackSound);
+            
                  this.getBody().setVelocity(new Vector2f(0,0));
                  this.removeFromOwningScene();
              }
              
                 
+             
          }
     }
     
@@ -251,6 +263,11 @@ public class EnemyFlierGooBomb extends Skill
              //remove if we hit a world object
              if(other instanceof WorldObjectEntity || other instanceof CombatEntity)
              {
+                 //add sound
+                float pitch = (float)(1.9f - (Math.random() * .4f));
+                Sound attackSound = Sound.locationSound("buffered/spit1.ogg", this.getPosition().x, this.getPosition().y, false,.8f,pitch);               
+                this.getOwningScene().add(attackSound);
+                
                 this.getBody().setVelocity(new Vector2f(0,0));
                 this.removeFromOwningScene();
              }
