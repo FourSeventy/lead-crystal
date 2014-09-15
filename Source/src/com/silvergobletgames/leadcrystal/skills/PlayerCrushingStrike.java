@@ -95,7 +95,7 @@ public class PlayerCrushingStrike extends PlayerSkill{
         hitBox.getBody().addForce(new Vector2f(xforce,yforce));
         this.user.getOwningScene().add(hitBox,Layer.MAIN);  
         
-        Sound sound = Sound.locationSound("buffered/clang1.ogg", user.getPosition().x, user.getPosition().y, false, 1f,1f);
+        Sound sound = Sound.locationSound("buffered/fireball.ogg", user.getPosition().x, user.getPosition().y, false);
         user.getOwningScene().add(sound);
         
         
