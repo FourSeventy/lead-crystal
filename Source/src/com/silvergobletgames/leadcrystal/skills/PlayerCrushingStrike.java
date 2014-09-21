@@ -93,7 +93,7 @@ public class PlayerCrushingStrike extends PlayerSkill{
         hitBox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 35, 1, 1));
         hitBox.setPosition(origin.x,origin.y);
         hitBox.getBody().addForce(new Vector2f(xforce,yforce));
-        this.user.getOwningScene().add(hitBox,Layer.MAIN);  
+        this.user.getOwningScene().add(hitBox,Layer.MAIN);
         
         Sound sound = Sound.locationSound("buffered/fireball.ogg", user.getPosition().x, user.getPosition().y, false);
         user.getOwningScene().add(sound);

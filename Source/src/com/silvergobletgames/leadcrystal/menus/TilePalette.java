@@ -84,6 +84,7 @@ public class TilePalette extends Menu {
     private ArrayList<Image> backgrounds = new ArrayList<>();
     private ArrayList<Image> townDoodads = new ArrayList<>();  
     private ArrayList<Image> desertTiles = new ArrayList<>();
+    private ArrayList<Image> undergroundTiles = new ArrayList<>();
     private ArrayList<Image> desertTiles2 = new ArrayList<>();
     private ArrayList<Image> desertDoodads = new ArrayList<>();
     private ArrayList<Image> templeTiles = new ArrayList<>();
@@ -100,6 +101,7 @@ public class TilePalette extends Menu {
     private ArrayList<WorldObjectEntity> desertTiles2WO = new ArrayList<>();
     private ArrayList<WorldObjectEntity> desertRocksWO = new ArrayList<>();
     private ArrayList<WorldObjectEntity> templeTilesWO = new ArrayList<>();
+    private ArrayList<WorldObjectEntity> undergroundTilesWO = new ArrayList<>();
     
     
     //current npe radio set selection
@@ -209,6 +211,17 @@ public class TilePalette extends Menu {
         }
         catch(Exception e){ System.err.println("Error getting Temple Tiles folder");}
         
+        //underground tiles
+        try
+        {
+            ArrayList<String> undergroundStrings = this.getTexturesInFolder(Game.getInstance().getConfiguration().getTextureRootFolder().resolve("terrain/undergroundTiles"));
+            for(String string: undergroundStrings)
+            {
+                undergroundTiles.add(new Image(string));
+            }
+        }
+        catch(Exception e){ System.err.println("Error getting Underground Tiles folder");}
+        
         //special doodads
         try
         {
@@ -244,6 +257,7 @@ public class TilePalette extends Menu {
         imageGroupMap.put("animatedImages", animatedTerrain);
         imageGroupMap.put("characters", characters); 
         imageGroupMap.put("caveDoodads",caveDoodads);
+        imageGroupMap.put("undergroundTiles",undergroundTiles);
                
         
         //build world object group mapping
@@ -252,6 +266,7 @@ public class TilePalette extends Menu {
         woGroupMap.put("town", townWO);       
         woGroupMap.put("desertdoodads", desertRocksWO); 
         woGroupMap.put("templetiles", templeTilesWO);
+        woGroupMap.put("undergroundtiles",undergroundTilesWO);
         
         //build npe group mapping
         npeGroupMap.put("town", townEnemies);
@@ -279,7 +294,7 @@ public class TilePalette extends Menu {
         });
         
         //build radio set for images
-        final RadioSet<String> ra = new RadioSet<>(10, 400);
+        final RadioSet<String> ra = new RadioSet<>(10, 370);
         ra.addElement(new SimpleEntry("Saved","savedImages" )); 
         ra.addElement(new SimpleEntry("Spcial Doodads","specialDoodads" ));     
         ra.addElement(new SimpleEntry("Desert Doodads","desertDoodads" ));
@@ -291,6 +306,7 @@ public class TilePalette extends Menu {
         ra.addElement(new SimpleEntry("Animated","animatedImages" ));
         ra.addElement(new SimpleEntry("Characters","characters" ));
         ra.addElement(new SimpleEntry("Cave Doodads","caveDoodads" ));
+        ra.addElement(new SimpleEntry("Underground Tiles", "undergroundTiles"));
 
         
       
@@ -306,7 +322,7 @@ public class TilePalette extends Menu {
         tabPane.addComponent(ra, 0);
         
         //build radio set for wo's
-        final RadioSet<String> ra2 = new RadioSet<>(10, 550);
+        final RadioSet<String> ra2 = new RadioSet<>(10, 520);
         Iterator iter = this.woGroupMap.keySet().iterator();
         while(iter.hasNext())
         {
