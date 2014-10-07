@@ -41,7 +41,8 @@ public class BrandingScene extends Scene{
         Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "silver-goblet.png");
         URI textureURI2 = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/silver-goblet-text.png"); 
         Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI2, "silver-goblet-text.png");
-                
+                     
+        
         //center and right layout coordinates
         int right = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x;
         int center = right/2;
@@ -87,6 +88,11 @@ public class BrandingScene extends Scene{
         super.update();
         
         this.timer++;
+        
+        if(timer == 20){
+            Sound sound = Sound.ambientSound("streaming/silvergoblet_intro.ogg", true);
+            this.add(sound); 
+        }
         
         
         if(this.timer > 350) // 5 ish seconds
