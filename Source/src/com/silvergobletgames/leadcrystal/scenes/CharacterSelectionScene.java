@@ -19,6 +19,7 @@ import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.graphics.*;
 import com.silvergobletgames.sylver.graphics.ImageEffect.ImageEffectType;
 import com.silvergobletgames.sylver.graphics.Text.CoreTextType;
+import javax.media.opengl.GL2;
 
 /**
  *
@@ -241,6 +242,23 @@ public class CharacterSelectionScene extends Scene
     public void sceneExited() 
     {
         Game.getInstance().unloadScene(CharacterSelectionScene.class);
+    }
+    
+    /**
+     * Renders everything in the scene using either the GL2 or GL3 renderer, based on the GlCapabilities
+     * @param gl 
+     */
+    public void render(GL2 gl)
+    {
+        //set viewport size
+        getViewport().setDimensions(Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x, Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().y);
+                  
+       
+        //===============
+        // GL2 rendering
+        //===============
+        RenderingPipelineGL2.render(gl, getViewport(), getSceneObjectManager(), getSceneEffectsManager()); 
+                
     }
     
     

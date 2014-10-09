@@ -26,6 +26,7 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import javax.media.opengl.GL2;
 import javax.media.opengl.GL3bc;
 import javax.media.opengl.glu.GLU;
 
@@ -269,6 +270,23 @@ public class MainMenuScene extends Scene
     public void sceneExited()
     {
         Game.getInstance().unloadScene(MainMenuScene.class);
+    }
+    
+    /**
+     * Renders everything in the scene using either the GL2 or GL3 renderer, based on the GlCapabilities
+     * @param gl 
+     */
+    public void render(GL2 gl)
+    {
+        //set viewport size
+        getViewport().setDimensions(Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x, Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().y);
+                  
+       
+        //===============
+        // GL2 rendering
+        //===============
+        RenderingPipelineGL2.render(gl, getViewport(), getSceneObjectManager(), getSceneEffectsManager()); 
+                
     }
     
     
