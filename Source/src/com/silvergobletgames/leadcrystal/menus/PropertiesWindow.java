@@ -1634,9 +1634,9 @@ public class PropertiesWindow extends Menu
     private void addLightFields(TabPane tp, int tab)
     {
         //default values
-        String size = "10";
+        String size = "100";
         String conicalRadius = "360";
-        String direction = "0";
+        String direction = "270";
         String intensity = "1";
         String r = "1";
         String g = "1";
@@ -1657,8 +1657,8 @@ public class PropertiesWindow extends Menu
                  direction = Float.toString(selectedItem.getLight().getDirection());
                  intensity = Float.toString(selectedItem.getLight().getIntensity());
                  r = Float.toString(selectedItem.getLight().getColor().r);
-                 b = Float.toString(selectedItem.getLight().getColor().g);
-                 g = Float.toString(selectedItem.getLight().getColor().b);
+                 b = Float.toString(selectedItem.getLight().getColor().b);
+                 g = Float.toString(selectedItem.getLight().getColor().g);
                  a = Float.toString(selectedItem.getLight().getColor().a);
              }
         }

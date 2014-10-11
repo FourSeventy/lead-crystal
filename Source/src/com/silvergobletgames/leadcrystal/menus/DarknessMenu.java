@@ -52,7 +52,10 @@ public class DarknessMenu extends Menu {
 
         //Darkness
         darknessTextures.add(new Image("darknessSquare.png"));
-        darknessTextures.add(new Image("test11.gif"));
+        darknessTextures.add(new Image("darknessLeft.png"));
+        darknessTextures.add(new Image("darknessRight.png"));
+        darknessTextures.add(new Image("darknessTop.png"));
+        darknessTextures.add(new Image("darknessBottom.png"));
         
         //add width and height textboxes
         Label l = new Label("Width", 50, 210);
