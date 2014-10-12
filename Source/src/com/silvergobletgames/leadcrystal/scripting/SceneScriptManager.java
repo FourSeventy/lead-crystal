@@ -100,11 +100,12 @@ public class SceneScriptManager
      * @param start start value of the effect
      * @param end end value of the effect
      */
-    public void addLightEffect(String entityID, String effectType, int duration, float start, float end)
+    public void addLightEffect(String entityID, String effectType, int duration, float start, float end, boolean repeating)
     {
         //create the image effect
         LightEffectType type = LightEffectType.valueOf(effectType);
         LightEffect effect = new LightEffect(type,duration,start,end);
+        effect.setRepeating(repeating);
         
         //get the entity and apply the image effect
         ((Entity)this.owningScene.getSceneObjectManager().get(entityID)).getLight().addLightEffect(effect);

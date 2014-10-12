@@ -102,6 +102,7 @@ public class TilePalette extends Menu {
     private ArrayList<WorldObjectEntity> desertRocksWO = new ArrayList<>();
     private ArrayList<WorldObjectEntity> templeTilesWO = new ArrayList<>();
     private ArrayList<WorldObjectEntity> undergroundTilesWO = new ArrayList<>();
+    private ArrayList<WorldObjectEntity> undergroundDoodadsWO = new ArrayList<>();
     
     
     //current npe radio set selection
@@ -222,6 +223,7 @@ public class TilePalette extends Menu {
         }
         catch(Exception e){ System.err.println("Error getting Underground Tiles folder");}
         
+        
         //special doodads
         try
         {
@@ -267,6 +269,7 @@ public class TilePalette extends Menu {
         woGroupMap.put("desertdoodads", desertRocksWO); 
         woGroupMap.put("templetiles", templeTilesWO);
         woGroupMap.put("undergroundtiles",undergroundTilesWO);
+        woGroupMap.put("cavedoodads",undergroundDoodadsWO);
         
         //build npe group mapping
         npeGroupMap.put("town", townEnemies);
@@ -322,7 +325,7 @@ public class TilePalette extends Menu {
         tabPane.addComponent(ra, 0);
         
         //build radio set for wo's
-        final RadioSet<String> ra2 = new RadioSet<>(10, 520);
+        final RadioSet<String> ra2 = new RadioSet<>(10, 480);
         Iterator iter = this.woGroupMap.keySet().iterator();
         while(iter.hasNext())
         {
