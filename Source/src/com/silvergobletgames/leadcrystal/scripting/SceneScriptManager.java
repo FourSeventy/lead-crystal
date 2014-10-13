@@ -289,7 +289,8 @@ public class SceneScriptManager
     }
     
     public void setMainObjectiveStatusText(String text){
-        
+        //send the packet
+        this.owningScene.sendSetMainQuestStatus(text);
     }
     
     public void completeLevel()
