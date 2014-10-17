@@ -82,7 +82,7 @@ public class PlayerDashAttack extends Skill{
         // make dash hitbox that will follow the player, and add force to the player
         Image swipe = new Image("dashEffect.png");            
         swipe.setHorizontalFlip(false);
-        swipe.setColor(new Color(1.2f,1.2f,1.2f));
+        swipe.setColor(new Color(1.2f,1.2f,1.2f,.7f));
         DashHitBox box = new DashHitBox(damage,new Body(new Box(100,100),1),swipe, user,vectorToTarget);
        // box.getImage().setDimensions(100, 140); 
         box.getBody().setRotation((float)theta);
@@ -92,12 +92,6 @@ public class PlayerDashAttack extends Skill{
         box.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 30, 0, 0)); 
         
         //add particle effect
-        PointParticleEmitter emitter =new LaserBitsEmitter();
-        emitter.setAngle( 360 - ((float)(theta * (180f/Math.PI)))); 
-        emitter.setDuration(20); 
-        emitter.setParticlesPerFrame(.5f);
-        emitter.setRelativePositioning(true); 
-        box.addEmitter(emitter);
         
         
         //tell player to handle dash
