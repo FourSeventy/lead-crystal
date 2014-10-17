@@ -73,14 +73,13 @@ public class PlayerBoomerang extends PlayerSkill
         
         //build body of the laser
         Body body = new Body(new Box(60,60), .1f);
-        Image img = new Image("blade_boomerang.png");
+        Image img = new Image("boomerang.png");
         img.setAnchor(Anchorable.Anchor.LEFTCENTER);
-        img.setScale(.2f);
         img.setColor(new Color(1.1f,1.1f,1.1f,1f)); 
         BoomerangHitbox laser = new BoomerangHitbox(damage, body, img, user,targetingData.vectorToTarget,this); 
         
         //add image effect
-        Float[] points1 = {1f, 1.35f, 1f};
+        Float[] points1 = {1.1f, 1.35f, 1.1f};
         int[] durations1= {15,15};
         ImageEffect blinkEffect = new MultiImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, points1, durations1);
         blinkEffect.setRepeating(true);

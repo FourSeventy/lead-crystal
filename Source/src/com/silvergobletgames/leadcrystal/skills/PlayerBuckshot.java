@@ -72,31 +72,31 @@ public class PlayerBuckshot extends PlayerSkill{
         
         //build bodies
         Body body = new Body(new Box(18,18), 1.5f);
-        Image img = new Image("chunk1.png");
+        Image img = new Image("buck2.png");
         img.setDimensions(10,10);
-        img.setColor(new Color(5f,.5f,.5f,1f)); 
+        img.setColor(new Color(3f,.5f,.5f,1f)); 
         HitBox upUp = new BuckshotHitBox(damage, body, img, user);  
         
         body = new Body(new Box(18,18), 1.5f);
-        img = new Image("chunk1.png");
+        img = new Image("buck.png");
         img.setDimensions(15,15);
-        img.setColor(new Color(5f,.5f,.5f,1f)); 
+        img.setColor(new Color(3f,.5f,.5f,1f)); 
         HitBox up = new BuckshotHitBox(damage, body, img, user);  
         
         body = new Body(new Box(18,18), 1.5f);
-        img = new Image("chunk1.png");
+        img = new Image("buck2.png");
         img.setDimensions(15,15);
-        img.setColor(new Color(5f,.5f,.5f,1f)); 
+        img.setColor(new Color(3f,.5f,.5f,1f)); 
         HitBox center = new BuckshotHitBox(damage, body, img, user);  
         
         body = new Body(new Box(18,18), 1.5f);
-        img = new Image("chunk1.png");
+        img = new Image("buck2.png");
         img.setDimensions(15,15);
-        img.setColor(new Color(5f,.5f,.5f,1f));
+        img.setColor(new Color(3f,.5f,.5f,1f));
         HitBox down = new BuckshotHitBox(damage, body, img, user);  
         
         body = new Body(new Box(18,18), 1.5f);
-        img = new Image("chunk1.png");
+        img = new Image("buck.png");
         img.setDimensions(10,10);
         img.setColor(new Color(3f,.5f,.5f,1f));
         HitBox downDown = new BuckshotHitBox(damage, body, img, user);  

@@ -130,7 +130,7 @@ public class PlayerBarrelRoll extends PlayerSkill{
              
              
              //explosion hitbox
-             Image img = new Image("gradientCircle.png");  
+             Image img = new Image("mediumCircle.png");  
              img.setDimensions(400, 400);
              img.setColor(new Color(3,3,1,1));
              img.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.SCALE, 35, 1, 0f));

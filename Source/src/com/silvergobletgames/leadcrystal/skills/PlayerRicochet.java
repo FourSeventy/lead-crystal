@@ -84,8 +84,8 @@ public class PlayerRicochet extends PlayerSkill{
         Body body = new Body(new Circle(20), 1);
         body.setRestitution(3);
         body.setFriction(0);
-        Image img = new Image("blade.png");
-        img.setDimensions(40, 40);
+        Image img = new Image("ricochet2.png");
+        img.setDimensions(43, 43);
         
         //add rotation effect to image
         ImageEffect rotationEffect = new ImageEffect(ImageEffectType.ROTATION, 30, 0, 360);
@@ -163,11 +163,13 @@ public class PlayerRicochet extends PlayerSkill{
                      angle += 180;
                  
                  //make emitter
-                 AbstractParticleEmitter emitter = new LaserBitsEmitter();
+                 PointParticleEmitter emitter = new LaserBitsEmitter();
                  emitter.setPosition(event.getPoint().getX(), event.getPoint().getY());
                  emitter.setDuration(1);
                  emitter.setAngle(angle);
+                 emitter.setSize(2);
                  emitter.setParticlesPerFrame(5);
+                 emitter.setColor(new Color(2f,2f,2f));
                  owningScene.add(emitter,Layer.MAIN);
                  
              }

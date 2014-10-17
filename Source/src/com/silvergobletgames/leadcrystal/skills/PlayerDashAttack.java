@@ -80,11 +80,11 @@ public class PlayerDashAttack extends Skill{
         damage.addImageEffect(brightnessEffect);
         
         // make dash hitbox that will follow the player, and add force to the player
-        Image swipe = new Image("swipe.png");            
-        swipe.setHorizontalFlip(true);
-        swipe.setColor(new Color(2f,.7f,.7f));
+        Image swipe = new Image("dashEffect.png");            
+        swipe.setHorizontalFlip(false);
+        swipe.setColor(new Color(1.2f,1.2f,1.2f));
         DashHitBox box = new DashHitBox(damage,new Body(new Box(100,100),1),swipe, user,vectorToTarget);
-        box.getImage().setDimensions(100, 140); 
+       // box.getImage().setDimensions(100, 140); 
         box.getBody().setRotation((float)theta);
         box.getImage().setAngle((float)(theta * (180f/Math.PI)));
         box.setPosition(user.getPosition().x + 100 * vectorToTarget.x, user.getPosition().y + 100 * vectorToTarget.y);

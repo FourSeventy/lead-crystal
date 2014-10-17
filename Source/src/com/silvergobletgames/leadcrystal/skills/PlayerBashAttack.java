@@ -76,9 +76,9 @@ public class PlayerBashAttack extends Skill{
         //build body and image
         Body body = new StaticBody(new Box(90, 90));
         Image swipe = new Image("swipe.png");            
-        swipe.setHorizontalFlip(true);
-        swipe.setDimensions(90, 90);
-        swipe.setColor(new Color(2f,.7f,.7f));
+        swipe.setHorizontalFlip(false);
+       // swipe.setDimensions(90, 90);
+        swipe.setColor(new Color(1.2f,1.2f,1.2f));
         
         //build and position hitbox
         BashHitBox hitBox = new BashHitBox(damage,body, swipe,this.user);

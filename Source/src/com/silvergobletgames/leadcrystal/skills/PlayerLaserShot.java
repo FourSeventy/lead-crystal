@@ -76,12 +76,13 @@ public class PlayerLaserShot extends PlayerSkill{
         Body body = new Body(new Box(57,33), 1);
         Image img = new Image("laserPew.png");
         img.setAnchor(Anchorable.Anchor.LEFTCENTER);
-        img.setDimensions(57, 33);
-        img.setColor(new Color(1f,1f,1.5f,1f)); 
+        //img.setDimensions(57, 33);
+        img.setScale(1.4f);
+        img.setColor(new Color(1.1f,1.1f,1.1f,1.1f)); 
         LaserHitbox laser = new LaserHitbox(damage, body, img, user); 
         
         //add image effect
-        Float[] points1 = {1f, 1.8f, 1f};
+        Float[] points1 = {1.1f, 1.7f, 1.1f};
         int[] durations1= {15,15};
         ImageEffect blinkEffect = new MultiImageEffect(ImageEffectType.BRIGHTNESS, points1, durations1);
         blinkEffect.setRepeating(true);
@@ -151,8 +152,8 @@ public class PlayerLaserShot extends PlayerSkill{
                  emitter.setDuration(1);
                  emitter.setAngle(angle);
                  emitter.setParticlesPerFrame(5);
-                 emitter.setColor(new Color(.5f,.5f,2.6f));
-                 emitter.setSize(3);
+                 emitter.setColor(new Color((61f/255f) * 4f,(40f/255f) * 4f,(86f/255f) * 4f));
+                 emitter.setSize(3);                
                  owningScene.add(emitter,Layer.MAIN);
                  
              }

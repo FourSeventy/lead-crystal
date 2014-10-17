@@ -82,7 +82,6 @@ public class PlayerRocket extends PlayerSkill
         Body body = new Body(new Box(50,30), 1);
         Image img = new Image("rocket.png");
         img.setDimensions(40, 20);
-        img.setScale(1.2f);
          
         //construct hitbox
         RocketHitbox rocket = new RocketHitbox(damage, body, img, user);
@@ -99,19 +98,19 @@ public class PlayerRocket extends PlayerSkill
         rocket.addEmitter(rocketEmitter);
 
         //add rocket engine effect
-        Image flash = new Image("flash.png");
-        flash.setScale(.05f);
+        Image flash = new Image("rocket_fire.png");
+        flash.setScale(.5f);
         
         //add image effect
-        Float[] points1 = {1f, 2f, 1f};
+        Float[] points1 = {1f, 1.8f, 1f};
         int[] durations1= {15,15};
         ImageEffect flashEffect = new MultiImageEffect(ImageEffectType.BRIGHTNESS, points1, durations1);
         flashEffect.setRepeating(true);
         flash.addImageEffect(flashEffect);
-        flash.setRotationPoint(1.5f, .5f);
+        flash.setRotationPoint(1.4f, .5f);
         flash.setAnchor(Anchorable.Anchor.RIGHTCENTER);
-        flash.setHorizontalFlip(true);
-        flash.setColor(new Color(3f,2f,2f,.45f));
+        flash.setHorizontalFlip(false);
+        flash.setColor(new Color(2.5f,1.7f,1.7f,.45f));
         flash.setAngle(rocket.getImage().getAngle()); 
         Overlay o = new Overlay(flash, -1, new SylverVector2f(.1f,.5f));
         o.setInfiniteDuration();
@@ -178,10 +177,22 @@ public class PlayerRocket extends PlayerSkill
                  //================================
                  
                  //explosion hitbox
-                 Image img = new Image("gradientCircle.png");  
-                 img.setDimensions(85, 85);
+                 Image img = new Image("flashParticle.png");  
+                 img.setDimensions(95, 95);
                  img.setColor(new Color(3,3,1,1));
                  img.addImageEffect(new ImageEffect(ImageEffectType.SCALE, 60, 1, 0f));
+                 img.setHorizontalFlip(SylverRandom.random.nextBoolean());
+                 img.setVerticalFlip(SylverRandom.random.nextBoolean());
+                 
+                 String particleImageToUse = SylverRandom.random.nextBoolean()?"flashParticle2.png":"flashParticle3.png";
+                 Image img2 = new Image(particleImageToUse);  
+                 img2.setDimensions(95, 95);
+                 img2.setColor(new Color(3,3,1,1));
+                 img2.addImageEffect(new ImageEffect(ImageEffectType.SCALE, 60, 1, 0f));
+                 img2.setHorizontalFlip(SylverRandom.random.nextBoolean());
+                 img2.setVerticalFlip(SylverRandom.random.nextBoolean()); 
+                 Overlay ehhovhh = new Overlay(img2);
+                 img.addOverlay(ehhovhh); 
                  Body beh = new StaticBody(new Circle(75));
                  beh.setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value);
                  beh.setBitmask(Entity.BitMasks.NO_COLLISION.value);
@@ -190,6 +201,8 @@ public class PlayerRocket extends PlayerSkill
                  explosionHitbox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 10, 0, 0));
                  explosionHitbox.setPosition(this.getPosition().x, this.getPosition().y);
                  this.getOwningScene().add(explosionHitbox, Layer.MAIN);
+                 
+                 
                  
                  //explosion particle emitter
                  AbstractParticleEmitter explosionEmitter = new RocketExplosionEmitter();

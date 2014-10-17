@@ -19,7 +19,7 @@ public class LeadCrystalParticleEmitters
     {
         public RocketSmokeEmitter()
         {
-            super(new Image("Smoke.png"));
+            super(new Image("smallSmoke.png"));
             this.setParticlesPerFrame(3); 
             this.setRelativePositioning(false);
         }
@@ -43,7 +43,7 @@ public class LeadCrystalParticleEmitters
     {
         public SmokeEmitter()
         {
-            super(new Image("Smoke.png"));
+            super(new Image("smallSmoke.png"));
         }
         
         public Particle buildParticle()
@@ -88,7 +88,7 @@ public class LeadCrystalParticleEmitters
     {
         public RocketExplosionEmitter()
         {
-            super(new Image("explosionParticle.png"));
+            super(new Image("fireParticle.png"));
             this.setParticlesPerFrame(2); 
             this.setRelativePositioning(false);
         }
@@ -101,9 +101,9 @@ public class LeadCrystalParticleEmitters
             float randomedAngle = getAngle() + (rand.nextFloat() - .5f) * 720;
             SylverVector2f velocity =new SylverVector2f(magnitude *(float)Math.cos(randomedAngle * Math.PI/180) , magnitude *(float)Math.sin(randomedAngle * Math.PI/180));
             SylverVector2f acceleration = new SylverVector2f(0,0);
-            Color color = new Color(.8f,.8f,.8f,.75f);
+            Color color = new Color(.8f,.8f,.8f,.50f);
             float ttl = 80 + (int)(Math.random()*20);
-            return new Particle(pos, velocity, acceleration, color, .6f, .5f/ttl, (int)ttl);
+            return new Particle(pos, velocity, acceleration, color, .25f, .15f/ttl, (int)ttl);
         }      
     }
         
@@ -124,17 +124,20 @@ public class LeadCrystalParticleEmitters
             SylverVector2f acceleration = new SylverVector2f(0,-.1f);
  
             Color color = new Color(this.getColor());
-            if(rand.nextDouble() <= .3f)
+            if(rand.nextDouble() <= .166f)
             {
-               color.r += .4f * rand.nextDouble();
+               float sign = rand.nextBoolean()? 1: -1;
+               color.r = (float)(1+  sign* (.30f * rand.nextDouble())) * color.r;
             }
-            if(rand.nextDouble() <= .3f)
+            if(rand.nextDouble() <= .166f)
             {
-               color.g += .4f * rand.nextDouble();
+               float sign = rand.nextBoolean()? 1: -1;
+               color.g = (float)(1+  sign *(.30f * rand.nextDouble())) * color.g;
             }
-            if(rand.nextDouble() <= .3f)
+            if(rand.nextDouble() <= .166f)
             {
-               color.b += .4f * rand.nextDouble();
+               float sign = rand.nextBoolean()? 1: -1;
+               color.b = (float)(1+ sign *(.30f * rand.nextDouble())) * color.b;
             }
             
             color.a = 1f;
@@ -266,7 +269,7 @@ public class LeadCrystalParticleEmitters
     {
         public SandSpurtEmitter()
         {
-            super(new Image("smoke.png"));
+            super(new Image("smallSmoke.png"));
             this.setParticlesPerFrame(10); 
             this.setAngle(90);
         }
@@ -290,7 +293,7 @@ public class LeadCrystalParticleEmitters
     {
         public SandSpawnEmitter()
         {
-            super(new Image("smoke.png"));
+            super(new Image("smallSmoke.png"));
             this.setParticlesPerFrame(15); 
             this.setAngle(90);
             this.setDuration(30);
@@ -409,7 +412,7 @@ public class LeadCrystalParticleEmitters
     {
         public GroundFireSmokeEmitter()
         {
-            super(new Image("firesmoke.png"));
+            super(new Image("bigSmoke.png"));
             this.setParticlesPerFrame(.5f);
         }
         
