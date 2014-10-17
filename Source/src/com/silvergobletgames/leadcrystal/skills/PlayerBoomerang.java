@@ -201,12 +201,12 @@ public class PlayerBoomerang extends PlayerSkill
                  ((GameServerScene)this.getOwningScene()).sendSkillCooldownPacket(UUID.fromString(this.sourceEntity.getID()), skill.getSkillID());
                  
                 //add effect
-                Image effectImage = new Image("shockwaveEffect.png");
+                Image effectImage = new Image("shockwaveParticle.png");
                 effectImage.setColor(new Color(1.5f,1.5f,1.5f,.7f));
                 effectImage.setAnchor(Anchorable.Anchor.CENTER);
-                effectImage.setScale(.2f);
+                effectImage.setScale(1.6f);
                 effectImage.setPositionAnchored(sourceEntity.getPosition().x, sourceEntity.getPosition().y);
-                Float[] points2 = {.25f, .05f};
+                Float[] points2 = {1.6f, .05f};
                 int[] durations2 = {25};     
                 effectImage.addImageEffect(new MultiImageEffect(ImageEffect.ImageEffectType.SCALE, points2, durations2));
                 Float[] points3 = {1f, 1.5f,1f};
