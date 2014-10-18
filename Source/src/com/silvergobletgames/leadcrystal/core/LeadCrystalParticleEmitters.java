@@ -431,6 +431,30 @@ public class LeadCrystalParticleEmitters
         }   
     }
     
+    public static class DashParticleEmitter extends ImageParticleEmitter
+    {
+        public DashParticleEmitter()
+        {
+            super(new Image("dashParticle.png"));
+            this.setParticlesPerFrame(.5f);
+        }
+        
+        
+        public  Particle buildParticle()
+        {
+            Random rand = SylverRandom.random;
+            SylverVector2f pos = new SylverVector2f(this.getPosition().x+(rand.nextFloat() - .5f)*100, this.getPosition().y+(rand.nextFloat() - .5f)*200);
+            float randomedAngle = getAngle() - 180 + (rand.nextFloat() - .5f) * 15;
+            SylverVector2f velocity = new SylverVector2f((float)Math.random() *5 * (float)Math.cos(randomedAngle * Math.PI/180) , (float)Math.random()*5 * (float)Math.sin(randomedAngle * Math.PI/180));
+            SylverVector2f acceleration = new SylverVector2f(0,0f);
+  
+            Color color = new Color(1.2f,1.2f,1.8f,1f);
+            int ttl = 20 + (int)(Math.random()*10);
+            return new  Particle( pos, velocity, acceleration, color, .6f, 0, ttl);
+        } 
+        
+    }
+    
    
     
 }

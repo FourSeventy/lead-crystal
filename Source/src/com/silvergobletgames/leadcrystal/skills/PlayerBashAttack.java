@@ -1,13 +1,6 @@
 package com.silvergobletgames.leadcrystal.skills;
 
 import com.silvergobletgames.leadcrystal.combat.CombatEffect;
-import com.silvergobletgames.sylver.core.Scene.Layer;
-import com.silvergobletgames.sylver.graphics.Image;
-import java.util.Random;
-import net.phys2d.math.Vector2f;
-import net.phys2d.raw.Body;
-import net.phys2d.raw.StaticBody;
-import net.phys2d.raw.shapes.Box;
 import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.combat.DotEffect;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
@@ -16,12 +9,20 @@ import com.silvergobletgames.leadcrystal.entities.*;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.sylver.audio.Sound;
+import com.silvergobletgames.sylver.core.Scene.Layer;
 import com.silvergobletgames.sylver.graphics.Color;
+import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.ImageEffect;
+import com.silvergobletgames.sylver.graphics.MultiImageEffect;
 import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
+import java.util.Random;
 import java.util.UUID;
+import net.phys2d.math.Vector2f;
+import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
+import net.phys2d.raw.StaticBody;
+import net.phys2d.raw.shapes.Box;
 
 
 
@@ -50,7 +51,12 @@ public class PlayerBashAttack extends Skill{
         float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
         damage.getAmountObject().adjustBase(damageAmout);
         damage.setType(Damage.DamageType.PHYSICAL);    
-        damage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, 10, 0.0f, 1f));
+        
+        //add brightness effect to damage
+        Float[] points = {1f,2f,1f};
+        int[] durations = {10,5};
+        ImageEffect brightnessEffect = new MultiImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, points,durations);
+        damage.addImageEffect(brightnessEffect);
         
         //add stun effect
         damage.addCombatEffect(new StateEffect(StateEffect.StateEffectType.STUN, (2 * 60) + 30,.5f,true));

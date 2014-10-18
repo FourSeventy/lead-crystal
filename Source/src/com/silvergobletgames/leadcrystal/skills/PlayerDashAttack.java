@@ -1,10 +1,9 @@
  package com.silvergobletgames.leadcrystal.skills;
 
-import com.silvergobletgames.sylver.graphics.Image;
-import net.phys2d.math.Vector2f;
 import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.DashParticleEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.LaserBitsEmitter;
 import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect;
@@ -14,13 +13,16 @@ import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.graphics.Color;
+import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.ImageEffect;
+import com.silvergobletgames.sylver.graphics.ImageParticleEmitter;
 import com.silvergobletgames.sylver.graphics.MultiImageEffect;
 import com.silvergobletgames.sylver.graphics.PointParticleEmitter;
 import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 import java.util.Random;
 import java.util.UUID;
+import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.shapes.Box;
 
@@ -83,8 +85,8 @@ public class PlayerDashAttack extends Skill{
         Image swipe = new Image("dashEffect.png");            
         swipe.setHorizontalFlip(false);
         swipe.setColor(new Color(1.2f,1.2f,1.2f,.7f));
-        DashHitBox box = new DashHitBox(damage,new Body(new Box(100,100),1),swipe, user,vectorToTarget);
-       // box.getImage().setDimensions(100, 140); 
+        swipe.setScale(1.2f);
+        DashHitBox box = new DashHitBox(damage,new Body(new Box(100,100),1),swipe, user,vectorToTarget);; 
         box.getBody().setRotation((float)theta);
         box.getImage().setAngle((float)(theta * (180f/Math.PI)));
         box.setPosition(user.getPosition().x + 100 * vectorToTarget.x, user.getPosition().y + 100 * vectorToTarget.y);
@@ -92,6 +94,10 @@ public class PlayerDashAttack extends Skill{
         box.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 30, 0, 0)); 
         
         //add particle effect
+        ImageParticleEmitter particles = new DashParticleEmitter();
+        particles.setAngle(theta);
+        particles.setDuration(-1);
+        box.addEmitter(particles);
         
         
         //tell player to handle dash
