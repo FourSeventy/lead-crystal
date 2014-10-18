@@ -71,12 +71,20 @@ public class PlayerBashAttack extends Skill{
         //determine angle for the image
         float theta = (float)Math.acos(vectorToTarget.dot(new Vector2f(1,0)));
         if(targetY < userY)
+        {
             theta = (float)(2* Math.PI - theta);
+        }
+        
+        
         
         //build body and image
         Body body = new StaticBody(new Box(90, 90));
-        Image swipe = new Image("swipe.png");            
-        swipe.setHorizontalFlip(false);
+        Image swipe = new Image("swipe.png"); 
+        
+        if(targetX < userX)
+        {
+           swipe.setVerticalFlip(true);
+        }
        // swipe.setDimensions(90, 90);
         swipe.setColor(new Color(1.2f,1.2f,1.2f));
         

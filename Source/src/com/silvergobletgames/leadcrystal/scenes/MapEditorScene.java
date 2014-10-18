@@ -860,28 +860,28 @@ public class MapEditorScene extends Scene {
             //camera movement
             if(inputSnapshot.isKeyPressedAltModifier(KeyEvent.VK_LEFT))
             {
-                this.viewportLocation.x = this.viewportLocation.x - 20;
+                this.viewportLocation.x = this.viewportLocation.x - 30;
             }
             else if (inputSnapshot.isKeyPressed(KeyEvent.VK_LEFT)) {
                 this.viewportLocation.x = this.viewportLocation.x - 10;
             }
             
             if (inputSnapshot.isKeyPressedAltModifier(KeyEvent.VK_RIGHT)) {
-                this.viewportLocation.x = this.viewportLocation.x + 20;
+                this.viewportLocation.x = this.viewportLocation.x + 30;
             }
             else if (inputSnapshot.isKeyPressed(KeyEvent.VK_RIGHT)) {
                 this.viewportLocation.x = this.viewportLocation.x + 10;
             }
             
             if (inputSnapshot.isKeyPressedAltModifier(KeyEvent.VK_UP)) {
-                this.viewportLocation.y = this.viewportLocation.y + 20;
+                this.viewportLocation.y = this.viewportLocation.y + 30;
             }
             else if (inputSnapshot.isKeyPressed(KeyEvent.VK_UP)) {
                 this.viewportLocation.y = this.viewportLocation.y + 10;
             }
             
             if (inputSnapshot.isKeyPressedAltModifier(KeyEvent.VK_DOWN)) {
-                this.viewportLocation.y = this.viewportLocation.y - 20;
+                this.viewportLocation.y = this.viewportLocation.y - 30;
             }
             else if (inputSnapshot.isKeyPressed(KeyEvent.VK_DOWN)) {
                 this.viewportLocation.y = this.viewportLocation.y - 10;

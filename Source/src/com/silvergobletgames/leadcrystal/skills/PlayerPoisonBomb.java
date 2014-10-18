@@ -76,7 +76,7 @@ public class PlayerPoisonBomb extends PlayerSkill{
         
         //build body of the laser
         Body body = new Body(new Box(60,60), 1);
-        Image img = new Image("implant.png");
+        Image img = new Image("poisonBomb.png");
         img.setAnchor(Anchorable.Anchor.LEFTCENTER);
         img.setDimensions(60, 60);
         img.setColor(new Color(1f,1f,1.5f,1f)); 
@@ -143,7 +143,7 @@ public class PlayerPoisonBomb extends PlayerSkill{
              
             Body body = new Body(new Box(60,60), 1);
             body.setDamping(.5f);
-            Image img = new Image("implant.png"); 
+            Image img = new Image("blank.png"); 
             img.setDimensions(60, 60);
             PoisonDropperHitbox poisonHitbox = new PoisonDropperHitbox(new Damage(DamageType.NODAMAGE, 0), body, img, this.sourceEntity,this.passthroughDamage);
             poisonHitbox.setPosition(this.getPosition().x, this.getPosition().y);

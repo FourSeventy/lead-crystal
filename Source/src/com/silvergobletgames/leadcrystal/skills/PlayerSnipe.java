@@ -179,15 +179,15 @@ public class PlayerSnipe extends PlayerSkill
         user.getOwningScene().add(snipe,Layer.MAIN);
 
         //rail image
-        Image img = new Image("rail.png");
-        img.setDimensions((float)Math.sqrt(Math.pow(endPoint.x - origin.x,2) + Math.pow(endPoint.y - origin.y,2)), 35f);
+        Image img = new Image("rail_orange.png");
+        img.setDimensions((float)Math.sqrt(Math.pow(endPoint.x - origin.x,2) + Math.pow(endPoint.y - origin.y,2)), 25f);
         img.setRotationPoint(0, .5f);
         img.setPosition(origin.x,origin.y);
         img.setAngle((float)(theta * (180f/Math.PI)));
         //img.addImageEffect(this.getDamageBrightnessEffect());
         
         int[] durations = {30,30};
-        Color[] colors = { new Color(1.4f,4f,1.4f,1),new Color(1.4f,1.4f,1.4f,1), new Color(1.4f,1.4f,1.4f,0) };
+        Color[] colors = { new Color(3f,2f,1.4f,1),new Color(1.4f,1.4f,1.4f,1), new Color(1.4f,1.4f,1.4f,0) };
         img.addImageEffect(new MultiImageEffect(ImageEffect.ImageEffectType.COLOR, colors, durations));
         user.getOwningScene().add(img,Layer.MAIN);
         

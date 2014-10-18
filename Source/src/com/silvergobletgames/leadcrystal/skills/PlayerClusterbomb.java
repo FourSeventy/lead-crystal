@@ -70,7 +70,7 @@ public class PlayerClusterbomb extends PlayerSkill
         //build body of bomb1
         Body body1 = new Body(new Circle(15), 1);
         body1.setFriction(2);
-        Image img = new Image("destructionDisk.png");
+        Image img = new Image("grenade.png");
         img.setDimensions(30, 30);
         img.setColor(new Color(1f,1f,1f,1f));  
         ClusterBombHitbox bomb1 = new ClusterBombHitbox(damage, body1, img, user); 
@@ -78,7 +78,7 @@ public class PlayerClusterbomb extends PlayerSkill
         //build body of bomb2
         Body body2 = new Body(new Circle(15), 1);
         body2.setFriction(2);
-        Image img2 = new Image("destructionDisk.png");
+        Image img2 = new Image("grenade.png");
         img2.setDimensions(30, 30);
         img2.setColor(new Color(1f,1f,1f,1f));  
         ClusterBombHitbox bomb2 = new ClusterBombHitbox(damage, body2, img2, user);
@@ -86,7 +86,7 @@ public class PlayerClusterbomb extends PlayerSkill
         //build body of bomb3
         Body body3 = new Body(new Circle(15), 1);
         body3.setFriction(2);
-        Image img3 = new Image("destructionDisk.png");
+        Image img3 = new Image("grenade.png");
         img3.setDimensions(30, 30);
         img3.setColor(new Color(1f,1f,1f,1f));  
         ClusterBombHitbox bomb3 = new ClusterBombHitbox(damage, body3, img3, user);
