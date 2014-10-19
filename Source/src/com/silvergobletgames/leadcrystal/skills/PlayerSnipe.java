@@ -178,6 +178,13 @@ public class PlayerSnipe extends PlayerSkill
         snipe.setPosition(endPoint.getX(), endPoint.getY());
         user.getOwningScene().add(snipe,Layer.MAIN);
 
+        
+//        //tile rail image
+//        float imageLength = 142;
+//        float distance = (float)Math.sqrt(Math.pow(endPoint.x - origin.x,2) + Math.pow(endPoint.y - origin.y,2));
+//        float accumulatedDistance = 0;
+//        for(accumulatedDistance < distance)
+        
         //rail image
         Image img = new Image("rail_orange.png");
         img.setDimensions((float)Math.sqrt(Math.pow(endPoint.x - origin.x,2) + Math.pow(endPoint.y - origin.y,2)), 25f);
@@ -190,6 +197,10 @@ public class PlayerSnipe extends PlayerSkill
         Color[] colors = { new Color(3f,2f,1.4f,1),new Color(1.4f,1.4f,1.4f,1), new Color(1.4f,1.4f,1.4f,0) };
         img.addImageEffect(new MultiImageEffect(ImageEffect.ImageEffectType.COLOR, colors, durations));
         user.getOwningScene().add(img,Layer.MAIN);
+        
+        
+        
+        
         
         //dispense muzzle flash
         Image flash = this.getMuzzleFlash(targetingData, origin);

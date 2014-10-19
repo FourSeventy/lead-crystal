@@ -82,15 +82,15 @@ public class PlayerBarrelRoll extends PlayerSkill{
         Image img = new Image("barrel.png");
         img.setAnchor(Anchorable.Anchor.CENTER);
         img.setDimensions(60, 60);
-        img.setColor(new Color(1.1f,1.1f,1.1f,1f)); 
+        img.setColor(new Color(1f,1f,1f,1f)); 
         BarrelHitBox barrel = new BarrelHitBox(damage, body, img, user); 
         
         //add image effect
-        Float[] points1 = {1.1f, 1.15f, 1.1f};
-        int[] durations1= {15,15};
-        ImageEffect blinkEffect = new MultiImageEffect(ImageEffectType.BRIGHTNESS, points1, durations1);
-        blinkEffect.setRepeating(true);
-        img.addImageEffect(blinkEffect);
+//        Float[] points1 = {1.1f, 1.15f, 1.1f};
+//        int[] durations1= {15,15};
+//        ImageEffect blinkEffect = new MultiImageEffect(ImageEffectType.BRIGHTNESS, points1, durations1);
+//        blinkEffect.setRepeating(true);
+//        img.addImageEffect(blinkEffect);
         
            
         //calculate force for the bullet
@@ -189,7 +189,7 @@ public class PlayerBarrelRoll extends PlayerSkill{
          {
              int variance =SylverRandom.random.nextInt(10);
              Body body = new Body(new Box(50 -variance ,50 - variance), 2);
-             Image image = new Image("barrelScrap.png"); 
+             Image image = new Image("barrel_chunk1.png"); 
              image.setDimensions(50 - variance, 50 - variance);
              BarrelDebrisHitbox fireHitbox = new BarrelDebrisHitbox(new Damage(DamageType.BURN, 5),body,image,this.sourceEntity);
              fireHitbox.setPosition(this.getPosition().x, this.getPosition().y);
