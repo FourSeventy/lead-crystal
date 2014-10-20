@@ -5,6 +5,7 @@ import com.jogamp.opengl.util.texture.Texture;
 import com.jogamp.opengl.util.texture.TextureCoords;
 import com.silvergobletgames.leadcrystal.combat.LevelProgressionManager.Level;
 import com.silvergobletgames.leadcrystal.core.CursorFactory;
+import com.silvergobletgames.leadcrystal.core.GameplaySettings;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
@@ -494,6 +495,79 @@ public class MapMenu extends Window{
        //===============
        // Level Buttons
        //===============
+        
+        if(GameplaySettings.getInstance().levelEditor)
+        {
+            //================== test 1 ======================
+            final Button button0 = new Button(new Image("blank.png"),100,700,75,75);
+       
+            Overlay correctOverlay0 = new Overlay(new Image("map_questionmark.png"));
+            correctOverlay0.getImage().setDimensions(75, 75);
+            correctOverlay0.useRelativeSize = false;  
+            
+            Object points[] = {0,.5,0};
+            int durations[] = {90,90};
+            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
+            effect.setRepeating(true);
+            button0.getImage().addImageEffect(effect);
+            
+            button0.getImage().addOverlay("img",correctOverlay0);
+            button0.addActionListener(new ActionListener(){
+                 public void actionPerformed(ActionEvent e)
+                 {
+                     if (e.getActionCommand().equals("mouseEntered")) {            
+                        button0.getImage().getOverlay("img").getImage().setScale(1.2f); 
+                        playLevelHoverSound();
+                        repaintLevelDetails(18);
+                     }
+                     if (e.getActionCommand().equals("mouseExited")) {
+                        button0.getImage().getOverlay("img").getImage().setScale(1.0f); 
+                         repaintLevelDetails(-1);
+                     }
+                     if(e.getActionCommand().equals("clicked"))
+                     {
+                         ((GameClientScene)owningScene).sendChooseLevelPacket(18);
+                     }
+                 }
+            });
+            this.levelButtons.add(button0);
+            this.addComponent(button0);
+            
+            //================== test 2 ======================
+            final Button button99 = new Button(new Image("blank.png"),250,700,75,75);
+       
+            Overlay correctOverlay99 = new Overlay(new Image("map_questionmark.png"));
+            correctOverlay99.getImage().setDimensions(75, 75);
+            correctOverlay99.useRelativeSize = false;  
+            
+            Object points2[] = {0,.5,0};
+            int durations2[] = {90,90};
+            MultiImageEffect effect2 = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points2, durations2);
+            effect2.setRepeating(true);
+            button99.getImage().addImageEffect(effect2);
+            
+            button99.getImage().addOverlay("img",correctOverlay99);
+            button99.addActionListener(new ActionListener(){
+                 public void actionPerformed(ActionEvent e)
+                 {
+                     if (e.getActionCommand().equals("mouseEntered")) {            
+                        button99.getImage().getOverlay("img").getImage().setScale(1.2f); 
+                        playLevelHoverSound();
+                        repaintLevelDetails(19);
+                     }
+                     if (e.getActionCommand().equals("mouseExited")) {
+                        button99.getImage().getOverlay("img").getImage().setScale(1.0f); 
+                         repaintLevelDetails(-1);
+                     }
+                     if(e.getActionCommand().equals("clicked"))
+                     {
+                         ((GameClientScene)owningScene).sendChooseLevelPacket(19);
+                     }
+                 }
+            });
+            this.levelButtons.add(button99);
+            this.addComponent(button99);
+        }
        
        //================== desert 0 ======================
        final Button button0 = new Button(new Image("blank.png"),175,225,75,75);

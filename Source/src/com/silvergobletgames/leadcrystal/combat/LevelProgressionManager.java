@@ -282,6 +282,196 @@ public class LevelProgressionManager
         //adding to map
         this.levelMap.put(10, cave5);
         
+        //temple1
+        Level temple1 = new Level(); 
+        temple1.levelDataName = "temple1.lv";
+        temple1.levelName = "Temple1";
+        //main objective
+        objective = new LevelObjective();
+        objective.objectiveName = "Do something";
+        objective.objectiveDescription = "Do Something";
+        objective.skillPointAward = true;
+        objective.currencyAward = 50;
+        temple1.mainObjective = objective;
+        //side objective 1
+        objective = new LevelObjective();
+        objective.objectiveName = "Do something";
+        objective.objectiveDescription = "Do something.";
+        objective.currencyAward = 25;
+        objective.statReward = ArmorStatID.MOVE_SPEED;
+        temple1.sideObjective = objective;
+        //adding to map
+        this.levelMap.put(11,temple1);
+        
+        //temple2
+        Level temple2 = new Level(); 
+        temple2.levelDataName = "temple21.lv";
+        temple2.levelName = "Temple2";
+        //main objective
+        objective = new LevelObjective();
+        objective.objectiveName = "Do something";
+        objective.objectiveDescription = "Do Something";
+        objective.skillPointAward = true;
+        objective.currencyAward = 50;
+        temple2.mainObjective = objective;
+        //side objective 1
+        objective = new LevelObjective();
+        objective.objectiveName = "Do something";
+        objective.objectiveDescription = "Do something.";
+        objective.currencyAward = 25;
+        objective.statReward = ArmorStatID.MOVE_SPEED;
+        temple2.sideObjective = objective;
+        //adding to map
+        this.levelMap.put(12,temple2);
+        
+        //temple3
+        Level temple3 = new Level(); 
+        temple3.levelDataName = "temple3.lv";
+        temple3.levelName = "Temple3";
+        //main objective
+        objective = new LevelObjective();
+        objective.objectiveName = "Do something";
+        objective.objectiveDescription = "Do Something";
+        objective.skillPointAward = true;
+        objective.currencyAward = 50;
+        temple3.mainObjective = objective;
+        //side objective 1
+        objective = new LevelObjective();
+        objective.objectiveName = "Do something";
+        objective.objectiveDescription = "Do something.";
+        objective.currencyAward = 25;
+        objective.statReward = ArmorStatID.MOVE_SPEED;
+        temple3.sideObjective = objective;
+        //adding to map
+        this.levelMap.put(13,temple3);
+        
+        //temple4
+        Level temple4 = new Level(); 
+        temple4.levelDataName = "temple4.lv";
+        temple4.levelName = "Temple4";
+        //main objective
+        objective = new LevelObjective();
+        objective.objectiveName = "Do something";
+        objective.objectiveDescription = "Do Something";
+        objective.skillPointAward = true;
+        objective.currencyAward = 50;
+        temple4.mainObjective = objective;
+        //side objective 1
+        objective = new LevelObjective();
+        objective.objectiveName = "Do something";
+        objective.objectiveDescription = "Do something.";
+        objective.currencyAward = 25;
+        objective.statReward = ArmorStatID.MOVE_SPEED;
+        temple4.sideObjective = objective;
+        //adding to map
+        this.levelMap.put(14,temple4);
+        
+        //temple5
+        Level temple5 = new Level(); 
+        temple5.levelDataName = "temple5.lv";
+        temple5.levelName = "Temple5";
+        //main objective
+        objective = new LevelObjective();
+        objective.objectiveName = "Do something";
+        objective.objectiveDescription = "Do Something";
+        objective.skillPointAward = true;
+        objective.currencyAward = 50;
+        temple5.mainObjective = objective;
+        //side objective 1
+        objective = new LevelObjective();
+        objective.objectiveName = "Do something";
+        objective.objectiveDescription = "Do something.";
+        objective.currencyAward = 25;
+        objective.statReward = ArmorStatID.MOVE_SPEED;
+        temple5.sideObjective = objective;
+        //adding to map
+        this.levelMap.put(15,temple5);
+        
+        //temple6
+        Level temple6 = new Level(); 
+        temple6.levelDataName = "temple6.lv";
+        temple6.levelName = "Temple6";
+        //main objective
+        objective = new LevelObjective();
+        objective.objectiveName = "Do something";
+        objective.objectiveDescription = "Do Something";
+        objective.skillPointAward = true;
+        objective.currencyAward = 50;
+        temple6.mainObjective = objective;
+        //side objective 1
+        objective = new LevelObjective();
+        objective.objectiveName = "Do something";
+        objective.objectiveDescription = "Do something.";
+        objective.currencyAward = 25;
+        objective.statReward = ArmorStatID.MOVE_SPEED;
+        temple6.sideObjective = objective;
+        //adding to map
+        this.levelMap.put(16,temple6);
+        
+        //temple7
+        Level temple7 = new Level(); 
+        temple7.levelDataName = "temple7.lv";
+        temple7.levelName = "Temple7";
+        //main objective
+        objective = new LevelObjective();
+        objective.objectiveName = "Do something";
+        objective.objectiveDescription = "Do Something";
+        objective.skillPointAward = true;
+        objective.currencyAward = 50;
+        temple7.mainObjective = objective;
+        //side objective 1
+        objective = new LevelObjective();
+        objective.objectiveName = "Do something";
+        objective.objectiveDescription = "Do something.";
+        objective.currencyAward = 25;
+        objective.statReward = ArmorStatID.MOVE_SPEED;
+        temple7.sideObjective = objective;
+        //adding to map
+        this.levelMap.put(17,temple7);
+        
+        //test1
+        Level test1 = new Level(); 
+        test1.levelDataName = "test1.lv";
+        test1.levelName = "Test1";
+        //main objective
+        objective = new LevelObjective();
+        objective.objectiveName = "Do something";
+        objective.objectiveDescription = "Do Something";
+        objective.skillPointAward = true;
+        objective.currencyAward = 50;
+        test1.mainObjective = objective;
+        //side objective 1
+        objective = new LevelObjective();
+        objective.objectiveName = "Do something";
+        objective.objectiveDescription = "Do something.";
+        objective.currencyAward = 25;
+        objective.statReward = ArmorStatID.MOVE_SPEED;
+        test1.sideObjective = objective;
+        //adding to map
+        this.levelMap.put(18,test1);
+        
+        //test2
+        Level test2 = new Level(); 
+        test2.levelDataName = "test2.lv";
+        test2.levelName = "Test2";
+        //main objective
+        objective = new LevelObjective();
+        objective.objectiveName = "Do something";
+        objective.objectiveDescription = "Do Something";
+        objective.skillPointAward = true;
+        objective.currencyAward = 50;
+        test2.mainObjective = objective;
+        //side objective 1
+        objective = new LevelObjective();
+        objective.objectiveName = "Do something";
+        objective.objectiveDescription = "Do something.";
+        objective.currencyAward = 25;
+        objective.statReward = ArmorStatID.MOVE_SPEED;
+        test2.sideObjective = objective;
+        //adding to map
+        this.levelMap.put(19,test2);
+        
+        
         
         
     }
