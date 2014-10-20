@@ -54,7 +54,11 @@ public class SceneScriptManager
     //==================
     
     
-    
+    /**
+     * Returns persisted world data that was saved with setWorldData().
+     * @param key Key that the data was saved under.
+     * @return Returns the saved world data of type float.
+     */
     public float getWorldData(String key)
     {
         if(worldDataVariables.get(key) == null)
@@ -63,6 +67,11 @@ public class SceneScriptManager
         return worldDataVariables.get(key);
     }
     
+    /**
+     * Persists data as a key/value pair. This data only persists for the current level.
+     * @param key Key to save the data under
+     * @param value Value of the data, must be a float
+     */
     public void setWorldData(String key, float value)
     {
         this.worldDataVariables.put(key,value);
@@ -71,7 +80,7 @@ public class SceneScriptManager
     /**
      * Adds an image effect to the given entity
      * @param entityID entityID to add the image effect to
-     * @param effectType ImageEffectType to add
+     * @param effectType ImageEffectType to add (BRIGHTNESS, ALPHABRIGHTNESS, COLOR, DURATION, ROTATION, XTRANSLATE, YTRANSLATE, SCALE, WIDTH, HEIGHT, XOVERLAYTRANSLATE, YOVERLAYTRANSLATE)
      * @param duration duration for the effect in ticks
      * @param start start value of the effect
      * @param end end value of the effect
@@ -95,7 +104,7 @@ public class SceneScriptManager
     /**
      * Adds a light effect to the given entity
      * @param entityID entityID to add the light effect to
-     * @param effectType LightEffectType to add
+     * @param effectType LightEffectType to add (SIZE, COLOR, DIRECTION, INTENSITY, RADIUS, DURATION)
      * @param duration duration for the effect to last in ticks
      * @param start start value of the effect
      * @param end end value of the effect
@@ -113,7 +122,7 @@ public class SceneScriptManager
     
     /**
      *  Adds an entity effect to the given entity
-     * @param entityID entityID to give effect to
+     * @param entityID entityID to give effect to( MASS,DURATION,ROTATION,XTRANSLATE,YTRANSLATE,VFORCE,HFORCE,REMOVEBODY)
      * @param effectType EntityEffectType for the effect
      * @param duration duration of the efect
      * @param start start value
@@ -132,11 +141,17 @@ public class SceneScriptManager
         ((Entity)this.owningScene.getSceneObjectManager().get(entityID)).addEntityEffect(effect);
     }
     
+    /**
+     * NOOP
+     */
     public void addTextEffect()
     {
         
     }
     
+    /**
+     * NOOP
+     */
     public void addCombatEffect()
     {
         
@@ -144,8 +159,8 @@ public class SceneScriptManager
     
     /**
      * Opens a menu for the given client
-     * @param clientID clientID of the target client
-     * @param menuID menuID to open
+     * @param clientID clientID of the target client (get with invoker.getID())
+     * @param menuID menuID to open (POTION,ARMOR,SKILL,MAP)
      */
     public void openClientMenu(String clientID, String menuID)
     {
@@ -155,8 +170,8 @@ public class SceneScriptManager
     
     /**
      * Closes a menu for the given client
-     * @param clientID clientID of the target client
-     * @param menuID menuID to close
+     * @param clientID clientID of the target client (get with invoker.getID())
+     * @param menuID menuID to close (POTION,ARMOR,SKILL,MAP)
      */
     public void closeClientMenu(String clientID, String menuID)
     {
@@ -164,12 +179,22 @@ public class SceneScriptManager
         this.owningScene.sendCloseMenu(clientID,id); 
     }
     
+    /**
+     * Opens helper tooltip for given client
+     * @param clientID clientID of the target client (get with invoker.getID())
+     * @param tipID InstructionalTip type to open (Jump,PrimarySkill,SecondarySkill,Sprint,UsePotion,RightClick,Ladder,Jumpthrough,OpenMap)
+     */
     public void openClientTip(String clientID, String tipID)
     {
         InstructionalTip tip = InstructionalTip.valueOf(tipID);
         this.owningScene.sendOpenInstructionalTipPacket(UUID.fromString(clientID),tip);
     }
     
+    /**
+     * closes helper tooltip for given client
+     * @param clientID clientID of the target client (get with invoker.getID())
+     * @param tipID InstructionalTip type to close (Jump,PrimarySkill,SecondarySkill,Sprint,UsePotion,RightClick,Ladder,Jumpthrough,OpenMap)
+     */
     public void closeClientTip(String clientID, String tipID)
     {
         InstructionalTip tip = InstructionalTip.valueOf(tipID);
@@ -178,8 +203,8 @@ public class SceneScriptManager
     
     /**
      * Tells a particular client to show the following dialogue
-     * @param clientID clientID of the target client
-     * @param speaker speaker of the dialogue
+     * @param clientID clientID of the target client  (get with invoker.getID())
+     * @param speaker speaker of the dialogue (Slash, Brice, drTam, oldMan)
      * @param text text for the dialogue
      */
     public void openClientDialogue(String clientID, String speaker, String text)
@@ -188,6 +213,11 @@ public class SceneScriptManager
         this.owningScene.sendOpenDialogue(clientID, speaker, text);
     }
     
+    /**
+     * Opens a dialoge for each player in the scene.
+     * @param speaker speaker of the dialogue (Slash, Brice, drTam, oldMan)
+     * @param text text for the dialogue
+     */
     public void openAllClientDialogue(String speaker, String text)
     {
         //for each player in the scene
@@ -199,9 +229,8 @@ public class SceneScriptManager
     }
     
     /**
-     * Completes the given side objective for every client in the scene
+     * Completes the side objective for every client in the scene
      * @param levelNumber level number
-     * @param objectiveNumber objective number
      */
     public void completeSideObjective(int levelNumber)
     {
@@ -240,6 +269,10 @@ public class SceneScriptManager
         this.setSideQuestStatusText("complete");
     }
     
+    /**
+     * Sets the side objective status text. This will flash on the screen a well as go in to the quest menu.
+     * @param text Text to show
+     */
     public void setSideQuestStatusText( String text)
     {
         //send the packet
@@ -247,7 +280,7 @@ public class SceneScriptManager
     }
     
     /**
-     * complete the main objective for every player in the scene. Also moves all players back to town
+     * complete the main objective for every player in the scene. 
      * @param levelNumber level to complete
      */
     public void completeMainObjective(int levelNumber)
@@ -288,16 +321,28 @@ public class SceneScriptManager
        
     }
     
-    public void setMainObjectiveStatusText(String text){
+    /**
+     * Sets the Main objective status text. This will flash on the screen a well as go in to the quest menu.
+     * @param text Text to show
+     */
+    public void setMainObjectiveStatusText(String text)
+    {
         //send the packet
         this.owningScene.sendSetMainQuestStatus(text);
     }
     
+    /**
+     * Completes the current level and moves all players back to town.
+     */
     public void completeLevel()
     {
        this.completeLevel("checkpoint1");
     }
     
+    /**
+     * Completes the current level and moves all players back to given checkpoint in town.
+     * @param destination checkpoint to move players to in town
+     */
     public void completeLevel(String destination)
     {
         //for each player in the scene
@@ -323,16 +368,29 @@ public class SceneScriptManager
            ((GobletServer)Game.getInstance().getRunnable("Goblet Server")).queueMovePlayerToLevel(clientID, levelName, toEntityID);      
     }
     
+    /**
+     * Enables pvp mode for given client id
+     * @param clientID  clientID of the target client (get with invoker.getID())
+     */
     public void enablePVP(String clientID)
     {
         ((GameServerScene)this.owningScene).clientsInScene.get(UUID.fromString(clientID)).player.getBody().setOverlapMask(Entity.OverlapMasks.PVP_PLAYER.value);
     }
     
+    /**
+     * disables pvp mode for given client id
+     * @param clientID  clientID of the target client (get with invoker.getID())
+     */
     public void disablePVP(String clientID)
     {
         ((GameServerScene)this.owningScene).clientsInScene.get(UUID.fromString(clientID)).player.getBody().setOverlapMask(Entity.OverlapMasks.PLAYER.value);
     }
     
+    /**
+     * Respawns target player
+     * @param clientID clientID of the target client to respawn
+     * @param invokerID  clientID of the invoking client (get with invoker.getID())
+     */
     public void respawnPlayer(String clientID,String invokerID)
     {
         //get invoker
@@ -375,12 +433,24 @@ public class SceneScriptManager
         this.owningScene.add(soundData);
     }
     
+    /**
+     * Adds a sound into the scene at given position
+     * @param x x coordinate
+     * @param y y coordinate
+     * @param soundRef sound to add
+     */
     public void playSoundAtPosition(float x, float y, String soundRef)
     {
         Sound soundData = Sound.locationSound(soundRef, x, y, false);
         this.owningScene.add(soundData);
     }
     
+    
+    /**
+     * Adds item pickup sound into the scene at given position
+     * @param x x coordinate
+     * @param y y coordinate
+     */
     public void playPickUpSound(float x, float y)
     {
         //add sound
@@ -388,6 +458,10 @@ public class SceneScriptManager
         this.owningScene.add(goldSound);
     }
     
+    /**
+     * Fades out old background music and fades  new music in
+     * @param soundRef 
+     */
     public void changeBGM(String soundRef)
     {
         Sound sound =Sound.changeBGM(soundRef, 400, 400);   
@@ -420,7 +494,7 @@ public class SceneScriptManager
     
     /**
      * Rearmes the spawner for the given MobSpawner id
-     * @param entityID 
+     * @param entityID MobSpawner id to rearm
      */
     public void rearmSpawner(String entityID)
     {
@@ -431,6 +505,11 @@ public class SceneScriptManager
         spawnerEntity.setArmed(true);
     }
     
+    /**
+     * Returns scene object with given id
+     * @param id id of the scene object to return
+     * @return 
+     */
     public SceneObject getSceneObject(String id)
     {
         return this.owningScene.getSceneObjectManager().get(id);
@@ -438,7 +517,7 @@ public class SceneScriptManager
     
     /**
      * Triggers the script of a given Entity
-     * @param entityID 
+     * @param entityID id of entity with script to trigger
      */
     public void triggerScript(String entityID)
     {
@@ -450,6 +529,12 @@ public class SceneScriptManager
             scriptObject.runScript(null); 
     }
     
+    /**
+     * Adds a loot spawner to given location
+     * @param spewTime spew time in frames
+     * @param x x coordinate
+     * @param y y coordinate
+     */
     public void addLootSpewer(float spewTime,float x, float y)
     {
         //add spewer to the world
