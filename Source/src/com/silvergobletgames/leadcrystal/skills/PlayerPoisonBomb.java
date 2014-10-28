@@ -83,18 +83,18 @@ public class PlayerPoisonBomb extends PlayerSkill{
         PoisonBombHitbox laser = new PoisonBombHitbox(new Damage(DamageType.NODAMAGE, 0), body, img, user,damage);  
         
         //add image effect
-        Float[] points1 = {1f, 1.8f, 1f};
-        int[] durations1= {15,15};
-        ImageEffect blinkEffect = new MultiImageEffect(ImageEffectType.BRIGHTNESS, points1, durations1);
-        blinkEffect.setRepeating(true);
-        img.addImageEffect(blinkEffect);
+//        Float[] points1 = {1f, 1.8f, 1f};
+//        int[] durations1= {15,15};
+//        ImageEffect blinkEffect = new MultiImageEffect(ImageEffectType.BRIGHTNESS, points1, durations1);
+//        blinkEffect.setRepeating(true);
+//        img.addImageEffect(blinkEffect);
         
            
         //calculate force for the bullet
         float xforce = 2500*vectorToTarget.x;
         float yforce = 2500*vectorToTarget.y;
         
-        //Dispense laser into the world
+        //Dispense bomb into the world
         laser.setPosition(origin.x + vectorToTarget.x * 25, origin.y + vectorToTarget.y * 25);
         laser.getBody().addForce(new Vector2f(xforce ,yforce));
         laser.getBody().setRotation((float)theta);
@@ -144,7 +144,7 @@ public class PlayerPoisonBomb extends PlayerSkill{
             Body body = new Body(new Box(60,60), 1);
             body.setDamping(.5f);
             Image img = new Image("blank.png"); 
-            img.setDimensions(60, 60);
+            img.setDimensions(1, 1);
             PoisonDropperHitbox poisonHitbox = new PoisonDropperHitbox(new Damage(DamageType.NODAMAGE, 0), body, img, this.sourceEntity,this.passthroughDamage);
             poisonHitbox.setPosition(this.getPosition().x, this.getPosition().y);
             this.getOwningScene().add(poisonHitbox, Layer.MAIN); 
@@ -206,6 +206,7 @@ public class PlayerPoisonBomb extends PlayerSkill{
                 Body body = new Body(new Box(200,200), 1);
                 body.setDamping(.5f);
                 Image img = new Image("blank.png"); 
+                img.setDimensions(1,1);
                 Damage d = new Damage(DamageType.NODAMAGE, 0);
                 PoisonFloaterHitbox poisonHitbox = new PoisonFloaterHitbox(d, body, img, this.sourceEntity,this.passthroughDamage);
                 poisonHitbox.setPosition(this.getPosition().x, this.getPosition().y);

@@ -365,7 +365,7 @@ public class LeadCrystalParticleEmitters
     {
         public PoisonGasEmitter()
         {
-            super(new Image("explosionParticle.png"));
+            super(new Image("fireParticle.png"));
             this.setParticlesPerFrame(2); 
             this.setRelativePositioning(false);
         }
@@ -373,14 +373,14 @@ public class LeadCrystalParticleEmitters
         public Particle buildParticle()
         {
             Random rand = SylverRandom.random;
-            SylverVector2f pos = new SylverVector2f(this.getPosition().x+(rand.nextFloat() - .5f)*100 , this.getPosition().y+(rand.nextFloat() - .5f)*30);
+            SylverVector2f pos = new SylverVector2f(this.getPosition().x+(rand.nextFloat() - .5f)*150 , this.getPosition().y+(rand.nextFloat() - .5f)*70);
             float magnitude =  rand.nextFloat()/3 + .3f;
             float randomedAngle = getAngle() + (rand.nextFloat() - .5f) * 720;
             SylverVector2f velocity =new SylverVector2f(magnitude *(float)Math.cos(randomedAngle * Math.PI/180) , magnitude *(float)Math.sin(randomedAngle * Math.PI/180));
             SylverVector2f acceleration = new SylverVector2f(0,0);
             Color color = new Color(.1f,1f,.1f,.75f);
             float ttl = 420 + (int)(Math.random()*20);
-            return new Particle(pos, velocity, acceleration, color, .8f, .25f/ttl, (int)ttl);
+            return new Particle(pos, velocity, acceleration, color, .8f, .20f/ttl, (int)ttl);
         }   
     }
     
