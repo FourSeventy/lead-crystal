@@ -455,6 +455,29 @@ public class LeadCrystalParticleEmitters
         
     }
     
+    public static class FlameStrikeParticleEmitter extends ImageParticleEmitter
+    {
+        public FlameStrikeParticleEmitter()
+        {
+            super(new Image("flamepuff.png"));
+            this.setParticlesPerFrame(2f);
+        }
+        
+        
+        public  Particle buildParticle()
+        {
+            Random rand = SylverRandom.random;
+            SylverVector2f pos = new SylverVector2f(this.getPosition().x+(rand.nextFloat() - .5f)*100, this.getPosition().y+(rand.nextFloat() - .5f)*200);
+            float randomedAngle = getAngle() + (rand.nextFloat() - .5f) * 15;
+            SylverVector2f velocity = new SylverVector2f((float)Math.random() *5 * (float)Math.cos(randomedAngle * Math.PI/180) , (float)Math.random()*5 * (float)Math.sin(randomedAngle * Math.PI/180));
+            SylverVector2f acceleration = new SylverVector2f(0,0f);
+  
+            Color color = new Color(1.8f,1.2f,1.2f,1f);
+            int ttl = 20 + (int)(Math.random()*10);
+            return new  Particle( pos, velocity, acceleration, color, 1f, .05f/ttl, ttl);
+        } 
+        
+    }
    
     
 }

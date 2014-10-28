@@ -1,28 +1,29 @@
 package com.silvergobletgames.leadcrystal.skills;
 
 import com.silvergobletgames.leadcrystal.combat.CombatEffect;
-import com.silvergobletgames.sylver.core.Scene.Layer;
-import com.silvergobletgames.sylver.graphics.Image;
-import java.util.Random;
-import net.phys2d.math.Vector2f;
-import net.phys2d.raw.Body;
-import net.phys2d.raw.StaticBody;
-import net.phys2d.raw.shapes.Box;
 import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.combat.DotEffect;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.FlameStrikeParticleEmitter;
 import com.silvergobletgames.leadcrystal.entities.*;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.sylver.audio.Sound;
+import com.silvergobletgames.sylver.core.Scene.Layer;
 import com.silvergobletgames.sylver.graphics.Anchorable;
 import com.silvergobletgames.sylver.graphics.Color;
+import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.ImageEffect;
 import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
+import java.util.Random;
 import java.util.UUID;
+import net.phys2d.math.Vector2f;
+import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
+import net.phys2d.raw.StaticBody;
+import net.phys2d.raw.shapes.Box;
 
 
 
@@ -61,6 +62,10 @@ public class PlayerCrushingStrike extends PlayerSkill{
         damage.setType(Damage.DamageType.PHYSICAL);    
         damage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, 10, 0.0f, 1f));
         
+         //apply image effect
+         damage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.COLOR, 5 * 60, new Color(255,40,5), new Color(1f,1f,1f)));
+                
+        
         
         
         
@@ -75,15 +80,13 @@ public class PlayerCrushingStrike extends PlayerSkill{
         Body body = new Body(new Box(40, 200),1);
         body.setRotatable(false);
         body.addExcludedBody(user.getBody());
-        Image image = new Image("swipe.png"); 
+        Image image = new Image("flameStrike.png"); 
         image.setDimensions(100, 200);
-        image.setColor(new Color(1,1,1f,1f));
+        image.setColor(new Color(1.4f,1,1f,1f));
        // image.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.COLOR, 50, new Color(1,1,1f,1f), new Color(1,1,1f,0f)));
         image.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 35, 1, 1));
         image.setAnchor(Anchorable.Anchor.CENTER);
-        image.setHorizontalFlip(true);
         image.setPositionAnchored(origin.x,origin.y);
-        //this.user.getOwningScene().add(image,Layer.MAIN);
         
         StrikeHitbox hitBox = new StrikeHitbox(damage,body,image,this.user,passthrough);
         hitBox.getBody().setBitmask(Entity.BitMasks.NO_COLLISION.value);
@@ -93,6 +96,12 @@ public class PlayerCrushingStrike extends PlayerSkill{
         hitBox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 35, 1, 1));
         hitBox.setPosition(origin.x,origin.y);
         hitBox.getBody().addForce(new Vector2f(xforce,yforce));
+        
+        //add particle emitter
+        FlameStrikeParticleEmitter particles = new FlameStrikeParticleEmitter();
+        particles.setAngle(theta);
+        hitBox.addEmitter(particles);
+        
         this.user.getOwningScene().add(hitBox,Layer.MAIN);
         
         Sound sound = Sound.locationSound("buffered/fireball.ogg", user.getPosition().x, user.getPosition().y, false);
