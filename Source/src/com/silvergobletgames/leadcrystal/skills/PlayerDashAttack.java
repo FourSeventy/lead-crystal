@@ -97,6 +97,7 @@ public class PlayerDashAttack extends Skill{
         ImageParticleEmitter particles = new DashParticleEmitter();
         particles.setAngle(theta);
         particles.setDuration(-1);
+        particles.setParticleRotation((float)(theta * (180f/Math.PI))); 
         box.addEmitter(particles);
         
         

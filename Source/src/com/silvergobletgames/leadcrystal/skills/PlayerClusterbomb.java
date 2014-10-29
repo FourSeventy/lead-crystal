@@ -66,7 +66,7 @@ public class PlayerClusterbomb extends PlayerSkill
         float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
         damage.getAmountObject().adjustBase(damageAmout);
         damage.setType(Damage.DamageType.NODAMAGE);  
-        damage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, 10, 0.0f, 1f));
+        damage.addImageEffect(this.getDamageBrightnessEffect());
         
         //build body of bomb1
         Body body1 = new Body(new Circle(15), 1);

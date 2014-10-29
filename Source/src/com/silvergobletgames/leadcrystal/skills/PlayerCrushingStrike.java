@@ -100,6 +100,8 @@ public class PlayerCrushingStrike extends PlayerSkill{
         //add particle emitter
         FlameStrikeParticleEmitter particles = new FlameStrikeParticleEmitter();
         particles.setAngle(theta);
+       
+        particles.setParticleRotation(90 + (float)(theta * (180f/Math.PI))); 
         hitBox.addEmitter(particles);
         
         this.user.getOwningScene().add(hitBox,Layer.MAIN);

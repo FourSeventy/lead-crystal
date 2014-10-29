@@ -22,6 +22,7 @@ import com.silvergobletgames.leadcrystal.combat.DotEffect;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.combat.StateEffect.StateEffectType;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.GroundFireEmitter1;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.GroundFireSmokeEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.LaserBitsEmitter;
@@ -78,19 +79,12 @@ public class PlayerBarrelRoll extends PlayerSkill{
         damage.addImageEffect(this.getDamageBrightnessEffect());
         
         //build body of the barrel
-        Body body = new Body(new Circle(30), 4);
+        Body body = new Body(new Circle(32), 4);
         Image img = new Image("barrel.png");
         img.setAnchor(Anchorable.Anchor.CENTER);
-        img.setDimensions(60, 60);
+        img.setDimensions(65, 65);
         img.setColor(new Color(1f,1f,1f,1f)); 
         BarrelHitBox barrel = new BarrelHitBox(damage, body, img, user); 
-        
-        //add image effect
-//        Float[] points1 = {1.1f, 1.15f, 1.1f};
-//        int[] durations1= {15,15};
-//        ImageEffect blinkEffect = new MultiImageEffect(ImageEffectType.BRIGHTNESS, points1, durations1);
-//        blinkEffect.setRepeating(true);
-//        img.addImageEffect(blinkEffect);
         
            
         //calculate force for the bullet
@@ -128,12 +122,25 @@ public class PlayerBarrelRoll extends PlayerSkill{
          private void explode()
          {
              
-             
-             //explosion hitbox
-             Image img = new Image("mediumCircle.png");  
-             img.setDimensions(400, 400);
+             //explosion images
+             Image img = new Image("flashParticle.png");  
+             img.setDimensions(300, 300);
              img.setColor(new Color(3,3,1,1));
-             img.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.SCALE, 35, 1, 0f));
+             img.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.SCALE, 60, 1, 0f));
+             img.setHorizontalFlip(SylverRandom.random.nextBoolean());
+             img.setVerticalFlip(SylverRandom.random.nextBoolean());
+
+             String particleImageToUse = SylverRandom.random.nextBoolean()?"flashParticle2.png":"flashParticle3.png";
+             Image img2 = new Image(particleImageToUse);  
+             img2.setDimensions(300, 300);
+             img2.setColor(new Color(3,3,1,1));
+             img2.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.SCALE, 60, 1, 0f));
+             img2.setHorizontalFlip(SylverRandom.random.nextBoolean());
+             img2.setVerticalFlip(SylverRandom.random.nextBoolean()); 
+             Overlay ehhovhh = new Overlay(img2);
+             img.addOverlay(ehhovhh); 
+             
+             
              Body beh = new StaticBody(new Circle(200));
              beh.setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value);
              beh.setBitmask(Entity.BitMasks.NO_COLLISION.value);
@@ -141,8 +148,15 @@ public class PlayerBarrelRoll extends PlayerSkill{
 
              //explosion hitbox
              HitBox explosionHitbox = new HitBox(damage, beh, img, sourceEntity);
-             explosionHitbox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 60, 0, 0));               
+             explosionHitbox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 10, 0, 0));               
              explosionHitbox.setPosition(this.getPosition().x, this.getPosition().y);
+             LeadCrystalParticleEmitters.BombExplosionEmitter emitter = new LeadCrystalParticleEmitters.BombExplosionEmitter();
+             emitter.setDuration(15);
+             AbstractParticleEmitter fire1 = new LeadCrystalParticleEmitters.GroundFireEmitter1(); 
+             fire1.setParticlesPerFrame(.75f);
+             fire1.setDuration(360);
+             explosionHitbox.addEmitter(fire1);
+             explosionHitbox.addEmitter(emitter);
              this.getOwningScene().add(explosionHitbox, Layer.MAIN); 
                 
              //shoot out debris
@@ -274,6 +288,7 @@ public class PlayerBarrelRoll extends PlayerSkill{
                 //apply damage dot
                 DotEffect fireDot = new DotEffect(360, 30, new Damage(DamageType.BURN, 5));               
                 ((CombatEntity)other).getCombatData().addCombatEffect("fireDot", fireDot);
+                ((CombatEntity)other).getImage().addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.COLOR, 6 * 60, new Color(255,40,5), new Color(1f,1f,1f)));
             }
             
         }
