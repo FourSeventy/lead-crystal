@@ -1,31 +1,32 @@
 package com.silvergobletgames.leadcrystal.skills;
 
-import com.silvergobletgames.leadcrystal.entities.CombatEntity;
-import com.silvergobletgames.leadcrystal.entities.HitBox;
-import com.silvergobletgames.leadcrystal.entities.Entity;
-import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
-import com.silvergobletgames.sylver.core.Scene.Layer;
-import com.silvergobletgames.sylver.graphics.Anchorable;
-import com.silvergobletgames.sylver.graphics.Color;
-import com.silvergobletgames.sylver.graphics.Image;
-import com.silvergobletgames.sylver.graphics.ImageEffect;
-import net.phys2d.math.Vector2f;
-import net.phys2d.raw.Body;
-import net.phys2d.raw.CollisionEvent;
-import net.phys2d.raw.shapes.Circle;
 import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.combat.DotEffect;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.IceEmitter;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.IceEmitter2;
 import com.silvergobletgames.leadcrystal.entities.*;
+import com.silvergobletgames.leadcrystal.entities.CombatEntity;
+import com.silvergobletgames.leadcrystal.entities.Entity;
+import com.silvergobletgames.leadcrystal.entities.HitBox;
+import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.sylver.audio.Sound;
+import com.silvergobletgames.sylver.core.Scene.Layer;
 import com.silvergobletgames.sylver.graphics.*;
+import com.silvergobletgames.sylver.graphics.Anchorable;
+import com.silvergobletgames.sylver.graphics.Color;
+import com.silvergobletgames.sylver.graphics.Image;
+import com.silvergobletgames.sylver.graphics.ImageEffect;
 import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 import java.util.UUID;
+import net.phys2d.math.Vector2f;
+import net.phys2d.raw.Body;
+import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.shapes.Box;
+import net.phys2d.raw.shapes.Circle;
 
 /**
  * 
@@ -58,23 +59,31 @@ public class PlayerWard extends PlayerSkill{
         SylverVector2f vectorToTarget = targetingData.vectorToTarget;
         float theta = targetingData.theta;
         
-        //place ice trap hitbox in the world
-       //build body of the laser
-        Body body = new Body(new Box(57,33), 1);
-        Image img = new Image("computer.png");
-        img.setAnchor(Anchorable.Anchor.LEFTCENTER);
-        img.setDimensions(57, 33);
-        IceTrapHitbox hitbox = new IceTrapHitbox(new Damage(Damage.DamageType.NODAMAGE, 0), body, img, user,damage); 
+        PlayerEntity player = (PlayerEntity) user;
+        float targetX = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationX;
+        float targetY = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationY;
         
-         //calculate force for the bullet
+       
+       //build body of the hitbox
+        Body body = new Body(new Box(100,15), 1);
+        Image img = new Image("icefloor.png");
+        img.setDimensions(100, 40);
+        IceTrapHitbox hitbox = new IceTrapHitbox(new Damage(Damage.DamageType.NODAMAGE, 0), body, img, user,damage); 
+             
+         //calculate force for the hitbox
         float xforce = 1000*vectorToTarget.x;
         float yforce = 1000*vectorToTarget.y;
         
-        //Dispense laser into the world
+        if(targetX < origin.x)
+        {
+           img.setVerticalFlip(true);
+        }
+        
+        //Dispense hitbox into the world
         hitbox.setPosition(origin.x + vectorToTarget.x * 25, origin.y + vectorToTarget.y * 25);
         hitbox.getBody().addForce(new Vector2f(xforce ,yforce));
         hitbox.getBody().setRotation((float)theta);
-        hitbox.getImage().setAngle((float)(theta * (180f/Math.PI))); 
+        //hitbox.getImage().setAngle((float)(theta * (180f/Math.PI))); 
         user.getOwningScene().add(hitbox,Layer.MAIN);     
         
         //play sound
@@ -148,6 +157,10 @@ public class PlayerWard extends PlayerSkill{
             
             //add its praticle effects
             AbstractParticleEmitter emitter = new IceEmitter();
+            emitter.setDuration(900);
+            this.addEmitter(emitter);
+            
+            emitter = new IceEmitter2();
             emitter.setDuration(900);
             this.addEmitter(emitter);
             

@@ -132,36 +132,6 @@ public class LeadCrystalParticleEmitters
                 
     }
     
-    public static class IceEmitter extends ImageParticleEmitter
-    {
-        public IceEmitter()
-        {
-            super(new Image("circle.png"));
-            this.setParticlesPerFrame(8);
-        }
-
-        public  Particle buildParticle()
-        { 
-            
-            Random rand = SylverRandom.random;
-            float posMag = (rand.nextFloat() - .5f)*400;
-            float posAngle = (rand.nextFloat() - .5f) * 720;
-            SylverVector2f pos = new SylverVector2f(this.getPosition().x + posMag *(float)Math.cos(posAngle * Math.PI/180) , this.getPosition().y + posMag *(float)Math.sin(posAngle * Math.PI/180));
-            float magnitude =  rand.nextFloat() + .3f;
-            float randomedAngle = getAngle() + (rand.nextFloat() - .5f) * 720;
-            SylverVector2f velocity =new SylverVector2f(magnitude *(float)Math.cos(randomedAngle * Math.PI/180) , magnitude *(float)Math.sin(randomedAngle * Math.PI/180));
-            SylverVector2f acceleration = new SylverVector2f(0,0);
-      
-            Color color = new Color(new Color(.8f,.8f,1.5f));
-//            if(Math.random() < .5){
-//                color.g += 1f;
-//            }
-            color.a = .7f;
-            int ttl = 50 + (int)(Math.random()*10);
-            return new  Particle( pos, velocity, acceleration,  color, 2f, -.1f/ttl, ttl);
-        }
-                
-    }
     
     public static class SandSpurtEmitter extends ImageParticleEmitter
     {
@@ -516,6 +486,67 @@ public class LeadCrystalParticleEmitters
             return new Particle(pos, velocity, acceleration, color, .6f, .8f/ttl, ttl);
         }   
     }
+    
+    public static class IceEmitter extends ImageParticleEmitter
+    {
+        public IceEmitter()
+        {
+            super(new Image("icepuff.png"));
+            this.setParticlesPerFrame(3);
+        }
+
+        public  Particle buildParticle()
+        { 
+            
+            Random rand = SylverRandom.random;
+            float posMag = (rand.nextFloat() - .5f)*400;
+            float posAngle = (rand.nextFloat() - .5f) * 720;
+            SylverVector2f pos = new SylverVector2f(this.getPosition().x + posMag *(float)Math.cos(posAngle * Math.PI/180) , this.getPosition().y + posMag *(float)Math.sin(posAngle * Math.PI/180));
+            float magnitude =  rand.nextFloat() + .3f;
+            float randomedAngle = getAngle() + (rand.nextFloat() - .5f) * 720;
+            SylverVector2f velocity =new SylverVector2f(magnitude *(float)Math.cos(randomedAngle * Math.PI/180) , magnitude *(float)Math.sin(randomedAngle * Math.PI/180));
+            SylverVector2f acceleration = new SylverVector2f(0,0);
+      
+            Color color = new Color(.8f,.8f,1.5f,1f);
+//            if(Math.random() < .5){
+//                color.g += 1f;
+//            }
+            int ttl = 50 + (int)(Math.random()*10);
+            return new  Particle( pos, velocity, acceleration,  color, 1.2f, -.2f/ttl, ttl);
+        }
+                
+    }
+    
+    public static class IceEmitter2 extends ImageParticleEmitter
+    {
+        public IceEmitter2()
+        {
+            super(new Image("iceball.png"));
+            this.setParticlesPerFrame(3);
+        }
+
+        public  Particle buildParticle()
+        { 
+            
+            Random rand = SylverRandom.random;
+            float posMag = (rand.nextFloat() - .5f)*400;
+            float posAngle = (rand.nextFloat() - .5f) * 720;
+            SylverVector2f pos = new SylverVector2f(this.getPosition().x + posMag *(float)Math.cos(posAngle * Math.PI/180) , this.getPosition().y + posMag *(float)Math.sin(posAngle * Math.PI/180));
+            float magnitude =  rand.nextFloat() + .3f;
+            float randomedAngle = getAngle() + (rand.nextFloat() - .5f) * 720;
+            SylverVector2f velocity =new SylverVector2f(magnitude *(float)Math.cos(randomedAngle * Math.PI/180) , magnitude *(float)Math.sin(randomedAngle * Math.PI/180));
+            SylverVector2f acceleration = new SylverVector2f(0,0);
+      
+            Color color = new Color(.8f,.8f,1.5f,.75f);
+//            if(Math.random() < .5){
+//                color.g += 1f;
+//            }
+            int ttl = 50 + (int)(Math.random()*10);
+            return new  Particle( pos, velocity, acceleration,  color, .6f, .2f/ttl, ttl);
+        }
+                
+    }
+   
    
     
 }

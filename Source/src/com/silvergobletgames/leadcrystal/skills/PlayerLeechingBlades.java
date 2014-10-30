@@ -67,7 +67,7 @@ public class PlayerLeechingBlades extends PlayerSkill{
         
         //build body of the blade
         Body body = new Body(new Circle(20), 1);
-        Image img = new Image("blade.png");
+        Image img = new Image("leechblade.png");
         img.setDimensions(40, 40);
         
         //add rotation effect to image
@@ -88,7 +88,7 @@ public class PlayerLeechingBlades extends PlayerSkill{
         
         //build body of the blade
         body = new Body(new Circle(20), 1);
-        img = new Image("blade.png");
+        img = new Image("leechblade.png");
         img.setDimensions(40, 40);
         
         //add rotation effect to image
@@ -109,7 +109,7 @@ public class PlayerLeechingBlades extends PlayerSkill{
         
         //build body of the blade
         body = new Body(new Circle(20), 1);
-        img = new Image("blade.png");
+        img = new Image("leechblade.png");
         img.setDimensions(40, 40);
         
         //add rotation effect to image
