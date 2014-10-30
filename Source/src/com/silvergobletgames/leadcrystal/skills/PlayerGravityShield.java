@@ -47,16 +47,16 @@ public class PlayerGravityShield extends PlayerSkill{
     public void use(Damage damage, SylverVector2f origin) 
     {
         //put overlay on
-        Image image = new Image("newShield.png");
+        Image image = new Image("shield.png");
         image.setAnchor(Anchorable.Anchor.CENTER);
-        image.setColor(new Color(2f,2f,2.5f,1f));
+        image.setColor(new Color(2f,2f,2f,.5f));
         Color[] points = {new Color(2f,2f,2.5f,1f), new Color(2.5f,2.5f,3f,1f), new Color(2f,2f,2.5f,1f)};
         int[] durations = {60,60};
         MultiImageEffect renderEffect = new MultiImageEffect(ImageEffect.ImageEffectType.COLOR, points, durations);
         renderEffect.setRepeating(true);
         image.addImageEffect(renderEffect);
         Overlay overlay = new Overlay(image, 300,new SylverVector2f(.5f, .65f));
-        overlay.setRelativeSize(1.2f);
+        overlay.setRelativeSize(2f);
         user.getImage().addOverlay("guardOverlay", overlay);
         
         //add the combat effect

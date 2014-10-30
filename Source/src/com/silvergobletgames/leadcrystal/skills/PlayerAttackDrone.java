@@ -56,8 +56,8 @@ public class PlayerAttackDrone extends Skill
     {
       
         //create drone and put it in the world
-        Image img = new Image("implant.png");
-        img.setScale(1.3f);
+        Image img = new Image("droid.png");
+        img.setScale(1f);
         Drone drone = new Drone(img,new StaticBody(new Circle(20)),(PlayerEntity)this.user);
         user.getOwningScene().add(drone,Layer.MAIN);
         
@@ -205,9 +205,9 @@ public class PlayerAttackDrone extends Skill
 
             //build body of the lazer
             Body body = new Body(new Box(10,4f), 1);
-            Image img = new Image("statbar.png");
+            Image img = new Image("dashparticle.png");
             img.setAnchor(Anchorable.Anchor.LEFTCENTER);
-            img.setDimensions(60, 4f);
+            img.setDimensions(60, 10f);
             img.setColor(new Color(3f,3f,.5f,1f)); 
             LaserHitbox laser = new LaserHitbox(damage, body, img, user);        
             laser.setImageOffset(new Vector2f(-10,0));
