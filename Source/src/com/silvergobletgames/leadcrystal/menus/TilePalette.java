@@ -142,6 +142,7 @@ public class TilePalette extends Menu {
         characters.add(new Image(new MoleAnimationPack()));
         characters.add(new Image(new JumperAnimationPack()));
         characters.add(new Image(new SandmanAnimationPack()));
+        characters.add(new Image("training_dummy.png"));
         
         //animated images
         animatedTerrain.add(new Image(new CommonCrateAnimationPack()));
