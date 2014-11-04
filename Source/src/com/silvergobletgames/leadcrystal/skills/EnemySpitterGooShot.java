@@ -45,22 +45,22 @@ public class EnemySpitterGooShot extends Skill
         damage.setType(Damage.DamageType.PHYSICAL);
         
         //build goo
-        Body body = new Body(new Box(20,20), 10);
-        Image img = new Image("plantSpit.png");
-        img.setDimensions(20, 20);
-        img.setColor(new Color(1f,1.6f,1f,1f));
+        Body body = new Body(new Box(23,23), 10);
+        Image img = new Image("poison_goo_ball.png");
+        img.setDimensions(25, 25);
+        img.setColor(new Color(1f,1.2f,1f,1f));
         GooHitBox goo1 = new GooHitBox(new Damage(damage), body, img, user);
         
-        body = new Body(new Box(20,20), 10);
-        img = new Image("plantSpit.png");
-        img.setDimensions(20, 20);
-        img.setColor(new Color(1f,1.6f,1f,1f));
+        body = new Body(new Box(23,23), 10);
+        img = new Image("poison_goo_ball.png");
+        img.setDimensions(25, 25);
+        img.setColor(new Color(1f,1.2f,1f,1f));
         GooHitBox goo2 = new GooHitBox(new Damage(damage), body, img, user);
         
-        body = new Body(new Box(20,20), 10);
-        img = new Image("plantSpit.png");
-        img.setDimensions(20, 20);
-        img.setColor(new Color(1f,1.6f,1f,1f));
+        body = new Body(new Box(23,23), 10);
+        img = new Image("poison_goo_ball.png");
+        img.setDimensions(25, 25);
+        img.setColor(new Color(1f,1.2f,1f,1f));
         GooHitBox goo3 = new GooHitBox(new Damage(damage), body, img, user);
         
         
