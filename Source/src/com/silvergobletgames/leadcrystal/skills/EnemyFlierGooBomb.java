@@ -51,10 +51,10 @@ public class EnemyFlierGooBomb extends Skill
         damage.addCombatEffect(new StateEffect(StateEffect.StateEffectType.SLOW, 240,.5f,true));
         
         //build goo
-        Body body = new Body(new Circle(22), 1);
-        Image img = new Image("plantSpit.png");
-        img.setDimensions(45, 45);
-        img.setColor(new Color(1f,1.6f,1f,1f));
+        Body body = new Body(new Circle(24), 1);
+        Image img = new Image("poison_goo_dart.png");
+        img.setDimensions(50, 50);
+        img.setColor(new Color(1f,1.2f,1f,1f));
         GooBombHitBox goo = new GooBombHitBox(damage, body, img, user);
         
         
@@ -63,11 +63,16 @@ public class EnemyFlierGooBomb extends Skill
         distanceVector.normalise();
          
         // Bullet force
-        float xforce1 = 700*distanceVector.x;
-        float yforce1 = 700*distanceVector.y;
+        float xforce1 = 900*distanceVector.x;
+        float yforce1 = 900*distanceVector.y;
 
+        
+        float theta = (float)Math.acos(distanceVector.dot(new SylverVector2f(1,0)));
+        if(user.getTarget().getPosition().y < origin.y)
+        {
+            theta = (float)(2* Math.PI - theta);
+        }
         //Dispense goo into the world
-        float theta = (float)Math.atan(xforce1/yforce1);
         goo.setPosition(origin.x, origin.y);
         goo.getBody().addForce(new Vector2f((int)xforce1 ,(int)yforce1));
         goo.getBody().setRotation((float)theta);
@@ -103,29 +108,9 @@ public class EnemyFlierGooBomb extends Skill
          {
              super.collidedWith(other,event);
              
-             //determine if we hit a player hitbox
-             boolean playerHitbox = false;
-             if(other instanceof HitBox)
-             {
-                if(!((HitBox)other).getDamage().getCombatEffects().isEmpty())
-                 {
-                     CombatEffect labelEffect = ((HitBox)other).getDamage().getCombatEffects().get(0);
-                     
-                     if(labelEffect instanceof StateEffect)
-                     {
-                         if (((StateEffect)labelEffect).getStateEffectType() == StateEffect.StateEffectType.LABEL)
-                         {
-                             if(((StateEffect)labelEffect).getName().equals("playerLaser"))
-                             {
-                                 playerHitbox = true;
-                             }
-                         }
-                     }
-                 }
-             }
              
              //remove if we hit a world object
-             if(other instanceof WorldObjectEntity || playerHitbox )
+             if(other instanceof WorldObjectEntity  )
              {
                  //spit out goop 
                 Vector2f normalVector =(Vector2f)event.getNormal();
@@ -146,21 +131,21 @@ public class EnemyFlierGooBomb extends Skill
 
                 //build goo
                 Body body = new Body(new Circle(10), 1);
-                Image img = new Image("plantSpit.png");
+                Image img = new Image("poison_goo_ball.png");
                 img.setDimensions(20, 20);
-                img.setColor(new Color(1f,1.6f,1f,1f));
+                img.setColor(new Color(1f,1.2f,1f,1f));
                 GooBitsHitBox goo = new GooBitsHitBox(dam, body, img, user);
                 
                 Body body2 = new Body(new Circle(10), 1);
-                Image img2 = new Image("plantSpit.png");
+                Image img2 = new Image("poison_goo_ball.png");
                 img2.setDimensions(20, 20);
-                img2.setColor(new Color(1f,1.6f,1f,1f));
+                img2.setColor(new Color(1f,1.2f,1f,1f));
                 GooBitsHitBox goo2 = new GooBitsHitBox(dam, body2, img2, user);
                 
                 Body body3 = new Body(new Circle(10), 1);
-                Image img3 = new Image("plantSpit.png");
+                Image img3 = new Image("poison_goo_ball.png");
                 img3.setDimensions(20, 20);
-                img3.setColor(new Color(1f,1.6f,1f,1f));
+                img3.setColor(new Color(1f,1.2f,1f,1f));
                 GooBitsHitBox goo3 = new GooBitsHitBox(dam, body3, img3, user);
 
 
