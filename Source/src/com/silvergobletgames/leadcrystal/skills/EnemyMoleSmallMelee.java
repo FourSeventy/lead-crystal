@@ -42,11 +42,13 @@ public class EnemyMoleSmallMelee extends Skill{
         //build body of attack
         Body body = new StaticBody(new Box(50, 36));
         body.addExcludedBody(user.getBody());
-        Image image = new Image("swipe.png");        
+        Image image = new Image("mole_swipe.png");        
         image.setColor(new Color(1,1,1f,1f));
         image.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.COLOR, 50, new Color(1,1,1f,1f), new Color(1,1,1f,0f)));
         image.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 50, 1, 1));
         if (user.getFacingDirection().equals(FacingDirection.RIGHT))
+            image.setHorizontalFlip(false);
+        else
             image.setHorizontalFlip(true);
         image.setAnchor(Anchorable.Anchor.CENTER);
         image.setPositionAnchored(origin.x,origin.y);
