@@ -40,7 +40,7 @@ public class EnemyMoleSmallMelee extends Skill{
         damage.setType(Damage.DamageType.PHYSICAL);
         
         //build body of attack
-        Body body = new StaticBody(new Box(50, 36));
+        Body body = new StaticBody(new Box(60, 43));
         body.addExcludedBody(user.getBody());
         Image image = new Image("mole_swipe.png");        
         image.setColor(new Color(1,1,1f,1f));
