@@ -25,7 +25,7 @@ public class PotionManager
 {
     public PlayerEntity playerReference;
     private int numberOfPotions;
-    private int maxPotions = 5;
+    private int maxPotions = 3;
     
     public static final int POTION_PRICE = 15;
     
