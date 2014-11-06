@@ -130,9 +130,9 @@ public class ArmorManager {
         this.upgradeRadar.unlocked = true;
         this.armorStats.put(this.upgradeRadar.id,this.upgradeRadar);  
  
-        this.lifeLeech = new ArmorStat(ArmorStatID.LIFE_LEECH, new Image("lifeLeechIcon.png"), "Life Leech", 50,5);
-        this.lifeLeech.description = "+5% life leech per point.";
-        this.lifeLeech.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().lifeLeech.adjustBase(.05f);}}); 
+        this.lifeLeech = new ArmorStat(ArmorStatID.LIFE_LEECH, new Image("lifeLeechIcon.png"), "Life on Hit", 50,5);
+        this.lifeLeech.description = "+1 life on hit per point.";
+        this.lifeLeech.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().lifeLeech.adjustBase(1f);}}); 
         this.lifeLeech.unlocked = true;
         this.armorStats.put(this.lifeLeech.id,this.lifeLeech);      
         

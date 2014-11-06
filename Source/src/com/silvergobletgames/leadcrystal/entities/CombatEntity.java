@@ -235,7 +235,7 @@ public abstract class CombatEntity extends Entity
         }
         
         //set damage life leech
-        damage.setLifeLeech(this.combatData.lifeLeech.getTotalValue());
+        damage.setLifeLeech( this.combatData.lifeLeech.getTotalValue());
         
         //calculate the skill origin point
         SylverVector2f offset = new SylverVector2f(0,0);
@@ -373,7 +373,7 @@ public abstract class CombatEntity extends Entity
         //TODO - interrupt casting
 
         //handle life leech
-        float leechAmount = incomingDamage.getAmount() * incomingDamage.getLifeLeech();
+        float leechAmount =  incomingDamage.getLifeLeech();
         if(leechAmount > 0)
         {
             Damage leechHeal = new Damage(DamageType.HEAL, leechAmount, this);
