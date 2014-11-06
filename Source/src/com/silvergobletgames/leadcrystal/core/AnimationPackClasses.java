@@ -892,23 +892,22 @@ public class AnimationPackClasses {
         {
              //Idle
             ArrayList<Texture> idle = new ArrayList<>();
-                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("crate.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("big_crate.png"));
             this.animationSet.put(CoreAnimations.IDLE, idle);
             
             
             
             idle = new ArrayList();
-                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("crateDamaged.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("big_crate_damaged.png"));
             this.animationSet.put(ExtendedImageAnimations.RUNNING, idle);
             
 
             
             //death
             ArrayList<Texture> dying = new ArrayList();
-                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("crateChunk1.png"));                
-                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("crateChunk2.png"));
-                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("crateChunk3.png"));               
-                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("crateChunk4.png"));
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("big_crate_chunk1.png"));                
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("big_crate_chunk2.png"));
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("big_crate_chunk3.png"));
             this.animationSet.put(ExtendedImageAnimations.DEATH, dying); 
             
             
@@ -920,8 +919,51 @@ public class AnimationPackClasses {
             //========================
             // Build Skill Offset Map
             //========================
-            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0000_1111_0000_1111_0000_0000_0000_0000),
-                                                                                        Float.intBitsToFloat(0b0111_1111_0010_0010_0000_0000_0000_0000)));
+            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0000_0000_1111_1111_0000_0000_0000_0000),
+                                                                                        Float.intBitsToFloat(0b0111_0000_1111_0010_0000_0000_0000_0000)));
+                  
+            
+            //================
+            // Build FPT Map
+            //================
+        }
+    }
+    
+    public static class ArmorCrateAnimationPack extends AnimationPack
+    {
+        public ArmorCrateAnimationPack()
+        {
+             //Idle
+            ArrayList<Texture> idle = new ArrayList<>();
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("armor_crate.png"));
+            this.animationSet.put(CoreAnimations.IDLE, idle);
+            
+            
+            
+            idle = new ArrayList();
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("armor_crate_damaged.png"));
+            this.animationSet.put(ExtendedImageAnimations.RUNNING, idle);
+            
+
+            
+            //death
+            ArrayList<Texture> dying = new ArrayList();
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("armor_crate_chunk1.png"));                
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("armor_crate_chunk2.png"));
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("armor_crate_chunk3.png"));               
+            this.animationSet.put(ExtendedImageAnimations.DEATH, dying); 
+            
+            
+            //=====================
+            // Build Delay Map
+            //=====================        
+
+            
+            //========================
+            // Build Skill Offset Map
+            //========================
+            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0000_0000_1111_0000_0000_0000_0000_0000),
+                                                                                        Float.intBitsToFloat(0b0111_0000_0000_0010_0000_0000_0000_0000)));
                   
             
             //================

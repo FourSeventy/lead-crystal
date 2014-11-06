@@ -20,7 +20,7 @@ import com.silvergobletgames.sylver.util.SylverVector2f;
  *
  * @author mike
  */
-public class BrainCrate extends BrainGround 
+public class BrainCrate extends Brain
 {
     
     
@@ -69,7 +69,7 @@ public class BrainCrate extends BrainGround
         if(self.getCombatData().dropGoldChance == DropGenerator.DropChance.ALWAYS)
         {
             //add spewer to the world
-            LootSpewer spew = new LootSpewer(30);
+            LootSpewer spew = new LootSpewer(60);
             spew.setPosition(self.getPosition().x, self.getPosition().y);
             self.getOwningScene().add(spew, Scene.Layer.MAIN);
         }

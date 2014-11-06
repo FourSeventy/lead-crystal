@@ -1,5 +1,6 @@
 package com.silvergobletgames.leadcrystal.menus;
 
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.ArmorCrateAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.CommonCrateAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.FlierAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.JumperAnimationPack;
@@ -146,6 +147,7 @@ public class TilePalette extends Menu {
         
         //animated images
         animatedTerrain.add(new Image(new CommonCrateAnimationPack()));
+        animatedTerrain.add(new Image(new ArmorCrateAnimationPack()));
         
         //backgrounds
         try
