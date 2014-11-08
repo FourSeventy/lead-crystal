@@ -44,7 +44,7 @@ public class PlayerLaserShot extends PlayerSkill{
     
     public PlayerLaserShot()
     {
-        super(SkillID.PlayerLaser,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,45,Integer.MAX_VALUE);
+        super(SkillID.PlayerLaser,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,30,Integer.MAX_VALUE);
         
         //set the skillID and the name
         this.icon = new Image("laserIcon.png");
@@ -65,19 +65,19 @@ public class PlayerLaserShot extends PlayerSkill{
         float theta = targetingData.theta;
                         
         //set damage
-        int min = 10; 
-        int max = 12;
+        int min = 6; 
+        int max = 8;
         float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
         damage.getAmountObject().adjustBase(damageAmout);
         damage.setType(Damage.DamageType.PHYSICAL);       
         damage.addImageEffect(this.getDamageBrightnessEffect());
         
         //build body of the laser
-        Body body = new Body(new Box(57,33), 1);
+        Body body = new Body(new Box(54,30), 1);
         Image img = new Image("laserPew.png");
         img.setAnchor(Anchorable.Anchor.LEFTCENTER);
         //img.setDimensions(57, 33);
-        img.setScale(1.4f);
+        img.setScale(1.3f);
         img.setColor(new Color(1.1f,1.1f,1.1f,1.1f)); 
         LaserHitbox laser = new LaserHitbox(damage, body, img, user); 
         
