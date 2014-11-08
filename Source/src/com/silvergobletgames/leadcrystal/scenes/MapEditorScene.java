@@ -898,14 +898,14 @@ public class MapEditorScene extends Scene {
                 {
                     if(so instanceof NonPlayerEntity)
                     {
-                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.MoleAnimationPack)
+                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.CommonCrateAnimationPack || ((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.ArmorCrateAnimationPack)
                         {
-                            ((NonPlayerEntity)so).getCombatData().xVelocity.setBase(27);
+                            ((NonPlayerEntity)so).getBody().setRotatable(true); 
                         }
                     }
                     else if(so instanceof MobSpawner)
                     {
-                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.MoleAnimationPack)
+                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.CommonCrateAnimationPack)
                         {
                             ((MobSpawner)so).mobToSpawn.getCombatData().xVelocity.setBase(27);
                         }                           
