@@ -646,7 +646,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         this.respawnGravestone = new RespawnGravestone(new Image("gravestone.png"),gravestoneBody,this);
         //this.respawnGravestone.getImage().setDimensions(100, 130);
-        this.respawnGravestone.getImage().setScale(.2f);
+        this.respawnGravestone.getImage().setScale(1.1f);
         
         Float[] points = {0f,0f,1f};
         int[] durations = {60,60};
