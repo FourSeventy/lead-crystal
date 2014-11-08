@@ -37,10 +37,12 @@ import net.phys2d.raw.shapes.Circle;
  */
 public class PlayerLeechingBlades extends PlayerSkill{
     
+    private static int BLADE_DURATION = 10 * 60;
+    
     public PlayerLeechingBlades()
     {
         //super constructor 
-        super(SkillID.PlayerLeechingBlades,SkillType.DEFENSIVE, ExtendedImageAnimations.SPELLATTACK,1800,50);
+        super(SkillID.PlayerLeechingBlades,SkillType.DEFENSIVE, ExtendedImageAnimations.SPELLATTACK,30 * 60,50);
  
         //set the skillID and the name
         this.icon = new Image("leechBladeIcon.png") ;
@@ -53,7 +55,7 @@ public class PlayerLeechingBlades extends PlayerSkill{
     {
         Random r = SylverRandom.random;
 
-         //set damage
+        //set damage
         int min = 10; 
         int max = 12;
         float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
@@ -82,7 +84,7 @@ public class PlayerLeechingBlades extends PlayerSkill{
   
         //build hitbox
         LeechingBladeHitbox blade = new LeechingBladeHitbox(new Damage(damage), body, img, user, LeechingBladeHitbox.LeechingBladeDirection.one); 
-        blade.addEntityEffect(new EntityEffect(EntityEffectType.DURATION, 1800, 0, 0));
+        blade.addEntityEffect(new EntityEffect(EntityEffectType.DURATION, PlayerLeechingBlades.BLADE_DURATION, 0, 0));
         blade.setPosition(user.getPosition().x, user.getPosition().y);
         this.user.getOwningScene().add(blade, Scene.Layer.MAIN);
         
@@ -102,7 +104,7 @@ public class PlayerLeechingBlades extends PlayerSkill{
   
         //build hitbox
         blade = new LeechingBladeHitbox(new Damage(damage), body, img, user, LeechingBladeHitbox.LeechingBladeDirection.two);  
-        blade.addEntityEffect(new EntityEffect(EntityEffectType.DURATION, 1800, 0, 0));
+        blade.addEntityEffect(new EntityEffect(EntityEffectType.DURATION, PlayerLeechingBlades.BLADE_DURATION, 0, 0));
         blade.setPosition(user.getPosition().x, user.getPosition().y);
         this.user.getOwningScene().add(blade, Scene.Layer.MAIN);
         
@@ -123,7 +125,7 @@ public class PlayerLeechingBlades extends PlayerSkill{
   
         //build hitbox
         blade = new LeechingBladeHitbox(new Damage(damage), body, img, user, LeechingBladeHitbox.LeechingBladeDirection.three);  
-        blade.addEntityEffect(new EntityEffect(EntityEffectType.DURATION, 1800, 0, 0));
+        blade.addEntityEffect(new EntityEffect(EntityEffectType.DURATION, PlayerLeechingBlades.BLADE_DURATION, 0, 0));
         blade.setPosition(user.getPosition().x, user.getPosition().y);
         this.user.getOwningScene().add(blade, Scene.Layer.MAIN);
         
