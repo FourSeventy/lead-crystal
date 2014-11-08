@@ -41,7 +41,7 @@ public class PlayerBoomerang extends PlayerSkill
     //==============
     public PlayerBoomerang()
     {
-        super(SkillID.PlayerBoomerang,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK,270,Integer.MAX_VALUE);
+        super(SkillID.PlayerBoomerang,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK,540,Integer.MAX_VALUE);
         
         //set the skillID and the name
         this.icon = new Image("boomerangIcon.png");
