@@ -55,22 +55,22 @@ public class CutsceneManager {
             owningScene.player.getLevelProgressionManager().cutsceneCompleteMap.put(Cutscenes.OpeningCutscene, true);
             this.playCutscene(new OpeningCutscene()); 
         }
-        //level 0 completion cutscene
-        if(owningScene.player.getLevelProgressionManager().cutsceneCompleteMap.get(Cutscenes.Desert0Completed) == false
-           && owningScene.player.getLevelProgressionManager().levelMap.get(0).mainObjective.complete == true
-                && owningScene.activeLevelData != null && owningScene.activeLevelData.filename.equals("town.lv"))
-        {
-            owningScene.player.getLevelProgressionManager().cutsceneCompleteMap.put(Cutscenes.Desert0Completed, true);
-             this.playCutscene(new Desert0CompletedCutscene()); 
-        }
-        //level 1 completion cutscene
-        if(owningScene.player.getLevelProgressionManager().cutsceneCompleteMap.get(Cutscenes.Desert1Completed) == false
-           && owningScene.player.getLevelProgressionManager().levelMap.get(1).mainObjective.complete == true
-                && owningScene.activeLevelData != null && owningScene.activeLevelData.filename.equals("town.lv"))
-        {
-            owningScene.player.getLevelProgressionManager().cutsceneCompleteMap.put(Cutscenes.Desert1Completed, true);
-             this.playCutscene(new Desert1CompletedCutscene()); 
-        }
+//        //level 0 completion cutscene
+//        if(owningScene.player.getLevelProgressionManager().cutsceneCompleteMap.get(Cutscenes.Desert0Completed) == false
+//           && owningScene.player.getLevelProgressionManager().levelMap.get(0).mainObjective.complete == true
+//                && owningScene.activeLevelData != null && owningScene.activeLevelData.filename.equals("town.lv"))
+//        {
+//            owningScene.player.getLevelProgressionManager().cutsceneCompleteMap.put(Cutscenes.Desert0Completed, true);
+//             this.playCutscene(new Desert0CompletedCutscene()); 
+//        }
+//        //level 1 completion cutscene
+//        if(owningScene.player.getLevelProgressionManager().cutsceneCompleteMap.get(Cutscenes.Desert1Completed) == false
+//           && owningScene.player.getLevelProgressionManager().levelMap.get(1).mainObjective.complete == true
+//                && owningScene.activeLevelData != null && owningScene.activeLevelData.filename.equals("town.lv"))
+//        {
+//            owningScene.player.getLevelProgressionManager().cutsceneCompleteMap.put(Cutscenes.Desert1Completed, true);
+//             this.playCutscene(new Desert1CompletedCutscene()); 
+//        }
     }
     
     public void playCutscene(Cutscene cutscene)

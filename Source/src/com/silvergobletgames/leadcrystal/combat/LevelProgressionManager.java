@@ -193,7 +193,7 @@ public class LevelProgressionManager
         objective.objectiveName = "Lost Treasure";
         objective.objectiveDescription = "Find the hidden artifact.";
         objective.currencyAward = 25;
-        objective.statReward = ArmorStatID.CC_REDUCTION;
+        objective.statReward = ArmorStatID.JETPACK;
         cave1.sideObjective = objective;
         //adding to map
         this.levelMap.put(6, cave1);
@@ -271,13 +271,13 @@ public class LevelProgressionManager
         objective.objectiveDescription = "Head into the temple and find the ancient relic.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
+        objective.statReward = ArmorStatID.MOVE_SPEED;
         cave5.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
         objective.objectiveName = "null";
         objective.objectiveDescription = "Do something.";
         objective.currencyAward = 25;
-        objective.statReward = ArmorStatID.MOVE_SPEED;
         cave5.sideObjective = objective;
         //adding to map
         this.levelMap.put(10, cave5);
