@@ -191,7 +191,7 @@ public class LevelProgressionManager
         //side objective 1
         objective = new LevelObjective();
         objective.objectiveName = "Lost Treasure";
-        objective.objectiveDescription = "Find lost treasure chest.";
+        objective.objectiveDescription = "Find the hidden artifact.";
         objective.currencyAward = 25;
         objective.statReward = ArmorStatID.CC_REDUCTION;
         cave1.sideObjective = objective;
@@ -201,7 +201,7 @@ public class LevelProgressionManager
         //cave 2
         Level cave2 = new Level(); 
         cave2.levelDataName = "cave2.lv";
-        cave2.levelName = "Cave 2";
+        cave2.levelName = "Clear Caves";
         //main objective
         objective = new LevelObjective();
         objective.objectiveName = "Kill Giant Motoccos";
@@ -264,17 +264,17 @@ public class LevelProgressionManager
         //cave 5
         Level cave5 = new Level(); 
         cave5.levelDataName = "cave5.lv";
-        cave5.levelName = "Destroy Source";
+        cave5.levelName = "Track Down Relic";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Destroy Source of Creatures";
-        objective.objectiveDescription = "Head into the temple and destroy the source of the creatures.";
+        objective.objectiveName = "Find the Ancient Relic";
+        objective.objectiveDescription = "Head into the temple and find the ancient relic.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         cave5.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Do something";
+        objective.objectiveName = "null";
         objective.objectiveDescription = "Do something.";
         objective.currencyAward = 25;
         objective.statReward = ArmorStatID.MOVE_SPEED;
