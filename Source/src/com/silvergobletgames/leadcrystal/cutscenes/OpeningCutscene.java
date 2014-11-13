@@ -1,6 +1,7 @@
 
 package com.silvergobletgames.leadcrystal.cutscenes;
 
+import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.core.InputSnapshot;
 import com.silvergobletgames.sylver.graphics.Color;
@@ -17,9 +18,9 @@ import com.silvergobletgames.sylver.windowsystem.TextBlock;
 public class OpeningCutscene extends Cutscene 
 {
    
-    private Image bashSlashImage;
-    private Image dangerCart;
-    private Image settlement;
+    private Image frame2;
+    private Image frame1;
+    private Image frame3;
     private Image bashBubble;
     private Image slashBubble;
     private TextBlock slashTextArea;
@@ -44,24 +45,23 @@ public class OpeningCutscene extends Cutscene
          this.center = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x/2;
          //center -500 is max left
         
-        dangerCart = new Image("openingCutscene1.jpg");
-        dangerCart.setScale(1.7f);
-        dangerCart.setPosition(center - 400, 650);
-        dangerCart.setAlphaBrightness(1);
-        this.objects.add(dangerCart);  
+        frame1 = new Image("opening_frame1.png");
+        frame1.setPosition(0, 0);
+        frame1.setDimensions(1600, 900);
+        frame1.setAlphaBrightness(1);
+        this.objects.add(frame1);  
         
         
-        bashSlashImage = new Image("openingCutscene2.jpg");
-        bashSlashImage.setScale(3.8f);
-        bashSlashImage.setPosition(center - (bashSlashImage.getWidth() * bashSlashImage.getScale())/2, 150);
-        bashSlashImage.setAlphaBrightness(0);
-        this.objects.add(bashSlashImage);  
+        frame2 = new Image("opening_frame2.png");
+        frame2.setDimensions(1600, 900);
+        frame2.setPosition(0,0);
+        frame2.setAlphaBrightness(0);
+        this.objects.add(frame2);  
         
-        settlement = new Image("openingCutscene3.jpg");
-        settlement.setScale(1f);
-        settlement.setPosition(center + 300, 25);
-        settlement.setAlphaBrightness(0);
-        this.objects.add(settlement);  
+        frame3 = new Image("opening_frame3.png");
+        frame3.setPosition(0,0);
+        frame3.setAlphaBrightness(0);
+        this.objects.add(frame3);  
              
         bashBubble = new Image("speechBubble.png");
         bashBubble.setScale(2f);
@@ -76,8 +76,8 @@ public class OpeningCutscene extends Cutscene
         slashBubble.setAlphaBrightness(0);
         this.objects.add(slashBubble);  
         
-        bashTextArea = new TextBlock(center - 400, 600, 400, new Text(""));       
-        slashTextArea = new TextBlock(center - 100, 600, 400, new Text(""));
+        bashTextArea = new TextBlock(center - 400, 600, 400, new Text("",LeadCrystalTextType.MENU30));       
+        slashTextArea = new TextBlock(center - 100, 600, 400, new Text("",LeadCrystalTextType.MENU30));
 
     }
     
@@ -88,7 +88,7 @@ public class OpeningCutscene extends Cutscene
         //start fading in bash and slash image at 4 seconds
         if(counter == 60 *4)
         {
-            bashSlashImage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.ALPHABRIGHTNESS, 60, 0, 1));
+            frame2.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.ALPHABRIGHTNESS, 60, 0, 1));
         }
         
         //at 8 seconds Slash: "Hey Bash, where is this settlement we are looking for?"
@@ -96,7 +96,7 @@ public class OpeningCutscene extends Cutscene
         {
             slashBubble.setAlphaBrightness(1);
 
-            Text t = new Text("Hey Bash, where is this settlement we are looking for?");
+            Text t = new Text("Hey Bash, where is this settlement we are looking for?",LeadCrystalTextType.MENU30);
             t.setColor(new Color(Color.black));
             slashTextArea = new TextBlock(center - 100, 600, 400, t); 
             this.objects.add(slashTextArea);
@@ -111,7 +111,7 @@ public class OpeningCutscene extends Cutscene
             //new text
             bashBubble.setAlphaBrightness(1);
 
-            Text t = new Text("It should be right up ahead somewhere.");
+            Text t = new Text("It should be right up ahead somewhere.",LeadCrystalTextType.MENU30);
             t.setColor(new Color(Color.black));
             bashTextArea = new TextBlock(center - 200, 600, 400, t); 
             this.objects.add(bashTextArea);
@@ -126,7 +126,7 @@ public class OpeningCutscene extends Cutscene
             //new text
             slashBubble.setAlphaBrightness(1);
 
-            Text t = new Text("It better be,  we've been driving through this damn desert for two days.");
+            Text t = new Text("It better be,  we've been driving through this damn desert for two days.",LeadCrystalTextType.MENU30);
             t.setColor(new Color(Color.black));
             slashTextArea = new TextBlock(center - 100, 600, 400, t); 
             this.objects.add(slashTextArea);
@@ -141,7 +141,7 @@ public class OpeningCutscene extends Cutscene
             //new text
             bashBubble.setAlphaBrightness(1);
 
-            Text t = new Text("Their distress signal says they are under attack. We've got to help them.");
+            Text t = new Text("Their distress signal says they are under attack. We've got to help them.",LeadCrystalTextType.MENU30);
             t.setColor(new Color(Color.black));
             bashTextArea = new TextBlock(center - 200, 600, 400, t); 
             this.objects.add(bashTextArea);
@@ -156,7 +156,7 @@ public class OpeningCutscene extends Cutscene
             //new text
             slashBubble.setAlphaBrightness(1);
 
-            Text t = new Text("I still think this is a bad idea. There better be a good reward in this");
+            Text t = new Text("I still think this is a bad idea. There better be a good reward in this",LeadCrystalTextType.MENU30);
             t.setColor(new Color(Color.black));
             slashTextArea = new TextBlock(center - 100, 600, 400, t); 
             this.objects.add(slashTextArea);
@@ -169,7 +169,7 @@ public class OpeningCutscene extends Cutscene
             this.objects.remove(slashTextArea);
             slashBubble.setAlphaBrightness(0);
             
-            this.settlement.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.ALPHABRIGHTNESS, 60, 0, 1));
+            this.frame3.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.ALPHABRIGHTNESS, 60, 0, 1));
         }
         
         // at 37 seconds  Slash: "There it is up ahead! You hop out here and clear this area, I'll meet you at the town!"
@@ -178,10 +178,13 @@ public class OpeningCutscene extends Cutscene
             
             //new text
             slashBubble.setAlphaBrightness(1);
+            slashBubble.setHorizontalFlip(false);
+            slashBubble.setVerticalFlip(true);
+            slashBubble.setPosition(center -100, 200);
 
-            Text t = new Text( "There it is up ahead! You hop out here and clear this area, I'll meet you at the town!");
+            Text t = new Text( "There it is up ahead! You hop out here and clear this area, I'll meet you at the town!",LeadCrystalTextType.MENU30);
             t.setColor(new Color(Color.black));
-            slashTextArea = new TextBlock(center - 200, 600, 400, t); 
+            slashTextArea = new TextBlock(center - 50, 500, 400, t); 
             this.objects.add(slashTextArea);
         }
         
