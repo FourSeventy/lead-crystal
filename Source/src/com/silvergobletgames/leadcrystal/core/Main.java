@@ -133,7 +133,7 @@ public class Main
                 URI textureURI = Game.getInstance().getConfiguration().getTextureRootFolder(); 
                 try
                 {
-                    Game.getInstance().getAssetManager().getTextureLoader().loadAllTextures(textureURI);
+                    Game.getInstance().getAssetManager().getTextureLoader().loadAllTexturesInDirectory(textureURI);
                 }
                 catch (IOException ex)
                 {

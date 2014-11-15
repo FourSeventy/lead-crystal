@@ -47,14 +47,13 @@ public class LevelData
      * @param filename The name of the level we want to load. The level must be located in the the LeadCrystal/Levels folder of your installation path
      * 
      */
-    protected LevelData (String filename) throws IOException, ClassNotFoundException
+    protected LevelData(String filename) throws IOException, ClassNotFoundException
     {
         //get path of the LeadCrystal install folder
         File file = new File("");
         String path =file.getAbsolutePath();
        
-        //get the file input stream of our level file
-        
+        //get the file input stream of our level file       
         try( FileInputStream f = new FileInputStream(path +"\\Levels\\" +filename);
              ObjectInputStream ois = new ObjectInputStream(f);)
         {     
