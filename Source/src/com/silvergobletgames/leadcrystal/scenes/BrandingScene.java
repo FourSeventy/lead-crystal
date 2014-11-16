@@ -102,7 +102,7 @@ public class BrandingScene extends Scene{
             while(!Game.getInstance().isLoaded(MainMenuScene.class))
             {
                 try{
-                  Thread.sleep(10);}
+                  Thread.sleep(50);}
                 catch(Exception e){}
             }
             
