@@ -347,8 +347,41 @@ public class MainMenuScene extends Scene
 
     public void levelEditorButton_click() 
     {
-        Game.getInstance().loadScene(new MapEditorScene());
-        Game.getInstance().changeScene(MapEditorScene.class,null);
+        
+        
+        //check if we are still loading assets
+        if((boolean)Game.getInstance().getStateVariable("finishedLoading") != true )
+        {
+            //load loading scene
+            Game.getInstance().loadScene(new LoadingScene());
+            Game.getInstance().changeScene(LoadingScene.class, null);
+            
+            ((LoadingScene)Game.getInstance().getScene(LoadingScene.class)).setCurrentProgressText("Loading Assets");
+            
+            //if so start up a thread that spins waiting for it to be done, and calls gameLaunchThread.start() upon completion
+            Thread assetLoadThread = new Thread(){
+                
+                @Override
+                public void run()
+                {
+                    while((boolean)Game.getInstance().getStateVariable("finishedLoading") != true)
+                    {
+                        try{Thread.sleep(50);}
+                        catch(Exception e){}
+                    }
+                    
+                    Game.getInstance().loadScene(new MapEditorScene());
+                    Game.getInstance().changeScene(MapEditorScene.class,null);
+                    Game.getInstance().unloadScene(LoadingScene.class);
+                }
+            };
+            assetLoadThread.start();
+        }
+        else //if not, just launch the game
+        {
+            Game.getInstance().loadScene(new MapEditorScene());
+            Game.getInstance().changeScene(MapEditorScene.class,null);
+        }
     }
  
     private void exitButton_click()
@@ -367,8 +400,8 @@ public class MainMenuScene extends Scene
         //load loading scene
         Game.getInstance().loadScene(new LoadingScene());
         Game.getInstance().changeScene(LoadingScene.class, null);
-
-        Thread thread = new Thread()
+        
+        final Thread gameLaunchThread = new Thread()
         {
             @Override
             public void run()
@@ -408,9 +441,34 @@ public class MainMenuScene extends Scene
                 
             }
         };
-
-        thread.start();
         
+        //check if we are still loading assets
+        if((boolean)Game.getInstance().getStateVariable("finishedLoading") != true )
+        {
+            ((LoadingScene)Game.getInstance().getScene(LoadingScene.class)).setCurrentProgressText("Loading Assets");
+            
+            //if so start up a thread that spins waiting for it to be done, and calls gameLaunchThread.start() upon completion
+            Thread assetLoadThread = new Thread(){
+                
+                @Override
+                public void run()
+                {
+                    while((boolean)Game.getInstance().getStateVariable("finishedLoading") != true)
+                    {
+                        try{Thread.sleep(50);}
+                        catch(Exception e){}
+                    }
+                    
+                    gameLaunchThread.start();
+                }
+            };
+            assetLoadThread.start();
+        }
+        else //if not, just launch the game
+        {
+            gameLaunchThread.start();
+        }
+                 
     }
     
     public static void hostMultiPlayerGame(final SaveGame saveGame, final ServerConfiguration config)
@@ -418,7 +476,7 @@ public class MainMenuScene extends Scene
         Game.getInstance().loadScene(new LoadingScene());
         Game.getInstance().changeScene(LoadingScene.class, null);
 
-        Thread thread = new Thread()
+        final Thread gameLaunchThread = new Thread()
         {
             @Override
             public void run()
@@ -474,8 +532,35 @@ public class MainMenuScene extends Scene
                 
             }
         };
+        
+        //check if we are still loading assets
+        if((boolean)Game.getInstance().getStateVariable("finishedLoading") != true )
+        {
+            ((LoadingScene)Game.getInstance().getScene(LoadingScene.class)).setCurrentProgressText("Loading Assets");
+            
+            //if so start up a thread that spins waiting for it to be done, and calls gameLaunchThread.start() upon completion
+            Thread assetLoadThread = new Thread(){
+                
+                @Override
+                public void run()
+                {
+                    while((boolean)Game.getInstance().getStateVariable("finishedLoading") != true)
+                    {
+                        try{Thread.sleep(50);}
+                        catch(Exception e){}
+                    }
+                    
+                    gameLaunchThread.start();
+                }
+            };
+            assetLoadThread.start();
+        }
+        else //if not, just launch the game
+        {
+            gameLaunchThread.start();
+        }
 
-        thread.start();
+        
     }
     
     public static void joinMultiPlayerGame(final SaveGame saveGame,final String ip, final int tcpPort, final int udpPort)
@@ -483,7 +568,7 @@ public class MainMenuScene extends Scene
         Game.getInstance().loadScene(new LoadingScene());
         Game.getInstance().changeScene(LoadingScene.class, null);
 
-        Thread thread = new Thread()
+        final Thread gameLaunchThread = new Thread()
         {
             @Override
             public void run()
@@ -534,7 +619,32 @@ public class MainMenuScene extends Scene
             }
         };
 
-        thread.start();
+        //check if we are still loading assets
+        if((boolean)Game.getInstance().getStateVariable("finishedLoading") != true )
+        {
+            ((LoadingScene)Game.getInstance().getScene(LoadingScene.class)).setCurrentProgressText("Loading Assets");
+            
+            //if so start up a thread that spins waiting for it to be done, and calls gameLaunchThread.start() upon completion
+            Thread assetLoadThread = new Thread(){
+                
+                @Override
+                public void run()
+                {
+                    while((boolean)Game.getInstance().getStateVariable("finishedLoading") != true)
+                    {
+                        try{Thread.sleep(50);}
+                        catch(Exception e){}
+                    }
+                    
+                    gameLaunchThread.start();
+                }
+            };
+            assetLoadThread.start();
+        }
+        else //if not, just launch the game
+        {
+            gameLaunchThread.start();
+        }
     }
     
     

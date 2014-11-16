@@ -114,7 +114,7 @@ public class Main
         }
         
         //signal not done loading
-        Game.getInstance().setStateVariable("finishedLoading", true);
+        Game.getInstance().setStateVariable("finishedLoading", false);
         
         //change us into the branding scene
         Game.getInstance().loadScene(new BrandingScene());
