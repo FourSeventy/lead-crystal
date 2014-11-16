@@ -98,9 +98,18 @@ public class BrandingScene extends Scene{
         
         if(this.timer > 350) // 5 ish seconds
         {
-            //switch to loading scene
-            Game.getInstance().changeScene(LoadingScene.class, null);
+            //if main menu scene isnt loaded yet, spin
+            while(!Game.getInstance().isLoaded(MainMenuScene.class))
+            {
+                try{
+                  Thread.sleep(10);}
+                catch(Exception e){}
+            }
+            
+            //change to the main menu scene
+            Game.getInstance().changeScene(MainMenuScene.class,new ArrayList(){{add(true);}});
             Game.getInstance().unloadScene(BrandingScene.class);
+          
         }
         
        

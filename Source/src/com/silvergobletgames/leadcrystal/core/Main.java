@@ -113,24 +113,55 @@ public class Main
             catch(Exception ex){ System.err.println("couldnt save settings");}
         }
         
+        //signal not done loading
+        Game.getInstance().setStateVariable("finishedLoading", true);
+        
         //change us into the branding scene
         Game.getInstance().loadScene(new BrandingScene());
         Game.getInstance().changeScene(BrandingScene.class, null);
         
-        //load the loading scene (will be switched into once the branding is done)
-        Game.getInstance().loadScene(new LoadingScene());
-        
-                
+           
         //thread to load our textures, sounds, fonts, and levels
-        Thread thread = new Thread()
+        Thread mainLoadingThread = new Thread()
         {
             @Override
             public void run()
             {
+                //load text renderers
+                try
+                {
+                    //((LoadingScene)Game.getInstance().getScene(MainMenuScene.class)).setCurrentProgressText("Loading Text Renderers");        
+                    LeadCrystalTextType.loadTextTypes();
+                }
+                catch(Exception e)
+                {
+                    //log error to console
+                    Logger logger =Logger.getLogger(Main.class.getName());
+                    logger.log(Level.SEVERE, "Error Loading TextRenderer: {0}", e.toString());
+                    logger.addHandler(new ConsoleHandler()); 
+                }
+                
+                //load textures we need for menus
+                URI textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("misc/mainMenuBackground.png");  
+                Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "mainmenubackground.png");
+                textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/tallFrameMenu.png");  
+                Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "tallframeMmenu.png");
+                textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("misc/blank.png");  
+                Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "blank.png"); 
+                textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/map_arrow.png");  
+                Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "map_arrow.png");               
+                textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/goldCoin.png");  
+                Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "goldcoin.png");              
+                textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/tallFrameMenu.png");  
+                Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "tallframemenu.png");
+                textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("misc/mouse_hand.png");  
+                Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "mouse_hand.png");
+
+                //load the main menu scene (will be switched into once the branding is done)
+                Game.getInstance().loadScene(new MainMenuScene()); //TODO: eliminate race condition
 
                 //load game textures 
-                ((LoadingScene)Game.getInstance().getScene(LoadingScene.class)).setCurrentProgressText("Loading Textures");
-                URI textureURI = Game.getInstance().getConfiguration().getTextureRootFolder(); 
+                textureURI = Game.getInstance().getConfiguration().getTextureRootFolder(); 
                 try
                 {
                     Game.getInstance().getAssetManager().getTextureLoader().loadAllTexturesInDirectory(textureURI);
@@ -144,8 +175,7 @@ public class Main
                 }
 
                 
-                //load all sounds
-                ((LoadingScene)Game.getInstance().getScene(LoadingScene.class)).setCurrentProgressText("Loading Sounds");      
+                //load all sounds    
                 try
                 {
                    Game.getInstance().getAudioRenderer().loadAllSounds(Game.getInstance().getConfiguration().getSoundRootFolder().resolve("buffered/")); 
@@ -161,7 +191,7 @@ public class Main
                 //load all levels
                 try
                 {
-                    ((LoadingScene)Game.getInstance().getScene(LoadingScene.class)).setCurrentProgressText("Loading Levels");        
+                    //load game textures 
                      LevelLoader.getInstance().loadLevels();
                 }
                 catch(Exception e)
@@ -174,40 +204,21 @@ public class Main
                     //rethrow error because it is critical
                     throw new RuntimeException("Error Loading Level", e);
                 }
-                       
                 
-                
-                //load text renderers
-                try
-                {
-                    ((LoadingScene)Game.getInstance().getScene(LoadingScene.class)).setCurrentProgressText("Loading Text Renderers");        
-                    LeadCrystalTextType.loadTextTypes();
-                }
-                catch(Exception e)
-                {
-                    //log error to console
-                    Logger logger =Logger.getLogger(Main.class.getName());
-                    logger.log(Level.SEVERE, "Error Loading TextRenderer: {0}", e.toString());
-                    logger.addHandler(new ConsoleHandler()); 
-                }
-        
-                //load the main menu scene
-                Game.getInstance().loadScene(new MainMenuScene());
-                //change to the main menu scene
-                Game.getInstance().changeScene(MainMenuScene.class,new ArrayList(){{add(true);}});   
-                //unload loading scene
-                Game.getInstance().unloadScene(LoadingScene.class);
+                //signal done loading
+                Game.getInstance().setStateVariable("finishedLoading", true);
+                   
             }
             
         };       
-        thread.setUncaughtExceptionHandler(new UncaughtExceptionHandler(){        
+        mainLoadingThread.setUncaughtExceptionHandler(new UncaughtExceptionHandler(){        
             @Override
             public void uncaughtException(Thread t, Throwable e)
             {
                 Game.getInstance().uncaughtExceptionHandlingActions(e);
             }
         });
-        thread.start();
+        mainLoadingThread.start();
         
         
         //start the game loop

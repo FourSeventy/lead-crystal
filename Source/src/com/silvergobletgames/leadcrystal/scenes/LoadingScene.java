@@ -9,6 +9,7 @@ import com.silvergobletgames.sylver.graphics.Text.CoreTextType;
 import com.silvergobletgames.sylver.windowsystem.Label;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
 
@@ -16,13 +17,16 @@ import javax.media.opengl.GL2;
  *
  * @author Mike
  */
-public class LoadingScene extends Scene{
+public class LoadingScene extends Scene
+{
     
     //loading text
     private Text loading;
     private long updateTicks;
     
     private Text currentProgress;
+    
+    private AtomicBoolean doneLoading = new AtomicBoolean(false);
     
     //==============
     // Constructor
@@ -78,6 +82,11 @@ public class LoadingScene extends Scene{
     public synchronized void setCurrentProgressText(String s)
     {
         currentProgress.setText(s);
+    }
+    
+    public void setFinishedLoading(boolean done)
+    {
+        this.doneLoading.set(done);
     }
     
     public void handleInput() 

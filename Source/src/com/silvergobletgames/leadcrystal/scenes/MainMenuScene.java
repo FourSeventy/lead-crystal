@@ -24,8 +24,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 import javax.media.opengl.GL2;
 import javax.media.opengl.GL3bc;
 import javax.media.opengl.glu.GLU;
@@ -34,8 +36,11 @@ import javax.media.opengl.glu.GLU;
  *
  * @author mike
  */
-public class MainMenuScene extends Scene 
+public class MainMenuScene extends Scene
 {   
+    
+    private boolean inScene = false;
+    
     
     //==============
     // Constructor
@@ -43,8 +48,7 @@ public class MainMenuScene extends Scene
     
     public MainMenuScene()
     {
-            
-        
+                
         //build background image
         Image back = new Image("mainMenuBackground.png");
         back.setPosition(0, 0);
@@ -81,8 +85,11 @@ public class MainMenuScene extends Scene
                        singlePlayerText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, singlePlayerText.getScale(), 1.20f));
                     
                     //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
-                    add(sound);
+                    if(MainMenuScene.this.inScene)
+                    {
+                        Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
+                        add(sound);
+                    }
                 }
                 if (e.getActionCommand().equals("mouseExited"))
                 {
@@ -116,8 +123,11 @@ public class MainMenuScene extends Scene
                        multiPlayerText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, multiPlayerText.getScale(), 1.2));
                     
                     //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
-                    add(sound);
+                    if(MainMenuScene.this.inScene)
+                    {
+                        Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
+                        add(sound);
+                    }
                 }
                 if (e.getActionCommand().equals("mouseExited"))
                 {
@@ -151,8 +161,11 @@ public class MainMenuScene extends Scene
                        optionsText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, optionsText.getScale(), 1.2));
                     
                     //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
-                    add(sound);
+                    if(MainMenuScene.this.inScene)
+                    {
+                        Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
+                        add(sound);
+                    }
                 }
                 if (e.getActionCommand().equals("mouseExited"))
                 {
@@ -188,8 +201,11 @@ public class MainMenuScene extends Scene
                            levelEditorText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, levelEditorText.getScale(), 1.2));
 
                         //play sound
-                        Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
-                        add(sound);
+                        if(MainMenuScene.this.inScene)
+                        {
+                            Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
+                            add(sound);
+                        }
                     }
                     if (e.getActionCommand().equals("mouseExited"))
                     {
@@ -224,8 +240,11 @@ public class MainMenuScene extends Scene
                        exitText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, exitText.getScale(),1.2));
                     
                     //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
-                    add(sound);
+                    if(MainMenuScene.this.inScene)
+                    {
+                        Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
+                        add(sound);
+                    }
                 }
                 if (e.getActionCommand().equals("mouseExited"))
                 {
@@ -236,6 +255,7 @@ public class MainMenuScene extends Scene
                 }
             }
         });
+            
 
         this.update();
     }
@@ -260,6 +280,8 @@ public class MainMenuScene extends Scene
             sound = Sound.adjustSourceVolume("BGM", .2f);
             add(sound);
         }
+        
+        this.inScene = true;
         
         //set mouse cursor
         Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND));
@@ -288,6 +310,7 @@ public class MainMenuScene extends Scene
         RenderingPipelineGL2.render(gl, getViewport(), getSceneObjectManager(), getSceneEffectsManager()); 
                 
     }
+ 
     
     
     //===============
