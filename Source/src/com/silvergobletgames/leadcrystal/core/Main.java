@@ -142,26 +142,14 @@ public class Main
                 }
                 
                 //load textures we need for menus
-                URI textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("misc/mainMenuBackground.png");  
-                Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "mainmenubackground.png");
-                textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/tallFrameMenu.png");  
-                Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "tallframeMmenu.png");
-                textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("misc/blank.png");  
-                Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "blank.png"); 
-                textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/map_arrow.png");  
-                Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "map_arrow.png");               
-                textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/goldCoin.png");  
-                Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "goldcoin.png");              
-                textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/tallFrameMenu.png");  
-                Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "tallframemenu.png");
-                textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("misc/mouse_hand.png");  
-                Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "mouse_hand.png");
+                Main.loadMenuTextures();
+                
 
                 //load the main menu scene (will be switched into once the branding is done)
                 Game.getInstance().loadScene(new MainMenuScene()); //TODO: eliminate race condition
 
                 //load game textures 
-                textureURI = Game.getInstance().getConfiguration().getTextureRootFolder(); 
+                URI textureURI = Game.getInstance().getConfiguration().getTextureRootFolder(); 
                 try
                 {
                     Game.getInstance().getAssetManager().getTextureLoader().loadAllTexturesInDirectory(textureURI);
@@ -229,4 +217,47 @@ public class Main
     
     }
     
+    
+    private static void loadMenuTextures()
+    {
+        URI textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("misc/mainMenuBackground.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "mainmenubackground.png");
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/tallFrameMenu.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "tallframeMmenu.png");
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("misc/blank.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "blank.png"); 
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/map_arrow.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "map_arrow.png");               
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/goldCoin.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "goldcoin.png");              
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/tallFrameMenu.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "tallframemenu.png");
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("misc/mouse_hand.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "mouse_hand.png");      
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("characters/bash/head/bash-head0.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "bash-head0.png");
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("characters/bash/head/bash-head1.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "bash-head1.png");
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("characters/bash/head/bash-head2.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "bash-head2.png");
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("characters/bash/head/bash-head3.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "bash-head3.png");
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("characters/bash/head/bash-head4.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "bash-head4.png");
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("characters/bash/body/brown/bash_brown.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "bash_brown.png");
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("characters/bash/body/black/bash_black.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "bash_black.png");
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("characters/bash/body/blue/bash_blue.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "bash_blue.png");
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("characters/bash/body/green/bash_green.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "bash_green.png");
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("characters/bash/body/white/bash_white.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "bash_white.png");
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("characters/bash/body/red/bash_red.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "bash_red.png");
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("characters/bash/body/yellow/bash_yellow.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "bash_yellow.png");
+
+    }
 }

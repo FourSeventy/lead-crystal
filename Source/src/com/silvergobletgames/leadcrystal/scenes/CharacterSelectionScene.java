@@ -3,22 +3,23 @@ package com.silvergobletgames.leadcrystal.scenes;
 import com.silvergobletgames.leadcrystal.core.CursorFactory;
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
+import com.silvergobletgames.leadcrystal.core.SaveGame;
+import com.silvergobletgames.leadcrystal.scenes.NewCharacterScene.PlayerMock;
+import com.silvergobletgames.sylver.audio.AudioRenderer;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.*;
+import com.silvergobletgames.sylver.graphics.*;
 import com.silvergobletgames.sylver.graphics.Anchorable;
 import com.silvergobletgames.sylver.graphics.Image;
+import com.silvergobletgames.sylver.graphics.ImageEffect.ImageEffectType;
 import com.silvergobletgames.sylver.graphics.Text;
+import com.silvergobletgames.sylver.graphics.Text.CoreTextType;
 import com.silvergobletgames.sylver.windowsystem.Button;
-import com.silvergobletgames.leadcrystal.core.SaveGame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import com.silvergobletgames.sylver.audio.AudioRenderer;
-import com.silvergobletgames.sylver.audio.Sound;
-import com.silvergobletgames.sylver.graphics.*;
-import com.silvergobletgames.sylver.graphics.ImageEffect.ImageEffectType;
-import com.silvergobletgames.sylver.graphics.Text.CoreTextType;
 import javax.media.opengl.GL2;
 
 /**
@@ -392,8 +393,10 @@ public class CharacterSelectionScene extends Scene
         {
             Game.getInstance().loadScene(new MultiplayerMenuScene());
             
+            PlayerMock playerMock = new PlayerMock(this.saveGames.get(this.selectedSave).fileName);
+            
             ArrayList args = new ArrayList();
-            args.add(this.saveGames.get(this.selectedSave));
+            args.add(playerMock);
             args.add(actionArg);
             Game.getInstance().changeScene(MultiplayerMenuScene.class,args);
         }
@@ -404,8 +407,9 @@ public class CharacterSelectionScene extends Scene
             Sound sound = Sound.newBGM("");
             add(sound);
          
+            PlayerMock playerMock = new PlayerMock(this.saveGames.get(this.selectedSave).fileName);
             //start a single player game
-            MainMenuScene.startSinglePlayerGame(this.saveGames.get(this.selectedSave));
+            MainMenuScene.startSinglePlayerGame(playerMock);
                          
         }
         

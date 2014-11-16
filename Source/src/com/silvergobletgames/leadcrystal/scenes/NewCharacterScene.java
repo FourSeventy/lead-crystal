@@ -25,6 +25,7 @@ import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashYellowFro
 import com.silvergobletgames.leadcrystal.core.CursorFactory;
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
+import com.silvergobletgames.leadcrystal.core.Main;
 import com.silvergobletgames.leadcrystal.core.SaveGame;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat;
@@ -43,6 +44,8 @@ import com.silvergobletgames.sylver.windowsystem.TextBox;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.media.opengl.GL2;
 
 public class NewCharacterScene extends Scene
@@ -121,7 +124,7 @@ public class NewCharacterScene extends Scene
         this.add(nameLabel, Layer.MAIN);
         
         //name textbox
-        nameTextBox = new TextBox(new Text("Player1",LeadCrystalTextType.MENU40), center + 180, 550);  
+        nameTextBox = new TextBox(new Text("Bash",LeadCrystalTextType.MENU40), center + 180, 550);  
         nameTextBox.setHideBackground(true);
         nameTextBox.setCursorScale(1.85f);
         nameTextBox.setAlphaNumericRestriction(true);
@@ -222,54 +225,9 @@ public class NewCharacterScene extends Scene
                     //=============== 
                     //make the player
                     //===============
-                    PlayerEntity player = new PlayerEntity(new Image(getBodyAnimationPack(bodyList.get(currentBodySelection))),new Image(headList.get(currentHeadSelection)),new Image(getBackArmAnimationPack(bodyList.get(currentBodySelection))),new Image(getFrontArmAnimationPack(bodyList.get(currentBodySelection))));
-                    player.setName(nameTextBox.getText()); 
-
-                    //dev settings
-                    if(player.getName().equals("devtest"))
-                    {
-                        
-                        player.getCurrencyManager().addCurrency(5000); 
-                        player.getLevelProgressionManager().completeMainObjective(0); 
-                        player.getLevelProgressionManager().completeMainObjective(1); 
-                        player.getLevelProgressionManager().completeMainObjective(2); 
-                        player.getLevelProgressionManager().completeMainObjective(3); 
-                        player.getLevelProgressionManager().completeMainObjective(4); 
-                        player.getLevelProgressionManager().completeMainObjective(5); 
-                        player.getLevelProgressionManager().completeMainObjective(6); 
-                        player.getLevelProgressionManager().completeMainObjective(7); 
-                        player.getLevelProgressionManager().completeMainObjective(8); 
-                        player.getLevelProgressionManager().completeMainObjective(9);
-                        player.getSkillManager().setSkillPoints(20);
-                        
-                         for(ArmorStat stat: player.getArmorManager().armorStats.values())
-                        {
-                            stat.unlocked = true;
-                        }
-
-                    }
-                    if(player.getName().equals("cavetest"))
-                    {
-                        
-                        player.getCurrencyManager().addCurrency(5000); 
-                        player.getLevelProgressionManager().completeMainObjective(0); 
-                        player.getLevelProgressionManager().completeMainObjective(1); 
-                        player.getLevelProgressionManager().completeMainObjective(2); 
-                        player.getLevelProgressionManager().completeMainObjective(3); 
-                        player.getLevelProgressionManager().completeMainObjective(4); 
-                        player.getLevelProgressionManager().completeMainObjective(5); 
-                        player.getSkillManager().setSkillPoints(20);
-                        
-                         for(ArmorStat stat: player.getArmorManager().armorStats.values())
-                        {
-                            stat.unlocked = true;
-                        }
-
-                    }
-
-                    SaveGame save = new SaveGame();
-                    save.setPlayer(player);
-                    save.save(player.getName() + ".save");
+                    
+                    PlayerMock playerMock = new PlayerMock(getBodyAnimationPack(bodyList.get(currentBodySelection)),headList.get(currentHeadSelection),getBackArmAnimationPack(bodyList.get(currentBodySelection)),getFrontArmAnimationPack(bodyList.get(currentBodySelection)),nameTextBox.getText());
+                    
                     
                     //change scene
                     //if we are in multiplayer mode, go to the multiplayer menu and pass it your character
@@ -278,7 +236,7 @@ public class NewCharacterScene extends Scene
                         Game.getInstance().loadScene(new MultiplayerMenuScene());
 
                         ArrayList args = new ArrayList();
-                        args.add(save);
+                        args.add(playerMock);
                         args.add(actionArg);
                         Game.getInstance().changeScene(MultiplayerMenuScene.class,args);
                     }
@@ -290,7 +248,7 @@ public class NewCharacterScene extends Scene
                         add(sound);
 
                         //start a single player game
-                        MainMenuScene.startSinglePlayerGame(save);
+                        MainMenuScene.startSinglePlayerGame(playerMock);
 
                     }                 
                   
@@ -438,49 +396,163 @@ public class NewCharacterScene extends Scene
     }
     
     
-    private AnimationPack getBodyAnimationPack(String selection)
+    private Class getBodyAnimationPack(String selection)
     {
         switch(selection)
         {
-            case "bash_brown.png": return new BashBrownBodyAnimationPack();
-            case "bash_blue.png": return new BashBlueBodyAnimationPack();
-            case "bash_green.png": return new BashGreenBodyAnimationPack();
-            case "bash_red.png": return new BashRedBodyAnimationPack();
-            case "bash_white.png": return new BashWhiteBodyAnimationPack();
-            case "bash_yellow.png": return new BashYellowBodyAnimationPack();
-            case "bash_black.png": return new BashBlackBodyAnimationPack();
+            case "bash_brown.png": return  BashBrownBodyAnimationPack.class;
+            case "bash_blue.png": return  BashBlueBodyAnimationPack.class;
+            case "bash_green.png": return  BashGreenBodyAnimationPack.class;
+            case "bash_red.png": return  BashRedBodyAnimationPack.class;
+            case "bash_white.png": return  BashWhiteBodyAnimationPack.class;
+            case "bash_yellow.png": return  BashYellowBodyAnimationPack.class;
+            case "bash_black.png": return  BashBlackBodyAnimationPack.class;
         }
         return null;
     }
     
-    private AnimationPack getFrontArmAnimationPack(String selection)
+    private Class getFrontArmAnimationPack(String selection)
     {
         switch(selection)
         {
-            case "bash_brown.png": return new BashBrownFrontArmAnimationPack();
-            case "bash_blue.png": return new BashBlueFrontArmAnimationPack();
-            case "bash_green.png": return new BashGreenFrontArmAnimationPack();
-            case "bash_red.png": return new BashRedFrontArmAnimationPack();
-            case "bash_white.png": return new BashWhiteFrontArmAnimationPack();
-            case "bash_yellow.png": return new BashYellowFrontArmAnimationPack();
-            case "bash_black.png": return new BashBlackFrontArmAnimationPack();
+            case "bash_brown.png": return  BashBrownFrontArmAnimationPack.class;
+            case "bash_blue.png": return  BashBlueFrontArmAnimationPack.class;
+            case "bash_green.png": return  BashGreenFrontArmAnimationPack.class;
+            case "bash_red.png": return  BashRedFrontArmAnimationPack.class;
+            case "bash_white.png": return  BashWhiteFrontArmAnimationPack.class;
+            case "bash_yellow.png": return  BashYellowFrontArmAnimationPack.class;
+            case "bash_black.png": return  BashBlackFrontArmAnimationPack.class;
         }
         return null;
     }
     
-    private AnimationPack getBackArmAnimationPack(String selection)
+    private Class getBackArmAnimationPack(String selection)
     {
         switch(selection)
         {
-            case "bash_brown.png": return new BashBrownBackArmAnimationPack();
-            case "bash_blue.png": return new BashBlueBackArmAnimationPack();
-            case "bash_green.png": return new BashGreenBackArmAnimationPack();
-            case "bash_red.png": return new BashRedBackArmAnimationPack();
-            case "bash_white.png": return new BashWhiteBackArmAnimationPack();
-            case "bash_yellow.png": return new BashYellowBackArmAnimationPack();
-            case "bash_black.png": return new BashBlackBackArmAnimationPack();
+            case "bash_brown.png": return  BashBrownBackArmAnimationPack.class;
+            case "bash_blue.png": return  BashBlueBackArmAnimationPack.class;
+            case "bash_green.png": return  BashGreenBackArmAnimationPack.class;
+            case "bash_red.png": return  BashRedBackArmAnimationPack.class;
+            case "bash_white.png": return  BashWhiteBackArmAnimationPack.class;
+            case "bash_yellow.png": return  BashYellowBackArmAnimationPack.class;
+            case "bash_black.png": return  BashBlackBackArmAnimationPack.class;
         }
         return null;
+    }
+    
+    
+    public static class PlayerMock //body head back front
+    {
+        public Class bodyAnimationPack, frontArmAnimationPack,backArmAnimationPack;
+        public String headString, name;
+        public String saveDataFileName = null;
+        
+        public PlayerMock(String saveDataFileName)
+        {
+            this.saveDataFileName = saveDataFileName;
+        }
+        
+        public PlayerMock(Class body, String head, Class back, Class front, String name)
+        {
+            this.bodyAnimationPack = body;
+            this.frontArmAnimationPack = front;
+            this.backArmAnimationPack = back;
+            this.headString = head;
+            this.name = name;
+        }
+        
+        
+        public SaveGame buildSaveGameData()
+        {
+            if(this.saveDataFileName == null)
+            {
+                AnimationPack body;
+                AnimationPack front;
+                AnimationPack back;
+
+                try{
+                    body = (AnimationPack)this.bodyAnimationPack.newInstance();
+                    front = (AnimationPack)this.frontArmAnimationPack.newInstance();
+                    back = (AnimationPack)this.backArmAnimationPack.newInstance();
+                }
+                catch(IllegalAccessException | InstantiationException e)
+                {
+                    //log error to console
+                    Logger logger =Logger.getLogger(NewCharacterScene.class.getName());
+                    logger.log(Level.SEVERE, "Error building player data", e.toString());
+
+                    body = new BashBrownBodyAnimationPack();
+                    front= new BashBrownFrontArmAnimationPack();
+                    back = new BashBrownBackArmAnimationPack();
+
+                }
+
+                PlayerEntity player = new PlayerEntity(new Image(body),new Image(this.headString),new Image(back),new Image(front));
+                player.setName(this.name); 
+
+                //dev settings
+                if(player.getName().equals("devtest"))
+                {
+
+                    player.getCurrencyManager().addCurrency(5000); 
+                    player.getLevelProgressionManager().completeMainObjective(0); 
+                    player.getLevelProgressionManager().completeMainObjective(1); 
+                    player.getLevelProgressionManager().completeMainObjective(2); 
+                    player.getLevelProgressionManager().completeMainObjective(3); 
+                    player.getLevelProgressionManager().completeMainObjective(4); 
+                    player.getLevelProgressionManager().completeMainObjective(5); 
+                    player.getLevelProgressionManager().completeMainObjective(6); 
+                    player.getLevelProgressionManager().completeMainObjective(7); 
+                    player.getLevelProgressionManager().completeMainObjective(8); 
+                    player.getLevelProgressionManager().completeMainObjective(9);
+                    player.getSkillManager().setSkillPoints(20);
+
+                     for(ArmorStat stat: player.getArmorManager().armorStats.values())
+                    {
+                        stat.unlocked = true;
+                    }
+
+                }
+                if(player.getName().equals("cavetest"))
+                {
+
+                    player.getCurrencyManager().addCurrency(5000); 
+                    player.getLevelProgressionManager().completeMainObjective(0); 
+                    player.getLevelProgressionManager().completeMainObjective(1); 
+                    player.getLevelProgressionManager().completeMainObjective(2); 
+                    player.getLevelProgressionManager().completeMainObjective(3); 
+                    player.getLevelProgressionManager().completeMainObjective(4); 
+                    player.getLevelProgressionManager().completeMainObjective(5); 
+                    player.getSkillManager().setSkillPoints(20);
+
+                     for(ArmorStat stat: player.getArmorManager().armorStats.values())
+                    {
+                        stat.unlocked = true;
+                    }
+
+                }
+
+                SaveGame save = new SaveGame();
+                save.setPlayer(player);
+                save.save(player.getName() + ".save");
+
+                return save;
+            }  
+            else
+            {
+                try
+                {
+                   return SaveGame.loadSaveFromFile(this.saveDataFileName);
+                }
+                catch(Exception e)
+                {
+                   System.err.println("Load Saved Game Fail: "); e.printStackTrace(System.err);
+                   return null;
+                }
+            }
+        }
+        
     }
 
 }

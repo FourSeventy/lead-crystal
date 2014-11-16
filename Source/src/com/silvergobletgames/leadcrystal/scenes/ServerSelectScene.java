@@ -5,6 +5,7 @@ import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
 import com.silvergobletgames.leadcrystal.core.GameplaySettings;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.core.SaveGame;
+import com.silvergobletgames.leadcrystal.scenes.NewCharacterScene.PlayerMock;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.*;
 import com.silvergobletgames.sylver.graphics.Image;
@@ -32,7 +33,7 @@ import javax.media.opengl.GL2;
 public class ServerSelectScene extends Scene
 {
     private RecentServerList recentServerList;
-    private SaveGame saveGame;
+    private PlayerMock playerMock;
     private TextBox ipTextBox;
     
     //================
@@ -121,7 +122,7 @@ public class ServerSelectScene extends Scene
                     int tcpPort = GameplaySettings.getInstance().tcpPort; 
                     int udpPort = GameplaySettings.getInstance().udpPort;
                     recentServerList.recentServers.add(ip);
-                    MainMenuScene.joinMultiPlayerGame(saveGame, ip, tcpPort,udpPort);
+                    MainMenuScene.joinMultiPlayerGame(playerMock, ip, tcpPort,udpPort);
                     
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
@@ -171,7 +172,7 @@ public class ServerSelectScene extends Scene
                 if (e.getActionCommand().equals("clicked")) 
                 {
                     ArrayList args = new ArrayList();
-                    args.add(saveGame);
+                    args.add(playerMock);
                    
                     //change scene
                     Game.getInstance().loadScene(new MultiplayerMenuScene());
@@ -224,7 +225,7 @@ public class ServerSelectScene extends Scene
     
     public void sceneEntered(ArrayList args) 
     {
-        this.saveGame = (SaveGame)args.get(0);
+        this.playerMock = (PlayerMock)args.get(0);
         
         //set mouse cursor
         Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND));

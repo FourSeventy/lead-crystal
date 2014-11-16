@@ -9,6 +9,7 @@ import com.silvergobletgames.leadcrystal.menus.ErrorMenu;
 import com.silvergobletgames.leadcrystal.netcode.ConnectionException;
 import com.silvergobletgames.leadcrystal.netcode.GobletServer;
 import com.silvergobletgames.leadcrystal.netcode.GobletServer.ServerConfiguration;
+import com.silvergobletgames.leadcrystal.scenes.NewCharacterScene.PlayerMock;
 import com.silvergobletgames.sylver.audio.AudioRenderer;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.*;
@@ -394,9 +395,11 @@ public class MainMenuScene extends Scene
     // Static Methods
     //================
     
-    public static void startSinglePlayerGame(final SaveGame saveGame)
+    public static void startSinglePlayerGame(final PlayerMock playerMock)
     {                 
                  
+        
+        
         //load loading scene
         Game.getInstance().loadScene(new LoadingScene());
         Game.getInstance().changeScene(LoadingScene.class, null);
@@ -407,6 +410,9 @@ public class MainMenuScene extends Scene
             public void run()
             {
 
+                // once we are all loaded get save game from player mock
+                SaveGame saveGame = playerMock.buildSaveGameData();
+       
                 //start a server
                 ServerConfiguration config = new ServerConfiguration();
                 config.singlePlayer = true;
@@ -471,7 +477,7 @@ public class MainMenuScene extends Scene
                  
     }
     
-    public static void hostMultiPlayerGame(final SaveGame saveGame, final ServerConfiguration config)
+    public static void hostMultiPlayerGame(final PlayerMock playerMock, final ServerConfiguration config)
     {
         Game.getInstance().loadScene(new LoadingScene());
         Game.getInstance().changeScene(LoadingScene.class, null);
@@ -483,7 +489,10 @@ public class MainMenuScene extends Scene
             {
                 //if game client is loaded for some reason unload it
                 if(Game.getInstance().isLoaded(GameClientScene.class))
-                    Game.getInstance().unloadScene(GameClientScene.class); 
+                    Game.getInstance().unloadScene(GameClientScene.class);
+                
+                // once we are all loaded get save game from player mock
+                SaveGame saveGame = playerMock.buildSaveGameData();
 
                 //start a server
                 Game.getInstance().addRunnable("Goblet Server", new GobletServer(config));
@@ -563,7 +572,7 @@ public class MainMenuScene extends Scene
         
     }
     
-    public static void joinMultiPlayerGame(final SaveGame saveGame,final String ip, final int tcpPort, final int udpPort)
+    public static void joinMultiPlayerGame(final PlayerMock playerMock, final String ip, final int tcpPort, final int udpPort)
     {
         Game.getInstance().loadScene(new LoadingScene());
         Game.getInstance().changeScene(LoadingScene.class, null);
@@ -576,6 +585,9 @@ public class MainMenuScene extends Scene
                 //if game client is loaded for some reason unload it
                 if(Game.getInstance().isLoaded(GameClientScene.class))
                     Game.getInstance().unloadScene(GameClientScene.class); 
+                
+                // once we are all loaded get save game from player mock
+                SaveGame saveGame = playerMock.buildSaveGameData();
 
                 //load game client scene
                 Game.getInstance().loadScene(new GameClientScene(saveGame)); 

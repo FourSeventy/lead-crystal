@@ -1,14 +1,19 @@
 package com.silvergobletgames.leadcrystal.scenes;
 
-import com.silvergobletgames.leadcrystal.core.SaveGame;
-import com.silvergobletgames.sylver.graphics.Color;
 import com.esotericsoftware.kryonet.Client;
 import com.silvergobletgames.leadcrystal.core.CursorFactory;
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
 import com.silvergobletgames.leadcrystal.core.GameplaySettings;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
+import com.silvergobletgames.leadcrystal.core.SaveGame;
+import com.silvergobletgames.leadcrystal.netcode.ConnectionException;
+import com.silvergobletgames.leadcrystal.netcode.GobletServer.ServerConfiguration;
+import com.silvergobletgames.leadcrystal.scenes.NewCharacterScene.PlayerMock;
+import com.silvergobletgames.sylver.audio.AudioRenderer;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.*;
 import com.silvergobletgames.sylver.graphics.*;
+import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.ImageEffect.ImageEffectType;
 import com.silvergobletgames.sylver.windowsystem.Button;
 import com.silvergobletgames.sylver.windowsystem.TextBox;
@@ -18,20 +23,16 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import javax.media.opengl.GL2;
 import javax.media.opengl.GL3bc;
 import javax.media.opengl.glu.GLU;
-import com.silvergobletgames.leadcrystal.netcode.ConnectionException;
-import com.silvergobletgames.leadcrystal.netcode.GobletServer.ServerConfiguration;
-import com.silvergobletgames.sylver.audio.AudioRenderer;
-import com.silvergobletgames.sylver.audio.Sound;
-import javax.media.opengl.GL2;
 
 
 public class MultiplayerMenuScene extends Scene 
 {   
     
     //save game
-    private SaveGame saveGame;
+    private PlayerMock playerMock;
     private String actionArg;
    
     
@@ -70,7 +71,7 @@ public class MultiplayerMenuScene extends Scene
 
                     //build args to send to the character selection screen
                     ArrayList args = new ArrayList();
-                    args.add(saveGame);
+                    args.add(playerMock);
 
                     //load and switch scenes
                     Game.getInstance().loadScene( new ServerSelectScene());
@@ -120,7 +121,7 @@ public class MultiplayerMenuScene extends Scene
                     Sound sound = Sound.newBGM("");
                     add(sound);
 
-                    MainMenuScene.hostMultiPlayerGame(saveGame,config);
+                    MainMenuScene.hostMultiPlayerGame(playerMock,config);
                                                      
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
@@ -213,7 +214,7 @@ public class MultiplayerMenuScene extends Scene
  
     public void sceneEntered(ArrayList args)
     {
-        this.saveGame = (SaveGame)args.get(0);
+        this.playerMock = (PlayerMock)args.get(0);
         if(args.size() > 1)
            this.actionArg = (String)args.get(1);
         
