@@ -508,15 +508,19 @@ public class Hud extends Window
         });
         
         //skill hotkey text
-        Text t = new Text("Left",LeadCrystalTextType.HUD20);
-        this.skillHotkey1 = new Label(t,center - 119,10) ;      
-        this.addComponent(skillHotkey1);
+//        Text t = new Text("Left",LeadCrystalTextType.HUD20);
+//        this.skillHotkey1 = new Label(t,center - 119,10) ;      
+//        this.addComponent(skillHotkey1);
         
-        t = new Text("Right",LeadCrystalTextType.HUD20);
-        this.skillHotkey2 = new Label(t,center - 56,10) ;      
-        this.addComponent(skillHotkey2);
+        Button b = new Button(new Image("mouseIconSmall.png"){{setHorizontalFlip(true);}}, center - 122,9, 15 , 15);
+        b.dontKillClick = true;
+        this.addComponent(b);  
         
-        t = new Text("Q",LeadCrystalTextType.HUD20);
+        b = new Button(new Image("mouseIconSmall.png"), center - 59,9, 15 , 15);
+        b.dontKillClick = true;
+        this.addComponent(b);       
+        
+        Text t = new Text("Q",LeadCrystalTextType.HUD20);
         this.skillHotkey3 = new Label(t,center + 8,10) ;      
         this.addComponent(skillHotkey3);
         
@@ -635,31 +639,37 @@ public class Hud extends Window
         // Tooltips
         //=============
         
-        Button b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
+        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
         this.leftClick.add(b);   
-        Text tt = new Text("Press (image) to Primary Attack",LeadCrystalTextType.HUD40);
+        Text tt = new Text("Press     to Primary Attack",LeadCrystalTextType.HUD34);
         tt.setPosition( center - tt.getWidth()/2, 647);
         this.leftClick.add(tt);
+        b = new Button(new Image("leftClickIcon.png"), center - 101, 635, 27 , 45);
+        b.dontKillClick = true;
+        this.leftClick.add(b);   
                
         b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
         this.rightClick.add(b);
-        tt = new Text("Press (image) to Secondary Attack",LeadCrystalTextType.HUD40);
+        tt = new Text("Press     to Secondary Attack",LeadCrystalTextType.HUD34);
         tt.setPosition( center - tt.getWidth()/2, 647);
         this.rightClick.add(tt);
+        b = new Button(new Image("leftClickIcon.png"){{setHorizontalFlip(true);}}, center - 120, 635, 27 , 45);
+        b.dontKillClick = true;
+        this.rightClick.add(b); 
         
         b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
         this.usePotion.add(b);
-        tt = new Text("Press (F) to use Potion",LeadCrystalTextType.HUD40);
+        tt = new Text("Press F to use Potion",LeadCrystalTextType.HUD34);
         tt.setPosition( center - tt.getWidth()/2, 647);
         this.usePotion.add(tt);
 
         b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
         this.jumpTip.add(b);
-        tt = new Text("Press (space) to Jump",LeadCrystalTextType.HUD40);
+        tt = new Text("Press Spacebar to Jump",LeadCrystalTextType.HUD34);
         tt.setPosition( center - tt.getWidth()/2, 647);
         this.jumpTip.add(tt);
         
@@ -667,21 +677,21 @@ public class Hud extends Window
         b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
         this.useLadder.add(b);
-        tt = new Text("Press (W) to climb ladders",LeadCrystalTextType.HUD40);
+        tt = new Text("Press W to climb ladders",LeadCrystalTextType.HUD34);
         tt.setPosition( center - tt.getWidth()/2, 647);
         this.useLadder.add(tt);
 
         b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
         this.jumpThrough.add(b);
-        tt = new Text("You can jump through some terrain",LeadCrystalTextType.HUD40);
+        tt = new Text("You can jump through some terrain",LeadCrystalTextType.HUD34);
         tt.setPosition( center - tt.getWidth()/2, 647);
         this.jumpThrough.add(tt);
  
         b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
         this.sprint.add(b);
-        tt = new Text("Hold (shift) to Sprint",LeadCrystalTextType.HUD40);
+        tt = new Text("Hold Shift to Sprint",LeadCrystalTextType.HUD34);
         tt.setPosition( center - tt.getWidth()/2, 647);
         this.sprint.add(tt);
         
@@ -689,9 +699,12 @@ public class Hud extends Window
         b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
         this.rightClickInteract.add(b);
-        tt = new Text("Press (image) to Interact",LeadCrystalTextType.HUD40);
+        tt = new Text("Press     to Interact",LeadCrystalTextType.HUD34);
         tt.setPosition( center - tt.getWidth()/2, 647);
         this.rightClickInteract.add(tt);
+        b = new Button(new Image("leftClickIcon.png"){{setHorizontalFlip(true);}}, center - 53, 635, 27 , 45);
+        b.dontKillClick = true;
+        this.rightClickInteract.add(b); 
 
         
         
