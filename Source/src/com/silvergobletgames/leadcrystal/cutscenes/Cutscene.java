@@ -21,6 +21,7 @@ public abstract class Cutscene
     protected GameClientScene owningScene;
     
     public boolean done = false;
+    public boolean skipping = false;
     
     //variables for scene fading
     private Image blackImage;
@@ -82,8 +83,9 @@ public abstract class Cutscene
         this.owningScene.lockInput.set(true);
         
         //handle input
-        if(input.isKeyReleased(KeyEvent.VK_ENTER) || input.isKeyReleased(KeyEvent.VK_ESCAPE) || input.isKeyReleased(KeyEvent.VK_SPACE))
+        if(!skipping && (input.isKeyReleased(KeyEvent.VK_ENTER) || input.isKeyReleased(KeyEvent.VK_ESCAPE) || input.isKeyReleased(KeyEvent.VK_SPACE)))
         {
+            this.skipping = true;
             this.counter = this.endTime -1 ;
         }
         
