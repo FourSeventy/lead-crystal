@@ -1,11 +1,14 @@
 
 package com.silvergobletgames.leadcrystal.scripting;
 
+import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.TeleporterEmitter;
 import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect.EntityEffectType;
 import com.silvergobletgames.leadcrystal.entities.MobSpawner;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
+import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity;
 import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat.ArmorStatID;
 import com.silvergobletgames.leadcrystal.items.LootSpewer;
 import com.silvergobletgames.leadcrystal.netcode.GobletServer;
@@ -17,6 +20,7 @@ import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.core.SceneObject;
+import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.ImageEffect;
 import com.silvergobletgames.sylver.graphics.ImageEffect.ImageEffectType;
@@ -541,6 +545,19 @@ public class SceneScriptManager
         LootSpewer spew = new LootSpewer((int)spewTime);
         spew.setPosition(x, y);
         this.owningScene.add(spew, Scene.Layer.MAIN);
+    }
+    
+    public void fadeInTeleporter(String entityId)
+    {
+        WorldObjectEntity teleporter =  (WorldObjectEntity)this.owningScene.getSceneObjectManager().get(entityId);
+       teleporter.getImage().addImageEffect(new ImageEffect(ImageEffectType.COLOR, 120 , new Color(1,1,1,0), new Color(1,1,1,1)));
+    }
+    public void enableTeleporter(String entityId)
+    {
+       WorldObjectEntity teleporter =  (WorldObjectEntity)this.owningScene.getSceneObjectManager().get(entityId);
+       teleporter.addEmitter(new TeleporterEmitter());
+       teleporter.getScriptObject().setTrigger(ScriptObject.ScriptTrigger.RIGHTCLICK);
+       teleporter.addToGroup(ExtendedSceneObjectGroups.CLICKABLE); 
     }
     
     

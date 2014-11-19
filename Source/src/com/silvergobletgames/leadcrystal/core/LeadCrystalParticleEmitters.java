@@ -495,6 +495,36 @@ public class LeadCrystalParticleEmitters
                 
     }
     
+    public static class TeleporterEmitter extends ImageParticleEmitter
+    {
+        public TeleporterEmitter()
+        {
+            super(new Image("teleport2.png"));
+ 
+            this.setDuration(-1);
+            this.setParticlesPerFrame(1);
+            
+        }
+
+        public  Particle buildParticle()
+        { 
+            Random rand = SylverRandom.random;
+            SylverVector2f pos = new SylverVector2f(this.getPosition().x+(rand.nextFloat() - .5f)*100 , this.getPosition().y+(rand.nextFloat() - .5f)*100);
+            float magnitude =  rand.nextFloat() + .3f;
+            float randomedAngle = getAngle() + (rand.nextFloat() - .5f) * 90;
+            SylverVector2f velocity =new SylverVector2f(magnitude *(float)Math.cos(randomedAngle * Math.PI/180) , magnitude *(float)Math.sin(randomedAngle * Math.PI/180));
+            SylverVector2f acceleration = new SylverVector2f(0,0);
+            Color color = new Color(1f,1.2f,1f,1f);
+            if(Math.random() < .5){
+                color.g += .5f;
+            }
+            color.a = 1f;
+            int ttl = 20 + (int)(Math.random()*20);
+            return new  Particle( pos, velocity, acceleration, color, .9f, -.1f/ttl, ttl);
+        }
+                
+    }
+    
     public static class SandSpurtEmitter extends ImageParticleEmitter
     {
         public SandSpurtEmitter()

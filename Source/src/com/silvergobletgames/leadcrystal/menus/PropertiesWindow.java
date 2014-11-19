@@ -1,9 +1,31 @@
  package com.silvergobletgames.leadcrystal.menus;
 
+import com.silvergobletgames.leadcrystal.ai.BrainFactory;
+import com.silvergobletgames.leadcrystal.ai.BrainFactory.BrainID;
+ import com.silvergobletgames.leadcrystal.combat.CombatData;
+import com.silvergobletgames.leadcrystal.combat.SoundPack.SoundPackID;
+import com.silvergobletgames.leadcrystal.combat.SoundPackFactory;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.BloodEmitter;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.GreenGooEmitter;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.LaserBitsEmitter;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SmokeEmitter;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.TeleporterEmitter;
+import com.silvergobletgames.leadcrystal.entities.Entity;
+import com.silvergobletgames.leadcrystal.entities.MobSpawner;
+import com.silvergobletgames.leadcrystal.entities.NonPlayerEntity;
+import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity;
+import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity.MaterialType;
+import com.silvergobletgames.leadcrystal.items.DropGenerator.DropChance;
+import com.silvergobletgames.leadcrystal.items.DropGenerator.DropQuality;
+import com.silvergobletgames.leadcrystal.scenes.MapEditorScene;
+import com.silvergobletgames.leadcrystal.scenes.MapEditorScene.ItemLocation;
+import com.silvergobletgames.leadcrystal.scripting.ScriptObject;
+import com.silvergobletgames.leadcrystal.skills.Skill.SkillID;
+import com.silvergobletgames.leadcrystal.skills.SkillFactory;
 import com.silvergobletgames.sylver.core.Scene.Layer;
 import com.silvergobletgames.sylver.core.SceneObject;
- import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.*;
+import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.netcode.SavableSceneObject;
 import com.silvergobletgames.sylver.netcode.SceneObjectSaveData;
 import com.silvergobletgames.sylver.windowsystem.*;
@@ -18,27 +40,6 @@ import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.StaticBody;
 import net.phys2d.raw.shapes.*;
-import com.silvergobletgames.leadcrystal.ai.BrainFactory;
-import com.silvergobletgames.leadcrystal.ai.BrainFactory.BrainID;
-import com.silvergobletgames.leadcrystal.combat.CombatData;
-import com.silvergobletgames.leadcrystal.entities.Entity;
-import com.silvergobletgames.leadcrystal.entities.MobSpawner;
-import com.silvergobletgames.leadcrystal.entities.NonPlayerEntity;
-import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity;
-import com.silvergobletgames.leadcrystal.items.DropGenerator.DropChance;
-import com.silvergobletgames.leadcrystal.items.DropGenerator.DropQuality;
-import com.silvergobletgames.leadcrystal.scripting.ScriptObject;
-import com.silvergobletgames.leadcrystal.scenes.MapEditorScene;
-import com.silvergobletgames.leadcrystal.scenes.MapEditorScene.ItemLocation;
-import com.silvergobletgames.leadcrystal.skills.Skill.SkillID;
-import com.silvergobletgames.leadcrystal.skills.SkillFactory;
-import com.silvergobletgames.leadcrystal.combat.SoundPack.SoundPackID;
-import com.silvergobletgames.leadcrystal.combat.SoundPackFactory;
-import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.BloodEmitter;
-import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.GreenGooEmitter;
-import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.LaserBitsEmitter;
-import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SmokeEmitter;
-import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity.MaterialType;
 
 public class PropertiesWindow extends Menu 
 {
@@ -1537,6 +1538,7 @@ public class PropertiesWindow extends Menu
         emitterDD.addElement(new SimpleEntry("Blood",BloodEmitter.class));
         emitterDD.addElement(new SimpleEntry("Laser",LaserBitsEmitter.class));
         emitterDD.addElement(new SimpleEntry("Smoke",SmokeEmitter.class));
+        emitterDD.addElement(new SimpleEntry("Teleporter",TeleporterEmitter.class));
         
         if(emitterClass == null)
            emitterDD.setDefaultSelection("None");
@@ -1548,6 +1550,8 @@ public class PropertiesWindow extends Menu
             emitterDD.setDefaultSelection("Laser");
         else if(emitterClass == SmokeEmitter.class)
             emitterDD.setDefaultSelection("Smoke");
+        else if(emitterClass == TeleporterEmitter.class)
+            emitterDD.setDefaultSelection("Teleporter");
         
         emitterFields.add(emitterDD); //1
         

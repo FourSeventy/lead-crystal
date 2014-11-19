@@ -277,7 +277,9 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
         //updates effects
         HashMap<String,EntityEffect> updateList = new HashMap(this.entityEffects);
         for(EntityEffect effect: updateList.values())
+        {
             effect.update();
+        }
         
                
     }    
