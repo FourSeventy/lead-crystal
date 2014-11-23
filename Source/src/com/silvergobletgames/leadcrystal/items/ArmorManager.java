@@ -94,7 +94,7 @@ public class ArmorManager {
         this.meleeAttackDamageBonus.unlocked = false;
         this.armorStats.put(this.meleeAttackDamageBonus.id,this.meleeAttackDamageBonus);
        
-        this.potionCooldownReset = new ArmorStat(ArmorStatID.POTION_COOLDOWN_RESET, new Image("steroidPotionIcon.png"), "Steroid Potions",200,1);
+        this.potionCooldownReset = new ArmorStat(ArmorStatID.POTION_COOLDOWN_RESET, new Image("steroidPotionIcon.png"), "Steroid Potions",150,1);
         this.potionCooldownReset.description = "Using a potion will instantly reset all cooldowns.";
         this.potionCooldownReset.unlocked = false;
         this.armorStats.put(this.potionCooldownReset.id,this.potionCooldownReset);
@@ -115,22 +115,22 @@ public class ArmorManager {
         // Helm 
         //===============
           
-        this.seeEnemyHealth = new ArmorStat(ArmorStatID.SEE_HEALTH, new Image("seeEnemyHealthIcon.png"), "Retinal Implant",200,1);
+        this.seeEnemyHealth = new ArmorStat(ArmorStatID.SEE_HEALTH, new Image("seeEnemyHealthIcon.png"), "Retinal Implant",150,1);
         this.seeEnemyHealth.description = "Gives the ability to see enemy health bars.";
         this.seeEnemyHealth.unlocked = true;
         this.armorStats.put(this.seeEnemyHealth.id,this.seeEnemyHealth);
        
-        this.doubleGoldFind = new ArmorStat(ArmorStatID.DOUBLE_GOLD, new Image("goldFindIcon.png"), "Double Gold Find",200,1);
+        this.doubleGoldFind = new ArmorStat(ArmorStatID.DOUBLE_GOLD, new Image("goldFindIcon.png"), "Double Gold Find",150,1);
         this.doubleGoldFind.description = "Doubles the value of each gold you pick up.";
         this.doubleGoldFind.unlocked= false;
         this.armorStats.put(this.doubleGoldFind.id,this.doubleGoldFind);
        
-        this.upgradeRadar = new ArmorStat(ArmorStatID.IMPROVED_RADAR, new Image("radarUpgradeIcon.png"), "Improved radar",200,1);
+        this.upgradeRadar = new ArmorStat(ArmorStatID.IMPROVED_RADAR, new Image("radarUpgradeIcon.png"), "Improved radar",150,1);
         this.upgradeRadar.description = "Allows enemies to show up on your radar.";
         this.upgradeRadar.unlocked = true;
         this.armorStats.put(this.upgradeRadar.id,this.upgradeRadar);  
  
-        this.lifeLeech = new ArmorStat(ArmorStatID.LIFE_LEECH, new Image("lifeLeechIcon.png"), "Life on Hit", 50,5);
+        this.lifeLeech = new ArmorStat(ArmorStatID.LIFE_LEECH, new Image("lifeLeechIcon.png"), "Life on Hit", 50,3);
         this.lifeLeech.description = "+1 life on hit per point.";
         this.lifeLeech.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().lifeLeech.adjustBase(1f);}}); 
         this.lifeLeech.unlocked = true;
@@ -146,12 +146,12 @@ public class ArmorManager {
         //================
         // Body
         //================
-        this.hardToKill = new ArmorStat(ArmorStatID.HARD_TO_KILL, new Image("specialArmorIcon.png"), "Hard To Kill",200,1);
+        this.hardToKill = new ArmorStat(ArmorStatID.HARD_TO_KILL, new Image("specialArmorIcon.png"), "Hard To Kill",150,1);
         this.hardToKill.description = "When below 33% health, DR is incresed +50%";
         this.hardToKill.unlocked = false;
         this.armorStats.put(this.hardToKill.id,this.hardToKill);
         
-        this.reducedCriticalHit = new ArmorStat(ArmorStatID.REDUCED_CRIT, new Image("hardenedArmorIcon.png"), "Hardened Armor",200,1);
+        this.reducedCriticalHit = new ArmorStat(ArmorStatID.REDUCED_CRIT, new Image("hardenedArmorIcon.png"), "Hardened Armor",150,1);
         this.reducedCriticalHit.description ="Enemies can no longer critical hit you.";
         this.reducedCriticalHit.unlocked = true;
         this.armorStats.put(this.reducedCriticalHit.id,this.reducedCriticalHit);
@@ -190,11 +190,11 @@ public class ArmorManager {
         // Boots
         //================
         
-        this.doubleJump = new ArmorStat(ArmorStatID.DOUBLE_JUMP, new Image("doubleJumpIcon.png"), "Double Jump",200,1);
+        this.doubleJump = new ArmorStat(ArmorStatID.DOUBLE_JUMP, new Image("doubleJumpIcon.png"), "Double Jump",150,1);
         this.doubleJump.unlocked = true;
         this.armorStats.put(this.doubleJump.id,this.doubleJump);
        
-        this.jetpack = new ArmorStat(ArmorStatID.JETPACK, new Image("rocketBootsIcon.png"), "Jetpack",200,1);
+        this.jetpack = new ArmorStat(ArmorStatID.JETPACK, new Image("rocketBootsIcon.png"), "Jetpack",150,1);
         this.jetpack.unlocked = false;
         this.armorStats.put(this.jetpack.id,this.jetpack);   
                       
