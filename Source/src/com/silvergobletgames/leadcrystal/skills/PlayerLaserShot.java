@@ -65,8 +65,8 @@ public class PlayerLaserShot extends PlayerSkill{
         float theta = targetingData.theta;
                         
         //set damage
-        int min = 6; 
-        int max = 8;
+        int min = 7; 
+        int max = 9;
         float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
         damage.getAmountObject().adjustBase(damageAmout);
         damage.setType(Damage.DamageType.PHYSICAL);       
