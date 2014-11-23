@@ -898,16 +898,16 @@ public class MapEditorScene extends Scene {
                 {
                     if(so instanceof NonPlayerEntity)
                     {
-                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.SandmanAnimationPack || ((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.SandmanAnimationPack)
+                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.MoleAnimationPack || ((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.MoleAnimationPack)
                         {
-                            ((NonPlayerEntity)so).getCombatData().maxHealth.setBase(125);
+                            ((NonPlayerEntity)so).getCombatData().maxHealth.setBase(200);
                         }
                     }
                     else if(so instanceof MobSpawner)
                     {
-                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.SandmanAnimationPack)
+                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.MoleAnimationPack)
                         {
-                            ((MobSpawner)so).mobToSpawn.getCombatData().maxHealth.setBase(125);
+                            ((MobSpawner)so).mobToSpawn.getCombatData().maxHealth.setBase(200);
                         }                           
                     }
                 }
