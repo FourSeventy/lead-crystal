@@ -37,7 +37,7 @@ import net.phys2d.raw.shapes.Circle;
  */
 public class PlayerLeechingBlades extends PlayerSkill{
     
-    private static int BLADE_DURATION = 10 * 60;
+    private static int BLADE_DURATION = 30 * 60;
     
     public PlayerLeechingBlades()
     {
@@ -56,8 +56,8 @@ public class PlayerLeechingBlades extends PlayerSkill{
         Random r = SylverRandom.random;
 
         //set damage
-        int min = 10; 
-        int max = 12;
+        int min = 5; 
+        int max = 7;
         float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
         damage.getAmountObject().adjustBase(damageAmout);
         damage.setType(Damage.DamageType.PHYSICAL);  
