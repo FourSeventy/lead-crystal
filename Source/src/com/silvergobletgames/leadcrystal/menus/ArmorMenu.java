@@ -1,5 +1,12 @@
 package com.silvergobletgames.leadcrystal.menus;
 
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBlackBodyAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBlueBodyAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownBodyAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashGreenBodyAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashRedBodyAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashWhiteBodyAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashYellowBodyAnimationPack;
 import com.silvergobletgames.leadcrystal.core.CursorFactory;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
@@ -10,6 +17,7 @@ import com.silvergobletgames.leadcrystal.skills.Skill;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.core.InputSnapshot;
+import com.silvergobletgames.sylver.graphics.AnimationPack;
 import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.Overlay;
@@ -155,12 +163,7 @@ public class ArmorMenu extends Window{
         //========================
         // Basic Labels and Image
         //========================
-        
-        //body image
-        Image bodyImg = new Image("bash_black.png");
-        bodyImg.setScale(1.5f);
-        Button bodyImage = new Button(bodyImg, 210, 250, bodyImg.getWidth() * 1.5f, bodyImg.getHeight() * 1.5f);
-        this.addComponent(bodyImage);
+       
         
         //Weapon Label
         Text weaponText = new Text("Weapon Upgrades",LeadCrystalTextType.HUD28);
@@ -179,6 +182,51 @@ public class ArmorMenu extends Window{
         Label bootsLabel = new Label(bootsText, 930 - helmText.getWidth()/2, 305);
         this.addComponent(bootsLabel);
         
+        
+        //figure out head and body image
+        String bodyImageString = "";
+        AnimationPack playerAnimationPack = this.playerReference.getImage().getAnimationPack();
+        if(playerAnimationPack instanceof BashBrownBodyAnimationPack)
+        {
+            bodyImageString = "bash_brown_pose.png";
+        }
+        if(playerAnimationPack instanceof BashBlackBodyAnimationPack)
+        {
+            bodyImageString = "bash_black_pose.png";
+        }
+        if(playerAnimationPack instanceof BashBlueBodyAnimationPack)
+        {
+            bodyImageString = "bash_blue_pose.png";
+        }
+        if(playerAnimationPack instanceof BashGreenBodyAnimationPack)
+        {
+            bodyImageString = "bash_green_pose.png";
+        }
+        if(playerAnimationPack instanceof BashRedBodyAnimationPack)
+        {
+            bodyImageString = "bash_red_pose.png";
+        }
+        if(playerAnimationPack instanceof BashWhiteBodyAnimationPack)
+        {
+            bodyImageString = "bash_white_pose.png";
+        }
+        if(playerAnimationPack instanceof BashYellowBodyAnimationPack)
+        {
+            bodyImageString = "bash_yellow_pose.png";
+        }
+        
+        
+        //body image
+        Image bodyImg = new Image(bodyImageString);
+        bodyImg.setScale(1.35f);
+        Button bodyImage = new Button(bodyImg, 580 - (bodyImg.getWidth() * 1.35f)/2, 290, bodyImg.getWidth() * 1.35f, bodyImg.getHeight() * 1.35f);
+        this.addComponent(bodyImage);
+        
+        //head image
+        Image headImg = new Image(this.playerReference.getHead().getTextureReference());
+        headImg.setScale(1.35f);
+        Button headImage = new Button(headImg, 574 - (headImg.getWidth() * 1.35f)/2, 499, headImg.getWidth() * 1.35f, headImg.getHeight() * 1.35f);
+        this.addComponent(headImage);
         
         //=================
         // Weapon Upgrades
