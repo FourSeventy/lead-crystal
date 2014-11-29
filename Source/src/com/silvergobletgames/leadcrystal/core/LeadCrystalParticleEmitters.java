@@ -21,7 +21,7 @@ public class LeadCrystalParticleEmitters
     {
         public JetpackEmitter()
         {
-            super(new Image("explosionParticle.png"));
+            super(new Image("fireParticle.png"));
             this.setParticlesPerFrame(2); 
             this.setRelativePositioning(false);
         }
