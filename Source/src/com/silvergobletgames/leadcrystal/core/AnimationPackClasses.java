@@ -217,6 +217,12 @@ public class AnimationPackClasses {
             dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_rightfoot.png"));  
             dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1_leftfoot.png"));                    
             this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
+            
+            //spawn
+            ArrayList<Texture> spawn = new ArrayList();
+            spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-ranged0.png"));
+            spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-ranged1.png"));                   
+            this.animationSet.put(ExtendedImageAnimations.SPAWN, spawn);
 
             //=====================
             // Build Delay Map
@@ -319,6 +325,12 @@ public class AnimationPackClasses {
             dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_rightfoot.png"));  
             dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout2_leftfoot.png"));                    
             this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
+            
+            //spawn
+            ArrayList<Texture> spawn = new ArrayList();
+            spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-ranged0.png"));
+            spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-ranged1.png"));                   
+            this.animationSet.put(ExtendedImageAnimations.SPAWN, spawn);
 
             //=====================
             // Build Delay Map
@@ -340,107 +352,6 @@ public class AnimationPackClasses {
             //================
             this.fptMap.put(ExtendedImageAnimations.RANGEDATTACK, 3);
             this.fptMap.put(ExtendedImageAnimations.RUNNING, 3);
-              
-
-        }
-    }
-    
-    public static class Scout3AnimationPack extends AnimationPack
-    {
-        public Scout3AnimationPack()
-        {
-            //Idle
-            ArrayList<Texture> idle = new ArrayList();
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle0.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle1.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle2.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle3.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle4.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle5.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle6.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle7.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle8.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle9.png"));
-            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-idle10.png"));
-            this.animationSet.put(CoreAnimations.IDLE, idle);
-
-            //Running
-            ArrayList<Texture> running = new ArrayList();
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk0.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk1.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk2.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk3.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk4.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk5.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk6.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk7.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk8.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk9.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk10.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk11.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk12.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk13.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk14.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk15.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk16.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk17.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk18.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk19.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk20.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk21.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk22.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk23.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk24.png"));
-            running.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-walk25.png"));
-            this.animationSet.put(ExtendedImageAnimations.RUNNING, running);
-
-            //Ranged Attack
-            ArrayList<Texture> ranged = new ArrayList();
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged0.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged1.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged2.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged3.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged4.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged5.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged6.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged7.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged8.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged9.png"));
-            ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3-ranged10.png"));
-            this.animationSet.put(ExtendedImageAnimations.RANGEDATTACK ,ranged); 
-
-            //death
-            ArrayList<Texture> dying = new ArrayList();
-            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_head.png"));
-            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_torso.png"));
-            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_leftarm.png"));
-            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_rightarm.png"));
-            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_righthand.png"));
-            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_leftleg.png"));
-            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_rightfoot.png"));  
-            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout3_leftfoot.png"));                    
-            this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
-
-            //=====================
-            // Build Delay Map
-            //=====================        
-            this.timingMap.put(ExtendedImageAnimations.RANGEDATTACK, 10);    
-            
-            //========================
-            // Build Skill Offset Map
-            //========================
-
-            this.positionOffsetMap.put(ExtendedImageAnimations.RANGEDATTACK, new SylverVector2f(50,22));
-            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0011_0111_0100_1011_1011_0100_1011_0100),
-                                                                                        Float.intBitsToFloat(0b0111_0111_1011_1011_0110_0100_0111_0111)));
-                    
-                    
-
-            //================
-            // Build FPT Map
-            //================
-            this.fptMap.put(ExtendedImageAnimations.RANGEDATTACK, 3);
-             this.fptMap.put(ExtendedImageAnimations.RUNNING, 3);
               
 
         }

@@ -15,7 +15,6 @@ import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.PlantAnimatio
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.SandmanAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.Scout1AnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.Scout2AnimationPack;
-import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.Scout3AnimationPack;
 import com.silvergobletgames.leadcrystal.entities.NonPlayerEntity;
 import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity;
 import com.silvergobletgames.leadcrystal.scenes.MapEditorScene;
@@ -131,7 +130,6 @@ public class TilePalette extends Menu {
         //characters
         characters.add(new Image(new Scout1AnimationPack()));
         characters.add(new Image(new Scout2AnimationPack()));
-        characters.add(new Image(new Scout3AnimationPack()));
         characters.add(new Image(new PlantAnimationPack()));
         characters.add(new Image(new NPC2AnimationPack()));
         characters.add(new Image(new NPC3AnimationPack()));
