@@ -18,9 +18,11 @@ import net.phys2d.raw.shapes.Box;
 import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.GreenGooEmitter;
 import com.silvergobletgames.leadcrystal.entities.NonPlayerEntity;
 import com.silvergobletgames.sylver.graphics.Anchorable;
+import com.silvergobletgames.sylver.graphics.PointParticleEmitter;
 import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 
@@ -89,7 +91,7 @@ public class EnemyTriShot extends Skill
                 
                 SylverVector2f vectorToTarget = new SylverVector2f(this.vectorToTarget);
                 vectorToTarget.normalise();
-                float degrees = Math.copySign(7 +SylverRandom.random.nextInt(6), vectorToTarget.getX());
+                float degrees = Math.copySign(SylverRandom.random.nextInt(4), vectorToTarget.getX());
                 
                 SylverVector2f upVector = new SylverVector2f((float)(Math.cos(degrees * Math.PI/180) *vectorToTarget.x  - (Math.sin(degrees * Math.PI/180))*vectorToTarget.y ),(float)((Math.sin(degrees * Math.PI/180))*vectorToTarget.x  + (Math.cos(degrees * Math.PI/180))*vectorToTarget.y )); // 5 degreees
                 upVector.normalise();
@@ -115,7 +117,7 @@ public class EnemyTriShot extends Skill
                     
                  SylverVector2f vectorToTarget = new SylverVector2f(this.vectorToTarget);
                 vectorToTarget.normalise();
-                float degrees = - Math.copySign(7 +SylverRandom.random.nextInt(6), vectorToTarget.getX())  ;              
+                float degrees = - Math.copySign(SylverRandom.random.nextInt(4), vectorToTarget.getX())  ;              
                 
                 SylverVector2f upVector = new SylverVector2f((float)(Math.cos(degrees * Math.PI/180) *vectorToTarget.x  - (Math.sin(degrees * Math.PI/180))*vectorToTarget.y ),(float)((Math.sin(degrees * Math.PI/180))*vectorToTarget.x  + (Math.cos(degrees * Math.PI/180))*vectorToTarget.y )); // 5 degreees
                 upVector.normalise();
@@ -137,15 +139,15 @@ public class EnemyTriShot extends Skill
 
             //build goo
             Body body = new Body(new Box(57,33), 10);
-            Image img = new Image("laserPew.png");
+            Image img = new Image("laserPewEnemy.png");
             img.setAnchor(Anchorable.Anchor.LEFTCENTER);
             img.setDimensions(57, 33);
             img.setColor(new Color(1.5f,1f,1f,1f)); 
             TriShotHitBox goo1 = new TriShotHitBox(damage, body, img, caster);                   
             
              // Bullet force
-            float xforce1 = 10000*vectorToTarget.x;
-            float yforce1 = 10000*vectorToTarget.y;
+            float xforce1 = 15000*vectorToTarget.x;
+            float yforce1 = 15000*vectorToTarget.y;
             
             SylverVector2f myPos = caster.getPosition();
             if( myPos.distance(vectorToTarget)< myPos.distance(origin))
@@ -183,6 +185,24 @@ public class EnemyTriShot extends Skill
              //remove if we hit a world object
              if(other instanceof WorldObjectEntity || other instanceof CombatEntity)
              {
+                 //get angle of impact
+                 Vector2f normalVector = (Vector2f)event.getNormal();
+                 normalVector =normalVector.negate();
+                 Vector2f xVector = new Vector2f(1,0);
+                 float angle = (float)(Math.acos(normalVector.dot(xVector) ) * 180 / Math.PI);
+                 if(normalVector.getY() < 0)
+                     angle += 180;
+                 
+                 //make emitter
+                 PointParticleEmitter emitter = new LeadCrystalParticleEmitters.LaserBitsEmitter();
+                 emitter.setPosition(event.getPoint().getX(), event.getPoint().getY());
+                 emitter.setDuration(1);
+                 emitter.setAngle(angle);
+                 emitter.setParticlesPerFrame(5);
+                 emitter.setColor(new Color((103/255f) * 4f,(50/255f) * 4f,(50f/255f) * 4f));
+                 emitter.setSize(3);                
+                 owningScene.add(emitter,Layer.MAIN);
+                 
                 this.getBody().setVelocity(new Vector2f(0,0));
                 this.removeFromOwningScene();
              }
