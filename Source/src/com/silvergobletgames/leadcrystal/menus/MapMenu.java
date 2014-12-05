@@ -272,7 +272,7 @@ public class MapMenu extends Window{
             Texture texture = this.mapBackground.getTexture();
             texture.bind(gl);
             //texture flip
-            TextureCoords coords = texture.getSubImageTexCoords((int)this.panOffset.x, (int)this.panOffset.y,(int)this.panOffset.x + texture.getWidth()/2, (int)this.panOffset.y + texture.getHeight()/2);
+            TextureCoords coords = texture.getSubImageTexCoords((int)this.panOffset.x, (int)this.panOffset.y,(int)this.panOffset.x + 600, (int)this.panOffset.y + 450);
             float textureBottom = coords.bottom();
             float textureTop = coords.top();
             float textureLeft = coords.left();
@@ -1132,6 +1132,324 @@ public class MapMenu extends Window{
        });
        this.levelButtons.add(button9);
        this.addComponent(button9);
+       
+       //================== Temple 1 ========================
+       final Button button10 = new Button("blank.png",2250,325,75,75);
+        
+        correctOverlay = new Overlay(new Image("map_lock.png"));  
+       //if this map is complete
+       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(11).mainObjective.complete)
+       {
+           correctOverlay = new Overlay(new Image("map_checkmark.png"));
+       }
+       //if the prereqs are complete
+       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(10).mainObjective.complete)
+       {
+           correctOverlay = new Overlay(new Image("map_questionmark.png"));
+           Object points[] = {0,.5,0};
+           int durations[] = {90,90};
+           MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
+           effect.setRepeating(true);
+           button10.getImage().addImageEffect(effect);
+       }
+       
+       
+       correctOverlay.getImage().setDimensions(75, 75);
+       correctOverlay.useRelativeSize = false;  
+       button10.getImage().addOverlay("img",correctOverlay);
+       button10.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                if (e.getActionCommand().equals("mouseEntered")) {
+                     if(!button10.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
+                     {
+                        button10.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        playLevelHoverSound();
+                        repaintLevelDetails(11);
+                     }
+                }
+                if (e.getActionCommand().equals("mouseExited")) {
+                     if(!button10.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     {
+                        button10.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        repaintLevelDetails(-1);
+                     }
+                }
+                if(e.getActionCommand().equals("clicked"))
+                {
+                     if(!button10.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                        ((GameClientScene)owningScene).sendChooseLevelPacket(11);
+                }
+            }
+       });
+       this.levelButtons.add(button10);
+       this.addComponent(button10);
+       
+       
+       //================== Temple 2 ========================
+       final Button button11 = new Button("blank.png",2450,525,75,75);
+        
+        correctOverlay = new Overlay(new Image("map_lock.png"));  
+       //if this map is complete
+       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(12).mainObjective.complete)
+       {
+           correctOverlay = new Overlay(new Image("map_checkmark.png"));
+       }
+       //if the prereqs are complete
+       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(11).mainObjective.complete)
+       {
+           correctOverlay = new Overlay(new Image("map_questionmark.png"));
+           Object points[] = {0,.5,0};
+           int durations[] = {90,90};
+           MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
+           effect.setRepeating(true);
+           button11.getImage().addImageEffect(effect);
+       }
+       
+       
+       correctOverlay.getImage().setDimensions(75, 75);
+       correctOverlay.useRelativeSize = false;  
+       button11.getImage().addOverlay("img",correctOverlay);
+       button11.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                if (e.getActionCommand().equals("mouseEntered")) {
+                     if(!button11.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
+                     {
+                        button11.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        playLevelHoverSound();
+                        repaintLevelDetails(12);
+                     }
+                }
+                if (e.getActionCommand().equals("mouseExited")) {
+                     if(!button11.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     {
+                        button11.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        repaintLevelDetails(-1);
+                     }
+                }
+                if(e.getActionCommand().equals("clicked"))
+                {
+                     if(!button11.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                        ((GameClientScene)owningScene).sendChooseLevelPacket(12);
+                }
+            }
+       });
+       this.levelButtons.add(button11);
+       this.addComponent(button11);
+       
+       //================== Temple 3 ========================
+       
+       final Button button12 = new Button("blank.png",2450,325,75,75);
+        
+        correctOverlay = new Overlay(new Image("map_lock.png"));  
+       //if this map is complete
+       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(13).mainObjective.complete)
+       {
+           correctOverlay = new Overlay(new Image("map_checkmark.png"));
+       }
+       //if the prereqs are complete
+       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(11).mainObjective.complete)
+       {
+           correctOverlay = new Overlay(new Image("map_questionmark.png"));
+           Object points[] = {0,.5,0};
+           int durations[] = {90,90};
+           MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
+           effect.setRepeating(true);
+           button12.getImage().addImageEffect(effect);
+       }
+       
+       
+       correctOverlay.getImage().setDimensions(75, 75);
+       correctOverlay.useRelativeSize = false;  
+       button12.getImage().addOverlay("img",correctOverlay);
+       button12.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                if (e.getActionCommand().equals("mouseEntered")) {
+                     if(!button12.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
+                     {
+                        button12.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        playLevelHoverSound();
+                        repaintLevelDetails(13);
+                     }
+                }
+                if (e.getActionCommand().equals("mouseExited")) {
+                     if(!button12.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     {
+                        button12.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        repaintLevelDetails(-1);
+                     }
+                }
+                if(e.getActionCommand().equals("clicked"))
+                {
+                     if(!button12.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                        ((GameClientScene)owningScene).sendChooseLevelPacket(13);
+                }
+            }
+       });
+       this.levelButtons.add(button12);
+       this.addComponent(button12);
+       
+       //================== Temple 4 ========================
+       
+       final Button button13 = new Button("blank.png",2450,125,75,75);
+        
+        correctOverlay = new Overlay(new Image("map_lock.png"));  
+       //if this map is complete
+       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(14).mainObjective.complete)
+       {
+           correctOverlay = new Overlay(new Image("map_checkmark.png"));
+       }
+       //if the prereqs are complete
+       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(11).mainObjective.complete)
+       {
+           correctOverlay = new Overlay(new Image("map_questionmark.png"));
+           Object points[] = {0,.5,0};
+           int durations[] = {90,90};
+           MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
+           effect.setRepeating(true);
+           button13.getImage().addImageEffect(effect);
+       }
+       
+       
+       correctOverlay.getImage().setDimensions(75, 75);
+       correctOverlay.useRelativeSize = false;  
+       button13.getImage().addOverlay("img",correctOverlay);
+       button13.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                if (e.getActionCommand().equals("mouseEntered")) {
+                     if(!button13.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
+                     {
+                        button13.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        playLevelHoverSound();
+                        repaintLevelDetails(14);
+                     }
+                }
+                if (e.getActionCommand().equals("mouseExited")) {
+                     if(!button13.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     {
+                        button13.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        repaintLevelDetails(-1);
+                     }
+                }
+                if(e.getActionCommand().equals("clicked"))
+                {
+                     if(!button13.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                        ((GameClientScene)owningScene).sendChooseLevelPacket(14);
+                }
+            }
+       });
+       this.levelButtons.add(button13);
+       this.addComponent(button13);
+       
+       //================== Temple 5 ========================
+       
+       final Button button14 = new Button("blank.png",2650,425,75,75);
+        
+        correctOverlay = new Overlay(new Image("map_lock.png"));  
+       //if this map is complete
+       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(15).mainObjective.complete )
+       {
+           correctOverlay = new Overlay(new Image("map_checkmark.png"));
+       }
+       //if the prereqs are complete
+       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(12).mainObjective.complete || ((GameClientScene)owningScene).hostLevelProgression.levelMap.get(13).mainObjective.complete)
+       {
+           correctOverlay = new Overlay(new Image("map_questionmark.png"));
+           Object points[] = {0,.5,0};
+           int durations[] = {90,90};
+           MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
+           effect.setRepeating(true);
+           button14.getImage().addImageEffect(effect);
+       }
+       
+       
+       correctOverlay.getImage().setDimensions(75, 75);
+       correctOverlay.useRelativeSize = false;  
+       button14.getImage().addOverlay("img",correctOverlay);
+       button14.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                if (e.getActionCommand().equals("mouseEntered")) {
+                     if(!button14.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
+                     {
+                        button14.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        playLevelHoverSound();
+                        repaintLevelDetails(15);
+                     }
+                }
+                if (e.getActionCommand().equals("mouseExited")) {
+                     if(!button14.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     {
+                        button14.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        repaintLevelDetails(-1);
+                     }
+                }
+                if(e.getActionCommand().equals("clicked"))
+                {
+                     if(!button14.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                        ((GameClientScene)owningScene).sendChooseLevelPacket(15);
+                }
+            }
+       });
+       this.levelButtons.add(button14);
+       this.addComponent(button14);
+       
+       //================== Temple 6 ========================
+       final Button button15 = new Button("blank.png",2650,225,75,75);
+        
+        correctOverlay = new Overlay(new Image("map_lock.png"));  
+       //if this map is complete
+       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(16).mainObjective.complete )
+       {
+           correctOverlay = new Overlay(new Image("map_checkmark.png"));
+       }
+       //if the prereqs are complete
+       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(14).mainObjective.complete || ((GameClientScene)owningScene).hostLevelProgression.levelMap.get(13).mainObjective.complete)
+       {
+           correctOverlay = new Overlay(new Image("map_questionmark.png"));
+           Object points[] = {0,.5,0};
+           int durations[] = {90,90};
+           MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
+           effect.setRepeating(true);
+           button15.getImage().addImageEffect(effect);
+       }
+       
+       
+       correctOverlay.getImage().setDimensions(75, 75);
+       correctOverlay.useRelativeSize = false;  
+       button15.getImage().addOverlay("img",correctOverlay);
+       button15.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                if (e.getActionCommand().equals("mouseEntered")) {
+                     if(!button15.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
+                     {
+                        button15.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        playLevelHoverSound();
+                        repaintLevelDetails(16);
+                     }
+                }
+                if (e.getActionCommand().equals("mouseExited")) {
+                     if(!button15.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     {
+                        button15.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        repaintLevelDetails(-1);
+                     }
+                }
+                if(e.getActionCommand().equals("clicked"))
+                {
+                     if(!button15.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                        ((GameClientScene)owningScene).sendChooseLevelPacket(16);
+                }
+            }
+       });
+       this.levelButtons.add(button15);
+       this.addComponent(button15);
+       
+       //================== Temple 7 ========================
        
        
        

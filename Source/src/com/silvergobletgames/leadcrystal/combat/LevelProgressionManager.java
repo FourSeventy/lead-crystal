@@ -305,7 +305,7 @@ public class LevelProgressionManager
         
         //temple2
         Level temple2 = new Level(); 
-        temple2.levelDataName = "temple21.lv";
+        temple2.levelDataName = "temple2.lv";
         temple2.levelName = "Temple2";
         //main objective
         objective = new LevelObjective();
