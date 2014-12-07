@@ -2,19 +2,11 @@ package com.silvergobletgames.leadcrystal.entities;
 
 import com.jogamp.opengl.util.texture.Texture;
 import com.silvergobletgames.leadcrystal.combat.*;
-import com.silvergobletgames.sylver.core.Scene.Layer;
-import com.silvergobletgames.sylver.graphics.*;
-import com.silvergobletgames.sylver.graphics.ImageEffect.ImageEffectType;
-import java.util.ArrayList;
-import java.util.Random;
-import net.phys2d.math.Vector2f;
-import net.phys2d.raw.Body;
-import net.phys2d.raw.CollisionEvent;
-import net.phys2d.raw.shapes.Box;
 import com.silvergobletgames.leadcrystal.combat.Damage.DamageType;
 import com.silvergobletgames.leadcrystal.combat.ProcEffect.ProcType;
 import com.silvergobletgames.leadcrystal.combat.StateEffect.StateEffectType;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.CommonCrateAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.CrateInterface;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.FlierAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.PlantAnimationPack;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
@@ -28,11 +20,20 @@ import com.silvergobletgames.leadcrystal.skills.Skill;
 import com.silvergobletgames.leadcrystal.skills.SkillManager;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Game;
+import com.silvergobletgames.sylver.core.Scene.Layer;
+import com.silvergobletgames.sylver.graphics.*;
 import com.silvergobletgames.sylver.graphics.AnimationPack.CoreAnimations;
 import com.silvergobletgames.sylver.graphics.AnimationPack.ImageAnimation;
+import com.silvergobletgames.sylver.graphics.ImageEffect.ImageEffectType;
 import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
+import java.util.ArrayList;
+import java.util.Random;
 import javax.media.opengl.GL2;
+import net.phys2d.math.Vector2f;
+import net.phys2d.raw.Body;
+import net.phys2d.raw.CollisionEvent;
+import net.phys2d.raw.shapes.Box;
 
 
 public abstract class CombatEntity extends Entity 
@@ -346,7 +347,7 @@ public abstract class CombatEntity extends Entity
         }
 
         //add damage text to the world
-        if (incomingDamage.getType() != DamageType.NODAMAGE && !(this.getImage().getAnimationPack() instanceof CommonCrateAnimationPack))
+        if (incomingDamage.getType() != DamageType.NODAMAGE && !(this.getImage().getAnimationPack() instanceof CrateInterface))
             owningScene.add(new CombatText(incomingDamage, this, owningScene), Layer.WORLD_HUD);
 
         //Apply the effects and overlays of the damage to this entity
@@ -597,7 +598,7 @@ public abstract class CombatEntity extends Entity
                     emitter.setPosition(this.getPosition().x,this.getPosition().y);
                     chunk.addEmitter(emitter); 
                 }
-                else if(this.getImage().getAnimationPack() instanceof CommonCrateAnimationPack)
+                else if(this.getImage().getAnimationPack() instanceof CrateInterface)
                 {
                     //dont add emitter
                 }

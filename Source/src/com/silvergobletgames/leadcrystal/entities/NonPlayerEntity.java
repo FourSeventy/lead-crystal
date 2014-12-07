@@ -21,6 +21,7 @@ import com.silvergobletgames.leadcrystal.entities.EntityTooltip.EntityTooltipFie
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.leadcrystal.skills.SkillManager;
 import com.silvergobletgames.leadcrystal.combat.SoundPack.SoundPackID;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.CommonCrateAnimationPack;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
@@ -73,7 +74,7 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
         setBrain(new Brain());
         
         //body settings
-        if(!(this.getImage().getAnimationPack() instanceof CommonCrateAnimationPack))
+        if(!(this.getImage().getAnimationPack() instanceof AnimationPackClasses.CrateInterface))
         {
           body.setRotatable(false);
         }
@@ -148,7 +149,7 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
             entityTooltip.setHealthField(combatData.getPercentHealth());
 
             //animation handling
-            if(this.image.getAnimation() != ExtendedImageAnimations.MELEEATTACK && this.image.getAnimation() != ExtendedImageAnimations.RANGEDATTACK && this.image.getAnimation() != ExtendedImageAnimations.SPELLATTACK && this.image.getAnimation() != ExtendedImageAnimations.SPAWN && !(this.image.getAnimationPack() instanceof CommonCrateAnimationPack))
+            if(this.image.getAnimation() != ExtendedImageAnimations.MELEEATTACK && this.image.getAnimation() != ExtendedImageAnimations.RANGEDATTACK && this.image.getAnimation() != ExtendedImageAnimations.SPELLATTACK && this.image.getAnimation() != ExtendedImageAnimations.SPAWN && !(this.image.getAnimationPack() instanceof AnimationPackClasses.CrateInterface))
             {
                 if (Math.abs(body.getVelocity().getX()) < 2)  
                 { 

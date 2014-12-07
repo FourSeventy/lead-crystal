@@ -797,7 +797,9 @@ public class AnimationPackClasses {
         }
     }
     
-    public static class CommonCrateAnimationPack extends AnimationPack
+    public static interface CrateInterface{}
+    
+    public static class CommonCrateAnimationPack extends AnimationPack implements CrateInterface
     {
         public CommonCrateAnimationPack()
         {
@@ -840,7 +842,7 @@ public class AnimationPackClasses {
         }
     }
     
-    public static class ArmorCrateAnimationPack extends AnimationPack
+    public static class ArmorCrateAnimationPack extends AnimationPack implements CrateInterface
     {
         public ArmorCrateAnimationPack()
         {
