@@ -61,7 +61,15 @@ public class DotEffect extends CombatEffect
     
     public void tick()
     {
-        owningEntity.takeDamage(damage);
+        Damage filteredDamage = new Damage(damage);
+        
+        //only apply life leech once every 4 ticks
+        if(!(this.timeElapsed % (frequency * 4) == 0))
+        {
+            filteredDamage.setLifeLeech(0);
+        }
+        
+        owningEntity.takeDamage(filteredDamage);
     }
     
     public DotEffect copy()
