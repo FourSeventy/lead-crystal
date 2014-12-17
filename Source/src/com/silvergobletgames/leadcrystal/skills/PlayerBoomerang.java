@@ -65,8 +65,7 @@ public class PlayerBoomerang extends PlayerSkill
         int max = 16;
         float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
         damage.getAmountObject().adjustBase(damageAmout);
-        damage.setType(Damage.DamageType.PHYSICAL);  
-        damage.setLifeLeech(damage.getLifeLeech() + 2f); 
+        damage.setType(Damage.DamageType.PHYSICAL);   
         
         //add brightness effect to damage
         damage.addImageEffect(this.getDamageBrightnessEffect());
