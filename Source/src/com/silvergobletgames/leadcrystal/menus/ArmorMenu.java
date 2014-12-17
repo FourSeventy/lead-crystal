@@ -43,14 +43,14 @@ public class ArmorMenu extends Window{
     
     //weapon
     private Button meleeAttackDamageBonusButton;
-    private Button potionCooldownResetButton;
+    private Button lifeLeechButton;   
     private Button criticalHitDamageButton;
     private Button weaponDamageButton;
     private Button weaponAttackSpeedButton;
     private Button critChanceButton;
     
     private Label meleeAttackDamageBonusLabel;
-    private Label potionCooldownResetLabel;
+    private Label lifeLeechLabel;
     private Label criticalHitDamageLabel;
     private Label weaponDamageLabel;
     private Label weaponAttackSpeedLabel;
@@ -61,13 +61,13 @@ public class ArmorMenu extends Window{
     private Button seeEnemyHealthButton;
     private Button doubleGoldFindButton;
     private Button upgradeRadarButton;
-    private Button lifeLeechButton;
+    private Button potionCooldownResetButton;//
     private Button healingEffectivenessButton;
     
     private Label seeEnemyHealthLabel;
     private Label doubleGoldFindLabel;
     private Label upgradeRadarLabel;
-    private Label lifeLeechLabel;
+    private Label potionCooldownResetLabel;//
     private Label healingEffectivenessLabel;
     
     //body
@@ -345,8 +345,8 @@ public class ArmorMenu extends Window{
         this.meleeAttackDamageBonusLabel = new Label(new Text(Byte.toString(stat4.points) + "/" +Integer.toString(stat4.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y+8 ); 
         this.addComponent(meleeAttackDamageBonusLabel); 
         
-        final ArmorStat stat5 = this.playerReference.getArmorManager().potionCooldownReset;
-        b = new Button(stat5.image.copy(), weaponBasePositionX + 110, weaponBasePositionY - 110, 85, 85);
+        final ArmorStat stat8 = this.playerReference.getArmorManager().lifeLeech;
+        b = new Button(stat8.image.copy(), weaponBasePositionX + 110, weaponBasePositionY - 110, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -354,12 +354,12 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameClientScene)owningScene).sendBuyStatPacket(stat5.id);
-                   ArmorMenu.this.handleSoundAndErrors(stat5.id);
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat8.id);
+                   ArmorMenu.this.handleSoundAndErrors(stat8.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(weaponBasePositionX +195,weaponBasePositionY - 100,stat5.name,stat5.image,stat5.description, stat5.cost);
+                   openTooltip(weaponBasePositionX +205,weaponBasePositionY - 100,stat8.name,stat8.image,stat8.description, stat8.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -368,9 +368,9 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
-        potionCooldownResetButton = b;
-        this.potionCooldownResetLabel = new Label(new Text(Byte.toString(stat5.points) + "/" +Integer.toString(stat5.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y+8 ); 
-        this.addComponent(potionCooldownResetLabel); 
+        lifeLeechButton =b;
+        this.lifeLeechLabel = new Label(new Text(Byte.toString(stat8.points) + "/" +Integer.toString(stat8.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y + 8); 
+        this.addComponent(lifeLeechLabel);
         
         final ArmorStat stat6 = this.playerReference.getArmorManager().criticalHitDamage;
         b = new Button(stat6.image.copy(), weaponBasePositionX + 220, weaponBasePositionY - 110, 85, 85);
@@ -436,8 +436,10 @@ public class ArmorMenu extends Window{
         this.seeEnemyHealthLabel = new Label(new Text(Byte.toString(stat7.points) + "/" +Integer.toString(stat7.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y + 8); 
         this.addComponent(seeEnemyHealthLabel); 
         
-        final ArmorStat stat8 = this.playerReference.getArmorManager().lifeLeech;
-        b = new Button(stat8.image.copy(), helmBasePositionX + 110, helmBasePositionY, 85, 85);
+        
+        ///// cooldown
+        final ArmorStat stat5 = this.playerReference.getArmorManager().potionCooldownReset;
+        b = new Button(stat5.image.copy(), helmBasePositionX + 110, helmBasePositionY, 85, 85);
         b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -445,12 +447,12 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameClientScene)owningScene).sendBuyStatPacket(stat8.id);
-                   ArmorMenu.this.handleSoundAndErrors(stat8.id);
+                   ((GameClientScene)owningScene).sendBuyStatPacket(stat5.id);
+                   ArmorMenu.this.handleSoundAndErrors(stat5.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
-                   openTooltip(helmBasePositionX -325,helmBasePositionY,stat8.name,stat8.image,stat8.description, stat8.cost);
+                   openTooltip(helmBasePositionX -325, helmBasePositionY ,stat5.name,stat5.image,stat5.description, stat5.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
@@ -459,9 +461,11 @@ public class ArmorMenu extends Window{
            }
        });
         this.addComponent(b);
-        lifeLeechButton =b;
-        this.lifeLeechLabel = new Label(new Text(Byte.toString(stat8.points) + "/" +Integer.toString(stat8.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y + 8); 
-        this.addComponent(lifeLeechLabel);
+        potionCooldownResetButton = b;
+        this.potionCooldownResetLabel = new Label(new Text(Byte.toString(stat5.points) + "/" +Integer.toString(stat5.maxPoints),LeadCrystalTextType.HUD20),b.getWindowRelativePosition().x + 30,b.getWindowRelativePosition().y+8 ); 
+        this.addComponent(potionCooldownResetLabel); 
+        
+        
         
         final ArmorStat stat9 = this.playerReference.getArmorManager().upgradeRadar;
         b = new Button(stat9.image.copy(), helmBasePositionX + 220, helmBasePositionY, 85, 85);

@@ -93,12 +93,14 @@ public class ArmorManager {
         this.meleeAttackDamageBonus.description = "+25% melee damage per point.";
         this.meleeAttackDamageBonus.unlocked = false;
         this.armorStats.put(this.meleeAttackDamageBonus.id,this.meleeAttackDamageBonus);
-       
-        this.potionCooldownReset = new ArmorStat(ArmorStatID.POTION_COOLDOWN_RESET, new Image("steroidPotionIcon.png"), "Steroid Potions",150,1);
-        this.potionCooldownReset.description = "Using a potion will instantly reset all cooldowns.";
-        this.potionCooldownReset.unlocked = false;
-        this.armorStats.put(this.potionCooldownReset.id,this.potionCooldownReset);
         
+        this.lifeLeech = new ArmorStat(ArmorStatID.LIFE_LEECH, new Image("lifeLeechIcon.png"), "Life on Hit", 150,1);
+        this.lifeLeech.description = "+1 life on hit per point.";
+        this.lifeLeech.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().lifeLeech.adjustBase(1f);}}); 
+        this.lifeLeech.unlocked = false;
+        this.armorStats.put(this.lifeLeech.id,this.lifeLeech); 
+       
+           
         this.criticalHitDamage = new ArmorStat(ArmorStatID.CRIT_DAMAGE, new Image("critDamageIcon.png"), "Critical Hit Damage",100,2);
         this.criticalHitDamage.description = "+50% critical hit damage.";
         this.criticalHitDamage.unlocked = false;
@@ -130,11 +132,10 @@ public class ArmorManager {
         this.upgradeRadar.unlocked = true;
         this.armorStats.put(this.upgradeRadar.id,this.upgradeRadar);  
  
-        this.lifeLeech = new ArmorStat(ArmorStatID.LIFE_LEECH, new Image("lifeLeechIcon.png"), "Life on Hit", 50,3);
-        this.lifeLeech.description = "+1 life on hit per point.";
-        this.lifeLeech.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().lifeLeech.adjustBase(1f);}}); 
-        this.lifeLeech.unlocked = true;
-        this.armorStats.put(this.lifeLeech.id,this.lifeLeech);      
+        this.potionCooldownReset = new ArmorStat(ArmorStatID.POTION_COOLDOWN_RESET, new Image("steroidPotionIcon.png"), "Steroid Potions",150,1);
+        this.potionCooldownReset.description = "Using a potion will instantly reset all cooldowns.";
+        this.potionCooldownReset.unlocked = true;
+        this.armorStats.put(this.potionCooldownReset.id,this.potionCooldownReset);
         
         this.healingEffectiveness = new ArmorStat(ArmorStatID.HEALING_EFFECTIVENESS, new Image("healingEffectivenessIcon.png"), "Healing Effectiveness", 50,3);
         this.healingEffectiveness.description = "+15% healing effectiveness per point.";

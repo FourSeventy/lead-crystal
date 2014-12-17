@@ -214,7 +214,7 @@ public class LevelProgressionManager
         objective.objectiveName = "Kill Jumpers";
         objective.objectiveDescription = "Kill 10 jumpers";
         objective.currencyAward = 25;
-        objective.statReward = ArmorStatID.POTION_COOLDOWN_RESET;
+        objective.statReward = ArmorStatID.LIFE_LEECH;
         cave2.sideObjective = objective;
         //adding to map
         this.levelMap.put(7, cave2);
