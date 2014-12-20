@@ -1451,6 +1451,57 @@ public class MapMenu extends Window{
        
        //================== Temple 7 ========================
        
+        final Button button16 = new Button("blank.png",2850,325,75,75);
+        
+        correctOverlay = new Overlay(new Image("map_lock.png"));  
+       //if this map is complete
+       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(17).mainObjective.complete )
+       {
+           correctOverlay = new Overlay(new Image("map_checkmark.png"));
+       }
+       //if the prereqs are complete
+       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(15).mainObjective.complete || ((GameClientScene)owningScene).hostLevelProgression.levelMap.get(16).mainObjective.complete)
+       {
+           correctOverlay = new Overlay(new Image("map_questionmark.png"));
+           Object points[] = {0,.5,0};
+           int durations[] = {90,90};
+           MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
+           effect.setRepeating(true);
+           button16.getImage().addImageEffect(effect);
+       }
+       
+       
+       correctOverlay.getImage().setDimensions(75, 75);
+       correctOverlay.useRelativeSize = false;  
+       button16.getImage().addOverlay("img",correctOverlay);
+       button16.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                if (e.getActionCommand().equals("mouseEntered")) {
+                     if(!button16.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
+                     {
+                        button16.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        playLevelHoverSound();
+                        repaintLevelDetails(17);
+                     }
+                }
+                if (e.getActionCommand().equals("mouseExited")) {
+                     if(!button16.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     {
+                        button16.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        repaintLevelDetails(-1);
+                     }
+                }
+                if(e.getActionCommand().equals("clicked"))
+                {
+                     if(!button16.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                        ((GameClientScene)owningScene).sendChooseLevelPacket(17);
+                }
+            }
+       });
+       this.levelButtons.add(button16);
+       this.addComponent(button16);
+       
        
        
        
