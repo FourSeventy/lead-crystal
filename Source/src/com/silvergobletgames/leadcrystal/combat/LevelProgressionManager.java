@@ -285,20 +285,19 @@ public class LevelProgressionManager
         //temple1
         Level temple1 = new Level(); 
         temple1.levelDataName = "temple1.lv";
-        temple1.levelName = "Temple1";
+        temple1.levelName = "Commando Outposts";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Do something";
-        objective.objectiveDescription = "Do Something";
+        objective.objectiveName = "Destroy Commando Outposts";
+        objective.objectiveDescription = "Destroy the three outposts in the ruins.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         temple1.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Do something";
-        objective.objectiveDescription = "Do something.";
+        objective.objectiveName = "Hack mainframe";
+        objective.objectiveDescription = "Find and hack the commando mainframe hidden in the ruins.";
         objective.currencyAward = 25;
-        objective.statReward = ArmorStatID.MOVE_SPEED;
         temple1.sideObjective = objective;
         //adding to map
         this.levelMap.put(11,temple1);
@@ -306,20 +305,19 @@ public class LevelProgressionManager
         //temple2
         Level temple2 = new Level(); 
         temple2.levelDataName = "temple2.lv";
-        temple2.levelName = "Temple2";
+        temple2.levelName = "Weapon Cache";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Do something";
-        objective.objectiveDescription = "Do Something";
+        objective.objectiveName = "Destroy Commando Weapon Cache";
+        objective.objectiveDescription = "Find and destroy the commandos weapon cache.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         temple2.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Do something";
-        objective.objectiveDescription = "Do something.";
+        objective.objectiveName = "Destroy Oil Pipe";
+        objective.objectiveDescription = "Find and destroy the commandos oil pipeline.";
         objective.currencyAward = 25;
-        objective.statReward = ArmorStatID.MOVE_SPEED;
         temple2.sideObjective = objective;
         //adding to map
         this.levelMap.put(12,temple2);
@@ -327,20 +325,19 @@ public class LevelProgressionManager
         //temple3
         Level temple3 = new Level(); 
         temple3.levelDataName = "temple3.lv";
-        temple3.levelName = "Temple3";
+        temple3.levelName = "Commando Hunt";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Do something";
-        objective.objectiveDescription = "Do Something";
+        objective.objectiveName = "Kill three elite commandos.";
+        objective.objectiveDescription = "Find and kill the three elite commandos.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         temple3.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Do something";
-        objective.objectiveDescription = "Do something.";
+        objective.objectiveName = "Salvage Technology";
+        objective.objectiveDescription = "Salvage some technology from one of the commando tanks";
         objective.currencyAward = 25;
-        objective.statReward = ArmorStatID.MOVE_SPEED;
         temple3.sideObjective = objective;
         //adding to map
         this.levelMap.put(13,temple3);
@@ -348,20 +345,19 @@ public class LevelProgressionManager
         //temple4
         Level temple4 = new Level(); 
         temple4.levelDataName = "temple4.lv";
-        temple4.levelName = "Temple4";
+        temple4.levelName = "Rescue Mission";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Do something";
-        objective.objectiveDescription = "Do Something";
+        objective.objectiveName = "Rescue Captured Townsfolk";
+        objective.objectiveDescription = "Find and rescue the captured townsfolk";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         temple4.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Do something";
-        objective.objectiveDescription = "Do something.";
+        objective.objectiveName = "Rare blade";
+        objective.objectiveDescription = "Rumour has it one of the commandos is carrying a rare blade weapon, find it for slash.";
         objective.currencyAward = 25;
-        objective.statReward = ArmorStatID.MOVE_SPEED;
         temple4.sideObjective = objective;
         //adding to map
         this.levelMap.put(14,temple4);
@@ -369,20 +365,19 @@ public class LevelProgressionManager
         //temple5
         Level temple5 = new Level(); 
         temple5.levelDataName = "temple5.lv";
-        temple5.levelName = "Temple5";
+        temple5.levelName = "Tank Commander";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Do something";
-        objective.objectiveDescription = "Do Something";
+        objective.objectiveName = "Kill Tank Commander";
+        objective.objectiveDescription = "Kill the elite tank commander";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         temple5.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Do something";
-        objective.objectiveDescription = "Do something.";
+        objective.objectiveName = "Disable uplink";
+        objective.objectiveDescription = "Disable satellite uplink";
         objective.currencyAward = 25;
-        objective.statReward = ArmorStatID.MOVE_SPEED;
         temple5.sideObjective = objective;
         //adding to map
         this.levelMap.put(15,temple5);
@@ -390,11 +385,11 @@ public class LevelProgressionManager
         //temple6
         Level temple6 = new Level(); 
         temple6.levelDataName = "temple6.lv";
-        temple6.levelName = "Temple6";
+        temple6.levelName = "Turret Commander";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Do something";
-        objective.objectiveDescription = "Do Something";
+        objective.objectiveName = "Kill the Elite Turret Commander";
+        objective.objectiveDescription = "Kill the elite turret commander.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         temple6.mainObjective = objective;
@@ -403,7 +398,6 @@ public class LevelProgressionManager
         objective.objectiveName = "Do something";
         objective.objectiveDescription = "Do something.";
         objective.currencyAward = 25;
-        objective.statReward = ArmorStatID.MOVE_SPEED;
         temple6.sideObjective = objective;
         //adding to map
         this.levelMap.put(16,temple6);
@@ -411,20 +405,19 @@ public class LevelProgressionManager
         //temple7
         Level temple7 = new Level(); 
         temple7.levelDataName = "temple7.lv";
-        temple7.levelName = "Temple7";
+        temple7.levelName = "Final Duel";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Do something";
-        objective.objectiveDescription = "Do Something";
+        objective.objectiveName = "Kill Gravin";
+        objective.objectiveDescription = "Face gravin in one on one combat.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         temple7.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Do something";
+        objective.objectiveName = "null";
         objective.objectiveDescription = "Do something.";
         objective.currencyAward = 25;
-        objective.statReward = ArmorStatID.MOVE_SPEED;
         temple7.sideObjective = objective;
         //adding to map
         this.levelMap.put(17,temple7);
