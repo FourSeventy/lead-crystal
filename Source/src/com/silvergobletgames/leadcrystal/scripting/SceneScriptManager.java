@@ -560,6 +560,11 @@ public class SceneScriptManager
        teleporter.addToGroup(ExtendedSceneObjectGroups.CLICKABLE); 
     }
     
+    public void finishGame()
+    {
+        
+    }
+    
     
     
 }

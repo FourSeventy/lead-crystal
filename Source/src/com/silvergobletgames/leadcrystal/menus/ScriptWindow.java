@@ -123,6 +123,7 @@ public class ScriptWindow extends Menu {
         //add page conditions
         tabPane.addComponent(new Label("Page Conditions:",10,630), index); 
         TextBox condition = new TextBox(175, 620);
+        condition.setMaxCharacters(1000);
         condition.setDimensions(600, 30);
         tabPane.addComponent(condition, index);
 
