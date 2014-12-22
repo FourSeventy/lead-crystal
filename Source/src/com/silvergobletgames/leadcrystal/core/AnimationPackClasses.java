@@ -1004,6 +1004,85 @@ public class AnimationPackClasses {
         }
     }
     
+    public static class TankAnimationPack extends AnimationPack
+    {
+        public TankAnimationPack()
+        {
+             //Idle
+            ArrayList<Texture> idle = new ArrayList();
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-idle0.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-idle1.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-idle2.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-idle3.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-idle4.png"));
+                
+                
+            this.animationSet.put(CoreAnimations.IDLE, idle);
+            
+            //walk
+            idle = new ArrayList();
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-moving0.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-moving1.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-moving2.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-moving3.png"));
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-moving4.png"));
+            this.animationSet.put(ExtendedImageAnimations.RUNNING, idle);
+
+            
+            //ranged attack
+            ArrayList<Texture> ranged = new ArrayList();
+                ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-shoot0.png"));
+                ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-shoot1.png"));
+                ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-shoot2.png"));
+                ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-shoot3.png"));
+                ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-shoot4.png"));
+                ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-shoot5.png"));
+                ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-shoot6.png"));
+                ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-shoot7.png"));
+                ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-shoot8.png"));
+                ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-shoot9.png"));
+                ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-shoot10.png"));
+            this.animationSet.put(ExtendedImageAnimations.RANGEDATTACK, ranged);
+            
+            //death
+            ArrayList<Texture> dying = new ArrayList();
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_head.png"));                
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_rightarm.png"));
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_leftarm.png"));               
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_righthand.png"));
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_torso.png"));
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_rightfoot.png"));
+            this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
+            
+            
+            //=====================
+            // Build Delay Map
+            //=====================        
+            this.timingMap.put(ExtendedImageAnimations.MELEEATTACK, 15);
+            this.timingMap.put(ExtendedImageAnimations.RANGEDATTACK, 10);
+
+            //========================
+            // Build Skill Offset Map
+            //========================
+            this.positionOffsetMap.put(ExtendedImageAnimations.MELEEATTACK, new SylverVector2f(100,0));
+            this.positionOffsetMap.put(ExtendedImageAnimations.RANGEDATTACK, new SylverVector2f(90,40));
+            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0110_1111_0110_0110_1101_1101_0000_0000),
+                                                                                        Float.intBitsToFloat(0b0111_1110_0111_0001_0111_0000_0000_0000)));
+                  
+            
+            //================
+            // Build FPT Map
+            //================
+            this.fptMap.put(ExtendedImageAnimations.RUNNING, 5);
+            this.fptMap.put(ExtendedImageAnimations.SPAWN, 3);
+            this.fptMap.put(ExtendedImageAnimations.MELEEATTACK, 5);
+            this.fptMap.put(ExtendedImageAnimations.RANGEDATTACK, 5);
+            this.fptMap.put(CoreAnimations.IDLE, 7);
+        }
+    }
+    
+    
+    
     
     //==============
     // Bash Brown 
