@@ -16,6 +16,7 @@ import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.SandmanAnimat
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.Scout1AnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.Scout2AnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.TankAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.TurretAnimationPack;
 import com.silvergobletgames.leadcrystal.entities.NonPlayerEntity;
 import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity;
 import com.silvergobletgames.leadcrystal.scenes.MapEditorScene;
@@ -143,6 +144,7 @@ public class TilePalette extends Menu {
         characters.add(new Image(new JumperAnimationPack()));
         characters.add(new Image(new SandmanAnimationPack()));
         characters.add(new Image(new TankAnimationPack()));
+        characters.add(new Image(new TurretAnimationPack()));
         characters.add(new Image("training_dummy.png"));
         
         //animated images

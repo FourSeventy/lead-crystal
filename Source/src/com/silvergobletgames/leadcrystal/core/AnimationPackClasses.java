@@ -1081,6 +1081,112 @@ public class AnimationPackClasses {
         }
     }
     
+    public static class TurretAnimationPack extends AnimationPack
+    {
+        public TurretAnimationPack()
+        {
+            //Idle
+            ArrayList<Texture> idle = new ArrayList();
+                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-idle0.png"));
+            this.animationSet.put(AnimationPack.CoreAnimations.IDLE, idle);
+
+            //Ranged Attack
+            ArrayList<Texture> ranged = new ArrayList();
+            
+                    
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-clamp7.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-clamp6.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-clamp5.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-clamp4.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-clamp3.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-clamp2.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-clamp1.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-clamp0.png"));
+                    
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-shoot0.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-shoot1.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-shoot2.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-shoot3.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-shoot4.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-shoot5.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-shoot6.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-shoot7.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-shoot8.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-shoot9.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-shoot10.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-shoot11.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-shoot12.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-shoot13.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-shoot14.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-shoot15.png"));
+                    
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-clamp0.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-clamp1.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-clamp2.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-clamp3.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-clamp4.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-clamp5.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-clamp6.png"));
+                    ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-clamp7.png"));
+
+            this.animationSet.put(ExtendedImageAnimations.RANGEDATTACK ,ranged); 
+
+            //death
+            ArrayList<Texture> dying = new ArrayList();
+                    dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_butt.png"));
+                    dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_head.png"));
+                    dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_leg_bot.png"));
+                    dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_leg_mid.png"));
+                    dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_leg_top.png"));
+                    dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_torso.png"));
+                    dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_wing.png"));
+            this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
+
+            
+//            //spawning
+//            ArrayList<Texture> spawning = new ArrayList();
+//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn1.png"));    
+//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn2.png"));
+//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn3.png"));
+//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn4.png"));
+//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn5.png"));
+//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn6.png"));
+//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn7.png"));
+//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn8.png"));
+//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn9.png"));
+//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn10.png"));
+//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn11.png"));
+//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn12.png"));
+//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn13.png"));
+//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn14.png"));
+//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn15.png"));
+//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn16.png"));
+//            this.animationSet.put(ExtendedImageAnimations.SPAWN,spawning);
+
+
+            //=====================
+            // Build Delay Map
+            //=====================        
+            this.timingMap.put(ExtendedImageAnimations.RANGEDATTACK, 50);
+
+            //========================
+            // Build Skill Offset Map
+            //========================
+
+            this.positionOffsetMap.put(ExtendedImageAnimations.RANGEDATTACK, new SylverVector2f(90,45));
+            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0011_0011_0111_0111_0111_0111_0110_0000),
+                                                                                        Float.intBitsToFloat(0b0010_1110_0011_0100_0111_1010_1100_0000)));
+                  
+
+            //================
+            // Build FPT Map
+            //================
+            this.fptMap.put(AnimationPack.CoreAnimations.IDLE, 5);
+            this.fptMap.put(ExtendedImageAnimations.SPAWN, 5);
+            this.fptMap.put(ExtendedImageAnimations.RANGEDATTACK, 4);
+        }
+    }  
+    
     
     
     
