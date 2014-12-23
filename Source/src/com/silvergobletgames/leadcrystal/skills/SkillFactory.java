@@ -68,6 +68,7 @@ public class SkillFactory
             case EnemyTriShot: return new EnemyTriShot();
             case EnemyRockThrow: return new EnemyRockThrow();
             case EnemySmallAntThrow: return new EnemySmallAntThrow();
+            case EnemyHomingMissile: return new EnemyHomingMissile();
             
             
             default: return null;
