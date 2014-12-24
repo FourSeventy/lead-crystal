@@ -73,7 +73,7 @@ public class EnemyHomingMissile extends Skill
         img.setDimensions(40, 20);
          
         //construct hitbox
-        PlayerRocket.RocketHitbox rocket = new PlayerRocket.RocketHitbox(damage, body, img, user);
+        EnemyRocketHitbox rocket = new EnemyRocketHitbox(damage, body, img, user);
         
        
         //set rocket image
