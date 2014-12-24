@@ -1062,8 +1062,7 @@ public class AnimationPackClasses {
             //========================
             // Build Skill Offset Map
             //========================
-            this.positionOffsetMap.put(ExtendedImageAnimations.MELEEATTACK, new SylverVector2f(100,0));
-            this.positionOffsetMap.put(ExtendedImageAnimations.RANGEDATTACK, new SylverVector2f(90,40));
+            this.positionOffsetMap.put(ExtendedImageAnimations.RANGEDATTACK, new SylverVector2f(108,0));
             this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0000_1000_1000_1000_1000_1101_0000_0000),
                                                                                         Float.intBitsToFloat(0b0111_1000_1110_1111_0010_0000_0000_0000)));
                   
@@ -1071,9 +1070,7 @@ public class AnimationPackClasses {
             //================
             // Build FPT Map
             //================
-            this.fptMap.put(ExtendedImageAnimations.RUNNING, 5);
-            this.fptMap.put(ExtendedImageAnimations.SPAWN, 3);
-            this.fptMap.put(ExtendedImageAnimations.MELEEATTACK, 5);
+            this.fptMap.put(ExtendedImageAnimations.RUNNING, 7);
             this.fptMap.put(ExtendedImageAnimations.RANGEDATTACK, 5);
             this.fptMap.put(CoreAnimations.IDLE, 7);
         }
