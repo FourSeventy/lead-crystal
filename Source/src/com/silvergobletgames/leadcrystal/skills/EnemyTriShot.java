@@ -21,6 +21,7 @@ import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.GreenGooEmitter;
 import com.silvergobletgames.leadcrystal.entities.NonPlayerEntity;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.graphics.Anchorable;
 import com.silvergobletgames.sylver.graphics.PointParticleEmitter;
 import com.silvergobletgames.sylver.util.SylverRandom;
@@ -164,6 +165,10 @@ public class EnemyTriShot extends Skill
             goo1.getBody().setRotation((float)theta);
             goo1.getImage().setAngle((float)(theta * 180f/Math.PI)); 
             this.getOwningScene().add(goo1,Layer.MAIN);  
+            
+            //play sound
+            Sound sound = Sound.locationSound("buffered/smallLaser.ogg", user.getPosition().x, user.getPosition().y, false, 1f,1f);
+            this.getOwningScene().add(sound);
         
         }
         

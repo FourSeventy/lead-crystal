@@ -90,9 +90,7 @@ public class EnemySinBlast extends Skill
         user.getOwningScene().add(smokeEmitter,Scene.Layer.MAIN);
 
       
-        //play sound
-        Sound sound = Sound.locationSound("buffered/rocketShoot.ogg", user.getPosition().x, user.getPosition().y, false, 1f,1f);
-        user.getOwningScene().add(sound);
+        
         
         
 
@@ -206,6 +204,10 @@ public class EnemySinBlast extends Skill
             bullet.setPosition(origin.x + vectorToTarget.x * 25, origin.y + vectorToTarget.y * 25);
             bullet.getBody().addForce(new Vector2f(xforce ,yforce));        
             this.getOwningScene().add(bullet,Layer.MAIN);
+            
+            //play sound
+            Sound sound = Sound.locationSound("buffered/smallLaser.ogg", user.getPosition().x, user.getPosition().y, false, 1f,1f);
+            this.getOwningScene().add(sound);
 
             
         
