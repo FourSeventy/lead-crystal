@@ -1046,19 +1046,17 @@ public class AnimationPackClasses {
             
             //death
             ArrayList<Texture> dying = new ArrayList();
-                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_head.png"));                
-                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_rightarm.png"));
-                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_leftarm.png"));               
-                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_righthand.png"));
-                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_torso.png"));
-                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("sandman_rightfoot.png"));
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-antenna.png"));                
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-body.png"));
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-cockpit.png"));               
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-hatch.png"));
+                dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-treads.png"));
             this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
             
             
             //=====================
             // Build Delay Map
             //=====================        
-            this.timingMap.put(ExtendedImageAnimations.MELEEATTACK, 15);
             this.timingMap.put(ExtendedImageAnimations.RANGEDATTACK, 10);
 
             //========================
@@ -1066,8 +1064,8 @@ public class AnimationPackClasses {
             //========================
             this.positionOffsetMap.put(ExtendedImageAnimations.MELEEATTACK, new SylverVector2f(100,0));
             this.positionOffsetMap.put(ExtendedImageAnimations.RANGEDATTACK, new SylverVector2f(90,40));
-            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0110_1111_0110_0110_1101_1101_0000_0000),
-                                                                                        Float.intBitsToFloat(0b0111_1110_0111_0001_0111_0000_0000_0000)));
+            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0000_1000_1000_1000_1000_1101_0000_0000),
+                                                                                        Float.intBitsToFloat(0b0111_1000_1110_1111_0010_0000_0000_0000)));
                   
             
             //================
@@ -1133,35 +1131,14 @@ public class AnimationPackClasses {
 
             //death
             ArrayList<Texture> dying = new ArrayList();
-                    dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_butt.png"));
-                    dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_head.png"));
-                    dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_leg_bot.png"));
-                    dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_leg_mid.png"));
-                    dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_leg_top.png"));
-                    dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_torso.png"));
-                    dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_wing.png"));
+                    dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-base.png"));
+                    dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-gun.png"));
+                    dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-hinge.png"));
+                    dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-dome.png"));
+                    dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-dome.png"));
+                    dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-dome.png"));
             this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
 
-            
-//            //spawning
-//            ArrayList<Texture> spawning = new ArrayList();
-//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn1.png"));    
-//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn2.png"));
-//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn3.png"));
-//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn4.png"));
-//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn5.png"));
-//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn6.png"));
-//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn7.png"));
-//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn8.png"));
-//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn9.png"));
-//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn10.png"));
-//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn11.png"));
-//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn12.png"));
-//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn13.png"));
-//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn14.png"));
-//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn15.png"));
-//                    spawning.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("spitter_spawn16.png"));
-//            this.animationSet.put(ExtendedImageAnimations.SPAWN,spawning);
 
 
             //=====================
@@ -1174,8 +1151,8 @@ public class AnimationPackClasses {
             //========================
 
             this.positionOffsetMap.put(ExtendedImageAnimations.RANGEDATTACK, new SylverVector2f(60,15));
-            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0011_0011_0111_0111_0111_0111_0110_0000),
-                                                                                        Float.intBitsToFloat(0b0010_1110_0011_0100_0111_1010_1100_0000)));
+            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0100_1001_1000_0000_1000_1111_0110_0000),
+                                                                                        Float.intBitsToFloat(0b0000_1000_0111_1100_1100_1100_1100_0000)));
                   
 
             //================

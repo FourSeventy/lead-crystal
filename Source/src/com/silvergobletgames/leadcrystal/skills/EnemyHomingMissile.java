@@ -237,7 +237,7 @@ public class EnemyHomingMissile extends Skill
          //Dispense rocket into the world
            rocket.setPosition(origin.x + vectorToTarget.x * 25, origin.y + vectorToTarget.y * 25);
            rocket.getBody().addForce(new Vector2f(xforce ,yforce));        
-           user.getOwningScene().add(rocket,Layer.MAIN); 
+           this.getOwningScene().add(rocket,Layer.MAIN); 
         
         }
         
