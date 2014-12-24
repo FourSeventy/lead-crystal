@@ -41,7 +41,7 @@ public class EnemySinBlast extends Skill
     
     public EnemySinBlast()
     {
-        super(SkillID.EnemySinBlast,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,120,800);
+        super(SkillID.EnemySinBlast,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,180,1000);
         
 
     }
@@ -57,10 +57,7 @@ public class EnemySinBlast extends Skill
         //Determine vector to target
         SylverVector2f distanceVector = user.distanceVector(user.getTarget());
         distanceVector.normalise();
-        
-        // Bullet force
-        float xforce = 1000*distanceVector.x;
-        float yforce = 1000*distanceVector.y;
+
 
        
         //determine theta
@@ -68,37 +65,10 @@ public class EnemySinBlast extends Skill
         if(user.getTarget().getPosition().y < user.getPosition().y)
             theta = (float)(2* Math.PI - theta);
         
-        //body and image and hitbox
-        Body body = new Body(new Box(50,50), 1);
-        Image img = new Image("poison_goo_ball.png");
-        img.setDimensions(50, 50);
-        EnemySinHitbox bullet = new EnemySinHitbox(damage, body, img, user, new SylverVector2f(distanceVector),1);
-              
-        //set bullet rotation
-        bullet.getBody().setRotation((float)theta);
-        bullet.getImage().setAngle((float)(theta * (180f/Math.PI))); 
-        
- 
-        //Dispense bullet into the world
-        bullet.setPosition(origin.x + distanceVector.x * 25, origin.y + distanceVector.y * 25);
-        bullet.getBody().addForce(new Vector2f(xforce ,yforce));        
-        user.getOwningScene().add(bullet,Layer.MAIN);
-        
-         //body and image and hitbox
-        body = new Body(new Box(50,50), 1);
-        img = new Image("poison_goo_ball.png");
-        img.setDimensions(50, 50);
-        bullet = new EnemySinHitbox(damage, body, img, user, new SylverVector2f(distanceVector),-1);
-              
-        //set bullet rotation
-        bullet.getBody().setRotation((float)theta);
-        bullet.getImage().setAngle((float)(theta * (180f/Math.PI))); 
-        
- 
-        //Dispense bullet into the world
-        bullet.setPosition(origin.x + distanceVector.x * 25, origin.y + distanceVector.y * 25);
-        bullet.getBody().addForce(new Vector2f(xforce ,yforce));        
-        user.getOwningScene().add(bullet,Layer.MAIN);
+      SinProducer producer = new SinProducer(damage,user.distanceVector(user.getTarget()),user.getTarget().getPosition(),user,origin);
+       producer.setPosition(origin.getX(), origin.getY());
+       
+       user.getOwningScene().add(producer, Layer.MAIN); 
         
         //dispense muzzle flash
         Image muzzleFlash = new Image("flash.png");
@@ -126,6 +96,121 @@ public class EnemySinBlast extends Skill
         
         
 
+        
+    }
+    
+    private class SinProducer extends Entity
+    {
+        private long ticks = 0;
+        private SylverVector2f origin;
+        private Damage passthroughDamage;
+        private SylverVector2f vectorToTarget;
+        private SylverVector2f targetPosition;
+        private CombatEntity caster;
+        
+        
+        public SinProducer(Damage passthroughDamage, SylverVector2f vectorToTarget,SylverVector2f targetPosition, CombatEntity caster,SylverVector2f origin)
+        { 
+           super( new Image("blank.png"),new Body(new Box(10,10), 1));
+           this.getBody().setGravityEffected(false);
+           this.getBody().setOverlapMask(Entity.OverlapMasks.NO_OVERLAP.value);
+           this.getBody().setBitmask(Entity.BitMasks.NO_COLLISION.value);
+           this.passthroughDamage = passthroughDamage;
+           this.vectorToTarget = vectorToTarget;
+           this.targetPosition = targetPosition;
+           this.caster = caster;
+           this.origin = origin;
+        }
+        
+        @Override
+        public void update()
+        {
+            this.ticks++;
+            
+            
+            if(this.ticks == 1)
+            {
+                
+                SylverVector2f vectorToTarget = new SylverVector2f(this.vectorToTarget);
+                vectorToTarget.normalise();
+               
+        
+                this.shootBullet(vectorToTarget, passthroughDamage, this.targetPosition,caster, origin);
+                
+               
+            }
+            else if(this.ticks == 30)
+            {
+                
+                SylverVector2f vectorToTarget = new SylverVector2f(this.vectorToTarget);
+                vectorToTarget.normalise();
+               
+        
+                this.shootBullet(vectorToTarget, passthroughDamage, this.targetPosition,caster, origin);
+            }
+            else if(this.ticks == 20)
+            {
+                    
+
+            }
+            if(this.ticks > 180)
+            {
+                this.removeFromOwningScene();
+            }
+            
+            
+        }
+        
+        private void shootBullet(SylverVector2f vectorToTarget, Damage d, SylverVector2f targetPosition, CombatEntity caster, SylverVector2f origin)
+        {
+            //Damage is scaled with base
+            Damage damage = new Damage(d);
+            
+             // Bullet force
+            float xforce = 1000*vectorToTarget.x;
+            float yforce = 1000*vectorToTarget.y;
+
+
+            //determine theta
+            float theta = (float)Math.acos(vectorToTarget.dot(new SylverVector2f(1,0)));
+            if(user.getTarget().getPosition().y < user.getPosition().y)
+                theta = (float)(2* Math.PI - theta);
+                //body and image and hitbox
+            Body body = new Body(new Box(50,50), 1);
+            Image img = new Image("poison_goo_ball.png");
+            img.setDimensions(50, 50);
+            EnemySinHitbox bullet = new EnemySinHitbox(damage, body, img, user, new SylverVector2f(vectorToTarget),1);
+
+            //set bullet rotation
+            bullet.getBody().setRotation((float)theta);
+            bullet.getImage().setAngle((float)(theta * (180f/Math.PI))); 
+
+
+            //Dispense bullet into the world
+            bullet.setPosition(origin.x + vectorToTarget.x * 25, origin.y + vectorToTarget.y * 25);
+            bullet.getBody().addForce(new Vector2f(xforce ,yforce));        
+            this.getOwningScene().add(bullet,Layer.MAIN);
+
+             //body and image and hitbox
+            body = new Body(new Box(50,50), 1);
+            img = new Image("poison_goo_ball.png");
+            img.setDimensions(50, 50);
+            bullet = new EnemySinHitbox(damage, body, img, user, new SylverVector2f(vectorToTarget),-1);
+
+            //set bullet rotation
+            bullet.getBody().setRotation((float)theta);
+            bullet.getImage().setAngle((float)(theta * (180f/Math.PI))); 
+
+
+            //Dispense bullet into the world
+            bullet.setPosition(origin.x + vectorToTarget.x * 25, origin.y + vectorToTarget.y * 25);
+            bullet.getBody().addForce(new Vector2f(xforce ,yforce));        
+            this.getOwningScene().add(bullet,Layer.MAIN);
+
+            
+        
+        }
+        
         
     }
     
