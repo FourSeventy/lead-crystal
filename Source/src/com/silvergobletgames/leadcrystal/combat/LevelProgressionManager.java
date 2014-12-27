@@ -288,8 +288,8 @@ public class LevelProgressionManager
         temple1.levelName = "Commando Outposts";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Destroy Commando Outposts";
-        objective.objectiveDescription = "Destroy the three outposts in the ruins.";
+        objective.objectiveName = "Clear Commando Outposts";
+        objective.objectiveDescription = "Kill all the troops in the three commando outposts.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         temple1.mainObjective = objective;
