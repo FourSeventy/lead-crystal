@@ -74,7 +74,7 @@ public class HitBox extends Entity
     {
         super.update();
         
-        if (owningScene != null) 
+        if (owningScene != null && sourceEntity != null) 
         {
             //Get rid of this if its really far away
             if (this.distanceAbs(sourceEntity) > 3000) 

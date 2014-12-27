@@ -1,11 +1,16 @@
 
 package com.silvergobletgames.leadcrystal.scripting;
 
+import com.silvergobletgames.leadcrystal.combat.Damage;
+import com.silvergobletgames.leadcrystal.combat.Damage.DamageType;
+import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.TeleporterEmitter;
 import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect.EntityEffectType;
+import com.silvergobletgames.leadcrystal.entities.HitBox;
 import com.silvergobletgames.leadcrystal.entities.MobSpawner;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity;
@@ -20,17 +25,23 @@ import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.core.SceneObject;
+import com.silvergobletgames.sylver.graphics.AbstractParticleEmitter;
 import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.ImageEffect;
 import com.silvergobletgames.sylver.graphics.ImageEffect.ImageEffectType;
 import com.silvergobletgames.sylver.graphics.LightEffect;
 import com.silvergobletgames.sylver.graphics.LightEffect.LightEffectType;
+import com.silvergobletgames.sylver.graphics.Overlay;
+import com.silvergobletgames.sylver.util.SylverRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
+import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
+import net.phys2d.raw.StaticBody;
 import net.phys2d.raw.shapes.Box;
+import net.phys2d.raw.shapes.Circle;
 
 /**
  *
@@ -333,6 +344,59 @@ public class SceneScriptManager
     {
         //send the packet
         this.owningScene.sendSetMainQuestStatus(text);
+    }
+    
+    public void insertExplosion(int x, int y)
+    {
+         //===============================
+        //add explosion hitbox and effects 
+        //================================
+
+        //explosion hitbox
+        Image img = new Image("flashParticle.png");  
+        img.setDimensions(300, 300);
+        img.setColor(new Color(3,3,1,1));
+        img.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.SCALE, 60, 1, 0f));
+        img.setHorizontalFlip(SylverRandom.random.nextBoolean());
+        img.setVerticalFlip(SylverRandom.random.nextBoolean());
+
+        String particleImageToUse = SylverRandom.random.nextBoolean()?"flashParticle2.png":"flashParticle3.png";
+        Image img2 = new Image(particleImageToUse);  
+        img2.setDimensions(300, 300);
+        img2.setColor(new Color(3,3,1,1));
+        img2.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.SCALE, 60, 1, 0f));
+        img2.setHorizontalFlip(SylverRandom.random.nextBoolean());
+        img2.setVerticalFlip(SylverRandom.random.nextBoolean()); 
+        Overlay ehhovhh = new Overlay(img2);
+        img.addOverlay(ehhovhh); 
+
+        Damage damage = new Damage(DamageType.NODAMAGE, 0);
+
+           Body beh = new StaticBody(new Circle(180));
+           beh.setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value);
+           beh.setBitmask(Entity.BitMasks.NO_COLLISION.value);
+           damage.setType(Damage.DamageType.PHYSICAL);   
+
+           //add stun and slow to damage
+           damage.addCombatEffect(new StateEffect(StateEffect.StateEffectType.STUN, 240));
+
+           HitBox explosionHitbox = new HitBox(damage, beh, img, null);
+           explosionHitbox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 10, 0, 0));               
+           explosionHitbox.setPosition(x, y);
+           LeadCrystalParticleEmitters.BombExplosionEmitter emitter = new LeadCrystalParticleEmitters.BombExplosionEmitter();
+           emitter.setDuration(15);
+           AbstractParticleEmitter fire1 = new LeadCrystalParticleEmitters.GroundFireEmitter1(); 
+           fire1.setParticlesPerFrame(.75f);
+           fire1.setDuration(360);
+           explosionHitbox.addEmitter(fire1);
+           explosionHitbox.addEmitter(emitter);
+
+           this.owningScene.add(explosionHitbox, Scene.Layer.MAIN);
+
+           //play sound
+           Sound sound = Sound.locationSound("buffered/explosion.ogg",x, y, false, 1f, 1f);
+            this.owningScene.add(sound);
+
     }
     
     /**
