@@ -399,13 +399,20 @@ public class SceneScriptManager
 
     }
     
-    public void dropTechnology(int x, int y)
+    public void dropSecondaryObjective(int x, int y, int level)
     {
         
         Body technologyBody = new Body(new Box(75,75),1 );
         technologyBody.setBitmask(Entity.BitMasks.COLLIDE_WORLD.value);
         technologyBody.setOverlapMask(Entity.OverlapMasks.NO_OVERLAP.value);
         
+        Image image;
+        switch(level)
+        {
+            case 13: image = new Image("doodad4.png");
+            case 14: image = new Image("doodad4.png");
+            default: image = new Image("doodad4.png");
+        }
         Entity technology = new Entity(new Image("doodad4.png"), technologyBody);
         technology.getImage().setDimensions(75, 75);
        // technology.getImage().setScale(1f);
@@ -413,7 +420,7 @@ public class SceneScriptManager
         
         //building respawn script
         ScriptPage page = new ScriptPage();
-        page.setScript("scriptManager.completeSideObjective(13);"); 
+        page.setScript("scriptManager.completeSideObjective(" + level+ ");"); 
         
         PageCondition condition = new PageCondition();
         condition.setConditionScript("conditionValue = true;");
