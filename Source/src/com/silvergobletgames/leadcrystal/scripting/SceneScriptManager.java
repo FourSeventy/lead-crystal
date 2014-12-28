@@ -434,6 +434,12 @@ public class SceneScriptManager
         this.owningScene.add(technology, Scene.Layer.MAIN);
     }
     
+    public void disableScriptObject(WorldObjectEntity obj)
+    {
+        obj.getScriptObject().setTrigger(ScriptObject.ScriptTrigger.NONE); 
+        obj.setWorldObjectType(WorldObjectEntity.WorldObjectType.NONE);
+    }
+    
     /**
      * Completes the current level and moves all players back to town.
      */
