@@ -275,8 +275,8 @@ public class LevelProgressionManager
         cave5.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "null";
-        objective.objectiveDescription = "Do something.";
+        objective.objectiveName = "Find Clue";
+        objective.objectiveDescription = "Find Clue to lead us to the commando base.";
         objective.currencyAward = 25;
         cave5.sideObjective = objective;
         //adding to map

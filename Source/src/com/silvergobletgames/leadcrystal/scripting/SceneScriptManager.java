@@ -408,7 +408,7 @@ public class SceneScriptManager
         
         Image image;
         switch(level)
-        {
+        {   case 10: image = new Image("doodad4.png");
             case 13: image = new Image("doodad4.png");
             case 14: image = new Image("doodad4.png");
             default: image = new Image("doodad4.png");
@@ -420,7 +420,7 @@ public class SceneScriptManager
         
         //building respawn script
         ScriptPage page = new ScriptPage();
-        page.setScript("scriptManager.completeSideObjective(" + level+ ");"); 
+        page.setScript("scriptManager.completeSideObjective(" + level+ "); self.removeFromOwningScene();"); 
         
         PageCondition condition = new PageCondition();
         condition.setConditionScript("conditionValue = true;");
