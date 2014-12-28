@@ -413,7 +413,7 @@ public class SceneScriptManager
             case 14: image = new Image("doodad4.png");
             default: image = new Image("doodad4.png");
         }
-        Entity technology = new Entity(new Image("doodad4.png"), technologyBody);
+        Entity technology = new Entity(image, technologyBody);
         technology.getImage().setDimensions(75, 75);
        // technology.getImage().setScale(1f);
         
