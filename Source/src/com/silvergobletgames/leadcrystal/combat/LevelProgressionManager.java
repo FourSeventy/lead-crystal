@@ -163,6 +163,7 @@ public class LevelProgressionManager
         objective.objectiveDescription = "We lost contact with a caravan carrying supplies to the town, go investigate";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
+        objective.statReward = ArmorStatID.THORNS_DAMAGE;
         level5.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
@@ -278,6 +279,7 @@ public class LevelProgressionManager
         objective.objectiveName = "Find Clue";
         objective.objectiveDescription = "Find Clue to lead us to the commando base.";
         objective.currencyAward = 25;
+        objective.statReward = ArmorStatID.CRIT_DAMAGE;
         cave5.sideObjective = objective;
         //adding to map
         this.levelMap.put(10, cave5);
@@ -298,6 +300,7 @@ public class LevelProgressionManager
         objective.objectiveName = "Hack mainframe";
         objective.objectiveDescription = "Find and hack the commando mainframe hidden in the ruins.";
         objective.currencyAward = 25;
+        objective.statReward = ArmorStatID.HEALING_EFFECTIVENESS;
         temple1.sideObjective = objective;
         //adding to map
         this.levelMap.put(11,temple1);
