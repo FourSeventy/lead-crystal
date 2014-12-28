@@ -399,6 +399,34 @@ public class SceneScriptManager
 
     }
     
+    public void dropTechnology(int x, int y)
+    {
+        
+        Body technologyBody = new Body(new Box(75,75),1 );
+        technologyBody.setBitmask(Entity.BitMasks.COLLIDE_WORLD.value);
+        technologyBody.setOverlapMask(Entity.OverlapMasks.NO_OVERLAP.value);
+        
+        Entity technology = new Entity(new Image("doodad4.png"), technologyBody);
+        technology.getImage().setDimensions(75, 75);
+       // technology.getImage().setScale(1f);
+        
+        
+        //building respawn script
+        ScriptPage page = new ScriptPage();
+        page.setScript("scriptManager.completeSideObjective(13);"); 
+        
+        PageCondition condition = new PageCondition();
+        condition.setConditionScript("conditionValue = true;");
+        
+        ScriptObject obj = new ScriptObject();
+        obj.addPage(page, condition);
+        obj.setTrigger(ScriptObject.ScriptTrigger.RIGHTCLICK);
+        technology.setScriptObject(obj); 
+        technology.setPosition(x, y);
+        
+        this.owningScene.add(technology, Scene.Layer.MAIN);
+    }
+    
     /**
      * Completes the current level and moves all players back to town.
      */
