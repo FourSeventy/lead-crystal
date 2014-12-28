@@ -80,7 +80,7 @@ public class PlayerSnipe extends PlayerSkill
         float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
         damage.getAmountObject().adjustBase(damageAmout);
         damage.setType(Damage.DamageType.PHYSICAL);      
-        damage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, 10, 0.0f, 1f));
+        damage.addImageEffect(this.getDamageBrightnessEffect());
         
         //make the damage always be a crit
         if(!damage.isCrit())
