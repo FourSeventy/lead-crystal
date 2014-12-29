@@ -36,6 +36,7 @@ public class PlayerBashAttack extends Skill{
         this.icon = new Image("bashIcon.png");
         this.skillName = "Bash";      
         this.skillDescription = "A melee strike with short range that bashes enemies backwards and stuns them.";
+        this.skillDamageDescription = "Damage: 13-15";
         
 
     }

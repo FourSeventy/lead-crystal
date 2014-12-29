@@ -783,7 +783,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     public void takeDamage(Damage dmg)
     {
         //handle proximityDamageReduction 
-       if(dmg.getSource() != null && dmg.getSource().distanceAbs(this) < 250)
+       if(dmg.getSource() != null && dmg.getType() != Damage.DamageType.HEAL && dmg.getSource().distanceAbs(this) < 250)
        {
            int points = this.armorManager.proximityDamageReduction.points;
            

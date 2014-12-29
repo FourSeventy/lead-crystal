@@ -51,7 +51,8 @@ public class PlayerPoisonBomb extends PlayerSkill{
         //set the skillID and the name
         this.icon = new Image("poisonBombIcon.png");
         this.skillName = "Poison Bomb";
-        this.skillDescription = "A poison bomb that trails poisonous gas that slows and damages.";
+        this.skillDescription = "A bomb that emits poisonous gas that slows and damages enemies.";
+        this.skillDamageDescription = "Damage: 6 per second";
         this.unlockCost = 1;
     }
     
@@ -270,7 +271,7 @@ public class PlayerPoisonBomb extends PlayerSkill{
             
             this.passthroughDamage = passthroughDamage;
             this.passthroughDamage.setType(Damage.DamageType.POISON);
-                this.passthroughDamage.getAmountObject().setBase(2);
+            this.passthroughDamage.getAmountObject().setBase(2);
 
          }
         

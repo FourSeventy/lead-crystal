@@ -42,6 +42,7 @@ public class SkillMenu extends Window {
    private Label skillTooltipName;
    private Button skillTooltipIcon;
    private TextBlock skillTooltipTextBlock;
+   private Label skillTooltipDamageLabel;
    
    //skill points
    private Label skillPoints;
@@ -94,7 +95,7 @@ public class SkillMenu extends Window {
        super(new Image("skillFrame.png"),x,y,1200,900);
        
         //text
-        Text menuText = new Text("Skill Menu",LeadCrystalTextType.HUD34);
+        Text menuText = new Text("Skill Selection",LeadCrystalTextType.HUD34);
         Label menuTextLabel = new Label(menuText,600 - menuText.getWidth()/2,830);
         this.addComponent(menuTextLabel);
         
@@ -1439,6 +1440,7 @@ public class SkillMenu extends Window {
         this.removeComponent(skillTooltipName);
         this.removeComponent(skillTooltipIcon);
         this.removeComponent(skillTooltipTextBlock);
+        this.removeComponent(skillTooltipDamageLabel);
         
         //===============
         //build tooltip
@@ -1460,9 +1462,14 @@ public class SkillMenu extends Window {
         this.addComponent(skillTooltipIcon);
         
         //description
-        text = new Text(skill.getSkillDescription());
+        text = new Text(skill.getSkillDescription(),LeadCrystalTextType.HUD24);
         skillTooltipTextBlock = new TextBlock(x + 110, y + 190, 280, text);
         this.addComponent(skillTooltipTextBlock);
+        
+        //damage description
+        text = new Text(skill.getDamageDescription(),LeadCrystalTextType.HUD24);
+        skillTooltipDamageLabel = new Label(text, x + 110, y + 40);
+        this.addComponent(skillTooltipDamageLabel);
         
         
     }
@@ -1474,6 +1481,7 @@ public class SkillMenu extends Window {
         this.removeComponent(skillTooltipName);
         this.removeComponent(skillTooltipIcon);
         this.removeComponent(skillTooltipTextBlock);
+        this.removeComponent(skillTooltipDamageLabel);
     }
     
     private void playSkillPickSound()

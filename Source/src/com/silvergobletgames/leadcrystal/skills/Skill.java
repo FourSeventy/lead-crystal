@@ -25,6 +25,8 @@ public abstract class Skill
     protected String skillName = "";
     //skill description
     protected String skillDescription = "";
+    //skill damage description
+    protected String skillDamageDescription= "";
     //unlock cost
     protected int unlockCost = 0;
     
@@ -255,6 +257,11 @@ public abstract class Skill
     public String getSkillDescription()
     {
         return this.skillDescription;
+    }
+    
+    public String getDamageDescription()
+    {
+        return this.skillDamageDescription;
     }
     
     /**

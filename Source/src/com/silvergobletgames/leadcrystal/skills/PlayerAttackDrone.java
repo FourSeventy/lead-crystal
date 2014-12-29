@@ -47,6 +47,7 @@ public class PlayerAttackDrone extends Skill
         //set the name description image and unlock cost
         this.skillName = "Attack Droid";
         this.skillDescription = "Spawns a droid that flies around with you shooting at enemies.";
+        this.skillDamageDescription = "Damage: 3-5";
         this.icon = new Image("attackDroidIcon.png");      
         this.unlockCost = 2;
         
@@ -58,7 +59,7 @@ public class PlayerAttackDrone extends Skill
         //create drone and put it in the world
         Image img = new Image("droid.png");
         img.setScale(1f);
-        Drone drone = new Drone(img,new StaticBody(new Circle(20)),(PlayerEntity)this.user);
+        Drone drone = new Drone(img,new StaticBody(new Circle(20)),(PlayerEntity)this.user,damage);
         user.getOwningScene().add(drone,Layer.MAIN);
         
         //play sound
@@ -74,6 +75,7 @@ public class PlayerAttackDrone extends Skill
     private class Drone extends Entity
     {
         private PlayerEntity playerReference;
+        private Damage passthroughDamage;
                
         //wander x and y offsets
         private float wanderX = 0; boolean right = true;
@@ -88,7 +90,7 @@ public class PlayerAttackDrone extends Skill
         //timer
         private int lifeTime =1800;
         
-        public Drone(Image image, Body body, PlayerEntity playerReference)
+        public Drone(Image image, Body body, PlayerEntity playerReference,Damage passthroughDamage)
         {
             super(image,body);        
             this.playerReference = playerReference;
@@ -98,6 +100,8 @@ public class PlayerAttackDrone extends Skill
             
             //initial position
             this.setPosition(playerReference.getPosition().x, playerReference.getPosition().y + 100);
+            
+            this.passthroughDamage = passthroughDamage;
                       
         }
         
@@ -189,7 +193,7 @@ public class PlayerAttackDrone extends Skill
         {
             Random r = SylverRandom.random;
             //set damage
-            Damage damage = new Damage(Damage.DamageType.PHYSICAL, 0, playerReference);
+            Damage damage = new Damage(this.passthroughDamage);
             //set damage
             int min = 3; 
             int max = 5;

@@ -44,8 +44,9 @@ public class PlayerWard extends PlayerSkill{
         
         //set the skillID and the name
         this.icon = new Image("iceWardIcon.png");
-        this.skillName = "Ice Ward";
-        this.skillDescription = "Places a ward on the ground damaging and slowing all enemies in its radius.";
+        this.skillName = "Ice Storm";
+        this.skillDescription = "Creates an icey storm in an area damaging and slowing all enemies in its radius.";
+        this.skillDamageDescription = "Damage: 2 per second";
         
         this.unlockCost = 1;
 

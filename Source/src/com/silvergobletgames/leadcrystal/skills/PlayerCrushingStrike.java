@@ -36,7 +36,8 @@ public class PlayerCrushingStrike extends PlayerSkill{
         //set the name description image and unlock cost
         this.icon = new Image("flameStrikeIcon.png");
         this.skillName = "Flame Strike";      
-        this.skillDescription = "An aoe melee attack that does more damage to closer enemies.";
+        this.skillDescription = "An area of effect melee attack that does more damage to closer enemies";
+        this.skillDamageDescription = "Damage: 10-20";
         this.unlockCost =1;
         
 
@@ -135,7 +136,7 @@ public class PlayerCrushingStrike extends PlayerSkill{
                  //get distance to user
                  float distance = other.distanceAbs(this.sourceEntity);
                  
-                 //damage goes from 30 to 5 linearly as the distance goes from 70 to 600               
+                 //damage goes from 10 to 20 linearly as the distance goes from 70 to 600               
                  float maxDamage = 20; //y1
                  float minDamage = 10; //y2
                  float closeDistance = 70; //x1
@@ -144,7 +145,7 @@ public class PlayerCrushingStrike extends PlayerSkill{
                  //linear equation
                  float damage = ((minDamage - maxDamage)/(farDistance-closeDistance)) * (distance - closeDistance) + maxDamage;
                 
-                 //set damage between 5 and 25
+                 //set damage between 10 and 20
                  damage = Math.max(damage, minDamage);
                  damage = Math.min(damage, maxDamage);
                  

@@ -48,6 +48,7 @@ public class PlayerLeechingBlades extends PlayerSkill{
         this.icon = new Image("leechBladeIcon.png") ;
         this.skillName = "Leeching Blades";
         this.skillDescription = "Launches blades that spin around you doing damage and leeching health from enemies.";
+        this.skillDamageDescription = "Damage: 5-7";
         this.unlockCost = 1;
     }
     

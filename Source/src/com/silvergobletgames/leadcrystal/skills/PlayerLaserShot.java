@@ -48,8 +48,9 @@ public class PlayerLaserShot extends PlayerSkill{
         
         //set the skillID and the name
         this.icon = new Image("laserIcon.png");
-        this.skillName = "Laser Shot";
-        this.skillDescription = "Fast and accurate laser shot with medium damage.";
+        this.skillName = "Laser Blast";
+        this.skillDamageDescription = "Damage: 7-9";
+        this.skillDescription = "Shoots a fast and accurate laser blast with medium damage.";
 
     }
     

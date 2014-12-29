@@ -46,6 +46,7 @@ public class PlayerClusterbomb extends PlayerSkill
         this.icon = new Image("clusterBombIcon.png");
         this.skillName = "Cluster Bomb";
         this.skillDescription = "Throws a cluster of bombs that stun enemies in a medium radius."; 
+        this.skillDamageDescription = "Damage: 10-12";
         this.unlockCost = 1;
         
     }

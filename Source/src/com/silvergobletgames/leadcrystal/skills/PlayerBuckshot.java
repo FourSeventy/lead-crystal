@@ -44,7 +44,8 @@ public class PlayerBuckshot extends PlayerSkill{
         
         //set the name description image and unlock cost
         this.skillName = "Buckshot";          
-        this.skillDescription = "Shoots a blast of buckshot that does high damage but has low range.";
+        this.skillDescription = "Shoots a blast of shrapnel that does high damage but has low range.";
+        this.skillDamageDescription = "Damage: 3-6 per shrapnel";
         this.unlockCost = 1;
         this.icon = new Image("buckshotIcon.png");
 

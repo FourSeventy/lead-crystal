@@ -55,7 +55,8 @@ public class PlayerBarrelRoll extends PlayerSkill{
         //set the skillID and the name
         this.icon = new Image("barrelRollIcon.png");
         this.skillName = "Barrel Roll";
-        this.skillDescription = "Rolls an explosive barrel that explodes into high damaging shrapnal and leaves damaging fire on the ground.";
+        this.skillDescription = "Rolls an explosive barrel that explodes into shrapnal and leaves damaging fire on the ground.";
+        this.skillDamageDescription = "Damage: 15-17";
         this.unlockCost = 2;
     }
     

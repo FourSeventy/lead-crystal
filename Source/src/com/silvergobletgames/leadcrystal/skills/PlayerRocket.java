@@ -48,7 +48,8 @@ public class PlayerRocket extends PlayerSkill
         //set the skillID and the name
         this.icon = new Image("rocketIcon.png");
         this.skillName = "Rocket Launcher";
-        this.skillDescription = "Shoots a rocket that explodes and does AOE damage.";
+        this.skillDescription = "Shoots a rocket that explodes and does high damage.";
+        this.skillDamageDescription = "Damage: 14-16";
         
         this.unlockCost = 2;
         
