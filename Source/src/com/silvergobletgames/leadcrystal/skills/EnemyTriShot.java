@@ -157,7 +157,7 @@ public class EnemyTriShot extends Skill
             }
 
             float theta = (float)Math.acos(vectorToTarget.dot(new SylverVector2f(1,0)));
-            if(targetPosition.y < myPos.y)
+            if(vectorToTarget.y < 0)
             theta = (float)(2* Math.PI - theta);
         
             goo1.setPosition(origin.x, origin.y);

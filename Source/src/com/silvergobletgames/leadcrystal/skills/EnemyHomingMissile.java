@@ -57,7 +57,7 @@ public class EnemyHomingMissile extends Skill
         SylverVector2f distanceVector = user.distanceVector(user.getTarget());
         distanceVector.normalise();
         
-         MissileProducer producer = new MissileProducer(damage,user.distanceVector(user.getTarget()),user.getTarget().getPosition(),user,origin);
+         MissileProducer producer = new MissileProducer(damage,distanceVector,new SylverVector2f(user.getTarget().getPosition()),user,origin);
        producer.setPosition(origin.getX(), origin.getY());
        
        user.getOwningScene().add(producer, Layer.MAIN); 
@@ -127,7 +127,7 @@ public class EnemyHomingMissile extends Skill
                 
                 SylverVector2f vectorToTarget = new SylverVector2f(this.vectorToTarget);
                 vectorToTarget.normalise();
-                float degrees = Math.copySign(SylverRandom.random.nextInt(20), vectorToTarget.getX());
+                float degrees = Math.copySign(SylverRandom.random.nextInt(20), Math.random()>.5?1:-1);
                 
                 SylverVector2f upVector = new SylverVector2f((float)(Math.cos(degrees * Math.PI/180) *vectorToTarget.x  - (Math.sin(degrees * Math.PI/180))*vectorToTarget.y ),(float)((Math.sin(degrees * Math.PI/180))*vectorToTarget.x  + (Math.cos(degrees * Math.PI/180))*vectorToTarget.y )); // 5 degreees
                 upVector.normalise();
@@ -141,7 +141,7 @@ public class EnemyHomingMissile extends Skill
                 
                  SylverVector2f vectorToTarget = new SylverVector2f(this.vectorToTarget);
                 vectorToTarget.normalise();
-                float degrees = Math.copySign(SylverRandom.random.nextInt(20), vectorToTarget.getX());
+                float degrees =  Math.copySign(SylverRandom.random.nextInt(20), Math.random()>.5?1:-1);
                 
                 SylverVector2f upVector = new SylverVector2f((float)(Math.cos(degrees * Math.PI/180) *vectorToTarget.x  - (Math.sin(degrees * Math.PI/180))*vectorToTarget.y ),(float)((Math.sin(degrees * Math.PI/180))*vectorToTarget.x  + (Math.cos(degrees * Math.PI/180))*vectorToTarget.y )); // 5 degreees
                 upVector.normalise();
@@ -153,7 +153,7 @@ public class EnemyHomingMissile extends Skill
                     
                  SylverVector2f vectorToTarget = new SylverVector2f(this.vectorToTarget);
                 vectorToTarget.normalise();
-                float degrees = - Math.copySign(SylverRandom.random.nextInt(30), vectorToTarget.getX())  ;              
+                float degrees = - Math.copySign(SylverRandom.random.nextInt(30), Math.random()>.5?1:-1)  ;              
                 
                 SylverVector2f upVector = new SylverVector2f((float)(Math.cos(degrees * Math.PI/180) *vectorToTarget.x  - (Math.sin(degrees * Math.PI/180))*vectorToTarget.y ),(float)((Math.sin(degrees * Math.PI/180))*vectorToTarget.x  + (Math.cos(degrees * Math.PI/180))*vectorToTarget.y )); // 5 degreees
                 upVector.normalise();
@@ -164,7 +164,7 @@ public class EnemyHomingMissile extends Skill
             {
                 SylverVector2f vectorToTarget = new SylverVector2f(this.vectorToTarget);
                 vectorToTarget.normalise();
-                float degrees = - Math.copySign(SylverRandom.random.nextInt(30), vectorToTarget.getX())  ;              
+                float degrees = - Math.copySign(SylverRandom.random.nextInt(30), Math.random()>.5?1:-1)  ;              
                 
                 SylverVector2f upVector = new SylverVector2f((float)(Math.cos(degrees * Math.PI/180) *vectorToTarget.x  - (Math.sin(degrees * Math.PI/180))*vectorToTarget.y ),(float)((Math.sin(degrees * Math.PI/180))*vectorToTarget.x  + (Math.cos(degrees * Math.PI/180))*vectorToTarget.y )); // 5 degreees
                 upVector.normalise();
@@ -179,19 +179,19 @@ public class EnemyHomingMissile extends Skill
             
         }
         
-        private void shootBullet(SylverVector2f vectorToTarget, Damage d, SylverVector2f targetPosition, CombatEntity caster, SylverVector2f origin)
+        private void shootBullet(SylverVector2f vector, Damage d, SylverVector2f targetPosition, CombatEntity caster, SylverVector2f origin)
         {
             //Damage is scaled with base
             Damage damage = new Damage(d);
 
            // Bullet force
-           float xforce = 1800*vectorToTarget.x;
-           float yforce = 1800*vectorToTarget.y;
+           float xforce = 1800*vector.x;
+           float yforce = 1800*vector.y;
 
 
            //Dispense goo into the world
-           float theta = (float)Math.acos(vectorToTarget.dot(new SylverVector2f(1,0)));
-           if(user.getTarget().getPosition().y < user.getPosition().y)
+           float theta = (float)Math.acos(vector.dot(new SylverVector2f(1,0)));
+           if(vector.y  < 0)
                theta = (float)(2* Math.PI - theta);
 
            //body and image
@@ -233,7 +233,7 @@ public class EnemyHomingMissile extends Skill
 
 
            //Dispense rocket into the world
-           rocket.setPosition(origin.x + vectorToTarget.x * 25, origin.y + vectorToTarget.y * 25);
+           rocket.setPosition(origin.x + vector.x * 25, origin.y + vector.y * 25);
            rocket.getBody().addForce(new Vector2f(xforce ,yforce));        
            this.getOwningScene().add(rocket,Layer.MAIN); 
         
