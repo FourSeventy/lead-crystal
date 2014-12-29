@@ -219,13 +219,13 @@ public class ArmorMenu extends Window{
         //body image
         Image bodyImg = new Image(bodyImageString);
         bodyImg.setScale(1.35f);
-        Button bodyImage = new Button(bodyImg, 580 - (bodyImg.getWidth() * 1.35f)/2, 290, bodyImg.getWidth() * 1.35f, bodyImg.getHeight() * 1.35f);
+        Button bodyImage = new Button(bodyImg, 580 - (bodyImg.getWidth() * 1.35f)/2, 310, bodyImg.getWidth() * 1.35f, bodyImg.getHeight() * 1.35f);
         this.addComponent(bodyImage);
         
         //head image
         Image headImg = new Image(this.playerReference.getHead().getTextureReference());
         headImg.setScale(1.35f);
-        Button headImage = new Button(headImg, 574 - (headImg.getWidth() * 1.35f)/2, 499, headImg.getWidth() * 1.35f, headImg.getHeight() * 1.35f);
+        Button headImage = new Button(headImg, 574 - (headImg.getWidth() * 1.35f)/2, 520, headImg.getWidth() * 1.35f, headImg.getHeight() * 1.35f);
         this.addComponent(headImage);
         
         //=================

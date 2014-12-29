@@ -50,8 +50,8 @@ public class QuestMenu extends Window{
        this.playerReference = player;
        
          //text
-        Text menuText = new Text("Objectives",LeadCrystalTextType.HUD24);
-        Label menuTextLabel = new Label(menuText,275 - menuText.getWidth()/2,840);
+        Text menuText = new Text("Objectives",LeadCrystalTextType.HUD30);
+        Label menuTextLabel = new Label(menuText,275 - menuText.getWidth()/2,830);
         this.addComponent(menuTextLabel);
         
         //close

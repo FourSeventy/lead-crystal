@@ -42,8 +42,8 @@ public class OptionsMenu extends Window{
         
       
         //text
-        Text menuText = new Text("Options",LeadCrystalTextType.HUD24);
-        Label menuTextLabel = new Label(menuText,275 - menuText.getWidth()/2,this.getHeight() -40);
+        Text menuText = new Text("Options",LeadCrystalTextType.HUD30);
+        Label menuTextLabel = new Label(menuText,275 - menuText.getWidth()/2,this.getHeight() -60);
         this.addComponent(menuTextLabel);
         
         //close
