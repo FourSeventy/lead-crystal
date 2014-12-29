@@ -137,9 +137,8 @@ public class ArmorManager {
         this.potionCooldownReset.unlocked = true;
         this.armorStats.put(this.potionCooldownReset.id,this.potionCooldownReset);
         
-        this.healingEffectiveness = new ArmorStat(ArmorStatID.HEALING_EFFECTIVENESS, new Image("healingEffectivenessIcon.png"), "Improved Potions", 50,3);
+        this.healingEffectiveness = new ArmorStat(ArmorStatID.HEALING_EFFECTIVENESS, new Image("healingEffectivenessIcon.png"), "Improved Potions", 150,1);
         this.healingEffectiveness.description = "Doubles the healing amount of potions.";
-        this.healingEffectiveness.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().healingModifier.adjustBase(.15f);}});
         this.healingEffectiveness.unlocked= false;
         this.armorStats.put(this.healingEffectiveness.id,this.healingEffectiveness);
        

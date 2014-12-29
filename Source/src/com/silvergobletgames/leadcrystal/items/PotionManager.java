@@ -69,8 +69,15 @@ public class PotionManager
         {
             this.numberOfPotions--;
             
+            int healAmount = 50;
+            
+            //handle potion effectiveness upgrade
+            if(this.playerReference.getArmorManager().healingEffectiveness.points == 1)
+            {
+                healAmount = 100;
+            }
             //do the heal
-            Damage heal = new Damage(Damage.DamageType.HEAL, 50);
+            Damage heal = new Damage(Damage.DamageType.HEAL, healAmount);
             this.playerReference.takeDamage(heal);
             
             Image potionImage = new Image("healthPot3.png");
