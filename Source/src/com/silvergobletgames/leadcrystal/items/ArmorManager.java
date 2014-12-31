@@ -66,7 +66,7 @@ public class ArmorManager {
     public ArmorManager()
     {
         
-         //=================
+        //=================
         // Weapon
         //=================
 
@@ -117,17 +117,17 @@ public class ArmorManager {
         // Helm 
         //===============
           
-        this.seeEnemyHealth = new ArmorStat(ArmorStatID.SEE_HEALTH, new Image("seeEnemyHealthIcon.png"), "Retinal Implant",150,1);
+        this.seeEnemyHealth = new ArmorStat(ArmorStatID.SEE_HEALTH, new Image("seeEnemyHealthIcon.png"), "Retinal Implant",75,1);
         this.seeEnemyHealth.description = "Shows health bars above enemies.";
         this.seeEnemyHealth.unlocked = true;
         this.armorStats.put(this.seeEnemyHealth.id,this.seeEnemyHealth);
        
-        this.doubleGoldFind = new ArmorStat(ArmorStatID.DOUBLE_GOLD, new Image("goldFindIcon.png"), "Gold Find",150,1);
+        this.doubleGoldFind = new ArmorStat(ArmorStatID.DOUBLE_GOLD, new Image("goldFindIcon.png"), "Gold Find",75,1);
         this.doubleGoldFind.description = "Doubles the value of each gold picked up.";
         this.doubleGoldFind.unlocked= false;
         this.armorStats.put(this.doubleGoldFind.id,this.doubleGoldFind);
        
-        this.upgradeRadar = new ArmorStat(ArmorStatID.IMPROVED_RADAR, new Image("radarUpgradeIcon.png"), "Improved Radar",150,1);
+        this.upgradeRadar = new ArmorStat(ArmorStatID.IMPROVED_RADAR, new Image("radarUpgradeIcon.png"), "Improved Radar",75,1);
         this.upgradeRadar.description = "Shows the position of enemies on the radar.";
         this.upgradeRadar.unlocked = true;
         this.armorStats.put(this.upgradeRadar.id,this.upgradeRadar);  
@@ -190,7 +190,7 @@ public class ArmorManager {
         // Boots
         //================
         
-        this.doubleJump = new ArmorStat(ArmorStatID.DOUBLE_JUMP, new Image("doubleJumpIcon.png"), "Double Jump Boots",150,1);
+        this.doubleJump = new ArmorStat(ArmorStatID.DOUBLE_JUMP, new Image("doubleJumpIcon.png"), "Double Jump Boots",75,1);
         this.doubleJump.description = "At the peak of a jump, press jump again to get an additional boost.";
         this.doubleJump.unlocked = true;
         this.armorStats.put(this.doubleJump.id,this.doubleJump);
