@@ -51,7 +51,7 @@ public class Hud extends Window
     private MessageManager messageManager;
     
     //dialogue
-    private DialogueWindow activeDialogue;
+    public DialogueWindow activeDialogue;
     
     //active level name
     public String activeLevelName;

@@ -690,7 +690,7 @@ public final class GameClientScene extends Scene
             //open esc menu
             if(inputSnapshot.isKeyReleased(KeyEvent.VK_ESCAPE))
             {        
-                if(hud.armorMenu.isOpen() || hud.mapMenu.isOpen() || hud.potionsMenu.isOpen() || hud.questMenu.isOpen() || hud.skillMenu.isOpen() || hud.optionsMenu.isOpen())
+                if(hud.armorMenu.isOpen() || hud.mapMenu.isOpen() || hud.potionsMenu.isOpen() || hud.questMenu.isOpen() || hud.skillMenu.isOpen() || hud.optionsMenu.isOpen() || (hud.activeDialogue != null && hud.activeDialogue.isOpen()))
                 {
                     hud.armorMenu.close();
                     hud.mapMenu.close();
@@ -698,6 +698,11 @@ public final class GameClientScene extends Scene
                     hud.questMenu.close();
                     hud.skillMenu.close();
                     hud.optionsMenu.close();
+                    
+                    if(hud.activeDialogue != null)
+                    {
+                       hud.activeDialogue.close();
+                    }
                 }
                 else
                 {
