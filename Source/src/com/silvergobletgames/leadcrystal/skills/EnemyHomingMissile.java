@@ -200,7 +200,7 @@ public class EnemyHomingMissile extends Skill
                theta = (float)(2* Math.PI - theta);
 
            //body and image
-           Body body = new Body(new Box(50,30), 1);
+           Body body = new Body(new Box(35,16), 1);
            Image img = new Image("rocket.png");
            img.setDimensions(40, 20);
 
