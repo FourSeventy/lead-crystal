@@ -108,6 +108,7 @@ public class QuestMenu extends Window{
         this.removeComponent(mainObjectiveDescription);
         this.removeComponent(mainObjectiveHeader);
         this.removeComponent(mainObjectiveCompleted);
+        this.removeComponent(mainObjectiveStatus);
         this.removeComponent(sideObjective1Description);
         this.removeComponent(sideObjectiveHeader);
         this.removeComponent(sideObjectiveCompleted);
@@ -131,26 +132,22 @@ public class QuestMenu extends Window{
         this.addComponent(mainObjectiveHeader);     
 
         //complete
-        if(currentLevel.mainObjective.complete)
+        if(currentLevel.mainObjective.complete || this.mainObjectiveStatusText.equals("complete"))
         {
             tex = new Text("Complete",LeadCrystalTextType.HUD28);
             this.mainObjectiveCompleted = new Label(tex, 250,700);
             this.mainObjectiveCompleted.getText().setColor(new Color(Color.green));
             this.addComponent(mainObjectiveCompleted);
+            this.mainObjectiveStatusText = "";
         }    
-        
-        //status
-        if(!mainObjectiveStatusText.equals("complete"))
+        else
         {
             tex =new Text(mainObjectiveStatusText,LeadCrystalTextType.HUD24);
             this.mainObjectiveStatus = new Label(tex, 250,700);
             this.mainObjectiveStatus.getText().setColor(new Color(Color.red)); 
             this.addComponent(mainObjectiveStatus);
         }
-        else
-        {
-            this.removeComponent(mainObjectiveStatus); 
-        }
+
 
         //title and description
         tex = new Text(currentLevel.mainObjective.objectiveName + "-",LeadCrystalTextType.HUD28);
@@ -172,26 +169,22 @@ public class QuestMenu extends Window{
             this.addComponent(sideObjectiveHeader);
 
             //complete
-            if(currentLevel.sideObjective.complete || this.sideObjectiveStatusText.equals("complete"))
+            if(currentLevel.sideObjective.complete || this.sideObjectiveStatusText.equals("complete")) //
             {
                 tex =new Text("Complete",LeadCrystalTextType.HUD28);
                 this.sideObjectiveCompleted = new Label(tex, 250,600 - mainObjectiveDescription.getHeight() - 50);
                 this.sideObjectiveCompleted.getText().setColor(new Color(Color.green)); 
                 this.addComponent(sideObjectiveCompleted);
+                this.sideObjectiveStatusText = "";
             }
-
-            //status
-            if(!sideObjectiveStatusText.equals("complete"))
+            else
             {
                 tex =new Text(sideObjectiveStatusText,LeadCrystalTextType.HUD24);
                 this.sideObjectiveStatus = new Label(tex, 250,600 - mainObjectiveDescription.getHeight() - 50);
                 this.sideObjectiveStatus.getText().setColor(new Color(Color.red)); 
                 this.addComponent(sideObjectiveStatus);
             }
-            else
-            {
-                this.removeComponent(sideObjectiveStatus); 
-            }
+
 
             tex = new Text(currentLevel.sideObjective.objectiveName + "-",LeadCrystalTextType.HUD28);
             this.sideObjectiveTitle = new Label(tex,75,600 - mainObjectiveDescription.getHeight() - 50 -40);

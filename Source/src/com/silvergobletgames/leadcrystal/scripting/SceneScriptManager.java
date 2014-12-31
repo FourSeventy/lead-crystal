@@ -334,6 +334,7 @@ public class SceneScriptManager
          
         }
        
+        this.setSideQuestStatusText("complete");
     }
     
     /**
