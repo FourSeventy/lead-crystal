@@ -121,6 +121,11 @@ public class EnemyHomingMissile extends Skill
         {
             this.ticks++;
             
+            if(caster.getCombatData().isDead() || !caster.getCombatData().canAttack())
+            {
+                this.removeFromOwningScene();
+                return;
+            }
             
             if(this.ticks == 1)
             {
