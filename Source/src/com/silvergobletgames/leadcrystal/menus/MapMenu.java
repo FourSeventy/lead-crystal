@@ -70,47 +70,7 @@ public class MapMenu extends Window{
        this.sceneReference = scene;
                    
       
-       //=================
-       // Level Details
-       //================
-       
-       this.levelName = new Label("", 850, 500);
-       
-       //main objective header
-       Text objectiveText = new Text("Main Objective:",LeadCrystalTextType.HUD24);
-       this.mainObjectiveHeader = new Label(objectiveText,760,450);
-       this.mainObjectiveHeader.getText().setColor(new Color(200,100,8));
-       
-       //main objective completed
-       Text completedText = new Text("Complete",LeadCrystalTextType.HUD24);
-       this.mainObjectiveCompleted = new Label(completedText, 935,450);
-       this.mainObjectiveCompleted.getText().setColor(new Color(Color.green));
-       
-       //main objective name
-       Text mainObjectiveNameText = new Text("",LeadCrystalTextType.HUD24);
-       this.mainObjectiveName = new Label(mainObjectiveNameText, 790,420);
-     
-       //main objective description
-       this.mainObjectiveDescription = new TextBlock(790, 370, 375, new Text("",LeadCrystalTextType.HUD16));
-
-       
-       //side objective header
-       Text sideObjectiveText = new Text("Side Objective:",LeadCrystalTextType.HUD24);
-       this.sideObjectiveHeader = new Label(sideObjectiveText,760,230);
-       this.sideObjectiveHeader.getText().setColor(new Color(200,100,8));
-       
-       //side objective complete
-       completedText = new Text("Complete",LeadCrystalTextType.HUD24);
-       this.sideObjectiveCompleted = new Label(completedText, 935,230);
-       this.sideObjectiveCompleted.getText().setColor(new Color(Color.green));
-       
-       //side objective name
-       Text sideObjectiveNameText = new Text("",LeadCrystalTextType.HUD24);
-       this.sideObjectiveName = new Label(sideObjectiveNameText, 790,200);
-       
-
-       //side objective description
-       sideObjectiveDescription = new TextBlock(790, 150, 375, new Text("",LeadCrystalTextType.HUD16));
+      
 
     }
     
@@ -393,25 +353,93 @@ public class MapMenu extends Window{
      * Repaints the level details that display in the bottom right corner of the map screen. A 0 clears the fields.
      * @param levelNumber 
      */
-    private void repaintLevelDetails(int levelNumber)
+    private void repaintLevelDetails(int levelNumber, Button button)
     {
+        final int LEFT_POSITION = 15;
+        final int RIGHT_POSITION = 725;
+        
+        //decide position of detail window
+        int xPosition;
+        if(button.getWindowRelativePosition().x > 632)
+        {
+            xPosition = LEFT_POSITION;
+        }
+        else
+        {
+             xPosition = RIGHT_POSITION;
+        }
+        
+        this.removeComponent(levelName);
+        this.removeComponent(mainObjectiveDescription);
+        this.removeComponent(mainObjectiveHeader);
+        this.removeComponent(mainObjectiveCompleted);
+        this.removeComponent(sideObjectiveDescription);
+        this.removeComponent(sideObjectiveHeader);
+        this.removeComponent(sideObjectiveCompleted);
+        this.removeComponent(levelDetailBackground);
+        this.removeComponent(sideObjectiveName);
+        this.removeComponent(mainObjectiveName);
+            
         if(levelNumber != -1)
         {
             Level newLevel = ((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber);
             
             //detail black
-            this.levelDetailBackground = new Button(new Image("section1.png"), 725, 25, 450, 550);
+            this.levelDetailBackground = new Button(new Image("section1.png"), xPosition, 25, 450, 550);
             levelDetailBackground.dontKillClick=true;
             this.addComponent(levelDetailBackground);
+            
+             //=================
+            // Level Details
+            //================
+
+            this.levelName = new Label("", xPosition + 125, 500);
+
+            //main objective header
+            Text objectiveText = new Text("Main Objective:",LeadCrystalTextType.HUD24);
+            this.mainObjectiveHeader = new Label(objectiveText,xPosition + 35,450);
+            this.mainObjectiveHeader.getText().setColor(new Color(200,100,8));
+
+            //main objective completed
+            Text completedText = new Text("Complete",LeadCrystalTextType.HUD24);
+            this.mainObjectiveCompleted = new Label(completedText, xPosition + 210,450);
+            this.mainObjectiveCompleted.getText().setColor(new Color(Color.green));
+
+            //main objective name
+            Text mainObjectiveNameText = new Text("",LeadCrystalTextType.HUD24);
+            this.mainObjectiveName = new Label(mainObjectiveNameText, xPosition + 65,420);
+
+            //main objective description
+            this.mainObjectiveDescription = new TextBlock(xPosition + 65, 370, 375, new Text("",LeadCrystalTextType.HUD16));
+
+
+            //side objective header
+            Text sideObjectiveText = new Text("Side Objective:",LeadCrystalTextType.HUD24);
+            this.sideObjectiveHeader = new Label(sideObjectiveText,xPosition + 35,230);
+            this.sideObjectiveHeader.getText().setColor(new Color(200,100,8));
+
+            //side objective complete
+            completedText = new Text("Complete",LeadCrystalTextType.HUD24);
+            this.sideObjectiveCompleted = new Label(completedText, xPosition + 210,230);
+            this.sideObjectiveCompleted.getText().setColor(new Color(Color.green));
+
+            //side objective name
+            Text sideObjectiveNameText = new Text("",LeadCrystalTextType.HUD24);
+            this.sideObjectiveName = new Label(sideObjectiveNameText, xPosition + 65,200);
+
+
+            //side objective description
+            sideObjectiveDescription = new TextBlock(xPosition + 65, 150, 375, new Text("",LeadCrystalTextType.HUD16));
             
             //level name
             this.removeComponent(levelName);
             Text newText = new Text(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber).levelName,LeadCrystalTextType.HUD34);
-            this.levelName = new Label(newText, 945 - newText.getWidth()/2, 500);
+            this.levelName = new Label(newText, xPosition + 220 - newText.getWidth()/2, 500);
             this.addComponent(levelName);
             
             //main objective description
             this.addComponent(mainObjectiveHeader);
+
             if(newLevel.mainObjective.complete)
             {
                 this.addComponent(mainObjectiveCompleted);
@@ -423,41 +451,36 @@ public class MapMenu extends Window{
             this.addComponent(mainObjectiveName);
             
             this.removeComponent(mainObjectiveDescription);
-            mainObjectiveDescription = new TextBlock(790, 390, 375, new Text(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber).mainObjective.objectiveDescription,LeadCrystalTextType.HUD22));
+            mainObjectiveDescription = new TextBlock(xPosition + 65, 390, 375, new Text(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber).mainObjective.objectiveDescription,LeadCrystalTextType.HUD22));
             this.addComponent(mainObjectiveDescription);
             
-            //side objective description
-            this.addComponent(sideObjectiveHeader);
-            if(newLevel.sideObjective.complete)
+            if(!newLevel.sideObjective.objectiveName.equals( "null"))
             {
-                this.addComponent(sideObjectiveCompleted);
+                //side objective description
+                this.addComponent(sideObjectiveHeader);
+                if(newLevel.sideObjective.complete)
+                {
+                    this.addComponent(sideObjectiveCompleted);
+                }
+
+                //side objective name
+                this.removeComponent(sideObjectiveName);
+                this.sideObjectiveName.getText().setText(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber).sideObjective.objectiveName + "-");
+                this.addComponent(sideObjectiveName);
+
+
+                this.removeComponent(sideObjectiveDescription);
+                sideObjectiveDescription = new TextBlock(xPosition + 65, 170, 375, new Text(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber).sideObjective.objectiveDescription,LeadCrystalTextType.HUD22));
+                this.addComponent(sideObjectiveDescription);
+            }
+            else
+            {
+                this.removeComponent(sideObjectiveName);
+                this.removeComponent(sideObjectiveDescription);
             }
             
-            //side objective name
-            this.removeComponent(sideObjectiveName);
-            this.sideObjectiveName.getText().setText(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber).sideObjective.objectiveName + "-");
-            this.addComponent(sideObjectiveName);
-            
-            
-            this.removeComponent(sideObjectiveDescription);
-            sideObjectiveDescription = new TextBlock(790, 170, 375, new Text(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber).sideObjective.objectiveDescription,LeadCrystalTextType.HUD22));
-            this.addComponent(sideObjectiveDescription);
-            
         }
-        else
-        {
-            this.removeComponent(levelName);
-            this.removeComponent(mainObjectiveDescription);
-            this.removeComponent(mainObjectiveHeader);
-            this.removeComponent(mainObjectiveCompleted);
-            this.removeComponent(sideObjectiveDescription);
-            this.removeComponent(sideObjectiveHeader);
-            this.removeComponent(sideObjectiveCompleted);
-            this.removeComponent(levelDetailBackground);
-            this.removeComponent(sideObjectiveName);
-            this.removeComponent(mainObjectiveName);
-        }
-        
+           
     }
     
     private void buildLevelButtons()
@@ -518,11 +541,11 @@ public class MapMenu extends Window{
                      if (e.getActionCommand().equals("mouseEntered")) {            
                         button0.getImage().getOverlay("img").getImage().setScale(1.2f); 
                         playLevelHoverSound();
-                        repaintLevelDetails(18);
+                        repaintLevelDetails(18,button0);
                      }
                      if (e.getActionCommand().equals("mouseExited")) {
                         button0.getImage().getOverlay("img").getImage().setScale(1.0f); 
-                         repaintLevelDetails(-1);
+                         repaintLevelDetails(-1,button0);
                      }
                      if(e.getActionCommand().equals("clicked"))
                      {
@@ -553,11 +576,11 @@ public class MapMenu extends Window{
                      if (e.getActionCommand().equals("mouseEntered")) {            
                         button99.getImage().getOverlay("img").getImage().setScale(1.2f); 
                         playLevelHoverSound();
-                        repaintLevelDetails(19);
+                        repaintLevelDetails(19,button99);
                      }
                      if (e.getActionCommand().equals("mouseExited")) {
                         button99.getImage().getOverlay("img").getImage().setScale(1.0f); 
-                         repaintLevelDetails(-1);
+                         repaintLevelDetails(-1,button99);
                      }
                      if(e.getActionCommand().equals("clicked"))
                      {
@@ -595,11 +618,11 @@ public class MapMenu extends Window{
                 if (e.getActionCommand().equals("mouseEntered")) {            
                    button0.getImage().getOverlay("img").getImage().setScale(1.2f); 
                    playLevelHoverSound();
-                   repaintLevelDetails(0);
+                   repaintLevelDetails(0,button0);
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
                    button0.getImage().getOverlay("img").getImage().setScale(1.0f); 
-                    repaintLevelDetails(-1);
+                    repaintLevelDetails(-1,button0);
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
@@ -637,11 +660,11 @@ public class MapMenu extends Window{
                 if (e.getActionCommand().equals("mouseEntered")) {            
                    button.getImage().getOverlay("img").getImage().setScale(1.2f); 
                    playLevelHoverSound();
-                   repaintLevelDetails(1);
+                   repaintLevelDetails(1,button);
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
                    button.getImage().getOverlay("img").getImage().setScale(1.0f); 
-                    repaintLevelDetails(-1);
+                    repaintLevelDetails(-1,button);
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
@@ -685,7 +708,7 @@ public class MapMenu extends Window{
                      {
                         button1.getImage().getOverlay("img").getImage().setScale(1.2f);
                         playLevelHoverSound();
-                        repaintLevelDetails(2);
+                        repaintLevelDetails(2,button1);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
@@ -693,7 +716,7 @@ public class MapMenu extends Window{
                      if(!button1.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button1.getImage().getOverlay("img").getImage().setScale(1.0f);
-                        repaintLevelDetails(-1);
+                        repaintLevelDetails(-1,button1);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
@@ -739,14 +762,14 @@ public class MapMenu extends Window{
                      {
                         button2.getImage().getOverlay("img").getImage().setScale(1.2f);
                         playLevelHoverSound();
-                        repaintLevelDetails(3);
+                        repaintLevelDetails(3,button2);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
                      if(!button2.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button2.getImage().getOverlay("img").getImage().setScale(1.0f);
-                        repaintLevelDetails(-1);
+                        repaintLevelDetails(-1,button2);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
@@ -791,14 +814,14 @@ public class MapMenu extends Window{
                      {
                         button3.getImage().getOverlay("img").getImage().setScale(1.2f);
                         playLevelHoverSound();
-                        repaintLevelDetails(4);
+                        repaintLevelDetails(4,button3);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
                      if(!button3.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button3.getImage().getOverlay("img").getImage().setScale(1.0f);
-                        repaintLevelDetails(-1);
+                        repaintLevelDetails(-1,button3);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
@@ -842,14 +865,14 @@ public class MapMenu extends Window{
                      {
                         button4.getImage().getOverlay("img").getImage().setScale(1.2f);
                         playLevelHoverSound();
-                        repaintLevelDetails(5);
+                        repaintLevelDetails(5,button4);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
                      if(!button4.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button4.getImage().getOverlay("img").getImage().setScale(1.0f);
-                        repaintLevelDetails(-1);
+                        repaintLevelDetails(-1,button4);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
@@ -900,14 +923,14 @@ public class MapMenu extends Window{
                      {
                         button5.getImage().getOverlay("img").getImage().setScale(1.2f);
                         playLevelHoverSound();
-                        repaintLevelDetails(6);
+                        repaintLevelDetails(6,button5);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
                      if(!button5.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button5.getImage().getOverlay("img").getImage().setScale(1.0f);
-                        repaintLevelDetails(-1);
+                        repaintLevelDetails(-1,button5);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
@@ -954,14 +977,14 @@ public class MapMenu extends Window{
                      {
                         button6.getImage().getOverlay("img").getImage().setScale(1.2f);
                         playLevelHoverSound();
-                        repaintLevelDetails(7);
+                        repaintLevelDetails(7,button6);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
                      if(!button6.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button6.getImage().getOverlay("img").getImage().setScale(1.0f);
-                        repaintLevelDetails(-1);
+                        repaintLevelDetails(-1,button6);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
@@ -1007,14 +1030,14 @@ public class MapMenu extends Window{
                      {
                         button7.getImage().getOverlay("img").getImage().setScale(1.2f);
                         playLevelHoverSound();
-                        repaintLevelDetails(8);
+                        repaintLevelDetails(8,button7);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
                      if(!button7.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button7.getImage().getOverlay("img").getImage().setScale(1.0f);
-                        repaintLevelDetails(-1);
+                        repaintLevelDetails(-1,button7);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
@@ -1060,14 +1083,14 @@ public class MapMenu extends Window{
                      {
                         button8.getImage().getOverlay("img").getImage().setScale(1.2f);
                         playLevelHoverSound();
-                        repaintLevelDetails(9);
+                        repaintLevelDetails(9,button8);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
                      if(!button8.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button8.getImage().getOverlay("img").getImage().setScale(1.0f);
-                        repaintLevelDetails(-1);
+                        repaintLevelDetails(-1,button8);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
@@ -1113,14 +1136,14 @@ public class MapMenu extends Window{
                      {
                         button9.getImage().getOverlay("img").getImage().setScale(1.2f);
                         playLevelHoverSound();
-                        repaintLevelDetails(10);
+                        repaintLevelDetails(10,button9);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
                      if(!button9.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button9.getImage().getOverlay("img").getImage().setScale(1.0f);
-                        repaintLevelDetails(-1);
+                        repaintLevelDetails(-1,button9);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
@@ -1165,14 +1188,14 @@ public class MapMenu extends Window{
                      {
                         button10.getImage().getOverlay("img").getImage().setScale(1.2f);
                         playLevelHoverSound();
-                        repaintLevelDetails(11);
+                        repaintLevelDetails(11,button10);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
                      if(!button10.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button10.getImage().getOverlay("img").getImage().setScale(1.0f);
-                        repaintLevelDetails(-1);
+                        repaintLevelDetails(-1,button10);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
@@ -1218,14 +1241,14 @@ public class MapMenu extends Window{
                      {
                         button11.getImage().getOverlay("img").getImage().setScale(1.2f);
                         playLevelHoverSound();
-                        repaintLevelDetails(12);
+                        repaintLevelDetails(12,button11);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
                      if(!button11.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button11.getImage().getOverlay("img").getImage().setScale(1.0f);
-                        repaintLevelDetails(-1);
+                        repaintLevelDetails(-1,button11);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
@@ -1271,14 +1294,14 @@ public class MapMenu extends Window{
                      {
                         button12.getImage().getOverlay("img").getImage().setScale(1.2f);
                         playLevelHoverSound();
-                        repaintLevelDetails(13);
+                        repaintLevelDetails(13,button12);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
                      if(!button12.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button12.getImage().getOverlay("img").getImage().setScale(1.0f);
-                        repaintLevelDetails(-1);
+                        repaintLevelDetails(-1,button12);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
@@ -1324,14 +1347,14 @@ public class MapMenu extends Window{
                      {
                         button13.getImage().getOverlay("img").getImage().setScale(1.2f);
                         playLevelHoverSound();
-                        repaintLevelDetails(14);
+                        repaintLevelDetails(14,button13);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
                      if(!button13.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button13.getImage().getOverlay("img").getImage().setScale(1.0f);
-                        repaintLevelDetails(-1);
+                        repaintLevelDetails(-1,button13);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
@@ -1377,14 +1400,14 @@ public class MapMenu extends Window{
                      {
                         button14.getImage().getOverlay("img").getImage().setScale(1.2f);
                         playLevelHoverSound();
-                        repaintLevelDetails(15);
+                        repaintLevelDetails(15,button14);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
                      if(!button14.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button14.getImage().getOverlay("img").getImage().setScale(1.0f);
-                        repaintLevelDetails(-1);
+                        repaintLevelDetails(-1,button14);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
@@ -1429,14 +1452,14 @@ public class MapMenu extends Window{
                      {
                         button15.getImage().getOverlay("img").getImage().setScale(1.2f);
                         playLevelHoverSound();
-                        repaintLevelDetails(16);
+                        repaintLevelDetails(16,button15);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
                      if(!button15.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button15.getImage().getOverlay("img").getImage().setScale(1.0f);
-                        repaintLevelDetails(-1);
+                        repaintLevelDetails(-1,button15);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
@@ -1482,14 +1505,14 @@ public class MapMenu extends Window{
                      {
                         button16.getImage().getOverlay("img").getImage().setScale(1.2f);
                         playLevelHoverSound();
-                        repaintLevelDetails(17);
+                        repaintLevelDetails(17,button16);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
                      if(!button16.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         button16.getImage().getOverlay("img").getImage().setScale(1.0f);
-                        repaintLevelDetails(-1);
+                        repaintLevelDetails(-1,button16);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
