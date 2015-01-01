@@ -58,6 +58,7 @@ public class StateEffect extends CombatEffect
                 overlay.setRelativePosition(.5f, 1.2f);
                 overlay.setRelativeSize(.1f);
                 this.overlays.add(overlay);
+                this.setName("stun");
                 
                 break;
             }
@@ -75,6 +76,7 @@ public class StateEffect extends CombatEffect
                     overlay.setRelativePosition(.5f, 1.2f);
                     overlay.setRelativeSize(.1f);
                     this.overlays.add(overlay);
+                    this.setName("slow");
                 }
             }
         }
@@ -329,6 +331,7 @@ public class StateEffect extends CombatEffect
         returnCopy.duration = this.duration;
         returnCopy.stateEffectType = this.stateEffectType;
         returnCopy.inPercent = this.inPercent;
+        returnCopy.name = this.name;
         
         //add effects
         for(ImageEffect effect:this.renderEffects)

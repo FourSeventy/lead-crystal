@@ -258,11 +258,6 @@ public class EnemyHomingMissile extends Skill
          { 
             super(d, b, i, user); 
                        
-            //label effect for destruction disk
-            StateEffect labelEffect = new StateEffect(StateEffect.StateEffectType.LABEL, 1) ;
-            labelEffect.setName("playerLaser");
-            labelEffect.setInfinite();            
-            this.getDamage().addCombatEffect(labelEffect);
             
             
          }
