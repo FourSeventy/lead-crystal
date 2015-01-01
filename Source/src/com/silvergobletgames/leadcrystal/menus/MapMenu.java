@@ -45,7 +45,7 @@ public class MapMenu extends Window{
     //map background fields
     private SylverVector2f panOffset = new SylverVector2f(0,0);
     private Float closePanX = null;
-    private Image mapBackground = new Image("mapBig.jpg");
+    private Image mapBackground = new Image("mapBig.png");
     private Image mapOutline = new Image("mapFrame.png"); 
     private SylverVector2f mapDimensions = new SylverVector2f(1165,850);
     
@@ -86,8 +86,8 @@ public class MapMenu extends Window{
         
         if(this.panOffset.x < this.mapBackground.getWidth()/2)
         {
-            this.panOffset.x = this.panOffset.x + 2;
-            newOffset.x = newOffset.x + 1.94f;
+            this.panOffset.x = this.panOffset.x + 4;
+            newOffset.x = newOffset.x + 2.588f;
         }
         
          //=================================
@@ -137,8 +137,8 @@ public class MapMenu extends Window{
         
         if(this.panOffset.x > 0)
         {
-            this.panOffset.x = this.panOffset.x - 2;
-            newOffset.x = newOffset.x - 1.94f ;
+            this.panOffset.x = this.panOffset.x - 4;
+            newOffset.x = newOffset.x - 2.588f ;
         }
         
          //=================================
@@ -232,7 +232,7 @@ public class MapMenu extends Window{
             Texture texture = this.mapBackground.getTexture();
             texture.bind(gl);
             //texture flip
-            TextureCoords coords = texture.getSubImageTexCoords((int)this.panOffset.x, (int)this.panOffset.y,(int)this.panOffset.x + 600, (int)this.panOffset.y + 450);
+            TextureCoords coords = texture.getSubImageTexCoords((int)this.panOffset.x, (int)this.panOffset.y,(int)this.panOffset.x + 900, (int)this.panOffset.y + 447);
             float textureBottom = coords.bottom();
             float textureTop = coords.top();
             float textureLeft = coords.left();
@@ -323,7 +323,7 @@ public class MapMenu extends Window{
         for(Button button: this.levelButtons)
         {
             //set button relative position
-           button.setWindowRelativePosition(button.getWindowRelativePosition().x - this.panOffset.x * 2, button.getWindowRelativePosition().y - this.panOffset.y * 2);
+           button.setWindowRelativePosition(button.getWindowRelativePosition().x - this.panOffset.x *1.294f , button.getWindowRelativePosition().y - this.panOffset.y * 1.294f);
 
             //hide button if it is out of the screen
             if(button.getWindowRelativePosition().x < 10 || button.getWindowRelativePosition().x > this.getWidth()-60
@@ -522,7 +522,7 @@ public class MapMenu extends Window{
         if(GameplaySettings.getInstance().levelEditor)
         {
             //================== test 1 ======================
-            final Button button0 = new Button(new Image("blank.png"),100,700,75,75);
+            final Button button0 = new Button(new Image("blank.png"),200,750,75,75);
        
             Overlay correctOverlay0 = new Overlay(new Image("map_questionmark.png"));
             correctOverlay0.getImage().setDimensions(75, 75);
@@ -557,7 +557,7 @@ public class MapMenu extends Window{
             this.addComponent(button0);
             
             //================== test 2 ======================
-            final Button button99 = new Button(new Image("blank.png"),250,700,75,75);
+            final Button button99 = new Button(new Image("blank.png"),325,750,75,75);
        
             Overlay correctOverlay99 = new Overlay(new Image("map_questionmark.png"));
             correctOverlay99.getImage().setDimensions(75, 75);
@@ -593,7 +593,7 @@ public class MapMenu extends Window{
         }
        
        //================== desert 0 ======================
-       final Button button0 = new Button(new Image("blank.png"),175,225,75,75);
+       final Button button0 = new Button(new Image("blank.png"),100,675,75,75);
        
        Overlay correctOverlay0 = new Overlay(new Image("map_questionmark.png"));
        correctOverlay0.getImage().setDimensions(75, 75);
@@ -635,7 +635,7 @@ public class MapMenu extends Window{
        
        //================== desert 1========================
        
-       final Button button = new Button(new Image("blank.png"),175,425,75,75);
+       final Button button = new Button(new Image("blank.png"),175,125,75,75);
        
        Overlay correctOverlay = new Overlay(new Image("map_questionmark.png"));
        correctOverlay.getImage().setDimensions(75, 75);
@@ -676,7 +676,7 @@ public class MapMenu extends Window{
        this.addComponent(button);
        
        //================== desert 2========================
-       final Button button1 = new Button("blank.png",375,425,75,75);
+       final Button button1 = new Button("blank.png",325,475,75,75);
        
        correctOverlay = new Overlay(new Image("map_lock.png"));
        
@@ -732,7 +732,7 @@ public class MapMenu extends Window{
        this.addComponent(button1);
        
        //================== desert 3========================
-       final Button button2 = new Button("blank.png",575,425,75,75);
+       final Button button2 = new Button("blank.png",625,725,75,75);
        
        correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
@@ -783,7 +783,7 @@ public class MapMenu extends Window{
        this.addComponent(button2);
        
        //================== desert 4========================
-       final Button button3 = new Button("blank.png",500,700,75,75);
+       final Button button3 = new Button("blank.png",500,250,75,75);
        
        correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
@@ -835,7 +835,7 @@ public class MapMenu extends Window{
        this.addComponent(button3);
        
         //================== desert 5========================
-       final Button button4 = new Button("blank.png",965,425,75,75);
+       final Button button4 = new Button("blank.png",665,375,75,75);
        
        correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
@@ -892,7 +892,7 @@ public class MapMenu extends Window{
        
        //================== cave 1 ========================
   
-        final Button button5 = new Button("blank.png",1400,425,75,75);
+        final Button button5 = new Button("blank.png",950,225,75,75);
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
@@ -946,7 +946,7 @@ public class MapMenu extends Window{
        
        //================== cave 2========================
   
-        final Button button6 = new Button("blank.png",1600,625,75,75);
+        final Button button6 = new Button("blank.png",950,475,75,75);
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
@@ -999,7 +999,7 @@ public class MapMenu extends Window{
        
        //================== cave 3========================
   
-        final Button button7 = new Button("blank.png",1600,325,75,75);
+        final Button button7 = new Button("blank.png",1150,125,75,75);
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
@@ -1052,7 +1052,7 @@ public class MapMenu extends Window{
        
        //================== cave 4========================
   
-        final Button button8 = new Button("blank.png",1750,325,75,75);
+        final Button button8 = new Button("blank.png",1150,625,75,75);
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
@@ -1105,7 +1105,7 @@ public class MapMenu extends Window{
        
        //================== cave 5========================
   
-        final Button button9 = new Button("blank.png",1950,325,75,75);
+        final Button button9 = new Button("blank.png",1400,725,75,75);
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
@@ -1157,7 +1157,7 @@ public class MapMenu extends Window{
        this.addComponent(button9);
        
        //================== Temple 1 ========================
-       final Button button10 = new Button("blank.png",2250,325,75,75);
+       final Button button10 = new Button("blank.png",1650,675,75,75);
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
@@ -1210,7 +1210,7 @@ public class MapMenu extends Window{
        
        
        //================== Temple 2 ========================
-       final Button button11 = new Button("blank.png",2450,525,75,75);
+       final Button button11 = new Button("blank.png",1850,750,75,75);
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
@@ -1263,7 +1263,7 @@ public class MapMenu extends Window{
        
        //================== Temple 3 ========================
        
-       final Button button12 = new Button("blank.png",2450,325,75,75);
+       final Button button12 = new Button("blank.png",1825,425,75,75);
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
@@ -1316,7 +1316,7 @@ public class MapMenu extends Window{
        
        //================== Temple 4 ========================
        
-       final Button button13 = new Button("blank.png",2450,125,75,75);
+       final Button button13 = new Button("blank.png",1600,300,75,75);
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
@@ -1369,7 +1369,7 @@ public class MapMenu extends Window{
        
        //================== Temple 5 ========================
        
-       final Button button14 = new Button("blank.png",2650,425,75,75);
+       final Button button14 = new Button("blank.png",2000,575,75,75);
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
@@ -1421,7 +1421,7 @@ public class MapMenu extends Window{
        this.addComponent(button14);
        
        //================== Temple 6 ========================
-       final Button button15 = new Button("blank.png",2650,225,75,75);
+       final Button button15 = new Button("blank.png",1875,175,75,75);
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
@@ -1474,7 +1474,7 @@ public class MapMenu extends Window{
        
        //================== Temple 7 ========================
        
-        final Button button16 = new Button("blank.png",2850,325,75,75);
+        final Button button16 = new Button("blank.png",2225,200,75,75);
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
