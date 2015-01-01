@@ -362,6 +362,14 @@ public abstract class CombatEntity extends Entity
                     ((StateEffect)combatEffect).setDuration((int)(combatEffect.getDuration() * (1 - combatData.ccResistance.getTotalValue()))); 
                 }
             }
+            
+            //interrupt attacking
+            if(((StateEffect)combatEffect).getStateEffectType() == StateEffectType.STUN)
+            {
+               this.interruptAttacking();
+            }
+            
+            //add effect
             this.combatData.addCombatEffect(combatEffect);
         }
 
