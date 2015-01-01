@@ -136,8 +136,7 @@ public class PlayerBoomerang extends PlayerSkill
             super(d, b, i, user); 
             
             this.vectorToTarget = vector;            
-            this.getBody().removeExcludedBody(this.sourceEntity.getBody());
-            this.getBody().setOverlapMask(0b11_0000); 
+            
             this.skill = skill;
 
          }
@@ -149,6 +148,11 @@ public class PlayerBoomerang extends PlayerSkill
              
              this.ticks++;
              
+             if(this.ticks == 30)
+             {
+                 this.getBody().removeExcludedBody(this.sourceEntity.getBody());
+                 this.getBody().setOverlapMask(0b11_0000); 
+             }
              if(this.ticks < 140)
              {
                 SylverVector2f ehh = vectorToTarget.negate();
