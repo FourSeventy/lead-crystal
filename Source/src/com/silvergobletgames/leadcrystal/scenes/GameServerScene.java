@@ -372,7 +372,9 @@ public class GameServerScene extends Scene
                             Shape shape = entity.getBody().getShape();
 
                             if(shape.contains(new Vector2f(clientData.currentInputPacket.mouseLocationX,clientData.currentInputPacket.mouseLocationY), new Vector2f(entity.getPosition().x,entity.getPosition().y), entity.getBody().getRotation()))
+                            {
                                 mouseOn = true;    
+                            }
 
 
                             //if the mouse is on something
@@ -387,10 +389,17 @@ public class GameServerScene extends Scene
                             }
                             else // mouse is outside an entity
                             {
-                                //if the old hovered entity is equal to this entity 
-                                if (clientData.lastHoveredEntityID != null )                                                                            
-                                    clientData.hoveredEntityExited = true;                                                 
+                                //if the old hovered entity is equal to this entity, or the old entity isnt in the scene anymore 
+                                if (clientData.lastHoveredEntityID != null  || this.getSceneObjectManager().get(clientData.lastHoveredEntityID) == null)     
+                                {
+                                    clientData.hoveredEntityExited = true;   
+                                }
                             }
+                        }
+                        
+                        if(clickableGroup.isEmpty() && clientData.lastHoveredEntityID != null)
+                        {
+                            clientData.hoveredEntityExited = true;   
                         }
 
                         //change mouse cursor if hover
