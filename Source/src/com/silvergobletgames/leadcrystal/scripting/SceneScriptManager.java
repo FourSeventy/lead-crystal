@@ -447,6 +447,12 @@ public class SceneScriptManager
     public void completeLevel()
     {
        this.completeLevel("checkpoint1");
+       
+       ArrayList<PlayerEntity> playerList = new ArrayList(((GameServerScene)this.owningScene).players);
+       for(PlayerEntity player :playerList)
+       {
+           this.owningScene.sendSaveGamePacket(UUID.fromString(player.getID()));
+       }
     }
     
     /**
@@ -464,6 +470,8 @@ public class SceneScriptManager
             
             //moves players back to town
             ((GobletServer)Game.getInstance().getRunnable("Goblet Server")).queueMovePlayerToLevel(player.getID(), "town.lv", destination);          
+        
+            this.owningScene.sendSaveGamePacket(UUID.fromString(player.getID()));
         }   
     }
     
