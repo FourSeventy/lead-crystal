@@ -242,7 +242,7 @@ public class LeadCrystalParticleEmitters
             float randomedAngle = getAngle() + (rand.nextFloat() - .5f) * 720;
             SylverVector2f velocity =new SylverVector2f(magnitude *(float)Math.cos(randomedAngle * Math.PI/180) , magnitude *(float)Math.sin(randomedAngle * Math.PI/180));
             SylverVector2f acceleration = new SylverVector2f(0,0);
-            Color color = new Color(.1f,1f,.1f,.75f);
+            Color color = new Color(.1f,1f,.1f,.50f);
             float ttl = 420 + (int)(Math.random()*20);
             return new Particle(pos, velocity, acceleration, color, .8f, .20f/ttl, (int)ttl);
         }   

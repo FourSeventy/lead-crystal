@@ -72,7 +72,7 @@ public class PlayerBoomerang extends PlayerSkill
         damage.addImageEffect(this.getDamageBrightnessEffect());
         
         //add ministun
-        damage.addCombatEffect(new StateEffect(StateEffect.StateEffectType.STUN, 25));
+        damage.addCombatEffect(new StateEffect(StateEffect.StateEffectType.DAMAGEREDUCTION, 180, -1f, false));
         
         //build body of the laser
         Body body = new Body(new Box(60,60), .1f);

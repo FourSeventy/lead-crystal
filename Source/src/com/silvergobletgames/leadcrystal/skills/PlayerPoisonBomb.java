@@ -51,7 +51,7 @@ public class PlayerPoisonBomb extends PlayerSkill{
         //set the skillID and the name
         this.icon = new Image("poisonBombIcon.png");
         this.skillName = "Poison Bomb";
-        this.skillDescription = "A bomb that emits poisonous gas that slows and damages enemies.";
+        this.skillDescription = "A bomb that emits poisonous gas that damages enemies and makes them vulnerable.";
         this.skillDamageDescription = "Damage: 6 per second";
         this.unlockCost = 1;
     }
@@ -282,7 +282,7 @@ public class PlayerPoisonBomb extends PlayerSkill{
             {
             
                 //apply slow
-                StateEffect slow = new StateEffect(StateEffect.StateEffectType.SLOW, 420, .30f, true);
+                StateEffect slow = new StateEffect(StateEffect.StateEffectType.DAMAGEREDUCTION, 420, -1f, false);
                ((CombatEntity)other).getCombatData().addCombatEffect("poisonSlow", slow);
                 
                 //apply image effect

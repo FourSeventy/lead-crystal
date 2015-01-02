@@ -78,6 +78,26 @@ public class StateEffect extends CombatEffect
                     this.overlays.add(overlay);
                     this.setName("slow");
                 }
+                break;
+            }
+            case DAMAGEREDUCTION:
+            {
+                if(amount != -1f)
+                {
+                    return;
+                }
+                
+                Image slowSpiral = new Image("teleport2.png");
+                ImageEffect spiralEffect = new ImageEffect(ImageEffect.ImageEffectType.ROTATION, 60, 0, 360);
+                spiralEffect.setRepeating(true);
+                slowSpiral.addImageEffect(spiralEffect);
+                slowSpiral.setAnchor(Anchorable.Anchor.BOTTOMCENTER);
+                Overlay overlay = new Overlay(slowSpiral);
+                overlay.setRelativePosition(.5f, 1.2f);
+                overlay.setRelativeSize(.1f);
+                this.overlays.add(overlay);
+                this.setName("slow");
+                
             }
         }
     }
