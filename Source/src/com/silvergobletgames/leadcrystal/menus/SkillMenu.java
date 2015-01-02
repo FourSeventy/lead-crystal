@@ -200,6 +200,7 @@ public class SkillMenu extends Window {
        //laser shot
        final Skill skill = this.skillSlots[0][0];
        Button b = new Button(skill.getIcon(),primaryOffsetX,primaryOffsetY,95,95);
+       b.getImage().setDimensions(95, 95); 
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -237,10 +238,14 @@ public class SkillMenu extends Window {
                if(e.getActionCommand().equals("mouseEntered"))
                {
                    openTooltip(skill,primaryOffsetX + 100 + 15,primaryOffsetY +30 );
+             
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
-                   closeTooltip();
+                   if( skill.getIcon().getTextureReference().equals(skillTooltipIcon.getImage().getTextureReference()) )
+                   {
+                     closeTooltip();
+                   }
                }
            }
        });
@@ -249,6 +254,7 @@ public class SkillMenu extends Window {
        //buckshot
        final Skill skill5 = this.skillSlots[0][1];
        b = new Button(skill5.getIcon(),primaryOffsetX + 110,primaryOffsetY,95,95);
+       b.getImage().setDimensions(95, 95); 
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -285,10 +291,14 @@ public class SkillMenu extends Window {
                if(e.getActionCommand().equals("mouseEntered"))
                {
                    openTooltip(skill5,primaryOffsetX + 210 + 15,primaryOffsetY +30 );
+                   
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
-                   closeTooltip();
+                   if( skill5.getIcon().getTextureReference().equals(skillTooltipIcon.getImage().getTextureReference()) )
+                   {
+                     closeTooltip();
+                   }
                }
            }
        });
@@ -297,6 +307,7 @@ public class SkillMenu extends Window {
        //ricochet
        final Skill skill7 = this.skillSlots[0][2];
        b = new Button(skill7.getIcon(),primaryOffsetX + 220,primaryOffsetY,95,95);
+       b.getImage().setDimensions(95, 95); 
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -336,7 +347,10 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
-                   closeTooltip();
+                   if( skill7.getIcon().getTextureReference().equals(skillTooltipIcon.getImage().getTextureReference()) )
+                   {
+                     closeTooltip();
+                   }
                }
            }
        });
@@ -345,6 +359,7 @@ public class SkillMenu extends Window {
        //rocket launcher
        final Skill blade = this.skillSlots[0][3];
        b = new Button(blade.getIcon(),primaryOffsetX + 330,primaryOffsetY,95,95);
+       b.getImage().setDimensions(95, 95); 
        b.addActionListener(new ActionListener(){
        
            public void actionPerformed(ActionEvent e)
@@ -384,7 +399,10 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
-                   closeTooltip();
+                   if( blade.getIcon().getTextureReference().equals(skillTooltipIcon.getImage().getTextureReference()) )
+                   {
+                     closeTooltip();
+                   }
                }
            }
        });
@@ -429,13 +447,17 @@ public class SkillMenu extends Window {
                         handSkillID = skill1.getSkillID();
                    }
                }
+               
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   if( skill1.getIcon().getTextureReference().equals(skillTooltipIcon.getImage().getTextureReference()) )
+                   {
+                     closeTooltip();
+                   }
+               }
                if(e.getActionCommand().equals("mouseEntered"))
                {
                    openTooltip(skill1,secondaryOffsetX + 100 + 15,secondaryOffsetY +30 );
-               }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
                }
            }
        });
@@ -477,14 +499,18 @@ public class SkillMenu extends Window {
                         handSkillID = skill3.getSkillID();
                    }
                }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   if( skill3.getIcon().getTextureReference().equals(skillTooltipIcon.getImage().getTextureReference()) )
+                   {
+                     closeTooltip();
+                   }
+               }
                if(e.getActionCommand().equals("mouseEntered"))
                {
                    openTooltip(skill3,secondaryOffsetX + 210 + 15,secondaryOffsetY +30 );
                }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
+               
            }
        });
        this.addComponent(b);
@@ -525,14 +551,18 @@ public class SkillMenu extends Window {
                         handSkillID = freezeSkill.getSkillID();
                    }
                }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   if(freezeSkill.getIcon().getTextureReference().equals(skillTooltipIcon.getImage().getTextureReference()) )
+                   {
+                     closeTooltip();
+                   }
+               }
                if(e.getActionCommand().equals("mouseEntered"))
                {
                    openTooltip(freezeSkill,secondaryOffsetX + 320 + 15,secondaryOffsetY +30 );
                }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
+               
            }
        });
        this.addComponent(b);
@@ -573,14 +603,18 @@ public class SkillMenu extends Window {
                         handSkillID = snipeSkill.getSkillID();
                    }
                }
+               if(e.getActionCommand().equals("mouseExited"))
+               {
+                   if( snipeSkill.getIcon().getTextureReference().equals(skillTooltipIcon.getImage().getTextureReference()) )
+                   {
+                     closeTooltip();
+                   }
+               }
                if(e.getActionCommand().equals("mouseEntered"))
                {
                    openTooltip(snipeSkill,secondaryOffsetX + 430 + 15,secondaryOffsetY +30 );
                }
-               if(e.getActionCommand().equals("mouseExited"))
-               {
-                   closeTooltip();
-               }
+               
            }
        });
        this.addComponent(b);
@@ -631,7 +665,10 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
-                   closeTooltip();
+                   if( skill6.getIcon().getTextureReference().equals(skillTooltipIcon.getImage().getTextureReference()) )
+                   {
+                     closeTooltip();
+                   }
                }
            }
            
@@ -680,7 +717,10 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
-                   closeTooltip();
+                   if( flashbangSkill.getIcon().getTextureReference().equals(skillTooltipIcon.getImage().getTextureReference()) )
+                   {
+                     closeTooltip();
+                   }
                }
            }
            
@@ -729,7 +769,10 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
-                   closeTooltip();
+                   if( stimSkill.getIcon().getTextureReference().equals(skillTooltipIcon.getImage().getTextureReference()) )
+                   {
+                     closeTooltip();
+                   }
                }
            }
            
@@ -778,7 +821,10 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
-                   closeTooltip();
+                   if( gravitySkill.getIcon().getTextureReference().equals(skillTooltipIcon.getImage().getTextureReference()) )
+                   {
+                     closeTooltip();
+                   }
                }
            }
            
@@ -831,7 +877,10 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
-                   closeTooltip();
+                   if( skill2.getIcon().getTextureReference().equals(skillTooltipIcon.getImage().getTextureReference()) )
+                   {
+                     closeTooltip();
+                   }
                }
            }
        });
@@ -879,7 +928,10 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
-                   closeTooltip();
+                   if( skill4.getIcon().getTextureReference().equals(skillTooltipIcon.getImage().getTextureReference()) )
+                   {
+                     closeTooltip();
+                   }
                }
            }
        });
@@ -927,7 +979,10 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
-                   closeTooltip();
+                   if( playerGuardSkill.getIcon().getTextureReference().equals(skillTooltipIcon.getImage().getTextureReference()) )
+                   {
+                     closeTooltip();
+                   }
                }
            }
        });
@@ -975,7 +1030,10 @@ public class SkillMenu extends Window {
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
-                   closeTooltip();
+                   if( playerFlashbangSkill.getIcon().getTextureReference().equals(skillTooltipIcon.getImage().getTextureReference()) )
+                   {
+                     closeTooltip();
+                   }
                }
            }
        });
