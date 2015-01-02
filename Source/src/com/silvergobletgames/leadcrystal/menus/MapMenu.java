@@ -844,7 +844,7 @@ public class MapMenu extends Window{
            correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
-       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(3).mainObjective.complete)
+       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(3).mainObjective.complete || ((GameClientScene)owningScene).hostLevelProgression.levelMap.get(4).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.5,0};
