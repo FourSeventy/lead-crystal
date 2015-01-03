@@ -323,7 +323,10 @@ public class SceneScriptManager
             }
             
             //send main objective complete packet
-            owningScene.sendMainObjectiveCompletePacket(player.getID(), currencyAward,id); 
+            if(levelNumber != 17) //dont send for final boss
+            {
+               owningScene.sendMainObjectiveCompletePacket(player.getID(), currencyAward,id);
+            }
             
             //complete main objective
             player.getLevelProgressionManager().completeMainObjective(levelNumber);          
