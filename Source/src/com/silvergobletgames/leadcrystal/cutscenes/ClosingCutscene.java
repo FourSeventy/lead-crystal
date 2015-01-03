@@ -21,7 +21,7 @@ public class ClosingCutscene extends Cutscene{
     {
         super( 60 * 5);
         
-        Image playerImage = new Image("bastionCut2.png");
+        Image playerImage = new Image("blank.png");
         playerImage.setDimensions(1600, 900);
         playerImage.setPosition(0, 0);
         this.objects.add(playerImage);    

@@ -38,32 +38,48 @@ public class CreditsScene extends Scene{
     
     public CreditsScene()
     {
-        //load texture we need
-        URI textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/silver-goblet.png");  
-        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "silver-goblet.png");
-        URI textureURI2 = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/silver-goblet-text.png"); 
-        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI2, "silver-goblet-text.png");
-                     
-        
         //center and right layout coordinates
         int right = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x;
         int center = right/2;
         
-        
+        Image img = new Image("silver-goblet.png");
+        img.setScale(.47f);
+        img.setPosition(center - img.getWidth()/2 - 150, 550); 
+        this.add(img, Layer.MAIN); 
        
+        Text text = new Text("Credits",LeadCrystalTextType.MENU60);
+        text.setPosition(center - text.getWidth()/2, 620);       
+        this.add(text,Layer.MAIN);
         
+        img = new Image("darknessSquare.png");
+        img.setDimensions(750, 8);
+        img.setColor(new Color(Color.white));
+        img.setPosition(center - img.getWidth()/2 + 170, 600);
+        this.add(img, Layer.MAIN);
         
-      Text leadCrystal = new Text("Michael Signorella -- Programming / Design",LeadCrystalTextType.MENU40);
-        leadCrystal.setPosition(center - leadCrystal.getWidth()/2, 700);       
-        this.add(leadCrystal,Layer.MAIN);
+        text = new Text("Programming",LeadCrystalTextType.MENU40);
+        text.setColor(new Color(1,1,1,.75f));
+        text.setPosition(center - text.getWidth() - 25, 450);
+        this.add(text,Layer.MAIN);
+        text = new Text("Michael Signorella",LeadCrystalTextType.MENU40);
+        text.setPosition(center , 450);
+        this.add(text,Layer.MAIN);
         
-        leadCrystal = new Text("George Lubinski  -- Art",LeadCrystalTextType.MENU40);
-        leadCrystal.setPosition(center - leadCrystal.getWidth()/2, 500);       
-        this.add(leadCrystal,Layer.MAIN);
+        text = new Text("Art",LeadCrystalTextType.MENU40);
+        text.setPosition(center - text.getWidth() - 25, 370);
+        text.setColor(new Color(1,1,1,.75f));
+        this.add(text,Layer.MAIN);
+        text = new Text("George Lubinski",LeadCrystalTextType.MENU40);
+        text.setPosition(center, 370);
+        this.add(text,Layer.MAIN);
         
-        leadCrystal = new Text("Justin Capalbo  -- QA",LeadCrystalTextType.MENU40);
-        leadCrystal.setPosition(center - leadCrystal.getWidth()/2, 300);       
-        this.add(leadCrystal,Layer.MAIN);
+        text = new Text("Testing",LeadCrystalTextType.MENU40);
+        text.setPosition(center - text.getWidth() - 25, 290);  
+        text.setColor(new Color(1,1,1,.75f));
+        this.add(text,Layer.MAIN);
+        text = new Text("Justin Capalbo",LeadCrystalTextType.MENU40);
+        text.setPosition(center , 290);       
+        this.add(text,Layer.MAIN);
         
         
        
