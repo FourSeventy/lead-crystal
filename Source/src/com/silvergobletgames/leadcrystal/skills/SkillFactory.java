@@ -70,6 +70,7 @@ public class SkillFactory
             case EnemySmallAntThrow: return new EnemySmallAntThrow();
             case EnemyHomingMissile: return new EnemyHomingMissile();
             case EnemySinBlast: return new EnemySinBlast();
+            case EnemyBossSwirl: return new EnemyBossSwirl();
             
             
             default: return null;

@@ -251,7 +251,7 @@ public class EnemySinBlast extends Skill
              int magnitude = 8;
 
              
-             float multiplier = (float)Math.sin(Math.toRadians(ticks * 3) + (2 *Math.PI/4)) * magnitude * this.startDirection;
+             float multiplier = (float)Math.sin(Math.toRadians(ticks * 3) + (Math.PI/2)) * magnitude * this.startDirection;
              
              this.getBody().adjustPosition(new Vector2f(perpendicularVector.x, perpendicularVector.y),multiplier);
           

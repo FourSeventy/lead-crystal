@@ -1270,11 +1270,16 @@ public class AnimationPackClasses {
             spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-ranged0.png"));
             spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("scout1-ranged1.png"));                   
             this.animationSet.put(ExtendedImageAnimations.SPAWN, spawn);
+            
+            //spell
+            ArrayList<Texture> spell = new ArrayList();
+            spell.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss1-shoot-0.png"));                  
+            this.animationSet.put(ExtendedImageAnimations.SPELLATTACK, spell);
 
             //=====================
             // Build Delay Map
             //=====================   
-            this.timingMap.put(ExtendedImageAnimations.MELEEATTACK, 10);
+            this.timingMap.put(ExtendedImageAnimations.MELEEATTACK, 15);
             this.timingMap.put(ExtendedImageAnimations.RANGEDATTACK, 10);    
             
             //========================
@@ -1290,9 +1295,9 @@ public class AnimationPackClasses {
             //================
             // Build FPT Map
             //================
-            this.fptMap.put(ExtendedImageAnimations.MELEEATTACK, 5);
+            this.fptMap.put(ExtendedImageAnimations.MELEEATTACK, 3);
             this.fptMap.put(ExtendedImageAnimations.RANGEDATTACK, 3);
-             this.fptMap.put(ExtendedImageAnimations.RUNNING, 5);
+            this.fptMap.put(ExtendedImageAnimations.RUNNING, 5);
               
 
 
