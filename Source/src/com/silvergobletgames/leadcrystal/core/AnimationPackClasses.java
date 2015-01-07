@@ -1449,6 +1449,7 @@ public class AnimationPackClasses {
             //================
             // Build FPT Map
             //================
+            this.fptMap.put(ExtendedImageAnimations.SPAWN, 3);
             this.fptMap.put(ExtendedImageAnimations.MELEEATTACK, 5);
             this.fptMap.put(ExtendedImageAnimations.RANGEDATTACK, 3);
              this.fptMap.put(ExtendedImageAnimations.RUNNING, 5);

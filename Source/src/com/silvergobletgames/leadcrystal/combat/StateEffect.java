@@ -15,7 +15,7 @@ import net.phys2d.math.Vector2f;
 public class StateEffect extends CombatEffect 
 {
     private StateEffectType stateEffectType;
-    private float amount;
+    public float amount;
     private boolean inPercent;
     
     public static enum StateEffectType{
@@ -82,7 +82,7 @@ public class StateEffect extends CombatEffect
             }
             case DAMAGEREDUCTION:
             {
-                if(amount != -1f)
+                if(amount > 0 )
                 {
                     return;
                 }

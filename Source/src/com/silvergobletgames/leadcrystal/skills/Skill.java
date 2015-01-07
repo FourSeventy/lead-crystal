@@ -48,7 +48,8 @@ public abstract class Skill
         PlayerAttackDrone,PlayerGravityShield,PlayerWard,PlayerLeechingBlades,  //tech
         EnemyGooShot,EnemySmallMelee, EnemyAntThrow,EnemySmallAntThrow, EnemyFlierGooBomb,
         EnemyBossSwipe, EnemyJumperSpikes,EnemyRangedSwipe,EnemyTriShot,  
-        EnemyRockThrow, EnemyHomingMissile,EnemySinBlast,EnemyBossSwirl,EnemyBossLaserBurst,EnemyBoss1Melee;
+        EnemyRockThrow, EnemyHomingMissile,EnemySinBlast,EnemyBossSwirl,EnemyBossLaserBurst,EnemyBoss1Melee,
+        EnemyBossSin;
         
     }
     

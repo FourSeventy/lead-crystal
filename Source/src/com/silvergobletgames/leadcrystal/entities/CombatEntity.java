@@ -357,7 +357,8 @@ public abstract class CombatEntity extends Entity
             if(combatEffect instanceof StateEffect)
             {
                 if(((StateEffect)combatEffect).getStateEffectType() == StateEffectType.STUN ||
-                   ((StateEffect)combatEffect).getStateEffectType() == StateEffectType.SLOW)
+                   ((StateEffect)combatEffect).getStateEffectType() == StateEffectType.SLOW ||
+                   (((StateEffect)combatEffect).getStateEffectType() == StateEffectType.DAMAGEREDUCTION && ((StateEffect)combatEffect).amount < 0 )   )
                 {
                     ((StateEffect)combatEffect).setDuration((int)(combatEffect.getDuration() * (1 - combatData.ccResistance.getTotalValue()))); 
                 }
