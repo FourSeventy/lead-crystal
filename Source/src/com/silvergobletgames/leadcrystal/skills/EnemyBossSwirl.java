@@ -3,6 +3,7 @@ package com.silvergobletgames.leadcrystal.skills;
 import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
+import com.silvergobletgames.leadcrystal.entities.CombatEntity;
 import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect;
@@ -237,6 +238,12 @@ public class EnemyBossSwirl extends Skill{
              
              if(this.shooting)
              {
+                 return;
+             }
+             
+             if(((CombatEntity)this.sourceEntity).getCombatData().isDead())
+             {
+                 this.removeFromOwningScene();
                  return;
              }
            

@@ -133,7 +133,7 @@ public class EnemyBossLaserBurst extends Skill
                 
                 SylverVector2f vectorToTarget = new SylverVector2f(this.vectorToTarget);
                 vectorToTarget.normalise();
-                float degrees = Math.copySign(SylverRandom.random.nextInt(20), Math.random()>.5?1:-1);
+                float degrees = Math.copySign(SylverRandom.random.nextInt(10), 1);
                 
                 SylverVector2f upVector = new SylverVector2f((float)(Math.cos(degrees * Math.PI/180) *vectorToTarget.x  - (Math.sin(degrees * Math.PI/180))*vectorToTarget.y ),(float)((Math.sin(degrees * Math.PI/180))*vectorToTarget.x  + (Math.cos(degrees * Math.PI/180))*vectorToTarget.y )); // 5 degreees
                 upVector.normalise();
@@ -147,7 +147,7 @@ public class EnemyBossLaserBurst extends Skill
                 
                  SylverVector2f vectorToTarget = new SylverVector2f(this.vectorToTarget);
                 vectorToTarget.normalise();
-                float degrees =  Math.copySign(SylverRandom.random.nextInt(20), Math.random()>.5?1:-1);
+                float degrees =  Math.copySign(SylverRandom.random.nextInt(10), 1);
                 
                 SylverVector2f upVector = new SylverVector2f((float)(Math.cos(degrees * Math.PI/180) *vectorToTarget.x  - (Math.sin(degrees * Math.PI/180))*vectorToTarget.y ),(float)((Math.sin(degrees * Math.PI/180))*vectorToTarget.x  + (Math.cos(degrees * Math.PI/180))*vectorToTarget.y )); // 5 degreees
                 upVector.normalise();
@@ -159,7 +159,7 @@ public class EnemyBossLaserBurst extends Skill
                     
                  SylverVector2f vectorToTarget = new SylverVector2f(this.vectorToTarget);
                 vectorToTarget.normalise();
-                float degrees = - Math.copySign(SylverRandom.random.nextInt(30), Math.random()>.5?1:-1)  ;              
+                float degrees = - Math.copySign(SylverRandom.random.nextInt(20), 1)  ;              
                 
                 SylverVector2f upVector = new SylverVector2f((float)(Math.cos(degrees * Math.PI/180) *vectorToTarget.x  - (Math.sin(degrees * Math.PI/180))*vectorToTarget.y ),(float)((Math.sin(degrees * Math.PI/180))*vectorToTarget.x  + (Math.cos(degrees * Math.PI/180))*vectorToTarget.y )); // 5 degreees
                 upVector.normalise();
@@ -170,7 +170,7 @@ public class EnemyBossLaserBurst extends Skill
             {
                 SylverVector2f vectorToTarget = new SylverVector2f(this.vectorToTarget);
                 vectorToTarget.normalise();
-                float degrees = - Math.copySign(SylverRandom.random.nextInt(30), Math.random()>.5?1:-1)  ;              
+                float degrees = - Math.copySign(SylverRandom.random.nextInt(20), 1)  ;              
                 
                 SylverVector2f upVector = new SylverVector2f((float)(Math.cos(degrees * Math.PI/180) *vectorToTarget.x  - (Math.sin(degrees * Math.PI/180))*vectorToTarget.y ),(float)((Math.sin(degrees * Math.PI/180))*vectorToTarget.x  + (Math.cos(degrees * Math.PI/180))*vectorToTarget.y )); // 5 degreees
                 upVector.normalise();
@@ -181,7 +181,18 @@ public class EnemyBossLaserBurst extends Skill
             {
                 SylverVector2f vectorToTarget = new SylverVector2f(this.vectorToTarget);
                 vectorToTarget.normalise();
-                float degrees = - Math.copySign(SylverRandom.random.nextInt(30), Math.random()>.5?1:-1)  ;              
+                float degrees = - Math.copySign(SylverRandom.random.nextInt(30), 1)  ;              
+                
+                SylverVector2f upVector = new SylverVector2f((float)(Math.cos(degrees * Math.PI/180) *vectorToTarget.x  - (Math.sin(degrees * Math.PI/180))*vectorToTarget.y ),(float)((Math.sin(degrees * Math.PI/180))*vectorToTarget.x  + (Math.cos(degrees * Math.PI/180))*vectorToTarget.y )); // 5 degreees
+                upVector.normalise();
+        
+                this.shootBullet(upVector, passthroughDamage, this.targetPosition,caster, origin);
+            }
+            else if (this.ticks == 75)
+            {
+                SylverVector2f vectorToTarget = new SylverVector2f(this.vectorToTarget);
+                vectorToTarget.normalise();
+                float degrees = - Math.copySign(SylverRandom.random.nextInt(30), 1)  ;              
                 
                 SylverVector2f upVector = new SylverVector2f((float)(Math.cos(degrees * Math.PI/180) *vectorToTarget.x  - (Math.sin(degrees * Math.PI/180))*vectorToTarget.y ),(float)((Math.sin(degrees * Math.PI/180))*vectorToTarget.x  + (Math.cos(degrees * Math.PI/180))*vectorToTarget.y )); // 5 degreees
                 upVector.normalise();
@@ -257,6 +268,8 @@ public class EnemyBossLaserBurst extends Skill
          public EnemyLaserHitbox(Damage d, Body b, Image i, Entity user)
          { 
             super(d, b, i, user); 
+            
+            this.getBody().setBitmask(Entity.BitMasks.NO_COLLISION.value);
                        
             
             
@@ -268,7 +281,7 @@ public class EnemyBossLaserBurst extends Skill
              
                          
              //remove if we hit a world object, or an enemy
-             if(other instanceof WorldObjectEntity || other instanceof CombatEntity)
+             if( other instanceof CombatEntity)
              {
                 
                 //get angle of impact
