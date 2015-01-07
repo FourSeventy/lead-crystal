@@ -35,7 +35,7 @@ public class EnemyBossSwirl extends Skill{
     
     public EnemyBossSwirl()
     {
-        super(SkillID.EnemyBossSwirl,Skill.SkillType.OFFENSIVE, ExtendedImageAnimations.SPELLATTACK,BLADE_DURATION + 120,1000);
+        super(SkillID.EnemyBossSwirl,Skill.SkillType.OFFENSIVE, ExtendedImageAnimations.SPELLATTACK,BLADE_DURATION + (60 * 10),1000);
         
 
     }
@@ -271,7 +271,7 @@ public class EnemyBossSwirl extends Skill{
                     radius =   200 + (200 - 200 * (float)Math.cos(Math.toRadians(this.ticks - 200)) );      
                 }
                 
-                System.err.println(radius);
+               
                 float xoffset = (float)Math.sin(x) * ( radius + 15 * (float)Math.sin(x/1.5));
                 float yoffset = (float)Math.cos(x) * ( radius + 15 * (float)Math.sin(x/1.5));
                 this.setPosition(this.sourceEntity.getPosition().x + xoffset, this.sourceEntity.getPosition().y + yoffset);

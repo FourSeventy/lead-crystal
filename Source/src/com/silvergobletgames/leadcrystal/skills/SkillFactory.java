@@ -71,6 +71,8 @@ public class SkillFactory
             case EnemyHomingMissile: return new EnemyHomingMissile();
             case EnemySinBlast: return new EnemySinBlast();
             case EnemyBossSwirl: return new EnemyBossSwirl();
+            case EnemyBossLaserBurst: return new EnemyBossLaserBurst();
+            case EnemyBoss1Melee: return new EnemyBoss1Melee();
             
             
             default: return null;

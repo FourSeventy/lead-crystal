@@ -1286,7 +1286,7 @@ public class AnimationPackClasses {
             // Build Skill Offset Map
             //========================
 
-            this.positionOffsetMap.put(ExtendedImageAnimations.RANGEDATTACK, new SylverVector2f(118,-54));
+            this.positionOffsetMap.put(ExtendedImageAnimations.RANGEDATTACK, new SylverVector2f(110,-54));
             this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0011_0111_0100_1011_1011_0100_1011_0100),
                                                                                         Float.intBitsToFloat(0b0111_0111_1011_1011_0110_0100_0111_0111)));
                     
