@@ -323,15 +323,6 @@ public class BrainFinalBoss1 extends BrainGround
 //        }
     }
     
-    public void deadEnter()
-    {
-
-        //add spewer to the world
-        LootSpewer spew = new LootSpewer(60 * 5);
-        spew.setPosition(self.getPosition().x, self.getPosition().y);
-        self.getOwningScene().add(spew, Scene.Layer.MAIN);
-        
-    }
     
     
 }

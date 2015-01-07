@@ -1374,6 +1374,25 @@ public class AnimationPackClasses {
             ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-shoot-13.png"));
             ranged.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-shoot-14.png"));
             this.animationSet.put(ExtendedImageAnimations.RANGEDATTACK ,ranged); 
+            
+            //Ranged Attack
+            ArrayList<Texture> spell = new ArrayList();
+            spell.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-shoot-0.png"));
+            spell.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-shoot-1.png"));
+            spell.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-shoot-2.png"));
+            spell.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-shoot-3.png"));
+            spell.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-shoot-4.png"));
+            spell.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-shoot-5.png"));
+            spell.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-shoot-6.png"));
+            spell.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-shoot-7.png"));
+            spell.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-shoot-8.png"));
+            spell.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-shoot-9.png"));
+            spell.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-shoot-10.png"));
+            spell.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-shoot-11.png"));
+            spell.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-shoot-12.png"));
+            spell.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-shoot-13.png"));
+            spell.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-shoot-14.png"));
+            this.animationSet.put(ExtendedImageAnimations.SPELLATTACK ,spell); 
 
             //melee Attack
             ArrayList<Texture> melee = new ArrayList();
@@ -1434,13 +1453,15 @@ public class AnimationPackClasses {
             // Build Delay Map
             //=====================   
             this.timingMap.put(ExtendedImageAnimations.MELEEATTACK, 10);
-            this.timingMap.put(ExtendedImageAnimations.RANGEDATTACK, 10);    
+            this.timingMap.put(ExtendedImageAnimations.RANGEDATTACK, 10); 
+            this.timingMap.put(ExtendedImageAnimations.SPELLATTACK, 30);
             
             //========================
             // Build Skill Offset Map
             //========================
 
-            this.positionOffsetMap.put(ExtendedImageAnimations.RANGEDATTACK, new SylverVector2f(118,-54));
+            this.positionOffsetMap.put(ExtendedImageAnimations.SPELLATTACK, new SylverVector2f(100,-54));
+            this.positionOffsetMap.put(ExtendedImageAnimations.RANGEDATTACK, new SylverVector2f(100,-54));
             this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0011_0111_0100_1011_1011_0100_1011_0100),
                                                                                         Float.intBitsToFloat(0b0111_0111_1011_1011_0110_0100_0111_0111)));
                     
@@ -1452,6 +1473,7 @@ public class AnimationPackClasses {
             this.fptMap.put(ExtendedImageAnimations.SPAWN, 3);
             this.fptMap.put(ExtendedImageAnimations.MELEEATTACK, 5);
             this.fptMap.put(ExtendedImageAnimations.RANGEDATTACK, 3);
+            this.fptMap.put(ExtendedImageAnimations.RANGEDATTACK, 9);
              this.fptMap.put(ExtendedImageAnimations.RUNNING, 5);
               
 

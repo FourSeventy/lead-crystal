@@ -41,7 +41,7 @@ public class EnemyBossLaserBurst extends Skill
     
     public EnemyBossLaserBurst()
     {
-        super(SkillID.EnemyBossLaserBurst,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,4 * 60, 800);
+        super(SkillID.EnemyBossLaserBurst,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,3 * 60, 800);
         
 
     }

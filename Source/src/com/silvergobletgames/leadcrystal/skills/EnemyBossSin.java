@@ -41,7 +41,7 @@ public class EnemyBossSin extends Skill
     
     public EnemyBossSin()
     {
-        super(SkillID.EnemyBossSin,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,10 * 60,800);
+        super(SkillID.EnemyBossSin,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK,10 * 60,1200);
         
 
     }
@@ -50,7 +50,7 @@ public class EnemyBossSin extends Skill
     {       
         
         //Damage is scaled with base
-        float dAmount = this.getBaseDamage(); 
+        float dAmount = this.getBaseDamage()/10; 
         damage.getAmountObject().adjustBase(dAmount);
         damage.setType(Damage.DamageType.PHYSICAL);
            
@@ -134,7 +134,7 @@ public class EnemyBossSin extends Skill
             SylverVector2f vectorToTarget = new SylverVector2f(this.vectorToTarget);
             vectorToTarget.normalise();
             
-            for( int x = 1; x < 200; x +=10)
+            for( int x = 1; x < 120; x +=10)
             {        
                 if(this.ticks == x)
                 {
@@ -156,8 +156,8 @@ public class EnemyBossSin extends Skill
             Damage damage = new Damage(d);
             
              // Bullet force
-            float xforce = 1000*vectorToTarget.x;
-            float yforce = 1000*vectorToTarget.y;
+            float xforce = 1800*vectorToTarget.x;
+            float yforce = 1800*vectorToTarget.y;
 
 
             //determine theta

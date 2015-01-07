@@ -74,6 +74,7 @@ public class SkillFactory
             case EnemyBossLaserBurst: return new EnemyBossLaserBurst();
             case EnemyBoss1Melee: return new EnemyBoss1Melee();
             case EnemyBossSin: return new EnemyBossSin();
+            case EnemyBossBarrage: return new EnemyBossBarrage();
             
             
             default: return null;
