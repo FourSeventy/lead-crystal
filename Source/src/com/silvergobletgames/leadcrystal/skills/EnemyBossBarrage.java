@@ -34,7 +34,6 @@ public class EnemyBossBarrage extends Skill{
     {
         super(SkillID.EnemyBossBarrage,Skill.SkillType.OFFENSIVE, ExtendedImageAnimations.RANGEDATTACK,60 * 10,1200);
         
-
     }
     
     
@@ -48,10 +47,10 @@ public class EnemyBossBarrage extends Skill{
         damage.setType(Damage.DamageType.PHYSICAL);
        
          //build goo
-        Body body = new Body(new Circle(50), 1);
+        Body body = new Body(new Circle(75), 1);
         Image img = new Image("poison_goo_ball.png");
-        img.setDimensions(100, 100);
-        img.setColor(new Color(1f,1.2f,1f,1f));
+        img.setDimensions(150, 150);
+        img.setColor(new Color(0f,0f,2f,1f));
         BarrageHitBox goo = new BarrageHitBox(damage, body, img, user);
         
         
@@ -89,10 +88,16 @@ public class EnemyBossBarrage extends Skill{
     
     private class BarrageHitBox extends HitBox
     {
+        
+        private long ticks = 0;
+        
          public BarrageHitBox(Damage d, Body b, Image i, Entity user)
          { 
             super(d, b, i, user); 
-                      
+                                
+            this.getBody().setOverlapMask(Entity.OverlapMasks.PLAYER_TOUCH.value);
+            this.getBody().setBitmask(Entity.BitMasks.NO_COLLISION.value);
+            
          }
          
          @Override
@@ -100,8 +105,56 @@ public class EnemyBossBarrage extends Skill{
          {
              super.update();
              
+             this.ticks++;
+                     
+             if(ticks % 30 == 0)
+             {
+               this.shootBullet(0); 
+               this.shootBullet((float)Math.PI/2); 
+               this.shootBullet((float)Math.PI); 
+               this.shootBullet((float)Math.PI * ((float)3/2)); 
+             }
+             
+             
              
          }
+         
+         private void shootBullet(float radianOffset)
+         {           
+              final int radius = 200;
+              
+              //build goo
+              Body body = new Body(new Circle(25), 1);
+              Image img = new Image("poison_goo_ball.png");
+              img.setDimensions(50, 50);
+              img.setColor(new Color(0f,0f,2f,1f));
+              HitBox goo = new HitBox(damage, body, img, user);
+              goo.getBody().setOverlapMask(Entity.OverlapMasks.PLAYER_TOUCH.value);
+              goo.getBody().setBitmask(Entity.BitMasks.NO_COLLISION.value);
+
+
+              //Determine vector to target
+              double x = Math.toRadians(this.ticks  ) + radianOffset;
+             
+              float xoffset = (float)Math.sin(x) * ( radius + 15 * (float)Math.sin(x/1.5));
+              float yoffset = (float)Math.cos(x) * ( radius + 15 * (float)Math.sin(x/1.5));
+              SylverVector2f directionVector = new SylverVector2f(xoffset , yoffset );
+              directionVector.normalise();
+
+
+              // Bullet force //TODO: make it 700 more than velocity
+              float xforce1 = 700*directionVector.x + this.getBody().getVelocity().getX();
+              float yforce1 = 700*directionVector.y + this.getBody().getVelocity().getY();
+
+
+              //Dispense goo into the world
+              goo.setPosition(this.getPosition().x, this.getPosition().y);
+              goo.getBody().addForce(new Vector2f((int)xforce1 ,(int)yforce1));
+
+
+              this.getOwningScene().add(goo,Layer.MAIN);  
+         }
+         
          public void collidedWith(Entity other, CollisionEvent event)
          {
              super.collidedWith(other,event);
