@@ -107,7 +107,7 @@ public class EnemyBossBarrage extends Skill{
              
              this.ticks++;
                      
-             if(ticks % 30 == 0)
+             if(ticks % 15 == 0)
              {
                this.shootBullet(0); 
                this.shootBullet((float)Math.PI/2); 
@@ -121,7 +121,7 @@ public class EnemyBossBarrage extends Skill{
          
          private void shootBullet(float radianOffset)
          {           
-              final int radius = 200;
+              final int radius = 85;
               
               //build goo
               Body body = new Body(new Circle(25), 1);
@@ -143,13 +143,14 @@ public class EnemyBossBarrage extends Skill{
 
 
               // Bullet force //TODO: make it 700 more than velocity
-              float xforce1 = 700*directionVector.x + this.getBody().getVelocity().getX();
-              float yforce1 = 700*directionVector.y + this.getBody().getVelocity().getY();
+              float xforce1 = 1000*directionVector.x;// + this.getBody().getVelocity().getX() *4;
+              float yforce1 = 1000*directionVector.y;// + this.getBody().getVelocity().getY() *4f;
 
 
               //Dispense goo into the world
-              goo.setPosition(this.getPosition().x, this.getPosition().y);
-              goo.getBody().addForce(new Vector2f((int)xforce1 ,(int)yforce1));
+              goo.setPosition(this.getPosition().x + xoffset, this.getPosition().y + yoffset);
+              goo.getBody().addForce(new Vector2f((int)xforce1 ,(int)yforce1)); 
+              goo.getBody().setVelocity(new Vector2f(this.getBody().getVelocity().getX(),this.getBody().getVelocity().getY()));
 
 
               this.getOwningScene().add(goo,Layer.MAIN);  
