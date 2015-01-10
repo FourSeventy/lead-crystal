@@ -9,6 +9,7 @@ import java.util.Random;
 import net.phys2d.math.Vector2f;
 import com.silvergobletgames.leadcrystal.ai.AIState.StateID;
 import com.silvergobletgames.leadcrystal.ai.BrainFactory.BrainID;
+import com.silvergobletgames.leadcrystal.combat.CombatData;
 import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.entities.Entity;
@@ -113,10 +114,14 @@ public class BrainFinalBoss1 extends BrainGround
         self.getImage().setAnimation(ExtendedImageAnimations.SPAWN);
     }
     
+    public void idleEnter()
+    {
+        self.getCombatData().setState(CombatData.CombatState.IMMUNE); 
+    }
     public void idleExecute()
     {
        
-        this.getStateMachine().changeState(StateID.MOVE);
+        //this.getStateMachine().changeState(StateID.MOVE);
     }
     
     /**
@@ -124,6 +129,7 @@ public class BrainFinalBoss1 extends BrainGround
      */
     protected void moveEnter()
     {
+        self.getCombatData().removeState(CombatData.CombatState.IMMUNE);
         
         // if previous move target is null, we are in starting state
         if(this.moveTarget == null)

@@ -1,17 +1,20 @@
 
 package com.silvergobletgames.leadcrystal.scripting;
 
+import com.silvergobletgames.leadcrystal.ai.AIState;
 import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.combat.Damage.DamageType;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.TeleporterEmitter;
+import com.silvergobletgames.leadcrystal.entities.CombatEntity;
 import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect.EntityEffectType;
 import com.silvergobletgames.leadcrystal.entities.HitBox;
 import com.silvergobletgames.leadcrystal.entities.MobSpawner;
+import com.silvergobletgames.leadcrystal.entities.NonPlayerEntity;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity;
 import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat.ArmorStatID;
@@ -677,9 +680,12 @@ public class SceneScriptManager
        teleporter.addToGroup(ExtendedSceneObjectGroups.CLICKABLE); 
     }
     
-    public void finishGame()
+
+    
+    public void activateEnemy(String entityID)
     {
-        
+        NonPlayerEntity entity = ((NonPlayerEntity)this.owningScene.getSceneObjectManager().get(entityID));
+        entity.getBrain().getStateMachine().changeState(AIState.StateID.MOVE);
     }
     
     
