@@ -53,10 +53,10 @@ public class LevelProgressionManager
         //desert 0
         Level level0 = new Level();
         level0.levelDataName = "desert0.lv";
-        level0.levelName = "Reach Town";
+        level0.levelName = "Find Titanis";
         //main objective
         LevelObjective objective = new LevelObjective();
-        objective.objectiveName = "Get To Town";
+        objective.objectiveName = "Locate Town";
         objective.objectiveDescription = "Clear the outskirts of town of enemies and locate the town";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
