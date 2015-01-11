@@ -35,7 +35,7 @@ public class EnemyBoss1Melee extends Skill{
         
      
        //Damage is scaled with base damage
-        float dAmount = this.getBaseDamage(); 
+        float dAmount = this.getBaseDamage() * 2; 
         damage.getAmountObject().adjustBase(dAmount);
         damage.setType(Damage.DamageType.PHYSICAL);
         

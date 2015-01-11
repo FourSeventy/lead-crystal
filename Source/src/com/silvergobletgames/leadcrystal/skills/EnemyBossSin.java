@@ -50,8 +50,7 @@ public class EnemyBossSin extends Skill
     {       
         
         //Damage is scaled with base
-        float dAmount = this.getBaseDamage()/10; 
-        damage.getAmountObject().adjustBase(dAmount);
+        damage.getAmountObject().setBase(4);
         damage.setType(Damage.DamageType.PHYSICAL);
            
         //Determine vector to target

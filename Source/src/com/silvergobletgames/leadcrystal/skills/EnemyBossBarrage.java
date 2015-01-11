@@ -9,6 +9,7 @@ import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect;
 import com.silvergobletgames.leadcrystal.entities.HitBox;
+import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene.Layer;
@@ -17,6 +18,7 @@ import com.silvergobletgames.sylver.graphics.Anchorable;
 import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.ImageEffect;
+import com.silvergobletgames.sylver.graphics.PointParticleEmitter;
 import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 import java.util.Random;
@@ -107,7 +109,7 @@ public class EnemyBossBarrage extends Skill{
              
              this.ticks++;
                      
-             if(ticks % 15 == 0)
+             if(ticks % 15 == 0 && this.getOwningScene() != null)
              {
                this.shootBullet(0); 
                this.shootBullet((float)Math.PI/2); 
@@ -123,12 +125,43 @@ public class EnemyBossBarrage extends Skill{
          {           
               final int radius = 85;
               
+              Damage d = new Damage(damage);
+              d.getAmountObject().setBase(8);
               //build goo
               Body body = new Body(new Circle(25), 1);
               Image img = new Image("poison_goo_ball.png");
               img.setDimensions(50, 50);
               img.setColor(new Color(0f,0f,2f,1f));
-              HitBox goo = new HitBox(damage, body, img, user);
+              HitBox goo = new HitBox(d, body, img, user){
+              @Override
+              public void collidedWith(Entity other, CollisionEvent event)
+              {
+                  super.collidedWith(other, event);
+                  
+                  if(other instanceof PlayerEntity)
+                  {
+                       //get angle of impact
+                    Vector2f normalVector = (Vector2f)event.getNormal();
+                    normalVector =normalVector.negate();
+                    Vector2f xVector = new Vector2f(1,0);
+                    float angle = (float)(Math.acos(normalVector.dot(xVector) ) * 180 / Math.PI);
+                    if(normalVector.getY() < 0)
+                        angle += 180;
+
+                    //make emitter
+                    PointParticleEmitter emitter = new LeadCrystalParticleEmitters.LaserBitsEmitter();
+                    emitter.setPosition(event.getPoint().getX(), event.getPoint().getY());
+                    emitter.setDuration(1);
+                    emitter.setAngle(angle);
+                    emitter.setParticlesPerFrame(5);
+                    emitter.setColor(new Color((50/255f) * 4f,(50/255f) * 4f,(103f/255f) * 4f));
+                    emitter.setSize(3);                
+                    owningScene.add(emitter,Layer.MAIN);
+
+                   this.getBody().setVelocity(new Vector2f(0,0));
+                   this.removeFromOwningScene();
+                  }
+              }};
               goo.getBody().setOverlapMask(Entity.OverlapMasks.PLAYER_TOUCH.value);
               goo.getBody().setBitmask(Entity.BitMasks.NO_COLLISION.value);
 
@@ -159,6 +192,9 @@ public class EnemyBossBarrage extends Skill{
          public void collidedWith(Entity other, CollisionEvent event)
          {
              super.collidedWith(other,event);
+             
+            
+                
                          
          }
     }
