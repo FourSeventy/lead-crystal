@@ -1,8 +1,5 @@
 package com.silvergobletgames.leadcrystal.skills;
 
-import com.silvergobletgames.sylver.graphics.*;
-import net.phys2d.math.Vector2f;
-import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
@@ -13,11 +10,15 @@ import com.silvergobletgames.leadcrystal.entities.EntityEffect;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect.EntityEffectType;
 import com.silvergobletgames.leadcrystal.entities.HitBox;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
+import com.silvergobletgames.leadcrystal.skills.EnemyBossSwirl.SwirlHitbox;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.core.SceneObjectManager;
+import com.silvergobletgames.sylver.graphics.*;
+import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.util.SylverVector2f;
+import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.StaticBody;
@@ -105,7 +106,7 @@ public class PlayerGravityShield extends PlayerSkill{
                      HitBox enemyHitbox = (HitBox)object;
                      
                      
-                     if(enemyHitbox.getBody() != null && enemyHitbox.distanceAbs(this) < 75 && enemyHitbox.getBody().getOverlapMask() == Entity.OverlapMasks.PLAYER_TOUCH.value)
+                     if(enemyHitbox.getBody() != null && enemyHitbox.distanceAbs(this) < 75 && enemyHitbox.getBody().getOverlapMask() == Entity.OverlapMasks.PLAYER_TOUCH.value && !(enemyHitbox instanceof SwirlHitbox) )
                      {
                          //get vector
                          SylverVector2f v = new SylverVector2f(enemyHitbox.getBody().getVelocity().getX(),enemyHitbox.getBody().getVelocity().getY());

@@ -246,7 +246,7 @@ public class EnemyBossSwirl extends Skill{
                  return;
              }
              
-             if(((CombatEntity)this.sourceEntity).getCombatData().isDead())
+             if( this.sourceEntity instanceof CombatEntity &&((CombatEntity)this.sourceEntity).getCombatData().isDead())
              {
                  this.removeFromOwningScene();
                  return;
