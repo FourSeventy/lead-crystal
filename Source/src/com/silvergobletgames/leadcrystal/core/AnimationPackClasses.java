@@ -1414,15 +1414,7 @@ public class AnimationPackClasses {
             this.animationSet.put(ExtendedImageAnimations.MELEEATTACK ,melee); 
             
             //death
-            ArrayList<Texture> dying = new ArrayList();
-            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-head.png"));
-            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-torso.png"));
-            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-leftarm.png"));
-            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-rightarm.png"));
-            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-righthand.png"));
-            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-leftleg.png"));
-            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-rightfoot.png"));  
-            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-leftfoot.png"));                    
+            ArrayList<Texture> dying = new ArrayList();                  
             this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
             
             //spawn
@@ -1474,7 +1466,70 @@ public class AnimationPackClasses {
             this.fptMap.put(ExtendedImageAnimations.MELEEATTACK, 5);
             this.fptMap.put(ExtendedImageAnimations.RANGEDATTACK, 3);
             this.fptMap.put(ExtendedImageAnimations.RANGEDATTACK, 9);
-             this.fptMap.put(ExtendedImageAnimations.RUNNING, 5);
+            this.fptMap.put(ExtendedImageAnimations.RUNNING, 5);
+              
+
+
+        }
+    }
+    
+    public static class Boss2DeathAnimationPack extends AnimationPack
+    {
+        public Boss2DeathAnimationPack()
+        {
+            //Idle
+            ArrayList<Texture> idle = new ArrayList();
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-idle-0.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-idle-1.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-idle-2.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-idle-3.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-idle-4.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-idle-5.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-idle-6.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-idle-7.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-idle-8.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-idle-9.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-idle-10.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-idle-11.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-idle-12.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-idle-13.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-idle-14.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-idle-15.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-idle-16.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-idle-17.png"));
+            idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-idle-18.png"));
+            this.animationSet.put(CoreAnimations.IDLE, idle);
+
+           
+            //death
+            ArrayList<Texture> dying = new ArrayList();
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-head.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-torso.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-leftarm.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-rightarm.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-righthand.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-leftleg.png"));
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-rightfoot.png"));  
+            dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("boss2-leftfoot.png"));                    
+            this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
+            
+          
+         
+            
+            //========================
+            // Build Skill Offset Map
+            //========================
+
+            this.positionOffsetMap.put(ExtendedImageAnimations.DEATH,new SylverVector2f(Float.intBitsToFloat(0b0011_0111_0100_1011_1011_0100_1011_0100),
+                                                                                        Float.intBitsToFloat(0b0111_0111_1011_1011_0110_0100_0111_0111)));
+                    
+                    
+
+            //================
+            // Build FPT Map
+            //================
+            this.fptMap.put(CoreAnimations.IDLE, 5);
+
               
 
 
