@@ -582,6 +582,46 @@ public class NewCharacterScene extends Scene
                     player.getLevelProgressionManager().completeSideObjective(10);
 
                 }
+                if(player.getName().equals("bosstest"))
+                {
+
+                    player.getCurrencyManager().addCurrency(1000); 
+                    player.getLevelProgressionManager().completeMainObjective(0); 
+                    player.getLevelProgressionManager().completeSideObjective(0);
+                    player.getLevelProgressionManager().completeMainObjective(1);
+                    player.getLevelProgressionManager().completeSideObjective(1);
+                    player.getLevelProgressionManager().completeMainObjective(2);
+                    player.getLevelProgressionManager().completeSideObjective(2);
+                    player.getLevelProgressionManager().completeMainObjective(3);
+                    player.getLevelProgressionManager().completeSideObjective(3);
+                    player.getLevelProgressionManager().completeMainObjective(4);
+                    player.getLevelProgressionManager().completeSideObjective(4);
+                    player.getLevelProgressionManager().completeMainObjective(5); 
+                    player.getLevelProgressionManager().completeSideObjective(5);
+                    player.getLevelProgressionManager().completeMainObjective(6);
+                    player.getLevelProgressionManager().completeSideObjective(6);
+                    player.getLevelProgressionManager().completeMainObjective(7); 
+                    player.getLevelProgressionManager().completeSideObjective(7);
+                    player.getLevelProgressionManager().completeMainObjective(8); 
+                    player.getLevelProgressionManager().completeSideObjective(8);
+                    player.getLevelProgressionManager().completeMainObjective(9);
+                    player.getLevelProgressionManager().completeSideObjective(9);
+                    player.getLevelProgressionManager().completeMainObjective(10);
+                    player.getLevelProgressionManager().completeSideObjective(10);                  
+                    player.getLevelProgressionManager().completeMainObjective(11);
+                    player.getLevelProgressionManager().completeSideObjective(11);
+                    player.getLevelProgressionManager().completeMainObjective(12);
+                    player.getLevelProgressionManager().completeSideObjective(12);
+                    player.getLevelProgressionManager().completeMainObjective(13);
+                    player.getLevelProgressionManager().completeSideObjective(13);
+                    player.getLevelProgressionManager().completeMainObjective(14);
+                    player.getLevelProgressionManager().completeSideObjective(14);
+                    player.getLevelProgressionManager().completeMainObjective(15);
+                    player.getLevelProgressionManager().completeSideObjective(15);
+                    player.getLevelProgressionManager().completeMainObjective(16);
+                    player.getLevelProgressionManager().completeSideObjective(16);
+
+                }
 
                 SaveGame save = new SaveGame();
                 save.setPlayer(player);
