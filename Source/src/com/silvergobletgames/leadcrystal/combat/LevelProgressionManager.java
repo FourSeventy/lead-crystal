@@ -57,7 +57,7 @@ public class LevelProgressionManager
         //main objective
         LevelObjective objective = new LevelObjective();
         objective.objectiveName = "Locate Town";
-        objective.objectiveDescription = "Clear the outskirts of town of enemies and locate the town";
+        objective.objectiveDescription = "You recieved a distress signal from a town called Titanis. Find the town and defeat any enemies in your path. ";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         level0.mainObjective = objective;
@@ -76,16 +76,15 @@ public class LevelProgressionManager
         level1.levelName = "Clear Antenna";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Clear Antenna";
-        objective.objectiveDescription = "Since the attack on the town our antenna has become overrun by scorpions. Clear the antenna of"
-                                          + " scorpions and get it working again.";
+        objective.objectiveName = "Kill Creatures Near Antenna ";
+        objective.objectiveDescription = "The town's antenna has been overrun by creatures called Motaccos. Clear the antenna off to get it functioning again.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         level1.mainObjective = objective;
         //side objective 
         objective = new LevelObjective();
         objective.objectiveName = "Collect Supplies";
-        objective.objectiveDescription = "We lost some supplies in that area. See if you can find 3 boxes of supplies";
+        objective.objectiveDescription = "The townsfolk lost some supplies in that area. See if you can find 3 boxes of supplies.";
         objective.currencyAward = 25;
         level1.sideObjective = objective;
         //adding to map
@@ -98,7 +97,7 @@ public class LevelProgressionManager
         //main objective
         objective = new LevelObjective();
         objective.objectiveName = "Find Power Supply";
-        objective.objectiveDescription = "The blacksmith has lost a power supply outside the city walls. Find this supply for him and he will be able to make you gear.";
+        objective.objectiveDescription = "The blacksmith lost a power supply out in the desert somewhere. Find this supply for him and he will be able to upgrade your gear.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         level2.mainObjective = objective;
@@ -114,17 +113,17 @@ public class LevelProgressionManager
         //desert 3
         Level level3 = new Level();
         level3.levelDataName = "desert3.lv";
-        level3.levelName = "Destroy Large Dabat Nest";
+        level3.levelName = "Dabat Nest";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Destroy Nest";
-        objective.objectiveDescription = "The townsfolk have noticed a lot of Dabats around, find and destroy the Dabat nest.";
+        objective.objectiveName = "Destroy Large Dabat Nest";
+        objective.objectiveDescription = "The townsfolk have noticed a lot of Dabats flying around. Find and destroy the Dabat nest.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         level3.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Giant Dabat";
+        objective.objectiveName = "Kill Giant Dabat";
         objective.objectiveDescription = "There is rumored to be a giant Dabat in this area. Destroy it.";
         objective.currencyAward = 25;
         objective.statReward = ArmorStatID.MELEE_DAMAGE;
@@ -135,18 +134,18 @@ public class LevelProgressionManager
         //desert 4
         Level level4 = new Level();
         level4.levelDataName = "desert4.lv";
-        level4.levelName = "Restart Power Generator";
+        level4.levelName = "Power Generator";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Fix Power Generator";
-        objective.objectiveDescription = "The defenses of the power generation station nearby have been ravaged by Dahla, and now the generator  has been taken over by the deadly monsters. Clear the generator of the monsters and restart it.";
+        objective.objectiveName = "Repair the Power Generator";
+        objective.objectiveDescription = "The power generation station nearby has been overrun by creatures and become inoperable. Clear the generator of the creatures and restart it.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         level4.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Lost Weapons";
-        objective.objectiveDescription = " Find the lost weapons cache.";
+        objective.objectiveName = "Find Weapon Cache";
+        objective.objectiveDescription = "There is a crate of lost weapons in this area, see if you can find it.";
         objective.currencyAward = 25;
         objective.statReward = ArmorStatID.IMPROVED_RADAR;
         level4.sideObjective = objective;
@@ -159,7 +158,7 @@ public class LevelProgressionManager
         level5.levelName = "Search and Rescue";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Search For Caravan";
+        objective.objectiveName = "Find Missing Caravan";
         objective.objectiveDescription = "We lost contact with a caravan carrying supplies to the town, go investigate";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
@@ -167,7 +166,7 @@ public class LevelProgressionManager
         level5.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Survivors";
+        objective.objectiveName = "Search For Survivors";
         objective.objectiveDescription = "Search for any survivors of the caravan";
         objective.currencyAward = 25;
         objective.statReward = ArmorStatID.HARD_TO_KILL;
@@ -185,14 +184,14 @@ public class LevelProgressionManager
         //main objective
         objective = new LevelObjective();
         objective.objectiveName = "Reactivate Water Pumps";
-        objective.objectiveDescription = "Find and activate the three water pumps.";
+        objective.objectiveDescription = "The towns underground water pumps seem to be malfunctioning. Find and activate the 3 water pumps.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         cave1.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Lost Treasure";
-        objective.objectiveDescription = "Find the hidden artifact.";
+        objective.objectiveName = "Find Power Crystal";
+        objective.objectiveDescription = "Rumor has it a rare crystal can be found in this cave system. Brice would love to study it if you can find it.";
         objective.currencyAward = 25;
         objective.statReward = ArmorStatID.JETPACK;
         cave1.sideObjective = objective;
@@ -206,14 +205,14 @@ public class LevelProgressionManager
         //main objective
         objective = new LevelObjective();
         objective.objectiveName = "Kill Giant Motoccos";
-        objective.objectiveDescription = "Kill all 5 giant motoccos in the cave.";
+        objective.objectiveDescription = "Several giant motoccos in the cave. Exterminate all 5 of them.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         cave2.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
         objective.objectiveName = "Kill Jumpers";
-        objective.objectiveDescription = "Kill 10 jumpers";
+        objective.objectiveDescription = "Countless Jumpers are roaming these cave. Thin their numbers by at least 10.";
         objective.currencyAward = 25;
         objective.statReward = ArmorStatID.LIFE_LEECH;
         cave2.sideObjective = objective;
@@ -226,14 +225,14 @@ public class LevelProgressionManager
         cave3.levelName = "Sewage Pipe";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Close off leaking sewage pipe";
-        objective.objectiveDescription = "Find and close off leaking sewage pipe";
+        objective.objectiveName = "Close Leaking Pipe";
+        objective.objectiveDescription = "Find and close off the leaking sewage pipe.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         cave3.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Missing artifact";
+        objective.objectiveName = "Find Talisman";
         objective.objectiveDescription = "Find the missing artifact";
         objective.currencyAward = 25;
         objective.statReward = ArmorStatID.DOUBLE_GOLD;
