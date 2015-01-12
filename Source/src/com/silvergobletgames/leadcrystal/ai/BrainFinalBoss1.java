@@ -116,12 +116,11 @@ public class BrainFinalBoss1 extends BrainGround
     
     public void idleEnter()
     {
-        self.getCombatData().setState(CombatData.CombatState.IMMUNE); 
+        
     }
     public void idleExecute()
     {
-       
-        //this.getStateMachine().changeState(StateID.MOVE);
+       self.getCombatData().setState(CombatData.CombatState.IMMUNE); 
     }
     
     /**
