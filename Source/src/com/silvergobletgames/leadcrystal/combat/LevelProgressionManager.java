@@ -57,7 +57,7 @@ public class LevelProgressionManager
         //main objective
         LevelObjective objective = new LevelObjective();
         objective.objectiveName = "Locate Town";
-        objective.objectiveDescription = "You recieved a distress signal from a town called Titanis. Find the town and defeat any enemies in your path. ";
+        objective.objectiveDescription = "You recieved a distress signal from a town called Titanis. Find the town and defeat any enemies in your path.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         level0.mainObjective = objective;
@@ -159,7 +159,7 @@ public class LevelProgressionManager
         //main objective
         objective = new LevelObjective();
         objective.objectiveName = "Find Missing Caravan";
-        objective.objectiveDescription = "We lost contact with a caravan carrying supplies to the town, go investigate";
+        objective.objectiveDescription = "We lost contact with a caravan carrying supplies to the town, go investigate.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         objective.statReward = ArmorStatID.THORNS_DAMAGE;
@@ -167,7 +167,7 @@ public class LevelProgressionManager
         //side objective 1
         objective = new LevelObjective();
         objective.objectiveName = "Search For Survivors";
-        objective.objectiveDescription = "Search for any survivors of the caravan";
+        objective.objectiveDescription = "Search for any survivors of the caravan.";
         objective.currencyAward = 25;
         objective.statReward = ArmorStatID.HARD_TO_KILL;
         level5.sideObjective = objective;
@@ -184,7 +184,7 @@ public class LevelProgressionManager
         //main objective
         objective = new LevelObjective();
         objective.objectiveName = "Reactivate Water Pumps";
-        objective.objectiveDescription = "The towns underground water pumps seem to be malfunctioning. Find and activate the 3 water pumps.";
+        objective.objectiveDescription = "The town's underground water pumps seem to be malfunctioning. Find and activate the 3 water pumps.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         cave1.mainObjective = objective;
@@ -205,14 +205,14 @@ public class LevelProgressionManager
         //main objective
         objective = new LevelObjective();
         objective.objectiveName = "Kill Giant Motoccos";
-        objective.objectiveDescription = "Several giant motoccos in the cave. Exterminate all 5 of them.";
+        objective.objectiveDescription = "Several giant motoccos are dwelling in this cave system. Exterminate all 5 of them.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         cave2.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
         objective.objectiveName = "Kill Jumpers";
-        objective.objectiveDescription = "Countless Jumpers are roaming these cave. Thin their numbers by at least 10.";
+        objective.objectiveDescription = "Countless Jumpers are roaming these caves. Thin their numbers by at least 10.";
         objective.currencyAward = 25;
         objective.statReward = ArmorStatID.LIFE_LEECH;
         cave2.sideObjective = objective;
@@ -225,15 +225,15 @@ public class LevelProgressionManager
         cave3.levelName = "Sewage Pipe";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Close Leaking Pipe";
-        objective.objectiveDescription = "Find and close off the leaking sewage pipe.";
+        objective.objectiveName = "Flush Enemies From Sewer";
+        objective.objectiveDescription = "Motoccos and Jumpers have made a haven out of the sewer system. Get down there and clear them out.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         cave3.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
         objective.objectiveName = "Find Talisman";
-        objective.objectiveDescription = "Find the missing artifact";
+        objective.objectiveDescription = "Some townsfolk speak about a rare talisman that might be found in this area. Find the missing artifact.";
         objective.currencyAward = 25;
         objective.statReward = ArmorStatID.DOUBLE_GOLD;
         cave3.sideObjective = objective;
@@ -247,7 +247,7 @@ public class LevelProgressionManager
         //main objective
         objective = new LevelObjective();
         objective.objectiveName = "Investigate Ruins";
-        objective.objectiveDescription = "Investigate the underground ruins";
+        objective.objectiveDescription = "There is an ancient underground ruin in this cavern. It is probably worth checking out.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         cave4.mainObjective = objective;
@@ -264,19 +264,19 @@ public class LevelProgressionManager
         //cave 5
         Level cave5 = new Level(); 
         cave5.levelDataName = "cave5.lv";
-        cave5.levelName = "Track Down Relic";
+        cave5.levelName = "Investigate Commando Presence";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Find the Ancient Relic";
-        objective.objectiveDescription = "Head into the temple and find the ancient relic.";
+        objective.objectiveName = "Recon Commandos";
+        objective.objectiveDescription = "Commandos have been spotted entering the underground ruins, see what they are up to.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         objective.statReward = ArmorStatID.MOVE_SPEED;
         cave5.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Find Clue";
-        objective.objectiveDescription = "Find Clue to lead us to the commando base.";
+        objective.objectiveName = "Find Map";
+        objective.objectiveDescription = "Find a map to lead us to the commando base.";
         objective.currencyAward = 25;
         objective.statReward = ArmorStatID.CRIT_DAMAGE;
         cave5.sideObjective = objective;
@@ -289,8 +289,8 @@ public class LevelProgressionManager
         temple1.levelName = "Commando Outposts";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Clear Commando Outposts";
-        objective.objectiveDescription = "Kill all the troops in the three commando outposts.";
+        objective.objectiveName = "Clear 3 Outposts";
+        objective.objectiveDescription = "The commandos have set up 3 guard outposts in the ruins. Wipe them out.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         temple1.mainObjective = objective;
@@ -311,7 +311,7 @@ public class LevelProgressionManager
         //main objective
         objective = new LevelObjective();
         objective.objectiveName = "Destroy Commando Weapon Cache";
-        objective.objectiveDescription = "Find and destroy the commandos weapon cache.";
+        objective.objectiveDescription = "Vexx's forces have stored a weapon cache in the ruins somewhere. Find it and destroy it.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         temple2.mainObjective = objective;
@@ -327,18 +327,18 @@ public class LevelProgressionManager
         //temple3
         Level temple3 = new Level(); 
         temple3.levelDataName = "temple3.lv";
-        temple3.levelName = "Commando Hunt";
+        temple3.levelName = "Commando Officers";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Kill three elite commandos.";
-        objective.objectiveDescription = "Find and kill the three elite commandos.";
+        objective.objectiveName = "Kill 3 Commando Officers";
+        objective.objectiveDescription = "Kill the 3 commando officers in this area. Be careful, these commandos are extremely dangerous.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         temple3.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
         objective.objectiveName = "Salvage Technology";
-        objective.objectiveDescription = "Salvage some technology from one of the commando tanks";
+        objective.objectiveDescription = "Salvage some technology from one of the commando tanks.";
         objective.currencyAward = 25;
         temple3.sideObjective = objective;
         //adding to map
@@ -351,14 +351,14 @@ public class LevelProgressionManager
         //main objective
         objective = new LevelObjective();
         objective.objectiveName = "Rescue Captured Townsfolk";
-        objective.objectiveDescription = "Find and rescue the captured townsfolk";
+        objective.objectiveDescription = "Several members of the town were captured by Vexx's forces. Find and rescue the captured townsfolk";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         temple4.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Rare blade";
-        objective.objectiveDescription = "Rumour has it one of the commandos is carrying a rare blade weapon, find it for slash.";
+        objective.objectiveName = "Rare Blade";
+        objective.objectiveDescription = "Rumour has it one of the commandos is carrying a rare blade weapon, find it for Slash.";
         objective.currencyAward = 25;
         temple4.sideObjective = objective;
         //adding to map
@@ -371,14 +371,14 @@ public class LevelProgressionManager
         //main objective
         objective = new LevelObjective();
         objective.objectiveName = "Kill Tank Commander";
-        objective.objectiveDescription = "Kill the elite tank commander";
+        objective.objectiveDescription = "An elite tank commander is guarding this section of the ruins. Show him who's boss.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         temple5.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Disable uplink";
-        objective.objectiveDescription = "Disable satellite uplink";
+        objective.objectiveName = "Disable Uplink";
+        objective.objectiveDescription = "There is a satellite uplink installed in the ruins somewhere. If you knock it out Vexx will lose communication with this forces.";
         objective.currencyAward = 25;
         temple5.sideObjective = objective;
         //adding to map
@@ -390,15 +390,15 @@ public class LevelProgressionManager
         temple6.levelName = "Turret Commander";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Kill the Elite Turret Commander";
-        objective.objectiveDescription = "Kill the elite turret commander.";
+        objective.objectiveName = "Kill Turret Commander";
+        objective.objectiveDescription = "Kill the elite turret commander. Watch that crossfire.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         temple6.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Do something";
-        objective.objectiveDescription = "Do something.";
+        objective.objectiveName = "Right Click";
+        objective.objectiveDescription = "Right click a thing.";
         objective.currencyAward = 25;
         temple6.sideObjective = objective;
         //adding to map
@@ -410,15 +410,15 @@ public class LevelProgressionManager
         temple7.levelName = "Final Duel";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Kill Gravin";
-        objective.objectiveDescription = "Face gravin in one on one combat.";
+        objective.objectiveName = "Kill Vexx";
+        objective.objectiveDescription = "Face Vexx in one on one combat. Be prepared, Vexx is extremely dangerous.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         temple7.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
         objective.objectiveName = "null";
-        objective.objectiveDescription = "Do something.";
+        objective.objectiveDescription = "null";
         objective.currencyAward = 25;
         temple7.sideObjective = objective;
         //adding to map
