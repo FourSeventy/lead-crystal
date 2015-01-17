@@ -619,6 +619,10 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         //Remove all effects
         this.combatData.removeAllCombatEffects();
         this.getImage().removeAllImageEffects();
+        
+        //play sound
+        Sound sound = Sound.locationSound("buffered/bashDeath01.ogg", this.getPosition().x, this.getPosition().y, false, 1f,1f);
+        this.getOwningScene().add(sound);
 
         //Stop casting
         this.interruptAttacking();
