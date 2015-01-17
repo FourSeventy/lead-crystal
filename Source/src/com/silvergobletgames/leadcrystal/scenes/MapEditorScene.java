@@ -893,21 +893,21 @@ public class MapEditorScene extends Scene {
                              
                
                 
-                //for boxes
+               
                 for(SceneObject so: this.getSceneObjectManager().get(Layer.MAIN))
                 {
                     if(so instanceof NonPlayerEntity)
                     {
-                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.MoleAnimationPack || ((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.MoleAnimationPack)
+                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.MoleAnimationPack )
                         {
-                            ((NonPlayerEntity)so).getCombatData().maxHealth.setBase(200);
+                            ((NonPlayerEntity)so).setSoundPack(SoundPackFactory.getInstance().getSoundPack(SoundPack.SoundPackID.BigMammal)); 
                         }
                     }
                     else if(so instanceof MobSpawner)
                     {
                         if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.MoleAnimationPack)
                         {
-                            ((MobSpawner)so).mobToSpawn.getCombatData().maxHealth.setBase(200);
+                            ((MobSpawner)so).mobToSpawn.setSoundPack(SoundPackFactory.getInstance().getSoundPack(SoundPack.SoundPackID.BigMammal)); 
                         }                           
                     }
                 }

@@ -4,6 +4,8 @@ package com.silvergobletgames.leadcrystal.skills;
 import com.silvergobletgames.leadcrystal.ai.AIState;
 import com.silvergobletgames.leadcrystal.ai.BrainFactory;
 import com.silvergobletgames.leadcrystal.combat.Damage;
+import com.silvergobletgames.leadcrystal.combat.SoundPack;
+import com.silvergobletgames.leadcrystal.combat.SoundPackFactory;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.MoleAnimationPack;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.entities.*;
@@ -125,6 +127,7 @@ public class EnemyAntThrow extends Skill {
                  ant.getCombatData().maxHealth.setBase(30);
                  ant.getCombatData().currentHealth = 30;
                  ant.getCombatData().xVelocity.setBase(25);
+                 ant.setSoundPack(SoundPackFactory.getInstance().getSoundPack(SoundPack.SoundPackID.Mammal));
                  ant.setPosition(this.body.getLastPosition().getX(), this.body.getLastPosition().getY() + 10);
                  ant.getBrain().getStateMachine().changeState(AIState.StateID.SPAWNING);
                  this.getOwningScene().add(ant,Layer.MAIN);
