@@ -172,7 +172,7 @@ public class EnemyTriShot extends Skill
             this.getOwningScene().add(goo1,Layer.MAIN);  
             
             //play sound
-            Sound sound = Sound.locationSound("buffered/smallLaser.ogg", user.getPosition().x, user.getPosition().y, false, 1f,1f);
+            Sound sound = Sound.locationSound("buffered/smallLaser.ogg", user.getPosition().x, user.getPosition().y, false, 1f,.85f);
             this.getOwningScene().add(sound);
         
         }
