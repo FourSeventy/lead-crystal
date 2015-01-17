@@ -85,7 +85,10 @@ public class EnemyAntThrow extends Skill {
 
             user.getOwningScene().add(tossedAnt,Layer.MAIN);
         }
+        
         //play sound
+        Sound sound = Sound.locationSound("buffered/jump.ogg", user.getPosition().x, user.getPosition().y, false, .8f, .6f);
+        user.getOwningScene().add(sound);
 
            
     }

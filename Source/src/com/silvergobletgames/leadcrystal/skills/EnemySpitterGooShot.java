@@ -123,10 +123,7 @@ public class EnemySpitterGooShot extends Skill
         //add sound
         Sound attackSound = Sound.locationSound("buffered/spit1.ogg", origin.x, origin.y, false);               
         user.getOwningScene().add(attackSound);
-        
-        
-
-        
+              
     }
     
     

@@ -17,6 +17,7 @@ import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect;
 import com.silvergobletgames.leadcrystal.entities.HitBox;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 
 
@@ -64,7 +65,11 @@ public class EnemyRangedSwipe extends Skill{
         fadeEffect.setDelay(30);
         hitBox.getImage().addImageEffect(fadeEffect); 
                     
-        this.user.getOwningScene().add(hitBox,Layer.MAIN);        
+        this.user.getOwningScene().add(hitBox,Layer.MAIN);  
+        
+        //add sound
+        Sound attackSound = Sound.locationSound("buffered/claw2.ogg", origin.x, origin.y, false);               
+        user.getOwningScene().add(attackSound);
     }
     
 

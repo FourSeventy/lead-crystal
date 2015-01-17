@@ -16,6 +16,7 @@ import com.silvergobletgames.leadcrystal.entities.EntityEffect;
 import com.silvergobletgames.leadcrystal.entities.HitBox;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene.Layer;
 import com.silvergobletgames.sylver.graphics.AbstractParticleEmitter;
 import com.silvergobletgames.sylver.graphics.Color;
@@ -91,10 +92,9 @@ public class EnemyRockThrow extends Skill
 
         
         //play sound
-        
-        
-
-        
+        Sound sound = Sound.locationSound("buffered/jump.ogg", user.getPosition().x, user.getPosition().y, false, .8f, .7f);
+        user.getOwningScene().add(sound);
+               
     }
     
     
@@ -116,7 +116,7 @@ public class EnemyRockThrow extends Skill
                           
                 
                 //if we landed on the top of a worldObjectEntity
-                if(-event.getNormal().getY() > .75 )
+                if(-event.getNormal().getY() > .65 )
                 {
                      //put slowing tar puddle in the world
                     HitBox slowingTar = new SlowingTarHitBox(user);
@@ -124,7 +124,10 @@ public class EnemyRockThrow extends Skill
                     slowingTar.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 600, 0, 0));
                     this.getOwningScene().add(slowingTar, Layer.MAIN);
                     
-                    
+                    //play sound
+                    Sound sound = Sound.locationSound("buffered/usePotion.ogg", user.getPosition().x, user.getPosition().y, false, 1.3f, .5f);
+                    this.getOwningScene().add(sound);
+                                     
                 }
                  
                  //remove from world

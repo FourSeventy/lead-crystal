@@ -19,6 +19,7 @@ import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.GreenGooEmitter;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 
 /**
@@ -143,8 +144,9 @@ public class EnemyJumperSpikes extends Skill
         user.getOwningScene().add(goo3,Layer.MAIN);
         user.getOwningScene().add(goo4,Layer.MAIN);
         
-        //play sound
-        
+        //add sound
+        Sound attackSound = Sound.locationSound("buffered/spit1.ogg", origin.x, origin.y, false);               
+        user.getOwningScene().add(attackSound);
         
 
         
