@@ -243,7 +243,7 @@ public class LevelProgressionManager
         //cave 4
         Level cave4 = new Level(); 
         cave4.levelDataName = "cave4.lv";
-        cave4.levelName = "Investigate ruins";
+        cave4.levelName = "Investigate Ruins";
         //main objective
         objective = new LevelObjective();
         objective.objectiveName = "Investigate Ruins";
@@ -264,10 +264,10 @@ public class LevelProgressionManager
         //cave 5
         Level cave5 = new Level(); 
         cave5.levelDataName = "cave5.lv";
-        cave5.levelName = "Investigate Commando Presence";
+        cave5.levelName = "Recon Commandos";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Recon Commandos";
+        objective.objectiveName = "Investigate Commando Presence";
         objective.objectiveDescription = "Commandos have been spotted entering the underground ruins, see what they are up to.";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
