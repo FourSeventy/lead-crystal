@@ -18,7 +18,7 @@ public class SoundPack
     public static enum SoundPackID
     { 
         //WARNING - Changing the names of this enum will break save data
-        None,Human,Bug,SmallBug, Mammal, BigMammal, Crate
+        None,Human,Bug,SmallBug, Mammal, BigMammal, Crate, Mechanical
     }
     
     public static enum SoundPackType 

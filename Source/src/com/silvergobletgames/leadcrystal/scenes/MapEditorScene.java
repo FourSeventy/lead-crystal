@@ -898,16 +898,16 @@ public class MapEditorScene extends Scene {
                 {
                     if(so instanceof NonPlayerEntity)
                     {
-                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.MoleAnimationPack )
+                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.Scout1AnimationPack || ((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.Scout2AnimationPack  )
                         {
-                            ((NonPlayerEntity)so).setSoundPack(SoundPackFactory.getInstance().getSoundPack(SoundPack.SoundPackID.BigMammal)); 
+                            ((NonPlayerEntity)so).setSoundPack(SoundPackFactory.getInstance().getSoundPack(SoundPack.SoundPackID.Human)); 
                         }
                     }
                     else if(so instanceof MobSpawner)
                     {
-                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.MoleAnimationPack)
+                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.Scout1AnimationPack || ((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.Scout2AnimationPack)
                         {
-                            ((MobSpawner)so).mobToSpawn.setSoundPack(SoundPackFactory.getInstance().getSoundPack(SoundPack.SoundPackID.BigMammal)); 
+                            ((MobSpawner)so).mobToSpawn.setSoundPack(SoundPackFactory.getInstance().getSoundPack(SoundPack.SoundPackID.Human)); 
                         }                           
                     }
                 }
