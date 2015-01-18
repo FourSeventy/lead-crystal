@@ -32,6 +32,7 @@ import com.silvergobletgames.leadcrystal.skills.Skill;
 import com.silvergobletgames.leadcrystal.skills.Skill.SkillID;
 import com.silvergobletgames.leadcrystal.skills.SkillManager;
 import com.silvergobletgames.sylver.audio.Sound;
+import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.core.InputSnapshot;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.core.Scene.Layer;
@@ -1388,11 +1389,17 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                 //add jetpack emitters
                 if(this.jetpackJuice == this.MAX_JETPACK_JUICE)
                 {
+                    
                     AbstractParticleEmitter explosionEmitter = new LeadCrystalParticleEmitters.JetpackEmitter();
                     explosionEmitter.setAngle(270);
                     explosionEmitter.setParticlesPerFrame(1);
                     explosionEmitter.setDuration(-1);
                     this.addEmitter(explosionEmitter);
+                    
+                    //start sound
+                    Sound sound = Sound.locationSound("buffered/jetpackLoop.ogg", this.getPosition().x  , this.getPosition().y, false, 1f, 1f, true);
+                    sound.name = "jetpackLoop";
+                    this.getOwningScene().add(sound);
                 }
 
                 //set gravity
@@ -1405,6 +1412,10 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                 }
                 else
                 {
+                    
+                    Game.getInstance().getAudioRenderer().getSoundSystem().stop("jetpackLoop");
+                    Game.getInstance().getAudioRenderer().getSoundSystem().removeSource("jetpackLoop");
+                    
                     //turn gravity back on for player
                     this.getBody().setGravityEffected(true);
 
@@ -1432,6 +1443,8 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     
     public void handleJumpReleased()
     {
+        Game.getInstance().getAudioRenderer().getSoundSystem().stop("jetpackLoop");
+        Game.getInstance().getAudioRenderer().getSoundSystem().removeSource("jetpackLoop");
         
         //save the released jump energy into local var
         float jumpEnergyAtRelease = this.jumpEnergy;
