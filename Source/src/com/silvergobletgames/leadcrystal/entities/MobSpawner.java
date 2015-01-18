@@ -154,7 +154,7 @@ public class MobSpawner extends Entity implements SavableSceneObject
         }
         
         //add sound
-        Sound sound = SpawningEffectsFactory.getSpawnSound(mobToSpawn.getImage().getAnimationPack(), spawnX, spawnX); 
+        Sound sound = SpawningEffectsFactory.getSpawnSound(mobToSpawn.getImage().getAnimationPack(), spawnX, spawnY); 
         if(sound != null)
         {
            this.owningScene.add(sound);

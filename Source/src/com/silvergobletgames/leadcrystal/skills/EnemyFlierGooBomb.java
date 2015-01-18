@@ -87,7 +87,7 @@ public class EnemyFlierGooBomb extends Skill
 
         
         //add sound
-        Sound attackSound = Sound.locationSound("buffered/spit1.ogg", origin.x, origin.y, false);               
+        Sound attackSound = Sound.locationSound("buffered/spit1.ogg", origin.x, origin.y, false, .80f);               
         user.getOwningScene().add(attackSound);
         
         
@@ -198,7 +198,7 @@ public class EnemyFlierGooBomb extends Skill
                 
                 //add sound
                 float pitch = (float)(1.9f - (Math.random() * .4f));
-                Sound attackSound = Sound.locationSound("buffered/spit1.ogg", this.getPosition().x, this.getPosition().y, false,.8f,pitch);               
+                Sound attackSound = Sound.locationSound("buffered/spit1.ogg", this.getPosition().x, this.getPosition().y, false,.45f,pitch);               
                 this.getOwningScene().add(attackSound);
               
                  
@@ -210,7 +210,7 @@ public class EnemyFlierGooBomb extends Skill
              {
                  //add sound
                 float pitch = (float)(1.9f - (Math.random() * .4f));
-                Sound attackSound = Sound.locationSound("buffered/spit1.ogg", this.getPosition().x, this.getPosition().y, false,.8f,pitch);               
+                Sound attackSound = Sound.locationSound("buffered/spit1.ogg", this.getPosition().x, this.getPosition().y, false,.45f,pitch);               
                 this.getOwningScene().add(attackSound);
             
                  this.getBody().setVelocity(new Vector2f(0,0));
@@ -250,7 +250,7 @@ public class EnemyFlierGooBomb extends Skill
              {
                  //add sound
                 float pitch = (float)(1.9f - (Math.random() * .4f));
-                Sound attackSound = Sound.locationSound("buffered/spit1.ogg", this.getPosition().x, this.getPosition().y, false,.8f,pitch);               
+                Sound attackSound = Sound.locationSound("buffered/spit1.ogg", this.getPosition().x, this.getPosition().y, false,.45f,pitch);               
                 this.getOwningScene().add(attackSound);
                 
                 this.getBody().setVelocity(new Vector2f(0,0));

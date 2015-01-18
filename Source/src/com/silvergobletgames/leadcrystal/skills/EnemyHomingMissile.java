@@ -243,7 +243,7 @@ public class EnemyHomingMissile extends Skill
            this.getOwningScene().add(rocket,Layer.MAIN); 
         
            //play sound
-            Sound sound = Sound.locationSound("buffered/rocketShoot.ogg", user.getPosition().x, user.getPosition().y, false, 1f,1f);
+            Sound sound = Sound.locationSound("buffered/rocketShoot.ogg", user.getPosition().x, user.getPosition().y, false, .9f,1f);
             this.getOwningScene().add(sound);
         }
         

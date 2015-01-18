@@ -43,10 +43,10 @@ public class SpawningEffectsFactory
     
     public static Sound getSpawnSound(AnimationPack pack,float x, float y)
     {
-        if(pack instanceof PlantAnimationPack ||  pack instanceof MoleAnimationPack || pack instanceof SandmanAnimationPack)
+        if(pack instanceof PlantAnimationPack ||  pack instanceof MoleAnimationPack || pack instanceof SandmanAnimationPack || pack instanceof JumperAnimationPack)
         {
             
-            return Sound.locationSound("buffered/spawn1.ogg", x, y, false,1.5f); 
+            return Sound.locationSound("buffered/spawn1.ogg", x, y, false,.65f); 
         }
         
         else return null;

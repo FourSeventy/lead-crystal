@@ -143,7 +143,7 @@ public class PlayerRocket extends PlayerSkill
 
       
         //play sound
-        Sound sound = Sound.locationSound("buffered/rocketShoot.ogg", user.getPosition().x, user.getPosition().y, false, 1f,1f);
+        Sound sound = Sound.locationSound("buffered/rocketShoot.ogg", user.getPosition().x, user.getPosition().y, false, .75f);
         user.getOwningScene().add(sound);
         
     }

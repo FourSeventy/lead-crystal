@@ -196,7 +196,7 @@ public class EnemyBossSin extends Skill
             this.getOwningScene().add(bullet,Layer.MAIN);
             
             //play sound
-            Sound sound = Sound.locationSound("buffered/laser03.ogg", user.getPosition().x, user.getPosition().y, false, 1f,1f);
+            Sound sound = Sound.locationSound("buffered/laser03.ogg", user.getPosition().x, user.getPosition().y, false, .5f,1f);
             this.getOwningScene().add(sound);
 
             

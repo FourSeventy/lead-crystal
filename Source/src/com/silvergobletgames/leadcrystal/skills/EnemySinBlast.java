@@ -151,11 +151,6 @@ public class EnemySinBlast extends Skill
         
                 this.shootBullet(vectorToTarget, passthroughDamage, this.targetPosition,caster, origin);
             }
-            else if(this.ticks == 20)
-            {
-                    
-
-            }
             if(this.ticks > 180)
             {
                 this.removeFromOwningScene();
@@ -179,7 +174,7 @@ public class EnemySinBlast extends Skill
             if(user.getTarget().getPosition().y < user.getPosition().y)
                 theta = (float)(2* Math.PI - theta);
                 //body and image and hitbox
-            Body body = new Body(new Box(45,45), 1);
+            Body body = new Body(new Box(44,44), 1);
             Image img = new Image("poison_goo_ball.png");
             img.setDimensions(50, 50);
             EnemySinHitbox bullet = new EnemySinHitbox(damage, body, img, user, new SylverVector2f(vectorToTarget),1);
@@ -195,7 +190,7 @@ public class EnemySinBlast extends Skill
             this.getOwningScene().add(bullet,Layer.MAIN);
 
              //body and image and hitbox
-            body = new Body(new Box(50,50), 1);
+            body = new Body(new Box(44,44), 1);
             img = new Image("poison_goo_ball.png");
             img.setDimensions(50, 50);
             bullet = new EnemySinHitbox(damage, body, img, user, new SylverVector2f(vectorToTarget),-1);
@@ -211,7 +206,7 @@ public class EnemySinBlast extends Skill
             this.getOwningScene().add(bullet,Layer.MAIN);
             
             //play sound
-            Sound sound = Sound.locationSound("buffered/laser03.ogg", user.getPosition().x, user.getPosition().y, false, 1f,1f);
+            Sound sound = Sound.locationSound("buffered/laser03.ogg", user.getPosition().x, user.getPosition().y, false, .45f,1f);
             this.getOwningScene().add(sound);
 
             

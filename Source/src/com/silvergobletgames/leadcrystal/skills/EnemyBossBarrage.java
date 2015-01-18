@@ -189,7 +189,7 @@ public class EnemyBossBarrage extends Skill{
               this.getOwningScene().add(goo,Layer.MAIN);  
               
               //play sound
-            Sound sound = Sound.locationSound("buffered/smallLaser.ogg", this.getPosition().x, this.getPosition().y, false, .5f,.55f);
+            Sound sound = Sound.locationSound("buffered/smallLaser.ogg", this.getPosition().x, this.getPosition().y, false, .15f,.55f);
             this.getOwningScene().add(sound);
          }
          

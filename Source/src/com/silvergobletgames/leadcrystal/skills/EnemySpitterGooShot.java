@@ -154,7 +154,7 @@ public class EnemySpitterGooShot extends Skill
              {
                  //add sound
                 float pitch = (float)(1.9f - (Math.random() * .4f));
-                Sound attackSound = Sound.locationSound("buffered/spit1.ogg", this.getPosition().x, this.getPosition().y, false,.40f,pitch);               
+                Sound attackSound = Sound.locationSound("buffered/spit1.ogg", this.getPosition().x, this.getPosition().y, false,.45f,pitch);               
                 this.getOwningScene().add(attackSound);
                 
                 this.getBody().setVelocity(new Vector2f(0,0));

@@ -145,7 +145,7 @@ public class EnemyJumperSpikes extends Skill
         user.getOwningScene().add(goo4,Layer.MAIN);
         
         //add sound
-        Sound attackSound = Sound.locationSound("buffered/spit1.ogg", origin.x, origin.y, false);               
+        Sound attackSound = Sound.locationSound("buffered/spit1.ogg", origin.x, origin.y, false,.80f);               
         user.getOwningScene().add(attackSound);
         
 
