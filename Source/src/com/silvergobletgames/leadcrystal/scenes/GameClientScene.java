@@ -719,14 +719,14 @@ public final class GameClientScene extends Scene
             //use hotbar skills 
             if(inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_Q))
             {
-                if (this.player.getSkillAssignment(3)  != null && player.getSkillManager().getSkill(this.player.getSkillAssignment(3)).isUsable())
+                if (this.player.getSkillAssignment(3)  != null)// && player.getSkillManager().getSkill(this.player.getSkillAssignment(3)).isUsable())
                 {
                     player.useActionBarSkill(this.player.getSkillAssignment(3));
                 }
             }
             if(inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_E))
             {
-                if (this.player.getSkillAssignment(4) != null && player.getSkillManager().getSkill(this.player.getSkillAssignment(4)).isUsable())
+                if (this.player.getSkillAssignment(4) != null)// && player.getSkillManager().getSkill(this.player.getSkillAssignment(4)).isUsable())
                 {
                     player.useActionBarSkill(this.player.getSkillAssignment(4));
                 }
@@ -756,6 +756,7 @@ public final class GameClientScene extends Scene
                 {
                     if (this.player.getSkillAssignment(1) != null && player.getSkillManager().getSkill(this.player.getSkillAssignment(1)).isUsable())
                     {
+                        
                         player.useActionBarSkill(this.player.getSkillAssignment(1));
                     }
                 }
@@ -763,10 +764,12 @@ public final class GameClientScene extends Scene
                 {                        
                     if (this.player.getSkillAssignment(2) != null && player.getSkillManager().getSkill(this.player.getSkillAssignment(2)).isUsable())
                     {
+                        
                         player.useActionBarSkill(this.player.getSkillAssignment(2));
                     }
                 }
             }
+            
 
 
             //===========================

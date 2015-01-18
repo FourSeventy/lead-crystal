@@ -17,6 +17,7 @@ import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
 import com.silvergobletgames.leadcrystal.skills.PlayerDashAttack;
 import com.silvergobletgames.leadcrystal.skills.Skill;
 import com.silvergobletgames.leadcrystal.skills.Skill.SkillID;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.InputSnapshot;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.graphics.Anchorable;
@@ -401,6 +402,13 @@ public class ClientPlayerEntity extends PlayerEntity
                 vectorToTarget.normalise();
                 this.handleDash(vectorToTarget);
             }
+        }
+        else
+        {
+         
+            //if not usable, play sound
+            Sound sound = Sound.ambientSound("buffered/error.ogg", false);
+            this.getOwningScene().add(sound);
         }
         
         
