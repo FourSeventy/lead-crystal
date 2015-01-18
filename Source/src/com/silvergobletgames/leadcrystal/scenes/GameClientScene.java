@@ -754,7 +754,7 @@ public final class GameClientScene extends Scene
             {
                 if (inputSnapshot.buttonClicked() == 1 )
                 {
-                    if (this.player.getSkillAssignment(1) != null && player.getSkillManager().getSkill(this.player.getSkillAssignment(1)).isUsable())
+                    if (this.player.getSkillAssignment(1) != null && player.getSkillManager().getSkill(this.player.getSkillAssignment(1)).isUsable()&& player.getCombatData().canAttack() && !player.inAttackAnimation())
                     {
                         
                         player.useActionBarSkill(this.player.getSkillAssignment(1));
@@ -762,7 +762,7 @@ public final class GameClientScene extends Scene
                 }
                 else if(inputSnapshot.buttonClicked() == 3)
                 {                        
-                    if (this.player.getSkillAssignment(2) != null && player.getSkillManager().getSkill(this.player.getSkillAssignment(2)).isUsable())
+                    if (this.player.getSkillAssignment(2) != null && player.getSkillManager().getSkill(this.player.getSkillAssignment(2)).isUsable() && player.getCombatData().canAttack() && !player.inAttackAnimation())
                     {
                         
                         player.useActionBarSkill(this.player.getSkillAssignment(2));

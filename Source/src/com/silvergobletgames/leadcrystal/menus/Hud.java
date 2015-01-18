@@ -1149,10 +1149,12 @@ public class Hud extends Window
         //Create and set the window
         float center = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x/2;
         DialogueWindow window = new DialogueWindow(center - 460,575, speaker, text);
+        window.setOwningScene(this.owningScene);
         window.open();
         this.sceneReference.add(window, Layer.MENU);
         window.update();
         this.activeDialogue = window;
+        
     }
     
     /**

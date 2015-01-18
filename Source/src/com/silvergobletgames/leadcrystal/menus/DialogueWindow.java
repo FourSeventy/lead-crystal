@@ -11,6 +11,7 @@ import com.silvergobletgames.sylver.windowsystem.Label;
 import com.silvergobletgames.sylver.windowsystem.Window;
 import java.util.ArrayList;
 import com.silvergobletgames.leadcrystal.scripting.ScriptObject;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.graphics.OpenGLGameWindow;
 import com.silvergobletgames.sylver.graphics.Text.CoreTextType;
@@ -120,10 +121,31 @@ public class DialogueWindow extends Window {
     @Override
     public void open()
     {
-        super.open();
+        
+        
+         if(this.owningScene != null)
+        {
+            Sound openSound = Sound.ambientSound("buffered/menuOpen.ogg", false);
+            this.owningScene.add(openSound);
+        }
+         
+         super.open();
         
         this.opening = true;
         this.setPosition(this.getPosition().x, 900);
+    }
+    
+    @Override
+    public void close()
+    {
+        if(this.owningScene != null && this.isOpen)
+        {
+            Sound closeSound = Sound.ambientSound("buffered/menuClose.ogg", false);
+            this.owningScene.add(closeSound);
+        }
+        
+        super.close();
+              
     }
     
     @Override
