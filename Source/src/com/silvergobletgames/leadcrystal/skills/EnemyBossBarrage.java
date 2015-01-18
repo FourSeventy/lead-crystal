@@ -80,9 +80,9 @@ public class EnemyBossBarrage extends Skill{
         user.getOwningScene().add(goo,Layer.MAIN);       
 
         
-        //add sound
-        Sound attackSound = Sound.locationSound("buffered/spit1.ogg", origin.x, origin.y, false);               
-        user.getOwningScene().add(attackSound);
+        //play sound
+        Sound sound = Sound.locationSound("buffered/laser04.ogg", user.getPosition().x, user.getPosition().y, false, 1f,1f);
+        user.getOwningScene().add(sound);
             
             
         
@@ -187,6 +187,10 @@ public class EnemyBossBarrage extends Skill{
 
 
               this.getOwningScene().add(goo,Layer.MAIN);  
+              
+              //play sound
+            Sound sound = Sound.locationSound("buffered/smallLaser.ogg", this.getPosition().x, this.getPosition().y, false, .5f,.55f);
+            this.getOwningScene().add(sound);
          }
          
          public void collidedWith(Entity other, CollisionEvent event)

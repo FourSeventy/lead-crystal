@@ -254,7 +254,7 @@ public class EnemyBossLaserBurst extends Skill
            this.getOwningScene().add(rocket,Layer.MAIN); 
         
            //play sound
-            Sound sound = Sound.locationSound("buffered/smallLaser.ogg", user.getPosition().x, user.getPosition().y, false, 1f,1f);
+            Sound sound = Sound.locationSound("buffered/laser01.ogg", user.getPosition().x, user.getPosition().y, false, 1f,1f);
             this.getOwningScene().add(sound);
         }
         
