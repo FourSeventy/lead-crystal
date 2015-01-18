@@ -110,6 +110,7 @@ public class PlayerBarrelRoll extends PlayerSkill{
     public static class BarrelHitBox extends HitBox
     {
 
+        public boolean landed= false;
         
          public BarrelHitBox(Damage d, Body b, Image i, Entity user)
          { 
@@ -241,6 +242,17 @@ public class PlayerBarrelRoll extends PlayerSkill{
                      }
                  }
              }
+             
+             //remove if we hit a world object
+             if( !landed && other instanceof WorldObjectEntity && -event.getNormal().getY() > .65 )
+             {
+                 //if we landed on the top of a worldObjectEntity
+                 landed = true;
+             
+                 Sound sound = Sound.locationSound("buffered/bodyFall.ogg", this.getPosition().x, this.getPosition().y, false,.40f,.6f);
+                 this.getOwningScene().add(sound);
+                
+              }
              
 
                          
