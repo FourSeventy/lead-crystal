@@ -251,10 +251,13 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("mouseEntered"))
                {
                    openTooltip(weaponBasePositionX +95,weaponBasePositionY ,stat1.name,stat1.image,stat1.description, stat1.cost);
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND)); 
+                   
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
                    closeTooltip();
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
                }
            }
        });
@@ -278,10 +281,14 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND)); 
+                   
                    openTooltip(weaponBasePositionX +195,weaponBasePositionY,stat2.name,stat2.image,stat2.description, stat2.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND)); 
+                   
                    closeTooltip();
                }
            }
@@ -305,10 +312,14 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND)); 
+                   
                    openTooltip(weaponBasePositionX +295,weaponBasePositionY,stat3.name,stat3.image,stat3.description, stat3.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND)); 
+                   
                    closeTooltip();
                }
            }
@@ -332,10 +343,14 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND)); 
+                   
                    openTooltip(weaponBasePositionX +95,weaponBasePositionY - 100,stat4.name,stat4.image,stat4.description, stat4.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND)); 
+                   
                    closeTooltip();
                }
            }
@@ -359,10 +374,12 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND));
                    openTooltip(weaponBasePositionX +205,weaponBasePositionY - 100,stat8.name,stat8.image,stat8.description, stat8.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
                    closeTooltip();
                }
            }
@@ -386,10 +403,12 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND));
                    openTooltip(weaponBasePositionX +295,weaponBasePositionY -100,stat6.name,stat6.image,stat6.description, stat6.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
                    closeTooltip();
                }
            }
@@ -423,10 +442,12 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND));
                    openTooltip(helmBasePositionX -425,helmBasePositionY ,stat7.name,stat7.image,stat7.description, stat7.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
                    closeTooltip();
                }
            }
@@ -452,10 +473,12 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND));
                    openTooltip(helmBasePositionX -325, helmBasePositionY ,stat5.name,stat5.image,stat5.description, stat5.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
                    closeTooltip();
                }
            }
@@ -481,10 +504,12 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND));
                    openTooltip(helmBasePositionX -225,helmBasePositionY,stat9.name,stat9.image,stat9.description, stat9.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
                    closeTooltip();
                }
            }
@@ -508,10 +533,12 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND));
                    openTooltip(helmBasePositionX -425,helmBasePositionY-100,stat10.name,stat10.image,stat10.description, stat10.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
                    closeTooltip();
                }
            }
@@ -535,10 +562,12 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND));
                    openTooltip(helmBasePositionX -325,helmBasePositionY-100,stat11.name,stat11.image,stat11.description, stat11.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
                    closeTooltip();
                }
            }
@@ -571,10 +600,12 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND));
                    openTooltip(armorBasePositionX +95,armorBasePositionY,stat12.name,stat12.image,stat12.description, stat12.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
                    closeTooltip();
                }
            }
@@ -598,10 +629,12 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND));
                    openTooltip(armorBasePositionX +195,armorBasePositionY,stat13.name,stat13.image,stat13.description, stat13.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
                    closeTooltip();
                }
            }
@@ -625,10 +658,12 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND));
                    openTooltip(armorBasePositionX +295,armorBasePositionY,stat14.name,stat14.image,stat14.description, stat14.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
                    closeTooltip();
                }
            }
@@ -652,10 +687,12 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND));
                    openTooltip(armorBasePositionX +95,armorBasePositionY-100,stat15.name,stat15.image,stat15.description, stat15.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
                    closeTooltip();
                }
            }
@@ -679,10 +716,12 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND));
                    openTooltip(armorBasePositionX +195,armorBasePositionY-100,stat16.name,stat16.image,stat16.description, stat16.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
                    closeTooltip();
                }
            }
@@ -706,10 +745,12 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND));
                    openTooltip(armorBasePositionX +295,armorBasePositionY-100,stat17.name,stat17.image,stat17.description, stat17.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
                    closeTooltip();
                }
            }
@@ -742,10 +783,12 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND));
                    openTooltip(bootsBasePositionX -425,bootsBasePositionY ,stat18.name,stat18.image,stat18.description, stat18.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
                    closeTooltip();
                }
            }
@@ -769,10 +812,12 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND));
                    openTooltip(bootsBasePositionX -325,bootsBasePositionY ,stat19.name,stat19.image,stat19.description, stat19.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
                    closeTooltip();
                }
            }
@@ -796,10 +841,12 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND));
                    openTooltip(bootsBasePositionX -225,bootsBasePositionY ,stat20.name,stat20.image,stat20.description, stat20.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
                    closeTooltip();
                }
            }
@@ -823,10 +870,12 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND));
                    openTooltip(bootsBasePositionX -425,bootsBasePositionY -100,stat21.name,stat21.image,stat21.description, stat21.cost);
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
                    closeTooltip();
                }
            }
@@ -1315,7 +1364,6 @@ public class ArmorMenu extends Window{
         
           
     }
-    
     
     
     private void openTooltip( float x, float y, String name, Image image, String description, Integer cost)

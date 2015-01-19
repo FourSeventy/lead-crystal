@@ -74,11 +74,15 @@ public class PotionsMenu extends Window{
                if (e.getActionCommand().equals("mouseEntered")) 
                {
                    section.setBrightness(1.65f);
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.PURCHASEHAND)); 
+               
                }
                if (e.getActionCommand().equals("mouseExited")) 
                {
                    section.setBrightness(1f);
                    potionImage.setBrightness(1f);
+                   Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND)); 
+               
                }
                if(e.getActionCommand().equals("clicked"))
                {
