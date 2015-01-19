@@ -643,7 +643,7 @@ public class MapEditorScene extends Scene {
         {
             this.jumpIntoLevel = true;
             this.placingStartingPosition = true;
-            Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.WRENCH));
+            Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.POINTERHAND));
         }
         
         if (this.polygonBuilder.active)
@@ -777,7 +777,7 @@ public class MapEditorScene extends Scene {
             {
                 this.placingStartingPosition  = false;
                 
-                Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND));
+                Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.POINTERHAND));
                 if (this.jumpIntoLevel)
                 {
                     this.jumpIntoLevel = false;
@@ -923,7 +923,7 @@ public class MapEditorScene extends Scene {
 
     public void sceneEntered(ArrayList args) 
     {
-        Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND));
+        Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.POINTERHAND));
         
         //stop music
         Sound sound = Sound.newBGM("");

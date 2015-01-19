@@ -884,7 +884,7 @@ public final class GameClientScene extends Scene
         getViewport().setDimensions(Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x, Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().y);
         
         //change cursor
-        Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE));      
+        Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICLE));      
         
         //Check for map editor flag
         if (args != null && args.size() > 0)
@@ -1219,7 +1219,7 @@ public final class GameClientScene extends Scene
         this.hud.activeLevelName = levelData.filename;
         
         //reset mouse cursor to default
-        Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.RETICULE)); 
+        Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.RETICLE)); 
         
         //fade from black
         getSceneEffectsManager().fadeFromBlack(new PostEffectExecutor()); 

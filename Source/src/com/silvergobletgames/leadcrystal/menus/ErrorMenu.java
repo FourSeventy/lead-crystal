@@ -34,7 +34,7 @@ public class ErrorMenu extends Window
                 if (e.getActionCommand().equals("mouseEntered")) {
 
                   closeImage.setBrightness(1.5f);
-                  Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.HAND)); 
+                  Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.POINTERHAND)); 
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
 

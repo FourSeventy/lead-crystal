@@ -499,7 +499,7 @@ public class MapMenu extends Window{
                 if (e.getActionCommand().equals("mouseEntered")) {
 
                   closeImage.setBrightness(1.5f);
-                  Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.HAND)); 
+                  Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND)); 
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
 
@@ -1544,7 +1544,7 @@ public class MapMenu extends Window{
                 if (e.getActionCommand().equals("mouseEntered"))
                 {
                     rightMovementButton.getImage().setBrightness(1.5f);
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.HAND)); 
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND)); 
                 
                 }
                 if (e.getActionCommand().equals("mouseExited")) 
@@ -1572,7 +1572,7 @@ public class MapMenu extends Window{
                 if (e.getActionCommand().equals("mouseEntered"))
                 {
                     leftMovementButton.getImage().setBrightness(1.5f);
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.HAND)); 
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND)); 
                 
                 }
                 if (e.getActionCommand().equals("mouseExited")) 

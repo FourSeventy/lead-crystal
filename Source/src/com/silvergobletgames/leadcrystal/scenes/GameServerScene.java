@@ -424,7 +424,7 @@ public class GameServerScene extends Scene
                         }
                         else if (clientData.hoveredEntityExited) 
                         {
-                            this.sendCursorChangePacket(clientID, CursorType.RETICULE);
+                            this.sendCursorChangePacket(clientID, CursorType.RETICLE);
                             this.sendEntityHoverPacket(clientID, clientData.lastHoveredEntityID, false,clientData.hoveredEntityInRange);
                         }
                     }

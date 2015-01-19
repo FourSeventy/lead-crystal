@@ -411,7 +411,7 @@ public class OptionsMenuScene extends Scene
     public void sceneEntered(ArrayList args) 
     {
         //set mouse cursor
-        Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND));
+        Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.POINTERHAND));
     }
    
     public void sceneExited()

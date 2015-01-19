@@ -63,7 +63,7 @@ public class QuestMenu extends Window{
                 if (e.getActionCommand().equals("mouseEntered")) {
 
                   closeImage.setBrightness(1.5f);
-                  Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.HAND)); 
+                  Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND)); 
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
 

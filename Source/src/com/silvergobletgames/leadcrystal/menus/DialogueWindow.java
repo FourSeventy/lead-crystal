@@ -64,16 +64,16 @@ public class DialogueWindow extends Window {
                     if (e.getActionCommand().equals("clicked")) 
                     {                        
                         ((GameClientScene)owningScene).hud.closeDialogue();
-                        Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE)); 
+                        Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICLE)); 
                     
                     }
                     if (e.getActionCommand().equals("mouseEntered")) 
                     {
-                        Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND)); 
+                        Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.ACTIVEHAND)); 
                     }
                     if (e.getActionCommand().equals("mouseExited")) 
                     {
-                         Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE)); 
+                         Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICLE)); 
                     }
                 }
             });

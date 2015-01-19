@@ -346,7 +346,7 @@ public class NewCharacterScene extends Scene
             this.actionArg = (String)args.get(0);
         
         //set mouse cursor
-        Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND));
+        Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.POINTERHAND));
     }
    
     public void sceneExited()

@@ -291,7 +291,7 @@ public class MainMenuScene extends Scene
         this.inScene = true;
         
         //set mouse cursor
-        Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND));
+        Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.POINTERHAND));
              
               
     }

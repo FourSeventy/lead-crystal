@@ -165,11 +165,11 @@ public class Hud extends Window
             {
                 if(e.getActionCommand().equals("mouseEntered"))
                 {
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND)); 
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.ACTIVEHAND)); 
                 }
                 else if(e.getActionCommand().equals("mouseExited"))
                 {
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE)); 
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICLE)); 
                 }
             }
         });
@@ -186,11 +186,11 @@ public class Hud extends Window
             {
                 if(e.getActionCommand().equals("mouseEntered"))
                 {
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND)); 
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.ACTIVEHAND)); 
                 }
                 else if(e.getActionCommand().equals("mouseExited"))
                 {
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE)); 
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICLE)); 
                 }
             }
         });
@@ -206,11 +206,11 @@ public class Hud extends Window
             {
                 if(e.getActionCommand().equals("mouseEntered"))
                 {
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND)); 
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.ACTIVEHAND)); 
                 }
                 else if(e.getActionCommand().equals("mouseExited"))
                 {
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE)); 
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICLE)); 
                 }
             }
         
@@ -227,11 +227,11 @@ public class Hud extends Window
             {
                 if(e.getActionCommand().equals("mouseEntered"))
                 {
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND)); 
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.ACTIVEHAND)); 
                 }
                 else if(e.getActionCommand().equals("mouseExited"))
                 {
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE)); 
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICLE)); 
                 }
             }
         
@@ -248,11 +248,11 @@ public class Hud extends Window
             {
                 if(e.getActionCommand().equals("mouseEntered"))
                 {
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND)); 
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.ACTIVEHAND)); 
                 }
                 else if(e.getActionCommand().equals("mouseExited"))
                 {
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE)); 
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICLE)); 
                 }
             }
         
@@ -269,11 +269,11 @@ public class Hud extends Window
             {
                 if(e.getActionCommand().equals("mouseEntered"))
                 {
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND)); 
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.ACTIVEHAND)); 
                 }
                 else if(e.getActionCommand().equals("mouseExited"))
                 {
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE)); 
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICLE)); 
                 }
             }
         
@@ -289,11 +289,11 @@ public class Hud extends Window
             {
                 if(e.getActionCommand().equals("mouseEntered"))
                 {
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND)); 
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.ACTIVEHAND)); 
                 }
                 else if(e.getActionCommand().equals("mouseExited"))
                 {
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE)); 
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICLE)); 
                 }
             }
         
@@ -587,12 +587,12 @@ public class Hud extends Window
                 if(e.getActionCommand().equals("mouseEntered"))
                 {
                     questButton.getImage().setBrightness(1.5f);
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND)); 
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.ACTIVEHAND)); 
                 }
                 if(e.getActionCommand().equals("mouseExited"))
                 {
                     questButton.getImage().setBrightness(1f);
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE)); 
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICLE)); 
                 }
             }      
         });      
@@ -606,12 +606,12 @@ public class Hud extends Window
                 if(e.getActionCommand().equals("mouseEntered"))
                 {
                     escMenu.getImage().setBrightness(1.5f);
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND)); 
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.ACTIVEHAND)); 
                 }
                 if(e.getActionCommand().equals("mouseExited"))
                 {
                     escMenu.getImage().setBrightness(1f);
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE)); 
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICLE)); 
                 }
                
                 if(e.getActionCommand().equals("clicked"))
@@ -989,7 +989,7 @@ public class Hud extends Window
                         }
                         if (e.getActionCommand().equals("mouseEntered")) 
                         {
-                            Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.HAND));
+                            Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.ACTIVEHAND));
 //                            
 
                               if(reiveInTownText.hasTextEffect("small"))
@@ -1003,7 +1003,7 @@ public class Hud extends Window
                         }
                         if (e.getActionCommand().equals("mouseExited"))
                         {
-                            Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICULE));
+                            Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICLE));
 //                             
                             
                                 if(reiveInTownText.hasTextEffect("big"))
