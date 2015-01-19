@@ -1228,9 +1228,13 @@ public final class GameClientScene extends Scene
         
         //reset mouse cursor to default
         Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.RETICLE)); 
+        this.mouseHover = false;
+        this.mouseHoverInRange = false;
         
         //fade from black
-        getSceneEffectsManager().fadeFromBlack(new PostEffectExecutor()); 
+        getSceneEffectsManager().fadeFromBlack(new PostEffectExecutor());
+        
+        
         
     }
     

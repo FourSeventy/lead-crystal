@@ -355,83 +355,82 @@ public class GameServerScene extends Scene
                     // Check for entity hovering
                     //============================
 
-                    if(!clientData.currentInputPacket.mouseOverMenu)
+
+                    float mouseX =  clientData.currentInputPacket.mouseLocationX;
+                    float mouseY =  clientData.currentInputPacket.mouseLocationY;
+                    Body mouse = new Body(new Box(2, 2), 1);
+                    mouse.setPosition(mouseX, mouseY);
+                    clientData.lastHoveredEntityID = clientData.hoveredEntityID;
+                    boolean lastRange = clientData.hoveredEntityInRange;
+                    clientData.hoveredEntityID = null;
+                    clientData.hoveredEntityInRange = false;
+                    clientData.hoveredEntityExited = false;
+                    boolean rangeChange = false;
+
+                    ArrayList<SceneObject> clickableGroup = this.getSceneObjectManager().get(ExtendedSceneObjectGroups.CLICKABLE);
+                    for (SceneObject hoverObject : clickableGroup) 
                     {
-                        float mouseX =  clientData.currentInputPacket.mouseLocationX;
-                        float mouseY =  clientData.currentInputPacket.mouseLocationY;
-                        Body mouse = new Body(new Box(2, 2), 1);
-                        mouse.setPosition(mouseX, mouseY);
-                        clientData.lastHoveredEntityID = clientData.hoveredEntityID;
-                        boolean lastRange = clientData.hoveredEntityInRange;
-                        clientData.hoveredEntityID = null;
-                        clientData.hoveredEntityInRange = false;
-                        clientData.hoveredEntityExited = false;
-                        boolean rangeChange = false;
+                        boolean mouseOn = false;
 
-                        ArrayList<SceneObject> clickableGroup = this.getSceneObjectManager().get(ExtendedSceneObjectGroups.CLICKABLE);
-                        for (SceneObject hoverObject : clickableGroup) 
+                        Entity entity = (Entity)hoverObject;
+
+                        Shape shape = entity.getBody().getShape();
+
+                        if(shape.contains(new Vector2f(clientData.currentInputPacket.mouseLocationX,clientData.currentInputPacket.mouseLocationY), new Vector2f(entity.getPosition().x,entity.getPosition().y), entity.getBody().getRotation()))
                         {
-                            boolean mouseOn = false;
-
-                            Entity entity = (Entity)hoverObject;
-
-                            Shape shape = entity.getBody().getShape();
-
-                            if(shape.contains(new Vector2f(clientData.currentInputPacket.mouseLocationX,clientData.currentInputPacket.mouseLocationY), new Vector2f(entity.getPosition().x,entity.getPosition().y), entity.getBody().getRotation()))
-                            {
-                                mouseOn = true;    
-                            }
-
-
-                            //if the mouse is on something
-                            if (mouseOn) 
-                            {
-                                clientData.hoveredEntityID = entity.getID();
-                                //if the entity is in range of the player
-                                if(Point.distance(player.getPosition().x, player.getPosition().y, entity.getPosition().x, entity.getPosition().y) < 250) 
-                                {
-                                    if(lastRange == false)
-                                    {
-                                        rangeChange = true;
-                                    }
-                                    clientData.hoveredEntityInRange = true;  
-                                }
-                                else   
-                                {
-                                    if(lastRange == true)
-                                    {
-                                        rangeChange = true;
-                                    }
-                                    clientData.hoveredEntityInRange = false;
-                                }
-                            }
-                            else // mouse is outside an entity
-                            {
-                                //if the old hovered entity is equal to this entity, or the old entity isnt in the scene anymore 
-                                if( clientData.lastHoveredEntityID != null &&( clientData.lastHoveredEntityID.equals(entity.getID()) || this.getSceneObjectManager().get(clientData.lastHoveredEntityID) == null))     
-                                {
-                                    clientData.hoveredEntityExited = true;   
-                                }
-                            }
-                        }
-                        
-                        //check for edge case for not hovering
-                        if(clickableGroup.isEmpty() && clientData.lastHoveredEntityID != null)
-                        {
-                           
-                            clientData.hoveredEntityExited = true;   
+                            mouseOn = true;    
                         }
 
-                        //send hover packet
-                        if((clientData.hoveredEntityID != null && clientData.lastHoveredEntityID == null) || rangeChange) 
-                        {                    
-                            this.sendEntityHoverPacket(clientID, clientData.hoveredEntityID, true,clientData.hoveredEntityInRange);                                                
-                        }
-                        else if (clientData.hoveredEntityExited) 
+
+                        //if the mouse is on something
+                        if (mouseOn) 
                         {
-                            this.sendEntityHoverPacket(clientID, clientData.lastHoveredEntityID, false,clientData.hoveredEntityInRange);
+                            clientData.hoveredEntityID = entity.getID();
+                            //if the entity is in range of the player
+                            if(Point.distance(player.getPosition().x, player.getPosition().y, entity.getPosition().x, entity.getPosition().y) < 250) 
+                            {
+                                if(lastRange == false)
+                                {
+                                    rangeChange = true;
+                                }
+                                clientData.hoveredEntityInRange = true;  
+                            }
+                            else   
+                            {
+                                if(lastRange == true)
+                                {
+                                    rangeChange = true;
+                                }
+                                clientData.hoveredEntityInRange = false;
+                            }
+                        }
+                        else // mouse is outside an entity
+                        {
+                            //if the old hovered entity is equal to this entity, or the old entity isnt in the scene anymore 
+                            if( clientData.lastHoveredEntityID != null &&( clientData.lastHoveredEntityID.equals(entity.getID()) || this.getSceneObjectManager().get(clientData.lastHoveredEntityID) == null))     
+                            {
+                                clientData.hoveredEntityExited = true;   
+                            }
                         }
                     }
+
+                    //check for edge case for not hovering
+                    if(clickableGroup.isEmpty() && clientData.lastHoveredEntityID != null)
+                    {
+
+                        clientData.hoveredEntityExited = true;   
+                    }
+
+                    //send hover packet
+                    if((clientData.hoveredEntityID != null && clientData.lastHoveredEntityID == null) || rangeChange) 
+                    {                    
+                        this.sendEntityHoverPacket(clientID, clientData.hoveredEntityID, true,clientData.hoveredEntityInRange);                                                
+                    }
+                    else if (clientData.hoveredEntityExited) 
+                    {
+                        this.sendEntityHoverPacket(clientID, clientData.lastHoveredEntityID, false,clientData.hoveredEntityInRange);
+                    }
+                    
 
 
                     //================

@@ -121,6 +121,9 @@ public class Hud extends Window
     public QuestMenu questMenu;
     public OptionsMenu optionsMenu;
     
+    //menu button feeler box
+    private float menuButtonLeft, menuButtonRight, menuButtonTop, menuButtonBottom;
+    
     //Chat manager
     public ChatManager chatManager;  
     
@@ -567,7 +570,7 @@ public class Hud extends Window
         radarFrame.dontKillClick = true;
         this.addComponent(radarFrame);
         
-        //credits hud element
+        //gold hud element
         t = new Text(Integer.toString(this.playerReference.getCurrencyManager().getBalence()),LeadCrystalTextType.HUD22);
         this.creditLabel = new Label(t, right - 114, 669);
         this.addComponent(creditLabel);
@@ -588,16 +591,27 @@ public class Hud extends Window
                 if(e.getActionCommand().equals("mouseEntered"))
                 {
                     questButton.getImage().setBrightness(1.5f);
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.ACTIVEHAND)); 
+                    if(!Hud.this.potionsMenu.isOpen() && !Hud.this.armorMenu.isOpen() && ! Hud.this.skillMenu.isOpen() && !Hud.this.mapMenu.isOpen())
+                    {
+                       Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.ACTIVEHAND));
+                    }
                 }
                 if(e.getActionCommand().equals("mouseExited"))
                 {
                     questButton.getImage().setBrightness(1f);
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICLE)); 
+                    if(!Hud.this.potionsMenu.isOpen() && !Hud.this.armorMenu.isOpen() && ! Hud.this.skillMenu.isOpen() && !Hud.this.mapMenu.isOpen())
+                    {
+                       Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICLE)); 
+                    }
                 }
             }      
         });      
         this.addComponent(questButton);  
+        
+        this.menuButtonLeft = right-224;
+        this.menuButtonRight = right-224 + (42 * .70f);
+        this.menuButtonTop = 770 + (61 * .70f);
+        this.menuButtonBottom = 723;
         
         //Menu Buttons      
         this.escMenu = new Button("radar_button_power.png",right - 224,723,42  * .70f,61  * .70f);
@@ -607,12 +621,19 @@ public class Hud extends Window
                 if(e.getActionCommand().equals("mouseEntered"))
                 {
                     escMenu.getImage().setBrightness(1.5f);
-                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.ACTIVEHAND)); 
+                    
+                    if(!Hud.this.potionsMenu.isOpen() && !Hud.this.armorMenu.isOpen() && ! Hud.this.skillMenu.isOpen() && !Hud.this.mapMenu.isOpen())
+                    {
+                        Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.ACTIVEHAND));
+                    } 
                 }
                 if(e.getActionCommand().equals("mouseExited"))
                 {
                     escMenu.getImage().setBrightness(1f);
+                    if(!Hud.this.potionsMenu.isOpen() && !Hud.this.armorMenu.isOpen() && ! Hud.this.skillMenu.isOpen() && !Hud.this.mapMenu.isOpen())
+                    {
                     Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICLE)); 
+                    }
                 }
                
                 if(e.getActionCommand().equals("clicked"))
@@ -1204,13 +1225,22 @@ public class Hud extends Window
      */
     public boolean isMouseOverMenu() 
     {
+        float x = Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x;
+        float y = Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y;
         for (Window m : menuList) 
         {
-            if (m.isOpen() && Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x >= m.getPosition().x && Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().x <= m.getPosition().x + m.getWidth() && Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y >= m.getPosition().y && Game.getInstance().getInputHandler().getInputSnapshot().getScreenMouseLocation().y <= m.getPosition().y + m.getHeight()) 
+            if (m.isOpen() && x >= m.getPosition().x && x <= m.getPosition().x + m.getWidth() && y >= m.getPosition().y && y <= m.getPosition().y + m.getHeight()) 
             {
                 return true;
             }
         }
+        
+        //radar buttons
+        if( x >= this.menuButtonLeft && x <= this.menuButtonRight && y>= this.menuButtonBottom && y <= this.menuButtonTop)
+        {
+            return true;
+        }
+        
         return false;
     } 
     
