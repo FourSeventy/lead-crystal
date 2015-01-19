@@ -284,7 +284,7 @@ public class MainMenuScene extends Scene
         {
             Sound sound = Sound.newBGM("streaming/mainMenu.ogg");
             add(sound);
-            sound = Sound.adjustSourceVolume("BGM", .2f);
+            sound = Sound.adjustSourceVolume("BGM", .15f);
             add(sound);
         }
         
