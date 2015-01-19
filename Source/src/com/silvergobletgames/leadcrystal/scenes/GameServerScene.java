@@ -362,9 +362,11 @@ public class GameServerScene extends Scene
                         Body mouse = new Body(new Box(2, 2), 1);
                         mouse.setPosition(mouseX, mouseY);
                         clientData.lastHoveredEntityID = clientData.hoveredEntityID;
+                        boolean lastRange = clientData.hoveredEntityInRange;
                         clientData.hoveredEntityID = null;
                         clientData.hoveredEntityInRange = false;
                         clientData.hoveredEntityExited = false;
+                        boolean rangeChange = false;
 
                         ArrayList<SceneObject> clickableGroup = this.getSceneObjectManager().get(ExtendedSceneObjectGroups.CLICKABLE);
                         for (SceneObject hoverObject : clickableGroup) 
@@ -386,12 +388,20 @@ public class GameServerScene extends Scene
                             {
                                 clientData.hoveredEntityID = entity.getID();
                                 //if the entity is in range of the player
-                                if (Point.distance(player.getPosition().x, player.getPosition().y, entity.getPosition().x, entity.getPosition().y) < 250) 
+                                if(Point.distance(player.getPosition().x, player.getPosition().y, entity.getPosition().x, entity.getPosition().y) < 250) 
                                 {
+                                    if(lastRange == false)
+                                    {
+                                        rangeChange = true;
+                                    }
                                     clientData.hoveredEntityInRange = true;  
                                 }
                                 else   
                                 {
+                                    if(lastRange == true)
+                                    {
+                                        rangeChange = true;
+                                    }
                                     clientData.hoveredEntityInRange = false;
                                 }
                             }
@@ -405,26 +415,20 @@ public class GameServerScene extends Scene
                             }
                         }
                         
+                        //check for edge case for not hovering
                         if(clickableGroup.isEmpty() && clientData.lastHoveredEntityID != null)
                         {
                            
                             clientData.hoveredEntityExited = true;   
                         }
 
-                        //change mouse cursor if hover
-                        if (clientData.hoveredEntityID != null) 
-                        {
-                            if (clientData.hoveredEntityInRange) 
-                            {
-                                this.sendCursorChangePacket(clientID, CursorType.ACTIVEHAND);  
-                                this.sendEntityHoverPacket(clientID, clientData.hoveredEntityID, true,clientData.hoveredEntityInRange);
-                            }
-                            else 
-                                this.sendCursorChangePacket(clientID, CursorType.UNACTIVEHAND);
+                        //send hover packet
+                        if((clientData.hoveredEntityID != null && clientData.lastHoveredEntityID == null) || rangeChange) 
+                        {                    
+                            this.sendEntityHoverPacket(clientID, clientData.hoveredEntityID, true,clientData.hoveredEntityInRange);                                                
                         }
                         else if (clientData.hoveredEntityExited) 
                         {
-                            this.sendCursorChangePacket(clientID, CursorType.RETICLE);
                             this.sendEntityHoverPacket(clientID, clientData.lastHoveredEntityID, false,clientData.hoveredEntityInRange);
                         }
                     }

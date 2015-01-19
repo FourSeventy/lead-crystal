@@ -169,6 +169,9 @@ public final class GameClientScene extends Scene
     //World Mouse Location
     public Point worldMouseLocation = new Point(0, 0); 
     private boolean mouseHoverInRange = false;
+    private boolean mouseHover = false;
+    private boolean mouseOverMenu = false; 
+    
     //active save game file
     private SaveGame activeSaveGame;
     //active level data
@@ -505,7 +508,11 @@ public final class GameClientScene extends Scene
         }       
         
         //update cutscene
-        this.cutsceneManager.update();       
+        this.cutsceneManager.update();   
+        
+        
+        //update mouse cursor state
+        this.handleMouseCursorState();
      
     }
     
@@ -604,6 +611,9 @@ public final class GameClientScene extends Scene
         int mouseY = (int) (((float) inputSnapshot.getScreenMouseLocation().y / getViewport().getHeight()) * getViewport().getHeight() + getViewport().getBottomLeftCoordinate().y);
         this.worldMouseLocation = new Point(mouseX, mouseY);
         
+        //check if mouse is over a menu
+        this.mouseOverMenu = this.hud.isMouseOverMenu();
+        
         //==============
         // Handle Chat
         //==============
@@ -624,178 +634,176 @@ public final class GameClientScene extends Scene
                 }
             }
         }
-
         
-              
+        if(hud.chatManager.chatPromptOpen || this.lockInput.get())
+        {
+            //send a blank input packet
+            this.sendBlankInputPacket();
+            return;
+        }
+
+                   
         
         //================
         //Keyboard input
         //================
         
-        if(!hud.chatManager.chatPromptOpen && this.lockInput.get() == false)
+             
+        //move left
+        if (inputSnapshot.isKeyPressed(KeyEvent.VK_A) )
         {
-            //move left
-            if (inputSnapshot.isKeyPressed(KeyEvent.VK_A) )
-            {
-                player.move(FacingDirection.LEFT);
-            }
-
-            //move right
-            if (inputSnapshot.isKeyPressed(KeyEvent.VK_D) )
-            {
-                player.move(FacingDirection.RIGHT);
-            }
-
-            //jump
-            if (inputSnapshot.isKeyPressed(KeyEvent.VK_SPACE) == true)
-            {
-                player.handleJumping();
-            }
-
-            //jump released
-            if (inputSnapshot.isKeyReleased(KeyEvent.VK_SPACE) == true)
-            {
-                player.handleJumpReleased();
-            }
-
-            //down
-            if (inputSnapshot.isKeyPressed(com.jogamp.newt.event.KeyEvent.VK_S) == true )
-            {
-                player.move(new SylverVector2f(0,-1));
-            }
-
-            //up
-            if (inputSnapshot.isKeyPressed(com.jogamp.newt.event.KeyEvent.VK_W) == true )
-            {
-                player.move(new SylverVector2f(0,1));
-            }
-
-            //toggle flashlight
-            if (inputSnapshot.isKeyReleased(KeyEvent.VK_T) == true)
-            {
-                player.toggleFlashlight();
-            }
-
-            //sprint
-            if (inputSnapshot.isKeyPressed(KeyEvent.VK_SHIFT))
-            {
-                player.handleSprint();
-            }
-            if(inputSnapshot.isKeyReleased(KeyEvent.VK_SHIFT))
-            {
-                player.handleSprintReleased();
-            }
-
-
-            //open esc menu
-            if(inputSnapshot.isKeyReleased(KeyEvent.VK_ESCAPE))
-            {        
-                if(hud.armorMenu.isOpen() || hud.mapMenu.isOpen() || hud.potionsMenu.isOpen() || hud.questMenu.isOpen() || hud.skillMenu.isOpen() || hud.optionsMenu.isOpen() || (hud.activeDialogue != null && hud.activeDialogue.isOpen()))
-                {
-                    hud.armorMenu.close();
-                    hud.mapMenu.close();
-                    hud.potionsMenu.close();
-                    hud.questMenu.close();
-                    hud.skillMenu.close();
-                    hud.optionsMenu.close();
-                    
-                    if(hud.activeDialogue != null)
-                    {
-                       hud.activeDialogue.close();
-                    }
-                }
-                else
-                {
-                    hud.escapeMenu.toggle();
-                }
-            }
-
-            //quest menu
-            if(inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_L))
-            {
-                hud.questMenu.toggle();
-            }
-
-            //use hotbar skills 
-            if(inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_Q))
-            {
-                if (this.player.getSkillAssignment(3)  != null)// && player.getSkillManager().getSkill(this.player.getSkillAssignment(3)).isUsable())
-                {
-                    player.useActionBarSkill(this.player.getSkillAssignment(3));
-                }
-            }
-            if(inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_E))
-            {
-                if (this.player.getSkillAssignment(4) != null)// && player.getSkillManager().getSkill(this.player.getSkillAssignment(4)).isUsable())
-                {
-                    player.useActionBarSkill(this.player.getSkillAssignment(4));
-                }
-            }
-            
-            //debug
-            if (inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_M))
-            {
-            
-            }
-
-            //handle dashing
-            if(this.player.dashing)
-            {
-                this.player.handleDash(null);
-            }
-
-
-            //==============
-            // Mouse Input
-            //==============
-            
-            this.player.setWorldMouseLocationPoint(mouseX, mouseY); 
-            if (inputSnapshot.isMouseDown() && !hud.isMouseOverMenu() && !this.mouseHoverInRange)
-            {
-                if (inputSnapshot.buttonClicked() == 1 )
-                {
-                    if (this.player.getSkillAssignment(1) != null && player.getSkillManager().getSkill(this.player.getSkillAssignment(1)).isUsable()&& player.getCombatData().canAttack() && !player.inAttackAnimation())
-                    {
-                        
-                        player.useActionBarSkill(this.player.getSkillAssignment(1));
-                    }
-                }
-                else if(inputSnapshot.buttonClicked() == 3)
-                {                        
-                    if (this.player.getSkillAssignment(2) != null && player.getSkillManager().getSkill(this.player.getSkillAssignment(2)).isUsable() && player.getCombatData().canAttack() && !player.inAttackAnimation())
-                    {
-                        
-                        player.useActionBarSkill(this.player.getSkillAssignment(2));
-                    }
-                }
-            }
-            
-
-
-            //===========================
-            // Calculate Facing Direction
-            //===========================
-            if (player.getCombatData().canMove())
-            {
-                if (mouseX < player.getPosition().x)
-                    player.face(FacingDirection.LEFT);
-                else
-                    player.face(FacingDirection.RIGHT);
-            }
-
-
-            //===================== 
-            // Sent Input to Server 
-            //=====================    
-             this.sendInputPacket();
-        
+            player.move(FacingDirection.LEFT);
         }
-        else
+
+        //move right
+        if (inputSnapshot.isKeyPressed(KeyEvent.VK_D) )
         {
-            //send a blank input packet
-            this.sendBlankInputPacket();
-            
+            player.move(FacingDirection.RIGHT);
         }
+
+        //jump
+        if (inputSnapshot.isKeyPressed(KeyEvent.VK_SPACE) == true)
+        {
+            player.handleJumping();
+        }
+
+        //jump released
+        if (inputSnapshot.isKeyReleased(KeyEvent.VK_SPACE) == true)
+        {
+            player.handleJumpReleased();
+        }
+
+        //down
+        if (inputSnapshot.isKeyPressed(com.jogamp.newt.event.KeyEvent.VK_S) == true )
+        {
+            player.move(new SylverVector2f(0,-1));
+        }
+
+        //up
+        if (inputSnapshot.isKeyPressed(com.jogamp.newt.event.KeyEvent.VK_W) == true )
+        {
+            player.move(new SylverVector2f(0,1));
+        }
+
+        //toggle flashlight
+        if (inputSnapshot.isKeyReleased(KeyEvent.VK_T) == true)
+        {
+            player.toggleFlashlight();
+        }
+
+        //sprint
+        if (inputSnapshot.isKeyPressed(KeyEvent.VK_SHIFT))
+        {
+            player.handleSprint();
+        }
+        if(inputSnapshot.isKeyReleased(KeyEvent.VK_SHIFT))
+        {
+            player.handleSprintReleased();
+        }
+
+
+        //open esc menu
+        if(inputSnapshot.isKeyReleased(KeyEvent.VK_ESCAPE))
+        {        
+            if(hud.armorMenu.isOpen() || hud.mapMenu.isOpen() || hud.potionsMenu.isOpen() || hud.questMenu.isOpen() || hud.skillMenu.isOpen() || hud.optionsMenu.isOpen() || (hud.activeDialogue != null && hud.activeDialogue.isOpen()))
+            {
+                hud.armorMenu.close();
+                hud.mapMenu.close();
+                hud.potionsMenu.close();
+                hud.questMenu.close();
+                hud.skillMenu.close();
+                hud.optionsMenu.close();
+
+                if(hud.activeDialogue != null)
+                {
+                   hud.activeDialogue.close();
+                }
+            }
+            else
+            {
+                hud.escapeMenu.toggle();
+            }
+        }
+
+        //quest menu
+        if(inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_L))
+        {
+            hud.questMenu.toggle();
+        }
+
+        //use hotbar skills 
+        if(inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_Q))
+        {
+            if (this.player.getSkillAssignment(3)  != null)// && player.getSkillManager().getSkill(this.player.getSkillAssignment(3)).isUsable())
+            {
+                player.useActionBarSkill(this.player.getSkillAssignment(3));
+            }
+        }
+        if(inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_E))
+        {
+            if (this.player.getSkillAssignment(4) != null)// && player.getSkillManager().getSkill(this.player.getSkillAssignment(4)).isUsable())
+            {
+                player.useActionBarSkill(this.player.getSkillAssignment(4));
+            }
+        }
+
+        //debug
+        if (inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_M))
+        {
+
+        }
+
+        //handle dashing
+        if(this.player.dashing)
+        {
+            this.player.handleDash(null);
+        }
+
+
+        //==============
+        // Mouse Input
+        //==============
+
+        this.player.setWorldMouseLocationPoint(mouseX, mouseY); 
+        if (inputSnapshot.isMouseDown() && !hud.isMouseOverMenu() && !this.mouseHoverInRange)
+        {
+            if (inputSnapshot.buttonClicked() == 1 )
+            {
+                if (this.player.getSkillAssignment(1) != null && player.getSkillManager().getSkill(this.player.getSkillAssignment(1)).isUsable()&& player.getCombatData().canAttack() && !player.inAttackAnimation())
+                {
+
+                    player.useActionBarSkill(this.player.getSkillAssignment(1));
+                }
+            }
+            else if(inputSnapshot.buttonClicked() == 3)
+            {                        
+                if (this.player.getSkillAssignment(2) != null && player.getSkillManager().getSkill(this.player.getSkillAssignment(2)).isUsable() && player.getCombatData().canAttack() && !player.inAttackAnimation())
+                {
+
+                    player.useActionBarSkill(this.player.getSkillAssignment(2));
+                }
+            }
+        }
+            
+
+
+        //===========================
+        // Calculate Facing Direction
+        //===========================
+        if (player.getCombatData().canMove())
+        {
+            if (mouseX < player.getPosition().x)
+                player.face(FacingDirection.LEFT);
+            else
+                player.face(FacingDirection.RIGHT);
+        }
+
+
+        //===================== 
+        // Sent Input to Server 
+        //=====================    
+         this.sendInputPacket();
+
     }
 
     /**
@@ -1251,6 +1259,28 @@ public final class GameClientScene extends Scene
                     ((NetworkedSceneObject)currentObject).interpolate(System.currentTimeMillis()-this.interpolationTime);
                 }
             }
+        }
+    }
+    
+    private void handleMouseCursorState()
+    {
+        //if the moues is over a menu, the menu controls the cursor
+        if(this.mouseOverMenu)
+        {
+            return;
+        }
+        
+        if(this.mouseHoverInRange)
+        {
+            Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.ACTIVEHAND));
+        }
+        else if(this.mouseHover)
+        {
+            Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.UNACTIVEHAND));       
+        }
+        else
+        {
+            Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICLE));       
         }
     }
       
@@ -1799,7 +1829,7 @@ public final class GameClientScene extends Scene
     private void handleHoverEntityPacket(HoverEntityPacket packet)
     {
         //if we are hovering
-        if(packet.currentlyHovering)
+        if(packet.currentlyHovering && packet.inRange)
         {
             //get entity that we are hovering on
             Entity hoveredEntity = (Entity)this.getSceneObjectManager().get(packet.hoveredID);
@@ -1828,6 +1858,7 @@ public final class GameClientScene extends Scene
         }
         
         this.mouseHoverInRange = packet.inRange;
+        this.mouseHover = packet.currentlyHovering;
     }
     
     private void handleSkillCooldownPacket(SkillCooldownPacket packet)
