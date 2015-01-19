@@ -232,8 +232,8 @@ public class Main
         Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "goldcoin.png");              
         textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/tallFrameMenu.png");  
         Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "tallframemenu.png");
-        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("misc/mouse_hand.png");  
-        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "mouse_hand.png");      
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/reticle07.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "reticle07.png");      
         textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("characters/bash/head/bash-head0.png");  
         Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "bash-head0.png");
         textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("characters/bash/head/bash-head1.png");  
