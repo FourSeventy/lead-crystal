@@ -256,7 +256,10 @@ public class ArmorMenu extends Window{
                }
                if(e.getActionCommand().equals("mouseExited"))
                {
-                   closeTooltip();
+                   if(ArmorMenu.this.skillTooltipIcon.getImage().getTextureReference().equals(stat1.image.getTextureReference()))
+                   {
+                      closeTooltip();
+                   }
                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
                }
            }
@@ -289,7 +292,10 @@ public class ArmorMenu extends Window{
                {
                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND)); 
                    
-                   closeTooltip();
+                   if(ArmorMenu.this.skillTooltipIcon.getImage().getTextureReference().equals(stat2.image.getTextureReference()))
+                   {
+                      closeTooltip();
+                   }
                }
            }
        });
@@ -320,7 +326,10 @@ public class ArmorMenu extends Window{
                {
                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND)); 
                    
-                   closeTooltip();
+                   if(ArmorMenu.this.skillTooltipIcon.getImage().getTextureReference().equals(stat3.image.getTextureReference()))
+                   {
+                      closeTooltip();
+                   }
                }
            }
        });
@@ -351,7 +360,10 @@ public class ArmorMenu extends Window{
                {
                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND)); 
                    
-                   closeTooltip();
+                   if(ArmorMenu.this.skillTooltipIcon.getImage().getTextureReference().equals(stat4.image.getTextureReference()))
+                   {
+                      closeTooltip();
+                   }
                }
            }
        });
@@ -380,7 +392,10 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("mouseExited"))
                {
                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
-                   closeTooltip();
+                   if(ArmorMenu.this.skillTooltipIcon.getImage().getTextureReference().equals(stat8.image.getTextureReference()))
+                   {
+                      closeTooltip();
+                   }
                }
            }
        });
@@ -409,7 +424,10 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("mouseExited"))
                {
                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
-                   closeTooltip();
+                   if(ArmorMenu.this.skillTooltipIcon.getImage().getTextureReference().equals(stat6.image.getTextureReference()))
+                   {
+                      closeTooltip();
+                   }
                }
            }
        });
@@ -448,7 +466,10 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("mouseExited"))
                {
                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
-                   closeTooltip();
+                   if(ArmorMenu.this.skillTooltipIcon.getImage().getTextureReference().equals(stat7.image.getTextureReference()))
+                   {
+                      closeTooltip();
+                   }
                }
            }
        });
@@ -479,7 +500,10 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("mouseExited"))
                {
                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
-                   closeTooltip();
+                   if(ArmorMenu.this.skillTooltipIcon.getImage().getTextureReference().equals(stat5.image.getTextureReference()))
+                   {
+                      closeTooltip();
+                   }
                }
            }
        });
@@ -510,7 +534,10 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("mouseExited"))
                {
                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
-                   closeTooltip();
+                   if(ArmorMenu.this.skillTooltipIcon.getImage().getTextureReference().equals(stat9.image.getTextureReference()))
+                   {
+                      closeTooltip();
+                   }
                }
            }
        });
@@ -539,7 +566,10 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("mouseExited"))
                {
                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
-                   closeTooltip();
+                   if(ArmorMenu.this.skillTooltipIcon.getImage().getTextureReference().equals(stat10.image.getTextureReference()))
+                   {
+                      closeTooltip();
+                   }
                }
            }
        });
@@ -568,7 +598,10 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("mouseExited"))
                {
                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
-                   closeTooltip();
+                   if(ArmorMenu.this.skillTooltipIcon.getImage().getTextureReference().equals(stat11.image.getTextureReference()))
+                   {
+                      closeTooltip();
+                   }
                }
            }
        });
@@ -606,7 +639,10 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("mouseExited"))
                {
                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
-                   closeTooltip();
+                   if(ArmorMenu.this.skillTooltipIcon.getImage().getTextureReference().equals(stat12.image.getTextureReference()))
+                   {
+                      closeTooltip();
+                   }
                }
            }
        });
@@ -635,7 +671,10 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("mouseExited"))
                {
                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
-                   closeTooltip();
+                   if(ArmorMenu.this.skillTooltipIcon.getImage().getTextureReference().equals(stat13.image.getTextureReference()))
+                   {
+                      closeTooltip();
+                   }
                }
            }
        });
@@ -664,7 +703,10 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("mouseExited"))
                {
                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
-                   closeTooltip();
+                   if(ArmorMenu.this.skillTooltipIcon.getImage().getTextureReference().equals(stat14.image.getTextureReference()))
+                   {
+                      closeTooltip();
+                   }
                }
            }
        });
@@ -693,7 +735,10 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("mouseExited"))
                {
                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
-                   closeTooltip();
+                   if(ArmorMenu.this.skillTooltipIcon.getImage().getTextureReference().equals(stat15.image.getTextureReference()))
+                   {
+                      closeTooltip();
+                   }
                }
            }
        });
@@ -722,7 +767,10 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("mouseExited"))
                {
                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
-                   closeTooltip();
+                   if(ArmorMenu.this.skillTooltipIcon.getImage().getTextureReference().equals(stat16.image.getTextureReference()))
+                   {
+                      closeTooltip();
+                   }
                }
            }
        });
@@ -751,7 +799,10 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("mouseExited"))
                {
                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
-                   closeTooltip();
+                   if(ArmorMenu.this.skillTooltipIcon.getImage().getTextureReference().equals(stat17.image.getTextureReference()))
+                   {
+                      closeTooltip();
+                   }
                }
            }
        });
@@ -789,7 +840,10 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("mouseExited"))
                {
                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
-                   closeTooltip();
+                   if(ArmorMenu.this.skillTooltipIcon.getImage().getTextureReference().equals(stat18.image.getTextureReference()))
+                   {
+                      closeTooltip();
+                   }
                }
            }
        });
@@ -818,7 +872,10 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("mouseExited"))
                {
                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
-                   closeTooltip();
+                   if(ArmorMenu.this.skillTooltipIcon.getImage().getTextureReference().equals(stat19.image.getTextureReference()))
+                   {
+                      closeTooltip();
+                   }
                }
            }
        });
@@ -847,7 +904,10 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("mouseExited"))
                {
                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
-                   closeTooltip();
+                   if(ArmorMenu.this.skillTooltipIcon.getImage().getTextureReference().equals(stat20.image.getTextureReference()))
+                   {
+                      closeTooltip();
+                   }
                }
            }
        });
@@ -876,7 +936,10 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("mouseExited"))
                {
                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorFactory.CursorType.ACTIVEHAND));
-                   closeTooltip();
+                   if(ArmorMenu.this.skillTooltipIcon.getImage().getTextureReference().equals(stat21.image.getTextureReference()))
+                   {
+                      closeTooltip();
+                   }
                }
            }
        });
