@@ -510,6 +510,8 @@ public final class GameClientScene extends Scene
         //update cutscene
         this.cutsceneManager.update();   
         
+        //check if mouse is over a menu
+        this.mouseOverMenu = this.hud.isMouseOverMenu();
         
         //update mouse cursor state
         this.handleMouseCursorState();
@@ -610,9 +612,7 @@ public final class GameClientScene extends Scene
         int mouseX = (int) (((float) inputSnapshot.getScreenMouseLocation().x / getViewport().getWidth()) * getViewport().getWidth() + getViewport().getBottomLeftCoordinate().x);
         int mouseY = (int) (((float) inputSnapshot.getScreenMouseLocation().y / getViewport().getHeight()) * getViewport().getHeight() + getViewport().getBottomLeftCoordinate().y);
         this.worldMouseLocation = new Point(mouseX, mouseY);
-        
-        //check if mouse is over a menu
-        this.mouseOverMenu = this.hud.isMouseOverMenu();
+       
         
         //==============
         // Handle Chat

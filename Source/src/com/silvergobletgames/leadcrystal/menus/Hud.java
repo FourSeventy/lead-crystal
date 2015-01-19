@@ -186,6 +186,7 @@ public class Hud extends Window
             {
                 if(e.getActionCommand().equals("mouseEntered"))
                 {
+                  
                     Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.ACTIVEHAND)); 
                 }
                 else if(e.getActionCommand().equals("mouseExited"))
