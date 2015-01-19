@@ -342,9 +342,13 @@ public class GameServerScene extends Scene
                     //===============================
 
                     if (clientData.currentInputPacket.mouseLocationX + 5 < player.getPosition().x)
+                    {
                         player.face(FacingDirection.LEFT);
+                    }
                     else if(clientData.currentInputPacket.mouseLocationX -5 > player.getPosition().x)
+                    {
                         player.face(FacingDirection.RIGHT);
+                    }
 
 
                     //============================
@@ -382,15 +386,19 @@ public class GameServerScene extends Scene
                             {
                                 clientData.hoveredEntityID = entity.getID();
                                 //if the entity is in range of the player
-                                if (Point.distance(player.getPosition().x, player.getPosition().y, entity.getPosition().x, entity.getPosition().y) < 250)             
-                                    clientData.hoveredEntityInRange = true;             
-                                else              
+                                if (Point.distance(player.getPosition().x, player.getPosition().y, entity.getPosition().x, entity.getPosition().y) < 250) 
+                                {
+                                    clientData.hoveredEntityInRange = true;  
+                                }
+                                else   
+                                {
                                     clientData.hoveredEntityInRange = false;
+                                }
                             }
                             else // mouse is outside an entity
                             {
                                 //if the old hovered entity is equal to this entity, or the old entity isnt in the scene anymore 
-                                if (clientData.lastHoveredEntityID != null  || this.getSceneObjectManager().get(clientData.lastHoveredEntityID) == null)     
+                                if (clientData.lastHoveredEntityID != null  && this.getSceneObjectManager().get(clientData.lastHoveredEntityID) == null)     
                                 {
                                     clientData.hoveredEntityExited = true;   
                                 }
@@ -399,6 +407,7 @@ public class GameServerScene extends Scene
                         
                         if(clickableGroup.isEmpty() && clientData.lastHoveredEntityID != null)
                         {
+                           
                             clientData.hoveredEntityExited = true;   
                         }
 
