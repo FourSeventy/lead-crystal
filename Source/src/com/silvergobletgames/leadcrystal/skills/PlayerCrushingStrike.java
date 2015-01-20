@@ -61,7 +61,7 @@ public class PlayerCrushingStrike extends PlayerSkill{
         float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
         damage.getAmountObject().adjustBase(damageAmout);
         damage.setType(Damage.DamageType.PHYSICAL);    
-        damage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, 10, 0.0f, 1f));
+        damage.addImageEffect(this.getDamageBrightnessEffect());
         
          //apply image effect
          damage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.COLOR, 5 * 60, new Color(255,40,5), new Color(1f,1f,1f)));
