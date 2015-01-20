@@ -1241,6 +1241,12 @@ public class Hud extends Window
             return true;
         }
         
+        //dialogue
+        if(this.activeDialogue != null && this.activeDialogue.isOpen() && x >= this.activeDialogue.getPosition().x && x <= this.activeDialogue.getPosition().x + this.activeDialogue.getWidth() && y >= this.activeDialogue.getPosition().y && y <= this.activeDialogue.getPosition().y + this.activeDialogue.getHeight())
+        {
+            return true;
+        }
+        
         return false;
     } 
     
