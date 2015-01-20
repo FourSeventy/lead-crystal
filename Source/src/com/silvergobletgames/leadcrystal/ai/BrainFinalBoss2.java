@@ -96,6 +96,14 @@ public class BrainFinalBoss2 extends BrainFighter
 //        }
     }
     
+    protected void spawningExecute()
+    {
+        if(self.getImage().getAnimation() != ExtendedImageAnimations.SPAWN)
+        {
+            this.getStateMachine().changeState(AIState.StateID.AGGRESSIVE);
+        }
+    }
+    
     
 
     

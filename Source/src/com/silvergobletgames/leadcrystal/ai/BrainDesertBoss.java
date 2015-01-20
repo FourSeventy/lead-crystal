@@ -75,6 +75,14 @@ public class BrainDesertBoss extends BrainGround
         self.getImage().setAnimation(ExtendedImageAnimations.SPAWN);
     }
     
+    protected void spawningExecute()
+    {
+        if(self.getImage().getAnimation() != ExtendedImageAnimations.SPAWN)
+        {
+            this.getStateMachine().changeState(StateID.AGGRESSIVE);
+        }
+    }
+    
     
     /**
      * Behavior executed when entering the move state

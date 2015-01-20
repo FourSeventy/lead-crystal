@@ -140,7 +140,10 @@ public class BrainFighter extends BrainGround
     
     protected void spawningExecute()
     {
-        
+        if(self.getImage().getAnimation() != ExtendedImageAnimations.SPAWN)
+        {
+            this.getStateMachine().changeState(StateID.AGGRESSIVE);
+        }
     }
 
     
