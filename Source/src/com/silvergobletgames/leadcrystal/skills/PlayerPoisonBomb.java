@@ -282,7 +282,7 @@ public class PlayerPoisonBomb extends PlayerSkill{
             {
             
                 //apply slow
-                StateEffect slow = new StateEffect(StateEffect.StateEffectType.DAMAGEREDUCTION, 420, -1f, false);
+                StateEffect slow = new StateEffect(StateEffect.StateEffectType.DAMAGEREDUCTION, 420, -.75f, false);
                ((CombatEntity)other).getCombatData().addCombatEffect("poisonSlow", slow);
                 
                 //apply image effect

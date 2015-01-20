@@ -41,13 +41,13 @@ public class PlayerBoomerang extends PlayerSkill
     //==============
     public PlayerBoomerang()
     {
-        super(SkillID.PlayerBoomerang,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK,540,Integer.MAX_VALUE);
+        super(SkillID.PlayerBoomerang,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK,600,Integer.MAX_VALUE);
         
         //set the skillID and the name
         this.icon = new Image("boomerangIcon.png");
         this.skillName = "Boomerang Throw";
         this.skillDescription = "Throws a deadly boomerang that flies in an arch. Catch the boomerang on the way back to reset the cooldown.";
-        this.skillDamageDescription = "Damage: 14-16";
+        this.skillDamageDescription = "Damage: 13-15";
         this.unlockCost = 1;
         
     }
@@ -62,8 +62,8 @@ public class PlayerBoomerang extends PlayerSkill
         TargetingData targetingData = this.getTargetingData(origin);
                         
         //set damage
-        int min = 14; 
-        int max = 16;
+        int min = 13; 
+        int max = 15;
         float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
         damage.getAmountObject().adjustBase(damageAmout);
         damage.setType(Damage.DamageType.PHYSICAL);   
@@ -72,7 +72,7 @@ public class PlayerBoomerang extends PlayerSkill
         damage.addImageEffect(this.getDamageBrightnessEffect());
         
         //add ministun
-        damage.addCombatEffect(new StateEffect(StateEffect.StateEffectType.DAMAGEREDUCTION, 180, -1f, false));
+        damage.addCombatEffect(new StateEffect(StateEffect.StateEffectType.DAMAGEREDUCTION, 180, -.75f, false));
         
         //build body of the laser
         Body body = new Body(new Box(60,60), .1f);
