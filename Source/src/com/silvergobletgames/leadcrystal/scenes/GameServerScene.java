@@ -508,7 +508,10 @@ public class GameServerScene extends Scene
                     }
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_F))
                     {
-                       player.getPotionManager().usePotion(); 
+                        if(!player.getCombatData().isDead())
+                        {
+                             player.getPotionManager().usePotion(); 
+                        }
                     }
 
                    
