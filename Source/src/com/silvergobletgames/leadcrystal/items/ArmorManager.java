@@ -170,8 +170,8 @@ public class ArmorManager {
                                                    }}); 
         this.armorStats.put(this.health.id,this.health);
 
-        this.thornsDamage = new ArmorStat(ArmorStatID.THORNS_DAMAGE, new Image("thornsIcon.png"), "Thorns Armor", 50,3);
-        this.thornsDamage.description = "+25% thorns damage per point.";
+        this.thornsDamage = new ArmorStat(ArmorStatID.THORNS_DAMAGE, new Image("thornsIcon.png"), "Thorns Armor", 50,4);
+        this.thornsDamage.description = "+30% thorns damage per point.";
         this.thornsDamage.unlocked = false;
         this.thornsDamage.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().thornsDamage.adjustBase(.25f);}}); 
         this.armorStats.put(this.thornsDamage.id,this.thornsDamage); 
