@@ -122,8 +122,8 @@ public class ArmorManager {
         this.seeEnemyHealth.unlocked = true;
         this.armorStats.put(this.seeEnemyHealth.id,this.seeEnemyHealth);
        
-        this.doubleGoldFind = new ArmorStat(ArmorStatID.DOUBLE_GOLD, new Image("goldFindIcon.png"), "Gold Find",75,1);
-        this.doubleGoldFind.description = "Doubles the value of each gold picked up.";
+        this.doubleGoldFind = new ArmorStat(ArmorStatID.DOUBLE_GOLD, new Image("goldFindIcon.png"), "LOL DOLLARS",75,1);
+        this.doubleGoldFind.description = "Every gold picked up now heals for 2 health.";
         this.doubleGoldFind.unlocked= false;
         this.armorStats.put(this.doubleGoldFind.id,this.doubleGoldFind);
        

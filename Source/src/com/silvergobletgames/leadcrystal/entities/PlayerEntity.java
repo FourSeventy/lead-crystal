@@ -455,7 +455,10 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             
             if(this.getArmorManager().doubleGoldFind.isMaxPoints() == true)
             {
-                currencyAmount *= 2;
+                //currencyAmount *= 2;
+                
+                Damage damage = new Damage(Damage.DamageType.HEAL, 2);
+                this.takeDamage(damage);
             }
             
             //add to currency manager
