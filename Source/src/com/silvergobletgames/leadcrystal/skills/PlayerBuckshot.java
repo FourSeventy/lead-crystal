@@ -69,6 +69,7 @@ public class PlayerBuckshot extends PlayerSkill{
         damage.getAmountObject().adjustBase(damageAmout);
         damage.setType(Damage.DamageType.PHYSICAL);    
         damage.addImageEffect(this.getDamageBrightnessEffect());
+        damage.setLifeLeech(damage.getLifeLeech()/2);
         
         
         //build bodies
