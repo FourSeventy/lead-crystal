@@ -33,7 +33,7 @@ public class EnemyAntThrow extends Skill {
     
     public EnemyAntThrow()
     {
-        super(SkillID.EnemyAntThrow,SkillType.OFFENSIVE,ExtendedImageAnimations.MELEEATTACK,360,1100);
+        super(SkillID.EnemyAntThrow,SkillType.OFFENSIVE,ExtendedImageAnimations.MELEEATTACK,10 * 60,1100);
 
     }
     
