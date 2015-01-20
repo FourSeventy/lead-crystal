@@ -1247,6 +1247,12 @@ public class Hud extends Window
             return true;
         }
         
+        //you have died
+        if(youHaveDied != null && x >= this.reviveButton.getPosition().x && x <= this.reviveButton.getPosition().x + this.reviveButton.getWidth() && y >= this.reviveButton.getPosition().y && y <= this.reviveButton.getPosition().y + this.reviveButton.getHeight())
+        {
+            return true;
+        }
+        
         return false;
     } 
     
