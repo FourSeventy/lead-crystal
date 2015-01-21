@@ -34,7 +34,7 @@ public class EnemyBossBarrage extends Skill{
     
     public EnemyBossBarrage()
     {
-        super(SkillID.EnemyBossBarrage,Skill.SkillType.OFFENSIVE, ExtendedImageAnimations.RANGEDATTACK,60 * 10,1200);
+        super(SkillID.EnemyBossBarrage,Skill.SkillType.OFFENSIVE, ExtendedImageAnimations.RANGEDATTACK,60 * 10,1500);
         
     }
     

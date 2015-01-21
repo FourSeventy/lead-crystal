@@ -45,6 +45,8 @@ public class BrainDesertBoss extends BrainGround
     {
         super();
         ID = BrainID.DesertBoss;
+        
+        relevantGroups.add(ExtendedSceneObjectGroups.FIGHTER);
     }
 
   

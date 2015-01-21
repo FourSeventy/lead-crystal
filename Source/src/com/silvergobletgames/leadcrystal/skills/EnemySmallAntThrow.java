@@ -9,7 +9,6 @@ import com.silvergobletgames.leadcrystal.combat.SoundPackFactory;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.MoleAnimationPack;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.entities.*;
-import com.silvergobletgames.leadcrystal.skills.PlayerLaserShot.LaserHitbox;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene.Layer;
 import com.silvergobletgames.sylver.graphics.Color;

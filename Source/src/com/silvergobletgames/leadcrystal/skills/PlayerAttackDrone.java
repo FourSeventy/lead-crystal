@@ -16,8 +16,8 @@ import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters;
 import com.silvergobletgames.leadcrystal.entities.*;
-import com.silvergobletgames.leadcrystal.skills.PlayerLaserShot.LaserHitbox;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.graphics.*;
@@ -290,4 +290,56 @@ public class PlayerAttackDrone extends Skill
         
     }
 
+    
+    public static class LaserHitbox extends HitBox
+    {
+
+        
+         public LaserHitbox(Damage d, Body b, Image i, Entity user)
+         { 
+            super(d, b, i, user); 
+            
+         }
+
+         public void collidedWith(Entity other, CollisionEvent event)
+         {
+             super.collidedWith(other,event); 
+             
+             //laser bits
+             if(!(other instanceof HitBox))
+             {
+                 //get angle of impact
+                 Vector2f normalVector = (Vector2f)event.getNormal();
+                 normalVector =normalVector.negate();
+                 Vector2f xVector = new Vector2f(1,0);
+                 float angle = (float)(Math.acos(normalVector.dot(xVector) ) * 180 / Math.PI);
+                 if(normalVector.getY() < 0)
+                     angle += 180;
+                 
+                 //make emitter
+                 PointParticleEmitter emitter = new LeadCrystalParticleEmitters.LaserBitsEmitter();
+                 emitter.setPosition(event.getPoint().getX(), event.getPoint().getY());
+                 emitter.setDuration(1);
+                 emitter.setAngle(angle);
+                 emitter.setParticlesPerFrame(5);
+                 emitter.setColor(new Color((61f/255f) * 4f,(40f/255f) * 4f,(86f/255f) * 4f));
+                 emitter.setSize(3);                
+                 owningScene.add(emitter,Layer.MAIN);
+                 
+             }
+
+                         
+             //remove if we hit a world object, or an enemy
+             if(other instanceof WorldObjectEntity || other instanceof CombatEntity)
+             {
+                 //play sound
+                Sound sound = Sound.locationSound("buffered/smallLaser.ogg", this.getPosition().x, this.getPosition().y, false, .5f,2);
+                this.getOwningScene().add(sound);
+        
+                this.getBody().setVelocity(new Vector2f(0,0));
+                this.removeFromOwningScene();
+             }
+         }
+         
+    }
 }

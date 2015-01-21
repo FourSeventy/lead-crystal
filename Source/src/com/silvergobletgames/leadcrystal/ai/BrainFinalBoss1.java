@@ -46,6 +46,8 @@ public class BrainFinalBoss1 extends BrainGround
     {
         super();
         ID = BrainID.FinalBoss1;
+        
+        relevantGroups.add(ExtendedSceneObjectGroups.FIGHTER);
     }
 
   

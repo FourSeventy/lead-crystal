@@ -11,6 +11,7 @@ import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.Boss2DeathAnimationPack;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
+import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.BloodEmitter;
 import com.silvergobletgames.leadcrystal.entities.Entity;
@@ -56,19 +57,22 @@ public class BrainFinalBoss2 extends BrainFighter
     {
         super();
         ID = BrainFactory.BrainID.FinalBoss2;
+        
+        relevantGroups.add(ExtendedSceneObjectGroups.FIGHTER);
     }
     
      public void selectSkill()
-    {        
+    {       
+        float roll = r.nextFloat();
 
         //get all offensive skills
         ArrayList<Skill> skillPool = self.getSkillManager().getKnownSkillsOfType(Skill.SkillType.OFFENSIVE);
   
-        if(r.nextFloat() < .33) //33% chance
+        if(roll < .33) //33% chance
         {
             this.selectedSkill = skillPool.get(0);
         }
-        else if(r.nextFloat() < .66) //33%  change
+        else if(roll < .66) //33%  change
         {
             this.selectedSkill = skillPool.get(1);
         }

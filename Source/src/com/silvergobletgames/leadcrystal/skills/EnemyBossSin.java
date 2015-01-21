@@ -41,7 +41,7 @@ public class EnemyBossSin extends Skill
     
     public EnemyBossSin()
     {
-        super(SkillID.EnemyBossSin,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK,10 * 60,1200);
+        super(SkillID.EnemyBossSin,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK,10 * 60,1500);
         
 
     }
@@ -50,7 +50,7 @@ public class EnemyBossSin extends Skill
     {       
         
         //Damage is scaled with base
-        damage.getAmountObject().setBase(4);
+        damage.getAmountObject().setBase(6);
         damage.setType(Damage.DamageType.PHYSICAL);
            
         //Determine vector to target
