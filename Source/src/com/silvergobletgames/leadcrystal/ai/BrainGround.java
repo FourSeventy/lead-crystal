@@ -1,5 +1,6 @@
 package com.silvergobletgames.leadcrystal.ai;
 
+import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
 import com.silvergobletgames.leadcrystal.core.GameplaySettings;
 import com.silvergobletgames.leadcrystal.entities.Entity;
@@ -52,6 +53,11 @@ public abstract class BrainGround extends Brain
      */
     public void moveTowardsPoint(SylverVector2f destinationPoint, boolean edgeDetection)
     {
+        if(self.getImage().getAnimation() == ExtendedImageAnimations.MELEEATTACK || self.getImage().getAnimation() == ExtendedImageAnimations.RANGEDATTACK || self.getImage().getAnimation() == ExtendedImageAnimations.SPELLATTACK)
+        {
+            return;
+        }
+        
         //increment timer
         this.moveCheckTimer++;
         
