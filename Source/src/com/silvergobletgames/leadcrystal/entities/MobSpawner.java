@@ -140,7 +140,7 @@ public class MobSpawner extends Entity implements SavableSceneObject
         this.owningScene.add(spawningMob, Layer.MAIN);   
         
         //get and add spawn effects to scene
-        ArrayList<SimpleEntry<SceneObject,SylverVector2f>> effects = SpawningEffectsFactory.getSpawnEffects(mobToSpawn.getImage().getAnimationPack());
+        ArrayList<SimpleEntry<SceneObject,SylverVector2f>> effects = SpawningEffectsFactory.getSpawnEffects(mobToSpawn.getImage().getAnimationPack(),mobToSpawn.getImage().isFlippedVertical());
         for(SimpleEntry<SceneObject,SylverVector2f> entry: effects)
         {
             SceneObject object = entry.getKey();

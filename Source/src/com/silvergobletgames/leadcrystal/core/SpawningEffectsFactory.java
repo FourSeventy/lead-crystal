@@ -7,6 +7,7 @@ import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.PlantAnimatio
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.SandmanAnimationPack;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.GreenGooEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SandSpawnEmitter;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SandSpawnUpsideDownEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SandSpurtEmitter;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.SceneObject;
@@ -20,15 +21,18 @@ public class SpawningEffectsFactory
 {
         
     
-    public static ArrayList<SimpleEntry<SceneObject,SylverVector2f>> getSpawnEffects(AnimationPack pack)
+    public static ArrayList<SimpleEntry<SceneObject,SylverVector2f>> getSpawnEffects(AnimationPack pack, boolean upsideDown)
     {
         
         ArrayList<SimpleEntry<SceneObject,SylverVector2f>> effects = new ArrayList();
         
-        if(pack instanceof PlantAnimationPack ||  pack instanceof MoleAnimationPack || pack instanceof SandmanAnimationPack)
-        {
-            
+        if((pack instanceof PlantAnimationPack && !upsideDown) ||  pack instanceof MoleAnimationPack || pack instanceof SandmanAnimationPack)
+        {         
             effects.add(new SimpleEntry(new SandSpawnEmitter(),new SylverVector2f(0,-.70f)));
+        }
+        else if(pack instanceof PlantAnimationPack && upsideDown)
+        {
+            effects.add(new SimpleEntry(new SandSpawnUpsideDownEmitter(),new SylverVector2f(0,.70f)));
         }
         else if(pack instanceof FlierAnimationPack)
         {
