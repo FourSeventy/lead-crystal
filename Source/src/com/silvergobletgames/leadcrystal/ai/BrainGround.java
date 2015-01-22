@@ -365,20 +365,20 @@ public abstract class BrainGround extends Brain
     protected boolean checkForWall()
     {       
         //build feeler box
-        Box feelerBox = new Box(65,30);
+        Box feelerBox = new Box(65,self.getHeight()/2);
         Body feelerBody = new StaticBody(feelerBox);
         feelerBody.setBitmask(Entity.BitMasks.COLLIDE_WORLD.value);
         
         //position feeler       
         float xPosition = self.getPosition().x +  self.getFacingDirection().value *(self.getWidth()/2 + 15);
-        float yPosition = self.getPosition().y + self.getHeight()/2 + 20;       
+        float yPosition = self.getPosition().y + self.getHeight()/4f + 20;       
         feelerBody.setPosition(xPosition, yPosition);
         
         //debug image
         if(GameplaySettings.getInstance().debugEnemies)
         {
             Image image = new Image("black.png");
-            image.setDimensions(65,30);
+            image.setDimensions(65,self.getHeight()/2);
             image.setAnchor(Anchorable.Anchor.CENTER);
             image.setPositionAnchored(xPosition, yPosition);
             image.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 15, 0, 0)); 
