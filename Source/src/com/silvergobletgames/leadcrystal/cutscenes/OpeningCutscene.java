@@ -95,7 +95,7 @@ public class OpeningCutscene extends Cutscene
         {
             slashBubble.setAlphaBrightness(1);
 
-            Text t = new Text("Hey Slash, where is this settlement we are looking for?",LeadCrystalTextType.MENU30);
+            Text t = new Text("Hey Slash, where is the settlement we are looking for?",LeadCrystalTextType.MENU30);
             t.setColor(new Color(Color.black));
             slashTextArea = new TextBlock(center - 150, 800, 380, t); 
             this.objects.add(slashTextArea);
@@ -125,7 +125,7 @@ public class OpeningCutscene extends Cutscene
             //new text
             slashBubble.setAlphaBrightness(1);
 
-            Text t = new Text("It better be,  we've been driving through this damn desert for two days.",LeadCrystalTextType.MENU30);
+            Text t = new Text("It better be, we've been driving through this desert for two days!",LeadCrystalTextType.MENU30);
             t.setColor(new Color(Color.black));
             slashTextArea = new TextBlock(center - 150, 800, 380, t); 
             this.objects.add(slashTextArea);
@@ -140,7 +140,7 @@ public class OpeningCutscene extends Cutscene
             //new text
             bashBubble.setAlphaBrightness(1);
 
-            Text t = new Text("Their distress signal says they are under attack. We've got to help them.",LeadCrystalTextType.MENU30);
+            Text t = new Text("Their distress signal says they are under attack. We've got to help them!", LeadCrystalTextType.MENU30);
             t.setColor(new Color(Color.black));
             bashTextArea = new TextBlock(center - 500, 770, 380, t); 
             this.objects.add(bashTextArea);
@@ -155,7 +155,7 @@ public class OpeningCutscene extends Cutscene
             //new text
             slashBubble.setAlphaBrightness(1);
 
-            Text t = new Text("I still think this is a bad idea. There better be a good reward in this",LeadCrystalTextType.MENU30);
+            Text t = new Text("I still think this is a bad idea. There better be a good reward in this.", LeadCrystalTextType.MENU30);
             t.setColor(new Color(Color.black));
             slashTextArea = new TextBlock(center - 150, 800, 380, t); 
             this.objects.add(slashTextArea);
@@ -181,7 +181,7 @@ public class OpeningCutscene extends Cutscene
             slashBubble.setVerticalFlip(true);
             slashBubble.setPosition(center -150, 150);
 
-            Text t = new Text( "There it is up ahead! I'll jump out here and clear this area, I'll meet you at the town!",LeadCrystalTextType.MENU30);
+            Text t = new Text( "There it is up ahead! I'll jump out here and clear this area then meet you at the town!",LeadCrystalTextType.MENU30);
             t.setColor(new Color(Color.black));
             slashTextArea = new TextBlock(center - 100, 400, 380, t); 
             this.objects.add(slashTextArea);
