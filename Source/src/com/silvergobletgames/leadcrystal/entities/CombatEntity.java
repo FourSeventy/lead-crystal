@@ -241,11 +241,18 @@ public abstract class CombatEntity extends Entity
         //calculate the skill origin point
         SylverVector2f offset = new SylverVector2f(0,0);
         if(this.image.getAnimationPack() != null)
+        {
             offset = new SylverVector2f(this.image.getAnimationPack().getPositionOffset(this.castingSkill.getImageAnimation()));
-        
+        }
         offset.x = offset.x * this.getFacingDirection().value;
+        if(this.image.isFlippedVertical())
+        {
+            offset.y = -offset.y;
+        }
         offset.scale(this.image.getScale());
         offset.add(this.getPosition());
+        
+        
         
         //use the skill
         this.castingSkill.use(damage, offset);
