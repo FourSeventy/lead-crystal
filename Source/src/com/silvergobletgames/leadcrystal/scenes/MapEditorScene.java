@@ -898,16 +898,16 @@ public class MapEditorScene extends Scene {
                 {
                     if(so instanceof NonPlayerEntity)
                     {
-                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.Scout1AnimationPack || ((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.Scout2AnimationPack  )
+                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.Scout1AnimationPack || ((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.Scout2AnimationPack || ((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.TankAnimationPack )
                         {
-                            ((NonPlayerEntity)so).setSoundPack(SoundPackFactory.getInstance().getSoundPack(SoundPack.SoundPackID.Human)); 
+                            ((NonPlayerEntity)so).setImageOffset(new Vector2f(0,6));
                         }
                     }
                     else if(so instanceof MobSpawner)
                     {
-                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.Scout1AnimationPack || ((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.Scout2AnimationPack)
+                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.Scout1AnimationPack || ((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.Scout2AnimationPack || ((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.TankAnimationPack )
                         {
-                            ((MobSpawner)so).mobToSpawn.setSoundPack(SoundPackFactory.getInstance().getSoundPack(SoundPack.SoundPackID.Human)); 
+                            ((MobSpawner)so).mobToSpawn.setImageOffset(new Vector2f(0,6)); 
                         }                           
                     }
                 }
