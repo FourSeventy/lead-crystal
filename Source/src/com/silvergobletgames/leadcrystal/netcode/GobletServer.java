@@ -350,6 +350,9 @@ public class GobletServer implements Runnable
             //mark that this player is in the middle of a level load
             connectedClients.get(clientID).loadingLevel = true;
             
+            //reset dialogue clicked
+            connectedClients.get(clientID).dialogueClosed = false;
+            
             //remove the player from the current scene
             sceneMap.get(connectedClients.get(clientID).currentLevel).removeClient(UUID.fromString(id));
                         
