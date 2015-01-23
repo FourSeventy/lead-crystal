@@ -1415,7 +1415,7 @@ public class GameServerScene extends Scene
             {
                 if( !(so instanceof WorldObjectEntity))
                 {
-                    return;
+                    continue;
                 }
                 
                 
