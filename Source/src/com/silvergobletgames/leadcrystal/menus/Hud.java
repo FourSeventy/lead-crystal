@@ -1184,8 +1184,12 @@ public class Hud extends Window
      */
     public void closeDialogue()
     {
+        
         this.sceneReference.remove(activeDialogue);
         this.activeDialogue = null;
+        
+        
+        
     }
     
     public boolean hasOpenDialogue()

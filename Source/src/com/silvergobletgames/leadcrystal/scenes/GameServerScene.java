@@ -9,6 +9,7 @@ import com.silvergobletgames.leadcrystal.core.LevelData;
 import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
+import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity;
 import com.silvergobletgames.leadcrystal.items.ArmorManager;
 import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat;
 import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat.ArmorStatID;
@@ -1273,6 +1274,10 @@ public class GameServerScene extends Scene
         {
             handleBuyStatPacket((BuyStatPacket)packet);
         }
+        else if (packet instanceof DialogueClosedPacket)
+        {
+            handleDialogueClosedPacket((DialogueClosedPacket)packet);
+        }
     }
     
     public void handleBuySkillPacket(BuySkillPacket packet)
@@ -1375,6 +1380,57 @@ public class GameServerScene extends Scene
         //move to town
         ((GobletServer)Game.getInstance().getRunnable("Goblet Server")).queueMovePlayerToLevel(packet.getClientID().toString(), "town.lv", "checkpoint1");
       
+    }
+    
+    public void handleDialogueClosedPacket(DialogueClosedPacket packet)
+    {
+        
+        ClientData clientData = this.clientsInScene.get(packet.getClientID());
+        
+        clientData.dialogueClosed = true;
+        
+        
+        //if all clients dialogues are closed, 
+        boolean allClosed = true;
+        for(ClientData client: this.clientsInScene.values())
+        {
+            if(client.dialogueClosed == false)
+            {
+                allClosed = false;
+            }
+        }
+        
+        if(allClosed)
+        {
+            
+            //reset to false
+            for(ClientData client: this.clientsInScene.values())
+            {
+                client.dialogueClosed = false;
+            }
+            
+             //search scene for script objects that have a dialogue closed trigger, and trigger them
+            ArrayList<SceneObject> scripts = this.getSceneObjectManager().get(ExtendedSceneObjectGroups.SCRIPT);
+            for(SceneObject so: scripts)
+            {
+                if( !(so instanceof WorldObjectEntity))
+                {
+                    return;
+                }
+                
+                
+                WorldObjectEntity wo = (WorldObjectEntity)so;
+                
+                if(wo.getScriptObject() != null && wo.getScriptObject().getTrigger() == ScriptTrigger.DIALOGUECLOSED)
+                {
+                    wo.getScriptObject().runScript(wo);
+                }
+            }
+            
+            
+        }
+          
+         
     }
      
     

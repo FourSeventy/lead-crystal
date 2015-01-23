@@ -1424,6 +1424,14 @@ public final class GameClientScene extends Scene
         this.sendPacket(packet);
     }
     
+    public void sendDialogueClosedPacket()
+    {
+        DialogueClosedPacket packet = new DialogueClosedPacket();
+        
+        //send
+        this.sendPacket(packet);
+    }
+    
     public void sendRespawnRequestPacket()
     {
         RespawnRequestPacket packet = new RespawnRequestPacket();

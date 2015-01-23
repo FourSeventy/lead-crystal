@@ -62,6 +62,9 @@ public class ClientData
     //is this client moving to a new level
     public boolean loadingLevel = false;
     
+    //state of dialogue box on client side
+    public boolean dialogueClosed = false;
+    
     //chat inbox
     public ArrayList<String> chatInbox = new ArrayList();
 

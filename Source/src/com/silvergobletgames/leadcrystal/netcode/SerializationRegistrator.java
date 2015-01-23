@@ -56,6 +56,7 @@ public class SerializationRegistrator
     {
         Kryo kryo = k;
         
+        kryo.register(DialogueClosedPacket.class);
         kryo.register(SetMainQuestStatusPacket.class);
         kryo.register(ArmorStatID.class);
         kryo.register(BuyStatPacket.class);

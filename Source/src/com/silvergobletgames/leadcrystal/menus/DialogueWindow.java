@@ -63,10 +63,8 @@ public class DialogueWindow extends Window {
                 public void actionPerformed(ActionEvent e) {
                     if (e.getActionCommand().equals("clicked")) 
                     {                
-                        Sound closeSound = Sound.ambientSound("buffered/menuClose.ogg", false);
-                        owningScene.add(closeSound);
-            
-                        ((GameClientScene)owningScene).hud.closeDialogue();
+                        
+                        DialogueWindow.this.close();
                         Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICLE)); 
                     
                     }
@@ -145,6 +143,8 @@ public class DialogueWindow extends Window {
         {
             Sound closeSound = Sound.ambientSound("buffered/menuClose.ogg", false);
             this.owningScene.add(closeSound);
+            
+            ((GameClientScene)this.owningScene).sendDialogueClosedPacket();
         }
         
         super.close();
