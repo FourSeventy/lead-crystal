@@ -139,6 +139,8 @@ public class Hud extends Window
     private ArrayList<SceneObject> useLadder = new ArrayList<>();
     private ArrayList<SceneObject> jumpThrough = new ArrayList<>();
     private ArrayList<SceneObject> rightClickInteract = new ArrayList<>();
+    private ArrayList<SceneObject> lightTooltip = new ArrayList<>();
+    
       
     public Hud(GameClientScene scene)
     {
@@ -717,6 +719,12 @@ public class Hud extends Window
         tt.setPosition( center - tt.getWidth()/2, 647);
         this.sprint.add(tt);
         
+        b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
+        b.dontKillClick = true;
+        this.lightTooltip.add(b);
+        tt = new Text("Press T to activate flashlight",LeadCrystalTextType.HUD34);
+        tt.setPosition( center - tt.getWidth()/2, 647);
+        this.lightTooltip.add(tt);
 
         b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
@@ -1272,6 +1280,7 @@ public class Hud extends Window
             case Jumpthrough: for(SceneObject obj :this.jumpThrough){this.owningScene.add(obj, Layer.HUD);} break;
             case Sprint: for(SceneObject obj :this.sprint){this.owningScene.add(obj, Layer.HUD);} break;
             case RightClick: for(SceneObject obj :this.rightClickInteract){this.owningScene.add(obj, Layer.HUD);} break;
+            case Light: for(SceneObject obj :this.lightTooltip){this.owningScene.add(obj, Layer.HUD);} break;
         }
     }
     
@@ -1287,6 +1296,8 @@ public class Hud extends Window
             case Jumpthrough: for(SceneObject obj :this.jumpThrough){this.owningScene.remove(obj);} break;
             case Sprint: for(SceneObject obj :this.sprint){this.owningScene.remove(obj);} break;
             case RightClick: for(SceneObject obj :this.rightClickInteract){this.owningScene.remove(obj);} break;
+            case Light: for(SceneObject obj :this.lightTooltip){this.owningScene.remove(obj);} break;
+        
         }
     }
     
