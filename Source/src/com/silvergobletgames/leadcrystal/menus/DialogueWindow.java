@@ -5,19 +5,21 @@ import com.silvergobletgames.leadcrystal.core.CursorFactory;
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
-import com.silvergobletgames.sylver.graphics.Image;
-import com.silvergobletgames.sylver.graphics.Text;
-import com.silvergobletgames.sylver.windowsystem.Label;
-import com.silvergobletgames.sylver.windowsystem.Window;
-import java.util.ArrayList;
 import com.silvergobletgames.leadcrystal.scripting.ScriptObject;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Game;
+import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.OpenGLGameWindow;
+import com.silvergobletgames.sylver.graphics.Text;
 import com.silvergobletgames.sylver.graphics.Text.CoreTextType;
 import com.silvergobletgames.sylver.windowsystem.Button;
+import com.silvergobletgames.sylver.windowsystem.Label;
+import com.silvergobletgames.sylver.windowsystem.TextArea;
+import com.silvergobletgames.sylver.windowsystem.TextBlock;
+import com.silvergobletgames.sylver.windowsystem.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  *
@@ -26,6 +28,7 @@ import java.awt.event.ActionListener;
 public class DialogueWindow extends Window {
     
     private Label name;
+    private TextBlock textArea;
     
     private ArrayList<Label> text = new ArrayList<>();
     
@@ -34,7 +37,7 @@ public class DialogueWindow extends Window {
     
     public DialogueWindow(float x, float y,String speakersName,  String dialogueText)
     {
-        super(new Image("dialogueBox.png"),x,y, 768 * 1.2f ,173 * 1.2f);
+        super(new Image("dialogueBox.png"), x, y, 768 * 1.2f, 173 * 1.2f);
         
         
         
@@ -81,39 +84,8 @@ public class DialogueWindow extends Window {
         this.addComponent(button);
         
         //set up dialog
-        ArrayList<String> list = new ArrayList<>();
-        
-        //break up the input into an array seperateed by spaces
-        String[] spaces = dialogueText.split(" ");
-        
-        //concatinate these words together untill they are length 90
-        String line = "";
-        for(String part: spaces)
-        {
-            line += part + " ";
-            
-            if(line.length() > 75)
-            {
-               int index = line.lastIndexOf(part);
-               line = line.substring(0, index);
-               list.add(line);
-               line = part + " ";
-            }
-            
-        }
-        list.add(line);
-        
-        for(String s: list)
-        {
-            text.add(new Label(new Text(s,LeadCrystalTextType.HUD22),0,0));
-        }
-        
-        //position the lines of text correctly
-        for(int i = 0; i <text.size(); i++)
-        {
-            text.get(i).setWindowRelativePosition( 200,  this.height - 49 - (i * text.get(i).getText().getHeight()) );
-            this.addComponent(text.get(i));
-        }
+        this.textArea = new TextBlock(191, 155, 720, new Text(dialogueText,LeadCrystalTextType.HUD22));  
+        this.addComponent(textArea);
         
         this.targetY = y;
  
