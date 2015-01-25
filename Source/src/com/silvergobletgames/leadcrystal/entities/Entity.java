@@ -1335,6 +1335,7 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
         renderData.data.add(6, verts); //Polygon vertices
         renderData.data.add(7, body.getBitmask());
         renderData.data.add(8, body.getOverlapMask());
+        renderData.data.add(9, body.getMass());
         
         return renderData;
         
@@ -1346,7 +1347,7 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
         Body body;
         float dimension1 = (float) renderData.data.get(1); //width or diameter    
         float dimension2 = (float) renderData.data.get(2); //height or null
-        float mass = 1;
+        float mass = (float) renderData.data.get(9); //mass
         
         //build with shape
         if (renderData.data.get(0).equals("box")) 
@@ -1379,7 +1380,7 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
         int changeMap = 0;
         ArrayList changeList = new ArrayList();
         
-        for(int i = 0; i <= 8; i++)
+        for(int i = 0; i <= 9; i++)
         {
             if(i == 6)
                 continue;
@@ -1463,7 +1464,7 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
         
         //construct an arraylist of data that we got, nulls will go where we didnt get any data
         ArrayList changeData = new ArrayList();
-        for(int i = 0; i <9; i ++)
+        for(int i = 0; i <10; i ++)
         {
             // The bit was set
             if ((fieldMap & (1L << i)) != 0)
