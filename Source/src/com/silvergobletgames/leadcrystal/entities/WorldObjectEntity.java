@@ -80,7 +80,7 @@ public class WorldObjectEntity extends Entity implements SavableSceneObject, Sha
         worldObjectType = WorldObjectType.NONE;
         materialType = MaterialType.NONE;
         
-        //set its static/dynamic group
+
         if(body != null)
         {
             this.body.setRestitution(.3f);
