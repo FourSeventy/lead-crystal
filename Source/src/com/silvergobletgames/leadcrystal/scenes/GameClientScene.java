@@ -70,6 +70,7 @@ import net.phys2d.math.Vector2f;
 import net.phys2d.raw.*;
 import net.phys2d.raw.StaticBody;
 import net.phys2d.raw.World;
+import net.phys2d.raw.shapes.Shape;
 import net.phys2d.raw.strategies.QuadSpaceStrategy;
 
 
@@ -475,7 +476,7 @@ public final class GameClientScene extends Scene
             ((LightSource)lightSourceObject).update();
         }
         
-        //Update light effects
+        //Update text effects
         for (SceneObject textObjects : this.getSceneObjectManager().get(CoreGroups.TEXT))
         {
             ((Text)textObjects).update();
@@ -822,7 +823,11 @@ public final class GameClientScene extends Scene
             {
                 if(item instanceof NonPlayerEntity)
                 {
-                    ((Entity) item).getBody().setGravityEffected(false);
+                    //((Entity) item).getBody().setGravityEffected(false);
+                    
+                    //change its body to static
+                    StaticBody body = new StaticBody(((Entity)item).getBody().getShape());
+                    ((Entity)item).setBody(body);
                 }
                 physicsWorld.add(((Entity) item).getBody());
             }
