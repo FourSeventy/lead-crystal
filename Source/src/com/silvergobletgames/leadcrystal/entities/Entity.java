@@ -345,7 +345,7 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
                 //gl.glLineWidth(1);
                 gl.glBegin(GL3bc.GL_LINE_LOOP);
                 for (int angle = 0; angle < 360; angle += 1) {
-                    gl.glVertex2f((float) (this.getPosition().x + Math.sin(angle * Math.PI / 180) * radius), (float) (this.getPosition().y + Math.cos(angle * Math.PI / 180) * radius));
+                    gl.glVertex2f((float) (this.body.getPosition().getX() + Math.sin(Math.toRadians(angle)) * radius), (float) (this.body.getPosition().getY() + Math.cos(angle * Math.PI / 180) * radius));
                     
                 }
                 gl.glEnd();

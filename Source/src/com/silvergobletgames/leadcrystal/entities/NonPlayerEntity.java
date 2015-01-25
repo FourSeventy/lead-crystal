@@ -379,7 +379,9 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
         {
             //if we had a bitmask change clear the arbiters
             if((((SceneObjectRenderDataChanges)changeData.get(2)).fields & (1 <<7)) != 0)
+            {
               ((GameClientScene)this.owningScene).clearArbitersOnBody(body);
+            }
             
             this.body = Entity.reconcileBodyRenderDataChanges( lastTime, futureTime,this.body, (SceneObjectRenderDataChanges)changeData.get(2));
         }
