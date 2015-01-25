@@ -818,15 +818,26 @@ public final class GameClientScene extends Scene
         //do special case stuff for entities
         if (item instanceof Entity) 
         {           
-            //add the entity to the physics world if the entity is in the main layer and it has a static body
+            //add the entity to the physics world if the entity is in the main layer and it has a static body or if its a NPE
             if ((layer == Layer.MAIN &&((Entity)item).getBody() instanceof StaticBody && !(item instanceof HitBox)) || (layer == Layer.MAIN && item instanceof NonPlayerEntity)) 
             {
                 if(item instanceof NonPlayerEntity)
                 {
-                    //((Entity) item).getBody().setGravityEffected(false);
-                    
-                    //change its body to static
+                    //change its body to static 
+                    Entity entityItem = ((Entity)item);
+                    float x = entityItem.getBody().getPosition().getX();
+                    float y = entityItem.getBody().getPosition().getY();
+                    long collisionMask = entityItem.getBody().getBitmask();
+                    long overlapMask = entityItem.getBody().getOverlapMask();
+                    float friction = entityItem.getBody().getFriction();
+                    float restitution = entityItem.getBody().getRestitution();
+                                    
                     StaticBody body = new StaticBody(((Entity)item).getBody().getShape());
+                    body.setPosition(x, y);
+                    body.setBitmask(collisionMask);
+                    body.setOverlapMask(overlapMask);
+                    body.setFriction(friction);
+                    body.setRestitution(restitution);
                     ((Entity)item).setBody(body);
                 }
                 physicsWorld.add(((Entity) item).getBody());
