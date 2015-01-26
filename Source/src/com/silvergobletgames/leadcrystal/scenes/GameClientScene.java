@@ -252,6 +252,34 @@ public final class GameClientScene extends Scene
 
         //clear the physics world of resting bodies (this needs to be done for isTouching() to work)
         physicsWorld.clearRestingState(); 
+        
+        //disable out of range bodies
+            ArrayList<SceneObject> objects = this.getSceneObjectManager().get(Layer.MAIN);
+            for(SceneObject s:  objects)
+            {
+                if( s instanceof Entity && ((Entity)s).getBody() != null)
+                {
+                    Entity ent = (Entity)s;
+                    
+        
+                    
+                    //if out of range of all players
+                    
+                    if(this.player.distanceAbs(ent) > 1_000)
+                    {
+                        ent.getImage().setColor(new Color(Color.red));
+                        //ent.getBody().setVelocity(new Vector2f(0,0));
+                       // this.physicsWorld.clearArbiters(ent.getBody());
+                        ent.getBody().setEnabled(false);                              
+                    }
+                    else
+                    {
+                        ent.getImage().setColor(new Color(Color.green));
+                        ent.getBody().setEnabled(true);
+                    }
+                }
+            }
+            
         //step physics world
         physicsWorld.step(5 / 60F);
         //resolve collisions
@@ -568,12 +596,6 @@ public final class GameClientScene extends Scene
             gl.glLoadIdentity();
             glu.gluLookAt(viewport.getBottomLeftCoordinate().x * Layer.MAIN.coordinateScalingFactor, viewport.getBottomLeftCoordinate().y * Layer.MAIN.coordinateScalingFactor, 1, viewport.getBottomLeftCoordinate().x * Layer.MAIN.coordinateScalingFactor, viewport.getBottomLeftCoordinate().y * Layer.MAIN.coordinateScalingFactor, 0, 0, 1, 0);
 
-//            gl.glColor4f(1,0,0,1);
-//            gl.glLineWidth(2);
-//            gl.glBegin(GL3bc.GL_LINES);
-//                gl.glVertex2f(viewport.topLine.getStart().getX(),viewport.topLine.getStart().getY());
-//                gl.glVertex2f(viewport.topLine.getEnd().getX(),viewport.topLine.getEnd().getY());
-//            gl.glEnd();
 
             gl.glColor4f(0,1,0,1);
             gl.glBegin(GL3bc.GL_LINES);

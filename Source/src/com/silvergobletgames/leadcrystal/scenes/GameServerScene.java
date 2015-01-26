@@ -167,8 +167,35 @@ public class GameServerScene extends Scene
             //tick the physics world
             physicsWorld.clearRestingState(); //clear the physics world of resting bodies (this needs to be done for isTouching() to work)
             
+            
+            //disable out of range bodies
+            ArrayList<SceneObject> objects = this.getSceneObjectManager().get(Layer.MAIN);
+            for(SceneObject s:  objects)
+            {
+                if( s instanceof Entity)
+                {
+                    Entity ent = (Entity)s;
+                    
+                    //if out of range of all players
+                    
+                    if(this.players.get(0).distanceAbs(ent) > 1_000)
+                    {
+                        //ent.getImage().setColor(new Color(Color.red));
+                       // ent.getBody().setVelocity(new Vector2f(0,0));
+                       // this.physicsWorld.clearArbiters(ent.getBody());
+                        ent.getBody().setEnabled(false);                              
+                    }
+                    else
+                    {
+                       // ent.getImage().setColor(new Color(Color.green));
+                        ent.getBody().setEnabled(true);
+                    }
+                }
+            }
+            
            // long time = System.currentTimeMillis();
             physicsWorld.step(5 / 60F);
+            
             
            // System.err.println(System.currentTimeMillis() - time);
             
@@ -520,12 +547,37 @@ public class GameServerScene extends Scene
                     //test
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_M))
                     {
-                        player.getCombatData().currentHealth = 0;
+                        ArrayList<SceneObject> objects = this.getSceneObjectManager().get(Layer.MAIN);
+                        for(SceneObject s:  objects)
+                        {
+                            if( s instanceof Entity)
+                            {
+                                Entity ent = (Entity)s;
+                                
+                                if(ent.getBody().getPosition().getX() > 1000)
+                                {
+                                    ent.getBody().setVelocity(new Vector2f(0,0));
+                                    ent.getBody().setEnabled(false);                              
+                                }
+                            }
+                        }
                     }
                     if (inputSnapshot.isKeyReleased(KeyEvent.VK_N))
                     {
                      
-                       
+                       ArrayList<SceneObject> objects = this.getSceneObjectManager().get(Layer.MAIN);
+                        for(SceneObject s:  objects)
+                        {
+                            if( s instanceof Entity)
+                            {
+                                Entity ent = (Entity)s;
+                                
+                                if(ent.getBody().getPosition().getX() > 1000)
+                                {
+                                    ent.getBody().setEnabled(true);
+                                }
+                            }
+                        }
                     }
 
 
