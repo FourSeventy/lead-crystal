@@ -896,20 +896,29 @@ public class MapEditorScene extends Scene {
                
                 for(SceneObject so: this.getSceneObjectManager().get(Layer.MAIN))
                 {
-                    if(so instanceof NonPlayerEntity)
+                    
+                    if(so instanceof WorldObjectEntity)
                     {
-                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.Scout1AnimationPack || ((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.Scout2AnimationPack || ((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.TankAnimationPack )
+                        if(((WorldObjectEntity)so).isViewportBlocker())
                         {
-                            ((NonPlayerEntity)so).setImageOffset(new Vector2f(0,6));
+                            ((WorldObjectEntity)so).getBody().setBitmask(Entity.BitMasks.NO_COLLISION.value);
+                            ((WorldObjectEntity)so).getBody().setOverlapMask(Entity.OverlapMasks.NO_OVERLAP.value);
                         }
                     }
-                    else if(so instanceof MobSpawner)
-                    {
-                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.Scout1AnimationPack || ((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.Scout2AnimationPack || ((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.TankAnimationPack )
-                        {
-                            ((MobSpawner)so).mobToSpawn.setImageOffset(new Vector2f(0,6)); 
-                        }                           
-                    }
+//                    if(so instanceof NonPlayerEntity)
+//                    {
+//                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.Scout1AnimationPack || ((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.Scout2AnimationPack || ((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.TankAnimationPack )
+//                        {
+//                            ((NonPlayerEntity)so).setImageOffset(new Vector2f(0,6));
+//                        }
+//                    }
+//                    else if(so instanceof MobSpawner)
+//                    {
+//                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.Scout1AnimationPack || ((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.Scout2AnimationPack || ((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.TankAnimationPack )
+//                        {
+//                            ((MobSpawner)so).mobToSpawn.setImageOffset(new Vector2f(0,6)); 
+//                        }                           
+//                    }
                 }
                 
                 

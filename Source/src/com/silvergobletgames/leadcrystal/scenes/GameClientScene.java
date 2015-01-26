@@ -859,13 +859,20 @@ public final class GameClientScene extends Scene
                     body.setRestitution(restitution);
                     ((Entity)item).setBody(body);
                 }
-                physicsWorld.add(((Entity) item).getBody());
+                
+                //if it isnt no collide/no-overlap add it
+                if(!(Entity.BitMasks.valueToEnum(((Entity)item).getBody().getBitmask()) == Entity.BitMasks.NO_COLLISION && Entity.OverlapMasks.valueToEnum(((Entity)item).getBody().getOverlapMask()) == Entity.OverlapMasks.NO_OVERLAP))
+                {
+                   physicsWorld.add(((Entity) item).getBody());
+                }
             }
             
 
             //if it has an image
-            if(((Entity)item).getImage() != null)           
+            if(((Entity)item).getImage() != null)   
+            {
                 this.imageUpdateList.add(((Entity)item).getImage());
+            }
             
             //strip out script objects
             ((Entity)item).setScriptObject(null);

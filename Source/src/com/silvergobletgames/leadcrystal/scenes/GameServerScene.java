@@ -672,7 +672,12 @@ public class GameServerScene extends Scene
             //add the entity to the physics world if the entity is in the main layer
             if (layer == Layer.MAIN)
             {
-                physicsWorld.add(((Entity) item).getBody());
+                
+                //if it isnt no collide/no-overlap add it
+                if(!(Entity.BitMasks.valueToEnum(((Entity)item).getBody().getBitmask()) == Entity.BitMasks.NO_COLLISION && Entity.OverlapMasks.valueToEnum(((Entity)item).getBody().getOverlapMask()) == Entity.OverlapMasks.NO_OVERLAP))
+                {
+                   physicsWorld.add(((Entity) item).getBody());
+                }
                 
                 //if the group is crate, add all other crates into included bodies
                 if(((Entity)item).isInGroup(ExtendedSceneObjectGroups.CRATE))
