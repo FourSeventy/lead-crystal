@@ -260,21 +260,17 @@ public final class GameClientScene extends Scene
                 if( s instanceof Entity && ((Entity)s).getBody() != null)
                 {
                     Entity ent = (Entity)s;
-                    
         
-                    
-                    //if out of range of all players
-                    
-                    if(this.player.distanceAbs(ent) > 1_000)
+                    if(this.player.distanceAbs(ent) >= 2_500)
                     {
-                        ent.getImage().setColor(new Color(Color.red));
+                        //ent.getImage().setColor(new Color(Color.red));
                         //ent.getBody().setVelocity(new Vector2f(0,0));
                        // this.physicsWorld.clearArbiters(ent.getBody());
                         ent.getBody().setEnabled(false);                              
                     }
                     else
                     {
-                        ent.getImage().setColor(new Color(Color.green));
+                        //ent.getImage().setColor(new Color(Color.green));
                         ent.getBody().setEnabled(true);
                     }
                 }

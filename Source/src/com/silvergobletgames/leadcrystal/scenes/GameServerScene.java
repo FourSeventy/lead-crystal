@@ -177,17 +177,24 @@ public class GameServerScene extends Scene
                     Entity ent = (Entity)s;
                     
                     //if out of range of all players
+                    boolean outOfRange = true;
+                    for(PlayerEntity p: this.players)
+                    {                    
+                        if(p.distanceAbs(ent) <= 2_500)
+                        {
+                            outOfRange = false;   
+                            break;
+                        }
+                    }
                     
-                    if(this.players.get(0).distanceAbs(ent) > 1_000)
+                    if(outOfRange)
                     {
-                        //ent.getImage().setColor(new Color(Color.red));
-                       // ent.getBody().setVelocity(new Vector2f(0,0));
-                       // this.physicsWorld.clearArbiters(ent.getBody());
-                        ent.getBody().setEnabled(false);                              
+                        // ent.getBody().setVelocity(new Vector2f(0,0));
+                        // this.physicsWorld.clearArbiters(ent.getBody());
+                         ent.getBody().setEnabled(false);  
                     }
                     else
                     {
-                       // ent.getImage().setColor(new Color(Color.green));
                         ent.getBody().setEnabled(true);
                     }
                 }
