@@ -273,12 +273,8 @@ public class WorldObjectEntity extends Entity implements SavableSceneObject, Sha
                
         renderData.data.add(0,this.image.dumpRenderData());
         renderData.data.add(1, this.light != null ? this.light.dumpRenderData() : null);
-        renderData.data.add(2, Entity.dumpBodyRenderData(this.body));
-        renderData.data.add(3, this.viewportBlocker);
-        renderData.data.add(4, this.shadowCaster);
-        renderData.data.add(5, this.worldObjectType);
-        renderData.data.add(6, this.entityTooltip.dumpRenderData());
-        renderData.data.add(7, this.materialType);
+        renderData.data.add(2,this.getBody().getPosition().getX());
+        renderData.data.add(3,this.getBody().getPosition().getY());
         
         
         return renderData;
@@ -289,15 +285,9 @@ public class WorldObjectEntity extends Entity implements SavableSceneObject, Sha
         Body body = Entity.buildBodyFromRenderData((RenderData)renderData.data.get(2));
         Image image = Image.buildFromRenderData((SceneObjectRenderData)renderData.data.get(0));
         WorldObjectEntity worldObject = new WorldObjectEntity(image,body);
-        worldObject.setViewportBlocker((boolean)renderData.data.get(3));
-        worldObject.setShadowCaster((boolean)renderData.data.get(4));
-        worldObject.setWorldObjectType((WorldObjectType)renderData.data.get(5));
-        EntityTooltip tooltip = EntityTooltip.buildFromRenderData((SceneObjectRenderData)renderData.data.get(6));
-        worldObject.setTooltip(tooltip);
-        worldObject.setMaterialType((MaterialType)renderData.data.get(7));
         
         if(renderData.data.get(1) != null)
-            worldObject.setLight(LightSource.buildFromRenderData((SceneObjectRenderData)renderData.data.get(5)));
+            worldObject.setLight(LightSource.buildFromRenderData((SceneObjectRenderData)renderData.data.get(1)));
         
         worldObject.setID(renderData.getID());              
         
@@ -331,16 +321,9 @@ public class WorldObjectEntity extends Entity implements SavableSceneObject, Sha
                 changeMap += 2;
             }
         }
+           
         
-        
-        SceneObjectRenderDataChanges bodyChanges = Entity.generateBodyRenderDataChanges((RenderData)oldData.data.get(2), (RenderData)newData.data.get(2));
-        if(bodyChanges != null)
-        {
-            changeList.add(bodyChanges);
-            changeMap += 4;
-        }
-        
-        for(int i = 3; i < 6; i++)
+        for(int i = 2; i <=3; i++)
         {
             if(!oldData.data.get(i).equals( newData.data.get(i)))
             {
@@ -348,23 +331,7 @@ public class WorldObjectEntity extends Entity implements SavableSceneObject, Sha
                 changeMap += 1 << i;
             }
         }
-        
-        if(entityTooltip != null)
-        {
-            SceneObjectRenderDataChanges tooltipChanges = this.entityTooltip.generateRenderDataChanges((RenderData)oldData.data.get(6), (RenderData)newData.data.get(6));
-            if(tooltipChanges != null)
-            {
-                changeList.add(tooltipChanges);
-                changeMap += 1<< 6;
-            }
-        }
-        
-        //material
-        if(!oldData.data.get(7).equals( newData.data.get(7)))
-        {
-            changeList.add(newData.data.get(7));
-            changeMap += 1 << 7;
-        }
+      
         
         changes.fields = changeMap;
         changes.data = changeList.toArray();
@@ -386,7 +353,7 @@ public class WorldObjectEntity extends Entity implements SavableSceneObject, Sha
         
         //construct an arraylist of data that we got, nulls will go where we didnt get any data
         ArrayList changeData = new ArrayList();
-        for(int i = 0; i <9; i ++)
+        for(int i = 0; i <=3; i ++)
         {
             // The bit was set
             if ((fieldMap & (1L << i)) != 0)
@@ -405,24 +372,19 @@ public class WorldObjectEntity extends Entity implements SavableSceneObject, Sha
         if(this.light != null && changeData.get(1) != null)
             this.light.reconcileRenderDataChanges(lastTime,futureTime,(SceneObjectRenderDataChanges)changeData.get(1)); 
         
-        if(changeData.get(2) != null)        
-            this.body = Entity.reconcileBodyRenderDataChanges( lastTime, futureTime,this.body, (SceneObjectRenderDataChanges)changeData.get(2));
-
+        float x = this.getPosition().getX();
+        float y = this.getPosition().getY();
+        if(changeData.get(2) != null) 
+        {
+            x = (float)changeData.get(2);
+        }
+        if(changeData.get(3) != null) 
+        {
+            y = (float)changeData.get(3);
+        }
         
-        
-        if(changeData.get(3) != null)
-            this.setViewportBlocker((boolean)changeData.get(3));
-        if(changeData.get(4) != null)
-            this.setShadowCaster((boolean)changeData.get(4));
-        if(changeData.get(5) != null)
-           this.setWorldObjectType((WorldObjectType)changeData.get(5));
-        
-        if(this.entityTooltip != null && changeData.get(6) != null)
-            this.entityTooltip.reconcileRenderDataChanges(lastTime, futureTime, (SceneObjectRenderDataChanges)changeData.get(6));
-        
-        if(changeData.get(7) != null)
-            this.setMaterialType((MaterialType)changeData.get(7));
-        
+        this.setPosition(x, y);
+                
     }
     
     public void interpolate(long currentTime)
@@ -433,11 +395,6 @@ public class WorldObjectEntity extends Entity implements SavableSceneObject, Sha
 
         if(light != null)
             light.interpolate(currentTime);
-
-        if(entityTooltip != null)
-            entityTooltip.interpolate(currentTime);          
-        
-        this.body = Entity.interpolateBody(this.body, currentTime);
     }
     
     
