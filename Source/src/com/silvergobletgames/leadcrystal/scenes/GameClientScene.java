@@ -260,8 +260,9 @@ public final class GameClientScene extends Scene
                 if( s instanceof Entity && ((Entity)s).getBody() != null)
                 {
                     Entity ent = (Entity)s;
+                    
         
-                    if(this.player.distanceAbs(ent) >= 2_500)
+                    if(this.player.distanceAbs(ent) >= 2_200)
                     {
                         //ent.getImage().setColor(new Color(Color.red));
                         //ent.getBody().setVelocity(new Vector2f(0,0));
