@@ -1,6 +1,7 @@
 package com.silvergobletgames.leadcrystal.core;
 
 import com.silvergobletgames.sylver.core.Game;
+import com.silvergobletgames.sylver.util.Log;
 import java.io.*;
 import java.net.URI;
 import java.net.URL;
@@ -110,8 +111,7 @@ public class GameplaySettings{
         catch(IOException e)
         {
              //log error to console
-            Logger logger =Logger.getLogger(GameplaySettings.class.getName());
-            logger.log(Level.SEVERE, "Could not dump gameplaySettings.ini to file: ", e);  
+            Log.error("Could not dump gameplaySettings.ini to file: ", e);  
         }
     }
     
@@ -153,8 +153,7 @@ public class GameplaySettings{
         catch(IOException | NumberFormatException e)
         {
             //log error to console
-            Logger logger =Logger.getLogger(GameplaySettings.class.getName());
-            logger.log(Level.SEVERE, "Problem loading gameplaySettings.ini: ",e);
+            Log.error( "Problem loading gameplaySettings.ini: ",e);
         }
         
         

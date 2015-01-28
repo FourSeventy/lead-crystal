@@ -39,6 +39,7 @@ import com.silvergobletgames.sylver.graphics.RenderingPipelineGL2;
 import com.silvergobletgames.sylver.graphics.Text;
 import com.silvergobletgames.sylver.graphics.Text.CoreTextType;
 import com.silvergobletgames.sylver.graphics.TextEffect;
+import com.silvergobletgames.sylver.util.Log;
 import com.silvergobletgames.sylver.windowsystem.Button;
 import com.silvergobletgames.sylver.windowsystem.TextBox;
 import java.awt.event.ActionEvent;
@@ -479,8 +480,7 @@ public class NewCharacterScene extends Scene
                 catch(IllegalAccessException | InstantiationException e)
                 {
                     //log error to console
-                    Logger logger =Logger.getLogger(NewCharacterScene.class.getName());
-                    logger.log(Level.SEVERE, "Error building player data", e.toString());
+                    Log.error( "Error building player data", e.toString());
 
                     body = new BashBrownBodyAnimationPack();
                     front= new BashBrownFrontArmAnimationPack();

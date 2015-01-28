@@ -7,14 +7,12 @@ import com.silvergobletgames.sylver.core.EngineSettings;
 import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.core.Game.SystemExitAction;
 import com.silvergobletgames.sylver.core.GameConfiguration;
+import com.silvergobletgames.sylver.util.Log;
 import java.io.File;
 import java.io.IOException;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class Main 
@@ -136,9 +134,7 @@ public class Main
                 catch(Exception e)
                 {
                     //log error to console
-                    Logger logger =Logger.getLogger(Main.class.getName());
-                    logger.log(Level.SEVERE, "Error Loading TextRenderer: {0}", e.toString());
-                    logger.addHandler(new ConsoleHandler()); 
+                    Log.error( "Error Loading TextRenderer: {0}", e.toString());
                 }
                 
                 //load textures we need for menus
@@ -157,9 +153,8 @@ public class Main
                 catch (IOException ex)
                 {
                      //log error to console
-                    Logger logger =Logger.getLogger(Main.class.getName());
-                    logger.log(Level.SEVERE, "Error Loading Textures: {0}", ex.toString());
-                    logger.addHandler(new ConsoleHandler()); 
+                    Log.error( "Error Loading Textures: {0}", ex.toString());
+                    
                 }
 
                 
@@ -171,9 +166,8 @@ public class Main
                 catch(Exception e)
                 {
                     //log error to console
-                    Logger logger =Logger.getLogger(Main.class.getName());
-                    logger.log(Level.SEVERE, "Error Loading Sounds: {0}", e.toString());
-                    logger.addHandler(new ConsoleHandler()); 
+                    Log.error( "Error Loading Sounds: {0}", e.toString());
+                    
                 }
                 
                 //load all levels
@@ -185,9 +179,8 @@ public class Main
                 catch(Exception e)
                 {
                     //log error to console
-                    Logger logger =Logger.getLogger(Main.class.getName());
-                    logger.log(Level.SEVERE, "Error Loading Level: {0}", e.toString());
-                    logger.addHandler(new ConsoleHandler()); 
+                    Log.error( "Error Loading Level: {0}", e.toString());
+                     
                     
                     //rethrow error because it is critical
                     throw new RuntimeException("Error Loading Level", e);

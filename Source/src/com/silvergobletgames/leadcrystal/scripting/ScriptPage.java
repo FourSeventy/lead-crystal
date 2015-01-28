@@ -3,6 +3,7 @@ package com.silvergobletgames.leadcrystal.scripting;
 import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.sylver.netcode.SaveData;
+import com.silvergobletgames.sylver.util.Log;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.script.*;
@@ -56,7 +57,7 @@ public class ScriptPage
         }
         catch (ScriptException ex)
         {
-            Logger.getLogger(ScriptPage.class.getName()).log(Level.SEVERE, null, ex);
+            Log.error( "Script Error", ex);
         }
     }
     
@@ -98,7 +99,7 @@ public class ScriptPage
         }
         catch (ScriptException ex)
         {
-            Logger.getLogger(PageCondition.class.getName()).log(Level.SEVERE, null, ex);
+            Log.error( "Script Error", ex);
         }
     }
     

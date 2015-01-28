@@ -12,6 +12,7 @@ import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.RenderingPipelineGL2;
 import com.silvergobletgames.sylver.graphics.Text;
 import com.silvergobletgames.sylver.graphics.TextEffect;
+import com.silvergobletgames.sylver.util.Log;
 import com.silvergobletgames.sylver.windowsystem.Button;
 import com.silvergobletgames.sylver.windowsystem.TextBox;
 import java.awt.event.ActionEvent;
@@ -58,8 +59,7 @@ public class ServerSelectScene extends Scene
         catch(Exception e)
         {
             //log error to console
-           Logger logger =Logger.getLogger(ServerSelectScene.class.getName());
-           logger.log(Level.SEVERE, "RecentServerCache load failed ", e); 
+           Log.error( "RecentServerCache load failed ", e); 
            
            this.recentServerList = new RecentServerList();
         }
@@ -249,8 +249,7 @@ public class ServerSelectScene extends Scene
         catch (IOException e) 
         {
            //log error to console
-           Logger logger =Logger.getLogger(ServerSelectScene.class.getName());
-           logger.log(Level.SEVERE, "RecentServerCache save failed ", e); 
+           Log.error( "RecentServerCache save failed ", e); 
         }
         Game.getInstance().unloadScene(ServerSelectScene.class);
     }

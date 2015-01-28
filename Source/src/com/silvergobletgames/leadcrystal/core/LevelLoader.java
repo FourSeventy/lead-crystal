@@ -1,6 +1,7 @@
 package com.silvergobletgames.leadcrystal.core;
 
 import com.silvergobletgames.sylver.graphics.TextureLoader;
+import com.silvergobletgames.sylver.util.Log;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -90,7 +91,7 @@ public class LevelLoader
         }
         catch (IOException | ClassNotFoundException ex)
         {
-            Logger.getLogger(LevelLoader.class.getName()).log(Level.SEVERE, null, ex);
+            Log.error( "Level loading problem", ex);
         }
         this.levelMap.put(filename, data);
         

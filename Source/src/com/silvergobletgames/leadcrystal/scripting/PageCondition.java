@@ -6,6 +6,7 @@ import com.silvergobletgames.leadcrystal.netcode.GobletServer;
 import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.netcode.SaveData;
+import com.silvergobletgames.sylver.util.Log;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.script.*;
@@ -71,7 +72,7 @@ public class PageCondition
         }
         catch (ScriptException ex)
         {
-            Logger.getLogger(ScriptPage.class.getName()).log(Level.SEVERE, null, ex);
+            Log.error( "Script Error", ex);
         }
         
         return conditionReturnValue;
@@ -114,7 +115,7 @@ public class PageCondition
         }
         catch (ScriptException ex)
         {
-            Logger.getLogger(PageCondition.class.getName()).log(Level.SEVERE, null, ex);
+            Log.error( "Script Error", ex);
         }
     }
     

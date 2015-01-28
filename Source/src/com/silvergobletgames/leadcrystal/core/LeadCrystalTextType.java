@@ -6,6 +6,7 @@ import com.silvergobletgames.sylver.graphics.OpenGLGameWindow;
 import com.silvergobletgames.sylver.graphics.OpenGLGameWindow.SylverRenderDelegate;
 import com.silvergobletgames.sylver.graphics.Text;
 import com.silvergobletgames.sylver.graphics.Text.TextType;
+import com.silvergobletgames.sylver.util.Log;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.FontMetrics;
@@ -68,7 +69,7 @@ public enum LeadCrystalTextType implements TextType{
         } 
         catch (IOException|FontFormatException e) 
         {
-            Logger.getLogger(LeadCrystalTextType.class.getName()).log(Level.SEVERE,  "Error loading font", e);
+            Log.error(  "Error loading font", e);
             
             //load backup font
             customFont = new Font("CALIBRI", Font.PLAIN, 1);
