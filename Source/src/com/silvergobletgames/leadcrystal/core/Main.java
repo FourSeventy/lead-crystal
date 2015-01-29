@@ -219,7 +219,7 @@ public class Main
         URI textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("misc/mainMenuBackground.png");  
         Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "mainmenubackground.png");
         textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/tallFrameMenu.png");  
-        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "tallframeMmenu.png");
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "tallframemenu.png");
         textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("misc/blank.png");  
         Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "blank.png"); 
         textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/map_arrow.png");  
@@ -253,7 +253,49 @@ public class Main
         textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("characters/bash/body/red/bash_red.png");  
         Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "bash_red.png");
         textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("characters/bash/body/yellow/bash_yellow.png");  
-        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "bash_yellow.png");
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "bash_yellow.png");               
+//        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/attackSpeedIcon.png");  
+//        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "attackspeedicon.png");             
+//        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/ccReductionIcon.png");  
+//        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "ccreductionicon.png");       
+//        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/critChanceIcon.png");  
+//        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "critchanceicon.png");      
+//        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/critDamageIcon.png");  
+//        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "critdamageicon.png");      
+//        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/damageIcon.png");  
+//        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "damageicon.png");      
+//        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/goldFindIcon.png");  
+//        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "goldfindicon.png");        
+//        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/hardenedArmorIcon.png");  
+//        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "hardenedarmoricon.png");      
+//        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/healingEffectivenessIcon.png");  
+//        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "healingeffectivenessicon.png");       
+//        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/healthIcon.png");  
+//        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "healthicon.png");       
+//        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/lifeLeechIcon.png");  
+//        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "lifeleechicon.png");       
+//        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/meleeDamageIcon.png");  
+//        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "meleedamageicon.png");       
+//        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/moveSpeedIcon.png");  
+//        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "movespeedicon.png");        
+//        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/numberOfPotionsIcon.png");  
+//        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "numberofpotionsicon.png");     
+//        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/radarUpgradeIcon.png");  
+//        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "radarupgradeicon.png");        
+//        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/seeEnemyHealthIcon.png");  
+//        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "seeenemyhealthicon.png");        
+//        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/specialArmorIcon.png");  
+//        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "specialarmoricon.png");   
+//        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/steroidPotionIcon.png");  
+//        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "steroidpotionicon.png");       
+//        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/superArmorIcon.png");  
+//        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "superarmoricon.png");       
+//        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/thornsIcon.png");  
+//        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "thornsicon.png");
+        
+        
+        
+        
 
     }
 }
