@@ -61,6 +61,9 @@ public class Main
         //creates the game
         Game.getInstance().createGame(configuration);
         
+        //set title
+        Game.getInstance().getGraphicsWindow().setTitle("Titanis");
+        
         //register game exit actions
         Game.getInstance().registerSystemExitAction(new SystemExitAction(){
             public void action()
