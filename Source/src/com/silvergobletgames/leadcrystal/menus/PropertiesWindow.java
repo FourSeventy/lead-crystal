@@ -951,8 +951,7 @@ public class PropertiesWindow extends Menu
         tp.addComponent(xOffset,tab); 
         imageFields.add(xOffset); //10
         
-        Image arrow = new Image("rightarrow.png");
-        arrow.setHorizontalFlip(true);
+        Image arrow = new Image("map_arrow.png");     
         Button nudgeButton = new Button(arrow, 110, 295, 30, 35);
         nudgeButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -966,7 +965,8 @@ public class PropertiesWindow extends Menu
         });
         tp.addComponent(nudgeButton, tab);
         
-        arrow = new Image("rightarrow.png");
+        arrow = new Image("map_arrow.png");
+        arrow.setHorizontalFlip(true);
         nudgeButton = new Button(arrow, 250, 295, 30, 35);
         nudgeButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -989,8 +989,7 @@ public class PropertiesWindow extends Menu
         tp.addComponent(yOffset,tab); 
         imageFields.add(yOffset); //11
         
-        arrow = new Image("rightarrow.png");
-        arrow.setHorizontalFlip(true);
+        arrow = new Image("map_arrow.png");      
         nudgeButton = new Button(arrow, 110, 255, 30, 35);
         nudgeButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -1004,7 +1003,8 @@ public class PropertiesWindow extends Menu
         });
         tp.addComponent(nudgeButton, tab);
         
-        arrow = new Image("rightarrow.png");
+        arrow = new Image("map_arrow.png");
+        arrow.setHorizontalFlip(true);
         nudgeButton = new Button(arrow, 250, 255, 30, 35);
         nudgeButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
