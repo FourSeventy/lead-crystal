@@ -75,7 +75,7 @@ public class PlayerBoomerang extends PlayerSkill
         damage.addCombatEffect(new StateEffect(StateEffect.StateEffectType.DAMAGEREDUCTION, 180, -.75f, false));
         
         //build body of the laser
-        Body body = new Body(new Box(60,60), .1f);
+        Body body = new Body(new Box(55,55), .1f);
         Image img = new Image("boomerang.png");
         img.setAnchor(Anchorable.Anchor.LEFTCENTER);
         img.setColor(new Color(1.1f,1.1f,1.1f,1f)); 
