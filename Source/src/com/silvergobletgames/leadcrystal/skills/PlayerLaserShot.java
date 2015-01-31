@@ -49,7 +49,7 @@ public class PlayerLaserShot extends PlayerSkill{
         //set the skillID and the name
         this.icon = new Image("laserIcon.png");
         this.skillName = "Laser Blast";
-        this.skillDamageDescription = "Damage: 7-9";
+        this.skillDamageDescription = "Damage: 8-10";
         this.skillDescription = "Shoots a fast and accurate laser blast with medium damage.";
 
     }
@@ -66,8 +66,8 @@ public class PlayerLaserShot extends PlayerSkill{
         float theta = targetingData.theta;
                         
         //set damage
-        int min = 7; 
-        int max = 9;
+        int min = 8; 
+        int max = 10;
         float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
         damage.getAmountObject().adjustBase(damageAmout);
         damage.setType(Damage.DamageType.PHYSICAL);       
@@ -91,8 +91,8 @@ public class PlayerLaserShot extends PlayerSkill{
         
            
         //calculate force for the bullet
-        float xforce = 2500*vectorToTarget.x;
-        float yforce = 2500*vectorToTarget.y;
+        float xforce = 2650*vectorToTarget.x;
+        float yforce = 2650*vectorToTarget.y;
         
         //Dispense laser into the world
         laser.setPosition(origin.x + vectorToTarget.x * 25, origin.y + vectorToTarget.y * 25);

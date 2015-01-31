@@ -124,8 +124,8 @@ public class PlayerRocket extends PlayerSkill
         //===========================
                
         //calculate force for the rocket
-        float xforce = 1800*vectorToTarget.x;
-        float yforce = 1800*vectorToTarget.y;
+        float xforce = 1600*vectorToTarget.x;
+        float yforce = 1600*vectorToTarget.y;
             
         
         //Dispense rocket into the world
@@ -194,7 +194,7 @@ public class PlayerRocket extends PlayerSkill
                  img2.setVerticalFlip(SylverRandom.random.nextBoolean()); 
                  Overlay ehhovhh = new Overlay(img2);
                  img.addOverlay(ehhovhh); 
-                 Body beh = new StaticBody(new Circle(75));
+                 Body beh = new StaticBody(new Circle(85));
                  beh.setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value);
                  beh.setBitmask(Entity.BitMasks.NO_COLLISION.value);
                  damage.setType(Damage.DamageType.BURN);   
