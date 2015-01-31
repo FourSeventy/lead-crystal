@@ -53,7 +53,7 @@ public class PlayerRicochet extends PlayerSkill{
         this.icon = new Image("ricochetBladeIcon.png");
         this.skillName = "Ricochet Blade";
         this.skillDescription = "Shoots a deadly blade that bounces off walls and pierces enemies.";
-        this.skillDamageDescription = "Damage: 8-10";
+        this.skillDamageDescription = "Damage: 7-9";
         this.unlockCost = 1;
 
     }
@@ -74,8 +74,8 @@ public class PlayerRicochet extends PlayerSkill{
         float theta = targetingData.theta;
                         
         //set damage
-        int min = 8; 
-        int max = 10;
+        int min = 7; 
+        int max = 9;
         float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
         damage.getAmountObject().adjustBase(damageAmout);
         damage.setType(Damage.DamageType.PHYSICAL);  
