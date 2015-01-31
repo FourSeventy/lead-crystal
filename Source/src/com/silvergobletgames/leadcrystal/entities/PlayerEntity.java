@@ -854,7 +854,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         if(this.castingSkill.getRange() < 200)
         {
             int points = this.getArmorManager().meleeAttackDamageBonus.points;
-            damage.getAmountObject().adjustPercentModifier(.5f * points);
+            damage.getAmountObject().adjustPercentModifier(.25f * points);
         }
         
         //roll for crit

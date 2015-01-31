@@ -77,9 +77,9 @@ public class ArmorManager {
         this.armorStats.put(this.weaponDamage.id,this.weaponDamage);
         
         this.weaponAttackSpeed = new ArmorStat(ArmorStatID.WEAPON_ATTACK_SPEED, new Image("attackSpeedIcon.png"), "Recoil Dampener", 50,5);
-        this.weaponAttackSpeed.description = "+5% attack speed per point.";
+        this.weaponAttackSpeed.description = "+4% attack speed per point.";
         this.weaponAttackSpeed.unlocked = true;
-        this.weaponAttackSpeed.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().cooldownModifier.adjustBase(-.05f);}}); 
+        this.weaponAttackSpeed.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().cooldownModifier.adjustBase(-.04f);}}); 
         this.armorStats.put(this.weaponAttackSpeed.id,this.weaponAttackSpeed);
         
         this.critChance = new ArmorStat(ArmorStatID.CRIT_CHANCE, new Image("critChanceIcon.png"), "Laser Targeting", 50,3);
