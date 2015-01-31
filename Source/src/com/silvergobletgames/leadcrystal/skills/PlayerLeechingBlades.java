@@ -37,7 +37,7 @@ import net.phys2d.raw.shapes.Circle;
  */
 public class PlayerLeechingBlades extends PlayerSkill{
     
-    private static int BLADE_DURATION = 30 * 60;
+    private static int BLADE_DURATION = 24 * 60;
     
     public PlayerLeechingBlades()
     {

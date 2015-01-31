@@ -88,7 +88,7 @@ public class PlayerAttackDrone extends Skill
         CombatEntity target;
         
         //timer
-        private int lifeTime =1800;
+        private int lifeTime =1440;
         
         public Drone(Image image, Body body, PlayerEntity playerReference,Damage passthroughDamage)
         {
