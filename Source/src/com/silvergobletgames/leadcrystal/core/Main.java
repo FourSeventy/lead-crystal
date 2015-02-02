@@ -253,7 +253,10 @@ public class Main
         textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("characters/bash/body/red/bash_red.png");  
         Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "bash_red.png");
         textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("characters/bash/body/yellow/bash_yellow.png");  
-        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "bash_yellow.png");               
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "bash_yellow.png");    
+        
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/logo.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "logo.png");   
 //        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/attackSpeedIcon.png");  
 //        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "attackspeedicon.png");             
 //        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/ccReductionIcon.png");  

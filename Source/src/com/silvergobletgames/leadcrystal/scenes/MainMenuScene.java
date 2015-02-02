@@ -60,9 +60,12 @@ public class MainMenuScene extends Scene
         final int right = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x;
         final int center = right/2;
 
-        Text leadCrystal = new Text("Titanis",LeadCrystalTextType.MENU60);
-        leadCrystal.setPosition(center - leadCrystal.getWidth()/2, 700);       
-        this.add(leadCrystal,Layer.MAIN);
+        Image logo = new Image("logo.png");
+        logo.setPosition(center - logo.getWidth()/2, 525);
+        this.add(logo,Layer.MAIN);
+//        Text leadCrystal = new Text("Titanis",LeadCrystalTextType.MENU60);
+//        leadCrystal.setPosition(center - leadCrystal.getWidth()/2, 700);       
+//        this.add(leadCrystal,Layer.MAIN);
         
         //single player
         final Text singlePlayerText = new Text("Single Player",LeadCrystalTextType.MENU54);
