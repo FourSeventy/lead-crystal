@@ -70,7 +70,7 @@ public class PlayerClusterbomb extends PlayerSkill
         damage.addImageEffect(this.getDamageBrightnessEffect());
         
         //build body of bomb1
-        Body body1 = new Body(new Circle(15), 1);
+        Body body1 = new Body(new Circle(18), 1);
         body1.setFriction(2);
         Image img = new Image("grenade.png");
         img.setDimensions(30, 30);
@@ -78,7 +78,7 @@ public class PlayerClusterbomb extends PlayerSkill
         ClusterBombHitbox bomb1 = new ClusterBombHitbox(damage, body1, img, user); 
         
         //build body of bomb2
-        Body body2 = new Body(new Circle(15), 1);
+        Body body2 = new Body(new Circle(18), 1);
         body2.setFriction(2);
         Image img2 = new Image("grenade.png");
         img2.setDimensions(30, 30);
@@ -86,7 +86,7 @@ public class PlayerClusterbomb extends PlayerSkill
         ClusterBombHitbox bomb2 = new ClusterBombHitbox(damage, body2, img2, user);
         
         //build body of bomb3
-        Body body3 = new Body(new Circle(15), 1);
+        Body body3 = new Body(new Circle(18), 1);
         body3.setFriction(2);
         Image img3 = new Image("grenade.png");
         img3.setDimensions(30, 30);

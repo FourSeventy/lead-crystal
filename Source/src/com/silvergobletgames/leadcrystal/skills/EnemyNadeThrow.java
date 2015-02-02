@@ -59,7 +59,7 @@ public class EnemyNadeThrow extends Skill
         
         //build rock
         //build body of bomb1
-        Body body1 = new Body(new Circle(15), 1);
+        Body body1 = new Body(new Circle(18), 1);
         body1.setFriction(2);
         Image img = new Image("grenade.png");
         img.setDimensions(30, 30);
