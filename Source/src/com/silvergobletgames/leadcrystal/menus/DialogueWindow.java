@@ -49,6 +49,8 @@ public class DialogueWindow extends Window {
             case "Dr. Tam": characterImage = new Image("DrTam.png"); break;
             case "Old Man": characterImage = new Image("OldMan.png"); break;
             case "Brice": characterImage = new Image("Brice.png"); break;
+            case "Vexx": characterImage = new Image("bossPortrait.png"); break;
+            case "Survivor": characterImage = new Image("survivorPortrait.png"); break;
             default: characterImage = new Image("blank.png");
         }
         
