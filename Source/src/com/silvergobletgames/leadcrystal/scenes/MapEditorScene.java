@@ -900,16 +900,20 @@ public class MapEditorScene extends Scene {
 
                     if(so instanceof NonPlayerEntity)
                     {
-                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.TankAnimationPack || ((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.TurretAnimationPack )
+                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.CommonCrateAnimationPack)
                         {
-                            ((NonPlayerEntity)so).getCombatData().ccResistance.setBase(.50f);
+                            ((NonPlayerEntity)so).getCombatData().maxHealth.setBase(20); 
+                        }
+                        else if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.ArmorCrateAnimationPack)
+                        {
+                            ((NonPlayerEntity)so).getCombatData().maxHealth.setBase(40); 
                         }
                     }
                     else if(so instanceof MobSpawner)
                     {
                         if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.Scout2AnimationPack )
                         {
-                            ((MobSpawner)so).mobToSpawn.getSkillManager().learnSkill(Skill.SkillID.EnemyNadeThrow);
+                            
                         }                           
                     }
                 }
