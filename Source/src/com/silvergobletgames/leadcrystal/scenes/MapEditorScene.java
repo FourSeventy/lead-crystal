@@ -900,9 +900,9 @@ public class MapEditorScene extends Scene {
 
                     if(so instanceof NonPlayerEntity)
                     {
-                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.Scout2AnimationPack )
+                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.TankAnimationPack || ((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.TurretAnimationPack )
                         {
-                            ((NonPlayerEntity)so).getSkillManager().learnSkill(Skill.SkillID.EnemyNadeThrow);
+                            ((NonPlayerEntity)so).getCombatData().ccResistance.setBase(.50f);
                         }
                     }
                     else if(so instanceof MobSpawner)
