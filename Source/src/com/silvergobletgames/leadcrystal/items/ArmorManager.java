@@ -176,8 +176,8 @@ public class ArmorManager {
         this.thornsDamage.setAddPointAction(new ArmorAction(){ public void doAction(){getPlayerReference().getCombatData().thornsDamage.adjustBase(.25f);}}); 
         this.armorStats.put(this.thornsDamage.id,this.thornsDamage); 
         
-        this.numberOfPotions = new ArmorStat(ArmorStatID.NUMBER_POTIONS, new Image("numberOfPotionsIcon.png"), "Potion Slots", 50,5);
-        this.numberOfPotions.description = "Can carry +1 additional potion per point.";
+        this.numberOfPotions = new ArmorStat(ArmorStatID.NUMBER_POTIONS, new Image("numberOfPotionsIcon.png"), "Potion Slots", 50,3);
+        this.numberOfPotions.description = "Can carry +1 additional potion per point. Initial maximum is 3.";
         this.numberOfPotions.unlocked = true;
         this.numberOfPotions.setAddPointAction(new ArmorAction(){ public void doAction(){playerReference.getPotionManager().increaseMaxPotions(1);}}); 
         this.armorStats.put(this.numberOfPotions.id,this.numberOfPotions);
