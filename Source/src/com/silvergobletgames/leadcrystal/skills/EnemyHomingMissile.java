@@ -40,7 +40,7 @@ public class EnemyHomingMissile extends Skill
     
     public EnemyHomingMissile()
     {
-        super(SkillID.EnemyHomingMissile,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,120,800);
+        super(SkillID.EnemyHomingMissile,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,120,850);
         
 
     }
