@@ -123,7 +123,7 @@ public class ArmorManager {
         this.armorStats.put(this.seeEnemyHealth.id,this.seeEnemyHealth);
        
         this.doubleGoldFind = new ArmorStat(ArmorStatID.DOUBLE_GOLD, new Image("goldFindIcon.png"), "Greed Is Good",75,1);
-        this.doubleGoldFind.description = "Every gold picked up now heals for 1 health.";
+        this.doubleGoldFind.description = "Every gold picked up heals for 1 health.";
         this.doubleGoldFind.unlocked= false;
         this.armorStats.put(this.doubleGoldFind.id,this.doubleGoldFind);
        

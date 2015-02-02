@@ -391,7 +391,7 @@ public abstract class CombatEntity extends Entity
 
         //handle life leech
         float leechAmount =  incomingDamage.getLifeLeech();
-        if(leechAmount > 0)
+        if(leechAmount > 0 && this.getImage() != null && !(this.getImage().getAnimationPack() instanceof CrateInterface) )
         {
             Damage leechHeal = new Damage(DamageType.HEAL, leechAmount, this);
             if(incomingDamage.getSource() != null)
