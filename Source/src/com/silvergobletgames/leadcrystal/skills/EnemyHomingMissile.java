@@ -51,7 +51,7 @@ public class EnemyHomingMissile extends Skill
         //Damage is scaled with base
         float dAmount = this.getBaseDamage(); 
         damage.getAmountObject().adjustBase(dAmount);
-        damage.setType(Damage.DamageType.PHYSICAL);
+        damage.setType(Damage.DamageType.NODAMAGE);
            
         //Determine vector to target
         SylverVector2f distanceVector = user.distanceVector(user.getTarget());

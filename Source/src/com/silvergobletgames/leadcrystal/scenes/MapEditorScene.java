@@ -900,13 +900,9 @@ public class MapEditorScene extends Scene {
 
                     if(so instanceof NonPlayerEntity)
                     {
-                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.CommonCrateAnimationPack)
+                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.TankAnimationPack)
                         {
-                            ((NonPlayerEntity)so).getCombatData().maxHealth.setBase(20); 
-                        }
-                        else if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.ArmorCrateAnimationPack)
-                        {
-                            ((NonPlayerEntity)so).getCombatData().maxHealth.setBase(40); 
+                            ((NonPlayerEntity)so).getCombatData().baseDamage.setBase(25);
                         }
                     }
                     else if(so instanceof MobSpawner)
