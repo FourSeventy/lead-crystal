@@ -99,7 +99,10 @@ public class CombatData
     { 
         //check for death
         if(currentHealth <= 0 && !this.getState(CombatState.DEAD))
+        {
+           currentHealth = 0;
            self.die(); 
+        }
        
         //if we are not dead, do stuff
         if (!this.getState(CombatState.DEAD)) 
