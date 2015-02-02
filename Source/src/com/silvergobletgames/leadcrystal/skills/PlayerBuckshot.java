@@ -65,43 +65,73 @@ public class PlayerBuckshot extends PlayerSkill{
         //set damage
         int min = 3; 
         int max = 6;
-        float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
-        damage.getAmountObject().adjustBase(damageAmout);
-        damage.setType(Damage.DamageType.PHYSICAL);    
-        damage.addImageEffect(this.getDamageBrightnessEffect());
-        damage.setLifeLeech(damage.getLifeLeech()/2);
         
+        
+        Damage damage1 = new Damage(damage);
+        float damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
+        damage1.getAmountObject().adjustBase(damageAmout);
+        damage1.setType(Damage.DamageType.PHYSICAL);    
+        damage1.addImageEffect(this.getDamageBrightnessEffect());
+        damage1.setLifeLeech(damage1.getLifeLeech()/2);
+        
+        Damage damage2 = new Damage(damage);
+        damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
+        damage2.getAmountObject().adjustBase(damageAmout);
+        damage2.setType(Damage.DamageType.PHYSICAL);    
+        damage2.addImageEffect(this.getDamageBrightnessEffect());
+        damage2.setLifeLeech(damage2.getLifeLeech()/2);
+        
+        Damage damage3 = new Damage(damage);
+        damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
+        damage3.getAmountObject().adjustBase(damageAmout);
+        damage3.setType(Damage.DamageType.PHYSICAL);    
+        damage3.addImageEffect(this.getDamageBrightnessEffect());
+        damage3.setLifeLeech(damage3.getLifeLeech()/2);
+        
+        Damage damage4 = new Damage(damage);
+        damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
+        damage4.getAmountObject().adjustBase(damageAmout);
+        damage4.setType(Damage.DamageType.PHYSICAL);    
+        damage4.addImageEffect(this.getDamageBrightnessEffect());
+        damage4.setLifeLeech(damage4.getLifeLeech()/2);
+        
+        Damage damage5 = new Damage(damage);
+        damageAmout =  min + r.nextInt(max+1 -min); // roll at number from min to max;
+        damage5.getAmountObject().adjustBase(damageAmout);
+        damage5.setType(Damage.DamageType.PHYSICAL);    
+        damage5.addImageEffect(this.getDamageBrightnessEffect());
+        damage5.setLifeLeech(damage5.getLifeLeech()/2);
         
         //build bodies
         Body body = new Body(new Box(18,18), 1.5f);
         Image img = new Image("buck2.png");
         img.setDimensions(10,10);
         img.setColor(new Color(3f,.5f,.5f,1f)); 
-        HitBox upUp = new BuckshotHitBox(damage, body, img, user);  
+        HitBox upUp = new BuckshotHitBox(damage1, body, img, user);  
         
         body = new Body(new Box(18,18), 1.5f);
         img = new Image("buck.png");
         img.setDimensions(15,15);
         img.setColor(new Color(3f,.5f,.5f,1f)); 
-        HitBox up = new BuckshotHitBox(damage, body, img, user);  
+        HitBox up = new BuckshotHitBox(damage2, body, img, user);  
         
         body = new Body(new Box(18,18), 1.5f);
         img = new Image("buck2.png");
         img.setDimensions(15,15);
         img.setColor(new Color(3f,.5f,.5f,1f)); 
-        HitBox center = new BuckshotHitBox(damage, body, img, user);  
+        HitBox center = new BuckshotHitBox(damage3, body, img, user);  
         
         body = new Body(new Box(18,18), 1.5f);
         img = new Image("buck2.png");
         img.setDimensions(15,15);
         img.setColor(new Color(3f,.5f,.5f,1f));
-        HitBox down = new BuckshotHitBox(damage, body, img, user);  
+        HitBox down = new BuckshotHitBox(damage4, body, img, user);  
         
         body = new Body(new Box(18,18), 1.5f);
         img = new Image("buck.png");
         img.setDimensions(10,10);
         img.setColor(new Color(3f,.5f,.5f,1f));
-        HitBox downDown = new BuckshotHitBox(damage, body, img, user);  
+        HitBox downDown = new BuckshotHitBox(damage5, body, img, user);  
         
         //calculate vectors
         int degrees = 7 +r.nextInt(6);
