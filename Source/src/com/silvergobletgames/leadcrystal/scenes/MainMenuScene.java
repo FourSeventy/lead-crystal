@@ -61,7 +61,7 @@ public class MainMenuScene extends Scene
         final int center = right/2;
 
         Image logo = new Image("logo.png");
-        logo.setPosition(center - logo.getWidth()/2, 525);
+        logo.setPosition(center - logo.getWidth()/2 - 20, 675);
         this.add(logo,Layer.MAIN);
 //        Text leadCrystal = new Text("Titanis",LeadCrystalTextType.MENU60);
 //        leadCrystal.setPosition(center - leadCrystal.getWidth()/2, 700);       
