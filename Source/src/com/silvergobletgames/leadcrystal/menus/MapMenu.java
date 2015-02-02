@@ -112,18 +112,18 @@ public class MapMenu extends Window{
                 button.setHidden(false);
                 
                //set alpha based on distance 
-                button.getImage().getOverlay("img").getImage().setColor(new Color(1,1,1,1));  
+                button.getImage().getOverlay("interact").getImage().setColor(new Color(1,1,1,1));  
                 
                 if(button.getWindowRelativePosition().x <100)
                 {
                     float alpha = (float)button.getWindowRelativePosition().x/(float)100;
-                    button.getImage().getOverlay("img").getImage().setColor(new Color(1,1,1,alpha));
+                    button.getImage().getOverlay("interact").getImage().setColor(new Color(1,1,1,alpha));
                 }
                 if(button.getWindowRelativePosition().x > (this.getWidth() -175))  // x=1040 y=1   x=1140 y =0
                 {
                     
                     float alpha =  (-1/(float)100) * button.getWindowRelativePosition().x  +(57/(float)5);
-                    button.getImage().getOverlay("img").getImage().setColor(new Color(1,1,1,alpha));
+                    button.getImage().getOverlay("interact").getImage().setColor(new Color(1,1,1,alpha));
                 }
                 
             }
@@ -163,17 +163,17 @@ public class MapMenu extends Window{
                 button.setHidden(false);
                 
                 //set alpha based on distance 
-                button.getImage().getOverlay("img").getImage().setColor(new Color(1,1,1,1));  
+                button.getImage().getOverlay("interact").getImage().setColor(new Color(1,1,1,1));  
                 
                 if(button.getWindowRelativePosition().x <100)
                 {
                     float alpha = (float)button.getWindowRelativePosition().x/(float)100;
-                    button.getImage().getOverlay("img").getImage().setColor(new Color(1,1,1,alpha));
+                    button.getImage().getOverlay("interact").getImage().setColor(new Color(1,1,1,alpha));
                 }
                 if(button.getWindowRelativePosition().x > (this.getWidth() -175))
                 {
                     float alpha =  (-1/(float)100) * button.getWindowRelativePosition().x  +(57/(float)5);
-                    button.getImage().getOverlay("img").getImage().setColor(new Color(1,1,1,alpha));
+                    button.getImage().getOverlay("interact").getImage().setColor(new Color(1,1,1,alpha));
                 }
 
             }
@@ -194,7 +194,6 @@ public class MapMenu extends Window{
                 //===============
                 // Handle Input
                 //===============
-                SylverVector2f newOffset = new SylverVector2f();
 
                 if(Game.getInstance().getInputHandler().getInputSnapshot().isKeyPressed(KeyEvent.VK_LEFT))
                 {
@@ -528,23 +527,23 @@ public class MapMenu extends Window{
             correctOverlay0.getImage().setDimensions(75, 75);
             correctOverlay0.useRelativeSize = false;  
             
-            Object points[] = {0,.5,0};
+            Object points[] = {0,.25,0};
             int durations[] = {90,90};
             MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
             effect.setRepeating(true);
             button0.getImage().addImageEffect(effect);
             
-            button0.getImage().addOverlay("img",correctOverlay0);
+            button0.getImage().addOverlay("interact",correctOverlay0);
             button0.addActionListener(new ActionListener(){
                  public void actionPerformed(ActionEvent e)
                  {
                      if (e.getActionCommand().equals("mouseEntered")) {            
-                        button0.getImage().getOverlay("img").getImage().setScale(1.2f); 
+                        button0.getImage().getOverlay("interact").getImage().setScale(1.2f); 
                         playLevelHoverSound();
                         repaintLevelDetails(18,button0);
                      }
                      if (e.getActionCommand().equals("mouseExited")) {
-                        button0.getImage().getOverlay("img").getImage().setScale(1.0f); 
+                        button0.getImage().getOverlay("interact").getImage().setScale(1.0f); 
                          repaintLevelDetails(-1,button0);
                      }
                      if(e.getActionCommand().equals("clicked"))
@@ -563,23 +562,23 @@ public class MapMenu extends Window{
             correctOverlay99.getImage().setDimensions(75, 75);
             correctOverlay99.useRelativeSize = false;  
             
-            Object points2[] = {0,.5,0};
+            Object points2[] = {0,.25,0};
             int durations2[] = {90,90};
             MultiImageEffect effect2 = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points2, durations2);
             effect2.setRepeating(true);
             button99.getImage().addImageEffect(effect2);
             
-            button99.getImage().addOverlay("img",correctOverlay99);
+            button99.getImage().addOverlay("interact",correctOverlay99);
             button99.addActionListener(new ActionListener(){
                  public void actionPerformed(ActionEvent e)
                  {
                      if (e.getActionCommand().equals("mouseEntered")) {            
-                        button99.getImage().getOverlay("img").getImage().setScale(1.2f); 
+                        button99.getImage().getOverlay("interact").getImage().setScale(1.2f); 
                         playLevelHoverSound();
                         repaintLevelDetails(19,button99);
                      }
                      if (e.getActionCommand().equals("mouseExited")) {
-                        button99.getImage().getOverlay("img").getImage().setScale(1.0f); 
+                        button99.getImage().getOverlay("interact").getImage().setScale(1.0f); 
                          repaintLevelDetails(-1,button99);
                      }
                      if(e.getActionCommand().equals("clicked"))
@@ -605,23 +604,23 @@ public class MapMenu extends Window{
        }
        else
        {
-            Object points[] = {0,.5,0};
+            Object points[] = {0,.25,0};
             int durations[] = {90,90};
             MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
             effect.setRepeating(true);
             button0.getImage().addImageEffect(effect);
        }
-       button0.getImage().addOverlay("img",correctOverlay0);
+       button0.getImage().addOverlay("interact",correctOverlay0);
        button0.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {            
-                   button0.getImage().getOverlay("img").getImage().setScale(1.2f); 
+                   button0.getImage().getOverlay("interact").getImage().setScale(1.2f); 
                    playLevelHoverSound();
                    repaintLevelDetails(0,button0);
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                   button0.getImage().getOverlay("img").getImage().setScale(1.0f); 
+                   button0.getImage().getOverlay("interact").getImage().setScale(1.0f); 
                     repaintLevelDetails(-1,button0);
                 }
                 if(e.getActionCommand().equals("clicked"))
@@ -647,23 +646,23 @@ public class MapMenu extends Window{
        }
        else
        {
-            Object points[] = {0,.5,0};
+            Object points[] = {0,.25,0};
             int durations[] = {90,90};
             MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
             effect.setRepeating(true);
             button.getImage().addImageEffect(effect);
        }
-       button.getImage().addOverlay("img",correctOverlay);
+       button.getImage().addOverlay("interact",correctOverlay);
        button.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {            
-                   button.getImage().getOverlay("img").getImage().setScale(1.2f); 
+                   button.getImage().getOverlay("interact").getImage().setScale(1.2f); 
                    playLevelHoverSound();
                    repaintLevelDetails(1,button);
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                   button.getImage().getOverlay("img").getImage().setScale(1.0f); 
+                   button.getImage().getOverlay("interact").getImage().setScale(1.0f); 
                     repaintLevelDetails(-1,button);
                 }
                 if(e.getActionCommand().equals("clicked"))
@@ -689,7 +688,7 @@ public class MapMenu extends Window{
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(1).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
-           Object points[] = {0,.5,0};
+           Object points[] = {0,.25,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
            effect.setRepeating(true);
@@ -698,30 +697,30 @@ public class MapMenu extends Window{
        
        correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;    
-       button1.getImage().addOverlay("img",correctOverlay);
+       button1.getImage().addOverlay("interact",correctOverlay);
        button1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
                     
-                     if(!button1.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button1.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                        button1.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        button1.getImage().getOverlay("interact").getImage().setScale(1.2f);
                         playLevelHoverSound();
                         repaintLevelDetails(2,button1);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
                     
-                     if(!button1.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button1.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                        button1.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        button1.getImage().getOverlay("interact").getImage().setScale(1.0f);
                         repaintLevelDetails(-1,button1);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button1.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button1.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
                             ((GameClientScene)owningScene).sendChooseLevelPacket(2);
                      }
@@ -744,7 +743,7 @@ public class MapMenu extends Window{
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(2).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
-           Object points[] = {0,.5,0};
+           Object points[] = {0,.25,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
            effect.setRepeating(true);
@@ -753,28 +752,28 @@ public class MapMenu extends Window{
        
        correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
-       button2.getImage().addOverlay("img",correctOverlay);
+       button2.getImage().addOverlay("interact",correctOverlay);
        button2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
-                     if(!button2.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button2.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                        button2.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        button2.getImage().getOverlay("interact").getImage().setScale(1.2f);
                         playLevelHoverSound();
                         repaintLevelDetails(3,button2);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button2.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button2.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                        button2.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        button2.getImage().getOverlay("interact").getImage().setScale(1.0f);
                         repaintLevelDetails(-1,button2);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button2.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button2.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                         ((GameClientScene)owningScene).sendChooseLevelPacket(3);
                 }
             }
@@ -795,7 +794,7 @@ public class MapMenu extends Window{
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(2).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
-           Object points[] = {0,.5,0};
+           Object points[] = {0,.25,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
            effect.setRepeating(true);
@@ -804,29 +803,29 @@ public class MapMenu extends Window{
        
        correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
-       button3.getImage().addOverlay("img",correctOverlay);
+       button3.getImage().addOverlay("interact",correctOverlay);
        button3.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
                     
-                     if(!button3.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button3.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                        button3.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        button3.getImage().getOverlay("interact").getImage().setScale(1.2f);
                         playLevelHoverSound();
                         repaintLevelDetails(4,button3);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button3.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button3.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                        button3.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        button3.getImage().getOverlay("interact").getImage().setScale(1.0f);
                         repaintLevelDetails(-1,button3);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button3.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button3.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                         ((GameClientScene)owningScene).sendChooseLevelPacket(4);
                 }
             }
@@ -847,7 +846,7 @@ public class MapMenu extends Window{
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(3).mainObjective.complete || ((GameClientScene)owningScene).hostLevelProgression.levelMap.get(4).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
-           Object points[] = {0,.5,0};
+           Object points[] = {0,.25,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
            effect.setRepeating(true);
@@ -856,28 +855,28 @@ public class MapMenu extends Window{
        
        correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
-       button4.getImage().addOverlay("img",correctOverlay);
+       button4.getImage().addOverlay("interact",correctOverlay);
        button4.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
-                     if(!button4.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button4.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                        button4.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        button4.getImage().getOverlay("interact").getImage().setScale(1.2f);
                         playLevelHoverSound();
                         repaintLevelDetails(5,button4);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button4.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button4.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                        button4.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        button4.getImage().getOverlay("interact").getImage().setScale(1.0f);
                         repaintLevelDetails(-1,button4);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {                       
-                     if(!button4.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button4.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         ((GameClientScene)owningScene).sendChooseLevelPacket(5);
                         closePanX = new Float(150);
@@ -904,7 +903,7 @@ public class MapMenu extends Window{
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(5).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
-           Object points[] = {0,.5,0};
+           Object points[] = {0,.25,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
            effect.setRepeating(true);
@@ -914,28 +913,28 @@ public class MapMenu extends Window{
        
        correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
-       button5.getImage().addOverlay("img",correctOverlay);
+       button5.getImage().addOverlay("interact",correctOverlay);
        button5.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
-                     if(!button5.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
+                     if(!button5.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png")) 
                      {
-                        button5.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        button5.getImage().getOverlay("interact").getImage().setScale(1.2f);
                         playLevelHoverSound();
                         repaintLevelDetails(6,button5);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button5.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button5.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                        button5.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        button5.getImage().getOverlay("interact").getImage().setScale(1.0f);
                         repaintLevelDetails(-1,button5);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button5.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button5.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                         ((GameClientScene)owningScene).sendChooseLevelPacket(6);
                 }
             }
@@ -958,7 +957,7 @@ public class MapMenu extends Window{
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(6).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
-           Object points[] = {0,.5,0};
+           Object points[] = {0,.25,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
            effect.setRepeating(true);
@@ -968,28 +967,28 @@ public class MapMenu extends Window{
        
        correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
-       button6.getImage().addOverlay("img",correctOverlay);
+       button6.getImage().addOverlay("interact",correctOverlay);
        button6.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
-                     if(!button6.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
+                     if(!button6.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png")) 
                      {
-                        button6.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        button6.getImage().getOverlay("interact").getImage().setScale(1.2f);
                         playLevelHoverSound();
                         repaintLevelDetails(7,button6);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button6.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button6.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                        button6.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        button6.getImage().getOverlay("interact").getImage().setScale(1.0f);
                         repaintLevelDetails(-1,button6);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button6.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button6.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                         ((GameClientScene)owningScene).sendChooseLevelPacket(7);
                 }
             }
@@ -1011,7 +1010,7 @@ public class MapMenu extends Window{
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(6).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
-           Object points[] = {0,.5,0};
+           Object points[] = {0,.25,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
            effect.setRepeating(true);
@@ -1021,28 +1020,28 @@ public class MapMenu extends Window{
        
        correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
-       button7.getImage().addOverlay("img",correctOverlay);
+       button7.getImage().addOverlay("interact",correctOverlay);
        button7.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
-                     if(!button7.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
+                     if(!button7.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png")) 
                      {
-                        button7.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        button7.getImage().getOverlay("interact").getImage().setScale(1.2f);
                         playLevelHoverSound();
                         repaintLevelDetails(8,button7);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button7.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button7.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                        button7.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        button7.getImage().getOverlay("interact").getImage().setScale(1.0f);
                         repaintLevelDetails(-1,button7);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button7.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button7.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                         ((GameClientScene)owningScene).sendChooseLevelPacket(8);
                 }
             }
@@ -1064,7 +1063,7 @@ public class MapMenu extends Window{
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(7).mainObjective.complete || ((GameClientScene)owningScene).hostLevelProgression.levelMap.get(8).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
-           Object points[] = {0,.5,0};
+           Object points[] = {0,.25,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
            effect.setRepeating(true);
@@ -1074,28 +1073,28 @@ public class MapMenu extends Window{
        
        correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
-       button8.getImage().addOverlay("img",correctOverlay);
+       button8.getImage().addOverlay("interact",correctOverlay);
        button8.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
-                     if(!button8.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
+                     if(!button8.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png")) 
                      {
-                        button8.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        button8.getImage().getOverlay("interact").getImage().setScale(1.2f);
                         playLevelHoverSound();
                         repaintLevelDetails(9,button8);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button8.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button8.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                        button8.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        button8.getImage().getOverlay("interact").getImage().setScale(1.0f);
                         repaintLevelDetails(-1,button8);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button8.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button8.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                         ((GameClientScene)owningScene).sendChooseLevelPacket(9);
                 }
             }
@@ -1117,7 +1116,7 @@ public class MapMenu extends Window{
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(9).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
-           Object points[] = {0,.5,0};
+           Object points[] = {0,.25,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
            effect.setRepeating(true);
@@ -1127,28 +1126,28 @@ public class MapMenu extends Window{
        
        correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
-       button9.getImage().addOverlay("img",correctOverlay);
+       button9.getImage().addOverlay("interact",correctOverlay);
        button9.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
-                     if(!button9.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
+                     if(!button9.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png")) 
                      {
-                        button9.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        button9.getImage().getOverlay("interact").getImage().setScale(1.2f);
                         playLevelHoverSound();
                         repaintLevelDetails(10,button9);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button9.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button9.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                        button9.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        button9.getImage().getOverlay("interact").getImage().setScale(1.0f);
                         repaintLevelDetails(-1,button9);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button9.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button9.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                         ((GameClientScene)owningScene).sendChooseLevelPacket(10);
                 }
             }
@@ -1169,7 +1168,7 @@ public class MapMenu extends Window{
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(10).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
-           Object points[] = {0,.5,0};
+           Object points[] = {0,.25,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
            effect.setRepeating(true);
@@ -1179,28 +1178,28 @@ public class MapMenu extends Window{
        
        correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
-       button10.getImage().addOverlay("img",correctOverlay);
+       button10.getImage().addOverlay("interact",correctOverlay);
        button10.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
-                     if(!button10.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
+                     if(!button10.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png")) 
                      {
-                        button10.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        button10.getImage().getOverlay("interact").getImage().setScale(1.2f);
                         playLevelHoverSound();
                         repaintLevelDetails(11,button10);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button10.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button10.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                        button10.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        button10.getImage().getOverlay("interact").getImage().setScale(1.0f);
                         repaintLevelDetails(-1,button10);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button10.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button10.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                         ((GameClientScene)owningScene).sendChooseLevelPacket(11);
                 }
             }
@@ -1222,7 +1221,7 @@ public class MapMenu extends Window{
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(11).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
-           Object points[] = {0,.5,0};
+           Object points[] = {0,.25,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
            effect.setRepeating(true);
@@ -1232,28 +1231,28 @@ public class MapMenu extends Window{
        
        correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
-       button11.getImage().addOverlay("img",correctOverlay);
+       button11.getImage().addOverlay("interact",correctOverlay);
        button11.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
-                     if(!button11.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
+                     if(!button11.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png")) 
                      {
-                        button11.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        button11.getImage().getOverlay("interact").getImage().setScale(1.2f);
                         playLevelHoverSound();
                         repaintLevelDetails(12,button11);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button11.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button11.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                        button11.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        button11.getImage().getOverlay("interact").getImage().setScale(1.0f);
                         repaintLevelDetails(-1,button11);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button11.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button11.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                         ((GameClientScene)owningScene).sendChooseLevelPacket(12);
                 }
             }
@@ -1275,7 +1274,7 @@ public class MapMenu extends Window{
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(11).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
-           Object points[] = {0,.5,0};
+           Object points[] = {0,.25,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
            effect.setRepeating(true);
@@ -1285,28 +1284,28 @@ public class MapMenu extends Window{
        
        correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
-       button12.getImage().addOverlay("img",correctOverlay);
+       button12.getImage().addOverlay("interact",correctOverlay);
        button12.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
-                     if(!button12.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
+                     if(!button12.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png")) 
                      {
-                        button12.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        button12.getImage().getOverlay("interact").getImage().setScale(1.2f);
                         playLevelHoverSound();
                         repaintLevelDetails(13,button12);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button12.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button12.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                        button12.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        button12.getImage().getOverlay("interact").getImage().setScale(1.0f);
                         repaintLevelDetails(-1,button12);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button12.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button12.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                         ((GameClientScene)owningScene).sendChooseLevelPacket(13);
                 }
             }
@@ -1328,7 +1327,7 @@ public class MapMenu extends Window{
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(11).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
-           Object points[] = {0,.5,0};
+           Object points[] = {0,.25,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
            effect.setRepeating(true);
@@ -1338,28 +1337,28 @@ public class MapMenu extends Window{
        
        correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
-       button13.getImage().addOverlay("img",correctOverlay);
+       button13.getImage().addOverlay("interact",correctOverlay);
        button13.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
-                     if(!button13.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
+                     if(!button13.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png")) 
                      {
-                        button13.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        button13.getImage().getOverlay("interact").getImage().setScale(1.2f);
                         playLevelHoverSound();
                         repaintLevelDetails(14,button13);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button13.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button13.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                        button13.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        button13.getImage().getOverlay("interact").getImage().setScale(1.0f);
                         repaintLevelDetails(-1,button13);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button13.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button13.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                         ((GameClientScene)owningScene).sendChooseLevelPacket(14);
                 }
             }
@@ -1381,7 +1380,7 @@ public class MapMenu extends Window{
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(12).mainObjective.complete || ((GameClientScene)owningScene).hostLevelProgression.levelMap.get(13).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
-           Object points[] = {0,.5,0};
+           Object points[] = {0,.25,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
            effect.setRepeating(true);
@@ -1391,28 +1390,28 @@ public class MapMenu extends Window{
        
        correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
-       button14.getImage().addOverlay("img",correctOverlay);
+       button14.getImage().addOverlay("interact",correctOverlay);
        button14.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
-                     if(!button14.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
+                     if(!button14.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png")) 
                      {
-                        button14.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        button14.getImage().getOverlay("interact").getImage().setScale(1.2f);
                         playLevelHoverSound();
                         repaintLevelDetails(15,button14);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button14.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button14.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                        button14.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        button14.getImage().getOverlay("interact").getImage().setScale(1.0f);
                         repaintLevelDetails(-1,button14);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button14.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button14.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                         ((GameClientScene)owningScene).sendChooseLevelPacket(15);
                 }
             }
@@ -1433,7 +1432,7 @@ public class MapMenu extends Window{
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(14).mainObjective.complete || ((GameClientScene)owningScene).hostLevelProgression.levelMap.get(13).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
-           Object points[] = {0,.5,0};
+           Object points[] = {0,.25,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
            effect.setRepeating(true);
@@ -1443,28 +1442,28 @@ public class MapMenu extends Window{
        
        correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
-       button15.getImage().addOverlay("img",correctOverlay);
+       button15.getImage().addOverlay("interact",correctOverlay);
        button15.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
-                     if(!button15.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
+                     if(!button15.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png")) 
                      {
-                        button15.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        button15.getImage().getOverlay("interact").getImage().setScale(1.2f);
                         playLevelHoverSound();
                         repaintLevelDetails(16,button15);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button15.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button15.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                        button15.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        button15.getImage().getOverlay("interact").getImage().setScale(1.0f);
                         repaintLevelDetails(-1,button15);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button15.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button15.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                         ((GameClientScene)owningScene).sendChooseLevelPacket(16);
                 }
             }
@@ -1486,7 +1485,7 @@ public class MapMenu extends Window{
        else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(15).mainObjective.complete || ((GameClientScene)owningScene).hostLevelProgression.levelMap.get(16).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
-           Object points[] = {0,.5,0};
+           Object points[] = {0,.25,0};
            int durations[] = {90,90};
            MultiImageEffect effect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
            effect.setRepeating(true);
@@ -1496,28 +1495,28 @@ public class MapMenu extends Window{
        
        correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;  
-       button16.getImage().addOverlay("img",correctOverlay);
+       button16.getImage().addOverlay("interact",correctOverlay);
        button16.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 if (e.getActionCommand().equals("mouseEntered")) {
-                     if(!button16.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png")) 
+                     if(!button16.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png")) 
                      {
-                        button16.getImage().getOverlay("img").getImage().setScale(1.2f);
+                        button16.getImage().getOverlay("interact").getImage().setScale(1.2f);
                         playLevelHoverSound();
                         repaintLevelDetails(17,button16);
                      }
                 }
                 if (e.getActionCommand().equals("mouseExited")) {
-                     if(!button16.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button16.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                        button16.getImage().getOverlay("img").getImage().setScale(1.0f);
+                        button16.getImage().getOverlay("interact").getImage().setScale(1.0f);
                         repaintLevelDetails(-1,button16);
                      }
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                     if(!button16.getImage().getOverlay("img").getImage().getTextureReference().equals("map_lock.png"))
+                     if(!button16.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                         ((GameClientScene)owningScene).sendChooseLevelPacket(17);
                 }
             }
@@ -1535,7 +1534,7 @@ public class MapMenu extends Window{
         
         Image i = new Image("map_arrow.png");
         i.setHorizontalFlip(true);
-        rightMovementButton = new Button(i, 1025, 700, 100, 100);
+        rightMovementButton = new Button(i, 1025, 730, 80, 80);
         rightMovementButton.addActionListener(new ActionListener(){
 
             @Override
@@ -1563,7 +1562,7 @@ public class MapMenu extends Window{
         this.addComponent(rightMovementButton);
         
         
-        leftMovementButton = new Button(new Image("map_arrow.png"), 900, 700, 100, 100);
+        leftMovementButton = new Button(new Image("map_arrow.png"), 920, 730, 80, 80);
         leftMovementButton.addActionListener(new ActionListener(){
 
             @Override
