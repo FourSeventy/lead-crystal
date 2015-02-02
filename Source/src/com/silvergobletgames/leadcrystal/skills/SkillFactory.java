@@ -76,6 +76,7 @@ public class SkillFactory
             case EnemyBossSin: return new EnemyBossSin();
             case EnemyBossBarrage: return new EnemyBossBarrage();
             case EnemyFlierGooTriBomb: return new EnemyFlierGooTriBomb();
+            case EnemyNadeThrow: return new EnemyNadeThrow();
             
             
             default: return null;

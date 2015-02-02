@@ -25,6 +25,7 @@ import com.silvergobletgames.leadcrystal.menus.ScriptWindow;
 import com.silvergobletgames.leadcrystal.menus.TilePalette;
 import com.silvergobletgames.leadcrystal.netcode.ConnectionException;
 import com.silvergobletgames.leadcrystal.netcode.GobletServer;
+import com.silvergobletgames.leadcrystal.skills.Skill;
 import com.silvergobletgames.sylver.audio.AudioRenderer;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.*;
@@ -896,29 +897,21 @@ public class MapEditorScene extends Scene {
                
                 for(SceneObject so: this.getSceneObjectManager().get(Layer.MAIN))
                 {
-                    
-                    if(so instanceof WorldObjectEntity)
+
+                    if(so instanceof NonPlayerEntity)
                     {
-                        if(((WorldObjectEntity)so).isViewportBlocker())
+                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.Scout2AnimationPack )
                         {
-                            ((WorldObjectEntity)so).getBody().setBitmask(Entity.BitMasks.NO_COLLISION.value);
-                            ((WorldObjectEntity)so).getBody().setOverlapMask(Entity.OverlapMasks.NO_OVERLAP.value);
+                            ((NonPlayerEntity)so).getSkillManager().learnSkill(Skill.SkillID.EnemyNadeThrow);
                         }
                     }
-//                    if(so instanceof NonPlayerEntity)
-//                    {
-//                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.Scout1AnimationPack || ((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.Scout2AnimationPack || ((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.TankAnimationPack )
-//                        {
-//                            ((NonPlayerEntity)so).setImageOffset(new Vector2f(0,6));
-//                        }
-//                    }
-//                    else if(so instanceof MobSpawner)
-//                    {
-//                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.Scout1AnimationPack || ((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.Scout2AnimationPack || ((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.TankAnimationPack )
-//                        {
-//                            ((MobSpawner)so).mobToSpawn.setImageOffset(new Vector2f(0,6)); 
-//                        }                           
-//                    }
+                    else if(so instanceof MobSpawner)
+                    {
+                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.Scout2AnimationPack )
+                        {
+                            ((MobSpawner)so).mobToSpawn.getSkillManager().learnSkill(Skill.SkillID.EnemyNadeThrow);
+                        }                           
+                    }
                 }
                 
                 

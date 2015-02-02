@@ -49,7 +49,7 @@ public abstract class Skill
         EnemyGooShot,EnemySmallMelee, EnemyAntThrow,EnemySmallAntThrow, EnemyFlierGooBomb,
         EnemyBossSwipe, EnemyJumperSpikes,EnemyRangedSwipe,EnemyTriShot,  
         EnemyRockThrow, EnemyHomingMissile,EnemySinBlast,EnemyBossSwirl,EnemyBossLaserBurst,EnemyBoss1Melee,
-        EnemyBossSin, EnemyBossBarrage, EnemyFlierGooTriBomb;
+        EnemyBossSin, EnemyBossBarrage, EnemyFlierGooTriBomb,EnemyNadeThrow;
         
     }
     
