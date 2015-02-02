@@ -457,7 +457,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             {
                 //currencyAmount *= 2;
                 
-                Damage damage = new Damage(Damage.DamageType.HEAL, 2);
+                Damage damage = new Damage(Damage.DamageType.HEAL, 1);
                 this.takeDamage(damage);
             }
             
