@@ -138,6 +138,21 @@ public class EnemyRockThrow extends Skill
              {
                  this.getBody().setVelocity(new Vector2f(0,0));
                  this.removeFromOwningScene();
+                 
+                 //remove infinite effects 
+                ((CombatEntity)other).getCombatData().removeCombatEffect("tarSlow");
+                ((CombatEntity)other).getImage().setColor(new Color(1,1,1,1));
+                
+                ((CombatEntity)other).getCombatData().removeCombatEffect("tarDotInfinite");
+    
+                
+                //apply finite slow
+                StateEffect slow = new StateEffect(StateEffect.StateEffectType.SLOW, 180, .50f, true);
+                ((CombatEntity)other).getCombatData().addCombatEffect("tarFinite", slow);
+                
+                //apply finite dot
+                DotEffect tarDot = new DotEffect( 3 * 60, 30, new Damage(DamageType.POISON, 2));    
+                ((CombatEntity)other).getCombatData().addCombatEffect("tarDot", tarDot);
              }
              
                 
