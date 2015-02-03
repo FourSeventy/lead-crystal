@@ -1273,6 +1273,9 @@ public final class GameClientScene extends Scene
         this.mouseHover = false;
         this.mouseHoverInRange = false;
         
+        //close dialogues
+        this.hud.closeDialogue();
+        
         //fade from black
         getSceneEffectsManager().fadeFromBlack(new PostEffectExecutor());
         
