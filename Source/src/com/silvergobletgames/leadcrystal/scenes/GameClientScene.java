@@ -1275,6 +1275,7 @@ public final class GameClientScene extends Scene
         
         //close dialogues
         this.hud.closeDialogue();
+        this.hud.closeAllTooltips();
         
         //fade from black
         getSceneEffectsManager().fadeFromBlack(new PostEffectExecutor());

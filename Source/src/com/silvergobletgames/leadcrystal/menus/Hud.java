@@ -1301,6 +1301,25 @@ public class Hud extends Window
         }
     }
     
+    public void closeAllTooltips()
+    {
+    
+        if(this.owningScene == null)
+        {
+            return;
+        }
+        
+        for(SceneObject obj :this.leftClick){this.owningScene.remove(obj);} 
+        for(SceneObject obj :this.rightClick){this.owningScene.remove(obj);}
+        for(SceneObject obj :this.usePotion){this.owningScene.remove(obj);} 
+        for(SceneObject obj :this.jumpTip){this.owningScene.remove(obj);} 
+        for(SceneObject obj :this.useLadder){this.owningScene.remove(obj);}
+        for(SceneObject obj :this.jumpThrough){this.owningScene.remove(obj);}
+        for(SceneObject obj :this.sprint){this.owningScene.remove(obj);} 
+        for(SceneObject obj :this.rightClickInteract){this.owningScene.remove(obj);} 
+        for(SceneObject obj :this.lightTooltip){this.owningScene.remove(obj);}
+    }
+    
     
     
     
