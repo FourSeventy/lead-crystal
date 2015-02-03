@@ -415,7 +415,7 @@ public class SceneScriptManager
         
         Image image;
         switch(level)
-        {   case 8: image = new Image("doodad4.png"); break;
+        {   case 8: image = new Image("talisman2.png"); break;
             case 10: image = new Image("doodad4.png"); break;
             case 13: image = new Image("doodad4.png"); break;
             case 14: image = new Image("doodad4.png"); break;
