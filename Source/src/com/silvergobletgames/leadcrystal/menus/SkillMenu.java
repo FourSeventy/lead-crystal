@@ -1566,7 +1566,9 @@ public class SkillMenu extends Window {
             this.owningScene.add(openSound);
         }
         
-        super.open();      
+        super.open();   
+        
+        ((GameClientScene)this.getOwningScene()).hud.closeDialogue();
         
     }
 

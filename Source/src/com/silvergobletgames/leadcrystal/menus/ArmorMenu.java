@@ -1388,6 +1388,8 @@ public class ArmorMenu extends Window{
         }
         
         super.open();
+        
+        ((GameClientScene)this.getOwningScene()).hud.closeDialogue();
        
     }
     

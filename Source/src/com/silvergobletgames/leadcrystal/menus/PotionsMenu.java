@@ -176,6 +176,8 @@ public class PotionsMenu extends Window{
         }
         
         super.open();
+        
+        ((GameClientScene)this.getOwningScene()).hud.closeDialogue();
        
     }
 }

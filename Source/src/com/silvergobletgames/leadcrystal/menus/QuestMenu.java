@@ -242,6 +242,8 @@ public class QuestMenu extends Window{
         
         //repaint
         this.repaintLevelDetails();
+        
+        ((GameClientScene)this.getOwningScene()).hud.closeDialogue();
     }
     
 }

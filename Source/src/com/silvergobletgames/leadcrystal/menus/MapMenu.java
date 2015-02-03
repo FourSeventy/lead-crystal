@@ -345,6 +345,8 @@ public class MapMenu extends Window{
         }
         
         super.open();
+        
+        ((GameClientScene)this.getOwningScene()).hud.closeDialogue();
        
     }
     

@@ -195,6 +195,8 @@ public class EscapeMenu extends Window
         }
         
         super.open();
+        
+        ((GameClientScene)this.getOwningScene()).hud.closeDialogue();
                
     }
 }
