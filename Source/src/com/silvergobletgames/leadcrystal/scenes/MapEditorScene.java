@@ -892,27 +892,27 @@ public class MapEditorScene extends Scene {
             if (inputSnapshot.isKeyReleasedCtrlModifier(KeyEvent.VK_M))
             {
                              
-               
-                
-               
-                for(SceneObject so: this.getSceneObjectManager().get(Layer.MAIN))
-                {
-
-                    if(so instanceof NonPlayerEntity)
-                    {
-                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.CrateInterface)
-                        {
-                            ((NonPlayerEntity)so).getCombatData().ccResistance.setBase(1);
-                        }
-                    }
-                    else if(so instanceof MobSpawner)
-                    {
-                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.Scout2AnimationPack )
-                        {
-                            
-                        }                           
-                    }
-                }
+               ((WorldObjectEntity)this.getSceneObjectManager().get("pump1")).getImage().setTextureReference("pump.png");
+                ((WorldObjectEntity)this.getSceneObjectManager().get("pump2")).getImage().setTextureReference("pump.png");
+               ((WorldObjectEntity)this.getSceneObjectManager().get("pump3")).getImage().setTextureReference("pump.png");
+//                for(SceneObject so: this.getSceneObjectManager().get(Layer.MAIN))
+//                {
+//
+//                    if(so instanceof NonPlayerEntity)
+//                    {
+//                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.CrateInterface)
+//                        {
+//                            ((NonPlayerEntity)so).getCombatData().ccResistance.setBase(1);
+//                        }
+//                    }
+//                    else if(so instanceof MobSpawner)
+//                    {
+//                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.Scout2AnimationPack )
+//                        {
+//                            
+//                        }                           
+//                    }
+//                }
                 
                 
                 
