@@ -222,7 +222,7 @@ public class BrainDesertBoss extends BrainGround
             
         }
         
-         if( r.nextFloat() < .0025f)
+         if( r.nextFloat() < .0040f)
         {
             this.getStateMachine().changeState(StateID.MOVE);
         }
