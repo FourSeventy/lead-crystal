@@ -4,6 +4,7 @@ import com.silvergobletgames.leadcrystal.combat.CombatData;
 import com.silvergobletgames.leadcrystal.combat.CombatData.CombatState;
 import com.silvergobletgames.leadcrystal.combat.CombatEffect;
 import com.silvergobletgames.leadcrystal.combat.Damage;
+import com.silvergobletgames.leadcrystal.combat.Damage.DamageType;
 import com.silvergobletgames.leadcrystal.combat.LevelProgressionManager;
 import com.silvergobletgames.leadcrystal.combat.ProcEffect;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
@@ -817,6 +818,12 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
            {
                this.combatData.removeCombatEffect("DRModifier"); 
            }
+       }
+       
+       if(dmg.getType() != DamageType.HEAL && dmg.getType() != DamageType.NODAMAGE && !this.getCombatData().isDead())
+       {
+            Sound sound = Sound.locationSound("buffered/fleshExplosion.ogg", this.getPosition().x, this.getPosition().y, false, .4f,.8f);               
+            this.getOwningScene().add(sound);
        }
        
        
