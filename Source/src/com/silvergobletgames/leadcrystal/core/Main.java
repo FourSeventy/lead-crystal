@@ -256,7 +256,17 @@ public class Main
         Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "bash_yellow.png");    
         
         textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/logo.png");  
-        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "logo.png");   
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "logo.png"); 
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("effects/leftClickIcon.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "leftclickicon.png"); 
+        
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("misc/slow.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "slow.png"); 
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("misc/stunSpiral.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "stunspiral.png"); 
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("effects/teleport2.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "teleport2.png"); 
+        
 //        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/attackSpeedIcon.png");  
 //        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "attackspeedicon.png");             
 //        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("icons/ccReductionIcon.png");  
