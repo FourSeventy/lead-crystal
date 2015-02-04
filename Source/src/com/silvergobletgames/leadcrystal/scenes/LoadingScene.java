@@ -97,7 +97,7 @@ public class LoadingScene extends Scene
                 tt = new Text("Tip: The       icon indicates an enemy is vulnerable.",LeadCrystalTextType.HUD34);
                 tt.setPosition( center - tt.getWidth()/2, 147);
                 this.add(tt,Layer.MAIN);
-                b = new Button(new Image("teleport2.png"){{setHorizontalFlip(true);}}, center - 210, 135, 35 , 35);
+                b = new Button(new Image("teleport2.png"){{setHorizontalFlip(true);}}, center - 225, 135, 35 , 35);
                 b.dontKillClick = true;
                 this.add(b,Layer.MAIN); 
             break;
