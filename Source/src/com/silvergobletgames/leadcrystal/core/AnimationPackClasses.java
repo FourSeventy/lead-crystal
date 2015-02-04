@@ -1053,6 +1053,11 @@ public class AnimationPackClasses {
                 dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-treads.png"));
             this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
             
+            //spawn
+            ArrayList<Texture> spawn = new ArrayList();
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("tank-shoot0.png"));
+            this.animationSet.put(ExtendedImageAnimations.SPAWN, spawn);
+            
             
             //=====================
             // Build Delay Map
@@ -1135,6 +1140,11 @@ public class AnimationPackClasses {
                     dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-dome.png"));
                     dying.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-dome.png"));
             this.animationSet.put(ExtendedImageAnimations.DEATH, dying);
+            
+            //spawn
+            ArrayList<Texture> spawn = new ArrayList();
+                spawn.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("turret-shoot0.png"));
+            this.animationSet.put(ExtendedImageAnimations.SPAWN, spawn);
 
 
 
