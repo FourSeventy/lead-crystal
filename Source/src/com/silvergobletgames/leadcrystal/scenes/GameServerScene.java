@@ -176,10 +176,10 @@ public class GameServerScene extends Scene
                 {
                     Entity ent = (Entity)s;
                     
-                    int distance = 2_600;
+                    int distance = 2_900;
                     if( !ent.getBody().isStatic())
                     {
-                        distance = 2_200;
+                        distance = 2_500;
                     }
                     
                     //if out of range of all players
