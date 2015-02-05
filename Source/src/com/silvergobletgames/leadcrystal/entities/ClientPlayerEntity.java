@@ -125,9 +125,9 @@ public class ClientPlayerEntity extends PlayerEntity
          }
          
          //turn off friction while in air to avoid sticking to walls
-         if(this.body.getFriction() != .1f &&  this.inAirTimer > 10)
+         if(this.body.getFriction() != .03f &&  this.inAirTimer > 10)
          {
-             this.body.setFriction(.1f);
+             this.body.setFriction(.03f);
          }
          else if(this.body.getFriction() != this.BASE_FRICTION && this.feetOnTheGround)
          {
