@@ -1023,6 +1023,11 @@ public class GameServerScene extends Scene
         physicsWorld.clearArbiters(body); 
     }
     
+    public LevelData getActiveLevel()
+    {
+        return this.activeLevel;
+    }
+    
     
     //=============================
     //Sending Messages to Clients

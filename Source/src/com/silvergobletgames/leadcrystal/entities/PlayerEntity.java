@@ -611,7 +611,14 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
      * EUUUGUHH
      */
     public void die() 
-    {       
+    {      
+        //if in level0 you cant die
+        if(this.getOwningScene() != null && this.getOwningScene() instanceof GameServerScene && ((GameServerScene)this.getOwningScene()).getActiveLevel() != null && ((GameServerScene)this.getOwningScene()).getActiveLevel().filename.equals("desert0.lv"))
+        {
+            this.getCombatData().fullHeal();
+            return;
+        }
+        
         //clear arbiters
         if(this.owningScene instanceof GameServerScene)
            ((GameServerScene) owningScene).physicsWorld.clearArbiters(this.body);
