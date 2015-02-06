@@ -261,7 +261,7 @@ public class MainMenuScene extends Scene
         });
         
         
-        final Text versionText = new Text("Version 0.9.4-Beta",LeadCrystalTextType.MENU15);
+        final Text versionText = new Text("Version 0.9.5-Beta",LeadCrystalTextType.MENU15);
         versionText.setColor(new Color(Color.black));
         versionText.setPosition(10, 10);
         this.add(versionText,Layer.MAIN);
