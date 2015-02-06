@@ -35,9 +35,12 @@ public class BrainJumper extends BrainGround
     private int lostLOSCounter = 0;
     private long fuzzyLogicTimer = 0;
     private float maxRangeFuzz = 1f;
+    private long lastTimAir = 0;
     
     private SylverVector2f lostTargetPosition = new SylverVector2f();
     Random r = SylverRandom.random;
+    
+    private SylverVector2f landedSpot = new SylverVector2f();
     
     
     
@@ -91,7 +94,10 @@ public class BrainJumper extends BrainGround
     
     protected void spawningExecute()
     {
-        
+        if(self.getImage().getAnimation() != ExtendedImageAnimations.SPAWN)
+        {
+            this.getStateMachine().changeState(StateID.AGGRESSIVE);
+        }
     }
 
     
@@ -196,6 +202,11 @@ public class BrainJumper extends BrainGround
         if(self.inAirTimer > 5)
             self.getImage().setAnimation(ExtendedImageAnimations.JUMPING);
         
+        if(this.lastTimAir > 0 && self.inAirTimer == 0)
+        {
+            landedSpot.set(self.getPosition().x,self.getPosition().y);
+        }
+        
         //if our y distance is large and our x distance is close to 0, target is unreachable
 //        if(Math.abs(self.getTarget().distanceVector(self).x) < 50 && Math.abs(self.getTarget().distanceVector(self).y) > 250)
 //        {   
@@ -221,7 +232,7 @@ public class BrainJumper extends BrainGround
             if((self.getTarget().distanceAbs(self) * this.maxRangeFuzz) > this.selectedSkill.getRange())
             {               
                 //move into range
-                if(self.inAirTimer < 10)
+                if(self.inAirTimer < 6)
                    this.moveTowardsPoint(self.getTarget().getPosition(), false);
 
                 //random chance to jump
@@ -250,8 +261,8 @@ public class BrainJumper extends BrainGround
                 }
                 else
                 {
-                    if(self.inAirTimer < 10)
-                       this.moveTowardsPoint(self.getTarget().getPosition(), false);
+                    if(self.inAirTimer == 0)
+                       this.wander(this.landedSpot, true);
                 }
             }
         }
@@ -263,6 +274,8 @@ public class BrainJumper extends BrainGround
 //      {
 //          self.jump(6500);
 //      }
+        
+        this.lastTimAir = self.inAirTimer;
 
     }
     
