@@ -140,7 +140,16 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
             if(p != null && this.distanceAbs(p) <= 2000)
             {
                 brain.update();
+                
+                //if we are stuck in said player, self destruct
+                if(this.distanceAbs(p) <= 47 && this.getBody().getBitmask() == Entity.BitMasks.NPE.value && this.getBody().getOverlapMask() ==Entity.OverlapMasks.NPE.value && !p.dashing)
+                {
+                    this.die();
+                }
+
             }
+            
+            
 
             //some entity tooltip settings
             if(this.combatData.getPercentHealth() != 1 )
