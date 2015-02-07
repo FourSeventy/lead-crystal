@@ -423,8 +423,8 @@ public class MainMenuScene extends Scene
                 //start a server
                 ServerConfiguration config = new ServerConfiguration();
                 config.singlePlayer = true;
-                config.tcpPort = GameplaySettings.getInstance().tcpPort; 
-                config.udpPort = GameplaySettings.getInstance().udpPort;
+                config.tcpPort = GameplaySettings.getInstance().tcpPort + 100; //adding 100 keeps multiplayer and single player games from interfearing
+                config.udpPort = GameplaySettings.getInstance().udpPort + 100;
                 Game.getInstance().addRunnable("Goblet Server", new GobletServer(config));
 
                 //load game client scene
