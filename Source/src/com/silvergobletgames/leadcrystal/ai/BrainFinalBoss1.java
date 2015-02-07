@@ -206,7 +206,7 @@ public class BrainFinalBoss1 extends BrainGround
             float scaling = 1;
             if(mag < 400)
                 scaling = .55f;
-            self.jump((int)(20_000* scaling * distanceVector.x), (int)(28_000* scaling * distanceVector.y)); 
+            self.jump((int)(8_000* scaling * distanceVector.x), (int)(22_000* scaling * distanceVector.y)); 
         }
         
         //if we are stuck
@@ -271,7 +271,7 @@ public class BrainFinalBoss1 extends BrainGround
             
         }
         
-         if( r.nextFloat() < .0025f)
+         if( r.nextFloat() < .0040f)
         {
             this.getStateMachine().changeState(StateID.MOVE);
         }
