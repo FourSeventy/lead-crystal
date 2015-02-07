@@ -406,9 +406,7 @@ public class MainMenuScene extends Scene
     
     public static void startSinglePlayerGame(final PlayerMock playerMock)
     {                 
-                 
-        
-        
+                        
         //load loading scene
         Game.getInstance().loadScene(new LoadingScene());
         Game.getInstance().changeScene(LoadingScene.class, null);
@@ -437,7 +435,11 @@ public class MainMenuScene extends Scene
                 {
                     ((GameClientScene)Game.getInstance().getScene(GameClientScene.class)).connectToServer( "127.0.0.1", config.tcpPort,config.udpPort);                   
                 }
-                catch(ConnectionException e){System.err.println("Couldnt connect: " + e.reason); return;}
+                catch(ConnectionException e)
+                {
+                    System.err.println("Couldnt connect: " + e.reason);
+                    return;
+                }
 
                 try{
                     Thread.sleep(200);
@@ -613,7 +615,7 @@ public class MainMenuScene extends Scene
         
                     Game.getInstance().loadScene(new ServerSelectScene());
                     ArrayList args = new ArrayList();
-                    args.add(saveGame);
+                    args.add(playerMock);
                     Game.getInstance().changeScene(ServerSelectScene.class, args); 
                     Game.getInstance().unloadScene(GameClientScene.class); 
                     Game.getInstance().unloadScene(LoadingScene.class);

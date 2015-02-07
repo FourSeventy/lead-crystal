@@ -5,23 +5,24 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import com.silvergobletgames.leadcrystal.core.GameplaySettings;
+import com.silvergobletgames.leadcrystal.core.SaveGame;
+import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
+import com.silvergobletgames.leadcrystal.netcode.JoinResponse.ReasonCode;
+import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
+import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.skills.Skill;
+import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.netcode.ClientPacket;
 import com.silvergobletgames.sylver.netcode.Packet;
+import com.silvergobletgames.sylver.util.Log;
+import com.silvergobletgames.sylver.util.SylverVector2f;
 import java.io.IOException;
 import java.util.*;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import net.phys2d.math.Vector2f;
-import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
-import com.silvergobletgames.leadcrystal.netcode.JoinResponse.ReasonCode;
-import com.silvergobletgames.leadcrystal.core.SaveGame;
-import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
-import com.silvergobletgames.leadcrystal.skills.Skill;
-import com.silvergobletgames.sylver.core.Game;
-import com.silvergobletgames.sylver.util.SylverVector2f;
 
 
 public class GobletServer implements Runnable
@@ -46,7 +47,7 @@ public class GobletServer implements Runnable
     private ConcurrentLinkedQueue<DisconnectRequest> disconnectQueue = new ConcurrentLinkedQueue();
     
     //server settings
-    private ServerConfiguration serverConfiguration;
+    private final ServerConfiguration serverConfiguration;
     
     //client move struct
     private static class MoveStruct
@@ -91,13 +92,17 @@ public class GobletServer implements Runnable
         }
         catch (IOException e)
         {
-            System.err.println("Server bind error: ");
-            e.printStackTrace(System.err);
+            Log.error("Server bind error: ", e);
         }
 
         //Request handling
         server.addListener(new Listener() 
         {          
+            public void connected (Connection connection) 
+            {
+                
+            }
+            
             public void received(final Connection connection,final Object object)
             {     
                 
@@ -124,6 +129,29 @@ public class GobletServer implements Runnable
                     
                 }
             }
+            
+            public void disconnected(Connection connection) 
+            {
+                //figure out the clientID of the disconnected player
+                UUID disconnectClientID = null;             
+                for(ClientData client: GobletServer.this.connectedClients.values())
+                {
+                    if(connection.getID() == client.connection.getID())
+                    {
+                        disconnectClientID = client.clientID;
+                    }
+                }
+                
+                //queue up disconnect
+                if(disconnectClientID != null)
+                {
+                    DisconnectRequest disconnectPacket = new DisconnectRequest();
+                    disconnectPacket.setClientID(disconnectClientID);
+                    
+                    disconnectQueue.add(disconnectPacket);
+                }
+                
+            }
         });
     }
     
@@ -142,6 +170,9 @@ public class GobletServer implements Runnable
      */
     public void serverLoop()
     {
+        
+        try
+        {
         //timing variables  
         long startOfLoopTime = 0;
         long endOfLoopTime=0;
@@ -224,8 +255,8 @@ public class GobletServer implements Runnable
             }    
                         
             //flushing output streams for debugging           
-            System.out.flush();
-            System.err.flush();
+//            System.out.flush();
+//            System.err.flush();
 
             //note the current time
             endOfLoopTime = System.nanoTime();           
@@ -242,6 +273,15 @@ public class GobletServer implements Runnable
                 endOfLoopTime = System.nanoTime();
             }                        
 
+        }
+        }
+        catch(Exception e)
+        {
+            //log and rethrow, this error should get caught by the thread
+            Log.error("Server Error: ", e);
+            this.stopServer();
+            
+            throw e;
         }
         
     }
@@ -393,64 +433,73 @@ public class GobletServer implements Runnable
     
     private void performPlayerJoin(JoinRequest request, Connection connection)
     {
-         //joining requirements
-        if(connectedClients.size() < this.serverConfiguration.maxPlayers)
-        {                      
-                       
-            //build the players save data
-            SaveGame saveData = new SaveGame(request.rawSaveData);
-
-            //put the client in the client list 
-            ClientData clientData = new ClientData(connection);
-            this.connectedClients.put(request.getClientID(), clientData);
-                      
-            //set clientID in client data
-            clientData.clientID = request.getClientID();
-            
-            //build player and add it to client data
-            PlayerEntity player = saveData.getPlayer();
-            player.setID(request.getClientID().toString());
-            clientData.player = player;
-            if(connectedClients.size() == 1)
-                this.host = player;  
-            
-            //send join response
-            JoinResponse response = new JoinResponse();
-            response.okToJoin = true;
-            response.hostProgressionManager = this.host.getLevelProgressionManager().dumpRenderData();
-            this.sendPacket(response, clientData.clientID);
-            
-            //determine if we should go into the town or level0
-            String levelToGo;
-            if(player.getLevelProgressionManager().levelMap.get(0).mainObjective.complete == true)
-                levelToGo = "town.lv";
-            else
-                levelToGo = "desert0.lv";
-            
-            //if we dont have a scene for the levelToGo already construct a new scene
-            if(this.sceneMap.get(levelToGo) == null)
-            {
-                this.constructScene(clientData.clientID, levelToGo, null);
-            }
-            else // just add the player to the level
-            {
-                //add our player to this scene
-                clientData.currentLevel = levelToGo;
-                sceneMap.get(clientData.currentLevel).addClient(clientData);
-            }            
-            
-            //Alert the players
-            this.addGlobalChat("[Server] " + clientData.player.getName() + " has connected.");           
-            
-        }
-        else //not allowed to join
+        
+        //if the server is full
+        if(connectedClients.size() == this.serverConfiguration.maxPlayers)
         {
-             //send a negative response
             JoinResponse response = new JoinResponse();
             response.okToJoin = false;
             response.reasonCode = ReasonCode.ServerFull;
-            this.sendPacket(response, request.getClientID());
+            connection.sendUDP(response);
+            return;
         }
+        
+        //if the server is single player
+        if(connectedClients.size() != 0 && this.serverConfiguration.singlePlayer == true)
+        {
+            JoinResponse response = new JoinResponse();
+            response.okToJoin = false;
+            response.reasonCode = ReasonCode.ServerPrivate;
+            connection.sendUDP(response);
+            return;
+        }
+                                        
+        //build the players save data
+        SaveGame saveData = new SaveGame(request.rawSaveData);
+
+        //put the client in the client list 
+        ClientData clientData = new ClientData(connection);
+        this.connectedClients.put(request.getClientID(), clientData);
+
+        //set clientID in client data
+        clientData.clientID = request.getClientID();
+
+        //build player and add it to client data
+        PlayerEntity player = saveData.getPlayer();
+        player.setID(request.getClientID().toString());
+        clientData.player = player;
+        if(connectedClients.size() == 1)
+            this.host = player;  
+
+        //send join response
+        JoinResponse response = new JoinResponse();
+        response.okToJoin = true;
+        response.hostProgressionManager = this.host.getLevelProgressionManager().dumpRenderData();
+        this.sendPacket(response, clientData.clientID);
+
+        //determine if we should go into the town or level0
+        String levelToGo;
+        if(player.getLevelProgressionManager().levelMap.get(0).mainObjective.complete == true)
+            levelToGo = "town.lv";
+        else
+            levelToGo = "desert0.lv";
+
+        //if we dont have a scene for the levelToGo already construct a new scene
+        if(this.sceneMap.get(levelToGo) == null)
+        {
+            this.constructScene(clientData.clientID, levelToGo, null);
+        }
+        else // just add the player to the level
+        {
+            //add our player to this scene
+            clientData.currentLevel = levelToGo;
+            sceneMap.get(clientData.currentLevel).addClient(clientData);
+        }            
+
+        //Alert the players
+        this.addGlobalChat("[Server] " + clientData.player.getName() + " has connected.");           
+            
+      
     }
     
     private void performPlayerDisconnect(DisconnectRequest packet)
@@ -463,7 +512,7 @@ public class GobletServer implements Runnable
             this.sceneMap.remove(this.connectedClients.get(packet.getClientID()).currentLevel);
         
         //send a message that the player left
-        this.addGlobalChat("[Server] User " + this.connectedClients.get(packet.getClientID()).player.getName()  + " has RAGEQUIT.");
+        this.addGlobalChat("[Server] Player " + this.connectedClients.get(packet.getClientID()).player.getName()  + " has disconnected.");
         
         //remove the client
         this.connectedClients.remove(packet.getClientID());               

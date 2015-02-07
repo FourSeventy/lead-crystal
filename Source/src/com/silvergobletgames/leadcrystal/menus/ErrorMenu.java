@@ -42,7 +42,6 @@ public class ErrorMenu extends Window
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                    System.err.println("WTFF");
                     clicked_handler();
                 }
             }
@@ -50,14 +49,14 @@ public class ErrorMenu extends Window
         this.addComponent(closeButton);
         
         //error label
-        Text t = new Text("Error",LeadCrystalTextType.MENU54);
+        Text t = new Text("Error",LeadCrystalTextType.MENU50);
         t.setColor(new Color(156,19,19)); 
         Label errorLabel = new Label(t, 200-t.getWidth()/2, 300);
         this.addComponent(errorLabel);
         
         
         //text
-        this.errorText = new TextBlock( 50, 230, 300, new Text(text,LeadCrystalTextType.MENU30));
+        this.errorText = new TextBlock( 50, 230, 300, new Text(text,LeadCrystalTextType.MENU23));
         this.addComponent(errorText);
               
         
