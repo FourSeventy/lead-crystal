@@ -262,12 +262,12 @@ public class GobletServer implements Runnable
             endOfLoopTime = System.nanoTime();           
             
             //pause to set frame rate   
-            while(endOfLoopTime-startOfLoopTime <= 12_166_667)
+            while(endOfLoopTime-startOfLoopTime <= 7_000_000)
             {
                 try{ Thread.sleep(0,250_000);} catch(java.lang.InterruptedException e){ System.err.println("sleep problem GobletServer");}   
                 endOfLoopTime = System.nanoTime();
             }                       
-            while (endOfLoopTime - startOfLoopTime <= 16_666_667)
+            while (endOfLoopTime - startOfLoopTime <= 8_333_334)
             {              
                 Thread.yield();
                 endOfLoopTime = System.nanoTime();
@@ -504,6 +504,12 @@ public class GobletServer implements Runnable
     
     private void performPlayerDisconnect(DisconnectRequest packet)
     {
+        //check to make sure the client is still connected
+        if(this.connectedClients.get(packet.getClientID()) == null)
+        {
+            return;
+        }
+        
         //remove the client from the scene
         this.sceneMap.get( this.connectedClients.get(packet.getClientID()).currentLevel).removeClient(packet.getClientID());
         
