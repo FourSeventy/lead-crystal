@@ -47,6 +47,8 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
     
     //the location thta this NPE was placed at, or spawned at (used for wandering patrolling etc)
     public SylverVector2f placedLocation;
+    
+    private long stuckInEnemyCount = 0;
 
     
     //==================
@@ -144,7 +146,16 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
                 //if we are stuck in said player, self destruct
                 if(this.distanceAbs(p) <= 47 && this.getBody().getBitmask() == Entity.BitMasks.NPE.value && this.getBody().getOverlapMask() ==Entity.OverlapMasks.NPE.value && !p.dashing)
                 {
-                    this.die();
+                    this.stuckInEnemyCount++;
+                    
+                    if(this.stuckInEnemyCount == 10)
+                    {
+                      this.die();
+                    }
+                }
+                else
+                {
+                    this.stuckInEnemyCount = 0;
                 }
 
             }
