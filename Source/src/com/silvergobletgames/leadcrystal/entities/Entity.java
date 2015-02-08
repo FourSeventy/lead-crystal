@@ -514,11 +514,17 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
                 scriptObject.playerCollisionList.add(other.getID());
                 
                 //check to see if all the players are here
+                GobletServer server = ((GobletServer)Game.getInstance().getRunnable("Goblet Server"));
                 boolean allHere = true;
-                for(UUID uid : ((GobletServer)Game.getInstance().getRunnable("Goblet Server")).connectedClients.keySet())
+                for(UUID uid : server.connectedClients.keySet())
                 {
-                    if(!scriptObject.playerCollisionList.contains(uid.toString()))
+                    PlayerEntity player = server.connectedClients.get(uid).player;
+                    
+                    //if the player is not in the collider and alive 
+                    if(!scriptObject.playerCollisionList.contains(uid.toString()) && !player.getCombatData().isDead())
+                    {
                         allHere = false;
+                    }
                 }
                 if(allHere)               
                     scriptObject.runScript(other);
