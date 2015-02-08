@@ -134,7 +134,6 @@ public class SerializationRegistrator
         kryo.register(Entry.class);
         kryo.register(SerializableEntry.class);
         kryo.register(SkillDataPacket.class); 
-        kryo.register(DisconnectRequest.class);
         kryo.register(SceneObjectRenderDataChanges.class);
         kryo.register(ExtendedSceneObjectClasses.class);
         kryo.register(CoreClasses.class);

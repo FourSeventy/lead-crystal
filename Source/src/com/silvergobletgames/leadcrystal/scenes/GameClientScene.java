@@ -29,7 +29,6 @@ import com.silvergobletgames.leadcrystal.netcode.ClientInputPacket;
 import com.silvergobletgames.leadcrystal.netcode.CloseMenuPacket;
 import com.silvergobletgames.leadcrystal.netcode.ConnectionException;
 import com.silvergobletgames.leadcrystal.netcode.CursorChangePacket;
-import com.silvergobletgames.leadcrystal.netcode.DisconnectRequest;
 import com.silvergobletgames.leadcrystal.netcode.JoinRequest;
 import com.silvergobletgames.leadcrystal.netcode.JoinResponse.ReasonCode;
 import com.silvergobletgames.leadcrystal.netcode.MovePlayerToPointPacket;
@@ -521,17 +520,7 @@ public final class GameClientScene extends Scene
         //FPS
         if(pingTimer %60 == 0)
             hud.fpsText.getText().setText(Float.toString(Game.getInstance().getGraphicsWindow().getFPS()) + " FPS");
-
-        //make sure we are still connected, if not save and exit to the main menu
-        if(!client.isConnected())
-        {
-            this.saveGameToDisk();
-//            Game.getInstance().unloadScene(GameClientScene.class);
-//            if(!Game.getInstance().isLoaded(MainMenuScene.class))
-//                Game.getInstance().loadScene(new MainMenuScene());
-//            
-//            Game.getInstance().changeScene(MainMenuScene.class, null);
-        }       
+ 
         
         //update cutscene
         this.cutsceneManager.update();   
@@ -1117,6 +1106,15 @@ public final class GameClientScene extends Scene
 
                 }
              }
+             
+            public void disconnected(Connection connection) 
+            {
+                saveGameToDisk();
+                Game.getInstance().unloadScene(GameClientScene.class);
+                Game.getInstance().loadScene(new MainMenuScene());
+                Game.getInstance().changeScene(MainMenuScene.class,new ArrayList(){{add(true);}});  
+            }
+            
         });  
             
     }
@@ -1388,11 +1386,8 @@ public final class GameClientScene extends Scene
                 
     }
     
-    public void sendDisconnectRequest()
+    public void disconnectFromServer()
     {
-        DisconnectRequest request = new DisconnectRequest();
-        
-        this.sendPacket(request);
         this.client.stop();
     }
     

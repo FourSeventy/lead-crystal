@@ -45,7 +45,7 @@ public class ClosingCutscene extends Cutscene{
     {
         Game.getInstance().loadScene(new CreditsScene());
         Game.getInstance().changeScene(CreditsScene.class, null);
-        ((GameClientScene)owningScene).sendDisconnectRequest();
+        ((GameClientScene)owningScene).disconnectFromServer();
         ((GameClientScene)owningScene).saveGameToDisk();
         Game.getInstance().unloadScene(GameClientScene.class);
     }

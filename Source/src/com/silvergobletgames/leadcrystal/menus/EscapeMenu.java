@@ -141,11 +141,7 @@ public class EscapeMenu extends Window
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("clicked")) 
                 {
-                    ((GameClientScene)owningScene).sendDisconnectRequest();
-                    ((GameClientScene)owningScene).saveGameToDisk();
-                    Game.getInstance().unloadScene(GameClientScene.class);
-                    Game.getInstance().loadScene(new MainMenuScene());
-                    Game.getInstance().changeScene(MainMenuScene.class,new ArrayList(){{add(true);}});  
+                    ((GameClientScene)owningScene).disconnectFromServer();
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
                 {

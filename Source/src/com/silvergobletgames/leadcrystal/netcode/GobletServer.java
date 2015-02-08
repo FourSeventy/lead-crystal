@@ -44,7 +44,7 @@ public class GobletServer implements Runnable
     //join queue
     private ConcurrentLinkedQueue<SimpleEntry<JoinRequest,Connection>> joinQueue = new ConcurrentLinkedQueue();
     //disconnect queue
-    private ConcurrentLinkedQueue<DisconnectRequest> disconnectQueue = new ConcurrentLinkedQueue();
+    private ConcurrentLinkedQueue<UUID> disconnectQueue = new ConcurrentLinkedQueue();
     
     //server settings
     private final ServerConfiguration serverConfiguration;
@@ -111,11 +111,6 @@ public class GobletServer implements Runnable
                 {             
                     handleJoinRequestPacket((JoinRequest)object, connection);
                 } 
-                //handle disconnect requests
-                else if(object instanceof DisconnectRequest)
-                {
-                    handleDisconnectRequestPacket((DisconnectRequest)object);
-                }
                               
                 //if the object is a ClientPacket and we have that client, and we haven't seen this packet before
                 else if(object instanceof ClientPacket && connectedClients.containsKey(((ClientPacket)object).getClientID()) && !connectedClients.get(((ClientPacket)object).getClientID()).recievedSequenceNumberHistory.containsKey(((ClientPacket)object).getSequenceNumber()))
@@ -144,11 +139,8 @@ public class GobletServer implements Runnable
                 
                 //queue up disconnect
                 if(disconnectClientID != null)
-                {
-                    DisconnectRequest disconnectPacket = new DisconnectRequest();
-                    disconnectPacket.setClientID(disconnectClientID);
-                    
-                    disconnectQueue.add(disconnectPacket);
+                {                   
+                    disconnectQueue.add(disconnectClientID);
                 }
                 
             }
@@ -250,7 +242,7 @@ public class GobletServer implements Runnable
             //performs client disconnects          
             while(!disconnectQueue.isEmpty())
             {
-                DisconnectRequest packet = disconnectQueue.poll();
+                UUID packet = disconnectQueue.poll();
                 performPlayerDisconnect(packet);
             }    
                         
@@ -502,30 +494,42 @@ public class GobletServer implements Runnable
       
     }
     
-    private void performPlayerDisconnect(DisconnectRequest packet)
+    private void performPlayerDisconnect(UUID id)
     {
-        //check to make sure the client is still connected
-        if(this.connectedClients.get(packet.getClientID()) == null)
+        //if the server isnt running anymore return
+        if(!this.serverRunning)
         {
             return;
         }
         
+        //check to make sure the client is still connected
+        if(this.connectedClients.get(id) == null)
+        {
+            return;
+        }
+        
+        //get current level
+        String currentLevel = this.connectedClients.get(id).currentLevel;
         //remove the client from the scene
-        this.sceneMap.get( this.connectedClients.get(packet.getClientID()).currentLevel).removeClient(packet.getClientID());
+        this.sceneMap.get(currentLevel).removeClient(id);
         
         //if there are no clients left in the scene get rid of it
-        if(this.sceneMap.get( this.connectedClients.get(packet.getClientID()).currentLevel).clientsInScene.isEmpty())
-            this.sceneMap.remove(this.connectedClients.get(packet.getClientID()).currentLevel);
+        if(this.sceneMap.get(currentLevel).clientsInScene.isEmpty())
+        {
+            this.sceneMap.remove(currentLevel);
+        }
         
         //send a message that the player left
-        this.addGlobalChat("[Server] Player " + this.connectedClients.get(packet.getClientID()).player.getName()  + " has disconnected.");
+        this.addGlobalChat("[Server] Player " + this.connectedClients.get(id).player.getName()  + " has disconnected.");
         
         //remove the client
-        this.connectedClients.remove(packet.getClientID());               
+        this.connectedClients.remove(id);               
         
         //if the host left, stop the server
-        if(packet.getClientID().toString().equals(host.getID()))
+        if(id.toString().equals(host.getID()))
+        {
             this.stopServer();
+        }
     }
     
     /**
@@ -613,10 +617,6 @@ public class GobletServer implements Runnable
         joinQueue.add(new SimpleEntry(request,connection));
     }
     
-    private void handleDisconnectRequestPacket(DisconnectRequest packet)
-    {
-        disconnectQueue.add(packet);
-    }
     
     public void resendPacket(UUID clientID,long sequenceNumber)
     {
