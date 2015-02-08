@@ -774,17 +774,6 @@ public class MapEditorScene extends Scene {
 
                 }
             }
-            else // place starting position
-            {
-                this.placingStartingPosition  = false;
-                
-                Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.POINTERHAND));
-                if (this.jumpIntoLevel)
-                {
-                    this.jumpIntoLevel = false;
-                    this.testCurrentLevel(MapEditorScene.worldMouseLocation.x,MapEditorScene.worldMouseLocation.y);                    
-                }
-            }
         }
 
         if (!scriptWindow.isOpen())
@@ -1337,78 +1326,6 @@ public class MapEditorScene extends Scene {
         this.loadedLevelData.filename = "newLevel.lv";
         
         
-    }
-   
-    public void testCurrentLevel(final float x,final float y)
-    {
-        //Build a point to load at        
-        
-        //Dummy save game
-        final PlayerEntity player = new PlayerEntity(new Image(new AnimationPackClasses.BashBrownBodyAnimationPack()),new Image("bash-head1.png"),new Image(new AnimationPackClasses.BashBrownFrontArmAnimationPack()),new Image(new AnimationPackClasses.BashBrownFrontArmAnimationPack()));
-                   
-        player.setName("testplayer");
-        final SaveGame save = new SaveGame();
-        save.setPlayer(player);
-        save.save(player.getName() + ".save");        
-
-        //save level
-        this.saveLevel(this.loadedLevelData.filename);
-        
-        Game.getInstance().loadScene(new LoadingScene());
-        Game.getInstance().changeScene(LoadingScene.class, null);
-
-        Thread thread = new Thread()
-        {
-            @Override
-            public void run()
-            {
-                //if game client is loaded for some reason unload it
-                if(Game.getInstance().isLoaded(GameClientScene.class))
-                    Game.getInstance().unloadScene(GameClientScene.class); 
-
-                //start a server
-                GobletServer.ServerConfiguration config = new GobletServer.ServerConfiguration();
-                config.tcpPort = GameplaySettings.getInstance().tcpPort; 
-                config.udpPort = GameplaySettings.getInstance().udpPort;
-                Game.getInstance().addRunnable("Goblet Server", new GobletServer(config));
-
-                //load game client scene
-                Game.getInstance().loadScene(new GameClientScene(save)); 
-
-                //connect to server
-                try
-                {
-                    
-                    ((GameClientScene)Game.getInstance().getScene(GameClientScene.class)).connectToServer( "127.0.0.1", config.tcpPort,config.udpPort);                   
-                }
-                catch(ConnectionException e){System.err.println("Couldnt connect: " + e.reason); return;}
-
-                try{
-                    Thread.sleep(1000);
-                }
-                catch(Exception e){}
-                
-                //switch to GameClientScene
-                ArrayList args = new ArrayList();
-                args.add(loadedLevelData.filename);
-                Game.getInstance().changeScene(GameClientScene.class,args); 
-
-                //unload loading scene
-                Game.getInstance().unloadScene(LoadingScene.class);
-                
-                 //tell the server to move the player to the right place
-                ((GobletServer)Game.getInstance().getRunnable("Goblet Server")).queueMovePlayerToLevel(((GameClientScene)Game.getInstance().getScene(GameClientScene.class)).clientID.toString(), loadedLevelData.filename, new SylverVector2f(x,y));
-                
-                
-                
-                
-                
-            }
-        };
-
-        thread.start();
-            
-         
     }
     
     /**

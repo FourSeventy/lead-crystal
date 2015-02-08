@@ -55,7 +55,6 @@ public class GobletServer implements Runnable
         String clientID;
         String levelName;
         String entityID;
-        SylverVector2f point;
     }
   
     
@@ -229,7 +228,7 @@ public class GobletServer implements Runnable
             while(!clientMoveQueue.isEmpty())
             {
                 MoveStruct struct = clientMoveQueue.poll();
-                performPlayerMove(struct.clientID, struct.levelName, struct.point,struct.entityID);
+                performPlayerMove(struct.clientID, struct.levelName,struct.entityID);
             }              
                       
             //performs client joins          
@@ -349,18 +348,7 @@ public class GobletServer implements Runnable
    
     }
     
-     
-    
-    public void queueMovePlayerToLevel(String playerID, String levelname, SylverVector2f point)
-    {
-        MoveStruct struct = new MoveStruct();
-        struct.clientID = playerID;
-        struct.levelName = levelname;
-        struct.point = point;
-        
-        this.clientMoveQueue.add(struct);
-    }
-    
+       
     public void queueMovePlayerToLevel(String playerID, String levelname, String entity)
     {
         MoveStruct struct = new MoveStruct();
@@ -372,7 +360,7 @@ public class GobletServer implements Runnable
     } 
     
     
-    private void performPlayerMove(String id, String levelName, SylverVector2f point, String entity)
+    private void performPlayerMove(String id, String levelName, String spawnEntity)
     {
         UUID clientID = UUID.fromString(id);
         
@@ -399,21 +387,12 @@ public class GobletServer implements Runnable
             if(!this.sceneMap.containsKey(levelName))
             {
                
-                this.constructScene(clientID, levelName, entity);
+                this.constructScene(clientID, levelName, spawnEntity);
             }
             else //add the client to that scene
             {    
                 connectedClients.get(clientID).currentLevel = levelName;
-                this.sceneMap.get(levelName).addClient(connectedClients.get(clientID)); 
-                
-                //get spawn point
-                SylverVector2f spawnPoint;
-                if(point != null)
-                    spawnPoint = point;
-                else //get point from entityID                                  
-                    spawnPoint = this.sceneMap.get(levelName).getSceneObjectManager().get(entity).getPosition();
-                
-                this.sceneMap.get(levelName).movePlayerToPoint(clientID.toString(), spawnPoint);
+                this.sceneMap.get(levelName).addClient(connectedClients.get(clientID),spawnEntity); 
             }
 
             
@@ -485,7 +464,7 @@ public class GobletServer implements Runnable
         {
             //add our player to this scene
             clientData.currentLevel = levelToGo;
-            sceneMap.get(clientData.currentLevel).addClient(clientData);
+            sceneMap.get(clientData.currentLevel).addClient(clientData,null);
         }            
 
         //Alert the players
@@ -539,7 +518,7 @@ public class GobletServer implements Runnable
      * @param levelName
      * @param spawnPoint 
      */
-    private void constructScene(final UUID clientID,final String levelName, final Object spawnPoint)
+    private void constructScene(final UUID clientID,final String levelName, final String spawnPoint)
     {
 
         GameServerScene scene = new GameServerScene();
@@ -550,29 +529,7 @@ public class GobletServer implements Runnable
 
         //add the client to this scene
         connectedClients.get(clientID).currentLevel = levelName;
-        scene.addClient(connectedClients.get(clientID));
-
-
-        //move player to spawn point 
-        if(spawnPoint != null)
-        {
-            //if we got a spawn point
-            if(spawnPoint instanceof SylverVector2f)
-            {
-            scene.movePlayerToPoint(clientID.toString(), (SylverVector2f)spawnPoint);
-            }
-            else if(spawnPoint instanceof String) //if we got a spawn entity
-            {
-                SylverVector2f point;
-                if(scene.getSceneObjectManager().get((String)spawnPoint) != null)
-                    point = scene.getSceneObjectManager().get((String)spawnPoint).getPosition();
-                else
-                    point = scene.getSceneObjectManager().get("checkpoint1").getPosition();
-
-                scene.movePlayerToPoint(clientID.toString(), point);
-
-            }
-        }
+        scene.addClient(connectedClients.get(clientID), spawnPoint);     
 
         //add the scene to the map
         this.sceneMap.put(levelToLoad, scene); 

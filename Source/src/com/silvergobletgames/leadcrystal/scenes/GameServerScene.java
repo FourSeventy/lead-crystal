@@ -890,7 +890,7 @@ public class GameServerScene extends Scene
         
     }
        
-    public void addClient(ClientData client)
+    public void addClient(ClientData client, String checkpoint)
     {    
         //add the client data to the local map
         this.clientsInScene.put(client.clientID, client);
@@ -969,14 +969,22 @@ public class GameServerScene extends Scene
         changeLevelPacket.gameLevelName= activeLevel.filename;
         this.sendPacket(changeLevelPacket, client.clientID); 
         
-        //set and add the player to the scene
-        SceneObject savePoint = this.getSceneObjectManager().get("checkpoint1");       
-        client.player.setPosition(savePoint.getPosition().x,savePoint.getPosition().y);
-        client.player.getBody().setVelocity(new Vector2f(0,0));
-        client.player.handleSprintReleased();
+        
+        //add player to scene
         add(client.player,Layer.MAIN);
         this.players.add(client.player);
         
+        //move player to starting spot
+        String spot = "checkpoint1";
+        if(checkpoint != null)
+        {
+            spot = checkpoint;
+        }
+        SceneObject savePoint = this.getSceneObjectManager().get(spot); 
+        SylverVector2f movePoint = new SylverVector2f(savePoint.getPosition().x,savePoint.getPosition().y);
+        this.movePlayerToPoint(client.player.getID(), movePoint); 
+        
+      
         //send client to other players
         this.newSceneObjects.put(client.clientID.toString(), new SerializableEntry(client.player.dumpRenderData(),Scene.Layer.MAIN));
         
@@ -1009,6 +1017,8 @@ public class GameServerScene extends Scene
         
         //set player position
         player.setPosition(point.x , point.y);
+        ((PlayerEntity)player).getBody().setVelocity(new Vector2f(0,0));
+        ((PlayerEntity)player).handleSprintReleased();
         
         //send teleport packet
         this.sendMovePlayerToPointPacket(UUID.fromString(player.getID()), point); 
