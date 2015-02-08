@@ -545,6 +545,11 @@ public class SceneScriptManager
             potionEntity.addEntityEffect(new EntityEffect(EntityEffectType.DURATION, 61, 0, 1));
             this.owningScene.add(potionEntity, Scene.Layer.MAIN);
         }
+        else
+        {
+            //play error sound
+            this.playSoundAtPosition(invoker.getPosition().x,invoker.getPosition().y, "error.ogg");
+        }
         
     }
     
