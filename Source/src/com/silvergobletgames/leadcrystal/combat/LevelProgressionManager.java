@@ -307,7 +307,7 @@ public class LevelProgressionManager
         //temple2
         Level temple2 = new Level(); 
         temple2.levelDataName = "temple2.lv";
-        temple2.levelName = "Weapon Cache";
+        temple2.levelName = "Weapon Caches";
         //main objective
         objective = new LevelObjective();
         objective.objectiveName = "Destroy Commando Weapon Cache";
@@ -317,8 +317,8 @@ public class LevelProgressionManager
         temple2.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Destroy Oil Pipe";
-        objective.objectiveDescription = "Find and destroy the commandos oil pipeline.";
+        objective.objectiveName = "Destroy Grenade Cache";
+        objective.objectiveDescription = "Find and destroy the crates of grenades.";
         objective.currencyAward = 25;
         temple2.sideObjective = objective;
         //adding to map
