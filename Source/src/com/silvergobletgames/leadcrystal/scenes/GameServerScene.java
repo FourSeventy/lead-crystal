@@ -897,6 +897,7 @@ public class GameServerScene extends Scene
         
         //clear old input packet info
         client.clientInputPacketQueue.clear();
+        client.packetsToBeHandledQueue.clear();
         client.currentInputPacket = null;
         
         //clear entity hover stuff

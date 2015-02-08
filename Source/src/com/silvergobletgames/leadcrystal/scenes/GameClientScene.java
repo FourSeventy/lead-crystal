@@ -52,6 +52,7 @@ import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.OpenGLGameWindow;
 import com.silvergobletgames.sylver.graphics.RenderingPipelineGL3;
 import com.silvergobletgames.sylver.netcode.*;
+import com.silvergobletgames.sylver.util.Log;
 import com.silvergobletgames.sylver.util.SerializableEntry;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 import java.awt.Point;
@@ -363,7 +364,10 @@ public final class GameClientScene extends Scene
                     }
                     else
                     {
-                            System.out.println("historical data null : " + Long.toString(this.workingRenderDataPacket.correspondingInputPacket));
+                        if(GameplaySettings.getInstance().networkDebugging)
+                        {
+                            Log.trace("historical data null : " + Long.toString(this.workingRenderDataPacket.correspondingInputPacket));
+                        }
                     }
 
                     //========================
@@ -1225,26 +1229,7 @@ public final class GameClientScene extends Scene
        
         //clear player historical positions
         this.playerHistoricalData.clear();
-        
-        //lock input for 2 seconds
-        Thread inputLock = new Thread(){
-            
-            @Override
-            public void run()
-            {
-                lockInput.set(true);
                 
-                try
-                {
-                    Thread.sleep(2000);
-                }
-                catch (InterruptedException ex){}
-                
-                lockInput.set(false);
-                
-            }
-        };
-        inputLock.start();
         
         //add player server time
         if(GameplaySettings.getInstance().drawPlayerServerTime == true)
@@ -1484,7 +1469,9 @@ public final class GameClientScene extends Scene
     private void resendPacket(long sequenceNumber)
     {
         if(GameplaySettings.getInstance().networkDebugging)
-            System.out.println("Client ResendingPacket: " + sequenceNumber);
+        {
+            Log.trace("Client ResendingPacket: " + sequenceNumber);
+        }
         
         //get packet to resend
         Packet packet = this.sentPacketsMap.get(sequenceNumber);
@@ -1641,6 +1628,26 @@ public final class GameClientScene extends Scene
         //close menus
         hud.mapMenu.close();
         hud.questMenu.close();
+        
+         //lock input for 3 seconds
+        Thread inputLock = new Thread(){
+            
+            @Override
+            public void run()
+            {
+                lockInput.set(true);
+                
+                try
+                {
+                    Thread.sleep(3_000);
+                }
+                catch (InterruptedException ex){}
+                
+                lockInput.set(false);
+                
+            }
+        };
+        inputLock.start();
         
         //queue up level change
         if(this.activeLevelData != null)
