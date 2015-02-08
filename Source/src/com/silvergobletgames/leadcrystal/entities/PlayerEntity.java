@@ -29,6 +29,7 @@ import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
 import com.silvergobletgames.leadcrystal.scripting.PageCondition;
 import com.silvergobletgames.leadcrystal.scripting.ScriptObject;
 import com.silvergobletgames.leadcrystal.scripting.ScriptPage;
+import com.silvergobletgames.leadcrystal.skills.PlayerBoomerang.BoomerangHitbox;
 import com.silvergobletgames.leadcrystal.skills.Skill;
 import com.silvergobletgames.leadcrystal.skills.Skill.SkillID;
 import com.silvergobletgames.leadcrystal.skills.SkillManager;
@@ -446,6 +447,12 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
      */
     public void collidedWith(Entity other, CollisionEvent event)
     {        
+        //if we hit someone elses boomerang return
+        if(other instanceof BoomerangHitbox && ((BoomerangHitbox)other).sourceEntity != this)
+        {
+            return;
+        }
+        
         super.collidedWith(other, event);
 
                  
