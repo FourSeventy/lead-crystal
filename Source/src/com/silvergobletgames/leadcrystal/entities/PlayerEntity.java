@@ -722,8 +722,11 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         this.combatData.removeState(CombatState.IMMUNE);
         
         //remove respawn gravestone
-        this.getOwningScene().remove(this.respawnGravestone);
-        this.respawnGravestone = null;
+        if(this.respawnGravestone != null)
+        {
+            this.getOwningScene().remove(this.respawnGravestone);
+            this.respawnGravestone = null;
+        }
        
     }
     

@@ -472,8 +472,8 @@ public class SceneScriptManager
         ArrayList<PlayerEntity> playerList = new ArrayList(((GameServerScene)this.owningScene).players);
         for(PlayerEntity player :playerList)
         {  
-            //heals players
-            player.getCombatData().fullHeal();  
+            //heals players and removes all ailments
+            player.respawn(); 
             
             //moves players back to town
             ((GobletServer)Game.getInstance().getRunnable("Goblet Server")).queueMovePlayerToLevel(player.getID(), "town.lv", destination);          
