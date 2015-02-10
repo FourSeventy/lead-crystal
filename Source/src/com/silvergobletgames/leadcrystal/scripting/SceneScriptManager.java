@@ -416,10 +416,10 @@ public class SceneScriptManager
         Image image;
         switch(level)
         {   case 8: image = new Image("talisman2.png"); break;
-            case 10: image = new Image("doodad4.png"); break;
-            case 13: image = new Image("doodad4.png"); break;
-            case 14: image = new Image("doodad4.png"); break;
-            default: image = new Image("doodad4.png"); break;
+            case 10: image = new Image("mobo.png"); break;
+            case 13: image = new Image("mobo.png"); break;
+            case 14: image = new Image("quest_blade.png"); break;
+            default: image = new Image("talisman2.png"); break;
         }
         Entity technology = new Entity(image, technologyBody);
         technology.getImage().setDimensions(75, 75);
