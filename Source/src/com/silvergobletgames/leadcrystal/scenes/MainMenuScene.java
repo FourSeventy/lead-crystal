@@ -61,7 +61,7 @@ public class MainMenuScene extends Scene
         final int center = right/2;
 
         Image logo = new Image("logo.png");
-        logo.setPosition(center - logo.getWidth()/2 - 20, 675);
+        logo.setPosition(center - logo.getWidth()/2 - 25, 650);
         this.add(logo,Layer.MAIN);
 //        Text leadCrystal = new Text("Titanis",LeadCrystalTextType.MENU60);
 //        leadCrystal.setPosition(center - leadCrystal.getWidth()/2, 700);       
@@ -69,7 +69,7 @@ public class MainMenuScene extends Scene
         
         //single player
         final Text singlePlayerText = new Text("Single Player",LeadCrystalTextType.MENU54);
-        singlePlayerText.setPosition(center - singlePlayerText.getWidth()/2, 575);
+        singlePlayerText.setPosition(center - singlePlayerText.getWidth()/2, 525);
         final Button singlePlayerButton = new Button(new Image("blank.png"), center - singlePlayerText.getWidth()/2, singlePlayerText.getPosition().y, singlePlayerText.getWidth(), singlePlayerText.getHeight());
         this.add(singlePlayerText,Layer.MAIN);
         this.add(singlePlayerButton,Layer.MAIN);
@@ -107,7 +107,7 @@ public class MainMenuScene extends Scene
         
         //multiplayer 
         final Text multiPlayerText = new Text("Multiplayer",LeadCrystalTextType.MENU54);
-        multiPlayerText.setPosition(center - multiPlayerText.getWidth()/2, 500);
+        multiPlayerText.setPosition(center - multiPlayerText.getWidth()/2, 425);
         final Button multiPlayerButton = new Button(new Image("blank.png"), center - multiPlayerText.getWidth()/2, multiPlayerText.getPosition().y, multiPlayerText.getWidth(), multiPlayerText.getHeight());
         this.add(multiPlayerText,Layer.MAIN);
         this.add(multiPlayerButton,Layer.MAIN);
@@ -145,7 +145,7 @@ public class MainMenuScene extends Scene
         
         //options
         final Text optionsText = new Text("Options",LeadCrystalTextType.MENU54);
-        optionsText.setPosition(center - optionsText.getWidth()/2, 425);
+        optionsText.setPosition(center - optionsText.getWidth()/2, 325);
         final Button optionsButton = new Button(new Image("blank.png"), center - optionsText.getWidth()/2, optionsText.getPosition().y, optionsText.getWidth(), optionsText.getHeight());
         this.add(optionsText,Layer.MAIN);
         this.add(optionsButton,Layer.MAIN);
@@ -185,7 +185,7 @@ public class MainMenuScene extends Scene
         {
              //level editor
             final Text levelEditorText = new Text("Level Editor",LeadCrystalTextType.MENU54);
-            levelEditorText.setPosition(center - levelEditorText.getWidth()/2, 350);
+            levelEditorText.setPosition(center - levelEditorText.getWidth()/2, 225);
             final Button levelEditorButton = new Button(new Image("blank.png"), center - levelEditorText.getWidth()/2, levelEditorText.getPosition().y, levelEditorText.getWidth(), levelEditorText.getHeight());
             this.add(levelEditorText,Layer.MAIN);
             this.add(levelEditorButton,Layer.MAIN);
@@ -222,9 +222,14 @@ public class MainMenuScene extends Scene
             });
         }
         
+        int exitPosition = 225;
+        if(GameplaySettings.getInstance().levelEditor == true)
+        {
+            exitPosition = 125;
+        }
         //exit
         final Text exitText = new Text("Exit",LeadCrystalTextType.MENU54);
-        exitText.setPosition(center - exitText.getWidth()/2, 275);
+        exitText.setPosition(center - exitText.getWidth()/2, exitPosition);
         final Button exitButton = new Button(new Image("blank.png"), center - exitText.getWidth()/2, exitText.getPosition().y, exitText.getWidth(), exitText.getHeight());
         this.add(exitText,Layer.MAIN);
         this.add(exitButton,Layer.MAIN);
