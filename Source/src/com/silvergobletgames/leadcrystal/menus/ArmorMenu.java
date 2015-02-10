@@ -183,50 +183,50 @@ public class ArmorMenu extends Window{
         this.addComponent(bootsLabel);
         
         
-        //figure out head and body image
-        String bodyImageString = "";
-        AnimationPack playerAnimationPack = this.playerReference.getImage().getAnimationPack();
-        if(playerAnimationPack instanceof BashBrownBodyAnimationPack)
-        {
-            bodyImageString = "bash_brown_pose.png";
-        }
-        if(playerAnimationPack instanceof BashBlackBodyAnimationPack)
-        {
-            bodyImageString = "bash_black_pose.png";
-        }
-        if(playerAnimationPack instanceof BashBlueBodyAnimationPack)
-        {
-            bodyImageString = "bash_blue_pose.png";
-        }
-        if(playerAnimationPack instanceof BashGreenBodyAnimationPack)
-        {
-            bodyImageString = "bash_green_pose.png";
-        }
-        if(playerAnimationPack instanceof BashRedBodyAnimationPack)
-        {
-            bodyImageString = "bash_red_pose.png";
-        }
-        if(playerAnimationPack instanceof BashWhiteBodyAnimationPack)
-        {
-            bodyImageString = "bash_white_pose.png";
-        }
-        if(playerAnimationPack instanceof BashYellowBodyAnimationPack)
-        {
-            bodyImageString = "bash_yellow_pose.png";
-        }
-        
-        
-        //body image
-        Image bodyImg = new Image(bodyImageString);
-        bodyImg.setScale(1.35f);
-        Button bodyImage = new Button(bodyImg, 580 - (bodyImg.getWidth() * 1.35f)/2, 310, bodyImg.getWidth() * 1.35f, bodyImg.getHeight() * 1.35f);
-        this.addComponent(bodyImage);
-        
-        //head image
-        Image headImg = new Image(this.playerReference.getHead().getTextureReference());
-        headImg.setScale(1.35f);
-        Button headImage = new Button(headImg, 574 - (headImg.getWidth() * 1.35f)/2, 520, headImg.getWidth() * 1.35f, headImg.getHeight() * 1.35f);
-        this.addComponent(headImage);
+//        //figure out head and body image
+//        String bodyImageString = "";
+//        AnimationPack playerAnimationPack = this.playerReference.getImage().getAnimationPack();
+//        if(playerAnimationPack instanceof BashBrownBodyAnimationPack)
+//        {
+//            bodyImageString = "bash_brown_pose.png";
+//        }
+//        if(playerAnimationPack instanceof BashBlackBodyAnimationPack)
+//        {
+//            bodyImageString = "bash_black_pose.png";
+//        }
+//        if(playerAnimationPack instanceof BashBlueBodyAnimationPack)
+//        {
+//            bodyImageString = "bash_blue_pose.png";
+//        }
+//        if(playerAnimationPack instanceof BashGreenBodyAnimationPack)
+//        {
+//            bodyImageString = "bash_green_pose.png";
+//        }
+//        if(playerAnimationPack instanceof BashRedBodyAnimationPack)
+//        {
+//            bodyImageString = "bash_red_pose.png";
+//        }
+//        if(playerAnimationPack instanceof BashWhiteBodyAnimationPack)
+//        {
+//            bodyImageString = "bash_white_pose.png";
+//        }
+//        if(playerAnimationPack instanceof BashYellowBodyAnimationPack)
+//        {
+//            bodyImageString = "bash_yellow_pose.png";
+//        }
+//        
+//        
+//        //body image
+//        Image bodyImg = new Image(bodyImageString);
+//        bodyImg.setScale(1.35f);
+//        Button bodyImage = new Button(bodyImg, 580 - (bodyImg.getWidth() * 1.35f)/2, 310, bodyImg.getWidth() * 1.35f, bodyImg.getHeight() * 1.35f);
+//        this.addComponent(bodyImage);
+//        
+//        //head image
+//        Image headImg = new Image(this.playerReference.getHead().getTextureReference());
+//        headImg.setScale(1.35f);
+//        Button headImage = new Button(headImg, 574 - (headImg.getWidth() * 1.35f)/2, 520, headImg.getWidth() * 1.35f, headImg.getHeight() * 1.35f);
+//        this.addComponent(headImage);
         
         //=================
         // Weapon Upgrades
