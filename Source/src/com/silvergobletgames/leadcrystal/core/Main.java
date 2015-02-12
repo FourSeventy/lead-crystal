@@ -216,11 +216,11 @@ public class Main
     
     private static void loadMenuTextures()
     {
-        URI textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("misc/mainMenuBackground.png");  
+        URI textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/mainMenuBackground.png");  
         Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "mainmenubackground.png");
         textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/tallFrameMenu.png");  
         Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "tallframemenu.png");
-        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("misc/blank.png");  
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("effects/blank.png");  
         Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "blank.png"); 
         textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/map_arrow.png");  
         Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "map_arrow.png");               
