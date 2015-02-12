@@ -220,7 +220,7 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
                 gearImage.setAnchor(Anchorable.Anchor.CENTER);
                 Overlay gear = new Overlay(gearImage);
                 gear.setRelativePosition(.5f, 1.2f);
-                gear.setRelativeSize(.2f);
+                gear.setRelativeSize(.125f);
                 image.addOverlay("interact",gear );  
                 
                 //add overlay movement

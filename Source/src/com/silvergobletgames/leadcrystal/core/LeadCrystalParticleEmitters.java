@@ -45,7 +45,7 @@ public class LeadCrystalParticleEmitters
     {
         public BloodEmitter()
         {
-            super(new Image("Bleed1.png"));
+            super(new Image("blood_splat2.png"));
         }
    
         public Particle buildParticle()
@@ -59,13 +59,13 @@ public class LeadCrystalParticleEmitters
                     SylverVector2f velocity =new SylverVector2f(magnitude *(float)Math.cos(randomedAngle * Math.PI/180) , magnitude *(float)Math.sin(randomedAngle * Math.PI/180));
                    SylverVector2f acceleration = new SylverVector2f(0,-.1f);
 
-                   Color color = new Color(1f,.1f,.1f,1f);
+                   Color color = new Color(.9f,.1f,.1f,1f);
                    if(Math.random() < .5){
-                       color.r += 1f;
+                       color.r += (float)rand.nextDouble();
                    }
                    color.a = 1f;
                    int ttl = 45 + (int)(Math.random()*20);
-                   return new  Particle( pos, velocity, acceleration, color, .24f, -.1f/ttl, ttl);
+                   return new  Particle( pos, velocity, acceleration, color, .25f, -.1f/ttl, ttl);
                }        
         
     }
@@ -74,7 +74,7 @@ public class LeadCrystalParticleEmitters
     {
         public GreenBloodEmitter()
         {
-            super(new Image("Bleed1.png"));
+            super(new Image("blood_splat2.png"));
 
         }
    
@@ -91,11 +91,11 @@ public class LeadCrystalParticleEmitters
 
             Color color = new Color(.1f,4f,.1f,1f);
             if(Math.random() < .5){
-                color.g += 1f;
+                color.g += (float)rand.nextDouble();
             }
             color.a = 1f;
             int ttl = 45 + (int)(Math.random()*20);
-            return new  Particle( pos, velocity, acceleration, color, .24f, -.1f/ttl, ttl);
+            return new  Particle( pos, velocity, acceleration, color, .25f, -.1f/ttl, ttl);
         }        
         
     }
@@ -152,7 +152,7 @@ public class LeadCrystalParticleEmitters
     {
         public GroundFireEmitter1()
         {
-            super(new Image("groundFire2.png"));
+            super(new Image("fire_ground.png"));
             this.setParticlesPerFrame(.25f);
         }
         
