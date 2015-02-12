@@ -221,7 +221,7 @@ public class PlayerAttackDrone extends Skill
             float targetY = this.target.getPosition().y;
 
             //Get user X and Y
-            float userX = this.getPosition().x;
+            float userX = this.getPosition().x ;
             float userY = this.getPosition().y;
 
             //get vector to target
@@ -238,7 +238,7 @@ public class PlayerAttackDrone extends Skill
                 theta = (float)(2* Math.PI - theta);
 
             //Dispense laser into the world
-            laser.setPosition(this.getPosition().x + vectorToTarget.x * 25, this.getPosition().y + vectorToTarget.y * 25);
+            laser.setPosition(this.getPosition().x + 10 + vectorToTarget.x * 25, this.getPosition().y + vectorToTarget.y * 25);
             laser.getBody().addForce(new Vector2f(xforce ,yforce));
             laser.getBody().setRotation((float)theta);
             laser.getImage().setAngle((float)(theta * (180f/Math.PI))); 
