@@ -881,9 +881,10 @@ public class MapEditorScene extends Scene {
             if (inputSnapshot.isKeyReleasedCtrlModifier(KeyEvent.VK_M))
             {
                              
-               ((WorldObjectEntity)this.getSceneObjectManager().get("pump1")).getImage().setTextureReference("pump.png");
-                ((WorldObjectEntity)this.getSceneObjectManager().get("pump2")).getImage().setTextureReference("pump.png");
-               ((WorldObjectEntity)this.getSceneObjectManager().get("pump3")).getImage().setTextureReference("pump.png");
+               ((WorldObjectEntity)this.getSceneObjectManager().get("switch0")).getImage().setTextureReference("objective_lever.png");
+                ((WorldObjectEntity)this.getSceneObjectManager().get("switch1")).getImage().setTextureReference("objective_lever.png");
+               ((WorldObjectEntity)this.getSceneObjectManager().get("switch2")).getImage().setTextureReference("objective_lever.png");
+               ((WorldObjectEntity)this.getSceneObjectManager().get("switch3")).getImage().setTextureReference("objective_lever.png");
 //                for(SceneObject so: this.getSceneObjectManager().get(Layer.MAIN))
 //                {
 //
