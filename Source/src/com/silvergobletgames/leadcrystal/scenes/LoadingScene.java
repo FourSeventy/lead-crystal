@@ -58,7 +58,7 @@ public class LoadingScene extends Scene
         Random r = new Random();
         
         //build tip
-        switch(r.nextInt(6))
+        switch(4)//r.nextInt(6))
         {
             case 0:
 
@@ -80,7 +80,7 @@ public class LoadingScene extends Scene
                 tt = new Text("Tip: The       icon indicates an enemy is stunned.",LeadCrystalTextType.HUD34);
                 tt.setPosition( center - tt.getWidth()/2, 125);
                 this.add(tt,Layer.MAIN);
-                b = new Button(new Image("stunspiral.png"){{setHorizontalFlip(true);}}, center - 210, 113, 35 , 35);
+                b = new Button(new Image("stunspiral.png"){{setHorizontalFlip(true);}}, center - 220, 115, 35 , 35);
                 b.dontKillClick = true;
                 this.add(b,Layer.MAIN);  
              break;
@@ -88,7 +88,7 @@ public class LoadingScene extends Scene
                 tt = new Text("Tip: The       icon indicates an enemy is slowed.",LeadCrystalTextType.HUD34);
                 tt.setPosition( center - tt.getWidth()/2, 125);
                 this.add(tt,Layer.MAIN);
-                b = new Button(new Image("slow.png"){{setHorizontalFlip(true);}}, center - 210, 113, 35 , 35);
+                b = new Button(new Image("slow.png"){{setHorizontalFlip(true);}}, center - 210, 115, 36 , 35);
                 b.dontKillClick = true;
                 this.add(b,Layer.MAIN); 
               break;
@@ -96,7 +96,7 @@ public class LoadingScene extends Scene
                 tt = new Text("Tip: The       icon indicates an enemy is vulnerable.", LeadCrystalTextType.HUD34);
                 tt.setPosition( center - tt.getWidth()/2, 125);
                 this.add(tt,Layer.MAIN);
-                b = new Button(new Image("teleport2.png"){{setHorizontalFlip(true);}}, center - 225, 113, 35 , 35);
+                b = new Button(new Image("vulnerable_curse.png"), center - 233, 115, 36 , 35);
                 b.dontKillClick = true;
                 this.add(b,Layer.MAIN); 
             break;

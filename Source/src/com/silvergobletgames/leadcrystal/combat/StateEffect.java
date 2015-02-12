@@ -50,7 +50,7 @@ public class StateEffect extends CombatEffect
             case STUN:
             {
                 Image stunSpiral = new Image("stunSpiral.png");
-                ImageEffect spiralEffect = new ImageEffect(ImageEffect.ImageEffectType.ROTATION, 60, 0, 360);
+                ImageEffect spiralEffect = new ImageEffect(ImageEffect.ImageEffectType.ROTATION, 90, 0, 360);
                 spiralEffect.setRepeating(true);
                 stunSpiral.addImageEffect(spiralEffect);
                 stunSpiral.setAnchor(Anchorable.Anchor.BOTTOMCENTER);
@@ -87,7 +87,7 @@ public class StateEffect extends CombatEffect
                     return;
                 }
                 
-                Image slowSpiral = new Image("teleport2.png");
+                Image slowSpiral = new Image("vulnerable_curse.png");
                 ImageEffect spiralEffect = new ImageEffect(ImageEffect.ImageEffectType.ROTATION, 60, 0, 360);
                 spiralEffect.setRepeating(true);
                 slowSpiral.addImageEffect(spiralEffect);

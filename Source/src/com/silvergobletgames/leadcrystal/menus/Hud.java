@@ -336,7 +336,7 @@ public class Hud extends Window
         
         
         //potion counter
-        this.potionImage = new Button("healthPot3.png", 229,762,34,34); 
+        this.potionImage = new Button("healthPot3.png", 229,762,28,33); 
         this.potionImage.dontKillClick = true;
         this.addComponent(potionImage);
         

@@ -43,12 +43,12 @@ public class EnemyRangedSwipe extends Skill{
         Body body = new Body(new Box(40, 150),1);
         body.setRotatable(false);
         body.addExcludedBody(user.getBody());
-        Image image = new Image("swipe.png"); 
+        Image image = new Image("sandman_swipe.png"); 
         image.setDimensions(100, 150);
         image.setColor(new Color(1,1,1f,1f));
        // image.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.COLOR, 50, new Color(1,1,1f,1f), new Color(1,1,1f,0f)));
         image.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 300, 1, 1));
-        if (user.getFacingDirection().equals(FacingDirection.RIGHT))
+        if (user.getFacingDirection().equals(FacingDirection.LEFT))
             image.setHorizontalFlip(true);
         image.setAnchor(Anchorable.Anchor.CENTER);
         image.setPositionAnchored(origin.x,origin.y);

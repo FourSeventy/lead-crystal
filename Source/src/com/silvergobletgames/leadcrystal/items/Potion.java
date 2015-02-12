@@ -27,7 +27,7 @@ public class Potion extends ItemEntity
     {
         super(new Image("healthPot3.png"));
         
-        this.image.setScale(2);
+        this.image.setScale(1.5f);
     }
 
     
