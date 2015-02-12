@@ -27,7 +27,7 @@ public final class Currency extends ItemEntity
     
     protected Currency(int amount)
     {
-        super(new Image("goldCoin.png"));
+        super(new Image("goldCoinSmall.png"));
        
         
         //set amount

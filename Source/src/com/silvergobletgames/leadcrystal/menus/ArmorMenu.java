@@ -156,7 +156,7 @@ public class ArmorMenu extends Window{
         Text playerGold = new Text(Integer.toString(0),LeadCrystalTextType.HUD24);
         playerGoldLabel = new Label(playerGold,1070,810);
         this.addComponent(playerGoldLabel);
-        Button b1 = new Button(new Image("goldCoin.png"),1120,808,20,20);
+        Button b1 = new Button(new Image("goldCoinSmall.png"),1120,808,20,20);
         this.addComponent(b1);
         
         
@@ -1473,7 +1473,7 @@ public class ArmorMenu extends Window{
             tooltipCost = new Label(text, x + 195 - text.getWidth()/2, y + 40);
             this.addComponent(tooltipCost);
             
-            tooltipGold = new Button(new Image("goldCoin.png"),x + 195 + text.getWidth()/2 + 5,y + 38,20,20);
+            tooltipGold = new Button(new Image("goldCoinWikidSmall.png"),x + 195 + text.getWidth()/2 + 5,y + 38,20,20);
             this.addComponent(tooltipGold);
         }
         

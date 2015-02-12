@@ -224,8 +224,8 @@ public class Main
         Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "blank.png"); 
         textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/map_arrow.png");  
         Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "map_arrow.png");               
-        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/goldCoin.png");  
-        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "goldcoin.png");              
+        textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("effects/goldCoinSmall.png");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "goldcoinsmall.png");              
         textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/tallFrameMenu.png");  
         Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "tallframemenu.png");
         textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/reticle07.png");  

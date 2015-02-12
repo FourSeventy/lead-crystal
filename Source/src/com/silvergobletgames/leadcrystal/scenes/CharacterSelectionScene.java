@@ -335,8 +335,8 @@ public class CharacterSelectionScene extends Scene
             this.add(savegameButton,Layer.MAIN);
             saveGameObjects.add(savegameButton);
             
-            Image coinIcon = new Image("goldCoin.png");
-            coinIcon.setScale(.30f);
+            Image coinIcon = new Image("goldCoinSmall.png");
+            coinIcon.setDimensions(24, 24);
             coinIcon.setPosition(center + 200 - 70, 627 - 55 * number);
             this.add(coinIcon,Layer.MAIN);
             saveGameObjects.add(coinIcon);

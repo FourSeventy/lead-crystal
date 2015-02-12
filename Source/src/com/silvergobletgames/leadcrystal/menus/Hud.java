@@ -336,7 +336,7 @@ public class Hud extends Window
         
         
         //potion counter
-        this.potionImage = new Button("healthPot3.png", 229,762,28,33); 
+        this.potionImage = new Button("healthPot3Small.png", 235,766,24,28); 
         this.potionImage.dontKillClick = true;
         this.addComponent(potionImage);
         
@@ -576,7 +576,7 @@ public class Hud extends Window
         t = new Text(Integer.toString(this.playerReference.getCurrencyManager().getBalence()),LeadCrystalTextType.HUD22);
         this.creditLabel = new Label(t, right - 114, 669);
         this.addComponent(creditLabel);
-        this.creditIcon = new Button("goldCoin.png", right - 133,667,17,17);
+        this.creditIcon = new Button("goldCoinWikidSmall.png", right - 133,667,17,17);
         this.creditIcon.dontKillClick = true;
         this.addComponent(creditIcon);
         

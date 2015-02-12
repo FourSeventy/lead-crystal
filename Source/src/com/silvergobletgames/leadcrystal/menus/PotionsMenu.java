@@ -120,7 +120,7 @@ public class PotionsMenu extends Window{
         Text potionPrice =new Text(Integer.toString(PotionManager.POTION_PRICE),LeadCrystalTextType.HUD30);
         Label label = new Label(potionPrice,290,340);
         this.addComponent(label);
-        Button b = new Button(new Image("goldCoin.png"),326,336,26,26);
+        Button b = new Button(new Image("goldCoinSmall.png"),326,336,26,26);
         this.addComponent(b);
      
         
@@ -136,7 +136,7 @@ public class PotionsMenu extends Window{
         Text playerGold = new Text(Integer.toString(0),LeadCrystalTextType.HUD24);
         playerGoldLabel = new Label(playerGold,390,57);
         this.addComponent(playerGoldLabel);
-        Button b1 = new Button(new Image("goldCoin.png"),460,55,20,20);
+        Button b1 = new Button(new Image("goldCoinWikidSmall.png"),460,55,20,20);
         this.addComponent(b1);
        
       

@@ -232,7 +232,7 @@ public class MessageManager
         currencyText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 270, 0, 0));
         
         //currency image
-        Image currencyImage = new Image("goldCoin.png");
+        Image currencyImage = new Image("goldCoinSmall.png");
         currencyImage.setScale(.5f);
         currencyImage.setPosition(center- currencyText.getWidth() - 70, 625);
         currencyImage.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 270, 0, 0));
