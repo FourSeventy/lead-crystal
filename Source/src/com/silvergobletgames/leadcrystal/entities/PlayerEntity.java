@@ -164,7 +164,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         //set image dimensions and offset
         image.setScale(1f);
-        this.imageOffset = new Vector2f(0,-20);
+        this.imageOffset = new Vector2f(0,-19);
 
         //set body attributes
         body.setFriction(this.BASE_FRICTION);
