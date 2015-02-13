@@ -9,7 +9,6 @@ import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.JumperAnimati
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.MoleAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.NPC2AnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.NPC3AnimationPack;
-import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.NPC4AnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.NPC5AnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.NPC6AnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.NPC7AnimationPack;
@@ -137,7 +136,6 @@ public class TilePalette extends Menu {
         characters.add(new Image(new PlantAnimationPack()));
         characters.add(new Image(new NPC2AnimationPack()));
         characters.add(new Image(new NPC3AnimationPack()));
-        characters.add(new Image(new NPC4AnimationPack()));
         characters.add(new Image(new NPC5AnimationPack()));
         characters.add(new Image(new NPC6AnimationPack()));
         characters.add(new Image(new NPC7AnimationPack()));

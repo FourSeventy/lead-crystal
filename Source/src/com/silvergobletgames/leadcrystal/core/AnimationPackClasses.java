@@ -57,27 +57,6 @@ public class AnimationPackClasses {
             this.animationSet.put(CoreAnimations.IDLE, idle); 
         }
     }
-   
-    public static class NPC4AnimationPack extends AnimationPack
-    {
-        public NPC4AnimationPack()
-        {
-            //Idle
-            ArrayList<Texture> idle = new ArrayList();
-                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("npc4idle0.png"));
-                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("npc4idle1.png"));
-                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("npc4idle2.png"));
-                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("npc4idle3.png"));
-                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("npc4idle4.png"));
-                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("npc4idle5.png"));
-                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("npc4idle6.png"));
-                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("npc4idle7.png"));
-                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("npc4idle8.png"));
-                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("npc4idle9.png"));
-                idle.add(Game.getInstance().getAssetManager().getTextureLoader().getTexture("npc4idle10.png"));
-            this.animationSet.put(CoreAnimations.IDLE, idle); 
-        }
-    }
     
     public static class NPC5AnimationPack extends AnimationPack
     {
