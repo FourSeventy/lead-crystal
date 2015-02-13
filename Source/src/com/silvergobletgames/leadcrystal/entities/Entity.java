@@ -291,7 +291,7 @@ public class Entity extends SceneObject implements AnimationListener
             image.draw(gl);
         
         //draws entityTooltip
-        if(entityTooltip != null && ((GameScene)this.getOwningScene()).getPlayer().getArmorManager().seeEnemyHealth.isMaxPoints())
+        if(entityTooltip != null && this.getOwningScene() instanceof GameScene &&((GameScene)this.getOwningScene()).getPlayer().getArmorManager().seeEnemyHealth.isMaxPoints())
             entityTooltip.draw(gl); 
         
         
