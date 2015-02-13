@@ -48,7 +48,7 @@ public class EnemyBoss1Melee extends Skill{
         image.setColor(new Color(1,1,1f,1f));
        // image.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.COLOR, 50, new Color(1,1,1f,1f), new Color(1,1,1f,0f)));
         image.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 300, 1, 1));
-        if (user.getFacingDirection().equals(FacingDirection.RIGHT))
+        if (user.getFacingDirection().equals(FacingDirection.LEFT))
             image.setHorizontalFlip(true);
         image.setAnchor(Anchorable.Anchor.CENTER);
         image.setPositionAnchored(origin.x,origin.y);
