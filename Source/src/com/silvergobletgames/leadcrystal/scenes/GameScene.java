@@ -77,11 +77,11 @@ public class GameScene extends Scene
     private AtomicBoolean lockInput = new AtomicBoolean(false);
      //World Mouse Location
     private SylverVector2f worldMouseLocation = new SylverVector2f(0, 0); 
-    private String lastHoveredEntityID;
-    private String hoveredEntityID;
-    private boolean mouseHoverInRange;
+    private String lastHoverID;
+    private String currentHoverID;  
     private boolean hoveredEntityExited;
     private boolean mouseHover;
+    private boolean mouseHoverInRange;
     
     //HUD
     private Hud hud;  
@@ -282,11 +282,11 @@ public class GameScene extends Scene
         //============================
         // Check for entity hovering
         //============================
-        Body mouse = new Body(new Box(2, 2), 1);
-        mouse.setPosition(mouseX, mouseY);
-        this.lastHoveredEntityID = this.hoveredEntityID;
+        Body mouseFeeler = new Body(new Box(2, 2), 1);
+        mouseFeeler.setPosition(mouseX, mouseY);
+        this.lastHoverID = this.currentHoverID;
         boolean lastRange = this.mouseHoverInRange;
-        this.hoveredEntityID = null;
+        this.currentHoverID = null;
         this.mouseHoverInRange = false;
         this.hoveredEntityExited = false;
         boolean rangeChange = false;
@@ -309,7 +309,7 @@ public class GameScene extends Scene
             //if the mouse is on something
             if (mouseOn) 
             {
-                this.hoveredEntityID = entity.getID();
+                this.currentHoverID = entity.getID();
                 //if the entity is in range of the player
                 if(Point.distance(player.getPosition().x, player.getPosition().y, entity.getPosition().x, entity.getPosition().y) < 250) 
                 {
@@ -331,7 +331,7 @@ public class GameScene extends Scene
             else // mouse is outside an entity
             {
                 //if the old hovered entity is equal to this entity, or the old entity isnt in the scene anymore 
-                if( this.lastHoveredEntityID != null &&( this.lastHoveredEntityID.equals(entity.getID()) || this.getSceneObjectManager().get(lastHoveredEntityID) == null))     
+                if( this.lastHoverID != null &&( this.lastHoverID.equals(entity.getID()) || this.getSceneObjectManager().get(lastHoverID) == null))     
                 {
                     this.hoveredEntityExited = true;   
                 }
@@ -339,41 +339,45 @@ public class GameScene extends Scene
         }
 
         //check for edge case for not hovering
-        if(clickableGroup.isEmpty() && this.lastHoveredEntityID != null)
+        if(clickableGroup.isEmpty() && this.lastHoverID != null)
         {
 
             this.hoveredEntityExited = true;   
         }
 
-         //send hover packet
-        if((this.hoveredEntityID != null && this.lastHoveredEntityID == null) || rangeChange) 
+         //handle hover
+        if((this.currentHoverID != null && this.lastHoverID == null) || (rangeChange && this.mouseHoverInRange ) ) 
         {      
             this.mouseHover = true;
-        }
-        else if (this.hoveredEntityExited) 
-        {
-            this.mouseHover = false;      
-        }
-                    
-        //if we are hovering
-        if(this.mouseHover && this.mouseHoverInRange)
-        {
-            //get entity that we are hovering on
-            Entity hoveredEntity = (Entity)this.getSceneObjectManager().get(this.hoveredEntityID);
             
-            //apply brightness effect
-            if(hoveredEntity != null && !hoveredEntity.getImage().hasImageEffect("hover"))
+            if(this.mouseHoverInRange)
             {
-                Float[] points = {1.3f,1.6f,1.3f};
-                int[] durations = {60,60};
-                ImageEffect brightnessEffect = new MultiImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, points,durations);
-                hoveredEntity.getImage().addImageEffect("hover",brightnessEffect);
+                //get entity that we are hovering on
+               Entity hoveredEntity = (Entity)this.getSceneObjectManager().get(this.currentHoverID);
+
+               //apply brightness effect
+               if(hoveredEntity != null && !hoveredEntity.getImage().hasImageEffect("hover"))
+               {
+                   Float[] points = {1.3f,1.6f,1.3f};
+                   int[] durations = {60,60};
+                   ImageEffect brightnessEffect = new MultiImageEffect(ImageEffect.ImageEffectType.BRIGHTNESS, points,durations);
+                   hoveredEntity.getImage().addImageEffect("hover",brightnessEffect);
+               }
             }
         }
-        else
+        else if(this.hoveredEntityExited || (rangeChange && !this.mouseHoverInRange )) 
         {
+            if(!rangeChange)
+            {
+               this.mouseHover = false; 
+            }
+            else
+            {
+                this.mouseHover = true;
+            }
+            
             //get entity that we are hovering on
-            Entity hoveredEntity = (Entity)this.getSceneObjectManager().get(this.hoveredEntityID);
+            Entity hoveredEntity = (Entity)this.getSceneObjectManager().get(this.lastHoverID);
             
             
             if(hoveredEntity != null) //prevents race condition timing bugs
@@ -383,6 +387,7 @@ public class GameScene extends Scene
                 hoveredEntity.getImage().setBrightness(1);
             }
         }
+                    
                     
 
 
@@ -522,11 +527,11 @@ public class GameScene extends Scene
        if(inputSnapshot.isMouseClicked() && !hud.isMouseOverMenu())
         {
             //if we clicked on an interactable object
-            if (this.hoveredEntityID != null && this.mouseHoverInRange)
+            if (this.currentHoverID != null && this.mouseHoverInRange)
             {
-                if(((Entity) this.getSceneObjectManager().get(this.hoveredEntityID)).getScriptObject().getTrigger() == ScriptTrigger.RIGHTCLICK)
+                if(((Entity) this.getSceneObjectManager().get(this.currentHoverID)).getScriptObject().getTrigger() == ScriptTrigger.RIGHTCLICK)
                 {
-                    ((Entity) this.getSceneObjectManager().get(this.hoveredEntityID)).getScriptObject().runScript(player);
+                    ((Entity) this.getSceneObjectManager().get(this.currentHoverID)).getScriptObject().runScript(player);
                     inputSnapshot.killMouseClick();
                 }
             }
@@ -536,14 +541,14 @@ public class GameScene extends Scene
         //mouse DOWN handling
         if (inputSnapshot.isMouseDown() && !hud.isMouseOverMenu())
         {
-            if (inputSnapshot.buttonClicked() == 1 && !(this.hoveredEntityID != null && this.mouseHoverInRange) )
+            if (inputSnapshot.buttonClicked() == 1 && !(this.currentHoverID != null && this.mouseHoverInRange) )
             {
                 if (player.getSkillAssignment(1) != null && player.getSkillManager().getSkill(player.getSkillAssignment(1)).isUsable())
                 {
                     player.useActionBarSkill(player.getSkillAssignment(1));
                 }
             }
-            else if(inputSnapshot.buttonClicked() == 3 && !(this.hoveredEntityID != null && this.mouseHoverInRange))
+            else if(inputSnapshot.buttonClicked() == 3 && !(this.currentHoverID != null && this.mouseHoverInRange))
             {
                 if (player.getSkillAssignment(2) != null && player.getSkillManager().getSkill(player.getSkillAssignment(2)).isUsable())
                 {
