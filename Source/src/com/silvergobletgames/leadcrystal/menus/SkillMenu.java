@@ -3,32 +3,32 @@ package com.silvergobletgames.leadcrystal.menus;
 
 import com.silvergobletgames.leadcrystal.core.CursorFactory;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
+import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
+import com.silvergobletgames.leadcrystal.skills.*;
+import com.silvergobletgames.leadcrystal.skills.PlayerAttackDrone;
 import com.silvergobletgames.leadcrystal.skills.PlayerBuckshot;
 import com.silvergobletgames.leadcrystal.skills.PlayerDashAttack;
-import com.silvergobletgames.leadcrystal.skills.PlayerSnipe;
-import com.silvergobletgames.leadcrystal.skills.PlayerAttackDrone;
 import com.silvergobletgames.leadcrystal.skills.PlayerGravityShield;
+import com.silvergobletgames.leadcrystal.skills.PlayerSnipe;
 import com.silvergobletgames.leadcrystal.skills.PlayerWard;
+import com.silvergobletgames.leadcrystal.skills.Skill.SkillID;
+import com.silvergobletgames.sylver.audio.Sound;
+import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.core.InputHandler;
 import com.silvergobletgames.sylver.graphics.Anchorable;
+import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.Image;
+import com.silvergobletgames.sylver.graphics.Text;
+import com.silvergobletgames.sylver.windowsystem.*;
 import com.silvergobletgames.sylver.windowsystem.Button;
 import com.silvergobletgames.sylver.windowsystem.Label;
 import com.silvergobletgames.sylver.windowsystem.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.media.opengl.GL3bc;
-import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
-import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
-import com.silvergobletgames.leadcrystal.skills.*;
-import com.silvergobletgames.leadcrystal.skills.Skill.SkillID;
-import com.silvergobletgames.sylver.audio.Sound;
-import com.silvergobletgames.sylver.core.Game;
-import com.silvergobletgames.sylver.graphics.Color;
-import com.silvergobletgames.sylver.graphics.Text;
-import com.silvergobletgames.sylver.windowsystem.*;
 import java.util.ArrayList;
 import javax.media.opengl.GL2;
+import javax.media.opengl.GL3bc;
 
 
 
@@ -220,7 +220,7 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
-                       ((GameClientScene)owningScene).sendBuySkillPacket(skill.getSkillID());
+                       ((GameScene)owningScene).buySkill(skill.getSkillID());
                        playSkillUnlockSound();
                    }
                }
@@ -273,7 +273,7 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
-                       ((GameClientScene)owningScene).sendBuySkillPacket(skill5.getSkillID());
+                       ((GameScene)owningScene).buySkill(skill5.getSkillID());
                        playSkillUnlockSound();
                    }
                }
@@ -326,7 +326,7 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
-                       ((GameClientScene)owningScene).sendBuySkillPacket(skill7.getSkillID());
+                       ((GameScene)owningScene).buySkill(skill7.getSkillID());
                        playSkillUnlockSound();
                    }
                }
@@ -378,7 +378,7 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
-                       ((GameClientScene)owningScene).sendBuySkillPacket(blade.getSkillID());
+                       ((GameScene)owningScene).buySkill(blade.getSkillID());
                        playSkillUnlockSound();
                    }
                }
@@ -432,7 +432,7 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
-                       ((GameClientScene)owningScene).sendBuySkillPacket(skill1.getSkillID());
+                       ((GameScene)owningScene).buySkill(skill1.getSkillID());
                        playSkillUnlockSound();
                    }
                }
@@ -484,7 +484,7 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
-                       ((GameClientScene)owningScene).sendBuySkillPacket(skill3.getSkillID());
+                       ((GameScene)owningScene).buySkill(skill3.getSkillID());
                        playSkillUnlockSound();
                    }
                }
@@ -536,7 +536,7 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
-                       ((GameClientScene)owningScene).sendBuySkillPacket(freezeSkill.getSkillID());
+                       ((GameScene)owningScene).buySkill(freezeSkill.getSkillID());
                        playSkillUnlockSound();
                    }
                }
@@ -588,7 +588,7 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
-                       ((GameClientScene)owningScene).sendBuySkillPacket(snipeSkill.getSkillID());
+                       ((GameScene)owningScene).buySkill(snipeSkill.getSkillID());
                        playSkillUnlockSound();
                    }
                }             
@@ -644,7 +644,7 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
-                       ((GameClientScene)owningScene).sendBuySkillPacket(skill6.getSkillID());
+                       ((GameScene)owningScene).buySkill(skill6.getSkillID());
                        playSkillUnlockSound();
                    }
                }
@@ -696,7 +696,7 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
-                       ((GameClientScene)owningScene).sendBuySkillPacket(flashbangSkill.getSkillID());
+                       ((GameScene)owningScene).buySkill(flashbangSkill.getSkillID());
                        playSkillUnlockSound();
                    }
                }
@@ -748,7 +748,7 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
-                       ((GameClientScene)owningScene).sendBuySkillPacket(stimSkill.getSkillID());
+                       ((GameScene)owningScene).buySkill(stimSkill.getSkillID());
                        playSkillUnlockSound();
                    }
                }
@@ -800,7 +800,7 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
-                       ((GameClientScene)owningScene).sendBuySkillPacket(gravitySkill.getSkillID());
+                       ((GameScene)owningScene).buySkill(gravitySkill.getSkillID());
                        playSkillUnlockSound();
                    }
                }
@@ -856,7 +856,7 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
-                       ((GameClientScene)owningScene).sendBuySkillPacket(skill2.getSkillID());
+                       ((GameScene)owningScene).buySkill(skill2.getSkillID());
                        playSkillUnlockSound();
                    }
                }
@@ -907,7 +907,7 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
-                       ((GameClientScene)owningScene).sendBuySkillPacket(skill4.getSkillID());
+                       ((GameScene)owningScene).buySkill(skill4.getSkillID());
                        playSkillUnlockSound();
                    }
                }
@@ -958,7 +958,7 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
-                       ((GameClientScene)owningScene).sendBuySkillPacket(playerGuardSkill.getSkillID());
+                       ((GameScene)owningScene).buySkill(playerGuardSkill.getSkillID());
                        playSkillUnlockSound();
                    }
                }
@@ -1009,7 +1009,7 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
-                       ((GameClientScene)owningScene).sendBuySkillPacket(playerFlashbangSkill.getSkillID());
+                       ((GameScene)owningScene).buySkill(playerFlashbangSkill.getSkillID());
                        playSkillUnlockSound();
                    }
                }
@@ -1568,7 +1568,7 @@ public class SkillMenu extends Window {
         
         super.open();   
         
-        ((GameClientScene)this.getOwningScene()).hud.closeDialogue();
+        ((GameScene)this.getOwningScene()).getHud().closeDialogue();
         
     }
 

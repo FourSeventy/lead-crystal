@@ -84,7 +84,7 @@ public class EntityEffect extends Effect
             {
                 if(this.owningEntity.getOwningScene() instanceof GameScene)
                 {
-                    ((GameScene)this.owningEntity.getOwningScene()).physicsWorld.remove(this.owningEntity.getBody());
+                    ((GameScene)this.owningEntity.getOwningScene()).getPhysicsWorld().remove(this.owningEntity.getBody());
 //                  
                 }
             }
@@ -180,35 +180,4 @@ public class EntityEffect extends Effect
         this.owningEntity = entity;
     }
     
-    
-    //=================
-    // Reder Data
-    //=================
-    
-    public RenderData dumpRenderData() 
-    {
-         
-        //=====================================
-        // WARNING
-        //-Making changes to this method could
-        //break saved data
-        //======================================
-        
-        RenderData renderData = new RenderData();
-        
-        renderData.data.add(0,this.entityEffectType);
-        renderData.data.add(1,this.duration);
-        renderData.data.add(2,this.start);
-        renderData.data.add(3,this.end);
-        renderData.data.add(4,this.repeat);
-        
-        return renderData;
-    }
-    
-    public static EntityEffect buildFromRenderData(RenderData renderData)
-    {
-        EntityEffect effect = new EntityEffect((EntityEffect.EntityEffectType)renderData.data.get(0),(int)renderData.data.get(1),renderData.data.get(2),renderData.data.get(3)); 
-        effect.repeat =((boolean)renderData.data.get(4));
-        return effect;
-    }
 }

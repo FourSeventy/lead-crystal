@@ -29,9 +29,6 @@ import com.silvergobletgames.leadcrystal.items.ArmorManager;
 import com.silvergobletgames.leadcrystal.items.Currency;
 import com.silvergobletgames.leadcrystal.items.CurrencyManager;
 import com.silvergobletgames.leadcrystal.items.Potion;
-import com.silvergobletgames.leadcrystal.netcode.ClientInputPacket;
-import com.silvergobletgames.leadcrystal.netcode.PlayerPredictionData;
-import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
 import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.leadcrystal.scripting.PageCondition;
 import com.silvergobletgames.leadcrystal.scripting.ScriptObject;
@@ -546,11 +543,10 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                 //play sound
                 if(this.jumpEnergy != MAX_JUMP_ENERGY)
                 {                                   
-                    if(this.getOwningScene() instanceof GameClientScene)
-                    {
-                        Sound sound = Sound.locationSound("buffered/bodyFall.ogg", this.getPosition().x, this.getPosition().y, false,.40f);
-                        this.getOwningScene().add(sound);
-                    }
+
+                    Sound sound = Sound.locationSound("buffered/bodyFall.ogg", this.getPosition().x, this.getPosition().y, false,.40f);
+                    this.getOwningScene().add(sound);
+                    
                 }
                 
                 //refresh jump variables
@@ -634,10 +630,8 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         }
         
         //clear arbiters
-        if(this.owningScene instanceof GameScene)
-           ((GameScene) owningScene).physicsWorld.clearArbiters(this.body);
-        else if(this.owningScene instanceof GameClientScene)
-           ((GameClientScene) owningScene).physicsWorld.clearArbiters(this.body);
+        ((GameScene) owningScene).getPhysicsWorld().clearArbiters(this.body);
+
         
         //Essential STATUS flag when dead
         this.combatData.setState(CombatState.DEAD);
@@ -683,23 +677,9 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         ImageEffect fadeEffect = new MultiImageEffect(ImageEffect.ImageEffectType.ALPHABRIGHTNESS, points,durations);
         this.respawnGravestone.getImage().addImageEffect(fadeEffect);
         
-        //building respawn script
-        ScriptPage page = new ScriptPage();
-        page.setScript("if(\"" + this.getID() + "\" != invoker.getID()){scriptManager.respawnPlayer(\"" + this.getID() + "\",invoker.getID());}"); 
-        
-        PageCondition condition = new PageCondition();
-        condition.setConditionScript("conditionValue = true;");
-        
-        ScriptObject obj = new ScriptObject();
-        obj.addPage(page, condition);
-        obj.setTrigger(ScriptObject.ScriptTrigger.RIGHTCLICK);
-        this.respawnGravestone.setScriptObject(obj); 
-        
         this.getOwningScene().add(this.respawnGravestone, Scene.Layer.MAIN);
         
-        
-        
-        
+     
     }
    
     public void respawn()
@@ -707,9 +687,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         //clear arbiters
         if(this.owningScene instanceof GameScene)
-           ((GameScene) owningScene).physicsWorld.clearArbiters(this.body);
-        else if(this.owningScene instanceof GameClientScene)
-           ((GameClientScene) owningScene).physicsWorld.clearArbiters(this.body);
+           ((GameScene) owningScene).getPhysicsWorld().clearArbiters(this.body);
         
         //recharge health
         this.combatData.fullHeal();
@@ -917,20 +895,20 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     {
         super.addedToScene();
         
-        if(this.owningScene instanceof GameScene)
-        {
-            if(((GameScene)this.owningScene).clientsInScene.get(UUID.fromString(this.ID)).currentLevel.equals("town.lv") && this.respawnWhenEnterTown == true)
-            {
-                //respawn the player
-                 this.respawn();
-
-                //send respawn packet
-                ((GameScene)this.getOwningScene()).sendRespawnPacket(UUID.fromString(this.ID));
-                
-                this.respawnWhenEnterTown = false;
-
-            }
-        }
+//        if(this.owningScene instanceof GameScene)
+//        {
+//            if(((GameScene)this.owningScene)..equals("town.lv") && this.respawnWhenEnterTown == true)
+//            {
+//                //respawn the player
+//                 this.respawn();
+//
+//                //send respawn packet
+//                ((GameScene)this.getOwningScene()).sendRespawnPacket(UUID.fromString(this.ID));
+//                
+//                this.respawnWhenEnterTown = false;
+//
+//            }
+//        }
     }
     
     public float getMaxJumpEnergy()
@@ -1420,11 +1398,9 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                 this.getBody().addSoftForce(new Vector2f(0, 15_000));
                 
                 //play the jump sound   
-                if(this.getOwningScene() instanceof GameClientScene)
-                {
-                    Sound jumpSound = Sound.locationSound("buffered/jump.ogg", this.getPosition().x, this.getPosition().y, false, .4f);               
-                    this.getOwningScene().add(jumpSound);
-                }
+                Sound jumpSound = Sound.locationSound("buffered/jump.ogg", this.getPosition().x, this.getPosition().y, false, .4f);               
+                this.getOwningScene().add(jumpSound);
+                
             } 
             else //add the normal amount of jump force
             {
@@ -1442,11 +1418,10 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             this.doubleJumpTimingRight = false;
             
             //add effects and sounds
-            if(this.getOwningScene() instanceof GameClientScene)
-            {
-                Sound jumpSound = Sound.locationSound("buffered/jump.ogg", this.getPosition().x, this.getPosition().y, false, .4f);               
-                this.getOwningScene().add(jumpSound);
-            }
+
+            Sound jumpSound = Sound.locationSound("buffered/jump.ogg", this.getPosition().x, this.getPosition().y, false, .4f);               
+            this.getOwningScene().add(jumpSound);
+            
             AbstractParticleEmitter emitter = new SmokeEmitter();
             emitter.setAngle(270);
             emitter.setParticlesPerFrame(10);
@@ -1676,264 +1651,6 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     }
     
     
-    //====================
-    // RenderData Methods
-    //==================== 
-    
-    public SceneObjectRenderData dumpRenderData() 
-    {
-        SceneObjectRenderData renderData = new SceneObjectRenderData(ExtendedSceneObjectClasses.PLAYERENTITY,this.ID);
-
-        renderData.data.add(0,this.image.dumpRenderData());
-        renderData.data.add(1,this.light != null ? this.light.dumpRenderData() : null);
-        renderData.data.add(2,this.combatData.dumpRenderData());
-        renderData.data.add(3,this.skillManager.dumpRenderData());
-        renderData.data.add(4,this.currencyManager.dumpRenderData());
-        renderData.data.add(5,this.armorManager.dumpRenderData());
-        renderData.data.add(6,this.levelProgressionManager.dumpRenderData());
-        renderData.data.add(7,this.worldMousePoint);
-        renderData.data.add(8,this.head.dumpRenderData()); 
-        renderData.data.add(9,this.frontArm.dumpRenderData());
-        renderData.data.add(10,this.backArm.dumpRenderData());
-        renderData.data.add(11,this.entityTooltip.dumpRenderData());
-        renderData.data.add(12,this.getName());
-        renderData.data.add(13,this.potionManager.dumpRenderData());
-        renderData.data.add(14,this.frontArm.getAnimation());
-            
-        
-        return renderData;
-    }
-    
-    public static PlayerEntity buildFromRenderData(SceneObjectRenderData renderData)
-    {
-        
-        Image image = Image.buildFromRenderData((SceneObjectRenderData)renderData.data.get(0));
-        
-        //build the player
-        PlayerEntity player = new PlayerEntity(image,Image.buildFromRenderData((SceneObjectRenderData)renderData.data.get(8)),Image.buildFromRenderData((SceneObjectRenderData)renderData.data.get(10)),Image.buildFromRenderData((SceneObjectRenderData)renderData.data.get(9)));
-        player.setID(renderData.getID());
-        player.setImage(image);
-        
-        EntityTooltip tooltip = EntityTooltip.buildFromRenderData((RenderData)renderData.data.get(11));
-        player.entityTooltip= tooltip;
-        
-        if(renderData.data.get(1) != null)
-        {
-             LightSource light = LightSource.buildFromRenderData((SceneObjectRenderData)renderData.data.get(1));
-             player.setLight(light);
-        }
-        
-        player.setName((String)renderData.data.get(12));
-        
-        return player;
-    }
-    
-    public SceneObjectRenderDataChanges generateRenderDataChanges(SceneObjectRenderData oldData,SceneObjectRenderData newData)
-    {
-        SceneObjectRenderDataChanges changes = new SceneObjectRenderDataChanges();
-        
-        int changeMap = 0;
-        changes.ID = this.ID;
-        ArrayList changeList = new ArrayList();
-        
-        //image
-        SceneObjectRenderDataChanges imageChanges = this.image.generateRenderDataChanges((SceneObjectRenderData)oldData.data.get(0), (SceneObjectRenderData)newData.data.get(0));
-        if(imageChanges != null)
-        {
-            changeList.add(imageChanges);
-            changeMap += 1L ;
-        }
-        
-        //light
-        if(this.light.isOn())
-        {
-            SceneObjectRenderDataChanges lightChanges = this.light.generateRenderDataChanges((SceneObjectRenderData)oldData.data.get(1), (SceneObjectRenderData)newData.data.get(1));
-            if(lightChanges != null)
-            {
-                changeList.add(lightChanges);
-                changeMap += 1L <<1;
-            }
-        }
-        
-        //combat data
-        SceneObjectRenderDataChanges combatChanges = this.combatData.generateRenderDataChanges((RenderData)oldData.data.get(2), (RenderData)newData.data.get(2));
-        if(combatChanges != null)
-        {
-            changeList.add(combatChanges);
-            changeMap += 1L <<2;
-        }
-        
-        //skill data
-        SceneObjectRenderDataChanges skillChanges = this.skillManager.generateRenderDataChanges((RenderData)oldData.data.get(3), (RenderData)newData.data.get(3));
-        if(skillChanges != null)
-        {
-            changeList.add(skillChanges);
-            changeMap += 1L <<3;
-        } 
-        
-        //currency data
-        SceneObjectRenderDataChanges currencyChanges = this.currencyManager.generateRenderDataChanges((RenderData)oldData.data.get(4), (RenderData)newData.data.get(4));
-        if(currencyChanges != null)
-        {
-            changeList.add(currencyChanges);
-            changeMap += 1L <<4;
-        }
-        
-        //armor data
-        SceneObjectRenderDataChanges armorChanges = this.armorManager.generateRenderDataChanges((RenderData)oldData.data.get(5), (RenderData)newData.data.get(5));
-        if(armorChanges != null)
-        {
-            changeList.add(armorChanges);
-            changeMap += 1L <<5;
-        } 
-        
-        //level progression
-        SceneObjectRenderDataChanges progressionChanges = this.levelProgressionManager.generateRenderDataChanges((RenderData)oldData.data.get(6), (RenderData)newData.data.get(6));
-        if(progressionChanges != null)
-        {
-            changeList.add(progressionChanges);
-            changeMap += 1L <<6;
-        }   
-        
-        if(!oldData.data.get(7).equals( newData.data.get(7)))
-        {
-            changeList.add(newData.data.get(7));
-            changeMap += 1L << 7;
-        }
-        
-        
-
-        
-        
-        if(entityTooltip != null)
-        {
-            SceneObjectRenderDataChanges tooltipChanges = this.entityTooltip.generateRenderDataChanges((RenderData)oldData.data.get(11), (RenderData)newData.data.get(11));
-            if(tooltipChanges != null)
-            {
-                changeList.add(tooltipChanges);
-                changeMap += 1L<<11;
-            }
-        }
-        
-        //potion data
-        SceneObjectRenderDataChanges potionChanges = this.potionManager.generateRenderDataChanges((RenderData)oldData.data.get(13), (RenderData)newData.data.get(13));
-        if(potionChanges != null)
-        {
-            changeList.add(potionChanges);
-            changeMap += 1L <<13;
-        }
-        
-        if(!oldData.data.get(14).equals( newData.data.get(14)))
-        {
-            changeList.add(newData.data.get(14));
-            changeMap += 1L << 14;
-        }
-        
-        
-        changes.fields = changeMap;
-        changes.data = changeList.toArray();
-        
-        if(changeList.size() > 0)
-            return changes;
-        else
-            return null;
-        
-        
-    }
-    
-    /**
-     * This reconcile method should be used on other players, not on your client side predicted player
-     * @param lastTime
-     * @param currentTime
-     * @param futureTime
-     * @param renderData
-     * @param freshPacket 
-     */
-    public void reconcileRenderDataChanges(long lastTime, long futureTime, SceneObjectRenderDataChanges renderDataChanges)
-    {
-        int fieldMap = renderDataChanges.fields;
-        ArrayList rawData = new ArrayList();
-        rawData.addAll(Arrays.asList(renderDataChanges.data)); 
-        
-        //construct an arraylist of data that we got, nulls will go where we didnt get any data
-        ArrayList changeData = new ArrayList();
-        for(int i = 0; i <16; i ++)
-        {
-            // The bit was set
-            if ((fieldMap & (1L << i)) != 0)
-            {
-                changeData.add(rawData.get(0));
-                rawData.remove(0);
-            }
-            else
-                changeData.add(null);          
-        }
-        
-        if( this.image != null && changeData.get(0) != null)
-            this.image.reconcileRenderDataChanges(lastTime,futureTime,(SceneObjectRenderDataChanges)changeData.get(0));
-        
-        if(this.light != null && changeData.get(1) != null)
-            this.light.reconcileRenderDataChanges(lastTime,futureTime,(SceneObjectRenderDataChanges)changeData.get(1)); 
-        
-        if(changeData.get(2) != null)
-            this.combatData.reconcileRenderDataChanges(lastTime,futureTime,(SceneObjectRenderDataChanges)changeData.get(2));
-               
-        if(changeData.get(6) != null)
-            this.levelProgressionManager.reconcileRenderDataChanges(lastTime, futureTime, (SceneObjectRenderDataChanges)changeData.get(6));
-        
-        if(this.entityTooltip != null && changeData.get(11) != null)
-            this.entityTooltip.reconcileRenderDataChanges(lastTime, futureTime, (SceneObjectRenderDataChanges)changeData.get(11));
-
-        if(changeData.get(7) != null && !(this instanceof ClientPlayerEntity))
-        {
-            this.worldMousePoint = new SylverVector2f((SylverVector2f)changeData.get(7));
-        }
-        
-        if(changeData.get(14) != null)
-        {
-            this.frontArm.setAnimation((ImageAnimation)changeData.get(14));
-            this.backArm.setAnimation((ImageAnimation)changeData.get(14));
-        }
-        
-//        if(changeData.get(15) != null)
-//        {
-//            this.MAX_JUMP_ENERGY = (float)changeData.get(15);
-//        }
-        
-
-    }
-    
-    public void interpolate(long currentTime)
-    {
-
-        if(image != null)
-            image.interpolate(currentTime);
-
-        if(light != null)
-            light.interpolate(currentTime);
-
-        if(entityTooltip != null)
-            entityTooltip.interpolate(currentTime);
-        
-        if(frontArm != null)
-           this.frontArm.update();
-        
-        if(backArm != null)
-            this.backArm.update();
-    }  
-    
-    public PlayerPredictionData dumpPredictionData()
-    {
-        PlayerPredictionData data = new PlayerPredictionData();
-        
-   
-        data.positionX = this.body.getPosition().getX();
-        data.positionY = this.body.getPosition().getY();
-        data.velocityX = this.body.getVelocity().getX();
-        data.velocityY = this.body.getVelocity().getY();
-        
-        return data;
-    }
     
     //================
     // Save Methods
@@ -2045,25 +1762,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             
             this.player = player;
             
-            Image gearImage =new Image("gear2.png");
-            gearImage.setAnchor(Anchorable.Anchor.CENTER);
-            Overlay gear = new Overlay(gearImage);
-            gear.setRelativePosition(.5f, 1.2f);
-            gear.setRelativeSize(.1f);
-            image.addOverlay("interact",gear );  
-
-            //add overlay movement
-            Object[] points = {1.2f,1.3f,1.2f};
-            int[] durations = {60,60};
-            MultiImageEffect bobEffect = new MultiImageEffect(ImageEffect.ImageEffectType.YOVERLAYTRANSLATE, points, durations);
-            bobEffect.setRepeating(true);
-            image.addImageEffect(bobEffect);
-            
-               Float[] points2 = {0f,0f,1f};
-            int[] durations2 = {60,60};
-            ImageEffect fadeEffect = new MultiImageEffect(ImageEffect.ImageEffectType.ALPHABRIGHTNESS, points2,durations2);
-        gear.getImage().addImageEffect(fadeEffect);
-        }
+         }
         
         
         @Override

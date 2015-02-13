@@ -26,7 +26,7 @@ import net.phys2d.raw.shapes.Box;
 
 
 
-public class PlayerBashAttack extends Skill{
+public class PlayerBashAttack extends PlayerSkill{
     
     public PlayerBashAttack()
     {
@@ -62,42 +62,25 @@ public class PlayerBashAttack extends Skill{
         //add stun effect
         damage.addCombatEffect(new StateEffect(StateEffect.StateEffectType.STUN, (2 * 60) + 30,.5f,true));
         
-        //Get target X and Y
-        PlayerEntity player = (PlayerEntity) user;
-        float targetX = ((GameScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationX;
-        float targetY = ((GameScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationY;
-        
-        //Get user X and Y
-        float userX = origin.x;
-        float userY = origin.y;
-        
-        //get vector to target
-        Vector2f vectorToTarget = new Vector2f(targetX - userX, targetY - userY);
-        vectorToTarget.normalise();
-        
-        //determine angle for the image
-        float theta = (float)Math.acos(vectorToTarget.dot(new Vector2f(1,0)));
-        if(targetY < userY)
-        {
-            theta = (float)(2* Math.PI - theta);
-        }
-        
-        
-        
+        //get targeting data
+        TargetingData targetingData = this.getTargetingData(origin);
+        SylverVector2f vectorToTarget = targetingData.vectorToTarget;
+        float theta = targetingData.theta;
+            
         //build body and image
         Body body = new StaticBody(new Box(90, 90));
         Image swipe = new Image("swipe.png"); 
         
-        if(targetX < userX)
-        {
-           swipe.setVerticalFlip(true);
-        }
+//        if(targetX < userX)
+//        {
+//           swipe.setVerticalFlip(true);
+//        }
        // swipe.setDimensions(90, 90);
         swipe.setColor(new Color(1.2f,1.2f,1.2f));
         
         //build and position hitbox
         BashHitBox hitBox = new BashHitBox(damage,body, swipe,this.user);
-        hitBox.vector = new Vector2f(vectorToTarget);
+        hitBox.vector = new Vector2f(vectorToTarget.x,vectorToTarget.y);
         hitBox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 15, 1, 1));
         hitBox.getBody().setRotation((float)theta);
         hitBox.getImage().setAngle((float)(theta * (180f/Math.PI))); 

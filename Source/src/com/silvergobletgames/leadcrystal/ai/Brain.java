@@ -143,45 +143,21 @@ public class Brain
     /**
      *  Try to target the closest player
      */
-    public final PlayerEntity targetClosestPlayer()
+    public final PlayerEntity targetPlayer()
     {
         
-        float closestDistance = Float.MAX_VALUE;
-        PlayerEntity closestPlayer = null;
+        PlayerEntity player = ((GameScene)self.getOwningScene()).getPlayer();
         
-        ArrayList<PlayerEntity> players = ((GameScene)self.getOwningScene()).getPlayers(); 
-        for(PlayerEntity player: players)
-        {
-            if(self.distanceAbs(player) < closestDistance)
-            {
-                closestDistance = self.distanceAbs(player);
-                closestPlayer = player;
-            }
-        }
+        self.target(player);
         
-        self.target(closestPlayer);
-        
-        return closestPlayer;
+        return player;
     }
     
-    public final PlayerEntity getClosestPlayer()
+    public final PlayerEntity getPlayer()
     {
-        float closestDistance = Float.MAX_VALUE;
-        PlayerEntity closestPlayer = null;
+        PlayerEntity player = ((GameScene)self.getOwningScene()).getPlayer();
         
-        ArrayList<PlayerEntity> players = ((GameScene)self.getOwningScene()).getPlayers(); 
-        for(PlayerEntity player: players)
-        {
-            if(self.distanceAbs(player) < closestDistance)
-            {
-                closestDistance = self.distanceAbs(player);
-                closestPlayer = player;
-            }
-        }
-        
-       
-        
-        return closestPlayer;
+        return player;
     }
     
     /**

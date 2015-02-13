@@ -2,7 +2,6 @@ package com.silvergobletgames.leadcrystal.scripting;
 
 import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
-import com.silvergobletgames.leadcrystal.netcode.GobletServer;
 import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.netcode.SaveData;
@@ -47,7 +46,7 @@ public class PageCondition
         //gets self, sceneScriptManager, and host references
         Entity entity =this.owningScriptObject.getOwningEntity();
         SceneScriptManager manager =((GameScene)this.owningScriptObject.getOwningEntity().getOwningScene()).getScriptManager();
-        PlayerEntity host = ((GobletServer)Game.getInstance().getRunnable("Goblet Server")).getHost();
+        PlayerEntity player = ((GameScene)this.owningScriptObject.getOwningEntity().getOwningScene()).getPlayer();
         
         //initializes our return value to false
         boolean conditionReturnValue = false;
@@ -60,7 +59,7 @@ public class PageCondition
                 this.scriptBindings  = engine.createBindings();
                 this.scriptBindings.put("self",entity);
                 this.scriptBindings.put("scriptManager", manager);
-                this.scriptBindings.put("host", host);    
+                this.scriptBindings.put("host", player);    
             }
             
             //run the script

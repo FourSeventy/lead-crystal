@@ -4,8 +4,6 @@ package com.silvergobletgames.leadcrystal.entities;
 import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectClasses;
 import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
 import com.silvergobletgames.leadcrystal.core.GameplaySettings;
-import com.silvergobletgames.leadcrystal.netcode.GobletServer;
-import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
 import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.leadcrystal.scripting.ScriptObject;
 import com.silvergobletgames.leadcrystal.scripting.ScriptObject.ScriptTrigger;
@@ -17,11 +15,7 @@ import com.silvergobletgames.sylver.core.SceneObjectManager;
 import com.silvergobletgames.sylver.graphics.*;
 import com.silvergobletgames.sylver.graphics.AnimationPack.ImageAnimation;
 import com.silvergobletgames.sylver.netcode.NetworkedSceneObject;
-import com.silvergobletgames.sylver.netcode.RenderData;
 import com.silvergobletgames.sylver.netcode.SaveData;
-import com.silvergobletgames.sylver.netcode.SceneObjectRenderData;
-import com.silvergobletgames.sylver.netcode.SceneObjectRenderDataChanges;
-import com.silvergobletgames.sylver.util.LinearInterpolator;
 import com.silvergobletgames.sylver.util.SerializableEntry;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 import java.awt.event.KeyEvent;
@@ -41,7 +35,7 @@ import net.phys2d.raw.shapes.*;
  * An Entity is a heavyweight SceneObject that is effected by physics, has an Image, and optional lights and emitters.
  * @author mike
  */
-public class Entity extends NetworkedSceneObject implements AnimationListener 
+public class Entity extends SceneObject implements AnimationListener 
 {
     //The name of the Entity (In English. e.g. Puke Maw, Suspicious Box, Dank Cellar)
     private String name;
@@ -297,7 +291,7 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
             image.draw(gl);
         
         //draws entityTooltip
-        if(entityTooltip != null && this.getOwningScene() instanceof GameClientScene && ((GameClientScene)this.getOwningScene()).player.getArmorManager().seeEnemyHealth.isMaxPoints())
+        if(entityTooltip != null && ((GameScene)this.getOwningScene()).getPlayer().getArmorManager().seeEnemyHealth.isMaxPoints())
             entityTooltip.draw(gl); 
         
         
@@ -497,39 +491,6 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
             if (scriptObject.getTrigger() == ScriptTrigger.COLLIDE)
                 scriptObject.runScript(other);  
             
-            //if the trigger is COLLIDE_EACH_ONCE handle that
-            if (scriptObject.getTrigger() == ScriptTrigger.COLLIDE_EACH_ONCE)
-            {
-                if(!scriptObject.playerCollisionList.contains(other.getID()))
-                {
-                    scriptObject.runScript(other);
-                    scriptObject.playerCollisionList.add(other.getID());
-                }
-            }
-            
-            //if the trigger is ALL_PLAYERS_HERE
-            if (scriptObject.getTrigger() == ScriptTrigger.ALL_PLAYERS_HERE)
-            {
-                //first add the currently collided player
-                scriptObject.playerCollisionList.add(other.getID());
-                
-                //check to see if all the players are here
-                GobletServer server = ((GobletServer)Game.getInstance().getRunnable("Goblet Server"));
-                boolean allHere = true;
-                for(UUID uid : server.connectedClients.keySet())
-                {
-                    PlayerEntity player = server.connectedClients.get(uid).player;
-                    
-                    //if the player is not in the collider and alive 
-                    if(!scriptObject.playerCollisionList.contains(uid.toString()) && !player.getCombatData().isDead())
-                    {
-                        allHere = false;
-                    }
-                }
-                if(allHere)               
-                    scriptObject.runScript(other);
-                
-            }
         }
                
     }
@@ -543,12 +504,6 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
             if (scriptObject.getTrigger() == ScriptTrigger.SEPERATE)
                     scriptObject.runScript(other);
             
-            //if the trigger is ALL_PLAYERS_HERE
-            if (scriptObject.getTrigger() == ScriptTrigger.ALL_PLAYERS_HERE)
-            {
-                //remove the players id from the list
-                scriptObject.playerCollisionList.remove(other.getID());
-            }
         }
     }
     
@@ -949,117 +904,8 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
         targetingMe.remove(e);
     }
     
-    //====================
-    // RenderData Methods
-    //====================
-    
-    public SceneObjectRenderData dumpRenderData() 
-    {
-        SceneObjectRenderData renderData = new SceneObjectRenderData(ExtendedSceneObjectClasses.ENTITY,this.ID);
-        
-        renderData.data.add(0, this.image.dumpRenderData());
-        renderData.data.add(1, this.light != null ? this.light.dumpRenderData() : null);
-        
-        return renderData;
-    }
-    
-    public static Entity buildFromRenderData(SceneObjectRenderData renderData)
-    {
-        Image image = Image.buildFromRenderData((SceneObjectRenderData)renderData.data.get(0));
-        
-        LightSource lightSource = null; 
-        if(renderData.data.get(1) != null)
-            LightSource.buildFromRenderData((SceneObjectRenderData)renderData.data.get(1));
-        
-        Entity entity = new Entity(image,null);
-        entity.setLight(lightSource);
-        entity.setID(renderData.getID());
-        
-        return entity;
-    }
-    
-    public SceneObjectRenderDataChanges generateRenderDataChanges(SceneObjectRenderData oldData,SceneObjectRenderData newData)
-    {
-        SceneObjectRenderDataChanges changes = new SceneObjectRenderDataChanges();
-        
-        int changeMap = 0;
-        changes.ID = this.ID;
-        ArrayList changeList = new ArrayList();
-        
-        if(this.image != null)
-        {
-            SceneObjectRenderDataChanges imageChanges = this.image.generateRenderDataChanges((SceneObjectRenderData)oldData.data.get(0), (SceneObjectRenderData)newData.data.get(0));
-            if(imageChanges != null)
-            {
-                changeList.add(imageChanges);
-                changeMap += 1;
-            }
-        }
-        
-        if(light != null)
-        {
-            SceneObjectRenderDataChanges lightChanges = this.light.generateRenderDataChanges((SceneObjectRenderData)oldData.data.get(1), (SceneObjectRenderData)newData.data.get(1));
-            if(lightChanges != null)
-            {
-                changeList.add(lightChanges);
-                changeMap += 2;
-            }
-        }
-        
-        changes.fields = changeMap;
-        changes.data = changeList.toArray();
-        
-        if(changeList.size() > 0)
-            return changes;
-        else
-            return null;
-        
-        
-    }
-    
-    public void reconcileRenderDataChanges(long lastTime, long futureTime, SceneObjectRenderDataChanges renderDataChanges)
-    {        
-        //construct an arraylist of data that we got, nulls will go where we didnt get any data
-        int fieldMap = renderDataChanges.fields;
-        ArrayList rawData = new ArrayList();
-        rawData.addAll(Arrays.asList(renderDataChanges.data));         
-        ArrayList changeData = new ArrayList();
-        for(int i = 0; i <8; i ++)
-        {
-            // The bit was set
-            if ((fieldMap & (1L << i)) != 0)
-            {
-                changeData.add(rawData.get(0));
-                rawData.remove(0);
-            }
-            else
-                changeData.add(null);          
-        }
-        
-        //reconcile for image  
-        if( this.image != null && changeData.get(0) != null)       
-            this.image.reconcileRenderDataChanges(lastTime,futureTime,(SceneObjectRenderDataChanges)changeData.get(0));
 
-        //reconcile for light
-        if(this.light != null && changeData.get(1) != null)
-            this.light.reconcileRenderDataChanges(lastTime,futureTime,(SceneObjectRenderDataChanges)changeData.get(1));
-
-    }
     
-    public void interpolate(long currentTime)
-    {
-
-        if(image != null)
-            image.interpolate(currentTime);
-
-        if(light != null)
-            light.interpolate(currentTime);      
-        
-    }
-    
-    
-    
-      
     //================
     // Saving Body
     //================
@@ -1262,336 +1108,5 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
 
         return body;
     }
-    
-    
-    //====================
-    //Render Data For Body
-    //====================
-    
-    /** DUMP FORMAT
-     * 0 - BODY SHAPE (String)
-     * 1 - WIDTH/DIAMETER (float)
-     * 2 - HEIGHT/NULL (float)
-     * 3 - ANGLE (float)
-     * 4 - x position (float)
-     * 5 - y position (float)
-     * 
-     */
-    public static RenderData dumpBodyRenderData(Body body)
-    {
-        RenderData renderData = new RenderData();
-        
-         //figure out shape
-        String shape;
-        if(body.getShape() instanceof Box)
-            shape = "box";
-        else if(body.getShape() instanceof Polygon)
-            shape = "polygon";
-        else
-            shape = "circle";
-        
-        //figure out dimensions
-        float width, height;
-        ROVector2f[] verts = new ROVector2f[0];
-        if(body.getShape() instanceof Box)
-        {
-            width = ((Box)body.getShape()).getSize().getX();
-            height = ((Box)body.getShape()).getSize().getY();
-        }          
-        else if(body.getShape() instanceof Polygon)
-        {
-            verts = ((Polygon)body.getShape()).getVertices();
-            float max = -1000000f, min = 1000000f;
-            for(ROVector2f vert: verts)
-            {
-                if(vert.getX() > max)
-                    max = vert.getX();
-                
-                if(vert.getX() < min)
-                    min = vert.getX();
-            }
-            
-            width = Math.abs(max - min);
-            
-            verts = ((Polygon)body.getShape()).getVertices();
-            max = -1000000f; min = 1000000f;
-            for(ROVector2f vert: verts)
-            {
-                if(vert.getY() > max)
-                    max = vert.getY();
-                
-                if(vert.getY() < min)
-                    min = vert.getY();
-            }
-            
-            height = Math.abs(max - min);
-        }        
-        else
-        {
-             width = ((Circle)body.getShape()).getRadius();
-             height = 0;
-        }
-        
-        renderData.data.add(0, shape);
-        renderData.data.add(1, width);
-        renderData.data.add(2, height);
-        renderData.data.add(3, body.getRotation()); //angle
-        renderData.data.add(4, body.getPosition().getX()); // x position
-        renderData.data.add(5, body.getPosition().getY()); // y position
-        renderData.data.add(6, verts); //Polygon vertices
-        renderData.data.add(7, body.getBitmask());
-        renderData.data.add(8, body.getOverlapMask());
-        renderData.data.add(9, body.getMass());
-        
-        return renderData;
-        
-    }
-    
-    public static Body buildBodyFromRenderData(RenderData renderData)
-    {
-        //get dimensions
-        Body body;
-        float dimension1 = (float) renderData.data.get(1); //width or diameter    
-        float dimension2 = (float) renderData.data.get(2); //height or null
-        float mass = (float) renderData.data.get(9); //mass
-        
-        //build with shape
-        if (renderData.data.get(0).equals("box")) 
-            {
-                body = new Body(new Box(dimension1, dimension2), mass);
-            } 
-            else if(renderData.data.get(0).equals("polygon"))
-            {               
-                ROVector2f[] polygonverts = (ROVector2f[])renderData.data.get(6);                   
-                Polygon cp = new Polygon(polygonverts);                    
-                body = new Body(cp,mass);               
-            }
-            else//its a circle
-            {
-                body = new Body(new Circle(dimension1), mass);
-            }
-        
-        body.setRotation((float)renderData.data.get(3));
-        body.setPosition((float)renderData.data.get(4), (float)renderData.data.get(5));
-        body.setBitmask((long)renderData.data.get(7));
-        body.setOverlapMask((long)renderData.data.get(8));
-        
-        return body;
-    }
-    
-    public static SceneObjectRenderDataChanges generateBodyRenderDataChanges(RenderData oldData,RenderData newData)
-    {
-         SceneObjectRenderDataChanges changes = new SceneObjectRenderDataChanges();
-        
-        int changeMap = 0;
-        ArrayList changeList = new ArrayList();
-        
-        for(int i = 0; i <= 9; i++)
-        {
-            if(i == 6)
-                continue;
-            
-            if(!oldData.data.get(i).equals( newData.data.get(i)))
-            {
-                changeList.add(newData.data.get(i));
-                changeMap += 1 << i;
-            }
-        }
-        
-        //handle changing vertices
-        
-        
-        changes.fields = changeMap;
-        changes.data = changeList.toArray();
-        
-        if(changeList.size() > 0)
-            return changes;
-        else
-            return null;
-    }
-    
-    public static Body reconcileBodyRenderDataChanges(long lastTime,long futureTime,Body body, SceneObjectRenderDataChanges renderDataChanges)
-    {
-        //figuring out the bodys current shape
-        String myShape;
-        if(body.getShape() instanceof Box)
-            myShape = "box";
-        else if(body.getShape() instanceof Polygon)
-            myShape = "polygon";
-        else
-            myShape = "circle";
-        
-         //figure out dimensions
-        float width, height;
-        if(body.getShape() instanceof Box)
-        {
-            width = ((Box)body.getShape()).getSize().getX();
-            height = ((Box)body.getShape()).getSize().getY();
-        }          
-        else if(body.getShape() instanceof Polygon)
-        {
-            ROVector2f[] verts = ((Polygon)body.getShape()).getVertices();
-            float max = -1000000f, min = 1000000f;
-            for(ROVector2f vert: verts)
-            {
-                if(vert.getX() > max)
-                    max = vert.getX();
-                
-                if(vert.getX() < min)
-                    min = vert.getX();
-            }
-            
-            width = Math.abs(max - min);
-            
-            verts = ((Polygon)body.getShape()).getVertices();
-            max = -1000000f; min = 1000000f;
-            for(ROVector2f vert: verts)
-            {
-                if(vert.getY() > max)
-                    max = vert.getY();
-                
-                if(vert.getY() < min)
-                    min = vert.getY();
-            }
-            
-            height = Math.abs(max - min);
-        }        
-        else
-        {
-             width = ((Circle)body.getShape()).getRadius();
-             height = 0;
-        }
-        
-        
-        
-        int fieldMap = renderDataChanges.fields;
-        ArrayList rawData = new ArrayList();
-        rawData.addAll(Arrays.asList(renderDataChanges.data)); 
-        
-        //construct an arraylist of data that we got, nulls will go where we didnt get any data
-        ArrayList changeData = new ArrayList();
-        for(int i = 0; i <10; i ++)
-        {
-            // The bit was set
-            if ((fieldMap & (1L << i)) != 0)
-            {
-                changeData.add(rawData.get(0));
-                rawData.remove(0);
-            }
-            else
-                changeData.add(null);          
-        }
-        
-        
-        
-        // if the shapes aren't the same set a new shape, or if the size of the shapes aren't the same
-        if( (changeData.get(0) != null && !myShape.equals((String)changeData.get(0))) || (changeData.get(1) != null && width != (float)changeData.get(1)) || (changeData.get(2) != null &&height != (float)changeData.get(2)) ) 
-        {
-            String newShape = (String)changeData.get(0);
-            
-            Shape shape;
-            switch(newShape)
-            {
-                case "box": shape = new Box((float)changeData.get(1),(float)changeData.get(2)); break;
-                case "polygon": shape = new Polygon(new ROVector2f[4]); break;
-                default: shape = new Circle((float)changeData.get(1)); break; // case "circle"
-            }
-            body.setShape(shape); 
-        }
-        
-        //bitmask
-        if(changeData.get(7) != null)
-        {
-            body.setBitmask((long)changeData.get(7));
-        }
-        
-        //overlap mask
-        if(changeData.get(8) != null)
-        {
-            body.setOverlapMask((long)changeData.get(8));
-        }
-        
        
-    
-        
-         //if its a fresh packet, build the interpolators for position
-        
-            //clear old interpolators
-            body.interpolators.clear();
-
-//            //x position interpolator
-//            if(changeData.get(4) != null)
-//            {
-//                LinearInterpolator xLerp= new LinearInterpolator(body.getPosition().getX(),(float)changeData.get(4),lastTime,futureTime);
-//                body.interpolators.add(xLerp);
-//            }
-//            else
-//                body.interpolators.add(null);
-//
-//            //y position interpolator
-//            if(changeData.get(5) != null)
-//            {
-//                LinearInterpolator yLerp= new LinearInterpolator(body.getPosition().getY(),(float)changeData.get(5),lastTime,futureTime);
-//                body.interpolators.add(yLerp);
-//            }
-//            else
-//                body.interpolators.add(null);
-            
-            float x = body.getPosition().getX();
-            float y = body.getPosition().getY();
-            if(changeData.get(4)!= null)
-            {
-              x = (float)changeData.get(4);   
-            }
-            
-            if(changeData.get(5) != null)
-            {
-                y = (float)changeData.get(5);
-            }
-            body.setPosition(x, y);
-            
-            //angle interpolator
-            if(changeData.get(3) != null)
-            {
-                LinearInterpolator angleLerp= new LinearInterpolator(body.getRotation(),(float)changeData.get(3),lastTime,futureTime);
-                body.interpolators.add(angleLerp);
-            }
-            else
-                body.interpolators.add(null);
-         
-    
-        return body;
-          
-    }
-    
-    public static Body interpolateBody(Body body,long currentTime)
-    {
-        if(!body.interpolators.isEmpty())
-        {
-            //interpolate x and y positions
-//            float x = body.getPosition().getX();   
-//            float y = body.getPosition().getY(); 
-//
-//            if(body.interpolators.get(0) != null )
-//                x=(float)((LinearInterpolator)body.interpolators.get(0)).interp(currentTime); 
-//
-//            if(body.interpolators.get(1) != null )
-//                y=(float)((LinearInterpolator)body.interpolators.get(1)).interp(currentTime);
-//
-//            body.setPosition(x, y);
-
-
-            //interpolate angle
-            if(body.interpolators.get(0) != null && currentTime <= ((LinearInterpolator)body.interpolators.get(0)).getb())
-            {
-                float angle =(float)((LinearInterpolator)body.interpolators.get(0)).interp(currentTime); 
-                body.setRotation(angle);
-            }
-
-        }
-         
-         return body;
-    }
-    
-    
 }

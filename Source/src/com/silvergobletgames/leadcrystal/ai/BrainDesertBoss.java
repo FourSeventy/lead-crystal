@@ -198,7 +198,7 @@ public class BrainDesertBoss extends BrainGround
         //if we dont have a target get one
         if(self.getTarget() == null)
         {
-            this.targetClosestPlayer();
+            this.targetPlayer();
         }
         
                  

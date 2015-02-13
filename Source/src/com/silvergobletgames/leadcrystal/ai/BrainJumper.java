@@ -113,7 +113,7 @@ public class BrainJumper extends BrainGround
     public void idleExecute()
     {
         //target the closest player
-        this.targetClosestPlayer();
+        this.targetPlayer();
         
         //if we can locate the target within unit's locate distance, switch to agressive. else wander
         if( self.getTarget() != null && this.locate(self.getTarget()) )
@@ -149,7 +149,7 @@ public class BrainJumper extends BrainGround
         //if we dont have a target get one
         if(self.getTarget() == null)
         {
-            this.targetClosestPlayer();
+            this.targetPlayer();
         }
         
         // if the target is way out of our range revert out of the aggresive state
@@ -298,7 +298,7 @@ public class BrainJumper extends BrainGround
     protected void lostTargetExecute()
     {
          //target the closest player
-        this.targetClosestPlayer();
+        this.targetPlayer();
         
         //if we can locate the target within unit's locate distance, switch to agressive. else wander
         if( self.getTarget() != null && this.locate(self.getTarget()))
@@ -351,7 +351,7 @@ public class BrainJumper extends BrainGround
                 messageGroup(ExtendedSceneObjectGroups.FIGHTER, 500, AIMessage.MSG_ENEMY_FOUND);
                 if (!self.isInGroup(ExtendedSceneObjectGroups.HEALER)) 
                 {
-                    this.targetClosestPlayer();
+                    this.targetPlayer();
                     this.getStateMachine().changeState(AIState.StateID.AGGRESSIVE);
                 }
             }

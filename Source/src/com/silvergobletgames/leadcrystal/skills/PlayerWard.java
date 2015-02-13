@@ -61,8 +61,8 @@ public class PlayerWard extends PlayerSkill{
         float theta = targetingData.theta;
         
         PlayerEntity player = (PlayerEntity) user;
-        float targetX = ((GameScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationX;
-        float targetY = ((GameScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationY;
+        float targetX = ((GameScene)player.getOwningScene()).getWorldMouseLocation().x;
+        float targetY = ((GameScene)player.getOwningScene()).getWorldMouseLocation().x;
         
        
        //build body of the hitbox

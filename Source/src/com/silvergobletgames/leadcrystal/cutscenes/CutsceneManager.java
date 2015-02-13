@@ -1,7 +1,7 @@
 
 package com.silvergobletgames.leadcrystal.cutscenes;
 
-import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.sylver.core.Game;
 
 /**
@@ -11,7 +11,7 @@ import com.silvergobletgames.sylver.core.Game;
 public class CutsceneManager {
     
     //owning scene
-    public GameClientScene owningScene;
+    public GameScene owningScene;
     
     //cutscene
     private Cutscene cutscene;
@@ -23,7 +23,7 @@ public class CutsceneManager {
     //==============
     // Constructor
     //==============
-    public CutsceneManager(GameClientScene scene)
+    public CutsceneManager(GameScene scene)
     {
         this.owningScene = scene;
     }
@@ -50,18 +50,18 @@ public class CutsceneManager {
         //===========================
         
         //opening cutscene
-        if(owningScene.player.getLevelProgressionManager().cutsceneCompleteMap.get(Cutscenes.OpeningCutscene) == false)
+        if(owningScene.getPlayer().getLevelProgressionManager().cutsceneCompleteMap.get(Cutscenes.OpeningCutscene) == false)
         {
-            owningScene.player.getLevelProgressionManager().cutsceneCompleteMap.put(Cutscenes.OpeningCutscene, true);
+            owningScene.getPlayer().getLevelProgressionManager().cutsceneCompleteMap.put(Cutscenes.OpeningCutscene, true);
             this.playCutscene(new OpeningCutscene()); 
         }
         
         //closing cutscene
-        if(owningScene.player.getLevelProgressionManager().cutsceneCompleteMap.get(Cutscenes.ClosingCutscene) == false
-           && owningScene.player.getLevelProgressionManager().levelMap.get(17).mainObjective.complete == true
-                && owningScene.activeLevelData != null && owningScene.activeLevelData.filename.equals("town.lv"))
+        if(owningScene.getPlayer().getLevelProgressionManager().cutsceneCompleteMap.get(Cutscenes.ClosingCutscene) == false
+           && owningScene.getPlayer().getLevelProgressionManager().levelMap.get(17).mainObjective.complete == true
+                && owningScene.getActiveLevel() != null && owningScene.getActiveLevel().filename.equals("town.lv"))
         {
-            owningScene.player.getLevelProgressionManager().cutsceneCompleteMap.put(Cutscenes.ClosingCutscene, true);
+            owningScene.getPlayer().getLevelProgressionManager().cutsceneCompleteMap.put(Cutscenes.ClosingCutscene, true);
              this.playCutscene(new ClosingCutscene()); 
         }
     }
@@ -70,7 +70,7 @@ public class CutsceneManager {
     {
         this.cutscene = cutscene;
         this.cutscene.setOwningScene(this.owningScene);
-        this.owningScene.lockInput.set(true);
+        this.owningScene.getInputLock().set(true);
     }
     
     public Cutscene getCutscene()

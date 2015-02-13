@@ -5,7 +5,7 @@ import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.items.Potion;
 import com.silvergobletgames.leadcrystal.items.PotionManager;
-import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.graphics.Image;
@@ -86,7 +86,7 @@ public class PotionsMenu extends Window{
                }
                if(e.getActionCommand().equals("clicked"))
                {
-                   ((GameClientScene)owningScene).sendBuyPotionPacket(); 
+                   ((GameScene)owningScene).buyPotion(); 
 
                    //check if the buy will succeed or fail
                    int currency = PotionsMenu.this.playerReference.getCurrencyManager().getBalence();
@@ -177,7 +177,7 @@ public class PotionsMenu extends Window{
         
         super.open();
         
-        ((GameClientScene)this.getOwningScene()).hud.closeDialogue();
+        ((GameScene)this.getOwningScene()).getHud().closeDialogue();
        
     }
 }

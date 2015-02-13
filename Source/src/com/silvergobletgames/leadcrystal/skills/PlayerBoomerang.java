@@ -205,7 +205,6 @@ public class PlayerBoomerang extends PlayerSkill
              {
                 //reset cooldown
                  skill.setCooldownRemaining(0);
-                 ((GameScene)this.getOwningScene()).sendSkillCooldownPacket(UUID.fromString(this.sourceEntity.getID()), skill.getSkillID());
                  
                 //add effect
                 Image effectImage = new Image("shockwaveParticle.png");

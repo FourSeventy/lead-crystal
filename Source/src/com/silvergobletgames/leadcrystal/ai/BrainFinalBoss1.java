@@ -247,7 +247,7 @@ public class BrainFinalBoss1 extends BrainGround
         //if we dont have a target get one
         if(self.getTarget() == null)
         {
-            this.targetClosestPlayer();
+            this.targetPlayer();
         }
         
                  

@@ -7,35 +7,33 @@ import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
 import com.silvergobletgames.leadcrystal.core.GameplaySettings;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.entities.Entity;
+import com.silvergobletgames.leadcrystal.entities.ItemEntity;
+import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
+import com.silvergobletgames.leadcrystal.items.ArmorManager;
+import com.silvergobletgames.leadcrystal.items.Potion;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
+import com.silvergobletgames.leadcrystal.skills.Skill.SkillID;
+import com.silvergobletgames.leadcrystal.skills.SkillFactory;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Game;
-import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.core.InputHandler;
+import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.core.Scene.Layer;
+import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.graphics.*;
+import com.silvergobletgames.sylver.graphics.Color;
+import com.silvergobletgames.sylver.graphics.Text.CoreTextType;
+import com.silvergobletgames.sylver.util.SylverVector2f;
 import com.silvergobletgames.sylver.windowsystem.Button;
 import com.silvergobletgames.sylver.windowsystem.Label;
+import com.silvergobletgames.sylver.windowsystem.Menu;
 import com.silvergobletgames.sylver.windowsystem.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.media.opengl.GL3bc;
-import com.silvergobletgames.leadcrystal.items.Potion;
-import com.silvergobletgames.leadcrystal.entities.ItemEntity;
-import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
-import com.silvergobletgames.leadcrystal.items.ArmorManager;
-import com.silvergobletgames.leadcrystal.netcode.ChatManager;
-import com.silvergobletgames.leadcrystal.netcode.OpenInstructionalTipPacket.InstructionalTip;
-import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
-import com.silvergobletgames.leadcrystal.skills.Skill.SkillID;
-import com.silvergobletgames.leadcrystal.skills.SkillFactory;
-import com.silvergobletgames.sylver.audio.Sound;
-import com.silvergobletgames.sylver.core.Scene;
-import com.silvergobletgames.sylver.core.SceneObject;
-import com.silvergobletgames.sylver.graphics.Text.CoreTextType;
-import com.silvergobletgames.sylver.util.SylverVector2f;
-import com.silvergobletgames.sylver.windowsystem.Menu;
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
+import javax.media.opengl.GL3bc;
 import jogamp.opengl.gl4.GL4bcImpl;
 
 /**
@@ -45,7 +43,7 @@ import jogamp.opengl.gl4.GL4bcImpl;
 public class Hud extends Window 
 {
     //scene and player references
-    private final GameClientScene sceneReference;   
+    private final GameScene sceneReference;   
     private final PlayerEntity playerReference;
     
     private MessageManager messageManager;
@@ -95,19 +93,7 @@ public class Hud extends Window
     private Button reviveButton;
     private Label reviveText;
     
-    
-    //==================
-    // networking stats
-    //==================
-    //ping
-    public Label pingText;   
-    //packet loss
-    public Label packetLossText;   
-    //server ip and port
-    public Label serverIpText;
-    public Label serverPortText;
-    //Framerate
-    public Label fpsText;
+
     
     //=======
     //Menus
@@ -121,11 +107,13 @@ public class Hud extends Window
     public QuestMenu questMenu;
     public OptionsMenu optionsMenu;
     
+    public static enum MenuID{
+        POTION,ARMOR,SKILL,MAP
+    }
+    
     //menu button feeler box
     private float menuButtonLeft, menuButtonRight, menuButtonTop, menuButtonBottom;
     
-    //Chat manager
-    public ChatManager chatManager;  
     
     
     //================
@@ -141,8 +129,12 @@ public class Hud extends Window
     private ArrayList<SceneObject> rightClickInteract = new ArrayList<>();
     private ArrayList<SceneObject> lightTooltip = new ArrayList<>();
     
+    public enum InstructionalTip{
+            PrimarySkill, SecondarySkill,UsePotion,Jump,Ladder,Jumpthrough,Sprint,RightClick,Light
+    }
+    
       
-    public Hud(GameClientScene scene)
+    public Hud(GameScene scene)
     {
         super(new Image("blank.png"),0,0,1440,900);
         
@@ -153,7 +145,7 @@ public class Hud extends Window
         this.sceneReference = scene;
         
         //player reference
-        this.playerReference = scene.player;
+        this.playerReference = scene.getPlayer();
         
         //position variables 
         float center = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x/2;
@@ -227,7 +219,7 @@ public class Hud extends Window
         menuList.add(skillMenu);
         
         //map menu
-        mapMenu = new MapMenu(center - 600,0,(GameClientScene)scene);
+        mapMenu = new MapMenu(center - 600,0,scene);
         mapMenu.addActionListener(new ActionListener(){
          public void actionPerformed(ActionEvent e)
             {
@@ -358,7 +350,7 @@ public class Hud extends Window
         this.skillButton1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
-               GameClientScene gs = ((GameClientScene)owningScene);
+               GameScene gs = ((GameScene)owningScene);
                 //if we click it when assigning skills
                 if(e.getActionCommand().equals("clicked") && skillMenu.isOpen() && skillMenu.hand != null)
                 {
@@ -379,8 +371,6 @@ public class Hud extends Window
                     skillMenu.hand = null;
                     skillMenu.handSkillID = null;
                     
-                    //tell the server we changed our skill
-                    gs.sendSkillPacket();
                     
                     //add sound
                     Sound goldSound = Sound.locationSound("buffered/jumpReversed.ogg", Hud.this.playerReference.getPosition().x, Hud.this.playerReference.getPosition().y, false, .6f,2f);               
@@ -397,7 +387,7 @@ public class Hud extends Window
         this.skillButton2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
-                 GameClientScene gs = ((GameClientScene)owningScene);
+                 GameScene gs = ((GameScene)owningScene);
                  
                 //if we click it when assigning skills
                 if(e.getActionCommand().equals("clicked") && skillMenu.isOpen() && skillMenu.hand != null)
@@ -419,9 +409,6 @@ public class Hud extends Window
                     skillMenu.hand = null;
                     skillMenu.handSkillID = null;
                     
-                    //tell the server we changed our skill
-                    gs.sendSkillPacket();
-                    
                     //add sound
                     Sound goldSound = Sound.locationSound("buffered/jumpReversed.ogg", Hud.this.playerReference.getPosition().x, Hud.this.playerReference.getPosition().y, false, .6f,2f);               
                     Hud.this.getOwningScene().add(goldSound);
@@ -437,7 +424,7 @@ public class Hud extends Window
         this.skillButton3.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
-                GameClientScene gs = ((GameClientScene)owningScene);
+                GameScene gs = ((GameScene)owningScene);
                 
                 //if we click it when assigning skills
                 if(e.getActionCommand().equals("clicked") && skillMenu.isOpen() && skillMenu.hand != null)
@@ -459,9 +446,6 @@ public class Hud extends Window
                     skillMenu.hand = null;
                     skillMenu.handSkillID = null;
                     
-                    //tell the server we changed our skill
-                    gs.sendSkillPacket();
-                    
                     //add sound
                     Sound goldSound = Sound.locationSound("buffered/jumpReversed.ogg", Hud.this.playerReference.getPosition().x, Hud.this.playerReference.getPosition().y, false, .6f,2f);               
                     Hud.this.getOwningScene().add(goldSound);
@@ -477,7 +461,7 @@ public class Hud extends Window
         this.skillButton4.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
-                GameClientScene gs = ((GameClientScene)owningScene);
+                GameScene gs = ((GameScene)owningScene);
                 
                 //if we click it when assigning skills
                 if(e.getActionCommand().equals("clicked") && skillMenu.isOpen() && skillMenu.hand != null)
@@ -498,9 +482,6 @@ public class Hud extends Window
                     //clear hand
                     skillMenu.hand = null;
                     skillMenu.handSkillID = null;
-                    
-                    //tell the server we changed our skill
-                    gs.sendSkillPacket();
                     
                     //add sound
                     Sound goldSound = Sound.locationSound("buffered/jumpReversed.ogg", Hud.this.playerReference.getPosition().x, Hud.this.playerReference.getPosition().y, false, .6f,2f);               
@@ -647,18 +628,7 @@ public class Hud extends Window
         });      
         this.addComponent(escMenu);  
 
-        //networking stats 
-        pingText = new Label(new Text("0ms",LeadCrystalTextType.HUD20),right - 140, 70);     
-        packetLossText= new Label(new Text("0% pl",LeadCrystalTextType.HUD20),right - 140,50);        
-        serverIpText = new Label(new Text("1.1.1.1",LeadCrystalTextType.HUD20),right - 140, 30);       
-        serverPortText = new Label(new Text("1234",LeadCrystalTextType.HUD20),right - 200, 10);     
-        fpsText = new Label(new Text("9000",LeadCrystalTextType.HUD20),right - 140, 90);
-        
-        //initializing chat manager
-        this.chatManager = new ChatManager(scene);
-        this.chatManager.receiveMessage("[Message] Welcome to the game!");
-        
-        
+                
         //=============
         // Tooltips
         //=============
@@ -852,10 +822,6 @@ public class Hud extends Window
         if(this.activeDialogue != null)
             this.activeDialogue.update();
         
-        //update chat manager
-        this.chatManager.update();
-        this.chatManager.handleInput(Game.getInstance().getInputHandler().getInputSnapshot());
-        
         
         //==============
         // Radar Arrows
@@ -1015,7 +981,7 @@ public class Hud extends Window
                     public void actionPerformed(ActionEvent e) {
                         if (e.getActionCommand().equals("clicked")) 
                         {
-                            ((GameClientScene)owningScene).sendRespawnRequestPacket();
+                            ((GameScene)owningScene).respawnPlayer();
                         }
                         if (e.getActionCommand().equals("mouseEntered")) 
                         {
@@ -1093,11 +1059,7 @@ public class Hud extends Window
         {
             menu.draw(gl);
         }
-        
-        //draw chat
-        this.chatManager.draw(gl);
-        
-        
+            
     }
     
     public void setUpSkillBar()
@@ -1205,32 +1167,6 @@ public class Hud extends Window
         return this.activeDialogue != null;
     }
     
-    public void drawNetworkingStats(boolean value)
-    {
-        if(value == true)
-        {
-            this.removeComponent(pingText);
-            this.removeComponent(packetLossText);
-            this.removeComponent(serverIpText);
-            this.removeComponent(serverPortText);
-            this.removeComponent(fpsText);
-            
-            this.addComponent(pingText);
-            this.addComponent(packetLossText);
-            this.addComponent(serverIpText);
-            this.addComponent(serverPortText);
-            this.addComponent(fpsText);
-        }
-        else
-        {
-            this.removeComponent(pingText);
-            this.removeComponent(packetLossText);
-            this.removeComponent(serverIpText);
-            this.removeComponent(serverPortText);
-            this.removeComponent(fpsText);
-        }
-    }
-    
     /**
      * This function is used to determine if the mouse is currently over an open menu
      * @return True if the mouse is over an open menu
@@ -1318,6 +1254,45 @@ public class Hud extends Window
         for(SceneObject obj :this.sprint){this.owningScene.remove(obj);} 
         for(SceneObject obj :this.rightClickInteract){this.owningScene.remove(obj);} 
         for(SceneObject obj :this.lightTooltip){this.owningScene.remove(obj);}
+    }
+    
+    public void openMenu(MenuID id)
+    {
+        switch(id)
+        {
+            case POTION:
+               this.potionsMenu.open();
+            break;
+            case ARMOR:
+                this.armorMenu.open();
+            break;           
+            case MAP:
+                this.mapMenu.open();
+            break;
+            case SKILL:
+                this.skillMenu.open();
+            break;
+                
+        }     
+    }
+    
+    public void closeMenu(MenuID id)
+    {
+        switch(id)
+        {
+            case POTION:
+               this.potionsMenu.close();      
+            break;
+            case ARMOR:
+                this.armorMenu.close();             
+            break;    
+            case MAP:
+                this.mapMenu.close();
+            break;
+            case SKILL:
+                this.skillMenu.close();
+            break;
+        }        
     }
     
     

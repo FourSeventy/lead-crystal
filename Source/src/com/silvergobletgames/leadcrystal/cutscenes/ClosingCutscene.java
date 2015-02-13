@@ -2,7 +2,7 @@
 package com.silvergobletgames.leadcrystal.cutscenes;
 
 import com.silvergobletgames.leadcrystal.scenes.CreditsScene;
-import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.leadcrystal.scenes.LoadingScene;
 import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.core.InputSnapshot;
@@ -45,9 +45,7 @@ public class ClosingCutscene extends Cutscene{
     {
         Game.getInstance().loadScene(new CreditsScene());
         Game.getInstance().changeScene(CreditsScene.class, null);
-        ((GameClientScene)owningScene).disconnectFromServer();
-        ((GameClientScene)owningScene).saveGameToDisk();
-        Game.getInstance().unloadScene(GameClientScene.class);
+       ((GameScene)owningScene).saveGameToDisk();
     }
 
     

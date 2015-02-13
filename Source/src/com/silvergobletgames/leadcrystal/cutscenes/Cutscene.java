@@ -1,7 +1,7 @@
 package com.silvergobletgames.leadcrystal.cutscenes;
 
 import com.jogamp.newt.event.KeyEvent;
-import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.sylver.core.InputSnapshot;
 import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.graphics.Color;
@@ -18,7 +18,7 @@ import javax.media.opengl.glu.gl2.GLUgl2;
 public abstract class Cutscene 
 {
     protected ArrayList<SceneObject> objects = new ArrayList();
-    protected GameClientScene owningScene;
+    protected GameScene owningScene;
     
     public boolean done = false;
     public boolean skipping = false;
@@ -80,7 +80,7 @@ public abstract class Cutscene
         }
         
         //lock input
-        this.owningScene.lockInput.set(true);
+        this.owningScene.getInputLock().set(true);
         
         //handle input
         if(!skipping && (input.isKeyReleased(KeyEvent.VK_ENTER) || input.isKeyReleased(KeyEvent.VK_ESCAPE) || input.isKeyReleased(KeyEvent.VK_SPACE)))
@@ -117,7 +117,7 @@ public abstract class Cutscene
         this.blackImage.draw(gl);
     }
     
-    public final void setOwningScene(GameClientScene scene)
+    public final void setOwningScene(GameScene scene)
     {
         this.owningScene = scene;
     }
@@ -126,7 +126,7 @@ public abstract class Cutscene
     {
         this.done = true;
         owningScene.getSceneEffectsManager().fadeFromBlack(null);
-        this.owningScene.lockInput.set(false);
+        this.owningScene.getInputLock().set(false);
     }
     
     public final void fadeFromBlack()

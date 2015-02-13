@@ -2,7 +2,7 @@ package com.silvergobletgames.leadcrystal.menus;
 
 import com.silvergobletgames.leadcrystal.core.CursorFactory;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
-import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.leadcrystal.scenes.MainMenuScene;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Game;
@@ -141,7 +141,7 @@ public class EscapeMenu extends Window
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("clicked")) 
                 {
-                    ((GameClientScene)owningScene).disconnectFromServer();
+                    ((GameScene)owningScene).saveAndQuit();
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
                 {
@@ -192,7 +192,7 @@ public class EscapeMenu extends Window
         
         super.open();
         
-        ((GameClientScene)this.getOwningScene()).hud.closeDialogue();
+        ((GameScene)this.getOwningScene()).getHud().closeDialogue();
                
     }
 }

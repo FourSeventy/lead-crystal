@@ -24,9 +24,6 @@ public class ScriptObject
     //active page
     private ScriptPage activePage;
     
-    //list of id's for keeping track of players
-    public HashSet<String> playerCollisionList = new HashSet<>();
-    
     //script trigger enum
     public static enum ScriptTrigger
     {

@@ -19,10 +19,8 @@ import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity;
 import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat.ArmorStatID;
 import com.silvergobletgames.leadcrystal.items.LootSpewer;
-import com.silvergobletgames.leadcrystal.netcode.GobletServer;
-import com.silvergobletgames.leadcrystal.netcode.OpenInstructionalTipPacket.InstructionalTip;
-import com.silvergobletgames.leadcrystal.netcode.OpenMenuPacket.MenuID;
-import com.silvergobletgames.leadcrystal.netcode.SideObjectiveCompletePacket;
+import com.silvergobletgames.leadcrystal.menus.Hud.InstructionalTip;
+import com.silvergobletgames.leadcrystal.menus.Hud.MenuID;
 import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Game;
@@ -183,7 +181,7 @@ public class SceneScriptManager
     public void openClientMenu(String clientID, String menuID)
     {
         MenuID id = MenuID.valueOf(menuID);
-        this.owningScene.sendOpenMenu(clientID,id); 
+        this.owningScene.getHud().openMenu(id); 
     }
     
     /**
@@ -194,7 +192,7 @@ public class SceneScriptManager
     public void closeClientMenu(String clientID, String menuID)
     {
         MenuID id = MenuID.valueOf(menuID);
-        this.owningScene.sendCloseMenu(clientID,id); 
+        this.owningScene.getHud().closeMenu(id); 
     }
     
     /**
@@ -205,7 +203,7 @@ public class SceneScriptManager
     public void openClientTip(String clientID, String tipID)
     {
         InstructionalTip tip = InstructionalTip.valueOf(tipID);
-        this.owningScene.sendOpenInstructionalTipPacket(UUID.fromString(clientID),tip);
+        this.owningScene.getHud().openTooltip(tip);
     }
     
     /**
@@ -216,7 +214,7 @@ public class SceneScriptManager
     public void closeClientTip(String clientID, String tipID)
     {
         InstructionalTip tip = InstructionalTip.valueOf(tipID);
-        this.owningScene.sendCloseInstructionalTipPacket(UUID.fromString(clientID),tip);
+        this.owningScene.getHud().closeAllTooltips();
     }
     
     /**
@@ -228,7 +226,7 @@ public class SceneScriptManager
     public void openClientDialogue(String clientID, String speaker, String text)
     {
         //send the packet
-        this.owningScene.sendOpenDialogue(clientID, speaker, text);
+        this.owningScene.getHud().openDialogue( speaker, text);
     }
     
     /**
@@ -238,12 +236,7 @@ public class SceneScriptManager
      */
     public void openAllClientDialogue(String speaker, String text)
     {
-        //for each player in the scene
-        ArrayList<PlayerEntity> playerList = new ArrayList(((GameScene)this.owningScene).players);
-        for(PlayerEntity player :playerList)
-        { 
-            this.openClientDialogue(player.getID(), speaker, text);
-        }
+        this.owningScene.getHud().openDialogue( speaker, text);
     }
     
     /**
@@ -253,36 +246,33 @@ public class SceneScriptManager
     public void completeSideObjective(int levelNumber)
     {
         
-        ArrayList<PlayerEntity> playerList = new ArrayList(((GameScene)this.owningScene).players);
-        for(PlayerEntity player :playerList)
-        {   
-            //figure out if it is newly completed
-            boolean sideObjectiveNewlyCompleted = false;
-            if(player.getLevelProgressionManager().levelMap.get(levelNumber).sideObjective.complete == false)
-                sideObjectiveNewlyCompleted = true;
+       PlayerEntity player = this.owningScene.getPlayer();
+       
+        //figure out if it is newly completed
+        boolean sideObjectiveNewlyCompleted = false;
+        if(player.getLevelProgressionManager().levelMap.get(levelNumber).sideObjective.complete == false)
+            sideObjectiveNewlyCompleted = true;
 
-            //complete side objective
-            player.getLevelProgressionManager().completeSideObjective(levelNumber);
-            
-            //send side objective complete packet
-            short currencyReward =0;
-            ArmorStatID id = null;
-            if(sideObjectiveNewlyCompleted)
-            {
-                currencyReward = (short)player.getLevelProgressionManager().levelMap.get(levelNumber).sideObjective.currencyAward;           
-                id = player.getLevelProgressionManager().levelMap.get(levelNumber).sideObjective.statReward;
-                
-            }
-            
-            owningScene.sendSideObjectiveCompletePacket(player.getID(), currencyReward,id);
-            
-            
-            //play sound
-            Sound sound = Sound.ambientSound("buffered/complete.ogg",true);  
-            this.owningScene.add(sound);
-           
-        
+        //complete side objective
+        player.getLevelProgressionManager().completeSideObjective(levelNumber);
+
+        //send side objective complete packet
+        short currencyReward =0;
+        ArmorStatID id = null;
+        if(sideObjectiveNewlyCompleted)
+        {
+            currencyReward = (short)player.getLevelProgressionManager().levelMap.get(levelNumber).sideObjective.currencyAward;           
+            id = player.getLevelProgressionManager().levelMap.get(levelNumber).sideObjective.statReward;
+
         }
+
+        owningScene.completeSideObjective( currencyReward,id);
+
+
+        //play sound
+        Sound sound = Sound.ambientSound("buffered/complete.ogg",true);  
+        this.owningScene.add(sound);
+ 
         
         this.setSideQuestStatusText("complete");
     }
@@ -294,7 +284,7 @@ public class SceneScriptManager
     public void setSideQuestStatusText( String text)
     {
         //send the packet
-        this.owningScene.sendSetSideQuestStatus(text);
+        this.owningScene.setSideQuestStatus(text);
     }
     
     /**
@@ -302,43 +292,40 @@ public class SceneScriptManager
      * @param levelNumber level to complete
      */
     public void completeMainObjective(int levelNumber)
-    {
-        //for each player in the scene
-        ArrayList<PlayerEntity> playerList = new ArrayList(((GameScene)this.owningScene).players);
-        for(PlayerEntity player :playerList)
-        {                       
-            //flags for completion packet
-            boolean mainObjectiveNewleyCompleted = false;
-            
-            //completes the main objective
-            if(player.getLevelProgressionManager().levelMap.get(levelNumber).mainObjective.complete == false)
-                mainObjectiveNewleyCompleted = true;
-            
-            //calculate currency reward 
-            short currencyAward = 0;
-            ArmorStatID id = null;
-            if(mainObjectiveNewleyCompleted)
-            {
-                currencyAward = (short)player.getLevelProgressionManager().levelMap.get(levelNumber).mainObjective.currencyAward;
-               id = player.getLevelProgressionManager().levelMap.get(levelNumber).mainObjective.statReward;
-                
-           
-            }
-            
-            //send main objective complete packet
-            if(levelNumber != 17) //dont send for final boss
-            {
-               owningScene.sendMainObjectiveCompletePacket(player.getID(), currencyAward,id);
-            }
-            
-            //complete main objective
-            player.getLevelProgressionManager().completeMainObjective(levelNumber);          
-            
-            //play sound
-            Sound sound = Sound.ambientSound("buffered/complete.ogg",true);  
-            this.owningScene.add(sound);
-         
+    {                      
+        
+        PlayerEntity player = this.owningScene.getPlayer();
+        
+        //flags for completion packet
+        boolean mainObjectiveNewleyCompleted = false;
+
+        //completes the main objective
+        if(player.getLevelProgressionManager().levelMap.get(levelNumber).mainObjective.complete == false)
+            mainObjectiveNewleyCompleted = true;
+
+        //calculate currency reward 
+        short currencyAward = 0;
+        ArmorStatID id = null;
+        if(mainObjectiveNewleyCompleted)
+        {
+            currencyAward = (short)player.getLevelProgressionManager().levelMap.get(levelNumber).mainObjective.currencyAward;
+           id = player.getLevelProgressionManager().levelMap.get(levelNumber).mainObjective.statReward;
+
+
         }
+
+        //send main objective complete packet
+        if(levelNumber != 17) //dont send for final boss
+        {
+           owningScene.completeMainObjective( currencyAward,id);
+        }
+
+        //complete main objective
+        player.getLevelProgressionManager().completeMainObjective(levelNumber);          
+
+        //play sound
+        Sound sound = Sound.ambientSound("buffered/complete.ogg",true);  
+        this.owningScene.add(sound);      
        
         this.setSideQuestStatusText("complete");
     }
@@ -350,7 +337,7 @@ public class SceneScriptManager
     public void setMainObjectiveStatusText(String text)
     {
         //send the packet
-        this.owningScene.sendSetMainQuestStatus(text);
+        this.owningScene.setMainQuestStatus(text);
     }
     
     public void insertExplosion(int x, int y)
@@ -455,11 +442,7 @@ public class SceneScriptManager
     {
        this.completeLevel("checkpoint1");
        
-       ArrayList<PlayerEntity> playerList = new ArrayList(((GameScene)this.owningScene).players);
-       for(PlayerEntity player :playerList)
-       {
-           this.owningScene.sendSaveGamePacket(UUID.fromString(player.getID()));
-       }
+     
     }
     
     /**
@@ -468,18 +451,15 @@ public class SceneScriptManager
      */
     public void completeLevel(String destination)
     {
-        //for each player in the scene
-        ArrayList<PlayerEntity> playerList = new ArrayList(((GameScene)this.owningScene).players);
-        for(PlayerEntity player :playerList)
-        {  
-            //heals players and removes all ailments
-            player.respawn(); 
-            
-            //moves players back to town
-            ((GobletServer)Game.getInstance().getRunnable("Goblet Server")).queueMovePlayerToLevel(player.getID(), "town.lv", destination);          
         
-            this.owningScene.sendSaveGamePacket(UUID.fromString(player.getID()));
-        }   
+        //heals players and removes all ailments
+        this.owningScene.getPlayer().respawn(); 
+
+        //moves players back to town
+        this.owningScene.changeLevel("town.lv");
+
+        this.owningScene.saveGameToDisk();
+         
     }
     
     /**
@@ -490,68 +470,9 @@ public class SceneScriptManager
      */
     public void movePlayer(String clientID, String levelName, String toEntityID)
     {
-           ((GobletServer)Game.getInstance().getRunnable("Goblet Server")).queueMovePlayerToLevel(clientID, levelName, toEntityID);      
+           this.owningScene.changeLevel(levelName); //TODO: to which entity
     }
     
-    /**
-     * Enables pvp mode for given client id
-     * @param clientID  clientID of the target client (get with invoker.getID())
-     */
-    public void enablePVP(String clientID)
-    {
-        ((GameScene)this.owningScene).clientsInScene.get(UUID.fromString(clientID)).player.getBody().setOverlapMask(Entity.OverlapMasks.PVP_PLAYER.value);
-    }
-    
-    /**
-     * disables pvp mode for given client id
-     * @param clientID  clientID of the target client (get with invoker.getID())
-     */
-    public void disablePVP(String clientID)
-    {
-        ((GameScene)this.owningScene).clientsInScene.get(UUID.fromString(clientID)).player.getBody().setOverlapMask(Entity.OverlapMasks.PLAYER.value);
-    }
-    
-    /**
-     * Respawns target player
-     * @param clientID clientID of the target client to respawn
-     * @param invokerID  clientID of the invoking client (get with invoker.getID())
-     */
-    public void respawnPlayer(String clientID,String invokerID)
-    {
-        //get invoker
-        PlayerEntity invoker =this.owningScene.clientsInScene.get(UUID.fromString(invokerID)).player;
-        
-        //if invoker has a potion respawn the player
-        if(invoker.getPotionManager().getNumberOfPotions() >0)
-        {
-            //respawn player
-            PlayerEntity respawnedPlayer = this.owningScene.clientsInScene.get(UUID.fromString(clientID)).player;     
-            respawnedPlayer.respawn();
-            
-            
-            //remove potion anda add potion graphic
-            invoker.getPotionManager().addPotion(-1);
-            Image potionImage = new Image("healthPot3.png");
-           
-            potionImage.addImageEffect(new ImageEffect(ImageEffectType.SCALE, 60, 1, 2));
-            potionImage.addImageEffect(new ImageEffect(ImageEffectType.ALPHABRIGHTNESS, 60, 1, 0));
-            
-            Body body = new Body( new Box(10,10),1);
-            body.setGravityEffected(false);
-            body.setOverlapMask(Entity.OverlapMasks.NO_OVERLAP.value);
-            body.setBitmask(Entity.BitMasks.NO_COLLISION.value);
-            Entity potionEntity = new Entity(potionImage, body);
-             potionEntity.setPosition(respawnedPlayer.getPosition().x, respawnedPlayer.getPosition().y + 150);
-            potionEntity.addEntityEffect(new EntityEffect(EntityEffectType.DURATION, 61, 0, 1));
-            this.owningScene.add(potionEntity, Scene.Layer.MAIN);
-        }
-        else
-        {
-            //play error sound
-            this.playSoundAtPosition(invoker.getPosition().x,invoker.getPosition().y, "error.ogg");
-        }
-        
-    }
     
     /**
      * Adds a sound into the scene
@@ -606,7 +527,7 @@ public class SceneScriptManager
      */
     public void tellClientToSave(String clientID)
     {
-        this.owningScene.sendSaveGamePacket(UUID.fromString(clientID));
+        this.owningScene.saveGameToDisk();
     }
     
     /**

@@ -102,20 +102,4 @@ public abstract class CombatEffect extends Effect
     }
     
     
-    //================
-    // Saving
-    //================
-    
-    public abstract RenderData dumpRenderData();
-    
-    public static CombatEffect buildFromRenderData(RenderData data)
-    {
-       switch((String)data.data.get(0)) 
-       {
-           case "Dot": return DotEffect.buildFromRenderData(data); 
-           case "Proc": return ProcEffect.buildFromRenderData(data);
-           case "State": return StateEffect.buildFromRenderData(data);
-           default: return null;
-       }
-    }
 }

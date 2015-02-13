@@ -1,5 +1,13 @@
 package com.silvergobletgames.leadcrystal.menus;
 
+import com.silvergobletgames.leadcrystal.combat.LevelProgressionManager.Level;
+import com.silvergobletgames.leadcrystal.core.CursorFactory;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
+import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
+import com.silvergobletgames.sylver.audio.Sound;
+import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.graphics.*;
 import com.silvergobletgames.sylver.windowsystem.Button;
 import com.silvergobletgames.sylver.windowsystem.Label;
@@ -7,14 +15,6 @@ import com.silvergobletgames.sylver.windowsystem.TextBlock;
 import com.silvergobletgames.sylver.windowsystem.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import com.silvergobletgames.leadcrystal.combat.LevelProgressionManager.Level;
-import com.silvergobletgames.leadcrystal.core.CursorFactory;
-import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters;
-import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
-import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
-import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
-import com.silvergobletgames.sylver.audio.Sound;
-import com.silvergobletgames.sylver.core.Game;
 
 /**
  *
@@ -91,7 +91,7 @@ public class QuestMenu extends Window{
     public void repaintLevelDetails()           
     {
         //get current level 
-        String playerLevelName = ((GameClientScene)this.owningScene).activeLevelData.filename; 
+        String playerLevelName = ((GameScene)this.owningScene).getActiveLevel().filename; 
         Level currentLevel= null;
         try
         {
@@ -243,7 +243,7 @@ public class QuestMenu extends Window{
         //repaint
         this.repaintLevelDetails();
         
-        ((GameClientScene)this.getOwningScene()).hud.closeDialogue();
+        ((GameScene)this.getOwningScene()).getHud().closeDialogue();
     }
     
 }

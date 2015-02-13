@@ -25,7 +25,6 @@ import com.silvergobletgames.leadcrystal.core.AnimationPackClasses;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.CommonCrateAnimationPack;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
-import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
 import com.silvergobletgames.leadcrystal.scripting.ScriptObject;
 import com.silvergobletgames.leadcrystal.scripting.ScriptObject.ScriptTrigger;
 import com.silvergobletgames.sylver.graphics.AnimationPack.CoreAnimations;
@@ -138,7 +137,7 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
         {
                      
             //update brain if we are near a player
-            PlayerEntity p = this.brain.getClosestPlayer();
+            PlayerEntity p = this.brain.getPlayer();
             if(p != null && this.distanceAbs(p) <= 2000)
             {
                 brain.update();
@@ -292,136 +291,6 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
     }
     
 
-    
-    //====================
-    // RenderData Methods
-    //====================
-    
-    public SceneObjectRenderData dumpRenderData() 
-    {
-        SceneObjectRenderData renderData = new SceneObjectRenderData(ExtendedSceneObjectClasses.NONPLAYERENTITY,this.ID);
-        
-        renderData.data.add(0,this.image.dumpRenderData());
-        renderData.data.add(1,this.entityTooltip.dumpRenderData());
-        renderData.data.add(2, Entity.dumpBodyRenderData(this.body));
-
-        
-        return renderData;
-    }
-    
-    public static NonPlayerEntity buildFromRenderData(SceneObjectRenderData renderData)
-    {
-        Image image = Image.buildFromRenderData((SceneObjectRenderData)renderData.data.get(0));
-        
-        EntityTooltip tooltip = EntityTooltip.buildFromRenderData((RenderData)renderData.data.get(1));
-       
-        Body body = Entity.buildBodyFromRenderData((RenderData)renderData.data.get(2));
-        NonPlayerEntity entity = new NonPlayerEntity(image,body);
-        entity.setTooltip(tooltip);
-        entity.setID(renderData.getID());
-        
-        return entity;
-    }
-    
-    public SceneObjectRenderDataChanges generateRenderDataChanges(SceneObjectRenderData oldData,SceneObjectRenderData newData)
-    {
-        SceneObjectRenderDataChanges changes = new SceneObjectRenderDataChanges();
-        
-        int changeMap = 0;
-        changes.ID = this.ID;
-        ArrayList changeList = new ArrayList();
-        
-        if(this.image != null)
-        {
-            SceneObjectRenderDataChanges imageChanges = this.image.generateRenderDataChanges((SceneObjectRenderData)oldData.data.get(0), (SceneObjectRenderData)newData.data.get(0));
-            if(imageChanges != null)
-            {
-                changeList.add(imageChanges);
-                changeMap += 1;
-            }
-        }
-        
-        if(entityTooltip != null)
-        {
-            SceneObjectRenderDataChanges tooltipChanges = this.entityTooltip.generateRenderDataChanges((RenderData)oldData.data.get(1), (RenderData)newData.data.get(1));
-            if(tooltipChanges != null)
-            {
-                changeList.add(tooltipChanges);
-                changeMap += 2;
-            }
-        }
-        
-        SceneObjectRenderDataChanges bodyChanges = Entity.generateBodyRenderDataChanges((RenderData)oldData.data.get(2), (RenderData)newData.data.get(2));
-        if(bodyChanges != null)
-        {
-            changeList.add(bodyChanges);
-            changeMap += 4;
-        }
-        
-        
-        changes.fields = changeMap;
-        changes.data = changeList.toArray();
-        
-        if(changeList.size() > 0)
-            return changes;
-        else
-            return null;
-        
-        
-    }
-    
-    public void reconcileRenderDataChanges(long lastTime, long futureTime, SceneObjectRenderDataChanges renderDataChanges)
-    {        
-        //construct an arraylist of data that we got, nulls will go where we didnt get any data
-        int fieldMap = renderDataChanges.fields;
-        ArrayList rawData = new ArrayList();
-        rawData.addAll(Arrays.asList(renderDataChanges.data));       
-        ArrayList changeData = new ArrayList();
-        for(int i = 0; i <8; i ++)
-        {
-            // The bit was set
-            if ((fieldMap & (1L << i)) != 0)
-            {
-                changeData.add(rawData.get(0));
-                rawData.remove(0);
-            }
-            else
-                changeData.add(null);          
-        }
-          
-        //reconcile image
-        if( this.image != null && changeData.get(0) != null)       
-            this.image.reconcileRenderDataChanges(lastTime,futureTime,(SceneObjectRenderDataChanges)changeData.get(0));
-        
-        //reconcile entity tooltip
-        if(this.entityTooltip != null && changeData.get(1) != null)
-            this.entityTooltip.reconcileRenderDataChanges(lastTime, futureTime, (SceneObjectRenderDataChanges)changeData.get(1));
-
-        if(changeData.get(2) != null)      
-        {
-            //if we had a bitmask change clear the arbiters
-            if((((SceneObjectRenderDataChanges)changeData.get(2)).fields & (1 <<7)) != 0)
-            {
-              ((GameClientScene)this.owningScene).clearArbitersOnBody(body);
-            }
-            
-            this.body = Entity.reconcileBodyRenderDataChanges( lastTime, futureTime,this.body, (SceneObjectRenderDataChanges)changeData.get(2));
-        }
-    }
-    
-    public void interpolate(long currentTime)
-    {
-
-        if(image != null)
-            image.interpolate(currentTime);
-
-        if(entityTooltip != null)
-            entityTooltip.interpolate(currentTime);
-        
-        this.body = Entity.interpolateBody(this.body, currentTime);
-        
-    }
-    
     
     //===========================
     // Saving Functions

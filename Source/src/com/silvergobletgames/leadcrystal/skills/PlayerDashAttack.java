@@ -10,6 +10,7 @@ import com.silvergobletgames.leadcrystal.entities.EntityEffect;
 import com.silvergobletgames.leadcrystal.entities.HitBox;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.scenes.GameScene;
+import com.silvergobletgames.leadcrystal.skills.PlayerSkill.TargetingData;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.graphics.Color;
@@ -27,7 +28,7 @@ import net.phys2d.raw.Body;
 import net.phys2d.raw.shapes.Box;
 
 
-public class PlayerDashAttack extends Skill{
+public class PlayerDashAttack extends PlayerSkill{
     
     public PlayerDashAttack()
     {
@@ -44,23 +45,15 @@ public class PlayerDashAttack extends Skill{
     
     public void use(Damage damage, SylverVector2f origin) 
     {
-        PlayerEntity player = (PlayerEntity) user;
         
         Random r = SylverRandom.random;
                         
        
-         //Get target X and Y
-        float targetX = ((GameScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationX;
-        float targetY = ((GameScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationY;
-        
-        //Get user X and Y
-        float userX = user.getPosition().x;
-        float userY = user.getPosition().y;
-        
-        //get vector to target
-        SylverVector2f vectorToTarget = new SylverVector2f(targetX - userX, targetY - userY);
-        vectorToTarget.normalise();
-        
+        //get targeting data
+        TargetingData targetingData = this.getTargetingData(origin);
+        SylverVector2f vectorToTarget = targetingData.vectorToTarget;
+        float theta = targetingData.theta;
+               
         //set damage
         int min = 12; 
         int max = 14;
@@ -69,12 +62,7 @@ public class PlayerDashAttack extends Skill{
         damage.setType(Damage.DamageType.PHYSICAL);    
         
         //add stun effect
-        damage.addCombatEffect(new StateEffect(StateEffect.StateEffectType.SLOW, 3 * 60,.50f, true));
-        
-         //determine angle for the image
-        float theta = (float)Math.acos(vectorToTarget.dot(new SylverVector2f(1,0)));
-        if(targetY < userY)
-            theta = (float)(2* Math.PI - theta);
+        damage.addCombatEffect(new StateEffect(StateEffect.StateEffectType.SLOW, 3 * 60,.50f, true));       
         
         //add brightness effect to damage
         Float[] points = {1f,2f,1f};

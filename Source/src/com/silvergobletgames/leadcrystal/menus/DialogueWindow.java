@@ -4,7 +4,7 @@ package com.silvergobletgames.leadcrystal.menus;
 import com.silvergobletgames.leadcrystal.core.CursorFactory;
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
-import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.leadcrystal.scripting.ScriptObject;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Game;
@@ -118,7 +118,7 @@ public class DialogueWindow extends Window {
             Sound closeSound = Sound.ambientSound("buffered/menuClose.ogg", false);
             this.owningScene.add(closeSound);
             
-            ((GameClientScene)this.owningScene).sendDialogueClosedPacket();
+            ((GameScene)this.owningScene).closeDialogue();
         }
         
         super.close();

@@ -8,7 +8,7 @@ import com.silvergobletgames.leadcrystal.core.CursorFactory;
 import com.silvergobletgames.leadcrystal.core.GameplaySettings;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
-import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.graphics.*;
@@ -30,7 +30,7 @@ import javax.media.opengl.GL2;
 public class MapMenu extends Window{
     
     //Player reference
-    private GameClientScene sceneReference;
+    private GameScene sceneReference;
     
     //level detail fields
     private Label levelName; 
@@ -62,7 +62,7 @@ public class MapMenu extends Window{
     //==============
     // Constructor
     //==============
-    public MapMenu(float x, float y,GameClientScene scene)
+    public MapMenu(float x, float y,GameScene scene)
     {
        //super constructor call, setting the background sprite and initial position
        super(new Image("mapFrame.png"),x,y,1200,900);
@@ -346,7 +346,7 @@ public class MapMenu extends Window{
         
         super.open();
         
-        ((GameClientScene)this.getOwningScene()).hud.closeDialogue();
+        ((GameScene)this.getOwningScene()).getHud().closeDialogue();
        
     }
     
@@ -383,7 +383,7 @@ public class MapMenu extends Window{
             
         if(levelNumber != -1)
         {
-            Level newLevel = ((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber);
+            Level newLevel = sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(levelNumber);
             
             //detail black
             this.levelDetailBackground = new Button(new Image("section1.png"), xPosition, 25, 450, 550);
@@ -434,7 +434,7 @@ public class MapMenu extends Window{
             
             //level name
             this.removeComponent(levelName);
-            Text newText = new Text(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber).levelName,LeadCrystalTextType.HUD34);
+            Text newText = new Text(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(levelNumber).levelName,LeadCrystalTextType.HUD34);
             this.levelName = new Label(newText, xPosition + 220 - newText.getWidth()/2, 500);
             this.addComponent(levelName);
             
@@ -448,11 +448,11 @@ public class MapMenu extends Window{
              
             //main objective name
             this.removeComponent(mainObjectiveName);
-            this.mainObjectiveName.getText().setText(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber).mainObjective.objectiveName + "-");
+            this.mainObjectiveName.getText().setText(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(levelNumber).mainObjective.objectiveName + "-");
             this.addComponent(mainObjectiveName);
             
             this.removeComponent(mainObjectiveDescription);
-            mainObjectiveDescription = new TextBlock(xPosition + 65, 390, 375, new Text(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber).mainObjective.objectiveDescription,LeadCrystalTextType.HUD22));
+            mainObjectiveDescription = new TextBlock(xPosition + 65, 390, 375, new Text(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(levelNumber).mainObjective.objectiveDescription,LeadCrystalTextType.HUD22));
             this.addComponent(mainObjectiveDescription);
             
             if(!newLevel.sideObjective.objectiveName.equals( "null"))
@@ -466,12 +466,12 @@ public class MapMenu extends Window{
 
                 //side objective name
                 this.removeComponent(sideObjectiveName);
-                this.sideObjectiveName.getText().setText(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber).sideObjective.objectiveName + "-");
+                this.sideObjectiveName.getText().setText(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(levelNumber).sideObjective.objectiveName + "-");
                 this.addComponent(sideObjectiveName);
 
 
                 this.removeComponent(sideObjectiveDescription);
-                sideObjectiveDescription = new TextBlock(xPosition + 65, 170, 375, new Text(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(levelNumber).sideObjective.objectiveDescription,LeadCrystalTextType.HUD22));
+                sideObjectiveDescription = new TextBlock(xPosition + 65, 170, 375, new Text(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(levelNumber).sideObjective.objectiveDescription,LeadCrystalTextType.HUD22));
                 this.addComponent(sideObjectiveDescription);
             }
             else
@@ -550,7 +550,7 @@ public class MapMenu extends Window{
                      }
                      if(e.getActionCommand().equals("clicked"))
                      {
-                         ((GameClientScene)owningScene).sendChooseLevelPacket(18);
+                         sceneReference.changeLevel(18);
                      }
                  }
             });
@@ -585,7 +585,7 @@ public class MapMenu extends Window{
                      }
                      if(e.getActionCommand().equals("clicked"))
                      {
-                         ((GameClientScene)owningScene).sendChooseLevelPacket(19);
+                         sceneReference.changeLevel(19);
                      }
                  }
             });
@@ -599,7 +599,7 @@ public class MapMenu extends Window{
        Overlay correctOverlay0 = new Overlay(new Image("map_questionmark.png"));
        correctOverlay0.getImage().setDimensions(75, 75);
        correctOverlay0.useRelativeSize = false;    
-       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(0).mainObjective.complete)
+       if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(0).mainObjective.complete)
        {
            correctOverlay0.getImage().setTextureReference("map_checkmark.png"); 
            correctOverlay0.getImage().setDimensions(75, 75);
@@ -627,7 +627,7 @@ public class MapMenu extends Window{
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                    ((GameClientScene)owningScene).sendChooseLevelPacket(0);
+                    sceneReference.changeLevel(0);
                 }
             }
        });
@@ -641,7 +641,7 @@ public class MapMenu extends Window{
        Overlay correctOverlay = new Overlay(new Image("map_questionmark.png"));
        correctOverlay.getImage().setDimensions(75, 75);
        correctOverlay.useRelativeSize = false;    
-       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(1).mainObjective.complete)
+       if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(1).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_checkmark.png")); 
            correctOverlay.getImage().setDimensions(75, 75);
@@ -669,7 +669,7 @@ public class MapMenu extends Window{
                 }
                 if(e.getActionCommand().equals("clicked"))
                 {
-                    ((GameClientScene)owningScene).sendChooseLevelPacket(1);
+                    sceneReference.changeLevel(1);
                 }
             }
        });
@@ -682,12 +682,12 @@ public class MapMenu extends Window{
        correctOverlay = new Overlay(new Image("map_lock.png"));
        
        //if this map is complete
-       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(2).mainObjective.complete)
+       if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(2).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
-       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(1).mainObjective.complete)
+       else if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(1).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.25,0};
@@ -724,7 +724,7 @@ public class MapMenu extends Window{
                 {
                      if(!button1.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                            ((GameClientScene)owningScene).sendChooseLevelPacket(2);
+                            sceneReference.changeLevel(2);
                      }
                 }
             }
@@ -737,12 +737,12 @@ public class MapMenu extends Window{
        
        correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
-       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(3).mainObjective.complete)
+       if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(3).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
-       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(2).mainObjective.complete)
+       else if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(2).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.25,0};
@@ -776,7 +776,7 @@ public class MapMenu extends Window{
                 if(e.getActionCommand().equals("clicked"))
                 {
                      if(!button2.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
-                        ((GameClientScene)owningScene).sendChooseLevelPacket(3);
+                        sceneReference.changeLevel(3);
                 }
             }
        });
@@ -788,12 +788,12 @@ public class MapMenu extends Window{
        
        correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
-       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(4).mainObjective.complete)
+       if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(4).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
-       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(2).mainObjective.complete)
+       else if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(2).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.25,0};
@@ -828,7 +828,7 @@ public class MapMenu extends Window{
                 if(e.getActionCommand().equals("clicked"))
                 {
                      if(!button3.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
-                        ((GameClientScene)owningScene).sendChooseLevelPacket(4);
+                        sceneReference.changeLevel(4);
                 }
             }
        });
@@ -840,12 +840,12 @@ public class MapMenu extends Window{
        
        correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
-       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(5).mainObjective.complete)
+       if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(5).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
-       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(3).mainObjective.complete || ((GameClientScene)owningScene).hostLevelProgression.levelMap.get(4).mainObjective.complete)
+       else if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(3).mainObjective.complete || sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(4).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.25,0};
@@ -880,7 +880,7 @@ public class MapMenu extends Window{
                 {                       
                      if(!button4.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
-                        ((GameClientScene)owningScene).sendChooseLevelPacket(5);
+                        sceneReference.changeLevel(5);
                         closePanX = new Float(150);
                      }
                 }
@@ -897,12 +897,12 @@ public class MapMenu extends Window{
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
-       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(6).mainObjective.complete)
+       if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(6).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
-       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(5).mainObjective.complete)
+       else if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(5).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.25,0};
@@ -937,7 +937,7 @@ public class MapMenu extends Window{
                 if(e.getActionCommand().equals("clicked"))
                 {
                      if(!button5.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
-                        ((GameClientScene)owningScene).sendChooseLevelPacket(6);
+                        sceneReference.changeLevel(6);
                 }
             }
        });
@@ -951,12 +951,12 @@ public class MapMenu extends Window{
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
-       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(7).mainObjective.complete)
+       if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(7).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
-       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(6).mainObjective.complete)
+       else if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(6).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.25,0};
@@ -991,7 +991,7 @@ public class MapMenu extends Window{
                 if(e.getActionCommand().equals("clicked"))
                 {
                      if(!button6.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
-                        ((GameClientScene)owningScene).sendChooseLevelPacket(7);
+                        sceneReference.changeLevel(7);
                 }
             }
        });
@@ -1004,12 +1004,12 @@ public class MapMenu extends Window{
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
-       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(8).mainObjective.complete)
+       if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(8).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
-       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(6).mainObjective.complete)
+       else if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(6).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.25,0};
@@ -1044,7 +1044,7 @@ public class MapMenu extends Window{
                 if(e.getActionCommand().equals("clicked"))
                 {
                      if(!button7.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
-                        ((GameClientScene)owningScene).sendChooseLevelPacket(8);
+                        sceneReference.changeLevel(8);
                 }
             }
        });
@@ -1057,12 +1057,12 @@ public class MapMenu extends Window{
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
-       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(9).mainObjective.complete)
+       if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(9).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
-       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(7).mainObjective.complete || ((GameClientScene)owningScene).hostLevelProgression.levelMap.get(8).mainObjective.complete)
+       else if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(7).mainObjective.complete || sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(8).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.25,0};
@@ -1097,7 +1097,7 @@ public class MapMenu extends Window{
                 if(e.getActionCommand().equals("clicked"))
                 {
                      if(!button8.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
-                        ((GameClientScene)owningScene).sendChooseLevelPacket(9);
+                        sceneReference.changeLevel(9);
                 }
             }
        });
@@ -1110,12 +1110,12 @@ public class MapMenu extends Window{
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
-       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(10).mainObjective.complete)
+       if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(10).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
-       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(9).mainObjective.complete)
+       else if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(9).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.25,0};
@@ -1150,7 +1150,7 @@ public class MapMenu extends Window{
                 if(e.getActionCommand().equals("clicked"))
                 {
                      if(!button9.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
-                        ((GameClientScene)owningScene).sendChooseLevelPacket(10);
+                        sceneReference.changeLevel(10);
                 }
             }
        });
@@ -1162,12 +1162,12 @@ public class MapMenu extends Window{
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
-       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(11).mainObjective.complete)
+       if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(11).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
-       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(10).mainObjective.complete)
+       else if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(10).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.25,0};
@@ -1202,7 +1202,7 @@ public class MapMenu extends Window{
                 if(e.getActionCommand().equals("clicked"))
                 {
                      if(!button10.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
-                        ((GameClientScene)owningScene).sendChooseLevelPacket(11);
+                        sceneReference.changeLevel(11);
                 }
             }
        });
@@ -1215,12 +1215,12 @@ public class MapMenu extends Window{
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
-       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(12).mainObjective.complete)
+       if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(12).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
-       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(11).mainObjective.complete)
+       else if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(11).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.25,0};
@@ -1255,7 +1255,7 @@ public class MapMenu extends Window{
                 if(e.getActionCommand().equals("clicked"))
                 {
                      if(!button11.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
-                        ((GameClientScene)owningScene).sendChooseLevelPacket(12);
+                        sceneReference.changeLevel(12);
                 }
             }
        });
@@ -1268,12 +1268,12 @@ public class MapMenu extends Window{
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
-       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(13).mainObjective.complete)
+       if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(13).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
-       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(11).mainObjective.complete)
+       else if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(11).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.25,0};
@@ -1308,7 +1308,7 @@ public class MapMenu extends Window{
                 if(e.getActionCommand().equals("clicked"))
                 {
                      if(!button12.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
-                        ((GameClientScene)owningScene).sendChooseLevelPacket(13);
+                        sceneReference.changeLevel(13);
                 }
             }
        });
@@ -1321,12 +1321,12 @@ public class MapMenu extends Window{
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
-       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(14).mainObjective.complete)
+       if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(14).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
-       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(11).mainObjective.complete)
+       else if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(11).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.25,0};
@@ -1361,7 +1361,7 @@ public class MapMenu extends Window{
                 if(e.getActionCommand().equals("clicked"))
                 {
                      if(!button13.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
-                        ((GameClientScene)owningScene).sendChooseLevelPacket(14);
+                        sceneReference.changeLevel(14);
                 }
             }
        });
@@ -1374,12 +1374,12 @@ public class MapMenu extends Window{
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
-       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(15).mainObjective.complete )
+       if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(15).mainObjective.complete )
        {
            correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
-       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(12).mainObjective.complete || ((GameClientScene)owningScene).hostLevelProgression.levelMap.get(13).mainObjective.complete)
+       else if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(12).mainObjective.complete || sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(13).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.25,0};
@@ -1414,7 +1414,7 @@ public class MapMenu extends Window{
                 if(e.getActionCommand().equals("clicked"))
                 {
                      if(!button14.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
-                        ((GameClientScene)owningScene).sendChooseLevelPacket(15);
+                        sceneReference.changeLevel(15);
                 }
             }
        });
@@ -1426,12 +1426,12 @@ public class MapMenu extends Window{
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
-       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(16).mainObjective.complete )
+       if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(16).mainObjective.complete )
        {
            correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
-       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(14).mainObjective.complete || ((GameClientScene)owningScene).hostLevelProgression.levelMap.get(13).mainObjective.complete)
+       else if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(14).mainObjective.complete || sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(13).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.25,0};
@@ -1466,7 +1466,7 @@ public class MapMenu extends Window{
                 if(e.getActionCommand().equals("clicked"))
                 {
                      if(!button15.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
-                        ((GameClientScene)owningScene).sendChooseLevelPacket(16);
+                        sceneReference.changeLevel(16);
                 }
             }
        });
@@ -1479,12 +1479,12 @@ public class MapMenu extends Window{
         
         correctOverlay = new Overlay(new Image("map_lock.png"));  
        //if this map is complete
-       if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(17).mainObjective.complete )
+       if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(17).mainObjective.complete )
        {
            correctOverlay = new Overlay(new Image("map_checkmark.png"));
        }
        //if the prereqs are complete
-       else if(((GameClientScene)owningScene).hostLevelProgression.levelMap.get(15).mainObjective.complete || ((GameClientScene)owningScene).hostLevelProgression.levelMap.get(16).mainObjective.complete)
+       else if(sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(15).mainObjective.complete || sceneReference.getPlayer().getLevelProgressionManager().levelMap.get(16).mainObjective.complete)
        {
            correctOverlay = new Overlay(new Image("map_questionmark.png"));
            Object points[] = {0,.25,0};
@@ -1519,7 +1519,7 @@ public class MapMenu extends Window{
                 if(e.getActionCommand().equals("clicked"))
                 {
                      if(!button16.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
-                        ((GameClientScene)owningScene).sendChooseLevelPacket(17);
+                        sceneReference.changeLevel(17);
                 }
             }
        });

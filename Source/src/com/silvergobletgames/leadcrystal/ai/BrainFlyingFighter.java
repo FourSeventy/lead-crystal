@@ -68,7 +68,7 @@ public class BrainFlyingFighter extends BrainFlying{
                 && !self.isInGroup(ExtendedSceneObjectGroups.HEALER)
                 && !self.getCombatData().isDead()) 
         {
-            this.targetClosestPlayer();
+            this.targetPlayer();
             this.getStateMachine().changeState(AIState.StateID.AGGRESSIVE);
         }
        
@@ -148,7 +148,7 @@ public class BrainFlyingFighter extends BrainFlying{
                 messageGroup(ExtendedSceneObjectGroups.FIGHTER, 500, AIMessage.MSG_ENEMY_FOUND);
                 if (!self.isInGroup(ExtendedSceneObjectGroups.HEALER)) 
                 {
-                    this.targetClosestPlayer();
+                    this.targetPlayer();
                     this.getStateMachine().changeState(AIState.StateID.AGGRESSIVE);
                 }
             }
@@ -178,7 +178,7 @@ public class BrainFlyingFighter extends BrainFlying{
     public void idleExecute()
     {
         //target the closest player
-        this.targetClosestPlayer();
+        this.targetPlayer();
         
         //if we can locate the target within 500 units, switch to agressive. else wander
         if( self.getTarget() != null && this.locate(self.getTarget()))
@@ -213,7 +213,7 @@ public class BrainFlyingFighter extends BrainFlying{
         //if we dont have a target get one
         if(self.getTarget() == null)
         {
-            this.targetClosestPlayer();
+            this.targetPlayer();
         }
         
         // if the target is way out of our range revert out of the aggresive state
@@ -311,7 +311,7 @@ public class BrainFlyingFighter extends BrainFlying{
     protected void lostTargetExecute()
     {
         //target the closest player
-        this.targetClosestPlayer();
+        this.targetPlayer();
         
         //if we can locate the target within unit's locate distance, switch to agressive. else wander
         if( self.getTarget() != null && this.locate(self.getTarget()))

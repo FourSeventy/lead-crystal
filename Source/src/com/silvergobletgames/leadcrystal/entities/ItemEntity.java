@@ -62,34 +62,21 @@ public abstract class ItemEntity extends Entity implements SavableSceneObject
         //code to make the item move to the player if within a certain distance
         if (owningScene != null && this.dontFloatDelay <=0)
         {
-            // get closest player
-            float closestDistance = Float.MAX_VALUE;
-            PlayerEntity closestPlayer = null;
-
-            ArrayList<PlayerEntity> players = ((GameScene)this.getOwningScene()).getPlayers(); 
-            for(PlayerEntity player: players)
-            {
-                if(this.distanceAbs(player) < closestDistance)
-                {
-                    closestDistance = this.distanceAbs(player);
-                    closestPlayer = player;
-                }
-            }
         
-            //hover toward closest player
-            if(closestPlayer != null)
-            {              
-                if (closestDistance <= 200 )
-                {
+            PlayerEntity player = ((GameScene)owningScene).getPlayer();
+            
+            //hover toward player           
+            if (this.distanceAbs(player) <= 200 )
+            {
 
-                    //get vector to player
-                    SylverVector2f vector = this.distanceVector(closestPlayer);
-                    vector.normalise();
-                    vector.scale(100);
+                //get vector to player
+                SylverVector2f vector = this.distanceVector(player);
+                vector.normalise();
+                vector.scale(115);
 
-                    this.body.setVelocity(new Vector2f(vector.x,vector.y));                 
-                }
+                this.body.setVelocity(new Vector2f(vector.x,vector.y));                 
             }
+            
             
             
 
