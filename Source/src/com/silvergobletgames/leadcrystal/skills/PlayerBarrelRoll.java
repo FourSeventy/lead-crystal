@@ -155,7 +155,7 @@ public class PlayerBarrelRoll extends PlayerSkill{
              LeadCrystalParticleEmitters.BombExplosionEmitter emitter = new LeadCrystalParticleEmitters.BombExplosionEmitter();
              emitter.setDuration(15);
              AbstractParticleEmitter fire1 = new LeadCrystalParticleEmitters.GroundFireEmitter1(); 
-             fire1.setParticlesPerFrame(.75f);
+             fire1.setParticlesPerFrame(.250f);
              fire1.setDuration(360);
              explosionHitbox.addEmitter(fire1);
              explosionHitbox.addEmitter(emitter);
@@ -193,6 +193,7 @@ public class PlayerBarrelRoll extends PlayerSkill{
              
              //add fire effects
              AbstractParticleEmitter fire1 = new GroundFireEmitter1(); 
+             fire1.setParticlesPerFrame(.250f);
              fire1.setDuration(360);
              fireHitbox.addEmitter(fire1);             
              AbstractParticleEmitter smoke = new GroundFireSmokeEmitter(); 
@@ -331,6 +332,7 @@ public class PlayerBarrelRoll extends PlayerSkill{
             
              //add fire effects
              AbstractParticleEmitter fire1 = new GroundFireEmitter1(); 
+             fire1.setParticlesPerFrame(.25f);
              fire1.setDuration(360);
            
              AbstractParticleEmitter smoke = new GroundFireSmokeEmitter(); 
@@ -355,6 +357,7 @@ public class PlayerBarrelRoll extends PlayerSkill{
              
              //add fire effects
              AbstractParticleEmitter fire1 = new GroundFireEmitter1(); 
+             fire1.setParticlesPerFrame(.25f);
              fire1.setDuration(360);
              fireHitbox.addEmitter(fire1);             
              AbstractParticleEmitter smoke = new GroundFireSmokeEmitter(); 
