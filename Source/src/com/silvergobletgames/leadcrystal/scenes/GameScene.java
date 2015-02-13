@@ -77,13 +77,11 @@ public class GameScene extends Scene
     private AtomicBoolean lockInput = new AtomicBoolean(false);
      //World Mouse Location
     private SylverVector2f worldMouseLocation = new SylverVector2f(0, 0); 
-    private boolean mouseHoverInRange = false;
-    private boolean mouseHover = false;
-    private boolean mouseOverMenu = false; 
     private String lastHoveredEntityID;
     private String hoveredEntityID;
-    private boolean hoveredEntityInRange;
+    private boolean mouseHoverInRange;
     private boolean hoveredEntityExited;
+    private boolean mouseHover;
     
     //HUD
     private Hud hud;  
@@ -287,9 +285,9 @@ public class GameScene extends Scene
         Body mouse = new Body(new Box(2, 2), 1);
         mouse.setPosition(mouseX, mouseY);
         this.lastHoveredEntityID = this.hoveredEntityID;
-        boolean lastRange = this.hoveredEntityInRange;
+        boolean lastRange = this.mouseHoverInRange;
         this.hoveredEntityID = null;
-        this.hoveredEntityInRange = false;
+        this.mouseHoverInRange = false;
         this.hoveredEntityExited = false;
         boolean rangeChange = false;
 
@@ -319,7 +317,7 @@ public class GameScene extends Scene
                     {
                         rangeChange = true;
                     }
-                    this.hoveredEntityInRange = true;  
+                    this.mouseHoverInRange = true;  
                 }
                 else   
                 {
@@ -327,7 +325,7 @@ public class GameScene extends Scene
                     {
                         rangeChange = true;
                     }
-                    this.hoveredEntityInRange = false;
+                    this.mouseHoverInRange = false;
                 }
             }
             else // mouse is outside an entity
@@ -347,6 +345,16 @@ public class GameScene extends Scene
             this.hoveredEntityExited = true;   
         }
 
+         //send hover packet
+        if((this.hoveredEntityID != null && this.lastHoveredEntityID == null) || rangeChange) 
+        {      
+            this.mouseHover = true;
+        }
+        else if (this.hoveredEntityExited) 
+        {
+            this.mouseHover = false;      
+        }
+                    
         //if we are hovering
         if(this.mouseHover && this.mouseHoverInRange)
         {
@@ -514,7 +522,7 @@ public class GameScene extends Scene
        if(inputSnapshot.isMouseClicked() && !hud.isMouseOverMenu())
         {
             //if we clicked on an interactable object
-            if (this.hoveredEntityID != null && this.hoveredEntityInRange)
+            if (this.hoveredEntityID != null && this.mouseHoverInRange)
             {
                 if(((Entity) this.getSceneObjectManager().get(this.hoveredEntityID)).getScriptObject().getTrigger() == ScriptTrigger.RIGHTCLICK)
                 {
@@ -528,14 +536,14 @@ public class GameScene extends Scene
         //mouse DOWN handling
         if (inputSnapshot.isMouseDown() && !hud.isMouseOverMenu())
         {
-            if (inputSnapshot.buttonClicked() == 1 && !(this.hoveredEntityID != null && this.hoveredEntityInRange) )
+            if (inputSnapshot.buttonClicked() == 1 && !(this.hoveredEntityID != null && this.mouseHoverInRange) )
             {
                 if (player.getSkillAssignment(1) != null && player.getSkillManager().getSkill(player.getSkillAssignment(1)).isUsable())
                 {
                     player.useActionBarSkill(player.getSkillAssignment(1));
                 }
             }
-            else if(inputSnapshot.buttonClicked() == 3 && !(this.hoveredEntityID != null && this.hoveredEntityInRange))
+            else if(inputSnapshot.buttonClicked() == 3 && !(this.hoveredEntityID != null && this.mouseHoverInRange))
             {
                 if (player.getSkillAssignment(2) != null && player.getSkillManager().getSkill(player.getSkillAssignment(2)).isUsable())
                 {
@@ -732,6 +740,7 @@ public class GameScene extends Scene
         }
         
         this.physicsWorld.clear();
+        this.collisionHandler.clearCollisions();
                  
         //Load the objects to the scene
         ArrayList<SimpleEntry<SceneObject,Layer>> sceneObjectList = level.getSceneObjects();
@@ -772,6 +781,7 @@ public class GameScene extends Scene
         //close menus
         hud.mapMenu.close();
         hud.questMenu.close();
+        
         
        //lock input for 3 seconds
         Thread inputLock = new Thread(){
@@ -849,7 +859,7 @@ public class GameScene extends Scene
     private void handleMouseCursorState()
     {
         //if the moues is over a menu, the menu controls the cursor
-        if(this.mouseOverMenu)
+        if(this.hud.isMouseOverMenu())
         {
             return;
         }

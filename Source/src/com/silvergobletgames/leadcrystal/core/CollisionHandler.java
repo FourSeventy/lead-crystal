@@ -53,4 +53,10 @@ public class CollisionHandler implements CollisionListener
         }
         separations.clear();
     }
+    
+    public void clearCollisions()
+    {
+        collisions.clear();
+        separations.clear();
+    }
 }
