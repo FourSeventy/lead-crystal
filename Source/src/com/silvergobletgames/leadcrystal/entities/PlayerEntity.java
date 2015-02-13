@@ -9,9 +9,16 @@ import com.silvergobletgames.leadcrystal.combat.LevelProgressionManager;
 import com.silvergobletgames.leadcrystal.combat.ProcEffect;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.core.*;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBlackBodyAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBlackFrontArmAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBlueBodyAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownBackArmAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownBodyAnimationPack;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownFrontArmAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashGreenBodyAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashRedBodyAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashWhiteBodyAnimationPack;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashYellowBodyAnimationPack;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.JetpackEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.RocketExplosionEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SandSpurtEmitter;
@@ -1203,6 +1210,47 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
          this.head.setHorizontalFlip(flipped);
          this.head.setScale(1.10f);
          this.head.setAnchor(Anchorable.Anchor.CENTER);
+         float xPosOffset, yPosOffset;
+        if(this.image.getAnimationPack() instanceof AnimationPackClasses.BashBrownBodyAnimationPack)
+        {
+            xPosOffset = -2;
+            yPosOffset = 15;
+        }
+        else if(this.image.getAnimationPack() instanceof AnimationPackClasses.BashBlackBodyAnimationPack )
+        {
+            xPosOffset = -2;
+            yPosOffset = 15;
+        }
+        else if(this.image.getAnimationPack() instanceof AnimationPackClasses.BashBlueBodyAnimationPack )
+        {
+            xPosOffset = -3;
+            yPosOffset = 14;
+        }
+        else if(this.image.getAnimationPack() instanceof AnimationPackClasses.BashGreenBodyAnimationPack)
+        {
+            xPosOffset = -2;
+            yPosOffset = 14;
+        }
+        else if(this.image.getAnimationPack() instanceof AnimationPackClasses.BashRedBodyAnimationPack)
+        {
+            xPosOffset = -2;
+            yPosOffset = 15;
+        }
+        else if(this.image.getAnimationPack() instanceof AnimationPackClasses.BashWhiteBodyAnimationPack)
+        {
+            xPosOffset = -2;
+            yPosOffset = 15;
+        }
+        else if(this.image.getAnimationPack() instanceof AnimationPackClasses.BashYellowBodyAnimationPack)
+        {
+            xPosOffset = -2;
+            yPosOffset = 13;
+        }
+        else
+        {
+            xPosOffset = -2;
+            yPosOffset = 15;
+        }
          if(!flipped)
          {
              float angle =(float)(theta * (180f/Math.PI));
@@ -1216,9 +1264,12 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
              
              
              float xOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
-             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;           
-             float xPos = -2 +this.image.getPosition().x + this.image.getWidth()*xOffset;
-             float yPos = 15+this.image.getPosition().y + this.image.getHeight()*yOffset;           
+             float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;   
+             
+             
+             
+             float xPos = xPosOffset +this.image.getPosition().x + this.image.getWidth()*xOffset;
+             float yPos = yPosOffset+this.image.getPosition().y + this.image.getHeight()*yOffset;           
              this.head.setPositionAnchored(xPos,yPos);
              
          }
@@ -1237,8 +1288,8 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
              
              float xOffset = 1- this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).x;
              float yOffset = this.bodyPartOffsets.get(this.image.getAnimation()).get(this.image.getAnimationIndex()).y;           
-             float xPos = 2 + this.image.getPosition().x + this.image.getWidth()*xOffset; 
-             float yPos = 15+this.image.getPosition().y + this.image.getHeight()*yOffset;            
+             float xPos = -xPosOffset + this.image.getPosition().x + this.image.getWidth()*xOffset; 
+             float yPos = yPosOffset+this.image.getPosition().y + this.image.getHeight()*yOffset;            
              this.head.setPositionAnchored(xPos,yPos);
          }         
     
