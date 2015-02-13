@@ -15,7 +15,7 @@ import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.GreenB
 import com.silvergobletgames.leadcrystal.entities.EntityEffect.EntityEffectType;
 import com.silvergobletgames.leadcrystal.items.DropGenerator;
 import com.silvergobletgames.leadcrystal.items.DropGenerator.DropQuality;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.leadcrystal.skills.Skill;
 import com.silvergobletgames.leadcrystal.skills.SkillManager;
 import com.silvergobletgames.sylver.audio.Sound;

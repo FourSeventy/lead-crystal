@@ -9,7 +9,7 @@ import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.HitBox;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.graphics.AbstractParticleEmitter;
@@ -205,7 +205,7 @@ public class PlayerBoomerang extends PlayerSkill
              {
                 //reset cooldown
                  skill.setCooldownRemaining(0);
-                 ((GameServerScene)this.getOwningScene()).sendSkillCooldownPacket(UUID.fromString(this.sourceEntity.getID()), skill.getSkillID());
+                 ((GameScene)this.getOwningScene()).sendSkillCooldownPacket(UUID.fromString(this.sourceEntity.getID()), skill.getSkillID());
                  
                 //add effect
                 Image effectImage = new Image("shockwaveParticle.png");

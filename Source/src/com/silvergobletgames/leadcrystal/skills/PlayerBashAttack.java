@@ -7,7 +7,7 @@ import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.entities.*;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene.Layer;
 import com.silvergobletgames.sylver.graphics.Color;
@@ -64,8 +64,8 @@ public class PlayerBashAttack extends Skill{
         
         //Get target X and Y
         PlayerEntity player = (PlayerEntity) user;
-        float targetX = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationX;
-        float targetY = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationY;
+        float targetX = ((GameScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationX;
+        float targetY = ((GameScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationY;
         
         //Get user X and Y
         float userX = origin.x;

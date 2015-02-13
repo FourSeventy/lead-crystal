@@ -18,7 +18,7 @@ import net.phys2d.raw.Body;
 import com.silvergobletgames.leadcrystal.ai.BrainFactory.BrainID;
 import com.silvergobletgames.leadcrystal.combat.SoundPack;
 import com.silvergobletgames.leadcrystal.entities.EntityTooltip.EntityTooltipField;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.leadcrystal.skills.SkillManager;
 import com.silvergobletgames.leadcrystal.combat.SoundPack.SoundPackID;
 import com.silvergobletgames.leadcrystal.core.AnimationPackClasses;
@@ -114,9 +114,9 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
         this.body.setFriction(10);
         
         //clear arbiters
-        if(this.owningScene instanceof GameServerScene)
+        if(this.owningScene instanceof GameScene)
         {
-            ((GameServerScene)this.owningScene).clearArbitersOnBody(body);
+            ((GameScene)this.owningScene).clearArbitersOnBody(body);
         }       
         //set masks
         body.setBitmask(Entity.BitMasks.COLLIDE_WORLD.value);

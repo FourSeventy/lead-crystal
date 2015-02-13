@@ -23,7 +23,7 @@ import com.silvergobletgames.leadcrystal.netcode.GobletServer;
 import com.silvergobletgames.leadcrystal.netcode.OpenInstructionalTipPacket.InstructionalTip;
 import com.silvergobletgames.leadcrystal.netcode.OpenMenuPacket.MenuID;
 import com.silvergobletgames.leadcrystal.netcode.SideObjectiveCompletePacket;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.core.Scene;
@@ -54,7 +54,7 @@ public class SceneScriptManager
 {
     
     //owning scene
-    private GameServerScene owningScene;
+    private GameScene owningScene;
     //world data
     private HashMap<String,Float> worldDataVariables = new HashMap();
     
@@ -62,7 +62,7 @@ public class SceneScriptManager
     // Constructor
     //==================
     
-    public SceneScriptManager(GameServerScene scene)
+    public SceneScriptManager(GameScene scene)
     {
         this.owningScene = scene;
     }
@@ -239,7 +239,7 @@ public class SceneScriptManager
     public void openAllClientDialogue(String speaker, String text)
     {
         //for each player in the scene
-        ArrayList<PlayerEntity> playerList = new ArrayList(((GameServerScene)this.owningScene).players);
+        ArrayList<PlayerEntity> playerList = new ArrayList(((GameScene)this.owningScene).players);
         for(PlayerEntity player :playerList)
         { 
             this.openClientDialogue(player.getID(), speaker, text);
@@ -253,7 +253,7 @@ public class SceneScriptManager
     public void completeSideObjective(int levelNumber)
     {
         
-        ArrayList<PlayerEntity> playerList = new ArrayList(((GameServerScene)this.owningScene).players);
+        ArrayList<PlayerEntity> playerList = new ArrayList(((GameScene)this.owningScene).players);
         for(PlayerEntity player :playerList)
         {   
             //figure out if it is newly completed
@@ -304,7 +304,7 @@ public class SceneScriptManager
     public void completeMainObjective(int levelNumber)
     {
         //for each player in the scene
-        ArrayList<PlayerEntity> playerList = new ArrayList(((GameServerScene)this.owningScene).players);
+        ArrayList<PlayerEntity> playerList = new ArrayList(((GameScene)this.owningScene).players);
         for(PlayerEntity player :playerList)
         {                       
             //flags for completion packet
@@ -455,7 +455,7 @@ public class SceneScriptManager
     {
        this.completeLevel("checkpoint1");
        
-       ArrayList<PlayerEntity> playerList = new ArrayList(((GameServerScene)this.owningScene).players);
+       ArrayList<PlayerEntity> playerList = new ArrayList(((GameScene)this.owningScene).players);
        for(PlayerEntity player :playerList)
        {
            this.owningScene.sendSaveGamePacket(UUID.fromString(player.getID()));
@@ -469,7 +469,7 @@ public class SceneScriptManager
     public void completeLevel(String destination)
     {
         //for each player in the scene
-        ArrayList<PlayerEntity> playerList = new ArrayList(((GameServerScene)this.owningScene).players);
+        ArrayList<PlayerEntity> playerList = new ArrayList(((GameScene)this.owningScene).players);
         for(PlayerEntity player :playerList)
         {  
             //heals players and removes all ailments
@@ -499,7 +499,7 @@ public class SceneScriptManager
      */
     public void enablePVP(String clientID)
     {
-        ((GameServerScene)this.owningScene).clientsInScene.get(UUID.fromString(clientID)).player.getBody().setOverlapMask(Entity.OverlapMasks.PVP_PLAYER.value);
+        ((GameScene)this.owningScene).clientsInScene.get(UUID.fromString(clientID)).player.getBody().setOverlapMask(Entity.OverlapMasks.PVP_PLAYER.value);
     }
     
     /**
@@ -508,7 +508,7 @@ public class SceneScriptManager
      */
     public void disablePVP(String clientID)
     {
-        ((GameServerScene)this.owningScene).clientsInScene.get(UUID.fromString(clientID)).player.getBody().setOverlapMask(Entity.OverlapMasks.PLAYER.value);
+        ((GameScene)this.owningScene).clientsInScene.get(UUID.fromString(clientID)).player.getBody().setOverlapMask(Entity.OverlapMasks.PLAYER.value);
     }
     
     /**

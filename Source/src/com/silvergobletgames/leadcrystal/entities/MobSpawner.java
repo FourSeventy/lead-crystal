@@ -5,7 +5,7 @@ import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectClasses;
 import com.silvergobletgames.leadcrystal.core.GameplaySettings;
 import com.silvergobletgames.leadcrystal.core.SpawningEffectsFactory;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.leadcrystal.scenes.MapEditorScene;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene.Layer;
@@ -74,7 +74,7 @@ public class MobSpawner extends Entity implements SavableSceneObject
     {
         super.collidedWith(other, event);
         
-        if(other instanceof PlayerEntity && owningScene instanceof GameServerScene && this.spawnOnPlayerCollide)
+        if(other instanceof PlayerEntity && owningScene instanceof GameScene && this.spawnOnPlayerCollide)
         {   
             
             if(this.armed == true)  

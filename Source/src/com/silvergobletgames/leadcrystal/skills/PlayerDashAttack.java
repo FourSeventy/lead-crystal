@@ -9,7 +9,7 @@ import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect;
 import com.silvergobletgames.leadcrystal.entities.HitBox;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.graphics.Color;
@@ -50,8 +50,8 @@ public class PlayerDashAttack extends Skill{
                         
        
          //Get target X and Y
-        float targetX = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationX;
-        float targetY = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationY;
+        float targetX = ((GameScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationX;
+        float targetY = ((GameScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationY;
         
         //Get user X and Y
         float userX = user.getPosition().x;

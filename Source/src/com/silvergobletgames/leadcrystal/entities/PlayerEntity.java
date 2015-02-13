@@ -32,7 +32,7 @@ import com.silvergobletgames.leadcrystal.items.Potion;
 import com.silvergobletgames.leadcrystal.netcode.ClientInputPacket;
 import com.silvergobletgames.leadcrystal.netcode.PlayerPredictionData;
 import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.leadcrystal.scripting.PageCondition;
 import com.silvergobletgames.leadcrystal.scripting.ScriptObject;
 import com.silvergobletgames.leadcrystal.scripting.ScriptPage;
@@ -627,15 +627,15 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     public void die() 
     {      
         //if in level0 you cant die
-        if(this.getOwningScene() != null && this.getOwningScene() instanceof GameServerScene && ((GameServerScene)this.getOwningScene()).getActiveLevel() != null && ((GameServerScene)this.getOwningScene()).getActiveLevel().filename.equals("desert0.lv"))
+        if(this.getOwningScene() != null && this.getOwningScene() instanceof GameScene && ((GameScene)this.getOwningScene()).getActiveLevel() != null && ((GameScene)this.getOwningScene()).getActiveLevel().filename.equals("desert0.lv"))
         {
             this.getCombatData().fullHeal();
             return;
         }
         
         //clear arbiters
-        if(this.owningScene instanceof GameServerScene)
-           ((GameServerScene) owningScene).physicsWorld.clearArbiters(this.body);
+        if(this.owningScene instanceof GameScene)
+           ((GameScene) owningScene).physicsWorld.clearArbiters(this.body);
         else if(this.owningScene instanceof GameClientScene)
            ((GameClientScene) owningScene).physicsWorld.clearArbiters(this.body);
         
@@ -706,8 +706,8 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     {
         
         //clear arbiters
-        if(this.owningScene instanceof GameServerScene)
-           ((GameServerScene) owningScene).physicsWorld.clearArbiters(this.body);
+        if(this.owningScene instanceof GameScene)
+           ((GameScene) owningScene).physicsWorld.clearArbiters(this.body);
         else if(this.owningScene instanceof GameClientScene)
            ((GameClientScene) owningScene).physicsWorld.clearArbiters(this.body);
         
@@ -917,15 +917,15 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     {
         super.addedToScene();
         
-        if(this.owningScene instanceof GameServerScene)
+        if(this.owningScene instanceof GameScene)
         {
-            if(((GameServerScene)this.owningScene).clientsInScene.get(UUID.fromString(this.ID)).currentLevel.equals("town.lv") && this.respawnWhenEnterTown == true)
+            if(((GameScene)this.owningScene).clientsInScene.get(UUID.fromString(this.ID)).currentLevel.equals("town.lv") && this.respawnWhenEnterTown == true)
             {
                 //respawn the player
                  this.respawn();
 
                 //send respawn packet
-                ((GameServerScene)this.getOwningScene()).sendRespawnPacket(UUID.fromString(this.ID));
+                ((GameScene)this.getOwningScene()).sendRespawnPacket(UUID.fromString(this.ID));
                 
                 this.respawnWhenEnterTown = false;
 

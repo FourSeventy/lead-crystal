@@ -81,78 +81,11 @@ public final class GameClientScene extends Scene
     // Client Specific Data
     //=====================
     
-    //the client object we will use to communicate to the server
-    private Client client;
-    //ClientID assigned to this client
-    protected UUID clientID;     
-    //packetSequencer
-    private PacketSequencer packetSequencer = new PacketSequencer();
-    //sent packets map
-    private LinkedHashMap<Long,Packet> sentPacketsMap = new LinkedHashMap(150,.75f, false){ 
-            private static final int MAX_ENTRIES = 100;
-
-            @Override
-            protected boolean removeEldestEntry(Map.Entry eldest) {
-               return size() > MAX_ENTRIES;
-            }};
-    //set of recieved packet sequence numbers ( max size 30)
-    private LinkedHashMap<Long,Packet> receivedSequenceNumbers = new LinkedHashMap(30,.75f,false){ 
-            private static final int MAX_ENTRIES = 30;
-
-            @Override
-            protected boolean removeEldestEntry(Map.Entry eldest) {
-               return size() > MAX_ENTRIES;
-            }};
-    //remove sequence number
-    private long remoteSequenceNumber;   
-    //player historical position data
-    private LinkedHashMap<Long,PlayerPredictionData> playerHistoricalData = new LinkedHashMap(450){ 
-            private static final int MAX_ENTRIES = 300;
-
-            @Override
-            protected boolean removeEldestEntry(Map.Entry eldest) {
-            return size() > MAX_ENTRIES;
-            }};
-    private long lastInputPacket = 0; 
-    private HashMap<Long,ClientInputPacket> historicalInputMap = new LinkedHashMap(450){ 
-            private static final int MAX_ENTRIES = 30;
-
-            @Override
-            protected boolean removeEldestEntry(Map.Entry eldest) {
-            return size() > MAX_ENTRIES;
-            }};
-    //image animation list
-    private CopyOnWriteArrayList<Image> imageUpdateList = new CopyOnWriteArrayList();
-    //host data used for host specific
-    public LevelProgressionManager hostLevelProgression;
-    //ping stuff
-    private long pingTimer = 0;
-    private int lastPingTime = 0;
-    private long lostPackets = 0;
+   
     //lock input 
     public AtomicBoolean lockInput = new AtomicBoolean(false);
     
-    //==========================================
-    // Incoming Data
-    // - This is the data that will be coming 
-    //   in from the server
-    //==========================================
-    
-    //incoming packet queue
-    public ConcurrentLinkedQueue<Packet> incomingPacketQueue = new ConcurrentLinkedQueue();
-    
-    //the last packets of scene data recieved from the server
-    private long renderPacketArrivedTimestamp;
-    private final int interpolationTime = 50; //50ms   this is the time in ms between expected renderData packets
-    private RenderDataPacket workingRenderDataPacket;
-    private ConcurrentLinkedQueue<RenderDataPacket> renderDataQueue = new ConcurrentLinkedQueue<>();
-    
-    //sound data queue
-    private SoundDataPacket workingSoundDataPacket;
-    private ConcurrentLinkedQueue<SoundDataPacket> soundDataQueue = new ConcurrentLinkedQueue<>();
-    
-    //queued level change
-    private ChangeLevelPacket workingChangeLevel;
+
     
     
     //===============
@@ -165,22 +98,15 @@ public final class GameClientScene extends Scene
     //Player Entity
     public ClientPlayerEntity player;    
     public PlayerEntity playerServerTime;
-    //HUD
-    public Hud hud;  
-    //World Mouse Location
-    public Point worldMouseLocation = new Point(0, 0); 
-    private boolean mouseHoverInRange = false;
-    private boolean mouseHover = false;
-    private boolean mouseOverMenu = false; 
     
-    //active save game file
-    private SaveGame activeSaveGame;
+   
+    
+    
     //active level data
     public LevelData activeLevelData;   
     //Map editor flag (loaded level path)
     private String mapEditorPath;    
-    //cutscene manager
-    private CutsceneManager cutsceneManager;
+    
     
    
     

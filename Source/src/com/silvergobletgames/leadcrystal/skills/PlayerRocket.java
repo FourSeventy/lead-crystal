@@ -18,7 +18,7 @@ import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.RocketExplosionEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.RocketSmokeEmitter;
 import com.silvergobletgames.leadcrystal.entities.*;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.graphics.*;

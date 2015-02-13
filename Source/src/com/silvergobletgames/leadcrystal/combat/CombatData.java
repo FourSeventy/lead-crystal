@@ -14,7 +14,7 @@ import com.silvergobletgames.leadcrystal.entities.CombatEntity;
 import com.silvergobletgames.leadcrystal.items.DropGenerator;
 import com.silvergobletgames.leadcrystal.items.DropGenerator.DropChance;
 import com.silvergobletgames.leadcrystal.items.DropGenerator.DropQuality;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 
 
 /**

@@ -2,7 +2,7 @@ package com.silvergobletgames.leadcrystal.skills;
 
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.sylver.graphics.AbstractParticleEmitter;
 import com.silvergobletgames.sylver.graphics.Anchorable;
 import com.silvergobletgames.sylver.graphics.AnimationPack;
@@ -47,8 +47,8 @@ public abstract class PlayerSkill extends Skill
         PlayerEntity player = (PlayerEntity) user;
         
         //Get target X and Y
-        float targetX = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationX;
-        float targetY = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationY;
+        float targetX = ((GameScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationX;
+        float targetY = ((GameScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationY;
         
         //Get user X and Y
         float userX = origin.x;

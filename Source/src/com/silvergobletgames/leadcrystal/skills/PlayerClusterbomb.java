@@ -10,7 +10,7 @@ import com.silvergobletgames.leadcrystal.entities.*;
 import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect;
 import com.silvergobletgames.leadcrystal.entities.HitBox;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene.Layer;
 import com.silvergobletgames.sylver.graphics.*;

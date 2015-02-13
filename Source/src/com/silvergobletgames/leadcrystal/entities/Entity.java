@@ -6,7 +6,7 @@ import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
 import com.silvergobletgames.leadcrystal.core.GameplaySettings;
 import com.silvergobletgames.leadcrystal.netcode.GobletServer;
 import com.silvergobletgames.leadcrystal.scenes.GameClientScene;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.leadcrystal.scripting.ScriptObject;
 import com.silvergobletgames.leadcrystal.scripting.ScriptObject.ScriptTrigger;
 import com.silvergobletgames.sylver.core.Game;
@@ -264,7 +264,7 @@ public class Entity extends NetworkedSceneObject implements AnimationListener
         }
         
         //Updates the script object
-        if (scriptObject != null && owningScene instanceof GameServerScene)
+        if (scriptObject != null && owningScene instanceof GameScene)
             scriptObject.update();
         
         //updates the tooltip

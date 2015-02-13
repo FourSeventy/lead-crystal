@@ -1,7 +1,7 @@
 package com.silvergobletgames.leadcrystal.scripting;
 
 import com.silvergobletgames.leadcrystal.entities.Entity;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.sylver.netcode.SaveData;
 import com.silvergobletgames.sylver.util.Log;
 import java.util.logging.Level;
@@ -42,7 +42,7 @@ public class ScriptPage
     {
         //gets self and sceneScriptManager references
         Entity entity =this.owningScriptObject.getOwningEntity();
-        SceneScriptManager manager =((GameServerScene)this.owningScriptObject.getOwningEntity().getOwningScene()).getScriptManager();
+        SceneScriptManager manager =((GameScene)this.owningScriptObject.getOwningEntity().getOwningScene()).getScriptManager();
         
         try
         {

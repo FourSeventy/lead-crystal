@@ -8,7 +8,7 @@ import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.FlameStrikeParticleEmitter;
 import com.silvergobletgames.leadcrystal.entities.*;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene.Layer;
 import com.silvergobletgames.sylver.graphics.Anchorable;

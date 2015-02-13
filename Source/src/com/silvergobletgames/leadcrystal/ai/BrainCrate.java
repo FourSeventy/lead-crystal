@@ -11,7 +11,7 @@ import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
 import com.silvergobletgames.leadcrystal.items.DropGenerator;
 import com.silvergobletgames.leadcrystal.items.LootSpewer;
 import com.silvergobletgames.leadcrystal.netcode.GobletServer;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.util.SylverVector2f;

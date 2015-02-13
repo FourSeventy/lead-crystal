@@ -14,7 +14,7 @@ import com.silvergobletgames.leadcrystal.ai.BrainFactory.BrainID;
 import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
 import com.silvergobletgames.leadcrystal.entities.Entity;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.leadcrystal.skills.Skill;
 import com.silvergobletgames.leadcrystal.skills.Skill.SkillID;
 import com.silvergobletgames.sylver.util.SylverRandom;
@@ -149,7 +149,7 @@ public class Brain
         float closestDistance = Float.MAX_VALUE;
         PlayerEntity closestPlayer = null;
         
-        ArrayList<PlayerEntity> players = ((GameServerScene)self.getOwningScene()).getPlayers(); 
+        ArrayList<PlayerEntity> players = ((GameScene)self.getOwningScene()).getPlayers(); 
         for(PlayerEntity player: players)
         {
             if(self.distanceAbs(player) < closestDistance)
@@ -169,7 +169,7 @@ public class Brain
         float closestDistance = Float.MAX_VALUE;
         PlayerEntity closestPlayer = null;
         
-        ArrayList<PlayerEntity> players = ((GameServerScene)self.getOwningScene()).getPlayers(); 
+        ArrayList<PlayerEntity> players = ((GameScene)self.getOwningScene()).getPlayers(); 
         for(PlayerEntity player: players)
         {
             if(self.distanceAbs(player) < closestDistance)

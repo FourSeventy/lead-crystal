@@ -11,7 +11,7 @@ import com.silvergobletgames.leadcrystal.entities.CombatEntity;
 import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.HitBox;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene.Layer;
 import com.silvergobletgames.sylver.graphics.*;
@@ -61,8 +61,8 @@ public class PlayerWard extends PlayerSkill{
         float theta = targetingData.theta;
         
         PlayerEntity player = (PlayerEntity) user;
-        float targetX = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationX;
-        float targetY = ((GameServerScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationY;
+        float targetX = ((GameScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationX;
+        float targetY = ((GameScene)player.getOwningScene()).clientsInScene.get(UUID.fromString(player.getID())).currentInputPacket.mouseLocationY;
         
        
        //build body of the hitbox

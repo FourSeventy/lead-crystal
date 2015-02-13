@@ -8,7 +8,7 @@ import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
 import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
 import net.phys2d.raw.Body;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.sylver.graphics.AnimationPack.ImageAnimation;
 
 

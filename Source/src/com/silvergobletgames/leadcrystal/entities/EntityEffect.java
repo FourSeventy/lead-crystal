@@ -1,6 +1,6 @@
 package com.silvergobletgames.leadcrystal.entities;
 
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.sylver.core.Effect;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.graphics.Image;
@@ -82,9 +82,9 @@ public class EntityEffect extends Effect
         {
             if(this.owningEntity.getOwningScene() != null)   
             {
-                if(this.owningEntity.getOwningScene() instanceof GameServerScene)
+                if(this.owningEntity.getOwningScene() instanceof GameScene)
                 {
-                    ((GameServerScene)this.owningEntity.getOwningScene()).physicsWorld.remove(this.owningEntity.getBody());
+                    ((GameScene)this.owningEntity.getOwningScene()).physicsWorld.remove(this.owningEntity.getBody());
 //                  
                 }
             }

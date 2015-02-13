@@ -10,7 +10,7 @@ import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.shapes.Box;
 import com.silvergobletgames.leadcrystal.entities.EntityTooltip.EntityTooltipField;
-import com.silvergobletgames.leadcrystal.scenes.GameServerScene;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.sylver.graphics.MultiImageEffect;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 import java.util.ArrayList;
@@ -66,7 +66,7 @@ public abstract class ItemEntity extends Entity implements SavableSceneObject
             float closestDistance = Float.MAX_VALUE;
             PlayerEntity closestPlayer = null;
 
-            ArrayList<PlayerEntity> players = ((GameServerScene)this.getOwningScene()).getPlayers(); 
+            ArrayList<PlayerEntity> players = ((GameScene)this.getOwningScene()).getPlayers(); 
             for(PlayerEntity player: players)
             {
                 if(this.distanceAbs(player) < closestDistance)
