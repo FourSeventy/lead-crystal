@@ -113,6 +113,7 @@ public class GameScene extends Scene
         physicsWorld.enableRestingBodyDetection(1f, 1f, 1f);
         
         //load level
+           //figure out which level to load
         
         //add player
         
@@ -731,8 +732,10 @@ public class GameScene extends Scene
             this.add(entry.getKey(), entry.getValue());
         }
         
-
+        //add player back into scene
+        this.add(this.player, Layer.MAIN);
         
+      
         //set which level is active
         this.activeLevel = level;
         

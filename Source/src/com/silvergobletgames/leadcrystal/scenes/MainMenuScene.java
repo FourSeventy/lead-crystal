@@ -6,9 +6,6 @@ import com.silvergobletgames.leadcrystal.core.GameplaySettings;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.core.SaveGame;
 import com.silvergobletgames.leadcrystal.menus.ErrorMenu;
-import com.silvergobletgames.leadcrystal.netcode.ConnectionException;
-import com.silvergobletgames.leadcrystal.netcode.GobletServer;
-import com.silvergobletgames.leadcrystal.netcode.GobletServer.ServerConfiguration;
 import com.silvergobletgames.leadcrystal.scenes.NewCharacterScene.PlayerMock;
 import com.silvergobletgames.sylver.audio.AudioRenderer;
 import com.silvergobletgames.sylver.audio.Sound;
@@ -68,25 +65,25 @@ public class MainMenuScene extends Scene
 //        this.add(leadCrystal,Layer.MAIN);
         
         //single player
-        final Text singlePlayerText = new Text("Single Player",LeadCrystalTextType.MENU54);
-        singlePlayerText.setPosition(center - singlePlayerText.getWidth()/2, 525);
-        final Button singlePlayerButton = new Button(new Image("blank.png"), center - singlePlayerText.getWidth()/2, singlePlayerText.getPosition().y, singlePlayerText.getWidth(), singlePlayerText.getHeight());
-        this.add(singlePlayerText,Layer.MAIN);
-        this.add(singlePlayerButton,Layer.MAIN);
-        singlePlayerButton.addActionListener(new ActionListener() {
+        final Text newGameText = new Text("New Game",LeadCrystalTextType.MENU54);
+        newGameText.setPosition(center - newGameText.getWidth()/2, 525);
+        final Button newGameButton = new Button(new Image("blank.png"), center - newGameText.getWidth()/2, newGameText.getPosition().y, newGameText.getWidth(), newGameText.getHeight());
+        this.add(newGameText,Layer.MAIN);
+        this.add(newGameButton,Layer.MAIN);
+        newGameButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("clicked")) 
                 {
-                    singleplayerButton_click();
+                    newGameButtonClick();
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
                 {
                     
-                      if(singlePlayerText.hasTextEffect("small"))
-                          singlePlayerText.removeTextEffect("small");
+                      if(newGameText.hasTextEffect("small"))
+                          newGameText.removeTextEffect("small");
                       
-                       singlePlayerText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, singlePlayerText.getScale(), 1.20f));
+                       newGameText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, newGameText.getScale(), 1.20f));
                     
                     //play sound
                     if(MainMenuScene.this.inScene)
@@ -97,34 +94,34 @@ public class MainMenuScene extends Scene
                 }
                 if (e.getActionCommand().equals("mouseExited"))
                 {
-                        if(singlePlayerText.hasTextEffect("big"))
-                           singlePlayerText.removeTextEffect("big");
+                        if(newGameText.hasTextEffect("big"))
+                           newGameText.removeTextEffect("big");
                         
-                        singlePlayerText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, singlePlayerText.getScale(), 1f));
+                        newGameText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, newGameText.getScale(), 1f));
                 }
             }
         });
         
         //multiplayer 
-        final Text multiPlayerText = new Text("Multiplayer",LeadCrystalTextType.MENU54);
-        multiPlayerText.setPosition(center - multiPlayerText.getWidth()/2, 425);
-        final Button multiPlayerButton = new Button(new Image("blank.png"), center - multiPlayerText.getWidth()/2, multiPlayerText.getPosition().y, multiPlayerText.getWidth(), multiPlayerText.getHeight());
-        this.add(multiPlayerText,Layer.MAIN);
-        this.add(multiPlayerButton,Layer.MAIN);
-        multiPlayerButton.addActionListener(new ActionListener() {
+        final Text loadGameText = new Text("Load Game",LeadCrystalTextType.MENU54);
+        loadGameText.setPosition(center - loadGameText.getWidth()/2, 425);
+        final Button loadGameButton = new Button(new Image("blank.png"), center - loadGameText.getWidth()/2, loadGameText.getPosition().y, loadGameText.getWidth(), loadGameText.getHeight());
+        this.add(loadGameText,Layer.MAIN);
+        this.add(loadGameButton,Layer.MAIN);
+        loadGameButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("clicked")) 
                 {
-                    multiplayerButton_click();
+                    loadGameButtonClick();
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
                 {
                     
-                      if(multiPlayerText.hasTextEffect("small"))
-                          multiPlayerText.removeTextEffect("small");
+                      if(loadGameText.hasTextEffect("small"))
+                          loadGameText.removeTextEffect("small");
                       
-                       multiPlayerText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, multiPlayerText.getScale(), 1.2));
+                       loadGameText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, loadGameText.getScale(), 1.2));
                     
                     //play sound
                     if(MainMenuScene.this.inScene)
@@ -135,10 +132,10 @@ public class MainMenuScene extends Scene
                 }
                 if (e.getActionCommand().equals("mouseExited"))
                 {
-                        if(multiPlayerText.hasTextEffect("big"))
-                           multiPlayerText.removeTextEffect("big");
+                        if(loadGameText.hasTextEffect("big"))
+                           loadGameText.removeTextEffect("big");
                         
-                        multiPlayerText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, multiPlayerText.getScale(), 1));
+                        loadGameText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, loadGameText.getScale(), 1));
                 }
             }
         });
@@ -332,22 +329,18 @@ public class MainMenuScene extends Scene
     // Handle Clicks
     //===============
     
-    public void singleplayerButton_click() 
+    public void newGameButtonClick() 
     {
-        //build args to send to the character selection screen
-        ArrayList args = new ArrayList();
-        args.add("Singleplayer");
-        
-        //load and switch scenes
-        Game.getInstance().loadScene( new CharacterSelectionScene());
-        Game.getInstance().changeScene(CharacterSelectionScene.class,args);
+        //change to new character scene
+        Game.getInstance().loadScene(new NewCharacterScene());
+        ArrayList<String> args = new ArrayList();
+        Game.getInstance().changeScene(NewCharacterScene.class, args);
     }
     
-    private void multiplayerButton_click()
+    private void loadGameButtonClick()
     {
         //build args to send to the character selection screen
         ArrayList args = new ArrayList();
-        args.add("Multiplayer");
         
         //load and switch scenes
         Game.getInstance().loadScene(new CharacterSelectionScene());
@@ -409,7 +402,7 @@ public class MainMenuScene extends Scene
     // Static Methods
     //================
     
-    public static void startSinglePlayerGame(final PlayerMock playerMock)
+    public static void startGame(final PlayerMock playerMock)
     {                 
                         
         //load loading scene
@@ -425,34 +418,12 @@ public class MainMenuScene extends Scene
                 // once we are all loaded get save game from player mock
                 SaveGame saveGame = playerMock.buildSaveGameData();
        
-                //start a server
-                ServerConfiguration config = new ServerConfiguration();
-                config.singlePlayer = true;
-                config.tcpPort = GameplaySettings.getInstance().tcpPort + 100; //adding 100 keeps multiplayer and single player games from interfearing
-                config.udpPort = GameplaySettings.getInstance().udpPort + 100;
-                Game.getInstance().addRunnable("Goblet Server", new GobletServer(config));
-
-                //load game client scene
-                Game.getInstance().loadScene(new GameClientScene(saveGame)); 
-
-                //connect to server
-                try
-                {
-                    ((GameClientScene)Game.getInstance().getScene(GameClientScene.class)).connectToServer( "127.0.0.1", config.tcpPort,config.udpPort);                   
-                }
-                catch(ConnectionException e)
-                {
-                    System.err.println("Couldnt connect: " + e.reason);
-                    return;
-                }
-
-                try{
-                    Thread.sleep(200);
-                }
-                catch(Exception e){}
+                
+                //load game scene
+                Game.getInstance().loadScene(new GameScene(saveGame));                 
                 
                 //switch to GameClientScene
-                Game.getInstance().changeScene(GameClientScene.class,null); 
+                Game.getInstance().changeScene(GameScene.class,null); 
 
                 //unload character selection scene
                 Game.getInstance().unloadScene(CharacterSelectionScene.class);
@@ -493,190 +464,5 @@ public class MainMenuScene extends Scene
                  
     }
     
-    public static void hostMultiPlayerGame(final PlayerMock playerMock, final ServerConfiguration config)
-    {
-        Game.getInstance().loadScene(new LoadingScene());
-        Game.getInstance().changeScene(LoadingScene.class, null);
 
-        final Thread gameLaunchThread = new Thread()
-        {
-            @Override
-            public void run()
-            {
-                //if game client is loaded for some reason unload it
-                if(Game.getInstance().isLoaded(GameClientScene.class))
-                    Game.getInstance().unloadScene(GameClientScene.class);
-                
-                // once we are all loaded get save game from player mock
-                SaveGame saveGame = playerMock.buildSaveGameData();
-
-                //start a server
-                Game.getInstance().addRunnable("Goblet Server", new GobletServer(config));
-
-                //load game client scene
-                Game.getInstance().loadScene(new GameClientScene(saveGame)); 
-
-                //connect to server
-                try
-                {
-                   ((GameClientScene)Game.getInstance().getScene(GameClientScene.class)).connectToServer( "127.0.0.1", config.tcpPort,config.udpPort);                   
-                }
-                catch(ConnectionException e)
-                {
-                    
-                    final int right = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x;
-                    final int center = right/2;
-        
-                    Game.getInstance().loadScene(new ServerSelectScene());
-                    ArrayList args = new ArrayList();
-                    args.add(saveGame);
-                    Game.getInstance().changeScene(ServerSelectScene.class, args); 
-                    Game.getInstance().unloadScene(GameClientScene.class); 
-                    Game.getInstance().unloadScene(LoadingScene.class);
-                    String additional = "";
-                    if(e.exception != null)
-                        additional = e.exception.getMessage();
-                    Game.getInstance().getScene(ServerSelectScene.class).add(new ErrorMenu(e.reason.toString() + ": " + additional, center-200,450-150), Layer.MAIN); 
-                    return;
-                }
-
-                try{
-                Thread.sleep(200);
-                }
-                catch(Exception e){}
-                
-                //switch to GameClientScene
-                Game.getInstance().changeScene(GameClientScene.class,null); 
-
-                //unload character selection scene
-                Game.getInstance().unloadScene(CharacterSelectionScene.class);
-
-                //unload loading scene
-                Game.getInstance().unloadScene(LoadingScene.class);
-                
-                
-            }
-        };
-        
-        //check if we are still loading assets
-        if((boolean)Game.getInstance().getStateVariable("finishedLoading") != true )
-        {
-            ((LoadingScene)Game.getInstance().getScene(LoadingScene.class)).setCurrentProgressText("Loading Assets");
-            
-            //if so start up a thread that spins waiting for it to be done, and calls gameLaunchThread.start() upon completion
-            Thread assetLoadThread = new Thread(){
-                
-                @Override
-                public void run()
-                {
-                    while((boolean)Game.getInstance().getStateVariable("finishedLoading") != true)
-                    {
-                        try{Thread.sleep(50);}
-                        catch(Exception e){}
-                    }
-                    
-                    gameLaunchThread.start();
-                }
-            };
-            assetLoadThread.start();
-        }
-        else //if not, just launch the game
-        {
-            gameLaunchThread.start();
-        }
-
-        
-    }
-    
-    public static void joinMultiPlayerGame(final PlayerMock playerMock, final String ip, final int tcpPort, final int udpPort)
-    {
-        Game.getInstance().loadScene(new LoadingScene());
-        Game.getInstance().changeScene(LoadingScene.class, null);
-
-        final Thread gameLaunchThread = new Thread()
-        {
-            @Override
-            public void run()
-            {
-                //if game client is loaded for some reason unload it
-                if(Game.getInstance().isLoaded(GameClientScene.class))
-                    Game.getInstance().unloadScene(GameClientScene.class); 
-                
-                // once we are all loaded get save game from player mock
-                SaveGame saveGame = playerMock.buildSaveGameData();
-
-                //load game client scene
-                Game.getInstance().loadScene(new GameClientScene(saveGame)); 
-
-                //connect to server
-                try
-                {
-                   ((GameClientScene)Game.getInstance().getScene(GameClientScene.class)).connectToServer(ip, tcpPort,udpPort);                   
-                }
-                catch(ConnectionException e)
-                {
-                    final int right = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x;
-                    final int center = right/2;
-        
-                    Game.getInstance().loadScene(new ServerSelectScene());
-                    ArrayList args = new ArrayList();
-                    args.add(playerMock);
-                    Game.getInstance().changeScene(ServerSelectScene.class, args); 
-                    Game.getInstance().unloadScene(GameClientScene.class); 
-                    Game.getInstance().unloadScene(LoadingScene.class);
-                    String additional = "";
-                    if(e.exception != null)
-                        additional = e.exception.getMessage();
-                    Game.getInstance().getScene(ServerSelectScene.class).add(new ErrorMenu(e.reason.toString() + ": " + additional, center-200,450-150), Layer.MAIN); 
-                    return;
-                }
-
-                try
-                {
-                Thread.sleep(500);
-                }
-                catch(Exception e){}
-                
-                //switch to GameClientScene
-                Game.getInstance().changeScene(GameClientScene.class,null); 
-
-                //unload loading scene
-                Game.getInstance().unloadScene(LoadingScene.class);
-                
-                
-            }
-        };
-
-        //check if we are still loading assets
-        if((boolean)Game.getInstance().getStateVariable("finishedLoading") != true )
-        {
-            ((LoadingScene)Game.getInstance().getScene(LoadingScene.class)).setCurrentProgressText("Loading Assets");
-            
-            //if so start up a thread that spins waiting for it to be done, and calls gameLaunchThread.start() upon completion
-            Thread assetLoadThread = new Thread(){
-                
-                @Override
-                public void run()
-                {
-                    while((boolean)Game.getInstance().getStateVariable("finishedLoading") != true)
-                    {
-                        try{Thread.sleep(50);}
-                        catch(Exception e){}
-                    }
-                    
-                    gameLaunchThread.start();
-                }
-            };
-            assetLoadThread.start();
-        }
-        else //if not, just launch the game
-        {
-            gameLaunchThread.start();
-        }
-    }
-    
-    
-    
-    
-   
 }

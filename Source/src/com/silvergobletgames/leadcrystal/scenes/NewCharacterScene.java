@@ -65,10 +65,6 @@ public class NewCharacterScene extends Scene
     private ArrayList<String> bodyList= new ArrayList<>();
     private int currentBodySelection = 0;
     
-    
-    //we have to pass this back to char select screen
-    private String actionArg;
-    
  
     
     //================
@@ -231,27 +227,15 @@ public class NewCharacterScene extends Scene
                     
                     
                     //change scene
-                    //if we are in multiplayer mode, go to the multiplayer menu and pass it your character
-                    if(actionArg.equals("Multiplayer"))
-                    {
-                        Game.getInstance().loadScene(new MultiplayerMenuScene());
+         
+                    //stop music
+                    Sound sound = Sound.newBGM("");
+                    add(sound);
 
-                        ArrayList args = new ArrayList();
-                        args.add(playerMock);
-                        args.add(actionArg);
-                        Game.getInstance().changeScene(MultiplayerMenuScene.class,args);
-                    }
-                    //else if we are in single player mode, start up a game
-                    else if(actionArg.equals("Singleplayer"))
-                    {          
-                        //stop music
-                        Sound sound = Sound.newBGM("");
-                        add(sound);
+                    //start a single player game
+                    MainMenuScene.startGame(playerMock);
 
-                        //start a single player game
-                        MainMenuScene.startSinglePlayerGame(playerMock);
-
-                    }                 
+                                    
                   
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
@@ -290,7 +274,6 @@ public class NewCharacterScene extends Scene
                     //change scene
                     Game.getInstance().loadScene(new CharacterSelectionScene());
                     ArrayList<String> args = new ArrayList();
-                    args.add(actionArg);
                     Game.getInstance().changeScene(CharacterSelectionScene.class,args);                     
                     
                 }
@@ -342,10 +325,6 @@ public class NewCharacterScene extends Scene
     
     public void sceneEntered(ArrayList args) 
     {
-        //set our args
-        if(args != null && args.get(0) != null)
-            this.actionArg = (String)args.get(0);
-        
         //set mouse cursor
         Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.POINTERHAND));
     }

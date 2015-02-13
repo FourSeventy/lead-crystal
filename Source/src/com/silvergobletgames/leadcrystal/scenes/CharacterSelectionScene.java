@@ -38,8 +38,6 @@ public class CharacterSelectionScene extends Scene
     private Image selectionArrow;
     private String selectedSave;
     
-    //should we execute single player actions, or multiplayer actions
-    private String actionArg;
     
     //==============
     // Constructor
@@ -231,11 +229,7 @@ public class CharacterSelectionScene extends Scene
     }
 
     public void sceneEntered(ArrayList args) 
-    {
-        //set our args
-        if(args != null && args.get(0) != null)
-            this.actionArg = (String)args.get(0);   
-        
+    {        
         //set mouse cursor
         Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.POINTERHAND));
     }
@@ -388,20 +382,8 @@ public class CharacterSelectionScene extends Scene
     
     private void selectButton_click()
     {
-        //if we are in multiplayer mode, go to the multiplayer menu and pass it your character
-        if(this.actionArg.equals("Multiplayer") && this.selectedSave != null)
-        {
-            Game.getInstance().loadScene(new MultiplayerMenuScene());
-            
-            PlayerMock playerMock = new PlayerMock(this.saveGames.get(this.selectedSave).fileName);
-            
-            ArrayList args = new ArrayList();
-            args.add(playerMock);
-            args.add(actionArg);
-            Game.getInstance().changeScene(MultiplayerMenuScene.class,args);
-        }
         //else if we are in single player mode, start up a game
-        else if(this.actionArg.equals("Singleplayer") && this.selectedSave != null)
+        if( this.selectedSave != null)
         {          
             //stop music
             Sound sound = Sound.newBGM("");
@@ -409,11 +391,9 @@ public class CharacterSelectionScene extends Scene
          
             PlayerMock playerMock = new PlayerMock(this.saveGames.get(this.selectedSave).fileName);
             //start a single player game
-            MainMenuScene.startSinglePlayerGame(playerMock);
-                         
+            MainMenuScene.startGame(playerMock);                        
         }
-        
-        
+       
     }
     
     private void newCharacterButton_click()
@@ -421,7 +401,6 @@ public class CharacterSelectionScene extends Scene
         
         Game.getInstance().loadScene(new NewCharacterScene());
         ArrayList<String> args = new ArrayList();
-        args.add(actionArg);
         Game.getInstance().changeScene(NewCharacterScene.class, args);
         
     }

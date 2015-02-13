@@ -23,8 +23,6 @@ import com.silvergobletgames.leadcrystal.menus.LevelPropertiesWindow;
 import com.silvergobletgames.leadcrystal.menus.PropertiesWindow;
 import com.silvergobletgames.leadcrystal.menus.ScriptWindow;
 import com.silvergobletgames.leadcrystal.menus.TilePalette;
-import com.silvergobletgames.leadcrystal.netcode.ConnectionException;
-import com.silvergobletgames.leadcrystal.netcode.GobletServer;
 import com.silvergobletgames.leadcrystal.skills.Skill;
 import com.silvergobletgames.sylver.audio.AudioRenderer;
 import com.silvergobletgames.sylver.audio.Sound;
