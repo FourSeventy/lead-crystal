@@ -27,7 +27,7 @@ public class ScriptObject
     //script trigger enum
     public static enum ScriptTrigger
     {
-        RIGHTCLICK, DEATH, SEPERATE, COLLIDE, AUTO, ALL_PLAYERS_HERE,COLLIDE_EACH_ONCE, NONE, DIALOGUECLOSED;
+        RIGHTCLICK, DEATH, SEPERATE, COLLIDE, AUTO,NONE, DIALOGUECLOSED;
     }
     
     //===============
