@@ -112,12 +112,20 @@ public class GameScene extends Scene
         physicsWorld.addListener(collisionHandler);
         physicsWorld.enableRestingBodyDetection(1f, 1f, 1f);
         
-        //load level
-           //figure out which level to load
         
-        //add player
+        //figure out which level to load
+        String levelToGo;
+        if(player.getLevelProgressionManager().levelMap.get(0).mainObjective.complete == true)
+            levelToGo = "town.lv";
+        else
+            levelToGo = "desert0.lv";
+        
+        //load level
+        this.loadLevel(levelToGo);
         
         //move player to starting spot
+        SceneObject checkpoint = this.getSceneObjectManager().get("checkpoint1"); //TODO get right spot
+        this.movePlayerToPoint( new SylverVector2f(checkpoint.getPosition().x, checkpoint.getPosition().y));
         
         //initializing vewport
         getViewport().quickMoveToCoordinate(player.getPosition().x, player.getPosition().y);
@@ -820,7 +828,7 @@ public class GameScene extends Scene
         Game.getInstance().changeScene(MainMenuScene.class,new ArrayList(){{add(true);}}); 
     }
      
-    public void movePlayerToPoint(String playerID,SylverVector2f point)
+    public void movePlayerToPoint(SylverVector2f point)
     {
         
         //clear player arbiters
