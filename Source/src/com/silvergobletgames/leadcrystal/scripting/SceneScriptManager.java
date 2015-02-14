@@ -35,6 +35,7 @@ import com.silvergobletgames.sylver.graphics.LightEffect;
 import com.silvergobletgames.sylver.graphics.LightEffect.LightEffectType;
 import com.silvergobletgames.sylver.graphics.Overlay;
 import com.silvergobletgames.sylver.util.SylverRandom;
+import com.silvergobletgames.sylver.util.SylverVector2f;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -456,8 +457,8 @@ public class SceneScriptManager
         this.owningScene.getPlayer().respawn(); 
 
         //moves players back to town
-        this.owningScene.changeLevel("town.lv");
-
+        this.owningScene.changeLevel("town.lv",destination);
+        
         this.owningScene.saveGameToDisk();
          
     }
@@ -470,7 +471,7 @@ public class SceneScriptManager
      */
     public void movePlayer(String clientID, String levelName, String toEntityID)
     {
-           this.owningScene.changeLevel(levelName); //TODO: to which entity
+           this.owningScene.changeLevel(levelName,toEntityID); 
     }
     
     

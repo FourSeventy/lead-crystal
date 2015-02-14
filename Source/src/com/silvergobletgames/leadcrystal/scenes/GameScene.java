@@ -63,6 +63,8 @@ public class GameScene extends Scene
     private LevelData activeLevel;
     //queued change level
     private String queuedNextLevel;
+    private String spawnDestination = "checkpoint1";
+    
     //script interpreter
     private SceneScriptManager scriptManager = new SceneScriptManager(this);
     //cutscene manager
@@ -122,7 +124,7 @@ public class GameScene extends Scene
         this.loadLevel(levelToGo);
         
         //move player to starting spot
-        SceneObject checkpoint = this.getSceneObjectManager().get("checkpoint1"); //TODO get right spot
+        SceneObject checkpoint = this.getSceneObjectManager().get("checkpoint1"); 
         this.movePlayerToPoint( new SylverVector2f(checkpoint.getPosition().x, checkpoint.getPosition().y));
         
         //initializing vewport
@@ -751,6 +753,13 @@ public class GameScene extends Scene
         //add player back into scene
         this.add(this.player, Layer.MAIN);
         
+        //move player to starting spot
+        SceneObject checkpoint = this.getSceneObjectManager().get(this.spawnDestination);
+        this.movePlayerToPoint( new SylverVector2f(checkpoint.getPosition().x, checkpoint.getPosition().y));
+        
+        //initializing vewport
+        getViewport().quickMoveToCoordinate(player.getPosition().x, player.getPosition().y);
+        
       
         //set which level is active
         this.activeLevel = level;
@@ -771,11 +780,11 @@ public class GameScene extends Scene
         
         String levelName = this.player.getLevelProgressionManager().levelMap.get(levelNumber).levelDataName;
         
-        this.changeLevel(levelName);
+        this.changeLevel(levelName , "checkpoint1");
         
     }
     
-    public void changeLevel(String levelName)
+    public void changeLevel(String levelName, String spawnDestination)
     {
         //close menus
         hud.mapMenu.close();
@@ -801,6 +810,8 @@ public class GameScene extends Scene
             }
         };
         inputLock.start();
+        
+        this.spawnDestination = spawnDestination;
         
         //queue up level change
         if(this.activeLevel!= null)
