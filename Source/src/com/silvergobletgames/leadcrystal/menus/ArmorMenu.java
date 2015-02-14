@@ -245,8 +245,9 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
+                   ArmorMenu.this.handleSoundAndErrors(stat1.id);
                    ((GameScene)owningScene).buyStat(stat1.id);
-                    ArmorMenu.this.handleSoundAndErrors(stat1.id);
+                    
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -279,8 +280,9 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameScene)owningScene).buyStat(stat2.id);
                    ArmorMenu.this.handleSoundAndErrors(stat2.id);
+                   ((GameScene)owningScene).buyStat(stat2.id);
+                   
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -313,8 +315,9 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameScene)owningScene).buyStat(stat3.id);
                    ArmorMenu.this.handleSoundAndErrors(stat3.id);
+                   ((GameScene)owningScene).buyStat(stat3.id);
+                   
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -347,8 +350,9 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameScene)owningScene).buyStat(stat4.id);
                    ArmorMenu.this.handleSoundAndErrors(stat4.id);
+                   ((GameScene)owningScene).buyStat(stat4.id);
+                   
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -381,8 +385,9 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameScene)owningScene).buyStat(stat8.id);
                    ArmorMenu.this.handleSoundAndErrors(stat8.id);
+                   ((GameScene)owningScene).buyStat(stat8.id);
+                   
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -413,8 +418,9 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameScene)owningScene).buyStat(stat6.id);
                    ArmorMenu.this.handleSoundAndErrors(stat6.id);
+                   ((GameScene)owningScene).buyStat(stat6.id);
+                   
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -455,8 +461,9 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameScene)owningScene).buyStat(stat7.id);
                    ArmorMenu.this.handleSoundAndErrors(stat7.id);
+                   ((GameScene)owningScene).buyStat(stat7.id);
+                   
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -489,8 +496,9 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameScene)owningScene).buyStat(stat5.id);
                    ArmorMenu.this.handleSoundAndErrors(stat5.id);
+                   ((GameScene)owningScene).buyStat(stat5.id);
+                   
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -555,8 +563,9 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameScene)owningScene).buyStat(stat10.id);
                    ArmorMenu.this.handleSoundAndErrors(stat10.id);
+                   ((GameScene)owningScene).buyStat(stat10.id);
+                   
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -587,8 +596,9 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameScene)owningScene).buyStat(stat11.id);
                    ArmorMenu.this.handleSoundAndErrors(stat11.id);
+                   ((GameScene)owningScene).buyStat(stat11.id);
+                   
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -628,8 +638,9 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameScene)owningScene).buyStat(stat12.id);
                    ArmorMenu.this.handleSoundAndErrors(stat12.id);
+                   ((GameScene)owningScene).buyStat(stat12.id);
+                   
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -660,8 +671,9 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameScene)owningScene).buyStat(stat13.id);
                    ArmorMenu.this.handleSoundAndErrors(stat13.id);
+                   ((GameScene)owningScene).buyStat(stat13.id);
+                   
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -692,8 +704,9 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameScene)owningScene).buyStat(stat14.id);
                    ArmorMenu.this.handleSoundAndErrors(stat14.id);
+                   ((GameScene)owningScene).buyStat(stat14.id);
+                   
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -724,8 +737,9 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameScene)owningScene).buyStat(stat15.id);
                    ArmorMenu.this.handleSoundAndErrors(stat15.id);
+                   ((GameScene)owningScene).buyStat(stat15.id);
+                   
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -756,8 +770,9 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameScene)owningScene).buyStat(stat16.id);
                    ArmorMenu.this.handleSoundAndErrors(stat16.id);
+                   ((GameScene)owningScene).buyStat(stat16.id);
+                   
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -788,8 +803,9 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameScene)owningScene).buyStat(stat17.id);
                    ArmorMenu.this.handleSoundAndErrors(stat17.id);
+                   ((GameScene)owningScene).buyStat(stat17.id);
+                   
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -829,8 +845,9 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameScene)owningScene).buyStat(stat18.id);
                    ArmorMenu.this.handleSoundAndErrors(stat18.id);
+                   ((GameScene)owningScene).buyStat(stat18.id);
+                   
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -861,8 +878,9 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameScene)owningScene).buyStat(stat19.id);
+                   
                    ArmorMenu.this.handleSoundAndErrors(stat19.id);
+                   ((GameScene)owningScene).buyStat(stat19.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -893,8 +911,9 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameScene)owningScene).buyStat(stat20.id);
                    ArmorMenu.this.handleSoundAndErrors(stat20.id);
+                   ((GameScene)owningScene).buyStat(stat20.id);
+                   
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {
@@ -925,8 +944,9 @@ public class ArmorMenu extends Window{
                if(e.getActionCommand().equals("clicked"))
                {
                    //buy stat
-                   ((GameScene)owningScene).buyStat(stat21.id);
+                   
                    ArmorMenu.this.handleSoundAndErrors(stat21.id);
+                   ((GameScene)owningScene).buyStat(stat21.id);
                }
                if(e.getActionCommand().equals("mouseEntered"))
                {

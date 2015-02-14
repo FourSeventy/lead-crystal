@@ -220,8 +220,9 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
+                        playSkillUnlockSound(skill);
                        ((GameScene)owningScene).buySkill(skill.getSkillID());
-                       playSkillUnlockSound();
+                      
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -273,8 +274,9 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
+                       playSkillUnlockSound(skill5);
                        ((GameScene)owningScene).buySkill(skill5.getSkillID());
-                       playSkillUnlockSound();
+                       
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -326,8 +328,9 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
+                       playSkillUnlockSound(skill7);
                        ((GameScene)owningScene).buySkill(skill7.getSkillID());
-                       playSkillUnlockSound();
+                       
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -378,8 +381,9 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
+                       playSkillUnlockSound(blade);
                        ((GameScene)owningScene).buySkill(blade.getSkillID());
-                       playSkillUnlockSound();
+                       
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -432,8 +436,9 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
+                       playSkillUnlockSound(skill1);
                        ((GameScene)owningScene).buySkill(skill1.getSkillID());
-                       playSkillUnlockSound();
+                       
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -484,8 +489,9 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
+                       playSkillUnlockSound(skill3);
                        ((GameScene)owningScene).buySkill(skill3.getSkillID());
-                       playSkillUnlockSound();
+                       
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -536,8 +542,9 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
+                       playSkillUnlockSound(freezeSkill);
                        ((GameScene)owningScene).buySkill(freezeSkill.getSkillID());
-                       playSkillUnlockSound();
+                       
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -588,8 +595,9 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
+                       playSkillUnlockSound(snipeSkill);
                        ((GameScene)owningScene).buySkill(snipeSkill.getSkillID());
-                       playSkillUnlockSound();
+                       
                    }
                }             
                if(e.getActionCommand().equals("mouseDown"))
@@ -644,8 +652,9 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
+                       playSkillUnlockSound(skill6);
                        ((GameScene)owningScene).buySkill(skill6.getSkillID());
-                       playSkillUnlockSound();
+                       
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -696,8 +705,9 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
+                       playSkillUnlockSound(flashbangSkill);
                        ((GameScene)owningScene).buySkill(flashbangSkill.getSkillID());
-                       playSkillUnlockSound();
+                       
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -748,8 +758,9 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
+                       playSkillUnlockSound(stimSkill);
                        ((GameScene)owningScene).buySkill(stimSkill.getSkillID());
-                       playSkillUnlockSound();
+                       
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -800,8 +811,9 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
+                       playSkillUnlockSound(gravitySkill);
                        ((GameScene)owningScene).buySkill(gravitySkill.getSkillID());
-                       playSkillUnlockSound();
+                       
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -856,8 +868,9 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
+                       playSkillUnlockSound(skill2);
                        ((GameScene)owningScene).buySkill(skill2.getSkillID());
-                       playSkillUnlockSound();
+                       
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -907,8 +920,9 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
+                       playSkillUnlockSound(skill4);
                        ((GameScene)owningScene).buySkill(skill4.getSkillID());
-                       playSkillUnlockSound();
+                       
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -958,8 +972,9 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
+                       playSkillUnlockSound(playerGuardSkill);
                        ((GameScene)owningScene).buySkill(playerGuardSkill.getSkillID());
-                       playSkillUnlockSound();
+                       
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -1009,8 +1024,9 @@ public class SkillMenu extends Window {
                    }
                    else //buy the skill
                    {
+                       playSkillUnlockSound(playerFlashbangSkill);
                        ((GameScene)owningScene).buySkill(playerFlashbangSkill.getSkillID());
-                       playSkillUnlockSound();
+                       
                    }
                }
                if(e.getActionCommand().equals("mouseDown"))
@@ -1549,11 +1565,20 @@ public class SkillMenu extends Window {
         SkillMenu.this.getOwningScene().add(goldSound);
     }
     
-    private void playSkillUnlockSound()
+    private void playSkillUnlockSound(Skill skill)
     {
-        //play sound
-        Sound sound = Sound.ambientSound("buffered/collect.ogg",true);  
-        this.owningScene.add(sound);
+        if(this.playerReference.getSkillManager().getSkillPoints() >= skill.getUnlockCost())
+        {
+            //play sound
+            Sound sound = Sound.ambientSound("buffered/collect.ogg",true);  
+            this.owningScene.add(sound);
+        }
+        else
+        {
+            //play error
+            Sound sound = Sound.ambientSound("buffered/error.ogg",true);  
+            this.owningScene.add(sound);
+        }
     }
     
     
