@@ -108,7 +108,7 @@ public class GameScene extends Scene
         this.setViewport(view);        
         
         //build physics world
-        physicsWorld = new World(new Vector2f(0.0f, -57.0f), 7, new QuadSpaceStrategy(20, 5));
+        physicsWorld = new World(new Vector2f(0.0f, -57.0f), 5, new QuadSpaceStrategy(20, 5));
         physicsWorld.addListener(collisionHandler);
         physicsWorld.enableRestingBodyDetection(1f, 1f, 1f);
         
