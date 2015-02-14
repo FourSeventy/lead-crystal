@@ -37,7 +37,6 @@
       <dirEntry mountPoint="23" file="X:/Lead Crystal/Assets/Levels" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="Levels" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
-      <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/kryonet/onejar/kryonet-1.04-all.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/Phys2d/phys2d.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/Sylver Engine/SylverEngine.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/Sylver Engine/lib/CodecJOrbis.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
