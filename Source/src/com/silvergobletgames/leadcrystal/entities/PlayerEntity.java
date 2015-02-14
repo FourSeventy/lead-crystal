@@ -131,7 +131,6 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     //status variables
     public boolean touchingLadder = false;
     public boolean onLadder = false;
-    public boolean respawnWhenEnterTown = false;
     private RespawnGravestone respawnGravestone;
     
     

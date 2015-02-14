@@ -757,8 +757,13 @@ public class GameScene extends Scene
         SceneObject checkpoint = this.getSceneObjectManager().get(this.spawnDestination);
         this.movePlayerToPoint( new SylverVector2f(checkpoint.getPosition().x, checkpoint.getPosition().y));
         
+        this.player.respawn();
+        
         //initializing vewport
         getViewport().quickMoveToCoordinate(player.getPosition().x, player.getPosition().y);
+        
+        if(this.hud != null)
+           this.hud.update();
         
       
         //set which level is active
@@ -957,10 +962,10 @@ public class GameScene extends Scene
       
     public void respawnPlayer()
     {       
-        //tell the player to respawn when enter town
-        player.respawnWhenEnterTown = true;
-
-        //TODO: move to town       
+        
+        //change level to town
+        this.changeLevel("town.lv","checkpoint1");
+   
     }
     
     public void closeDialogue()
