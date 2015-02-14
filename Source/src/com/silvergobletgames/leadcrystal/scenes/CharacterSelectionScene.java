@@ -101,44 +101,9 @@ public class CharacterSelectionScene extends Scene
             }
         });
         
-        //new character
-        final Text newCharacterText = new Text("New Character",LeadCrystalTextType.MENU46);
-        newCharacterText.setPosition(center + 280 - 70, 590);
-        final Button newCharacterButton = new Button(new Image("blank.png"), newCharacterText.getPosition().x, newCharacterText.getPosition().y, newCharacterText.getWidth(), newCharacterText.getHeight());
-        this.add(newCharacterText,Layer.MAIN);
-        this.add(newCharacterButton,Layer.MAIN);
-        newCharacterButton.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                if (e.getActionCommand().equals("clicked")) {
-                    newCharacterButton_click();
-                }
-               if (e.getActionCommand().equals("mouseEntered")) 
-                {
-                    
-                      if(newCharacterText.hasTextEffect("small"))
-                          newCharacterText.removeTextEffect("small");
-                      
-                       newCharacterText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, newCharacterText.getScale(), 1.2));
-                    
-                    //play sound
-                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
-                    add(sound);
-                }
-                if (e.getActionCommand().equals("mouseExited"))
-                {
-                        if(newCharacterText.hasTextEffect("big"))
-                           newCharacterText.removeTextEffect("big");
-                        
-                        newCharacterText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, newCharacterText.getScale(), 1));
-                }
-            }
-        });  
-        
-        
         //delete
         final Text deleteText = new Text("Delete",LeadCrystalTextType.MENU46);
-        deleteText.setPosition(center + 280 - 70, 535);
+        deleteText.setPosition(center + 280 - 70, 590);
         final Button deleteButton = new Button(new Image("blank.png"), deleteText.getPosition().x, deleteText.getPosition().y, deleteText.getWidth(), deleteText.getHeight());
         this.add(deleteText,Layer.MAIN);
         this.add(deleteButton,Layer.MAIN);
@@ -173,7 +138,7 @@ public class CharacterSelectionScene extends Scene
               
         //back
         final Text backText = new Text("Back",LeadCrystalTextType.MENU46);
-        backText.setPosition(center + 280 - 70, 480); 
+        backText.setPosition(center + 280 - 70, 535); 
         final Button backButton = new Button(new Image("blank.png"), backText.getPosition().x, backText.getPosition().y, backText.getWidth(), backText.getHeight());      
         this.add(backText,Layer.MAIN);
         this.add(backButton,Layer.MAIN);
@@ -394,15 +359,6 @@ public class CharacterSelectionScene extends Scene
             MainMenuScene.startGame(playerMock);                        
         }
        
-    }
-    
-    private void newCharacterButton_click()
-    {
-        
-        Game.getInstance().loadScene(new NewCharacterScene());
-        ArrayList<String> args = new ArrayList();
-        Game.getInstance().changeScene(NewCharacterScene.class, args);
-        
     }
     
     private void deleteButton_click()

@@ -271,10 +271,9 @@ public class NewCharacterScene extends Scene
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("clicked")) 
                 {
-                    //change scene
-                    Game.getInstance().loadScene(new CharacterSelectionScene());
-                    ArrayList<String> args = new ArrayList();
-                    Game.getInstance().changeScene(CharacterSelectionScene.class,args);                     
+                    //switch back to the main menu    
+                    Game.getInstance().loadScene(new MainMenuScene());
+                    Game.getInstance().changeScene(MainMenuScene.class, null);                      
                     
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
