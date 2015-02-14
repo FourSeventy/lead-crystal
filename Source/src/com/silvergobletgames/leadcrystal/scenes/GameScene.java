@@ -446,14 +446,14 @@ public class GameScene extends Scene
         //use hotbar skills 
         if (inputSnapshot.isKeyReleased(KeyEvent.VK_Q))
         {
-            if(player.getSkillAssignment(3) != null && player.getSkillManager().getSkill(player.getSkillAssignment(3)).isUsable())
+            if(player.getSkillAssignment(3) != null)
             {
                 player.useActionBarSkill(player.getSkillAssignment(3));
             }
         }
         if (inputSnapshot.isKeyReleased(KeyEvent.VK_E))
         {
-            if(player.getSkillAssignment(4) != null && player.getSkillManager().getSkill(player.getSkillAssignment(4)).isUsable())
+            if(player.getSkillAssignment(4) != null )
             {
                 player.useActionBarSkill(player.getSkillAssignment(4));
             }
