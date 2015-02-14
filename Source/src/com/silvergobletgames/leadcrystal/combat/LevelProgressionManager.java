@@ -389,8 +389,8 @@ public class LevelProgressionManager
         temple6.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Right Click";
-        objective.objectiveDescription = "Right click a thing.";
+        objective.objectiveName = "Gold Stockpile";
+        objective.objectiveDescription = "Find the commando gold stockpile.";
         objective.currencyAward = 25;
         temple6.sideObjective = objective;
         //adding to map
