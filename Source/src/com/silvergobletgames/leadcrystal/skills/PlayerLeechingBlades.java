@@ -157,6 +157,7 @@ public class PlayerLeechingBlades extends PlayerSkill{
             
             this.direction = dir;
             
+            this.setLockImageToBody(false);
          }
          
          @Override

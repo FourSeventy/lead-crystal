@@ -68,6 +68,9 @@ public class Entity extends SceneObject implements AnimationListener
     //facing variables
     private FacingDirection facing = FacingDirection.RIGHT;
     
+    //lock image to body
+    private boolean lockImageToBody = true;
+    
     
     /**
      * Enumerated bitmasks for entity bodies.  
@@ -226,14 +229,20 @@ public class Entity extends SceneObject implements AnimationListener
             }
         }
         else
+        {
             image.removeOverlay("interact");
+        }
         
         //updates the image
         if (image != null) 
         {
             image.update();
-            image.setPositionAnchored(this.getPosition().x + this.imageOffset.x,this.getPosition().y + this.imageOffset.y);                     
-            image.setAngle((float) (this.body.getRotation() * 180 / Math.PI));
+            image.setPositionAnchored(this.getPosition().x + this.imageOffset.x,this.getPosition().y + this.imageOffset.y);  
+            
+            if(this.lockImageToBody)
+            {
+               image.setAngle((float) (this.body.getRotation() * 180 / Math.PI));
+            }
         }
         
         //updates the emitters positions in the world
@@ -541,6 +550,11 @@ public class Entity extends SceneObject implements AnimationListener
         
         if(effect != null)
             effect.onRemove();
+    }
+    
+    public void setLockImageToBody(boolean value)
+    {
+        this.lockImageToBody = value;
     }
     
     

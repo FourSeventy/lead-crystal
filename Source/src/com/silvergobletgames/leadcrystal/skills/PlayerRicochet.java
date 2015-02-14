@@ -142,6 +142,7 @@ public class PlayerRicochet extends PlayerSkill{
             labelEffect.setName("playerLaser");
             labelEffect.setInfinite();            
             this.getDamage().addCombatEffect(labelEffect);
+            this.setLockImageToBody(false);
          }
 
          public void collidedWith(Entity other, CollisionEvent event)

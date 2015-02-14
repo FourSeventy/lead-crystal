@@ -61,7 +61,8 @@ public class EnemySmallAntThrow extends Skill {
         ImageEffect spin = new ImageEffect(ImageEffect.ImageEffectType.ROTATION, 60, 0, 360);
         spin.setRepeating(true);
         img.addImageEffect(spin);
-        AntHitbox tossedAnt = new AntHitbox(damage, body, img, user);        
+        AntHitbox tossedAnt = new AntHitbox(damage, body, img, user);
+        tossedAnt.setLockImageToBody(false);
 
         //Determine vector to target
         SylverVector2f distanceVector = new SylverVector2f(user.getFacingDirection().value * r.nextFloat() ,1);//user.distanceVector(user.getTarget());

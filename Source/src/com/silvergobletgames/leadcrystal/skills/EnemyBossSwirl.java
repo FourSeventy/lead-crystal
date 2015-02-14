@@ -231,6 +231,7 @@ public class EnemyBossSwirl extends Skill{
             this.getBody().setBitmask(Entity.BitMasks.NO_COLLISION.value);
             
             this.direction = dir;
+            this.setLockImageToBody(false);
          
             
          }

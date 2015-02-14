@@ -92,6 +92,7 @@ public class PlayerBoomerang extends PlayerSkill
         ImageEffect rotationEffect = new ImageEffect(ImageEffect.ImageEffectType.ROTATION, 60, 0, 360);
         rotationEffect.setRepeating(true);
         img.addImageEffect(rotationEffect);
+        laser.setLockImageToBody(false);
         
     
         //calculate force for the bullet
