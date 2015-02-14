@@ -1536,7 +1536,7 @@ public class MapMenu extends Window{
         
         Image i = new Image("map_arrow.png");
         i.setHorizontalFlip(true);
-        rightMovementButton = new Button(i, 1025, 730, 80, 80);
+        rightMovementButton = new Button(i, 620 , 760, 80, 80);
         rightMovementButton.addActionListener(new ActionListener(){
 
             @Override
@@ -1564,7 +1564,7 @@ public class MapMenu extends Window{
         this.addComponent(rightMovementButton);
         
         
-        leftMovementButton = new Button(new Image("map_arrow.png"), 920, 730, 80, 80);
+        leftMovementButton = new Button(new Image("map_arrow.png"), 600  -i.getWidth() - 20, 760, 80, 80);
         leftMovementButton.addActionListener(new ActionListener(){
 
             @Override
