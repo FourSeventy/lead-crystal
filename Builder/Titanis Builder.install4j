@@ -64,7 +64,6 @@
       </dirEntry>
       <fileEntry mountPoint="183" file="X:/Lead Crystal/Assets/Configurations/dev/engineSettings.ini" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="183" file="X:/Lead Crystal/Assets/Configurations/dev/gameSettings.ini" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
-      <fileEntry mountPoint="183" file="X:/Lead Crystal/Assets/Configurations/dev/recentServerCache" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <dirEntry mountPoint="182" file="X:/Lead Crystal/Assets/Level Editor Files" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="Level Editor Files" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
