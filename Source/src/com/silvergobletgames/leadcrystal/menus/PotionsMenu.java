@@ -86,7 +86,7 @@ public class PotionsMenu extends Window{
                }
                if(e.getActionCommand().equals("clicked"))
                {
-                   ((GameScene)owningScene).buyPotion(); 
+                   
 
                    //check if the buy will succeed or fail
                    int currency = PotionsMenu.this.playerReference.getCurrencyManager().getBalence();
@@ -106,6 +106,8 @@ public class PotionsMenu extends Window{
                         PotionsMenu.this.getOwningScene().add(errorSound);
                        //show error message
                    }
+                   
+                   ((GameScene)owningScene).buyPotion(); 
                }
            }
        });
