@@ -50,19 +50,13 @@ public class GameplaySettings{
     // Gameplay Settings
     //=================== 
     public boolean showCooldownTimers = false;
-    public boolean drawNetworkingStats = false;
-    public int tcpPort = 50501;
-    public int udpPort = 50511;
+
     
     //=====================
     // Dev Settings
     //=====================
-    private boolean devMode = false;
     public boolean bodyWireframe = false;
-    public boolean viewportFeelers = false;
-    public boolean drawPlayerServerTime = false;
-    public boolean networkDebugging = false;
-    public boolean packetSizeDebugging  = false;    
+    public boolean viewportFeelers = false;  
     public boolean debugEnemies = false;
     public boolean levelEditor = false;
     
@@ -84,24 +78,12 @@ public class GameplaySettings{
         try
         {
             Properties iniSaver = new Properties();
-            iniSaver.setProperty("showCooldownTimers",Boolean.toString(this.showCooldownTimers));
-            iniSaver.setProperty("drawNetworkingStats", Boolean.toString(this.drawNetworkingStats));
-            iniSaver.setProperty("tcpPort",Integer.toString(this.tcpPort));
-            iniSaver.setProperty("udpPort",Integer.toString(this.udpPort));
+            iniSaver.setProperty("showCooldownTimers",Boolean.toString(this.showCooldownTimers));         
+            iniSaver.setProperty("debug_bodyWireframe", Boolean.toString(this.bodyWireframe));
+            iniSaver.setProperty("debug_viewportFeelers", Boolean.toString(this.viewportFeelers));          
+            iniSaver.setProperty("debug_debugEnemies",Boolean.toString(this.debugEnemies));
+            iniSaver.setProperty("levelEditor",Boolean.toString(this.levelEditor));
             
-            //set properties
-            if(this.devMode == true)
-            {
-                
-                iniSaver.setProperty("dev_devmode",Boolean.toString(this.devMode));
-                iniSaver.setProperty("dev_bodyWireframe", Boolean.toString(this.bodyWireframe));
-                iniSaver.setProperty("dev_viewportFeelers", Boolean.toString(this.viewportFeelers));
-                iniSaver.setProperty("dev_drawPlayerServerTime", Boolean.toString(this.drawPlayerServerTime));
-                iniSaver.setProperty("dev_networkDebugging", Boolean.toString(this.networkDebugging));
-                iniSaver.setProperty("dev_packetSizeDebugging", Boolean.toString(this.packetSizeDebugging));          
-                iniSaver.setProperty("dev_debugEnemies",Boolean.toString(this.debugEnemies));
-                iniSaver.setProperty("dev_levelEditor",Boolean.toString(this.levelEditor));
-            }
             
            
             //open output stream
@@ -133,19 +115,12 @@ public class GameplaySettings{
             
             //load game configs
             this.showCooldownTimers = Boolean.parseBoolean(iniLoader.getProperty("showCooldownTimers","false"));
-            this.drawNetworkingStats = Boolean.parseBoolean(iniLoader.getProperty("drawNetworkingStats","false"));
-            this.tcpPort = Integer.parseInt(iniLoader.getProperty("tcpPort","50501")); 
-            this.udpPort = Integer.parseInt(iniLoader.getProperty("udpPort","50511")); 
             
             //load dev configs
-            this.bodyWireframe = Boolean.parseBoolean(iniLoader.getProperty("dev_bodyWireframe","false"));
-            this.viewportFeelers = Boolean.parseBoolean(iniLoader.getProperty("dev_viewportFeelers","false"));
-            this.drawPlayerServerTime = Boolean.parseBoolean(iniLoader.getProperty("dev_drawPlayerServerTime","false"));
-            this.networkDebugging = Boolean.parseBoolean(iniLoader.getProperty("dev_networkDebugging","false"));
-            this.packetSizeDebugging = Boolean.parseBoolean(iniLoader.getProperty("dev_packetSizeDebugging","false"));           
-            this.debugEnemies = Boolean.parseBoolean(iniLoader.getProperty("dev_debugEnemies","false"));
-            this.levelEditor = Boolean.parseBoolean(iniLoader.getProperty("dev_levelEditor","false"));
-            this.devMode = Boolean.parseBoolean(iniLoader.getProperty("dev_devmode","false"));
+            this.bodyWireframe = Boolean.parseBoolean(iniLoader.getProperty("debug_bodyWireframe","false"));
+            this.viewportFeelers = Boolean.parseBoolean(iniLoader.getProperty("debug_viewportFeelers","false"));          
+            this.debugEnemies = Boolean.parseBoolean(iniLoader.getProperty("debug_debugEnemies","false"));
+            this.levelEditor = Boolean.parseBoolean(iniLoader.getProperty("levelEditor","false"));
             
             
 
