@@ -9,11 +9,7 @@ import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.ImageEffect;
-import com.silvergobletgames.sylver.netcode.RenderData;
 import com.silvergobletgames.sylver.netcode.SaveData;
-import com.silvergobletgames.sylver.netcode.SceneObjectRenderDataChanges;
-import java.util.ArrayList;
-import java.util.Arrays;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.shapes.Box;
 

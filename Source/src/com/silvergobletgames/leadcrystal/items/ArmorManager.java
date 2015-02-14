@@ -1,17 +1,10 @@
 package com.silvergobletgames.leadcrystal.items;
 
-import com.silvergobletgames.leadcrystal.combat.*;
-import com.silvergobletgames.leadcrystal.core.GameplaySettings;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat.ArmorStatID;
 import com.silvergobletgames.sylver.graphics.Image;
-import com.silvergobletgames.sylver.netcode.RenderData;
 import com.silvergobletgames.sylver.netcode.SaveData;
-import com.silvergobletgames.sylver.netcode.SceneObjectRenderDataChanges;
 import com.silvergobletgames.sylver.util.SerializableEntry;
-import java.util.AbstractMap.SimpleEntry;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -361,79 +354,6 @@ public class ArmorManager {
         }
         
         
-        //=======================
-        // Seralization Methods
-        //=======================
-        
-        public RenderData dumpRenderData()
-        {
-            RenderData renderData = new RenderData();
-            renderData.data.add(0,this.points);
-            renderData.data.add(1,this.unlocked);
-            
-
-
-            return renderData;        
-        }
-
-        public SceneObjectRenderDataChanges generateRenderDataChanges(RenderData oldData,RenderData newData)
-        {
-            SceneObjectRenderDataChanges changes = new SceneObjectRenderDataChanges();
-
-            int changeMap = 0;
-            ArrayList changeList = new ArrayList();
-
-            for(int i = 0; i <2; i++)
-            {                  
-                if( !oldData.data.get(i).equals( newData.data.get(i)))
-                {                 
-                    changeList.add(newData.data.get(i));
-                    changeMap += 1L << i;
-                }
-            }
-
-
-            changes.fields = changeMap;
-            changes.data = changeList.toArray();
-
-            if(changeList.size() > 0)
-               return changes;
-           else
-               return null;
-
-        }
-
-        public void reconcileRenderDataChanges(long lastTime,long futureTime,SceneObjectRenderDataChanges renderDataChanges)
-        {
-            //construct an arraylist of data that we got, nulls will go where we didnt get any data    
-            int fieldMap = renderDataChanges.fields;
-            ArrayList rawData = new ArrayList();
-            rawData.addAll(Arrays.asList(renderDataChanges.data));           
-            ArrayList changeData = new ArrayList();
-            for(byte i = 0; i <2; i ++)
-            {
-                // The bit was set
-                if ((fieldMap & (1L << i)) != 0)
-                {
-                    changeData.add(rawData.get(0));
-                    rawData.remove(0);
-                }
-                else
-                {
-                    changeData.add(null); 
-                }
-            }
-            
-            if(changeData.get(0) != null)
-            {
-                this.points = (byte)changeData.get(0);
-            }
-            if(changeData.get(1) != null)
-            {
-                this.unlocked = (boolean)changeData.get(1);
-            }
-
-     }
     }
     
  

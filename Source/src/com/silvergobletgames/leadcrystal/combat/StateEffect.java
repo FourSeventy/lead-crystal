@@ -1,10 +1,6 @@
 package com.silvergobletgames.leadcrystal.combat;
 
 import com.silvergobletgames.sylver.graphics.*;
-import com.silvergobletgames.sylver.netcode.RenderData;
-import com.silvergobletgames.sylver.netcode.SceneObjectDeserializer;
-import com.silvergobletgames.sylver.netcode.SceneObjectRenderData;
-import java.util.ArrayList;
 import net.phys2d.math.Vector2f;
 
 

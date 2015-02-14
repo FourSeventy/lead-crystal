@@ -1,9 +1,6 @@
 package com.silvergobletgames.leadcrystal.combat;
 
 import com.silvergobletgames.sylver.graphics.Overlay;
-import com.silvergobletgames.sylver.graphics.ImageEffect;
-import com.silvergobletgames.sylver.netcode.RenderData;
-import com.silvergobletgames.sylver.netcode.SaveData;
 import com.silvergobletgames.leadcrystal.entities.CombatEntity;
 import com.silvergobletgames.sylver.graphics.ImageEffect;
 import java.util.ArrayList;

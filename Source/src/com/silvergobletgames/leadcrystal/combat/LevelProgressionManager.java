@@ -3,18 +3,10 @@ package com.silvergobletgames.leadcrystal.combat;
 import com.silvergobletgames.leadcrystal.cutscenes.CutsceneManager.Cutscenes;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.items.ArmorManager.ArmorStat.ArmorStatID;
-import com.silvergobletgames.leadcrystal.items.Currency;
-import com.silvergobletgames.leadcrystal.scenes.GameScene;
-import com.silvergobletgames.sylver.netcode.RenderData;
 import com.silvergobletgames.sylver.netcode.SaveData;
-import com.silvergobletgames.sylver.netcode.SceneObjectRenderDataChanges;
-import com.silvergobletgames.sylver.util.SerializableEntry;
-import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map.Entry;
-import java.util.UUID;
 
 /**
  *

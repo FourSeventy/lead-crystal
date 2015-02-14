@@ -1,22 +1,14 @@
 package com.silvergobletgames.leadcrystal.entities;
 
 
-import com.jogamp.opengl.util.texture.Texture;
-import com.silvergobletgames.leadcrystal.core.GameplaySettings;
 import com.silvergobletgames.sylver.graphics.Anchorable;
 import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.Text;
-import com.silvergobletgames.sylver.netcode.RenderData;
-import com.silvergobletgames.sylver.netcode.SceneObjectRenderDataChanges;
 import com.silvergobletgames.sylver.util.LinearInterpolator;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
-import javax.media.opengl.GL3bc;
-import com.silvergobletgames.leadcrystal.entities.CombatEntity;
-import com.silvergobletgames.leadcrystal.entities.Entity;
 import javax.media.opengl.GL2;
 
 

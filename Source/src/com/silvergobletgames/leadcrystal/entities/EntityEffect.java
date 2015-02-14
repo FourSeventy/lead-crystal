@@ -2,12 +2,8 @@ package com.silvergobletgames.leadcrystal.entities;
 
 import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.sylver.core.Effect;
-import com.silvergobletgames.sylver.core.Scene;
-import com.silvergobletgames.sylver.graphics.Image;
-import com.silvergobletgames.sylver.netcode.RenderData;
 import com.silvergobletgames.sylver.util.LinearInterpolator;
 import java.util.HashMap;
-import net.phys2d.math.Vector2f;
 
 
 public class EntityEffect extends Effect

@@ -1,12 +1,7 @@
 
 package com.silvergobletgames.leadcrystal.items;
 
-import com.silvergobletgames.sylver.netcode.RenderData;
 import com.silvergobletgames.sylver.netcode.SaveData;
-import com.silvergobletgames.sylver.netcode.SceneObjectRenderDataChanges;
-import java.util.ArrayList;
-import java.util.Arrays;
-import com.silvergobletgames.leadcrystal.entities.EntityTooltip;
 
 /**
  *

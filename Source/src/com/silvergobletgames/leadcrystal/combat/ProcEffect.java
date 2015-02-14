@@ -3,10 +3,6 @@ package com.silvergobletgames.leadcrystal.combat;
 import com.silvergobletgames.sylver.graphics.Overlay;
 import com.silvergobletgames.sylver.graphics.AbstractParticleEmitter;
 import com.silvergobletgames.sylver.graphics.ImageEffect;
-import com.silvergobletgames.sylver.netcode.RenderData;
-import com.silvergobletgames.sylver.netcode.SceneObjectDeserializer;
-import com.silvergobletgames.sylver.netcode.SceneObjectRenderData;
-import java.util.ArrayList;
 
 /**
  *
