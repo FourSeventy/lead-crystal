@@ -263,7 +263,7 @@ public class MainMenuScene extends Scene
         });
         
         
-        final Text versionText = new Text("Version 0.9.7 \u00a9 Silver Goblet Games",LeadCrystalTextType.MENU15);
+        final Text versionText = new Text("Version 0.9.8 \u00a9 Silver Goblet Games",LeadCrystalTextType.MENU15);
         versionText.setColor(new Color(Color.black));
         versionText.setPosition(10, 10);
         this.add(versionText,Layer.MAIN);
