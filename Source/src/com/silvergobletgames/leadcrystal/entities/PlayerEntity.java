@@ -466,7 +466,6 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             
             if(this.getArmorManager().doubleGoldFind.isMaxPoints() == true)
             {
-                //currencyAmount *= 2;
                 
                 Damage damage = new Damage(Damage.DamageType.HEAL, 1);
                 this.takeDamage(damage);
@@ -478,7 +477,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             //add currency text
             Text currencyText = new Text("+" + Integer.toString(currencyAmount), LeadCrystalTextType.COMBAT);
             currencyText.setColor(new Color(240,194,12));
-            currencyText.setPosition(other.getPosition().x + SylverRandom.random.nextInt(10), other.getPosition().y + 100);
+            currencyText.setPosition(other.getPosition().x + SylverRandom.random.nextInt(10), other.getPosition().y);
             currencyText.addTextEffect(new TextEffect(TextEffect.TextEffectType.YTRANSLATE, 120, other.getPosition().y, other.getPosition().y + 250));
             currencyText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 120, 0, 0));
             TextEffect fadeEffect = new TextEffect(TextEffect.TextEffectType.COLOR, 30, new Color(new Color(240,194,12),1), new Color(new Color(240,194,12),0));
@@ -507,7 +506,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                 //add potion text
                 Text currencyText = new Text("+1", LeadCrystalTextType.COMBAT);
                 currencyText.setColor(new Color(126,11,15));
-                currencyText.setPosition(other.getPosition().x + SylverRandom.random.nextInt(10), other.getPosition().y + 100);
+                currencyText.setPosition(other.getPosition().x + SylverRandom.random.nextInt(10), other.getPosition().y );
                 currencyText.addTextEffect(new TextEffect(TextEffect.TextEffectType.YTRANSLATE, 120, other.getPosition().y, other.getPosition().y + 250));
                 currencyText.addTextEffect(new TextEffect(TextEffect.TextEffectType.DURATION, 120, 0, 0));
                 TextEffect fadeEffect = new TextEffect(TextEffect.TextEffectType.COLOR, 30, new Color(new Color(126,11,15),1), new Color(new Color(126,11,15),0));
