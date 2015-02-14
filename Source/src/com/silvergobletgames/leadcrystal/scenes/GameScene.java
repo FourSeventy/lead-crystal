@@ -213,9 +213,7 @@ public class GameScene extends Scene
                 currentObject.update();
             }
         }    
-        
-        //update hud
-        hud.update();
+
 
         //update scene effects manager
         this.getSceneEffectsManager().update();
