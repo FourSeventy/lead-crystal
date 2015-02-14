@@ -130,7 +130,7 @@ public class GameScene extends Scene
         
         //initializing hud
         hud = new Hud(this);
-        this.add(hud,Layer.MENU);          
+        this.add(hud,Layer.MENU);           
         
         //cutscenee manager
         this.cutsceneManager = new CutsceneManager(this);
@@ -148,12 +148,6 @@ public class GameScene extends Scene
      */
     public void update()
     {
-          
-        //==============            
-        // Handle Input
-        //==============
-        this.handleInput();
-
 
         //================
         // Handle Physics
