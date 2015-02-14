@@ -786,6 +786,12 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                 this.finishAttack();             
            
         }
+        else
+        {       
+            //if not usable, play sound
+            Sound sound = Sound.ambientSound("buffered/error.ogg", false);
+            this.getOwningScene().add(sound);
+        }
     }
     
     @Override

@@ -313,9 +313,9 @@ public class NewCharacterScene extends Scene
         if(Game.getInstance().getInputHandler().getInputSnapshot().isKeyReleased(KeyEvent.VK_ESCAPE)) 
         {           
 
-            //change scene
-            Game.getInstance().loadScene(new CharacterSelectionScene());
-            Game.getInstance().changeScene(CharacterSelectionScene.class,null); 
+            //switch back to the main menu    
+            Game.getInstance().loadScene(new MainMenuScene());
+            Game.getInstance().changeScene(MainMenuScene.class, null);  
         }
 
     }

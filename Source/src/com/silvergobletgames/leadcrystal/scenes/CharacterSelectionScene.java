@@ -1,5 +1,6 @@
 package com.silvergobletgames.leadcrystal.scenes;
 
+import com.jogamp.newt.event.KeyEvent;
 import com.silvergobletgames.leadcrystal.core.CursorFactory;
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
@@ -190,7 +191,15 @@ public class CharacterSelectionScene extends Scene
 
     public void handleInput() 
     {
-        
+        //if escape is pressed        
+        if(Game.getInstance().getInputHandler().getInputSnapshot().isKeyReleased(KeyEvent.VK_ESCAPE)) 
+        {           
+
+            //switch back to the main menu    
+            Game.getInstance().loadScene(new MainMenuScene());
+            Game.getInstance().changeScene(MainMenuScene.class, null);  
+        }
+
     }
 
     public void sceneEntered(ArrayList args) 
