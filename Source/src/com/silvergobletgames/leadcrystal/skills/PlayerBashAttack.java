@@ -71,10 +71,10 @@ public class PlayerBashAttack extends PlayerSkill{
         Body body = new StaticBody(new Box(90, 90));
         Image swipe = new Image("swipe.png"); 
         
-//        if(targetX < userX)
-//        {
-//           swipe.setVerticalFlip(true);
-//        }
+        if(vectorToTarget.x <= 0)
+        {
+           swipe.setVerticalFlip(true);
+        }
        // swipe.setDimensions(90, 90);
         swipe.setColor(new Color(1.2f,1.2f,1.2f));
         
