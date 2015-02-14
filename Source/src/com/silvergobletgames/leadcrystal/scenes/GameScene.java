@@ -537,14 +537,14 @@ public class GameScene extends Scene
         {
             if (inputSnapshot.buttonClicked() == 1 && !(this.currentHoverID != null && this.mouseHoverInRange) )
             {
-                if (player.getSkillAssignment(1) != null && player.getSkillManager().getSkill(player.getSkillAssignment(1)).isUsable())
+                if (player.getSkillAssignment(1) != null && player.getSkillManager().getSkill(player.getSkillAssignment(1)).isUsable() && player.getCombatData().canAttack() && !player.inAttackAnimation())
                 {
                     player.useActionBarSkill(player.getSkillAssignment(1));
                 }
             }
             else if(inputSnapshot.buttonClicked() == 3 && !(this.currentHoverID != null && this.mouseHoverInRange))
             {
-                if (player.getSkillAssignment(2) != null && player.getSkillManager().getSkill(player.getSkillAssignment(2)).isUsable())
+                if (player.getSkillAssignment(2) != null && player.getSkillManager().getSkill(player.getSkillAssignment(2)).isUsable() && player.getCombatData().canAttack() && !player.inAttackAnimation())
                 {
                     player.useActionBarSkill(player.getSkillAssignment(2));
                 }
@@ -669,7 +669,13 @@ public class GameScene extends Scene
     
     public void add(Sound sound)
     {
-         AudioRenderer.playSound(sound);
+        //dont play null sounds
+        if(sound == null)
+        {
+            return;
+        }
+        
+        AudioRenderer.playSound(sound);
     }
 
     public void remove(SceneObject item)
