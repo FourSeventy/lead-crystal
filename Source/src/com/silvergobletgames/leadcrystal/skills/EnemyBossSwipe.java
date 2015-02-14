@@ -17,6 +17,7 @@ import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect;
 import com.silvergobletgames.leadcrystal.entities.HitBox;
+import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.util.SylverVector2f;
 
 
@@ -33,7 +34,15 @@ public class EnemyBossSwipe extends Skill{
     public void use(Damage damage, SylverVector2f origin)
     {
         
-     
+        if(origin.x < user.getPosition().x)
+        {
+            origin.x += 100;
+        }
+        else if(origin.x >= user.getPosition().x)
+        {
+            origin.x -=100;
+        }
+        
         //Damage is scaled with base damage
         float dAmount = this.getBaseDamage()/2; 
         damage.getAmountObject().adjustBase(dAmount);
@@ -52,7 +61,7 @@ public class EnemyBossSwipe extends Skill{
            // image.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.COLOR, 50, new Color(1,1,1f,1f), new Color(1,1,1f,0f)));
             image.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 300, 1, 1));
             if (user.getFacingDirection().equals(FacingDirection.LEFT))
-                image.setHorizontalFlip(true);
+                image.setVerticalFlip(true);
             image.setAnchor(Anchorable.Anchor.CENTER);
             image.setPositionAnchored(origin.x,origin.y);
             this.user.getOwningScene().add(image,Layer.MAIN);
@@ -80,7 +89,11 @@ public class EnemyBossSwipe extends Skill{
             hitBox.getImage().setAngle((float)(theta * 180f/Math.PI)); 
             
             
-            this.user.getOwningScene().add(hitBox,Layer.MAIN);  
+            this.user.getOwningScene().add(hitBox,Layer.MAIN); 
+            
+            //add sound
+            Sound attackSound = Sound.locationSound("buffered/claw2.ogg", origin.x, origin.y, false);               
+            user.getOwningScene().add(attackSound);
             
             
         }
