@@ -41,7 +41,7 @@ public class EnemySinBlast extends Skill
     
     public EnemySinBlast()
     {
-        super(SkillID.EnemySinBlast,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,180,800);
+        super(SkillID.EnemySinBlast,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,180,950);
         
 
     }

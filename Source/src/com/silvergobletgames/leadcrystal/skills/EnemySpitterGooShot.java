@@ -31,7 +31,7 @@ public class EnemySpitterGooShot extends Skill
     
     public EnemySpitterGooShot()
     {
-        super(SkillID.EnemyGooShot,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,120,800);
+        super(SkillID.EnemyGooShot,SkillType.OFFENSIVE,ExtendedImageAnimations.RANGEDATTACK,120,950);
         
 
     }
