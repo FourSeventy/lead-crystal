@@ -77,8 +77,8 @@ public abstract class PlayerSkill extends Skill
     protected Image getMuzzleFlash(TargetingData targetingData, SylverVector2f origin)
     {
         Image flash = new Image("flash.png");
-        flash.setScale(.14f);
-        flash.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 7, 1, 1));
+        flash.setScale(.87f);
+        flash.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 5, 1, 1));
         flash.setRotationPoint(0, .5f);
         flash.setAnchor(Anchorable.Anchor.LEFTCENTER);
         flash.setColor(new Color(3f,2f,2f,.45f));

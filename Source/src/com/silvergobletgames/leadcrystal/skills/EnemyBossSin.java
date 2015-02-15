@@ -71,7 +71,7 @@ public class EnemyBossSin extends Skill
         
         //dispense muzzle flash
         Image muzzleFlash = new Image("flash.png");
-        muzzleFlash.setScale(.14f);
+        //muzzleFlash.setScale(.14f);
         muzzleFlash.addImageEffect(new ImageEffect(ImageEffect.ImageEffectType.DURATION, 7, 1, 1));
         muzzleFlash.setRotationPoint(0, .5f);
         muzzleFlash.setAnchor(Anchorable.Anchor.LEFTCENTER);
