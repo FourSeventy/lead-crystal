@@ -9,19 +9,8 @@ import com.silvergobletgames.leadcrystal.combat.LevelProgressionManager;
 import com.silvergobletgames.leadcrystal.combat.ProcEffect;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.core.*;
-import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBlackBodyAnimationPack;
-import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBlackFrontArmAnimationPack;
-import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBlueBodyAnimationPack;
-import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownBackArmAnimationPack;
-import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownBodyAnimationPack;
-import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashBrownFrontArmAnimationPack;
-import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashGreenBodyAnimationPack;
-import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashRedBodyAnimationPack;
-import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashWhiteBodyAnimationPack;
-import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.BashYellowBodyAnimationPack;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.JetpackEmitter;
-import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.RocketExplosionEmitter;
-import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SandSpurtEmitter;
+import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.JetpackFireEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SmokeEmitter;
 import com.silvergobletgames.leadcrystal.entities.EntityTooltip.EntityTooltipField;
 import com.silvergobletgames.leadcrystal.items.*;
@@ -30,19 +19,14 @@ import com.silvergobletgames.leadcrystal.items.Currency;
 import com.silvergobletgames.leadcrystal.items.CurrencyManager;
 import com.silvergobletgames.leadcrystal.items.Potion;
 import com.silvergobletgames.leadcrystal.scenes.GameScene;
-import com.silvergobletgames.leadcrystal.scripting.PageCondition;
-import com.silvergobletgames.leadcrystal.scripting.ScriptObject;
-import com.silvergobletgames.leadcrystal.scripting.ScriptPage;
 import com.silvergobletgames.leadcrystal.skills.PlayerBoomerang.BoomerangHitbox;
 import com.silvergobletgames.leadcrystal.skills.Skill;
 import com.silvergobletgames.leadcrystal.skills.Skill.SkillID;
 import com.silvergobletgames.leadcrystal.skills.SkillManager;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.Game;
-import com.silvergobletgames.sylver.core.InputSnapshot;
 import com.silvergobletgames.sylver.core.Scene;
 import com.silvergobletgames.sylver.core.Scene.Layer;
-import com.silvergobletgames.sylver.core.SceneObject;
 import com.silvergobletgames.sylver.graphics.*;
 import com.silvergobletgames.sylver.graphics.AnimationPack.CoreAnimations;
 import com.silvergobletgames.sylver.graphics.AnimationPack.ImageAnimation;
@@ -52,22 +36,15 @@ import com.silvergobletgames.sylver.graphics.LightSource;
 import com.silvergobletgames.sylver.netcode.*;
 import com.silvergobletgames.sylver.util.SylverRandom;
 import com.silvergobletgames.sylver.util.SylverVector2f;
-import java.awt.Point;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.UUID;
 import javax.media.opengl.GL2;
 import net.phys2d.math.ROVector2f;
 import net.phys2d.math.Vector2f;
-import net.phys2d.raw.*;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
-import net.phys2d.raw.StaticBody;
 import net.phys2d.raw.shapes.Box;
-import net.phys2d.raw.shapes.Circle;
-import net.phys2d.raw.shapes.Line;
 import net.phys2d.raw.shapes.Polygon;
 
 public class PlayerEntity extends CombatEntity implements SavableSceneObject
@@ -1453,6 +1430,19 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                     explosionEmitter.setDuration(-1);
                     this.addEmitter(explosionEmitter);
                     
+                    
+                    JetpackFireEmitter fireEmitter = new JetpackFireEmitter();
+                    fireEmitter.setAngle(0);
+                    fireEmitter.setDuration(-1);
+                    fireEmitter.setParticleRotation(90);
+                    this.addEmitter(fireEmitter);
+                    
+                    fireEmitter = new JetpackFireEmitter();
+                    fireEmitter.setAngle(20);
+                    fireEmitter.setDuration(-1);
+                    fireEmitter.setParticleRotation(90);
+                    this.addEmitter(fireEmitter);
+                    
                     //start sound
                     Sound sound = Sound.locationSound("buffered/jetpackLoop.ogg", this.getPosition().x  , this.getPosition().y, false, 1f, 1f, true);
                     sound.name = "jetpackLoop";
@@ -1479,7 +1469,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
                     //remove jetpack emitters
                     for(AbstractParticleEmitter e :this.getEmitters())
                     {
-                        if(e instanceof SmokeEmitter || e instanceof JetpackEmitter)
+                        if(e instanceof SmokeEmitter || e instanceof JetpackEmitter || e instanceof JetpackFireEmitter)
                         {
                             e.stopEmittingThenRemove();
                         }
@@ -1540,7 +1530,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         //remove jetpack emitters
         for(AbstractParticleEmitter e :this.getEmitters())
         {
-            if(e instanceof SmokeEmitter || e instanceof JetpackEmitter)
+            if(e instanceof SmokeEmitter || e instanceof JetpackEmitter || e instanceof JetpackFireEmitter)
             {
                 e.stopEmittingThenRemove();
             }

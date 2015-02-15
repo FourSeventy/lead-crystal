@@ -40,6 +40,28 @@ public class LeadCrystalParticleEmitters
         }      
     }
     
+    public static class JetpackFireEmitter extends ImageParticleEmitter
+    {
+        public JetpackFireEmitter()
+        {
+            super(new Image("rocket_fire.png"));
+            this.setParticlesPerFrame(.1f); 
+            this.setRelativePositioning(true);
+        }
+        
+        public Particle buildParticle()
+        {
+            Random rand = SylverRandom.random;
+            
+            SylverVector2f pos = new SylverVector2f(this.getPosition().x - 95 + getAngle() +(rand.nextFloat() - .5f)*5 , this.getPosition().y - 105);
+            SylverVector2f velocity =new SylverVector2f(0,0);
+            SylverVector2f acceleration = new SylverVector2f(0,0);
+            Color color = new Color(new Color(2.5f,1.7f,1.7f,.45f));
+            int ttl = 20;
+            return new Particle(pos, velocity, acceleration, color, 1.6f, 0,  ttl);
+        }      
+    }
+    
     
     public static class BloodEmitter extends ImageParticleEmitter
     {
@@ -171,12 +193,6 @@ public class LeadCrystalParticleEmitters
         }      
     }
     
-    
-    
-    
-    //=========
-    // Good
-    //=========
     public static class DashParticleEmitter extends ImageParticleEmitter
     {
         public DashParticleEmitter()
@@ -310,6 +326,8 @@ public class LeadCrystalParticleEmitters
             return new Particle(pos, velocity, acceleration, color, .8f, 1f/ttl,  ttl);
         }      
     }
+    
+    
     
     public static class SmokeEmitter extends ImageParticleEmitter
     {
