@@ -13,6 +13,7 @@ import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.Jetpac
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.JetpackFireEmitter;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.SmokeEmitter;
 import com.silvergobletgames.leadcrystal.entities.EntityTooltip.EntityTooltipField;
+import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity.WorldObjectType;
 import com.silvergobletgames.leadcrystal.items.*;
 import com.silvergobletgames.leadcrystal.items.ArmorManager;
 import com.silvergobletgames.leadcrystal.items.Currency;
@@ -513,7 +514,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         {                                
             
             //if we landed on the top of a worldObjectEntity
-            if(-event.getNormal().getY() > .35)
+            if(-event.getNormal().getY() > .35 && ((WorldObjectEntity)other).getWorldObjectType() == WorldObjectType.TERRAIN)
             {
                 //play sound
                 if(this.jumpEnergy != MAX_JUMP_ENERGY)
