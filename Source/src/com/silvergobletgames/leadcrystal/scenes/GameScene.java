@@ -9,6 +9,7 @@ import com.silvergobletgames.leadcrystal.core.LevelData;
 import com.silvergobletgames.leadcrystal.cutscenes.CutsceneManager;
 import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.Entity.FacingDirection;
+import com.silvergobletgames.leadcrystal.entities.HitBox;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.entities.WorldObjectEntity;
 import com.silvergobletgames.leadcrystal.items.ArmorManager;
@@ -163,20 +164,20 @@ public class GameScene extends Scene
         ArrayList<SceneObject> objects = this.getSceneObjectManager().get(Layer.MAIN);
         for(SceneObject s:  objects)
         {
-            if( s instanceof Entity)
+            if( s instanceof Entity && !(s instanceof HitBox))
             {
                 Entity ent = (Entity)s;
 
-                int distance = 2_900;
+                int distance = 3_700;
                 if( !ent.getBody().isStatic())
                 {
-                    distance = 2_500;
+                    distance = 3_000;
                 }
 
                 //if out of range of the player                  
                 if(player.distanceAbs(ent) >= distance)
                 {
-                    // ent.getBody().setVelocity(new Vector2f(0,0));
+                     ent.getBody().setVelocity(new Vector2f(0,0));
                     // this.physicsWorld.clearArbiters(ent.getBody());
                      ent.getBody().setEnabled(false);  
                 }
