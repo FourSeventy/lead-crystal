@@ -70,6 +70,10 @@ public class SceneScriptManager
     // Script Functions
     //==================
     
+    public void clearWorldData()
+    {
+        this.worldDataVariables.clear();
+    }
     
     /**
      * Returns persisted world data that was saved with setWorldData().

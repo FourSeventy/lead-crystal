@@ -773,6 +773,9 @@ public class GameScene extends Scene
         //set which level is active
         this.activeLevel = level;
         
+        //clear old script world data
+        this.scriptManager.clearWorldData();
+        
         //run all auto scripts
         ArrayList<SceneObject> scripts = this.getSceneObjectManager().get(ExtendedSceneObjectGroups.SCRIPT);       
         for(SceneObject obj: scripts)
