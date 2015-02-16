@@ -40,7 +40,7 @@ public class PlayerWard extends PlayerSkill{
     public PlayerWard()
     {
         //super constructor 
-        super(SkillID.PlayerWard,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK, 1800, Integer.MAX_VALUE);
+        super(SkillID.PlayerWard,SkillType.OFFENSIVE,ExtendedImageAnimations.SPELLATTACK, 18 * 60, Integer.MAX_VALUE);
         
         //set the skillID and the name
         this.icon = new Image("iceWardIcon.png");
