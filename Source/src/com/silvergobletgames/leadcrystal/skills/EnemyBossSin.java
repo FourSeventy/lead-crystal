@@ -180,7 +180,7 @@ public class EnemyBossSin extends Skill
             this.getOwningScene().add(bullet,Layer.MAIN);
 
              //body and image and hitbox
-            body = new Body(new Box(50,50), 1);
+            body = new Body(new Box(42,42), 1);
             img = new Image("poison_goo_ball.png");
             img.setDimensions(50, 50);
             bullet = new EnemySinHitbox(damage, body, img, user, new SylverVector2f(vectorToTarget),-1);

@@ -174,7 +174,7 @@ public class EnemySinBlast extends Skill
             if(user.getTarget().getPosition().y < user.getPosition().y)
                 theta = (float)(2* Math.PI - theta);
                 //body and image and hitbox
-            Body body = new Body(new Box(44,44), 1);
+            Body body = new Body(new Box(42,42), 1);
             Image img = new Image("poison_goo_ball.png");
             img.setDimensions(50, 50);
             EnemySinHitbox bullet = new EnemySinHitbox(damage, body, img, user, new SylverVector2f(vectorToTarget),1);
