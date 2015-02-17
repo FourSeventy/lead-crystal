@@ -291,11 +291,11 @@ public class EnemyHomingMissile extends Skill
                  img2.setVerticalFlip(SylverRandom.random.nextBoolean()); 
                  Overlay ehhovhh = new Overlay(img2);
                  img.addOverlay(ehhovhh); 
-                 Body beh = new StaticBody(new Circle(75));
-                 beh.setOverlapMask(Entity.OverlapMasks.NPE_TOUCH.value);
-                 beh.setBitmask(Entity.BitMasks.NO_COLLISION.value);
+                 Body beh = new StaticBody(new Circle(75));            
                  damage.setType(Damage.DamageType.BURN);   
                  HitBox explosionHitbox = new HitBox(damage, beh, img, sourceEntity);
+                 beh.setOverlapMask(this.body.getOverlapMask());
+                 beh.setBitmask(Entity.BitMasks.NO_COLLISION.value);
                  explosionHitbox.addEntityEffect(new EntityEffect(EntityEffect.EntityEffectType.DURATION, 10, 0, 0));
                  explosionHitbox.setPosition(this.getPosition().x, this.getPosition().y);
                  this.getOwningScene().add(explosionHitbox, Layer.MAIN);

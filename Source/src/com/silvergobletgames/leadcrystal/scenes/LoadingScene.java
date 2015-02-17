@@ -58,7 +58,7 @@ public class LoadingScene extends Scene
         Random r = new Random();
         
         //build tip
-        switch(4)//r.nextInt(6))
+        switch(r.nextInt(6))
         {
             case 0:
 
