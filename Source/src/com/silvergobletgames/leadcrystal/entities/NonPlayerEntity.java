@@ -278,7 +278,7 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
     
     public void jump()
     {
-       this.jump(0,5000);
+       this.jump(0,16_500);
     }
     
     public void jump(int x, int y)
