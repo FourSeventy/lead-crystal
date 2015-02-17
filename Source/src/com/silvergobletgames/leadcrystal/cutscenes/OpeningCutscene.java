@@ -4,6 +4,7 @@ package com.silvergobletgames.leadcrystal.cutscenes;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.core.InputSnapshot;
+import com.silvergobletgames.sylver.graphics.Anchorable;
 import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.ImageEffect;
@@ -43,10 +44,12 @@ public class OpeningCutscene extends Cutscene
         // fade in to level
         
          this.center = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x/2;
+         float height = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().y/2;
          //center -500 is max left
         
         frame1 = new Image("opening_frame1.png");
-        frame1.setPosition(0, 0);
+        frame1.setAnchor(Anchorable.Anchor.CENTER);
+        frame1.setPositionAnchored(this.center, height);
         frame1.setDimensions(1600, 900);
         frame1.setAlphaBrightness(1);
         this.objects.add(frame1);  
@@ -54,12 +57,14 @@ public class OpeningCutscene extends Cutscene
         
         frame2 = new Image("opening_frame2.png");
         frame2.setDimensions(1600, 900);
-        frame2.setPosition(0,0);
+        frame2.setAnchor(Anchorable.Anchor.CENTER);
+        frame2.setPositionAnchored(this.center, height);
         frame2.setAlphaBrightness(0);
         this.objects.add(frame2);  
         
         frame3 = new Image("opening_frame3.png");
-        frame3.setPosition(0,0);
+        frame3.setAnchor(Anchorable.Anchor.CENTER);
+        frame3.setPositionAnchored(this.center, height);
         frame3.setAlphaBrightness(0);
         this.objects.add(frame3);  
              
