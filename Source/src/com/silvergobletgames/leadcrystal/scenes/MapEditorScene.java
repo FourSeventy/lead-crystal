@@ -879,25 +879,115 @@ public class MapEditorScene extends Scene {
             if (inputSnapshot.isKeyReleasedCtrlModifier(KeyEvent.VK_M))
             {
                              
-               ((WorldObjectEntity)this.getSceneObjectManager().get("switch0")).getImage().setTextureReference("objective_lever.png");
-                ((WorldObjectEntity)this.getSceneObjectManager().get("switch1")).getImage().setTextureReference("objective_lever.png");
-               ((WorldObjectEntity)this.getSceneObjectManager().get("switch2")).getImage().setTextureReference("objective_lever.png");
-               ((WorldObjectEntity)this.getSceneObjectManager().get("switch3")).getImage().setTextureReference("objective_lever.png");
-//                for(SceneObject so: this.getSceneObjectManager().get(Layer.MAIN))
+//                 for(SceneObject so: this.getSceneObjectManager().get(Layer.MAIN))
 //                {
 //
+//                    
+//                    // =========== boxes ==================
 //                    if(so instanceof NonPlayerEntity)
 //                    {
 //                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.CrateInterface)
 //                        {
-//                            ((NonPlayerEntity)so).getCombatData().ccResistance.setBase(1);
+//                            ((NonPlayerEntity)so).getBody().setMass(7);
+//                        }
+//                    }
+//                    
+//                    // =========== motoccos ==================
+//                    if(so instanceof NonPlayerEntity)
+//                    {
+//                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.MoleAnimationPack && ((NonPlayerEntity)so).getImage().getScale() <= 1)
+//                        {
+//                            ((NonPlayerEntity)so).getBody().setMass(10);
+//                        }
+//                    }
+//                    else if(so instanceof MobSpawner)
+//                    {
+//                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.MoleAnimationPack && ((MobSpawner)so).mobToSpawn.getImage().getScale() <= 1 )
+//                        {
+//                            ((MobSpawner)so).mobToSpawn.getBody().setMass(10);
+//                        }                           
+//                    }
+//                    
+//                    // =========== sandman ==================
+//                    if(so instanceof NonPlayerEntity)
+//                    {
+//                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.SandmanAnimationPack)
+//                        {
+//                            ((NonPlayerEntity)so).getBody().setMass(20);
+//                        }
+//                    }
+//                    else if(so instanceof MobSpawner)
+//                    {
+//                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.SandmanAnimationPack )
+//                        {
+//                            ((MobSpawner)so).mobToSpawn.getBody().setMass(20);
+//                        }                           
+//                    }
+//                    
+//                    
+//                    // =========== giant motocco ==================
+//                    if(so instanceof NonPlayerEntity)
+//                    {
+//                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.MoleAnimationPack && ((NonPlayerEntity)so).getImage().getScale() > 1 )
+//                        {
+//                            ((NonPlayerEntity)so).getBody().setMass(20);
+//                            ((NonPlayerEntity)so).getBody().setFriction(1);
+//                        }
+//                    }
+//                    else if(so instanceof MobSpawner)
+//                    {
+//                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.MoleAnimationPack && ((MobSpawner)so).mobToSpawn.getImage().getScale() > 1 )
+//                        {
+//                            ((MobSpawner)so).mobToSpawn.getBody().setMass(20);
+//                            ((MobSpawner)so).mobToSpawn.getBody().setFriction(1);
+//                        }                           
+//                    }
+//                    
+//                     // =========== commando ==================
+//                    if(so instanceof NonPlayerEntity)
+//                    {
+//                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.Scout1AnimationPack)
+//                        {
+//                            ((NonPlayerEntity)so).getBody().setMass(20);
+//                        }
+//                    }
+//                    else if(so instanceof MobSpawner)
+//                    {
+//                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.Scout1AnimationPack )
+//                        {
+//                            ((MobSpawner)so).mobToSpawn.getBody().setMass(20);
+//                        }                           
+//                    }
+//                    
+//                     // =========== commando ==================
+//                    if(so instanceof NonPlayerEntity)
+//                    {
+//                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.Scout2AnimationPack)
+//                        {
+//                            ((NonPlayerEntity)so).getBody().setMass(20);
 //                        }
 //                    }
 //                    else if(so instanceof MobSpawner)
 //                    {
 //                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.Scout2AnimationPack )
 //                        {
-//                            
+//                            ((MobSpawner)so).mobToSpawn.getBody().setMass(20);
+//                        }                           
+//                    }
+//                    
+//                     // =========== tank ==================
+//                    if(so instanceof NonPlayerEntity)
+//                    {
+//                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.Scout1AnimationPack)
+//                        {
+//                            ((NonPlayerEntity)so).getBody().setMass(25);
+//                        }
+//                    }
+//                    else if(so instanceof MobSpawner)
+//                    {
+//                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.Scout1AnimationPack )
+//                        {
+//                            ((MobSpawner)so).mobToSpawn.getBody().setMass(25);
 //                        }                           
 //                    }
 //                }
