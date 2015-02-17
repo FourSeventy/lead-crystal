@@ -517,7 +517,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             if(-event.getNormal().getY() > .35 && ((WorldObjectEntity)other).getWorldObjectType() == WorldObjectType.TERRAIN)
             {
                 //play sound
-                if(this.jumpEnergy != MAX_JUMP_ENERGY)
+                if(this.jumpEnergy != MAX_JUMP_ENERGY && this.inAirTimer > 10)
                 {                                   
 
                     Sound sound = Sound.locationSound("buffered/bodyFall.ogg", this.getPosition().x, this.getPosition().y, false,.40f);
@@ -1314,8 +1314,9 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         //=============================
          if (!combatData.isDead() && !this.onLadder)
          {
+ 
              //change animation if we are in the air
-             if(inAirTimer > 30 || jumpEnergy < this.MAX_JUMP_ENERGY && !(this.feetOnTheGround))           
+             if(inAirTimer > 30 || jumpEnergy < this.MAX_JUMP_ENERGY && jumpEnergy > 0 && !(this.feetOnTheGround))           
                  this.image.setAnimation(ExtendedImageAnimations.JUMPING);
              
                  
@@ -1483,9 +1484,6 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
         
         //set jump released flag
         this.jumpReleased = false;
-        
-        //set correct animation for this frame
-        this.setCorrectAnimation();
         
     }
     
