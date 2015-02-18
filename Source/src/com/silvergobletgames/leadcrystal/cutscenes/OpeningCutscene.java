@@ -47,7 +47,7 @@ public class OpeningCutscene extends Cutscene
          float height = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().y/2;
          //center -500 is max left
         
-        frame1 = new Image("opening_frame1.png");
+        frame1 = new Image("opening_frame1.jpg");
         frame1.setAnchor(Anchorable.Anchor.CENTER);
         frame1.setPositionAnchored(this.center, height);
         frame1.setDimensions(1600, 900);
@@ -55,14 +55,14 @@ public class OpeningCutscene extends Cutscene
         this.objects.add(frame1);  
         
         
-        frame2 = new Image("opening_frame2.png");
+        frame2 = new Image("opening_frame2.jpg");
         frame2.setDimensions(1600, 900);
         frame2.setAnchor(Anchorable.Anchor.CENTER);
         frame2.setPositionAnchored(this.center, height);
         frame2.setAlphaBrightness(0);
         this.objects.add(frame2);  
         
-        frame3 = new Image("opening_frame3.png");
+        frame3 = new Image("opening_frame3.jpg");
         frame3.setAnchor(Anchorable.Anchor.CENTER);
         frame3.setPositionAnchored(this.center, height);
         frame3.setAlphaBrightness(0);

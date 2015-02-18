@@ -51,7 +51,7 @@ public class CharacterSelectionScene extends Scene
         final int center = right/2;
         
         //build background image
-        Image back = new Image("mainMenuBackground.png");
+        Image back = new Image("mainMenuBackground.jpg");
         back.setPosition(0, 0);
         back.setDimensions(1600, 900);
         this.add(back,Layer.BACKGROUND);

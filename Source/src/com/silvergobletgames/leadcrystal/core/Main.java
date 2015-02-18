@@ -216,8 +216,8 @@ public class Main
     
     private static void loadMenuTextures()
     {
-        URI textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/mainMenuBackground.png");  
-        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "mainmenubackground.png");
+        URI textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/mainMenuBackground.jpg");  
+        Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "mainmenubackground.jpg");
         textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("ui/tallFrameMenu.png");  
         Game.getInstance().getAssetManager().getTextureLoader().loadTexture(textureURI, "tallframemenu.png");
         textureURI = Game.getInstance().getConfiguration().getTextureRootFolder().resolve("effects/blank.png");  
