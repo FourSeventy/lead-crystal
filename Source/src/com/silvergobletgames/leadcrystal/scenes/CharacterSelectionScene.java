@@ -49,11 +49,13 @@ public class CharacterSelectionScene extends Scene
         //center and right
         final int right = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x;
         final int center = right/2;
+        float height = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().y/2;
         
         //build background image
         Image back = new Image("mainMenuBackground.jpg");
-        back.setPosition(0, 0);
         back.setDimensions(1600, 900);
+        back.setAnchor(Anchorable.Anchor.CENTER);
+        back.setPositionAnchored(center, height);
         this.add(back,Layer.BACKGROUND);
         
         //options title

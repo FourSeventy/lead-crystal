@@ -46,16 +46,20 @@ public class MainMenuScene extends Scene
     
     public MainMenuScene()
     {
-                
-        //build background image
-        Image back = new Image("mainMenuBackground.jpg");
-        back.setPosition(0, 0);
-        back.setDimensions(1600, 900);
-        this.add(back,Layer.BACKGROUND);
-        
+            
         //center and right
         final int right = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x;
         final int center = right/2;
+        float height = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().y/2;
+        
+        //build background image
+        Image back = new Image("mainMenuBackground.jpg");
+        back.setDimensions(1600, 900);
+        back.setAnchor(Anchorable.Anchor.CENTER);
+        back.setPositionAnchored(center, height);
+        this.add(back,Layer.BACKGROUND);
+        
+
 
         Image logo = new Image("logo.png");
         logo.setPosition(center - logo.getWidth()/2 - 25, 650);

@@ -14,6 +14,7 @@ import com.silvergobletgames.sylver.audio.AudioRenderer;
 import com.silvergobletgames.sylver.audio.Sound;
 import com.silvergobletgames.sylver.core.*;
 import com.silvergobletgames.sylver.core.EngineSettings.ParticleDensity;
+import com.silvergobletgames.sylver.graphics.Anchorable;
 import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.OpenGLGameWindow;
@@ -58,11 +59,13 @@ public class ControlsScene extends Scene
         //center and right
         final int right = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x;
         final int center = right/2;
+        float height = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().y/2;
         
         //build background image
         Image back = new Image("mainMenuBackground.jpg");
-        back.setPosition(0, 0);
         back.setDimensions(1600, 900);
+        back.setAnchor(Anchorable.Anchor.CENTER);
+        back.setPositionAnchored(center, height);
         this.add(back,Layer.BACKGROUND);
         
         //options title
