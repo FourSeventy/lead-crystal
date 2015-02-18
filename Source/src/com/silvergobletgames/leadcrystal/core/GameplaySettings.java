@@ -62,8 +62,8 @@ public class GameplaySettings{
     public short right = 68;
     public short jump = 32;
     public short sprint = 15;
-    public short toggleFlashlight = 84;
-    public short usePotion = 70;
+    public short flashlight = 84;
+    public short potion = 70;
     public short skill3 = 81;
     public short skill4 = 69;
 
@@ -105,8 +105,8 @@ public class GameplaySettings{
             iniSaver.setProperty("bind_right",Short.toString(this.right));
             iniSaver.setProperty("bind_jump",Short.toString(this.jump));
             iniSaver.setProperty("bind_sprint",Short.toString(this.sprint));
-            iniSaver.setProperty("bind_flashlight",Short.toString(this.toggleFlashlight));
-            iniSaver.setProperty("bind_potion",Short.toString(this.usePotion));
+            iniSaver.setProperty("bind_flashlight",Short.toString(this.flashlight));
+            iniSaver.setProperty("bind_potion",Short.toString(this.potion));
             iniSaver.setProperty("bind_skill3",Short.toString(this.skill3));
             iniSaver.setProperty("bind_skill4",Short.toString(this.skill4));
             
@@ -156,8 +156,8 @@ public class GameplaySettings{
             this.right = Short.parseShort(iniLoader.getProperty("bind_right","68"));
             this.jump = Short.parseShort(iniLoader.getProperty("bind_jump","32"));
             this.sprint = Short.parseShort(iniLoader.getProperty("bind_sprint","15"));
-            this.toggleFlashlight = Short.parseShort(iniLoader.getProperty("bind_flashlight","84"));
-            this.usePotion = Short.parseShort(iniLoader.getProperty("bind_potion","70"));
+            this.flashlight = Short.parseShort(iniLoader.getProperty("bind_flashlight","84"));
+            this.potion = Short.parseShort(iniLoader.getProperty("bind_potion","70"));
             this.skill3 = Short.parseShort(iniLoader.getProperty("bind_skill3","81"));
             this.skill4 = Short.parseShort(iniLoader.getProperty("bind_skill4","69"));
             

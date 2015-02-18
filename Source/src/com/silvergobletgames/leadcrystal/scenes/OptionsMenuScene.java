@@ -322,9 +322,49 @@ public class OptionsMenuScene extends Scene
             }
         });
         
+        //controls
+        final Text controlsText = new Text("Controls",LeadCrystalTextType.MENU46);
+        controlsText.setPosition(center - controlsText.getWidth()/2, 255);
+        final Button controlsButton = new Button(new Image("blank.png"), center - controlsText.getWidth()/2, controlsText.getPosition().y, controlsText.getWidth(), controlsText.getHeight());
+        this.add(controlsText,Layer.MAIN);
+        this.add(controlsButton,Layer.MAIN);
+        controlsButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                if (e.getActionCommand().equals("clicked")) 
+                {
+                    
+                    //change scene
+                    Game.getInstance().loadScene(new ControlsScene());
+                    Game.getInstance().changeScene(ControlsScene.class,null); 
+                    
+                    
+                }
+                if (e.getActionCommand().equals("mouseEntered")) 
+                {
+                    
+                      if(controlsText.hasTextEffect("small"))
+                          controlsText.removeTextEffect("small");
+                      
+                       controlsText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, controlsText.getScale(), 1.2));
+                    
+                    //play sound
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
+                    add(sound);
+                }
+                if (e.getActionCommand().equals("mouseExited"))
+                {
+                        if(controlsText.hasTextEffect("big"))
+                           controlsText.removeTextEffect("big");
+                        
+                        controlsText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, controlsText.getScale(), 1));
+                }
+            }
+        }); 
+        
         //back
         final Text backText = new Text("Back",LeadCrystalTextType.MENU46);
-        backText.setPosition(center - backText.getWidth()/2, 255);
+        backText.setPosition(center - backText.getWidth()/2, 190);
         final Button backButton = new Button(new Image("blank.png"), center - backText.getWidth()/2, backText.getPosition().y, backText.getWidth(), backText.getHeight());
         this.add(backText,Layer.MAIN);
         this.add(backButton,Layer.MAIN);
