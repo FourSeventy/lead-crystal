@@ -50,6 +50,22 @@ public class GameplaySettings{
     // Gameplay Settings
     //=================== 
     public boolean showCooldownTimers = false;
+    
+    
+    //===================
+    // Control Settings
+    //=================== 
+    
+    public short up = 87;
+    public short down = 83;
+    public short left = 65;
+    public short right = 68;
+    public short jump = 32;
+    public short sprint = 15;
+    public short toggleFlashlight = 84;
+    public short usePotion = 70;
+    public short skill3 = 81;
+    public short skill4 = 69;
 
     
     //=====================
@@ -82,7 +98,18 @@ public class GameplaySettings{
             iniSaver.setProperty("debug_bodyWireframe", Boolean.toString(this.bodyWireframe));
             iniSaver.setProperty("debug_viewportFeelers", Boolean.toString(this.viewportFeelers));          
             iniSaver.setProperty("debug_debugEnemies",Boolean.toString(this.debugEnemies));
-            iniSaver.setProperty("levelEditor",Boolean.toString(this.levelEditor));
+            iniSaver.setProperty("levelEditor",Boolean.toString(this.levelEditor));           
+            iniSaver.setProperty("bind_up",Short.toString(this.up));          
+            iniSaver.setProperty("bind_down",Short.toString(this.down));
+            iniSaver.setProperty("bind_left",Short.toString(this.left));
+            iniSaver.setProperty("bind_right",Short.toString(this.right));
+            iniSaver.setProperty("bind_jump",Short.toString(this.jump));
+            iniSaver.setProperty("bind_sprint",Short.toString(this.sprint));
+            iniSaver.setProperty("bind_flashlight",Short.toString(this.toggleFlashlight));
+            iniSaver.setProperty("bind_potion",Short.toString(this.usePotion));
+            iniSaver.setProperty("bind_skill3",Short.toString(this.skill3));
+            iniSaver.setProperty("bind_skill4",Short.toString(this.skill4));
+            
             
             
            
@@ -121,6 +148,18 @@ public class GameplaySettings{
             this.viewportFeelers = Boolean.parseBoolean(iniLoader.getProperty("debug_viewportFeelers","false"));          
             this.debugEnemies = Boolean.parseBoolean(iniLoader.getProperty("debug_debugEnemies","false"));
             this.levelEditor = Boolean.parseBoolean(iniLoader.getProperty("levelEditor","false"));
+            
+            
+            this.up = Short.parseShort(iniLoader.getProperty("bind_up","87"));
+            this.down = Short.parseShort(iniLoader.getProperty("bind_down","83"));
+            this.left = Short.parseShort(iniLoader.getProperty("bind_left","65"));
+            this.right = Short.parseShort(iniLoader.getProperty("bind_right","68"));
+            this.jump = Short.parseShort(iniLoader.getProperty("bind_jump","32"));
+            this.sprint = Short.parseShort(iniLoader.getProperty("bind_sprint","15"));
+            this.toggleFlashlight = Short.parseShort(iniLoader.getProperty("bind_flashlight","84"));
+            this.usePotion = Short.parseShort(iniLoader.getProperty("bind_potion","70"));
+            this.skill3 = Short.parseShort(iniLoader.getProperty("bind_skill3","81"));
+            this.skill4 = Short.parseShort(iniLoader.getProperty("bind_skill4","69"));
             
             
 

@@ -188,21 +188,7 @@ public class MapMenu extends Window{
         if(this.isOpen)
         {
             if(owningScene != null)
-            {
-
-              
-                //===============
-                // Handle Input
-                //===============
-
-                if(Game.getInstance().getInputHandler().getInputSnapshot().isKeyPressed(KeyEvent.VK_LEFT))
-                {
-                    this.panMapLeft();
-                }
-                if(Game.getInstance().getInputHandler().getInputSnapshot().isKeyPressed(KeyEvent.VK_RIGHT))
-                {
-                    this.panMapRight();
-                }
+            {           
 
                 super.update();
 

@@ -404,6 +404,17 @@ public class GameScene extends Scene
         {
             player.move(FacingDirection.RIGHT);
         }
+        
+        //down
+        if (inputSnapshot.isKeyPressed(KeyEvent.VK_S) == true)
+        {
+            player.move(new SylverVector2f(0,-1));
+        }
+        //up
+        if (inputSnapshot.isKeyPressed(KeyEvent.VK_W) == true)
+        {
+            player.move(new SylverVector2f(0,1));
+        }
 
         //jump
         if (inputSnapshot.isKeyPressed(KeyEvent.VK_SPACE) == true)
@@ -416,17 +427,7 @@ public class GameScene extends Scene
         {
             player.handleJumpReleased();
         }
-
-        //down
-        if (inputSnapshot.isKeyPressed(KeyEvent.VK_S) == true)
-        {
-            player.move(new SylverVector2f(0,-1));
-        }
-        //up
-        if (inputSnapshot.isKeyPressed(KeyEvent.VK_W) == true)
-        {
-            player.move(new SylverVector2f(0,1));
-        }
+     
 
         //sprint
         if (inputSnapshot.isKeyPressed(KeyEvent.VK_SHIFT))
@@ -497,14 +498,6 @@ public class GameScene extends Scene
                 hud.escapeMenu.toggle();
             }
         }
-
-        //quest menu
-        if(inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_L))
-        {
-            hud.questMenu.toggle();
-        }
-
-
 
         //debug
         if (inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_M))
