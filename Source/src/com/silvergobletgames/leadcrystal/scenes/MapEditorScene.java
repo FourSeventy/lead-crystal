@@ -636,14 +636,6 @@ public class MapEditorScene extends Scene {
             Game.getInstance().loadScene(new MainMenuScene());
             Game.getInstance().changeScene(MainMenuScene.class,new ArrayList(){{add(true);}});
         }
-
-        //test
-        if (inputSnapshot.isKeyReleased(KeyEvent.VK_F5))
-        {
-            this.jumpIntoLevel = true;
-            this.placingStartingPosition = true;
-            Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.POINTERHAND));
-        }
         
         if (this.polygonBuilder.active)
         {

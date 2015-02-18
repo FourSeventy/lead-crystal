@@ -504,12 +504,6 @@ public class GameScene extends Scene
             }
         }
 
-        //debug
-        if (inputSnapshot.isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_M))
-        {
-
-        }
-
 
 
         //=============
