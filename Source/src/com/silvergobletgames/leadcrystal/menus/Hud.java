@@ -11,6 +11,7 @@ import com.silvergobletgames.leadcrystal.entities.ItemEntity;
 import com.silvergobletgames.leadcrystal.entities.PlayerEntity;
 import com.silvergobletgames.leadcrystal.items.ArmorManager;
 import com.silvergobletgames.leadcrystal.items.Potion;
+import com.silvergobletgames.leadcrystal.scenes.ControlsScene;
 import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.leadcrystal.skills.Skill.SkillID;
 import com.silvergobletgames.leadcrystal.skills.SkillFactory;
@@ -656,14 +657,18 @@ public class Hud extends Window
         b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
         this.usePotion.add(b);
-        tt = new Text("Press F to use Potion",LeadCrystalTextType.HUD34);
+        String key = ControlsScene.getKeyText(GameplaySettings.getInstance().potion).toLowerCase();
+        String formattedKey = key.substring(0, 1).toUpperCase() + key.substring(1);
+        tt = new Text("Press "+ formattedKey+" to use Potion",LeadCrystalTextType.HUD34);
         tt.setPosition( center - tt.getWidth()/2, 647);
         this.usePotion.add(tt);
 
         b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
         this.jumpTip.add(b);
-        tt = new Text("Press Spacebar to Jump",LeadCrystalTextType.HUD34);
+        key = ControlsScene.getKeyText(GameplaySettings.getInstance().jump).toLowerCase();
+        formattedKey = key.substring(0, 1).toUpperCase() + key.substring(1);
+        tt = new Text("Press "+formattedKey+" to Jump",LeadCrystalTextType.HUD34);
         tt.setPosition( center - tt.getWidth()/2, 647);
         this.jumpTip.add(tt);
         
@@ -671,7 +676,9 @@ public class Hud extends Window
         b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
         this.useLadder.add(b);
-        tt = new Text("Press W to climb ladders",LeadCrystalTextType.HUD34);
+        key = ControlsScene.getKeyText(GameplaySettings.getInstance().up).toLowerCase();
+        formattedKey = key.substring(0, 1).toUpperCase() + key.substring(1);
+        tt = new Text("Press "+formattedKey+" to climb ladders",LeadCrystalTextType.HUD34);
         tt.setPosition( center - tt.getWidth()/2, 647);
         this.useLadder.add(tt);
 
@@ -685,14 +692,18 @@ public class Hud extends Window
         b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
         this.sprint.add(b);
-        tt = new Text("Hold Shift to Sprint",LeadCrystalTextType.HUD34);
+        key = ControlsScene.getKeyText(GameplaySettings.getInstance().sprint).toLowerCase();
+        formattedKey = key.substring(0, 1).toUpperCase() + key.substring(1);
+        tt = new Text("Hold "+formattedKey+" to Sprint",LeadCrystalTextType.HUD34);
         tt.setPosition( center - tt.getWidth()/2, 647);
         this.sprint.add(tt);
         
         b = new Button(new Image("tutorial_tooltip.png"), center - 300, 600, 600 , 120);
         b.dontKillClick = true;
         this.lightTooltip.add(b);
-        tt = new Text("Press T to activate flashlight",LeadCrystalTextType.HUD34);
+        key = ControlsScene.getKeyText(GameplaySettings.getInstance().flashlight).toLowerCase();
+        formattedKey = key.substring(0, 1).toUpperCase() + key.substring(1);
+        tt = new Text("Press "+formattedKey+" to activate flashlight",LeadCrystalTextType.HUD34);
         tt.setPosition( center - tt.getWidth()/2, 647);
         this.lightTooltip.add(tt);
 

@@ -714,7 +714,7 @@ public class ControlsScene extends Scene
     
    }
    
-    private static String getKeyText(short keyCode)
+    public static String getKeyText(short keyCode)
     {
             switch(keyCode)
             {
