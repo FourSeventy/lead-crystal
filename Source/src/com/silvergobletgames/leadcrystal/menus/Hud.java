@@ -508,11 +508,13 @@ public class Hud extends Window
         b.dontKillClick = true;
         this.addComponent(b);       
         
-        Text t = new Text("Q",LeadCrystalTextType.HUD20);
+        String hotkey = ControlsScene.getKeyText(GameplaySettings.getInstance().skill3);
+        Text t = new Text(hotkey,LeadCrystalTextType.HUD20);
         this.skillHotkey3 = new Label(t,center + 8,10) ;      
         this.addComponent(skillHotkey3);
         
-        t = new Text("E",LeadCrystalTextType.HUD20);
+        hotkey = ControlsScene.getKeyText(GameplaySettings.getInstance().skill4);
+        t = new Text(hotkey,LeadCrystalTextType.HUD20);
         this.skillHotkey4 = new Label(t,center + 73,10) ;      
         this.addComponent(skillHotkey4);
         
