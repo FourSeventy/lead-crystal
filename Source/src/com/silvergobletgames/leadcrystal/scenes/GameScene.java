@@ -3,6 +3,7 @@ package com.silvergobletgames.leadcrystal.scenes;
 import com.jogamp.newt.event.KeyEvent;
 import com.silvergobletgames.leadcrystal.core.*;
 import com.silvergobletgames.leadcrystal.core.CollisionHandler;
+import com.silvergobletgames.leadcrystal.core.ControlsAdapter.GameControl;
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
 import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
 import com.silvergobletgames.leadcrystal.core.LevelData;
@@ -246,6 +247,8 @@ public class GameScene extends Scene
         //input snapshot
         InputSnapshot inputSnapshot = Game.getInstance().getInputHandler().getInputSnapshot();
         
+        ControlsAdapter controlsAdapter = new ControlsAdapter(inputSnapshot);
+        
         //======================= 
         // Handle Mouse Location
         //=======================           
@@ -394,66 +397,75 @@ public class GameScene extends Scene
 
 
         //move left
-        if (inputSnapshot.isKeyPressed(KeyEvent.VK_A))
+        if (controlsAdapter.isControlPressed(GameControl.LEFT))
         {
             player.move(FacingDirection.LEFT);
         }
 
         //move right
-        if (inputSnapshot.isKeyPressed(KeyEvent.VK_D))
+        if (controlsAdapter.isControlPressed(GameControl.RIGHT))
         {
             player.move(FacingDirection.RIGHT);
         }
         
         //down
-        if (inputSnapshot.isKeyPressed(KeyEvent.VK_S) == true)
+        if (controlsAdapter.isControlPressed(GameControl.DOWN))
         {
             player.move(new SylverVector2f(0,-1));
         }
         //up
-        if (inputSnapshot.isKeyPressed(KeyEvent.VK_W) == true)
+        if (controlsAdapter.isControlPressed(GameControl.UP))
         {
             player.move(new SylverVector2f(0,1));
         }
 
         //jump
-        if (inputSnapshot.isKeyPressed(KeyEvent.VK_SPACE) == true)
+        if (controlsAdapter.isControlPressed(GameControl.JUMP))
         {
             player.handleJumping();
         }
 
         //jump released
-        if (inputSnapshot.isKeyReleased(KeyEvent.VK_SPACE) == true)
+        if (controlsAdapter.isControlReleased(GameControl.JUMP))
         {
             player.handleJumpReleased();
         }
      
 
         //sprint
-        if (inputSnapshot.isKeyPressed(KeyEvent.VK_SHIFT))
+        if (controlsAdapter.isControlPressed(GameControl.SPRINT))
         {
             player.handleSprint();
         }
-        if(inputSnapshot.isKeyReleased(KeyEvent.VK_SHIFT))
+        if(controlsAdapter.isControlReleased(GameControl.SPRINT))
         {
             player.handleSprintReleased();
         }
 
+        //use potion
+        if (controlsAdapter.isControlReleased(GameControl.POTION))
+        {
+            if(!player.getCombatData().isDead())
+            {
+                 player.getPotionManager().usePotion(); 
+            }
+        }
+        
         //toggle flashlight
-        if (inputSnapshot.isKeyReleased(KeyEvent.VK_T))
+        if (controlsAdapter.isControlReleased(GameControl.FLASHLIGHT))
         {
             player.toggleFlashlight();
         }
 
         //use hotbar skills 
-        if (inputSnapshot.isKeyReleased(KeyEvent.VK_Q))
+        if (controlsAdapter.isControlReleased(GameControl.SKILL3))
         {
             if(player.getSkillAssignment(3) != null)
             {
                 player.useActionBarSkill(player.getSkillAssignment(3));
             }
         }
-        if (inputSnapshot.isKeyReleased(KeyEvent.VK_E))
+        if (controlsAdapter.isControlReleased(GameControl.SKILL4))
         {
             if(player.getSkillAssignment(4) != null )
             {
@@ -461,14 +473,7 @@ public class GameScene extends Scene
             }
         }
 
-        //use potion
-        if (inputSnapshot.isKeyReleased(KeyEvent.VK_F))
-        {
-            if(!player.getCombatData().isDead())
-            {
-                 player.getPotionManager().usePotion(); 
-            }
-        }
+        
         
         //dash
         if(player.dashing)
