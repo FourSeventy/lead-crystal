@@ -73,8 +73,8 @@ public class ControlsScene extends Scene
          
         
         // up
-        this.upText = new Text("Up             " +  this.getKeyText(settings.up)  ,LeadCrystalTextType.MENU36);
-        upText.setPosition(center - 100, 630);
+        this.upText = new Text("Up                     " +  this.getKeyText(settings.up)  ,LeadCrystalTextType.MENU36);
+        upText.setPosition(center - 120, 630);
         final Button upButton = new Button(new Image("blank.png"), center - upText.getWidth()/2, upText.getPosition().y, upText.getWidth(), upText.getHeight());
         this.add(upText,Layer.MAIN);
         this.add(upButton,Layer.MAIN);
@@ -84,7 +84,7 @@ public class ControlsScene extends Scene
                 if (e.getActionCommand().equals("clicked")) 
                 {
                    ControlsScene.this.refreshButtonText();
-                   upText.setText("Up             _");
+                   upText.setText("Up                     _");
                    ControlsScene.this.currentlyUpdating ="up";
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
@@ -110,8 +110,8 @@ public class ControlsScene extends Scene
         });
         
         // down
-        this.downText = new Text("Down             " +   this.getKeyText(settings.down),LeadCrystalTextType.MENU36);
-        downText.setPosition(center - 100, 580);
+        this.downText = new Text("Down               " +   this.getKeyText(settings.down),LeadCrystalTextType.MENU36);
+        downText.setPosition(center - 120, 580);
         final Button downButton = new Button(new Image("blank.png"), center - downText.getWidth()/2, downText.getPosition().y, downText.getWidth(), downText.getHeight());
         this.add(downText,Layer.MAIN);
         this.add(downButton,Layer.MAIN);
@@ -121,7 +121,7 @@ public class ControlsScene extends Scene
                 if (e.getActionCommand().equals("clicked")) 
                 {
                    ControlsScene.this.refreshButtonText();
-                   downText.setText("Down             _");
+                   downText.setText("Down               _");
                    ControlsScene.this.currentlyUpdating ="down";
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
@@ -147,8 +147,8 @@ public class ControlsScene extends Scene
         });
         
         // Left
-        this.leftText = new Text("Left             " +   this.getKeyText(settings.left),LeadCrystalTextType.MENU36);
-        leftText.setPosition(center - 100, 530);
+        this.leftText = new Text("Left                   " +   this.getKeyText(settings.left),LeadCrystalTextType.MENU36);
+        leftText.setPosition(center - 120, 530);
         final Button leftButton = new Button(new Image("blank.png"), center - leftText.getWidth()/2, leftText.getPosition().y, leftText.getWidth(), leftText.getHeight());
         this.add(leftText,Layer.MAIN);
         this.add(leftButton,Layer.MAIN);
@@ -158,7 +158,7 @@ public class ControlsScene extends Scene
                 if (e.getActionCommand().equals("clicked")) 
                 {
                    ControlsScene.this.refreshButtonText();
-                   leftText.setText("Left             _");
+                   leftText.setText("Left                   _");
                    ControlsScene.this.currentlyUpdating ="left";
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
@@ -184,8 +184,8 @@ public class ControlsScene extends Scene
         });
         
         // Right
-        this.rightText = new Text("Right             " +   this.getKeyText(settings.right),LeadCrystalTextType.MENU36);
-        rightText.setPosition(center - 100, 480);
+        this.rightText = new Text("Right                " +   this.getKeyText(settings.right),LeadCrystalTextType.MENU36);
+        rightText.setPosition(center - 120, 480);
         final Button rightButton = new Button(new Image("blank.png"), center - rightText.getWidth()/2, rightText.getPosition().y, rightText.getWidth(), rightText.getHeight());
         this.add(rightText,Layer.MAIN);
         this.add(rightButton,Layer.MAIN);
@@ -195,7 +195,7 @@ public class ControlsScene extends Scene
                 if (e.getActionCommand().equals("clicked")) 
                 {
                    ControlsScene.this.refreshButtonText();
-                   rightText.setText("Right             _");
+                   rightText.setText("Right                _");
                    ControlsScene.this.currentlyUpdating ="right";
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
@@ -221,8 +221,8 @@ public class ControlsScene extends Scene
         });
         
         // Jump
-        this.jumpText = new Text("Jump             " +   this.getKeyText(settings.jump),LeadCrystalTextType.MENU36);
-        jumpText.setPosition(center - 100, 430);
+        this.jumpText = new Text("Jump               " +   this.getKeyText(settings.jump),LeadCrystalTextType.MENU36);
+        jumpText.setPosition(center - 120, 430);
         final Button jumpButton = new Button(new Image("blank.png"), center - jumpText.getWidth()/2, jumpText.getPosition().y, jumpText.getWidth(), jumpText.getHeight());
         this.add(jumpText,Layer.MAIN);
         this.add(jumpButton,Layer.MAIN);
@@ -232,7 +232,7 @@ public class ControlsScene extends Scene
                 if (e.getActionCommand().equals("clicked")) 
                 {
                    ControlsScene.this.refreshButtonText();
-                   jumpText.setText("Jump             _");
+                   jumpText.setText("Jump               _");
                    ControlsScene.this.currentlyUpdating ="jump";
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
@@ -258,8 +258,8 @@ public class ControlsScene extends Scene
         });
         
         // Sprint
-        this.sprintText = new Text("Sprint             "+   this.getKeyText(settings.sprint),LeadCrystalTextType.MENU36);
-        sprintText.setPosition(center - 100, 380);
+        this.sprintText = new Text("Sprint              "+   this.getKeyText(settings.sprint),LeadCrystalTextType.MENU36);
+        sprintText.setPosition(center - 120, 380);
         final Button sprintButton = new Button(new Image("blank.png"), center - sprintText.getWidth()/2, sprintText.getPosition().y, sprintText.getWidth(), sprintText.getHeight());
         this.add(sprintText,Layer.MAIN);
         this.add(sprintButton,Layer.MAIN);
@@ -269,7 +269,7 @@ public class ControlsScene extends Scene
                 if (e.getActionCommand().equals("clicked")) 
                 {
                    ControlsScene.this.refreshButtonText();
-                   sprintText.setText("Sprint             _");
+                   sprintText.setText("Sprint              _");
                    ControlsScene.this.currentlyUpdating ="sprint";
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
@@ -295,8 +295,8 @@ public class ControlsScene extends Scene
         });
         
         // Flashlight
-        this.flashlightText = new Text("Flashlight             " +   this.getKeyText(settings.flashlight),LeadCrystalTextType.MENU36);
-        flashlightText.setPosition(center - 100, 330);
+        this.flashlightText = new Text("Flashlight       " +   this.getKeyText(settings.flashlight),LeadCrystalTextType.MENU36);
+        flashlightText.setPosition(center - 120, 330);
         final Button flashlightButton = new Button(new Image("blank.png"), center - flashlightText.getWidth()/2, flashlightText.getPosition().y, flashlightText.getWidth(), flashlightText.getHeight());
         this.add(flashlightText,Layer.MAIN);
         this.add(flashlightButton,Layer.MAIN);
@@ -306,7 +306,7 @@ public class ControlsScene extends Scene
                 if (e.getActionCommand().equals("clicked")) 
                 {
                    ControlsScene.this.refreshButtonText();
-                   flashlightText.setText("Flashlight             _");
+                   flashlightText.setText("Flashlight       _");
                    ControlsScene.this.currentlyUpdating ="flashlight";
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
@@ -332,8 +332,8 @@ public class ControlsScene extends Scene
         });
         
         // Potion
-        this.potionText = new Text("Potion             " +   this.getKeyText(settings.potion),LeadCrystalTextType.MENU36);
-        potionText.setPosition(center - 100, 280);
+        this.potionText = new Text("Potion              " +   this.getKeyText(settings.potion),LeadCrystalTextType.MENU36);
+        potionText.setPosition(center - 120, 280);
         final Button potionButton = new Button(new Image("blank.png"), center - potionText.getWidth()/2, potionText.getPosition().y, potionText.getWidth(), potionText.getHeight());
         this.add(potionText,Layer.MAIN);
         this.add(potionButton,Layer.MAIN);
@@ -343,7 +343,7 @@ public class ControlsScene extends Scene
                 if (e.getActionCommand().equals("clicked")) 
                 {
                    ControlsScene.this.refreshButtonText();
-                   potionText.setText("Potion             _");
+                   potionText.setText("Potion              _");
                    ControlsScene.this.currentlyUpdating ="potion";
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
@@ -369,8 +369,8 @@ public class ControlsScene extends Scene
         });
         
         // Skill3
-        this.skill3Text = new Text("Skill3             " +   this.getKeyText(settings.skill3),LeadCrystalTextType.MENU36);
-        skill3Text.setPosition(center - 100, 230);
+        this.skill3Text = new Text("Skill3                " +   this.getKeyText(settings.skill3),LeadCrystalTextType.MENU36);
+        skill3Text.setPosition(center - 120, 230);
         final Button skill3Button = new Button(new Image("blank.png"), center - skill3Text.getWidth()/2, skill3Text.getPosition().y, skill3Text.getWidth(), skill3Text.getHeight());
         this.add(skill3Text,Layer.MAIN);
         this.add(skill3Button,Layer.MAIN);
@@ -380,7 +380,7 @@ public class ControlsScene extends Scene
                 if (e.getActionCommand().equals("clicked")) 
                 {
                   ControlsScene.this.refreshButtonText();
-                   skill3Text.setText("Skill3             _");
+                   skill3Text.setText("Skill3                _");
                    ControlsScene.this.currentlyUpdating ="skill3"; 
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
@@ -406,8 +406,8 @@ public class ControlsScene extends Scene
         });
         
         // skill4
-        this.skill4Text = new Text("Skill4             " +   this.getKeyText(settings.skill4),LeadCrystalTextType.MENU36);
-        skill4Text.setPosition(center - 100, 180);
+        this.skill4Text = new Text("Skill4                " +   this.getKeyText(settings.skill4),LeadCrystalTextType.MENU36);
+        skill4Text.setPosition(center - 120, 180);
         final Button skill4Button = new Button(new Image("blank.png"), center - skill4Text.getWidth()/2, skill4Text.getPosition().y, skill4Text.getWidth(), skill4Text.getHeight());
         this.add(skill4Text,Layer.MAIN);
         this.add(skill4Button,Layer.MAIN);
@@ -417,7 +417,7 @@ public class ControlsScene extends Scene
                 if (e.getActionCommand().equals("clicked")) 
                 {
                    ControlsScene.this.refreshButtonText();
-                   skill4Text.setText("Skill4             _");
+                   skill4Text.setText("Skill4                _");
                    ControlsScene.this.currentlyUpdating ="skill4"; 
                 }
                 if (e.getActionCommand().equals("mouseEntered")) 
@@ -690,25 +690,25 @@ public class ControlsScene extends Scene
        final int right = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x;
         final int center = right/2;
         
-       this.upText.setText("Up             " +  ControlsScene.getKeyText(settings.up));   
+       this.upText.setText("Up                     " +  ControlsScene.getKeyText(settings.up));   
        //upText.setPosition(center - upText.getWidth()/2, 630);
-       this.downText.setText("Down             " +  ControlsScene.getKeyText(settings.down)); 
+       this.downText.setText("Down               " +  ControlsScene.getKeyText(settings.down)); 
        //downText.setPosition(center - downText.getWidth()/2, 580);
-       this.leftText.setText("Left             " +  ControlsScene.getKeyText(settings.left)); 
+       this.leftText.setText("Left                   " +  ControlsScene.getKeyText(settings.left)); 
       // leftText.setPosition(center - leftText.getWidth()/2, 530);
-       this.rightText.setText("Right             " +  ControlsScene.getKeyText(settings.right)); 
+       this.rightText.setText("Right                " +  ControlsScene.getKeyText(settings.right)); 
       // rightText.setPosition(center - rightText.getWidth()/2, 480);
-       this.jumpText.setText("Jump             " +  ControlsScene.getKeyText(settings.jump)); 
+       this.jumpText.setText("Jump               " +  ControlsScene.getKeyText(settings.jump)); 
       // jumpText.setPosition(center - jumpText.getWidth()/2, 430);
-       this.sprintText.setText("Sprint             " +  ControlsScene.getKeyText(settings.sprint));
+       this.sprintText.setText("Sprint              " +  ControlsScene.getKeyText(settings.sprint));
       // sprintText.setPosition(center - sprintText.getWidth()/2, 380);
-       this.flashlightText.setText("Flashlight             " +  ControlsScene.getKeyText(settings.flashlight)); 
+       this.flashlightText.setText("Flashlight       " +  ControlsScene.getKeyText(settings.flashlight)); 
       // flashlightText.setPosition(center - flashlightText.getWidth()/2, 330);
-       this.potionText.setText("Potion             " +  ControlsScene.getKeyText(settings.potion)); 
+       this.potionText.setText("Potion              " +  ControlsScene.getKeyText(settings.potion)); 
       // potionText.setPosition(center - potionText.getWidth()/2, 280);
-       this.skill3Text.setText("Skill3             " +  ControlsScene.getKeyText(settings.skill3));
+       this.skill3Text.setText("Skill3                " +  ControlsScene.getKeyText(settings.skill3));
       // skill3Text.setPosition(center - skill3Text.getWidth()/2, 230);
-       this.skill4Text.setText("Skill4             " +  ControlsScene.getKeyText(settings.skill4));
+       this.skill4Text.setText("Skill4                " +  ControlsScene.getKeyText(settings.skill4));
       // skill4Text.setPosition(center - skill4Text.getWidth()/2, 180);
 
     
