@@ -112,7 +112,7 @@ public class EnemySmallAntThrow extends Skill {
                  
                  Image antImage = new Image(new MoleAnimationPack());
                  antImage.setScale(.8f);
-                 Body antBody = new Body(new Circle(40),3);
+                 Body antBody = new Body(new Circle(40),10);
                  antBody.setFriction(0.3f);
                  antBody.setGravityEffected(true);
                  antBody.setOverlapMask(Entity.OverlapMasks.NPE.value);
