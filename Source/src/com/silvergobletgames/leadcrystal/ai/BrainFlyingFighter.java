@@ -270,10 +270,6 @@ public class BrainFlyingFighter extends BrainFlying{
                  this.moveTowardsPoint(patternPosition);
 
 
-                //random chance to jump
-                if(Math.random()< .005f)
-                    self.jump();
-
                 //keep track of our time since last attack
                 timeSinceLastAttack++;
 
