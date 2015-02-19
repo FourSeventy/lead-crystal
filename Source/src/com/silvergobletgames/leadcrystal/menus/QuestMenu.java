@@ -213,6 +213,13 @@ public class QuestMenu extends Window{
         this.repaintLevelDetails(); 
     }
     
+    public void clearObjectiveStatus()
+    {
+        this.sideObjectiveStatusText = "";
+        this.mainObjectiveStatusText = "";
+        this.repaintLevelDetails();
+    }
+    
     
      @Override
     public void close()

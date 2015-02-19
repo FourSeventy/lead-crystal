@@ -760,7 +760,10 @@ public class GameScene extends Scene
         getViewport().quickMoveToCoordinate(player.getPosition().x, player.getPosition().y);
         
         if(this.hud != null)
+        {
            this.hud.update();
+           this.hud.questMenu.clearObjectiveStatus();
+        }
         
       
         //set which level is active
