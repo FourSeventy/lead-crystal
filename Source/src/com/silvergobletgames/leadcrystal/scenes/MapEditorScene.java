@@ -875,66 +875,6 @@ public class MapEditorScene extends Scene {
 //                {
 //
 //                    
-//                    // =========== boxes ==================
-//                    if(so instanceof NonPlayerEntity)
-//                    {
-//                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.CrateInterface)
-//                        {
-//                            ((NonPlayerEntity)so).getBody().setMass(7);
-//                        }
-//                    }
-//                    
-//                    // =========== motoccos ==================
-//                    if(so instanceof NonPlayerEntity)
-//                    {
-//                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.MoleAnimationPack && ((NonPlayerEntity)so).getImage().getScale() <= 1)
-//                        {
-//                            ((NonPlayerEntity)so).getBody().setMass(10);
-//                        }
-//                    }
-//                    else if(so instanceof MobSpawner)
-//                    {
-//                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.MoleAnimationPack && ((MobSpawner)so).mobToSpawn.getImage().getScale() <= 1 )
-//                        {
-//                            ((MobSpawner)so).mobToSpawn.getBody().setMass(10);
-//                        }                           
-//                    }
-//                    
-//                    // =========== sandman ==================
-//                    if(so instanceof NonPlayerEntity)
-//                    {
-//                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.SandmanAnimationPack)
-//                        {
-//                            ((NonPlayerEntity)so).getBody().setMass(20);
-//                        }
-//                    }
-//                    else if(so instanceof MobSpawner)
-//                    {
-//                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.SandmanAnimationPack )
-//                        {
-//                            ((MobSpawner)so).mobToSpawn.getBody().setMass(20);
-//                        }                           
-//                    }
-//                    
-//                    
-//                    // =========== giant motocco ==================
-//                    if(so instanceof NonPlayerEntity)
-//                    {
-//                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.MoleAnimationPack && ((NonPlayerEntity)so).getImage().getScale() > 1 )
-//                        {
-//                            ((NonPlayerEntity)so).getBody().setMass(20);
-//                            ((NonPlayerEntity)so).getBody().setFriction(1);
-//                        }
-//                    }
-//                    else if(so instanceof MobSpawner)
-//                    {
-//                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.MoleAnimationPack && ((MobSpawner)so).mobToSpawn.getImage().getScale() > 1 )
-//                        {
-//                            ((MobSpawner)so).mobToSpawn.getBody().setMass(20);
-//                            ((MobSpawner)so).mobToSpawn.getBody().setFriction(1);
-//                        }                           
-//                    }
-//                    
 //                     // =========== commando ==================
 //                    if(so instanceof NonPlayerEntity)
 //                    {
@@ -970,23 +910,23 @@ public class MapEditorScene extends Scene {
 //                     // =========== tank ==================
 //                    if(so instanceof NonPlayerEntity)
 //                    {
-//                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.Scout1AnimationPack)
+//                        if(((NonPlayerEntity)so).getImage().getAnimationPack() instanceof AnimationPackClasses.TankAnimationPack)
 //                        {
 //                            ((NonPlayerEntity)so).getBody().setMass(25);
 //                        }
 //                    }
 //                    else if(so instanceof MobSpawner)
 //                    {
-//                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.Scout1AnimationPack )
+//                        if(((MobSpawner)so).mobToSpawn.getImage().getAnimationPack() instanceof AnimationPackClasses.TankAnimationPack )
 //                        {
 //                            ((MobSpawner)so).mobToSpawn.getBody().setMass(25);
 //                        }                           
 //                    }
 //                }
-                
-                
-                
-            }
+//                
+//                
+//                
+              }
             
             
             
