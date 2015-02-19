@@ -83,7 +83,7 @@ public class ArmorManager {
         
         
         this.meleeAttackDamageBonus = new ArmorStat(ArmorStatID.MELEE_DAMAGE, new Image("meleeDamageIcon.png"), "Brass Knuckles",100,2);
-        this.meleeAttackDamageBonus.description = "+25% melee damage per point.";
+        this.meleeAttackDamageBonus.description = "+35% melee damage per point.";
         this.meleeAttackDamageBonus.unlocked = false;
         this.armorStats.put(this.meleeAttackDamageBonus.id,this.meleeAttackDamageBonus);
         
