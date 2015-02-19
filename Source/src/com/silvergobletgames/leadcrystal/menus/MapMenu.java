@@ -90,6 +90,7 @@ public class MapMenu extends Window{
             newOffset.x = newOffset.x + 2f;
         }
         
+        
          //=================================
         // Update Button Relative Positions
         //=================================
@@ -333,6 +334,8 @@ public class MapMenu extends Window{
         super.open();
         
         ((GameScene)this.getOwningScene()).getHud().closeDialogue();
+        
+        this.update();
        
     }
     
@@ -867,7 +870,7 @@ public class MapMenu extends Window{
                      if(!button4.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
                      {
                         sceneReference.changeLevel(5);
-                        closePanX = new Float(150);
+                        closePanX = new Float(65);
                      }
                 }
             }
@@ -1083,7 +1086,10 @@ public class MapMenu extends Window{
                 if(e.getActionCommand().equals("clicked"))
                 {
                      if(!button8.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
-                        sceneReference.changeLevel(9);
+                     {
+                        sceneReference.changeLevel(9);             
+                         closePanX = new Float(340);
+                     }
                 }
             }
        });
@@ -1136,7 +1142,10 @@ public class MapMenu extends Window{
                 if(e.getActionCommand().equals("clicked"))
                 {
                      if(!button9.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
+                     {
                         sceneReference.changeLevel(10);
+                        closePanX = new Float(530);
+                     }
                 }
             }
        });
@@ -1188,7 +1197,10 @@ public class MapMenu extends Window{
                 if(e.getActionCommand().equals("clicked"))
                 {
                      if(!button10.getImage().getOverlay("interact").getImage().getTextureReference().equals("map_lock.png"))
+                     {
                         sceneReference.changeLevel(11);
+                        closePanX = new Float(630);
+                     }
                 }
             }
        });
