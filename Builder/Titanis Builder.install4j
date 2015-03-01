@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="5.1.11" transformSequenceNumber="4">
-  <directoryPresets config="X:/Lead Crystal/Assets/Configurations/prod/gameSettings.ini" />
-  <application name="Titanis" distributionSourceDir="" applicationId="0938-5269-1317-3306" mediaDir="X:/Lead Crystal/Distributions/${compiler:sys.version}" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="Titanis" publisher="Silver Goblet Games" publisherWeb="http://www.silvergobletgames.com" version="0.9.11" allPathsRelative="false" backupOnSave="false" autoSave="false" convertDotsToUnderscores="false" macSignature="????" installerName="" javaMinVersion="1.7" javaMaxVersion="1.7" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
+  <directoryPresets config="X:/Lead Crystal/Assets/All Graphics/Installer Images" />
+  <application name="Titanis" distributionSourceDir="" applicationId="0938-5269-1317-3306" mediaDir="X:/Lead Crystal/Distributions/${compiler:sys.version}" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="Titanis" publisher="Silver Goblet Games" publisherWeb="http://www.silvergobletgames.com" version="1.0.0" allPathsRelative="false" backupOnSave="false" autoSave="false" convertDotsToUnderscores="false" macSignature="????" installerName="" javaMinVersion="1.7" javaMaxVersion="1.7" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
       <additionalLanguages />
@@ -91,7 +91,7 @@
         <content />
       </infoPlist>
       <iconImageFiles>
-        <file path="X:/Lead Crystal/Assets/All Graphics/Installer Images/silver-goblet-icon.png" />
+        <file path="X:/Lead Crystal/Assets/All Graphics/Installer Images/icon.png" />
       </iconImageFiles>
     </launcher>
   </launchers>
@@ -295,7 +295,7 @@
                     <object class="com.install4j.runtime.beans.actions.desktop.RegisterAddRemoveAction">
                       <void property="icon">
                         <object class="com.install4j.api.beans.ExternalFile">
-                          <string>X:/Lead Crystal/Assets/All Graphics/Installer Images/silver-goblet-icon.ico</string>
+                          <string>X:/Lead Crystal/Assets/All Graphics/Installer Images/icon.ico</string>
                         </object>
                       </void>
                       <void property="itemName">
@@ -317,6 +317,11 @@
                       </void>
                       <void property="name">
                         <string>Titanis</string>
+                      </void>
+                      <void property="winIconFile">
+                        <object class="com.install4j.api.beans.ExternalFile">
+                          <string>X:/Lead Crystal/Assets/All Graphics/Installer Images/icon.ico</string>
+                        </object>
                       </void>
                     </object>
                   </java>
