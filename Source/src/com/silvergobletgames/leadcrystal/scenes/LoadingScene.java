@@ -1,6 +1,7 @@
 
 package com.silvergobletgames.leadcrystal.scenes;
 
+import com.silvergobletgames.leadcrystal.core.GameplaySettings;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.sylver.audio.AudioRenderer;
 import com.silvergobletgames.sylver.audio.Sound;
@@ -58,11 +59,13 @@ public class LoadingScene extends Scene
         Random r = new Random();
         
         //build tip
-        switch(r.nextInt(6))
+        switch(r.nextInt(7))
         {
             case 0:
 
-                Text tt = new Text("Tip: Pressing T will activate your flashlight.",LeadCrystalTextType.HUD34);
+                String key = ControlsScene.getKeyText(GameplaySettings.getInstance().flashlight).toLowerCase();
+                String formattedKey = key.substring(0, 1).toUpperCase() + key.substring(1);
+                Text tt = new Text("Tip: Pressing "+formattedKey+" will activate your flashlight.",LeadCrystalTextType.HUD34);
                 tt.setPosition( center - tt.getWidth()/2, 125);
                 this.add(tt,Layer.MAIN);             
              break;
@@ -93,21 +96,22 @@ public class LoadingScene extends Scene
                 this.add(b,Layer.MAIN); 
               break;
             case 4: 
-                tt = new Text("Tip: The       icon indicates an enemy is vulnerable.", LeadCrystalTextType.HUD34);
+                tt = new Text("Tip: The       icon indicates an enemy is vulnerable. Vulnerable enemies take 75% more damage.", LeadCrystalTextType.HUD34);
                 tt.setPosition( center - tt.getWidth()/2, 125);
                 this.add(tt,Layer.MAIN);
-                b = new Button(new Image("vulnerable_curse.png"), center - 233, 115, 36 , 35);
+                b = new Button(new Image("vulnerable_curse.png"), center - 563, 115, 36 , 35);
                 b.dontKillClick = true;
                 this.add(b,Layer.MAIN); 
-            break;
-                
+            break;          
             case 5:
-                tt = new Text("Tip: Pressing F will use a potion.", LeadCrystalTextType.HUD34);
+                key = ControlsScene.getKeyText(GameplaySettings.getInstance().potion).toLowerCase();
+                formattedKey = key.substring(0, 1).toUpperCase() + key.substring(1);
+                tt = new Text("Tip: Pressing "+ formattedKey +" will use a potion.", LeadCrystalTextType.HUD34);
                 tt.setPosition( center - tt.getWidth()/2, 125);
                 this.add(tt,Layer.MAIN);             
              break;
             case 6:
-                tt = new Text("Tip: Resurrecting a player in co-op requires a potion.", LeadCrystalTextType.HUD34);
+                tt = new Text("Tip: The arrows on your radar point towards level objectives.", LeadCrystalTextType.HUD34);
                 tt.setPosition( center - tt.getWidth()/2, 125);
                 this.add(tt,Layer.MAIN);             
             break;
