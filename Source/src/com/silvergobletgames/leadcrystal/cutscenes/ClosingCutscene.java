@@ -6,6 +6,7 @@ import com.silvergobletgames.leadcrystal.scenes.GameScene;
 import com.silvergobletgames.leadcrystal.scenes.LoadingScene;
 import com.silvergobletgames.sylver.core.Game;
 import com.silvergobletgames.sylver.core.InputSnapshot;
+import com.silvergobletgames.sylver.graphics.Anchorable;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.windowsystem.Label;
 
@@ -21,13 +22,16 @@ public class ClosingCutscene extends Cutscene{
     {
         super( 60 * 5);
         
-        Image playerImage = new Image("blank.png");
-        playerImage.setDimensions(1600, 900);
-        playerImage.setPosition(0, 0);
-        this.objects.add(playerImage);    
+         float center = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().x/2;
+         float height = Game.getInstance().getGraphicsWindow().getCurrentAspectRatio().y/2;
+         //center -500 is max left
         
-        Label l = new Label("Closing Cutscene", 400 , 400);
-        this.objects.add(l);
+        Image frame1 = new Image("finalscene.jpg");
+        frame1.setAnchor(Anchorable.Anchor.CENTER);
+        frame1.setPositionAnchored(center, height);
+        frame1.setDimensions(1600, 900);
+        frame1.setAlphaBrightness(1);
+        this.objects.add(frame1); 
         
         
     }
