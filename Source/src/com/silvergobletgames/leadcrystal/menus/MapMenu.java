@@ -335,6 +335,7 @@ public class MapMenu extends Window{
         
         ((GameScene)this.getOwningScene()).getHud().closeDialogue();
         
+        Game.getInstance().getInputHandler().getInputSnapshot().killMouseClick();
         this.update();
        
     }
