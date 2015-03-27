@@ -110,7 +110,7 @@ public class GameScene extends Scene
         this.setViewport(view);        
         
         //build physics world
-        physicsWorld = new World(new Vector2f(0.0f, -57.0f), 5, new QuadSpaceStrategy(20, 5));
+        physicsWorld = new World(new Vector2f(0.0f, -57.0f), 8, new QuadSpaceStrategy(20, 5));
         physicsWorld.addListener(collisionHandler);
         physicsWorld.enableRestingBodyDetection(1f, 1f, 1f);
         
@@ -763,6 +763,9 @@ public class GameScene extends Scene
         {
            this.hud.update();
            this.hud.questMenu.clearObjectiveStatus();
+           
+           //close dialogue
+           this.getHud().closeDialogue();
         }
         
       
@@ -771,6 +774,8 @@ public class GameScene extends Scene
         
         //clear old script world data
         this.scriptManager.clearWorldData();
+        
+        
         
         //run all auto scripts
         ArrayList<SceneObject> scripts = this.getSceneObjectManager().get(ExtendedSceneObjectGroups.SCRIPT);       

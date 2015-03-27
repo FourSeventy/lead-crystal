@@ -99,7 +99,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     protected final Vector2f BASE_PLAYER_VELOCITY = new Vector2f(55,128);
     protected final float BASE_DAMPING = .1f; 
     protected final float BASE_FRICTION = 1.45f; 
-    protected final float AIR_DAMPENING = .5f;
+    protected final float AIR_DAMPENING = .27f;
     private boolean sprinting = false;
     public boolean dashing = false;
     protected SylverVector2f dashVector;
@@ -1588,11 +1588,15 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             //add force to the body
             vector.normalise();
             
-            float horizontalForce = 2_300;
+            float horizontalForce = 4_300;
+            
+            //air dampening
             if(!this.feetOnTheGround)
             {
                 horizontalForce *= this.AIR_DAMPENING;
             }       
+            
+            //ladder dampening
             float verticalForce = 0;
             if(this.onLadder)
             { 
