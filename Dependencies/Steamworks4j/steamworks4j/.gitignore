@@ -1,0 +1,26 @@
+# Steam SDK
+sdk/
+
+# generated sources
+java-wrapper/src/main/native/com.codedisaster.steamworks.*
+
+# output
+build/
+obj/
+target/
+Makefile
+*.exp
+*.lib
+*.make
+*.sln
+*.vcxproj
+*.vcxproj.*
+*.xcodeproj/
+
+# IDE files
+.idea/
+*.iml
+
+# misc
+premake5.exe
+steam_appid.txt

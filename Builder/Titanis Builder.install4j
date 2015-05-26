@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="5.1.11" transformSequenceNumber="4">
-  <directoryPresets config="X:/Lead Crystal/Assets/All Graphics/Installer Images" />
+  <directoryPresets config="X:/Lead Crystal/Dependencies/Steamworks4j/steamworks4j/natives/libs/steamworks4j64.dll" />
   <application name="Titanis" distributionSourceDir="" applicationId="0938-5269-1317-3306" mediaDir="X:/Lead Crystal/Distributions/${compiler:sys.version}" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="Titanis" publisher="Silver Goblet Games" publisherWeb="http://www.silvergobletgames.com" version="1.0.1" allPathsRelative="false" backupOnSave="false" autoSave="false" convertDotsToUnderscores="false" macSignature="????" installerName="" javaMinVersion="1.7" javaMaxVersion="1.7" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
@@ -26,6 +26,7 @@
       <mountPoint id="123" root="" location="Graphics" mode="755" />
       <mountPoint id="124" root="" location="Sounds" mode="755" />
       <mountPoint id="336" root="" location="LevelEditorFiles" mode="755" />
+      <mountPoint id="391" root="" location="" mode="755" />
     </mountPoints>
     <entries>
       <dirEntry mountPoint="23" file="X:/Lead Crystal/Assets/Levels" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="Levels" excludeSuffixes="" dirMode="755" overrideDirMode="false">
@@ -47,6 +48,17 @@
       <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/Sylver Engine/natives/joal-natives-windows-i586.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/Sylver Engine/natives/jogl-all-natives-windows-amd64.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/Sylver Engine/natives/jogl-all-natives-windows-i586.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/Steamworks4j/steamworks4j/steamworks4j-1.0.2.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/Steamworks4j/steamworks4j/natives/libs/libsteam_api.dylib" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/Steamworks4j/steamworks4j/natives/libs/libsteam_api.so" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/Steamworks4j/steamworks4j/natives/libs/libsteam_api64.so" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/Steamworks4j/steamworks4j/natives/libs/libsteamworks4j.dylib" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/Steamworks4j/steamworks4j/natives/libs/libsteamworks4j.so" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/Steamworks4j/steamworks4j/natives/libs/libsteamworks4j64.so" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/Steamworks4j/steamworks4j/natives/libs/steam_api.dll" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/Steamworks4j/steamworks4j/natives/libs/steam_api64.dll" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/Steamworks4j/steamworks4j/natives/libs/steamworks4j.dll" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="27" file="X:/Lead Crystal/Dependencies/Steamworks4j/steamworks4j/natives/libs/steamworks4j64.dll" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="26" file="X:/Lead Crystal/Source/dist/LeadCrystal.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="26" file="X:/Lead Crystal/Assets/Configurations/engineSettings.ini" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="26" file="X:/Lead Crystal/Assets/Configurations/gameSettings.ini" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
@@ -59,6 +71,7 @@
       <dirEntry mountPoint="336" file="X:/Lead Crystal/Assets/Level Editor Files" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="Level Editor Files" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
+      <fileEntry mountPoint="391" file="X:/Lead Crystal/Assets/Configurations/steam_appid.txt" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
     </entries>
     <components />
   </files>
@@ -446,7 +459,7 @@
     </applications>
   </installerGui>
   <mediaSets>
-    <windows name="Windows(64bit)" id="29" customizedId="" mediaFileName="" installDir="Titanis" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="windows-amd64-1.7.0_76" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="true" customInstallBaseDir="" contentFilesType="1" downloadURL="" verifyIntegrity="true">
+    <windows name="Windows(64bit)" id="29" customizedId="" mediaFileName="" installDir="Titanis" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="windows-amd64-1.7.0_76" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" downloadURL="" verifyIntegrity="true">
       <excludedLaunchers />
       <excludedBeans />
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
@@ -477,7 +490,7 @@
   </mediaSets>
   <buildIds buildAll="false">
     <mediaSet refId="29" />
-    <mediaSet refId="173" />
+    <mediaSet refId="122" />
   </buildIds>
   <buildOptions verbose="false" faster="false" disableSigning="false" debug="false" />
 </install4j>
