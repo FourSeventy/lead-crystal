@@ -5,6 +5,7 @@ import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
 import com.silvergobletgames.leadcrystal.core.GameplaySettings;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.leadcrystal.core.SaveGame;
+import com.silvergobletgames.leadcrystal.core.Steam;
 import com.silvergobletgames.leadcrystal.menus.ErrorMenu;
 import com.silvergobletgames.leadcrystal.scenes.NewCharacterScene.PlayerMock;
 import com.silvergobletgames.sylver.audio.AudioRenderer;
@@ -284,6 +285,15 @@ public class MainMenuScene extends Scene
 
     public void handleInput() 
     {
+        if(Game.getInstance().getInputHandler().getInputSnapshot().isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_A)) 
+        {  
+            Steam.getInstance().unlockAchievement("TEST_ACHIEVEMENT1");
+        }
+        
+        if(Game.getInstance().getInputHandler().getInputSnapshot().isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_B)) 
+        {
+            Steam.getInstance().clearAchievement("TEST_ACHIEVEMENT1");
+        }
     }  
      
 

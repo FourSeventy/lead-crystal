@@ -1,5 +1,6 @@
 package com.silvergobletgames.leadcrystal.core;
 
+import com.codedisaster.steamworks.SteamAPI;
 import com.silvergobletgames.leadcrystal.scenes.BrandingScene;
 import com.silvergobletgames.leadcrystal.scenes.LoadingScene;
 import com.silvergobletgames.leadcrystal.scenes.MainMenuScene;
@@ -76,6 +77,14 @@ public class Main
                     Game.getInstance().getConfiguration().getEngineSettings().dumpSettingsToFile(systemSettingsPath);
                 }
                 catch(Exception ex){ System.err.println("couldnt save settings");}
+            }
+        });      
+        Game.getInstance().registerSystemExitAction(new SystemExitAction(){
+            public void action()
+            {
+                //shut down steam api
+                SteamAPI.shutdown();
+                
             }
         });      
         Game.getInstance().registerSystemExitAction(new SystemExitAction(){
@@ -204,6 +213,8 @@ public class Main
         });
         mainLoadingThread.start();
         
+        //load steam api
+        SteamAPI.init();
         
         //start the game loop
         Game.getInstance().gameLoop();
