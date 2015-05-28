@@ -8,6 +8,8 @@ import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.TeleporterEmitter;
+import com.silvergobletgames.leadcrystal.core.Steam;
+import com.silvergobletgames.leadcrystal.core.Steam.ACHIEVEMENT;
 import com.silvergobletgames.leadcrystal.entities.CombatEntity;
 import com.silvergobletgames.leadcrystal.entities.Entity;
 import com.silvergobletgames.leadcrystal.entities.EntityEffect;
@@ -464,6 +466,12 @@ public class SceneScriptManager
         this.owningScene.changeLevel("town.lv",destination);
         
         this.owningScene.saveGameToDisk();
+        
+        //check if all missions are complete for achievement
+        if(this.owningScene.getPlayer().getLevelProgressionManager().isAllLevelsComplete())
+        {
+            Steam.getInstance().unlockAchievement(ACHIEVEMENT.BEAT_ALL_MISSIONS);
+        }
          
     }
     
@@ -618,6 +626,11 @@ public class SceneScriptManager
     {
         NonPlayerEntity entity = ((NonPlayerEntity)this.owningScene.getSceneObjectManager().get(entityID));
         entity.getBrain().getStateMachine().changeState(AIState.StateID.MOVE);
+    }
+    
+    public void unlockAchievement(String achievementID)
+    {
+        Steam.getInstance().unlockAchievement(ACHIEVEMENT.valueOf(achievementID)); 
     }
     
     

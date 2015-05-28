@@ -129,6 +129,31 @@ public class Steam {
 		}
 	};
     
+    
+    public static enum ACHIEVEMENT{
+        
+        TEST_ACHIEVEMENT("TEST_ACHIEVEMENT1"),
+        BEAT_GAME("BEAT_GAME"),
+        BEAT_ALL_MISSIONS("BEAT_ALL_MISSIONS"),
+        SECRET_AREA("SECRET_AREA"),
+        KILL_ENEMIES("KILL_ENEMIES"),
+        OFFENSIVE_UPGRADES("OFFENSIE_UPGRADES"),
+        MOVEMENT_UPGRADES("MOVEMENT_UPGRADES"),
+        BEAT_MOTOCCO("BEAT_MOTOCCO"),
+        BEAT_MOTOCCO_NODAMAGE("BEAT_MOTOCCO_NODAMAGE"),
+        BEAT_VEXX_NODAMAGE("BEAT_VEXX_NODAMAGE"),
+        LOOT_GOLD("LOOT_GOLD"),
+        OWN_ATTACK("OWN_ATTACK"),
+        PRACTICE_DUMMY("PRACTICE_DUMMY");
+        
+        public String value;
+        
+        ACHIEVEMENT(String s)
+        {
+            value = s;
+        }
+    }
+    
     private Steam()
     {
         
@@ -183,15 +208,15 @@ public class Steam {
         return userStats.getNumAchievements();        
     }
     
-    public void unlockAchievement(String achievement)
+    public void unlockAchievement(ACHIEVEMENT achievement)
     {  
-         userStats.setAchievement(achievement);
+         userStats.setAchievement(achievement.value);
          userStats.storeStats();
     }
     
-    public void clearAchievement(String achievement)
+    public void clearAchievement(ACHIEVEMENT achievement)
     {
-        userStats.clearAchievement(achievement);
+        userStats.clearAchievement(achievement.value);
         userStats.storeStats();
     }
     

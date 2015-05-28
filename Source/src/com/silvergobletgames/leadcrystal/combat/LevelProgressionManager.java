@@ -590,6 +590,24 @@ public class LevelProgressionManager
     {
         return this.levelMap.get(levelNumber).mainObjective.complete;
     }
+    
+    public boolean isAllLevelsComplete()
+    {
+        for(Level level :this.levelMap.values())
+        {
+            if(level.levelDataName.equals("test1.lv")|| level.levelDataName.equals("test2.lv")||level.levelDataName.equals("town.lv"))
+            {
+                continue;
+            }
+            
+            if(!level.mainObjective.complete || !level.mainObjective.complete)
+            {
+                return false;
+            }
+        }
+        
+        return true;
+    }
    
   
     

@@ -285,15 +285,7 @@ public class MainMenuScene extends Scene
 
     public void handleInput() 
     {
-        if(Game.getInstance().getInputHandler().getInputSnapshot().isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_A)) 
-        {  
-            Steam.getInstance().unlockAchievement("TEST_ACHIEVEMENT1");
-        }
-        
-        if(Game.getInstance().getInputHandler().getInputSnapshot().isKeyReleased(com.jogamp.newt.event.KeyEvent.VK_B)) 
-        {
-            Steam.getInstance().clearAchievement("TEST_ACHIEVEMENT1");
-        }
+
     }  
      
 
