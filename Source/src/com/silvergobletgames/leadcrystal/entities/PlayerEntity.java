@@ -110,6 +110,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
     public boolean touchingLadder = false;
     public boolean onLadder = false;
     private RespawnGravestone respawnGravestone;
+    public boolean takenDamage = false;
     
     
     
@@ -806,6 +807,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
        
        if(dmg.getType() != DamageType.HEAL && dmg.getType() != DamageType.NODAMAGE && !this.getCombatData().isDead())
        {
+            this.takenDamage = true;
             Sound sound = Sound.locationSound("buffered/fleshExplosion.ogg", this.getPosition().x, this.getPosition().y, false, .4f,.8f);               
             this.getOwningScene().add(sound);
        }
@@ -1338,6 +1340,7 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
          
            
     }
+    
     
 
     

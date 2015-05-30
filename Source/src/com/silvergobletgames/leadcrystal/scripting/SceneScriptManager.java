@@ -634,5 +634,15 @@ public class SceneScriptManager
     }
     
     
+    public void clearPlayerDamageFlag()
+    {
+        this.owningScene.getPlayer().takenDamage = false;
+    }
+    
+    public boolean isPlayerDamaged()
+    {
+        return this.owningScene.getPlayer().takenDamage;
+    }
+    
     
 }
