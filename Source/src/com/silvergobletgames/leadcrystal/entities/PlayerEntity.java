@@ -452,6 +452,9 @@ public class PlayerEntity extends CombatEntity implements SavableSceneObject
             
             //add to currency manager
             this.currencyManager.addCurrency(currencyAmount);
+            
+            //add currency stat
+            Steam.getInstance().incrementStat(Steam.STEAM_STAT.GOLD_COLLECTED, 1);
 
             //add currency text
             Text currencyText = new Text("+" + Integer.toString(currencyAmount), LeadCrystalTextType.COMBAT);

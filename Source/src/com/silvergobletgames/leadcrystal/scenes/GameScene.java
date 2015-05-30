@@ -775,8 +775,10 @@ public class GameScene extends Scene
         //clear old script world data
         this.scriptManager.clearWorldData();
         
+        //pushes stats to steam
+        Steam.getInstance().pushStatsToServer();
         
-        
+           
         //run all auto scripts
         ArrayList<SceneObject> scripts = this.getSceneObjectManager().get(ExtendedSceneObjectGroups.SCRIPT);       
         for(SceneObject obj: scripts)
@@ -851,6 +853,9 @@ public class GameScene extends Scene
         save.setPlayer(this.player);
         //actually save it
         save.save(this.activeSaveGame.fileName);
+        
+        //pushes stats to steam
+        Steam.getInstance().pushStatsToServer();
     }   
     
     public void saveAndQuit()

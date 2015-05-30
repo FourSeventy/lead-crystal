@@ -154,6 +154,21 @@ public class Steam {
         }
     }
     
+    public static enum STEAM_STAT{
+        
+        GOLD_COLLECTED("gold_collected"),
+        ENEMIES_KILLD("enemies_killed"),
+        DUMMY_DAMAGE("dummy_damage");
+        
+        public String value;
+        
+        STEAM_STAT(String s)
+        {
+            value = s;
+        }
+        
+    }
+    
     private Steam()
     {
         
@@ -201,8 +216,7 @@ public class Steam {
         
         return instance;
     }
-    
-    
+        
     public int getNumAchievements()
     {
         return userStats.getNumAchievements();        
@@ -218,6 +232,16 @@ public class Steam {
     {
         userStats.clearAchievement(achievement.value);
         userStats.storeStats();
+    }
+    
+    public void incrementStat(STEAM_STAT stat, int amount)
+    {
+        this.userStats.setStatI(stat.value, this.userStats.getStatI(stat.value, 0) + amount);
+    }
+    
+    public void pushStatsToServer()
+    {
+        this.userStats.storeStats();
     }
     
     

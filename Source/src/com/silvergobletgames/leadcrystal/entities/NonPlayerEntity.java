@@ -1,36 +1,37 @@
 package com.silvergobletgames.leadcrystal.entities;
 
 
-import com.silvergobletgames.leadcrystal.combat.Damage;
-import com.silvergobletgames.leadcrystal.combat.CombatData;
 import com.silvergobletgames.leadcrystal.ai.AIState;
 import com.silvergobletgames.leadcrystal.ai.Brain;
 import com.silvergobletgames.leadcrystal.ai.BrainFactory;
-import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectClasses;
+import com.silvergobletgames.leadcrystal.ai.BrainFactory.BrainID;
+import com.silvergobletgames.leadcrystal.combat.CombatData;
+import com.silvergobletgames.leadcrystal.combat.Damage;
+import com.silvergobletgames.leadcrystal.combat.SoundPack;
+import com.silvergobletgames.leadcrystal.combat.SoundPack.SoundPackID;
 import com.silvergobletgames.leadcrystal.combat.SoundPackFactory;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses;
+import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.CommonCrateAnimationPack;
+import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
+import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectClasses;
+import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
+import com.silvergobletgames.leadcrystal.core.Steam;
+import com.silvergobletgames.leadcrystal.entities.EntityTooltip.EntityTooltipField;
+import com.silvergobletgames.leadcrystal.scenes.GameScene;
+import com.silvergobletgames.leadcrystal.scripting.ScriptObject;
+import com.silvergobletgames.leadcrystal.scripting.ScriptObject.ScriptTrigger;
+import com.silvergobletgames.leadcrystal.skills.SkillManager;
+import com.silvergobletgames.sylver.graphics.AnimationPack.CoreAnimations;
+import com.silvergobletgames.sylver.graphics.AnimationPack.ImageAnimation;
 import com.silvergobletgames.sylver.graphics.Color;
 import com.silvergobletgames.sylver.graphics.Image;
 import com.silvergobletgames.sylver.graphics.ImageEffect;
 import com.silvergobletgames.sylver.netcode.*;
+import com.silvergobletgames.sylver.util.SylverVector2f;
 import java.io.Serializable;
 import java.util.*;
-import net.phys2d.raw.Body;
-import com.silvergobletgames.leadcrystal.ai.BrainFactory.BrainID;
-import com.silvergobletgames.leadcrystal.combat.SoundPack;
-import com.silvergobletgames.leadcrystal.entities.EntityTooltip.EntityTooltipField;
-import com.silvergobletgames.leadcrystal.scenes.GameScene;
-import com.silvergobletgames.leadcrystal.skills.SkillManager;
-import com.silvergobletgames.leadcrystal.combat.SoundPack.SoundPackID;
-import com.silvergobletgames.leadcrystal.core.AnimationPackClasses;
-import com.silvergobletgames.leadcrystal.core.AnimationPackClasses.CommonCrateAnimationPack;
-import com.silvergobletgames.leadcrystal.core.ExtendedImageAnimations;
-import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
-import com.silvergobletgames.leadcrystal.scripting.ScriptObject;
-import com.silvergobletgames.leadcrystal.scripting.ScriptObject.ScriptTrigger;
-import com.silvergobletgames.sylver.graphics.AnimationPack.CoreAnimations;
-import com.silvergobletgames.sylver.graphics.AnimationPack.ImageAnimation;
-import com.silvergobletgames.sylver.util.SylverVector2f;
 import net.phys2d.math.Vector2f;
+import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.shapes.Circle;
 
@@ -103,6 +104,9 @@ public class NonPlayerEntity extends CombatEntity implements SavableSceneObject
         
         //super die
         super.die();
+        
+        //add stat
+        Steam.getInstance().incrementStat(Steam.STEAM_STAT.ENEMIES_KILLD, 1);
         
         
         
