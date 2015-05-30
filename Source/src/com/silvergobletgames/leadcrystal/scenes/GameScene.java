@@ -960,12 +960,35 @@ public class GameScene extends Scene
         boolean success = player.getCurrencyManager().getBalence()>=player.getArmorManager().armorStats.get(statId).cost 
                           && player.getArmorManager().armorStats.get(statId).points < player.getArmorManager().armorStats.get(statId).maxPoints;
 
-        //if the subtraction succeeded, give potion to player
+        //if the subtraction succeeded, give stat to player
         if(success)
         {
             player.getCurrencyManager().subtractCurrency(player.getArmorManager().armorStats.get(statId).cost);
             player.getArmorManager().armorStats.get(statId).addPoint(1); 
         }   
+        
+        //check if we have all offensive upgrades for achievement
+        if(player.getArmorManager().weaponDamage.isMaxPoints() &&
+           player.getArmorManager().weaponAttackSpeed.isMaxPoints() &&
+           player.getArmorManager().lifeLeech.isMaxPoints() &&
+           player.getArmorManager().critChance.isMaxPoints() &&
+           player.getArmorManager().criticalHitDamage.isMaxPoints() &&
+           player.getArmorManager().meleeAttackDamageBonus.isMaxPoints())
+        {
+            Steam.getInstance().unlockAchievement(Steam.ACHIEVEMENT.OFFENSIVE_UPGRADES); 
+        }
+        
+        //check if we have all boots upgrades for achievement
+        if(player.getArmorManager().moveSpeed.isMaxPoints() &&
+           player.getArmorManager().doubleJump.isMaxPoints() &&
+           player.getArmorManager().jetpack.isMaxPoints() &&
+           player.getArmorManager().ccReduction.isMaxPoints()
+           )
+        {
+            Steam.getInstance().unlockAchievement(Steam.ACHIEVEMENT.MOVEMENT_UPGRADES); 
+        }
+        
+        
     }     
       
     public void respawnPlayer()
