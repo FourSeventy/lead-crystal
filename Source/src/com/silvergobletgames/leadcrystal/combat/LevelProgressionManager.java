@@ -418,42 +418,40 @@ public class LevelProgressionManager
         
         //test1
         Level test1 = new Level(); 
-        test1.levelDataName = "test1.lv";
-        test1.levelName = "Test1";
+        test1.levelDataName = "custom1.lv";
+        test1.levelName = "Custom Level 1";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Do something";
-        objective.objectiveDescription = "Do Something";
+        objective.objectiveName = "Play Custom Level 1";
+        objective.objectiveDescription = "Play a level named custom1.lv";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         test1.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Do something";
-        objective.objectiveDescription = "Do something.";
+        objective.objectiveName = "null";
+        objective.objectiveDescription = "null";
         objective.currencyAward = 25;
-        objective.statReward = ArmorStatID.MOVE_SPEED;
         test1.sideObjective = objective;
         //adding to map
         this.levelMap.put(18,test1);
         
         //test2
         Level test2 = new Level(); 
-        test2.levelDataName = "test2.lv";
-        test2.levelName = "Test2";
+        test2.levelDataName = "custom2.lv";
+        test2.levelName = "Custom Level 2";
         //main objective
         objective = new LevelObjective();
-        objective.objectiveName = "Do something";
-        objective.objectiveDescription = "Do Something";
+        objective.objectiveName = "Play Custom Level 2";
+        objective.objectiveDescription = "Play a level named custom2.lv";
         objective.skillPointAward = true;
         objective.currencyAward = 50;
         test2.mainObjective = objective;
         //side objective 1
         objective = new LevelObjective();
-        objective.objectiveName = "Do something";
-        objective.objectiveDescription = "Do something.";
+        objective.objectiveName = "null";
+        objective.objectiveDescription = "null";
         objective.currencyAward = 25;
-        objective.statReward = ArmorStatID.MOVE_SPEED;
         test2.sideObjective = objective;
         //adding to map
         this.levelMap.put(19,test2);
@@ -595,7 +593,7 @@ public class LevelProgressionManager
     {
         for(Level level :this.levelMap.values())
         {
-            if(level.levelDataName.equals("test1.lv")|| level.levelDataName.equals("test2.lv")||level.levelDataName.equals("town.lv"))
+            if(level.levelDataName.equals("custom1.lv")|| level.levelDataName.equals("custom2.lv")||level.levelDataName.equals("town.lv"))
             {
                 continue;
             }
