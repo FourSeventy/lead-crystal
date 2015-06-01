@@ -21,16 +21,16 @@ public class Main
 
     public static void main(String[] args) 
     {          
-        
-        //setting some system properties
-        System.setProperty("sun.java2d.noddraw", "true");
-        System.setProperty("sun.java2d.opengl", "true"); 
-                  
-        
+          
         //get resource URI paths       
         File rootDirectory = new File("");
         URI textureFolderURI = rootDirectory.toURI().resolve("Graphics/");
         URI soundFolderURI = rootDirectory.toURI().resolve("Sounds/");
+        
+        //setting some system properties
+        System.setProperty("sun.java2d.noddraw", "true");
+        System.setProperty("sun.java2d.opengl", "true"); 
+        System.setProperty("newt.window.icons", textureFolderURI.resolve("ui/window_icon.png").toString() + " " + textureFolderURI.resolve("ui/window_icon.png").toString() ); 
       
         
         //try to load system settings from file        
