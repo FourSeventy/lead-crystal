@@ -101,6 +101,7 @@ public class CreditsScene extends Scene{
             Game.getInstance().loadScene(new MainMenuScene());
             Game.getInstance().changeScene(MainMenuScene.class,new ArrayList(){{add(true);}});
             Game.getInstance().unloadScene(CreditsScene.class);
+            Game.getInstance().unloadScene((GameScene.class)); 
         }
         
        

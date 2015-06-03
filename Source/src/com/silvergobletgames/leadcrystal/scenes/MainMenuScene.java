@@ -424,6 +424,8 @@ public class MainMenuScene extends Scene
                 // once we are all loaded get save game from player mock
                 SaveGame saveGame = playerMock.buildSaveGameData();
        
+                //make sure game scene isnt loaded
+                Game.getInstance().unloadScene((GameScene.class));
                 
                 //load game scene
                 Game.getInstance().loadScene(new GameScene(saveGame));                 
