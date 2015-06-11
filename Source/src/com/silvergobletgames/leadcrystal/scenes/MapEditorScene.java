@@ -1304,16 +1304,8 @@ public class MapEditorScene extends Scene {
         //set default level properties
         this.levelProperties.setAmbientLight(new Color(1f,1f,1f,1f));
         
-        //add spawner entity
-        StaticBody body = new StaticBody(new Box(100,200));
-        body.setBitmask(Entity.BitMasks.NO_COLLISION.value);
-        body.setOverlapMask(Entity.OverlapMasks.NO_OVERLAP.value);      
-        Image img = new Image("textureMissing.jpg");
-        img.setDimensions(100, 200);
-        WorldObjectEntity entity = new WorldObjectEntity(img, body);
-        entity.setPosition(0, 0);
-        entity.setID("checkpoint1");
-        this.add(entity, Layer.MAIN);
+        //load base level
+        this.loadLevel("baseLevel.lv");
         
         //level data
         this.loadedLevelData.filename = "newLevel.lv";
