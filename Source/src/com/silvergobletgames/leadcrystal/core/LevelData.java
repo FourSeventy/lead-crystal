@@ -47,23 +47,24 @@ public class LevelData
      * @param filename The name of the level we want to load. The level must be located in the the LeadCrystal/Levels folder of your installation path
      * 
      */
-    protected LevelData(String filename) throws IOException, ClassNotFoundException
+    protected LevelData(String filePath) throws IOException, ClassNotFoundException
     {
-        //get path of the LeadCrystal install folder
-        File file = new File("");
-        String path =file.getAbsolutePath();
        
         //get the file input stream of our level file       
-        try( FileInputStream f = new FileInputStream(path +"\\Levels\\" +filename);
+        try( FileInputStream f = new FileInputStream(filePath);
              ObjectInputStream ois = new ObjectInputStream(f);)
         {     
+          
             //read in the raw data
             ArrayList<Object> rawGameLevelData = (ArrayList<Object>)ois.readObject();
 
             //Gets the scene objects from the first data slot
             this.sceneObjectData = (ArrayList<SceneObjectSaveData>)rawGameLevelData.get(0);
             this.ambientLight = (Color)rawGameLevelData.get(7);
-            this.filename = filename;
+            
+            //get filename
+            String[] pieces = filePath.split("\\\\");          
+            this.filename = pieces[pieces.length-1];
         }
         catch(ClassNotFoundException|IOException e){System.err.println("Level Load Failed: "); e.printStackTrace(System.err); throw e;}
 
@@ -98,7 +99,7 @@ public class LevelData
         
         
         //write that raw data to the disk
-         try (FileOutputStream f = new FileOutputStream(path +"\\Levels\\" +name); 
+         try (FileOutputStream f = new FileOutputStream(path +"\\Custom Levels\\" +name); 
               ObjectOutputStream oos = new ObjectOutputStream(f);)
          {           
              oos.writeObject(levelData);

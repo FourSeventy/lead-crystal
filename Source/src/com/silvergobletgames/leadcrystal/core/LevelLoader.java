@@ -50,21 +50,24 @@ public class LevelLoader
         File file = new File("");
         String path =file.getAbsolutePath();
 
-        File resourceFolder = new File(path+"\\Levels\\");
-        File[] listOfFiles = resourceFolder.listFiles();
+        File levelFolder = new File(path+"\\Levels\\");
+        
+        File[] levelFiles = levelFolder.listFiles();
 
         //iterate through files in the folder and load them
         String fileName;
-        for (int i = 0; i < listOfFiles.length; i++) 
+        for (int i = 0; i < levelFiles.length; i++) 
         {
-            if (listOfFiles[i].isFile()) 
+            if (levelFiles[i].isFile()) 
             {
-                fileName = listOfFiles[i].getName();
+                fileName = levelFiles[i].getName();
                 
                 LevelData data = null;
                 try
                 {
-                    data = new LevelData(fileName);
+  
+                    
+                    data = new LevelData(path +"\\Levels\\" +fileName);
                 }
                 catch(Exception e)
                 {
@@ -79,6 +82,36 @@ public class LevelLoader
             }
         }
         
+        //if level editor is enabled load custom levels
+        if(GameplaySettings.getInstance().levelEditor)
+        {
+            File customFolder = new File(path+"\\Custom Levels\\");
+            File[] customFiles = customFolder.listFiles();
+            for (int i = 0; i < customFiles.length; i++) 
+            {
+                if (customFiles[i].isFile()) 
+                {
+                    fileName = customFiles[i].getName();
+
+                    LevelData data = null;
+                    try
+                    {
+                        data = new LevelData(path +"\\Custom Levels\\" +fileName);
+                    }
+                    catch(Exception e)
+                    {
+                      System.err.println("cant load Level");
+                    }
+
+                    if(data != null)
+                    {
+                        this.levelMap.put(fileName, data);
+                    }
+
+                }
+            }
+        }
+        
     }
     
     public void reloadLevel(String filename)
@@ -87,7 +120,9 @@ public class LevelLoader
         LevelData data = null;
         try
         {
-             data = new LevelData(filename);
+            File file = new File("");
+            String path =file.getAbsolutePath();
+             data = new LevelData(path +"\\Custom Levels\\" +filename);
         }
         catch (IOException | ClassNotFoundException ex)
         {

@@ -941,34 +941,6 @@ public class MapEditorScene extends Scene {
         Sound sound = Sound.newBGM("");
         add(sound);
             
-        if (args != null && args.size() > 1)
-        {
-            String path = (String)args.get(0);
-            loadLevel(path);
-            File directory = new File ("");
-            
-            path = directory.getAbsolutePath() + "\\Save Games\\";
-            String fileName;
-
-            File folder = new File(path);
-            File[] listOfFiles = folder.listFiles();
-
-            String selectedSave = ((SaveGame)args.get(1)).fileName;
-            
-            for (int i = 0; i < listOfFiles.length; i++) 
-            {
-                fileName = listOfFiles[i].getName().toLowerCase();
-                if (listOfFiles[i].isFile() && fileName.endsWith(".save")) 
-                {
-                    //if it exists, delete
-                    if (selectedSave.equals(fileName))
-                    {
-                        boolean success = (new File(path + selectedSave)).delete();            
-                    }           
-                }            
-            }
-            
-        }
     }
 
     public void sceneExited() 
