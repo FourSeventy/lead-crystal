@@ -7,6 +7,7 @@ import com.jogamp.newt.event.KeyEvent;
 import com.jogamp.newt.util.MonitorModeUtil;
 import com.silvergobletgames.leadcrystal.core.CursorFactory;
 import com.silvergobletgames.leadcrystal.core.CursorFactory.CursorType;
+import com.silvergobletgames.leadcrystal.core.GameplaySettings;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalTextType;
 import com.silvergobletgames.sylver.audio.AudioRenderer;
 import com.silvergobletgames.sylver.audio.Sound;
@@ -365,9 +366,53 @@ public class OptionsMenuScene extends Scene
             }
         }); 
         
+        //level editor
+        final Text levelEditorText = new Text(GameplaySettings.getInstance().levelEditor?"Level Editor: ON":"Level Editor: OFF",LeadCrystalTextType.MENU46);
+        levelEditorText.setPosition(center - levelEditorText.getWidth()/2, 190);
+        final Button levelEditorButton = new Button(new Image("blank.png"), center - levelEditorText.getWidth()/2, levelEditorText.getPosition().y, levelEditorText.getWidth(), levelEditorText.getHeight());
+        this.add(levelEditorText,Layer.MAIN);
+        this.add(levelEditorButton,Layer.MAIN);
+        levelEditorButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                if (e.getActionCommand().equals("clicked")) 
+                {
+                    if(GameplaySettings.getInstance().levelEditor == false)
+                    {
+                        GameplaySettings.getInstance().levelEditor = true;
+                        levelEditorText.setText("Level Editor: ON");   
+                    }
+                    else
+                    {
+                        GameplaySettings.getInstance().levelEditor = false;
+                        levelEditorText.setText("Level Editor: Off");
+                    }
+                }
+                if (e.getActionCommand().equals("mouseEntered")) 
+                {
+                    
+                      if(levelEditorText.hasTextEffect("small"))
+                          levelEditorText.removeTextEffect("small");
+                      
+                       levelEditorText.addTextEffect("big",new TextEffect(TextEffect.TextEffectType.SCALE, 15, levelEditorText.getScale(), 1.2));
+                    
+                   //play sound
+                    Sound sound = Sound.ambientSound("buffered/buttonBoop.ogg", true);
+                    add(sound);
+                }
+                if (e.getActionCommand().equals("mouseExited"))
+                {
+                        if(levelEditorText.hasTextEffect("big"))
+                           levelEditorText.removeTextEffect("big");
+                        
+                        levelEditorText.addTextEffect("small",new TextEffect(TextEffect.TextEffectType.SCALE, 15, levelEditorText.getScale(), 1));
+                }
+            }
+        });
+        
         //back
         final Text backText = new Text("Back",LeadCrystalTextType.MENU46);
-        backText.setPosition(center - backText.getWidth()/2, 190);
+        backText.setPosition(center - backText.getWidth()/2, 125);
         final Button backButton = new Button(new Image("blank.png"), center - backText.getWidth()/2, backText.getPosition().y, backText.getWidth(), backText.getHeight());
         this.add(backText,Layer.MAIN);
         this.add(backButton,Layer.MAIN);
