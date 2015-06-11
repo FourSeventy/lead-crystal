@@ -105,11 +105,12 @@ public class Hud extends Window
     public PotionsMenu potionsMenu;
     public ArmorMenu armorMenu;
     public MapMenu mapMenu;
+    public CustomMapMenu customMapMenu;
     public QuestMenu questMenu;
     public OptionsMenu optionsMenu;
     
     public static enum MenuID{
-        POTION,ARMOR,SKILL,MAP
+        POTION,ARMOR,SKILL,MAP,CUSTOM_MAP
     }
     
     //menu button feeler box
@@ -239,6 +240,27 @@ public class Hud extends Window
         mapMenu.close();
         mapMenu.setOwningScene(scene);
         menuList.add(mapMenu);
+        
+        //custom map menu
+        customMapMenu = new CustomMapMenu(center - 600,0,scene);
+        customMapMenu.addActionListener(new ActionListener(){
+         public void actionPerformed(ActionEvent e)
+            {
+                if(e.getActionCommand().equals("mouseEntered"))
+                {
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.ACTIVEHAND)); 
+                }
+                else if(e.getActionCommand().equals("mouseExited"))
+                {
+                    Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICLE)); 
+                }
+            }
+        
+        });
+        customMapMenu.update();
+        customMapMenu.close();
+        customMapMenu.setOwningScene(scene);
+        menuList.add(customMapMenu);
         
         //quest menu
         questMenu = new QuestMenu(1,0,playerReference);
@@ -577,7 +599,7 @@ public class Hud extends Window
                 if(e.getActionCommand().equals("mouseEntered"))
                 {
                     questButton.getImage().setBrightness(1.5f);
-                    if(!Hud.this.potionsMenu.isOpen() && !Hud.this.armorMenu.isOpen() && ! Hud.this.skillMenu.isOpen() && !Hud.this.mapMenu.isOpen())
+                    if(!Hud.this.potionsMenu.isOpen() && !Hud.this.armorMenu.isOpen() && ! Hud.this.skillMenu.isOpen() && !Hud.this.mapMenu.isOpen() && !Hud.this.customMapMenu.isOpen())
                     {
                        Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.ACTIVEHAND));
                     }
@@ -585,7 +607,7 @@ public class Hud extends Window
                 if(e.getActionCommand().equals("mouseExited"))
                 {
                     questButton.getImage().setBrightness(1f);
-                    if(!Hud.this.potionsMenu.isOpen() && !Hud.this.armorMenu.isOpen() && ! Hud.this.skillMenu.isOpen() && !Hud.this.mapMenu.isOpen())
+                    if(!Hud.this.potionsMenu.isOpen() && !Hud.this.armorMenu.isOpen() && ! Hud.this.skillMenu.isOpen() && !Hud.this.mapMenu.isOpen() && !Hud.this.customMapMenu.isOpen())
                     {
                        Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICLE)); 
                     }
@@ -608,7 +630,7 @@ public class Hud extends Window
                 {
                     escMenu.getImage().setBrightness(1.5f);
                     
-                    if(!Hud.this.potionsMenu.isOpen() && !Hud.this.armorMenu.isOpen() && ! Hud.this.skillMenu.isOpen() && !Hud.this.mapMenu.isOpen())
+                    if(!Hud.this.potionsMenu.isOpen() && !Hud.this.armorMenu.isOpen() && ! Hud.this.skillMenu.isOpen() && !Hud.this.mapMenu.isOpen() && !Hud.this.customMapMenu.isOpen())
                     {
                         Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.ACTIVEHAND));
                     } 
@@ -616,7 +638,7 @@ public class Hud extends Window
                 if(e.getActionCommand().equals("mouseExited"))
                 {
                     escMenu.getImage().setBrightness(1f);
-                    if(!Hud.this.potionsMenu.isOpen() && !Hud.this.armorMenu.isOpen() && ! Hud.this.skillMenu.isOpen() && !Hud.this.mapMenu.isOpen())
+                    if(!Hud.this.potionsMenu.isOpen() && !Hud.this.armorMenu.isOpen() && ! Hud.this.skillMenu.isOpen() && !Hud.this.mapMenu.isOpen() && !Hud.this.customMapMenu.isOpen())
                     {
                     Game.getInstance().getGraphicsWindow().setCursor(CursorFactory.getInstance().getCursor(CursorType.RETICLE)); 
                     }
@@ -1282,6 +1304,9 @@ public class Hud extends Window
             case MAP:
                 this.mapMenu.open();
             break;
+            case CUSTOM_MAP:
+                 this.customMapMenu.open();
+            break;
             case SKILL:
                 this.skillMenu.open();
             break;
@@ -1302,6 +1327,9 @@ public class Hud extends Window
             case MAP:
                 this.mapMenu.close();
             break;
+            case CUSTOM_MAP:
+                this.customMapMenu.close();
+             break;
             case SKILL:
                 this.skillMenu.close();
             break;

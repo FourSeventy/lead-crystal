@@ -137,6 +137,11 @@ public class LevelLoader
         return this.levelMap.get(levelName);
     }
     
+    public boolean isLevelLoaded(String filename)
+    {
+        return this.levelMap.containsKey(filename);
+    }
+    
     
     
 }

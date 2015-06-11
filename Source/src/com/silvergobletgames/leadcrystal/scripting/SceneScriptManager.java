@@ -6,6 +6,7 @@ import com.silvergobletgames.leadcrystal.combat.Damage;
 import com.silvergobletgames.leadcrystal.combat.Damage.DamageType;
 import com.silvergobletgames.leadcrystal.combat.StateEffect;
 import com.silvergobletgames.leadcrystal.core.ExtendedSceneObjectGroups;
+import com.silvergobletgames.leadcrystal.core.GameplaySettings;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters;
 import com.silvergobletgames.leadcrystal.core.LeadCrystalParticleEmitters.TeleporterEmitter;
 import com.silvergobletgames.leadcrystal.core.Steam;
@@ -642,6 +643,11 @@ public class SceneScriptManager
     public boolean isPlayerDamaged()
     {
         return this.owningScene.getPlayer().takenDamage;
+    }
+    
+    public boolean isLevelEditor()
+    {
+        return GameplaySettings.getInstance().levelEditor;
     }
     
     

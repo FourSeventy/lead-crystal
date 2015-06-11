@@ -484,7 +484,7 @@ public class GameScene extends Scene
         //open esc menu
         if(inputSnapshot.isKeyReleased(KeyEvent.VK_ESCAPE))
         {        
-            if(hud.armorMenu.isOpen() || hud.mapMenu.isOpen() || hud.potionsMenu.isOpen() || hud.questMenu.isOpen() || hud.skillMenu.isOpen() || hud.optionsMenu.isOpen() || (hud.activeDialogue != null && hud.activeDialogue.isOpen()))
+            if(hud.armorMenu.isOpen() || hud.mapMenu.isOpen() ||hud.customMapMenu.isOpen() || hud.potionsMenu.isOpen() || hud.questMenu.isOpen() || hud.skillMenu.isOpen() || hud.optionsMenu.isOpen() || (hud.activeDialogue != null && hud.activeDialogue.isOpen()))
             {
                 hud.armorMenu.close();
                 hud.mapMenu.close();
@@ -492,6 +492,7 @@ public class GameScene extends Scene
                 hud.questMenu.close();
                 hud.skillMenu.close();
                 hud.optionsMenu.close();
+                hud.customMapMenu.close();
 
                 if(hud.activeDialogue != null)
                 {
@@ -803,6 +804,7 @@ public class GameScene extends Scene
     {
         //close menus
         hud.mapMenu.close();
+        hud.customMapMenu.close();
         hud.questMenu.close();
         
         
