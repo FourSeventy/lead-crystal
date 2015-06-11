@@ -30,7 +30,7 @@ public class Main
         //setting some system properties
         System.setProperty("sun.java2d.noddraw", "true");
         System.setProperty("sun.java2d.opengl", "true"); 
-        System.setProperty("newt.window.icons", textureFolderURI.resolve("ui/window_icon.png").toString() + " " + textureFolderURI.resolve("ui/window_icon.png").toString() ); 
+        System.setProperty("newt.window.icons", textureFolderURI.resolve("ui/window_icon.png").toString() + " " + textureFolderURI.resolve("ui/window_icon_small.png").toString() ); 
       
         
         //try to load system settings from file        
